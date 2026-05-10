@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Experience Design — The Art of Game Design</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="../index.html"><span class="logo"></span><span>The Art of Game Design</span></a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="foundations.html">Foundations</a>
+      <a href="player.html">The Player</a>
+      <a href="mechanics.html">Mechanics</a>
+      <a href="experience.html">Experience</a>
+      <a href="team.html">The Team</a>
+      <a href="business.html">The Business</a>
+      <a href="impact.html">Impact</a>
+      <a href="../lenses.html">Lenses</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="eyebrow">Section 05 · Chapters 16–23</div>
+  <h1>Experience Design</h1>
+  <p>The shape of interest, the dual nature of story and game, indirect control, transmedia worlds, characters, spaces, presence, and aesthetics. The craft of building the experience itself.</p>
+</header>
+
+<main class="container-narrow prose">
+
+<h2>Chapter 16 — Interest Curves</h2>
+
+<p>A teenage Jesse Schell got his first lesson in design from a magician named Mark Tripp. The juggling show he'd written started with the hardest trick. The audience clapped politely; nothing built. Mark sketched a different shape:</p>
+
+<blockquote>Start with a bang to get their attention. Then back off, do something smaller, let them know you. Gradually build to a grand finale that exceeds their expectations.<cite>Mark Tripp</cite></blockquote>
+
+<p>Every entertainment experience can be charted as an <strong>interest curve</strong> — the level of audience interest over time. A good curve has a hook, gradually rising interest punctuated by rests, and a grand finale that exceeds what came before. It should send the audience out with more interest than they came in with.</p>
+
+<p>The most striking insight: interest curves are <strong>fractal</strong>. Each chapter, each level, each challenge inside a game has its own curve. <em>Half-Life 2</em>'s player-death-rate-per-map looks like the same fractal shape as the macro game arc.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #68</div>
+  <div class="lens-title">The Lens of Moments</div>
+  <p class="lens-desc">Memorable moments are the stars that make up the constellation of your interest curve.</p>
+  <ul class="lens-questions">
+    <li>What are the key moments in my game?</li>
+    <li>How can I make each moment as powerful as possible?</li>
+  </ul>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #69</div>
+  <div class="lens-title">The Lens of the Interest Curve</div>
+  <ul class="lens-questions">
+    <li>If I draw an interest curve, how is it generally shaped?</li>
+    <li>Does it have a hook?</li>
+    <li>Does it have rising interest, periods of rest, and a finale?</li>
+    <li>Is there a fractal structure?</li>
+  </ul>
+</div>
+
+<h3>What comprises interest?</h3>
+
+<p>Three factors combine:</p>
+<ul>
+  <li><strong>Inherent interest</strong> — some events grip us by nature. Risk, change, the unusual.</li>
+  <li><strong>Poetry of presentation</strong> — beauty in the rendering, the writing, the staging.</li>
+  <li><strong>Projection</strong> — how strongly the audience puts themselves into the experience.</li>
+</ul>
+
+<p>A violin concerto has little inherent interest and little projection — its poetry must carry it. A street performer juggling chainsaws has high inherent interest and projection but moderate poetry. <em>Tetris</em> has minimal poetry and minimal inherent interest, but it survives because projection is absolute — the choices are entirely yours.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #70</div>
+  <div class="lens-title">The Lens of Inherent Interest</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #71</div>
+  <div class="lens-title">The Lens of Beauty</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #72</div>
+  <div class="lens-title">The Lens of Projection</div>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 17 — Story</h2>
+
+<p>The relationship between story and game is older than the field admits. Some say they don't mix; some say they're inseparable. The truth is more useful: in practice, there are two reliable patterns that produce great game-stories.</p>
+
+<h3>Two methods that actually work</h3>
+
+<ul>
+  <li><strong>The String of Pearls.</strong> A noninteractive story (the string) punctuated by stretches of free play (the pearls). Cut scene → level → cut scene → level. Critics call it not really interactive; players love it.</li>
+  <li><strong>The Story Machine.</strong> Build rules that generate stories from play. Baseball, golf, <em>The Sims</em>, <em>Minecraft</em>. The author isn't a person — it's the system.</li>
+</ul>
+
+<div class="lens">
+  <div class="lens-num">LENS #73</div>
+  <div class="lens-title">The Lens of the Story Machine</div>
+  <ul class="lens-questions">
+    <li>How can I give players choices that create different stories?</li>
+    <li>How can I let players personalize the story?</li>
+    <li>Do my rules lead to stories with good interest curves?</li>
+    <li>Who can your players tell the story to that will actually care?</li>
+  </ul>
+</div>
+
+<h3>Five problems that block the dream of fully branching interactive narrative</h3>
+
+<ol>
+  <li><strong>Good stories have unity.</strong> Cinderella's beginning only works with Cinderella's ending.</li>
+  <li><strong>Combinatorial explosion.</strong> Ten depth-three branches = 88,573 outcomes.</li>
+  <li><strong>Multiple endings disappoint.</strong> "Is this the real ending?"</li>
+  <li><strong>Not enough verbs.</strong> Game characters run, shoot, and jump; story characters talk, ask, plead, and negotiate.</li>
+  <li><strong>Time travel makes tragedy obsolete.</strong> If the player can reload, the inevitability that powers tragedy disappears.</li>
+</ol>
+
+<h3>The Story Stack</h3>
+
+<p>From least flexible to most flexible: <strong>Fantasy → Action → Economy → World → Story</strong>. Start with story and you'll fight inflexible fantasy uphill. Start with a powerful fantasy, find actions that fulfill it, give them an economy that rewards them, build a world where the economy makes sense, and only then write a story that explains it all. Story is the servant; it must never become the master.</p>
+
+<h3>Eleven story tips for game designers</h3>
+
+<ol>
+  <li><strong>Respect the story stack.</strong></li>
+  <li><strong>Put your story to work</strong> — it can solve technical problems for free.</li>
+  <li><strong>Goals, obstacles, and conflicts.</strong></li>
+  <li><strong>Make it real to you, or it won't be real to them.</strong></li>
+  <li><strong>Provide simplicity and transcendence.</strong></li>
+  <li><strong>Consider the Hero's Journey.</strong></li>
+  <li><strong>Keep your story world consistent.</strong> One bad episode taints all past ones.</li>
+  <li><strong>Make your story world accessible.</strong> Jules Verne knew rockets existed; he used a cannon because his audience understood cannons.</li>
+  <li><strong>Use clichés judiciously.</strong> The familiar is a shortcut to comprehension.</li>
+  <li><strong>Sometimes a map brings a story to life.</strong> <em>Treasure Island</em> began as a drawing.</li>
+  <li><strong>Surprise and emotion.</strong> If your story is dull, use Lens #1 and Lens #4 on it.</li>
+</ol>
+
+<div class="lens">
+  <div class="lens-num">LENS #74</div>
+  <div class="lens-title">The Lens of the Obstacle</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #75</div>
+  <div class="lens-title">The Lens of Simplicity and Transcendence</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #76</div>
+  <div class="lens-title">The Lens of the Hero's Journey</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #77</div>
+  <div class="lens-title">The Lens of the Weirdest Thing</div>
+  <p class="lens-desc">What's the weirdest thing in your story? Is it interesting enough to be the weirdest thing? Are there too many weird things?</p>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #78</div>
+  <div class="lens-title">The Lens of Story</div>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 18 — Indirect Control</h2>
+
+<p>The conflict between freedom (which makes games games) and craft (which makes stories stories) seems irresolvable. The way out: we don't need to give players <em>real</em> freedom — we need to give them the <em>feeling</em> of freedom.</p>
+
+<p>Six techniques of indirect control:</p>
+
+<ol>
+  <li><strong>Constraints.</strong> Two doors instead of an open field — the player still chooses, still feels free, but the design space is small.</li>
+  <li><strong>Goals.</strong> A player given the goal "find the bananas" will go where the bananas appear to be.</li>
+  <li><strong>Interface.</strong> A plastic guitar controller silently rules out a thousand actions the player never thinks to attempt.</li>
+  <li><strong>Visual design.</strong> The eye is pulled. The Disney castle visible from Main Street. The single red line painted on the floor of <em>Aladdin</em>'s throne room that no one consciously remembers following.</li>
+  <li><strong>Characters.</strong> If you make players care about an NPC, you can make them do almost anything for them. In <em>Ico</em>, the timer mechanic that puts the princess in danger triggers immediate protective action.</li>
+  <li><strong>Music.</strong> Restaurants speed up music at lunch and slow it at three. Game music does the same.</li>
+</ol>
+
+<div class="lens">
+  <div class="lens-num">LENS #79</div>
+  <div class="lens-title">The Lens of Freedom</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #80</div>
+  <div class="lens-title">The Lens of Help</div>
+  <p class="lens-desc">Deep down, everyone wants to be helpful.</p>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #81</div>
+  <div class="lens-title">The Lens of Indirect Control</div>
+  <ul class="lens-questions">
+    <li>Ideally, what would I like the players to do?</li>
+    <li>Can constraints, goals, interface, visuals, characters, or music guide them?</li>
+  </ul>
+</div>
+
+<h3>Collusion</h3>
+
+<p>The next level beyond indirect control: characters who simultaneously play their role in the world <em>and</em> work for the designer to keep the experience well-paced. The Pirates of the Caribbean enemy ships flee toward interesting islands. <em>Façade</em>'s Grace and Trip make dialogue decisions weighted partly by their goals as characters and partly by their job of maintaining the story's tension curve.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #82</div>
+  <div class="lens-title">The Lens of Collusion</div>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 19 — Worlds</h2>
+
+<p>The successful properties of the past century — <em>Star Wars</em>, <em>Pokémon</em>, <em>Star Trek</em>, <em>Lord of the Rings</em>, <em>Harry Potter</em> — are not just stories. They are <strong>transmedia worlds</strong>: places that exist apart from any single book, film, or game. The Star Wars action figures sold so well not because of the characters but because they were another gateway into the world the children wanted to enter.</p>
+
+<h3>Properties of strong worlds</h3>
+
+<ul>
+  <li><strong>Powerful.</strong> They exert a long-lasting pull on the imagination.</li>
+  <li><strong>Long-lived.</strong> Sherlock Holmes is 130. Santa Claus is older.</li>
+  <li><strong>Evolving.</strong> Holmes's deerstalker cap was invented by an illustrator. Rudolph by an ad copywriter.</li>
+  <li><strong>Rooted in a single medium.</strong> Then they expand.</li>
+  <li><strong>Created by a single mind (or small team).</strong></li>
+  <li><strong>Built to host many stories.</strong></li>
+  <li><strong>Accessible through any gateway.</strong> If any one gateway requires another, you've lost.</li>
+  <li><strong>About wish fulfillment.</strong></li>
+</ul>
+
+<div class="lens">
+  <div class="lens-num">LENS #83</div>
+  <div class="lens-title">The Lens of Fantasy</div>
+  <ul class="lens-questions">
+    <li>What fantasy does my world fulfill?</li>
+    <li>Who does the player fantasize about being?</li>
+    <li>What does my player fantasize about doing there?</li>
+  </ul>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #84</div>
+  <div class="lens-title">The Lens of the World</div>
+  <ul class="lens-questions">
+    <li>How is my world better than the real world?</li>
+    <li>Can there be multiple gateways? How do they differ? How do they support each other?</li>
+    <li>Is my world centered on a single story, or could many stories happen here?</li>
+  </ul>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 20 — Characters</h2>
+
+<p>Compared to novel characters and film characters, videogame characters tend toward the physical, the fantastic, and the simple. This is a function of the medium — but it doesn't have to be a ceiling.</p>
+
+<h3>Avatars</h3>
+
+<p>The character you control has special power. Two patterns dominate: the <strong>ideal form</strong> (powerful, attractive, the person you'd like to be) and the <strong>blank slate</strong> (iconic, simple, easy to project onto). Mario is both — an idealized version of nobody.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #85</div>
+  <div class="lens-title">The Lens of the Avatar</div>
+</div>
+
+<h3>Tips for compelling characters</h3>
+
+<ol>
+  <li><strong>List character functions</strong> separately from your character ideas, then match them. Some characters can play several roles.</li>
+  <li><strong>Define and use traits.</strong> Pick three or four words per character, then make every line of dialogue earn its place by demonstrating one.</li>
+  <li><strong>Use the interpersonal circumplex.</strong> Friendliness vs. dominance — graph each character relative to another to see where the relational gaps are.</li>
+  <li><strong>Make a character web.</strong> What does each character think of each of the others?</li>
+  <li><strong>Use status.</strong> Status is something you <em>do</em>, not what you are. Avoiding eye contact, fidgeting, looking down — low status. Stillness, calm head, holding eye contact — high status. Most videogame characters have none.</li>
+  <li><strong>Use the power of the voice.</strong> Talkies elevated film. Voice will elevate games — but it requires writing for the actor, not the other way around.</li>
+  <li><strong>Use the power of the face.</strong> Especially the eyes.</li>
+  <li><strong>Powerful stories transform characters.</strong> Map who changes when, and in what direction.</li>
+  <li><strong>Let your characters surprise us.</strong> When emotional reactions differ from what we expect, we pay attention.</li>
+  <li><strong>Avoid the uncanny valley.</strong> Almost-human is creepier than obviously-stylized.</li>
+</ol>
+
+<div class="lens">
+  <div class="lens-num">LENS #86</div>
+  <div class="lens-title">The Lens of Character Function</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #87</div>
+  <div class="lens-title">The Lens of Character Traits</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #88</div>
+  <div class="lens-title">The Lens of the Interpersonal Circumplex</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #89</div>
+  <div class="lens-title">The Lens of the Character Web</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #90</div>
+  <div class="lens-title">The Lens of Status</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #91</div>
+  <div class="lens-title">The Lens of Character Transformation</div>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 21 — Spaces</h2>
+
+<blockquote>The primary purpose of architecture is to control a person's experience.<cite>Jesse Schell</cite></blockquote>
+
+<p>Architects and game designers are close cousins. Both create structures that exist to engender experiences in the people who pass through them. Both must rely on indirect control. Five common organizing principles for game space:</p>
+
+<ul>
+  <li><strong>Linear</strong> — Candyland, Monopoly, Mario, Guitar Hero.</li>
+  <li><strong>Grid</strong> — Chess, Advance Wars, Settlers, Minecraft.</li>
+  <li><strong>Web</strong> — Fox and Geese, Trivial Pursuit, Zork.</li>
+  <li><strong>Points in space</strong> — Bocce, Animal Crossing.</li>
+  <li><strong>Divided space</strong> — Risk, Civilization, Zelda: Ocarina.</li>
+</ul>
+
+<p>Whatever the organizing principle, landmarks matter. The first text adventure had two indistinguishable mazes; learning to drop items to mark them was half the puzzle. A good space has built-in landmarks that make it both navigable and memorable.</p>
+
+<h3>Christopher Alexander</h3>
+
+<p>The architect's <em>The Timeless Way of Building</em> and <em>A Pattern Language</em> describe a "nameless quality" that great spaces share — alive, whole, comfortable, free, exact, egoless, eternal, free from inner contradictions. His fifteen properties of living structures (levels of scale, strong centers, boundaries, alternating repetition, positive space, good shape, local symmetries, deep interlock, contrast, gradients, roughness, echoes, the void, simplicity, not-separateness) translate surprisingly well to game design.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #92</div>
+  <div class="lens-title">The Lens of Inner Contradiction</div>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #93</div>
+  <div class="lens-title">The Lens of The Nameless Quality</div>
+</div>
+
+<h3>Virtual architecture is not real architecture</h3>
+
+<p>Real-world rules don't apply: most game levels would be uninhabitable as buildings. The mind doesn't translate 3D to 2D maps; it remembers spaces relatively. Scale matters most in cues — eye height, doorways, people, texture density.</p>
+
+<p>A peculiar problem of third-person view: a normal room feels crowded when an avatar moves through it. The Max Payne solution — bigger rooms, slightly bigger furniture, spread further apart — looks weird in first-person but feels normal in third.</p>
+
+<hr class="fancy">
+
+<h2>Chapter 22 — Presence</h2>
+
+<p>VR and AR are not technologies for fooling the eye. They are technologies for fooling the body — or, more precisely, for fooling the mind's sense of where the body is. That sense is called <strong>proprioception</strong>, and overcoming it is the magic at the heart of immersive media.</p>
+
+<h3>Six presence breakers</h3>
+
+<ol>
+  <li><strong>Motion sickness.</strong> The poison-control reflex. Keep framerate ≥ 60fps (aim for 90). Avoid virtual camera motion. Don't accelerate. Hide edges (vignettes). Teleport sparingly. Above all, keep the horizon level.</li>
+  <li><strong>Counter-intuitive interactions.</strong> In presence, your body expects depth of behavior. The knife should cut things; the lighter should burn things.</li>
+  <li><strong>Intensity overload.</strong> VR can make things <em>too</em> real. Players who think "this is too much" have already left.</li>
+  <li><strong>Unrealistic audio.</strong> If you pick up a coin and drop it, the world had better "ching."</li>
+  <li><strong>Proprioceptive disconnect.</strong> A standing avatar in a seated body. A hand visible somewhere your hand isn't.</li>
+  <li><strong>Lack of identity.</strong> If two NPCs talk past you, you start wondering: why am I a ghost?</li>
+</ol>
+
+<h3>Six presence builders</h3>
+
+<ol>
+  <li><strong>Hand presence.</strong> The strongest variety. Lucid dreamers stabilize their dreams by looking at their hands.</li>
+  <li><strong>Social presence.</strong> Sharing space with another person is uniquely powerful.</li>
+  <li><strong>Familiarity.</strong> Known places (a car, a kitchen) build presence faster than alien ones.</li>
+  <li><strong>Realistic audio.</strong> Double whatever you'd spend on a flat-screen game.</li>
+  <li><strong>Proprioceptive alignment.</strong> A seated game for seated players is more present than a standing game for seated players.</li>
+  <li><strong>Comedy.</strong> A comedic world tolerates more strangeness — and weird events become part of the world's rules rather than breakers of them.</li>
+</ol>
+
+<div class="lens">
+  <div class="lens-num">LENS #93½</div>
+  <div class="lens-title">The Lens of Presence</div>
+  <ul class="lens-questions">
+    <li>Is my player experiencing a sense of presence? Could it be stronger?</li>
+    <li>What in my game is diminishing or breaking presence?</li>
+    <li>What in my game is building or strengthening presence?</li>
+  </ul>
+</div>
+
+<p>Two practical practices: <strong>brownboxing</strong> (build a cardboard physical mock-up before the digital prototype) and <strong>encourage looking around</strong> (players trained by flat screens face forward; design for the moment they discover they can turn).</p>
+
+<hr class="fancy">
+
+<h2>Chapter 23 — Aesthetics</h2>
+
+<p>Game designers who dismiss aesthetics as surface miss the point. Good artwork draws players in, makes the world feel real, satisfies a basic pleasure of sensation, builds atmosphere, and even excuses imperfections in design.</p>
+
+<h3>Learn to see</h3>
+
+<p>Betty Edwards's <em>Drawing on the Right Side of the Brain</em> is required reading. The brain's labeling instinct slaps a name on what it sees so it can move on. To make great visual experiences, you must override it — really see shapes, proportions, shadows, relationships.</p>
+
+<h3>Let aesthetics guide design</h3>
+
+<p>Some studios delay involving artists until the game is "designed." This is backward. Concept art, especially at the start, can completely change a project's direction. A nebulous idea becomes a concrete vision the moment it has a picture attached. Strong concept art makes everyone — designers, executives, funders — see the same thing.</p>
+
+<h3>How much detail?</h3>
+
+<p>Just enough to be wonderful, no more. J.R.R. Tolkien used "distant mountains" — names of places never visited — to make Middle-earth feel vast. Cinderella's Castle is gorgeous from far away <em>and</em> close up; almost anyone can do the first, but doing the second is rare.</p>
+
+<h3>Use audio</h3>
+
+<p>One study showed that improving audio quality made players rate the <em>graphics</em> higher. Sound bypasses the analytical mind and reaches the body directly. And: pick music as early as possible. The right piece will guide a thousand later decisions.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #94</div>
+  <div class="lens-title">The Lens of Atmosphere</div>
+  <ul class="lens-questions">
+    <li>Without using words, how can I describe the atmosphere of my game?</li>
+    <li>How can I use artistic content to deepen that atmosphere?</li>
+  </ul>
+</div>
+
+<nav class="chapter-nav">
+  <a href="mechanics.html"><span class="dir">← Previous</span>Mechanics</a>
+  <a href="community.html" class="next"><span class="dir">Next →</span>Community</a>
+</nav>
+
+</main>
+
+<footer class="footer">
+  <div style="opacity: 0.6;">Based on <em>The Art of Game Design</em> by Jesse Schell.</div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

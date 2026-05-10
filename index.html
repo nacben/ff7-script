@@ -1,0 +1,1764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Art of Game Design — A Visual Companion</title>
+<meta name="description" content="An educational companion to Jesse Schell's classic text on game design. Explore the lenses, principles, and craft of building experiences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0a1f;
+  --bg-2: #161029;
+  --bg-3: #1f1838;
+  --surface: #261d44;
+  --ink: #ece9f7;
+  --ink-dim: #b6acd6;
+  --ink-faint: #8a80b0;
+  --accent: #ffcc66;
+  --accent-2: #ff7eb6;
+  --accent-3: #7ee8fa;
+  --accent-4: #b48cff;
+  --border: #2e2453;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--serif);
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(180, 140, 255, 0.18), transparent 60%),
+    radial-gradient(1000px 600px at 90% 10%, rgba(255, 126, 182, 0.12), transparent 60%),
+    radial-gradient(800px 600px at 50% 100%, rgba(126, 232, 250, 0.10), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  line-height: 1.65;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(14, 10, 31, 0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.nav-brand {
+  font-family: var(--sans); font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.nav-brand .logo {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: conic-gradient(from 220deg, var(--accent), var(--accent-2), var(--accent-4), var(--accent-3), var(--accent));
+  box-shadow: 0 0 24px rgba(255, 204, 102, 0.35);
+}
+.nav-links { display: flex; gap: 0.25rem; font-family: var(--sans); font-size: 0.9rem; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--ink-dim); text-decoration: none;
+  padding: 0.5rem 0.85rem; border-radius: 8px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.nav-links a:hover { color: var(--ink); background: var(--bg-3); }
+.nav-links a.active { color: var(--accent); }
+.nav-toggle {
+  display: none; background: none; border: 1px solid var(--border);
+  color: var(--ink); padding: 0.4rem 0.7rem; border-radius: 8px; cursor: pointer;
+}
+
+/* ---------- Layout ---------- */
+.container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+.container-narrow { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; padding: 6rem 1.5rem 4rem; text-align: center; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(600px 400px at 50% 30%, rgba(255, 204, 102, 0.12), transparent 70%);
+  pointer-events: none;
+}
+.hero-kicker {
+  font-family: var(--sans); font-size: 0.85rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 1.05; margin: 0 0 1.2rem;
+  font-weight: 400; letter-spacing: -0.01em;
+}
+.hero h1 .em {
+  font-style: italic;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p.lede {
+  max-width: 680px; margin: 0 auto 2rem;
+  color: var(--ink-dim); font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+}
+.hero-cta { display: inline-flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.btn {
+  font-family: var(--sans); font-size: 0.95rem; font-weight: 600;
+  padding: 0.9rem 1.4rem; border-radius: 999px;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: 1px solid transparent; cursor: pointer;
+}
+.btn-primary {
+  background: linear-gradient(120deg, var(--accent), #ffaa3a);
+  color: #1a1430; box-shadow: 0 8px 24px rgba(255, 170, 58, 0.25);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255, 170, 58, 0.35); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--border); }
+.btn-ghost:hover { background: var(--bg-3); }
+
+/* ---------- Section headings ---------- */
+.section-eyebrow {
+  font-family: var(--sans); font-size: 0.8rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent-3); margin-bottom: 0.75rem;
+}
+h2.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  margin: 0 0 1rem; font-weight: 500; letter-spacing: -0.01em;
+}
+h2.section-title .em { font-style: italic; color: var(--accent); }
+.section-lede { color: var(--ink-dim); max-width: 720px; margin-bottom: 2.5rem; font-size: 1.1rem; }
+
+/* ---------- Page header (section banner) ---------- */
+.page-header {
+  padding: 5rem 1.5rem 2rem; text-align: center;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 204, 102, 0.03), transparent);
+}
+.page-header .eyebrow {
+  font-family: var(--sans); font-size: 0.85rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.page-header h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 400; margin: 0 0 1rem; letter-spacing: -0.01em;
+}
+.page-header p { color: var(--ink-dim); max-width: 680px; margin: 0 auto; font-size: 1.1rem; }
+
+/* ---------- Prose ---------- */
+.prose h2 { font-size: 1.8rem; font-weight: 500; margin: 3.5rem 0 1rem; letter-spacing: -0.005em; }
+.prose h3 {
+  font-size: 1.3rem; font-weight: 600;
+  margin: 2.5rem 0 0.8rem; color: var(--accent); font-family: var(--sans);
+}
+.prose h4 { font-size: 1.1rem; font-weight: 600; margin: 1.8rem 0 0.5rem; color: var(--ink); font-family: var(--sans); }
+.prose p { margin: 0 0 1.1rem; }
+.prose ul, .prose ol { padding-left: 1.4rem; margin: 0 0 1.2rem; }
+.prose li { margin-bottom: 0.4rem; }
+.prose strong { color: var(--accent); font-weight: 600; }
+.prose em { color: var(--accent-3); }
+.prose a { color: var(--accent-2); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 1.2rem; margin: 1.5rem 0;
+  color: var(--ink-dim); font-style: italic;
+  background: var(--bg-2); border-radius: 0 8px 8px 0;
+}
+.prose blockquote cite {
+  display: block; margin-top: 0.5rem; font-style: normal;
+  font-family: var(--sans); font-size: 0.9rem; color: var(--ink-faint);
+}
+.prose blockquote cite::before { content: "— "; }
+
+/* ---------- Pull quote ---------- */
+.pullquote {
+  font-family: var(--serif); font-size: 1.6rem; line-height: 1.4;
+  font-style: italic; color: var(--ink); text-align: center;
+  padding: 2rem; margin: 3rem 0;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.pullquote cite {
+  display: block; margin-top: 1rem; font-style: normal;
+  font-family: var(--sans); font-size: 0.9rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+/* ---------- Grid ---------- */
+.grid { display: grid; gap: 1.5rem; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card {
+  background: linear-gradient(180deg, var(--bg-2), var(--bg-3));
+  border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.6rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative; overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-3px); border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+.card a.card-link { text-decoration: none; color: inherit; display: block; }
+.card .card-num { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; }
+.card h3 { margin: 0.4rem 0 0.6rem; font-size: 1.2rem; color: var(--ink); font-family: var(--sans); font-weight: 600; }
+.card p { margin: 0; color: var(--ink-dim); font-size: 0.95rem; line-height: 1.55; }
+.card .card-tag {
+  font-family: var(--sans); font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-3); margin-top: 0.8rem; display: inline-block;
+}
+
+/* ---------- Lens ---------- */
+.lens {
+  background:
+    linear-gradient(135deg, rgba(255, 204, 102, 0.08), rgba(180, 140, 255, 0.06)),
+    var(--surface);
+  border: 1px solid var(--accent); border-radius: 18px;
+  padding: 1.8rem 2rem; margin: 2.5rem 0;
+  position: relative;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255, 204, 102, 0.15);
+}
+.lens::before {
+  content: ""; position: absolute;
+  top: -8px; left: 1.5rem;
+  width: 60px; height: 16px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 999px; opacity: 0.7;
+}
+.lens-num { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.08em; }
+.lens-title { margin: 0.2rem 0 0.4rem; font-family: var(--serif); font-size: 1.5rem; font-style: italic; color: var(--ink); }
+.lens-desc { color: var(--ink-dim); margin: 0.6rem 0 1rem; font-size: 1rem; }
+.lens-questions { margin: 0; padding-left: 1.3rem; }
+.lens-questions li { color: var(--ink); margin-bottom: 0.4rem; }
+.lens-questions li::marker { color: var(--accent); }
+
+/* ---------- Callout ---------- */
+.callout {
+  background: var(--bg-2); border-left: 4px solid var(--accent-3);
+  border-radius: 0 12px 12px 0;
+  padding: 1.2rem 1.4rem; margin: 1.5rem 0;
+}
+.callout-title {
+  font-family: var(--sans); font-size: 0.8rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-3); margin-bottom: 0.5rem;
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout.warn { border-left-color: var(--accent-2); }
+.callout.warn .callout-title { color: var(--accent-2); }
+.callout.gold { border-left-color: var(--accent); }
+.callout.gold .callout-title { color: var(--accent); }
+
+/* ---------- Magic words ---------- */
+.magic-words {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.6rem; text-align: center;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  padding: 1.5rem; margin: 2rem 0;
+}
+
+/* ---------- Tetrad ---------- */
+.tetrad { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 520px; margin: 2rem auto; }
+.tetrad-cell { background: var(--bg-2); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; text-align: center; }
+.tetrad-cell h4 {
+  margin: 0 0 0.4rem; font-family: var(--sans); color: var(--accent);
+  font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.tetrad-cell p { margin: 0; font-size: 0.9rem; color: var(--ink-dim); }
+.tetrad-cell.visible { border-color: var(--accent); }
+.tetrad-cell.hidden { border-style: dashed; }
+
+/* ---------- Lens grid (reference) ---------- */
+.lens-controls {
+  display: flex; gap: 1rem; margin: 1.5rem 0 2rem;
+  flex-wrap: wrap; align-items: center;
+}
+.lens-search {
+  flex: 1; min-width: 240px;
+  font-family: var(--sans); font-size: 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 999px; color: var(--ink);
+}
+.lens-search::placeholder { color: var(--ink-faint); }
+.lens-search:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 204, 102, 0.15);
+}
+.lens-count { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-faint); }
+.lens-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.lens-item {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.2rem 1.4rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.lens-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.lens-item.hidden { display: none; }
+.lens-item .lens-num { font-size: 0.75rem; }
+.lens-item .lens-title { font-size: 1.1rem; margin: 0.3rem 0 0.5rem; }
+.lens-item .lens-desc { font-size: 0.9rem; margin: 0; }
+
+/* ---------- Tables ---------- */
+.data-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; font-family: var(--sans); }
+.data-table th, .data-table td { text-align: left; padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); }
+.data-table th { font-weight: 600; color: var(--accent); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.data-table tr:hover td { background: var(--bg-2); }
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 1.5rem 4rem; text-align: center;
+  font-family: var(--sans); font-size: 0.9rem;
+  color: var(--ink-faint); background: var(--bg-2);
+}
+.footer a { color: var(--ink-dim); text-decoration: none; }
+.footer a:hover { color: var(--accent); }
+.footer .footer-grid {
+  max-width: 1100px; margin: 0 auto 2rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem; text-align: left;
+}
+.footer h4 {
+  color: var(--ink); font-size: 0.85rem;
+  letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 0.8rem;
+}
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer li { margin-bottom: 0.4rem; }
+
+/* ---------- Misc ---------- */
+hr.fancy {
+  border: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 3rem 0;
+}
+.center { text-align: center; }
+.back-to-top {
+  display: inline-block; margin-top: 2rem;
+  font-family: var(--sans); font-size: 0.85rem;
+  color: var(--ink-faint); text-decoration: none;
+  padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 999px;
+}
+.back-to-top:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  body { font-size: 17px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--bg); padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-toggle { display: block; }
+  .hero { padding: 4rem 1rem 3rem; }
+  .container, .container-narrow { padding: 2rem 1rem 4rem; }
+  .pullquote { font-size: 1.3rem; padding: 1.2rem; }
+  .lens { padding: 1.4rem; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero p.lede, .hero-cta { animation: fadeUp 0.8s ease both; }
+.hero p.lede { animation-delay: 0.1s; }
+.hero-cta { animation-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">
+      <span class="logo" aria-hidden="true"></span>
+      <span>The Art of Game Design</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#foundations">Foundations</a>
+      <a href="#process">Process</a>
+      <a href="#player">The Player</a>
+      <a href="#mechanics">Mechanics</a>
+      <a href="#experience">Experience</a>
+      <a href="#community">Community</a>
+      <a href="#team">The Team</a>
+      <a href="#business">The Business</a>
+      <a href="#impact">Impact</a>
+      <a href="#lenses">Lenses</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-kicker">A Visual Companion</div>
+  <h1>The Art of <span class="em">Game Design</span></h1>
+  <p class="lede">A field guide to the craft of building experiences — distilled from Jesse Schell's classic text, organized for designers, students, and the endlessly curious.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#foundations">Begin with Foundations →</a>
+    <a class="btn btn-ghost" href="#lenses">Browse the 112 Lenses</a>
+  </div>
+</header>
+
+<main class="container" style="padding-bottom: 5rem;">
+
+  <section style="text-align:center; margin-bottom: 4rem;">
+    <div class="magic-words">
+      I am a game designer.<br>
+      I am a game designer.<br>
+      I am a game designer.
+    </div>
+    <p style="color: var(--ink-dim); max-width: 600px; margin: 0 auto; font-size: 1.05rem;">
+      Say them out loud. Don't be shy — there's no one here but us.
+      Game design begins with a decision, and that decision is yours.
+    </p>
+  </section>
+
+  <hr class="fancy">
+
+  <section>
+    <div class="section-eyebrow">What you'll find here</div>
+    <h2 class="section-title">A complete <span class="em">curriculum</span> in game craft</h2>
+    <p class="section-lede">Nine sections cover the entire arc of design — from your first idea through balancing, playtesting, shipping, and understanding the way games change the people who play them.</p>
+
+    <div class="grid grid-2">
+      <div class="card"><a class="card-link" href="#foundations"><div class="card-num">01 — FOUNDATIONS</div><h3>The Designer &amp; the Experience</h3><p>Who you are, what you make, where it happens, and what holds it together. The skills of listening, the elemental tetrad, and the unifying power of theme.</p><span class="card-tag">Chapters 1–6</span></a></div>
+      <div class="card"><a class="card-link" href="#process"><div class="card-num">02 — PROCESS</div><h3>Ideas &amp; Iteration</h3><p>How games actually get made: the silent partner of the subconscious, brainstorming, prototyping, the Rule of the Loop, and risk mitigation.</p><span class="card-tag">Chapters 7–8</span></a></div>
+      <div class="card"><a class="card-link" href="#player"><div class="card-num">03 — THE PLAYER</div><h3>Demographics, Mind &amp; Motivation</h3><p>Who plays, how their minds work, and why they care. Modeling, flow, empathy, imagination, and the secret priorities of every player.</p><span class="card-tag">Chapters 9–11</span></a></div>
+      <div class="card"><a class="card-link" href="#mechanics"><div class="card-num">04 — MECHANICS</div><h3>The Seven Building Blocks</h3><p>Space, time, objects, actions, rules, skill, and chance — the elements every game is built from, plus balancing, puzzles, and interface.</p><span class="card-tag">Chapters 12–15</span></a></div>
+      <div class="card"><a class="card-link" href="#experience"><div class="card-num">05 — EXPERIENCE DESIGN</div><h3>Curves, Stories, Worlds, Spaces</h3><p>The shape of interest, the story machine, transmedia worlds, characters and avatars, architecture for play, and the aesthetics of presence.</p><span class="card-tag">Chapters 16–23</span></a></div>
+      <div class="card"><a class="card-link" href="#community"><div class="card-num">06 — COMMUNITY</div><h3>Players Among Players</h3><p>Why people play together, how communities form, how friendships are forged and maintained — and the design discipline of preventing grief.</p><span class="card-tag">Chapters 24–25</span></a></div>
+      <div class="card"><a class="card-link" href="#team"><div class="card-num">07 — THE TEAM</div><h3>Making it Together</h3><p>The secret of teamwork is love. Communication, documentation, and the irreplaceable practice of playtesting — when useful, but at least every week.</p><span class="card-tag">Chapters 26–28</span></a></div>
+      <div class="card"><a class="card-link" href="#business"><div class="card-num">08 — THE BUSINESS</div><h3>Technology, Clients &amp; Money</h3><p>Form follows funding. Navigating technology hype, dealing with clients, pitching ideas, and understanding the economics that keep the industry alive.</p><span class="card-tag">Chapters 29–32</span></a></div>
+      <div class="card"><a class="card-link" href="#impact"><div class="card-num">09 — IMPACT</div><h3>Transformation, Responsibility, Purpose</h3><p>Games change the people who play them. Take the invisible ring — accept the responsibility, find your secret purpose, and make work that matters.</p><span class="card-tag">Chapters 33–35</span></a></div>
+    </div>
+  </section>
+
+  <hr class="fancy">
+
+  <section>
+    <div class="section-eyebrow">The core idea</div>
+    <h2 class="section-title">A game is a <span class="em">problem-solving activity</span>, approached with a playful attitude.</h2>
+    <p class="section-lede">That definition — arrived at after a careful chase through toys, play, fun, and games — sets the agenda for everything that follows. Game designers don't really make games. They make experiences. Games are the machines that produce them.</p>
+    <blockquote class="pullquote">
+      We cannot create experiences directly. We create artifacts — rule sets, game boards, computer programs — and cross our fingers that the experience that takes place during interaction is something the player will enjoy.
+      <cite>Jesse Schell</cite>
+    </blockquote>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     SECTION 01 — FOUNDATIONS
+     ============================================================ -->
+<header class="page-header" id="foundations">
+  <div class="eyebrow">Section 01 · Chapters 1–6</div>
+  <h1>Foundations</h1>
+  <p>Everything begins with the designer. Before mechanics or technology, before pitches or playtests, there is a person who decides to make a thing — and an audience whose experience that thing exists to serve.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 1 — In the Beginning, There Is the Designer</h2>
+<p>If you want to become a game designer, the answer is almost embarrassingly simple: design games. Start now. Don't even finish this sentence. <em>Go.</em></p>
+<p>For many would-be designers, the trouble isn't knowing what to do — it's a crisis of confidence. They feel stuck in a catch-22: only game designers can design games, but you only become a game designer by designing them. The way out is just as simple. Say these words:</p>
+<div class="magic-words">I am a game designer.</div>
+<p>Say them out loud. Say them like a chant. You may not feel like one yet — but as we'll see, people become what they pretend to be. Doubt will plague you forever. When you're a novice, you'll think you don't know what you're doing. When you're seasoned, you'll think you've lost your touch. The work continues regardless.</p>
+<blockquote>If you aren't dropping, you aren't learning. And if you aren't learning, you aren't a juggler.<cite>A saying among jugglers</cite></blockquote>
+
+<h3>What skills does a game designer need?</h3>
+<p>In short — <strong>all of them.</strong> Almost anything you can be good at can become useful: animation, anthropology, architecture, brainstorming, business, cinematography, communication, creative writing, economics, engineering, games of every kind, history, management, mathematics, music, psychology, public speaking, sound design, technical writing, visual arts.</p>
+<p>No one masters all of these. But the more of them you are comfortable working with, however imperfectly, the better off you will be — for growth only happens when we exceed our limits.</p>
+
+<h3>The most important skill</h3>
+<p>Of all those skills, one stands above the rest. It sounds so simple that many people miss it. It isn't creativity. It isn't critical thinking. It isn't even communication.</p>
+<p>It is <strong>listening</strong>.</p>
+<p>Not the surface kind. Deep listening. Listening that puts you off-balance, that accepts the possibility of upset. The kind described in Hesse's <em>Siddhartha</em>: "To listen with a silent heart, with a waiting, open soul. Without passion, without desire, without judgment, without rebuke."</p>
+<p>Designers must listen to five things:</p>
+<ul>
+  <li><strong>The team</strong> — they collectively hold the skills you don't</li>
+  <li><strong>The audience</strong> — they decide whether your game succeeded</li>
+  <li><strong>The game</strong> — you must hear what is wrong with it as a mechanic listens to an engine</li>
+  <li><strong>The client</strong> — they are paying, and they need to be understood</li>
+  <li><strong>The self</strong> — the hardest of all, and the source of your true creativity</li>
+</ul>
+
+<div class="callout gold">
+  <div class="callout-title">The secret of the gifted</div>
+  <p>There are two gifts. The <em>minor</em> gift is innate aptitude — design comes easily. The <em>major</em> gift is love of the work itself. People with only the minor gift rarely produce great things. People with the major gift will keep at it, and their skills will grow to match or exceed those of the naturally gifted. The only way to find out if you have it is to start down the path and see if it makes your heart sing.</p>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 2 — The Designer Creates an Experience</h2>
+<p>A game designer's goal is not to design games. <strong>It is to create experiences.</strong> Games themselves are just artifacts — clumps of cardboard or bags of bits — worthless until played. What we care about is what happens in the mind of the player.</p>
+<p>This is hard territory because experiences are too familiar. We can't see them, hold them, or share them. No two people have the same experience of the same thing. And yet, creating experiences is all we really do.</p>
+<blockquote>The game is not the experience. The game enables the experience, but it is not the experience.<cite>Jesse Schell</cite></blockquote>
+
+<h3>Three approaches to chasing rainbows</h3>
+<ul>
+  <li><strong>Psychology</strong> — the science of the mechanisms of the mind. Useful, though most modern psychology avoids the subjective experience we care about most.</li>
+  <li><strong>Anthropology</strong> — especially cultural anthropology, which immerses itself in the lives of its subjects. We can do the same with our players.</li>
+  <li><strong>Design</strong> — every other design discipline, from architecture to music, has lessons for us.</li>
+</ul>
+
+<h3>Essential experience</h3>
+<p>You can never replicate a real experience exactly. What you can do is capture its essence. A snowball-fight game doesn't need real snow — it needs the feel of cold, the chaos, the laughter, the friendly threat. Identify what makes the experience matter, then find as many ways as possible to deliver that essence through your game.</p>
+
+<div class="lens">
+  <div class="lens-num">LENS #1</div>
+  <div class="lens-title">The Lens of Emotion</div>
+  <p class="lens-desc">People may forget what you said, but they'll never forget how you made them feel. — Maya Angelou</p>
+  <ul class="lens-questions">
+    <li>What emotions would I like my player to experience? Why?</li>
+    <li>What emotions are players having when they play now? Why?</li>
+    <li>How can I bridge the gap between the two?</li>
+  </ul>
+</div>
+
+<div class="lens">
+  <div class="lens-num">LENS #2</div>
+  <div class="lens-title">The Lens of Essential Experience</div>
+  <p class="lens-desc">Stop thinking about your game. Start thinking about the experience of the player.</p>
+  <ul class="lens-questions">
+    <li>What experience do I want the player to have?</li>
+    <li>What is essential to that experience?</li>
+    <li>How can my game capture that essence?</li>
+  </ul>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 3 — The Experience Takes Place in a Venue</h2>
+<p>Every play experience happens somewhere. Technologies come and go — arcade, PC, console, handheld, mobile, tablet — but the <em>venues</em> in our lives are far more stable. Looking past the platform of the moment to the place where play actually happens reveals patterns that survive technological churn.</p>
+
+<h3>Private venues</h3>
+<ul>
+  <li><strong>The Hearth</strong> — once a fireplace, now a TV. A place where families gather. Good for games people can play together or enjoy watching.</li>
+  <li><strong>The Workbench</strong> — a quiet, private place for focused, intense, often solitary work. PC gaming, MMOs, and VR live here.</li>
+  <li><strong>The Reading Nook</strong> — a comfortable place to "lean back." Tablets thrive here, with games that are simpler and more relaxing.</li>
+</ul>
+
+<h3>Public venues</h3>
+<ul>
+  <li><strong>The Theater</strong> — many people focused on one performance. Games struggle here because interactivity dilutes with audience size.</li>
+  <li><strong>The Arena</strong> — purpose-built fields of play, often paired with theaters. Physical sports' natural home; e-sports increasingly imitate it.</li>
+  <li><strong>The Museum</strong> — a place we go to encounter the exotic. Arcades, zoos, and gallery installations all share this DNA.</li>
+</ul>
+
+<h3>Half-private, half-public</h3>
+<ul>
+  <li><strong>The Gaming Table</strong> — the intimate face-to-face venue of board, card, and dice games. So engrossing that the sandwich and the sushi roll were both invented by table-gamers who couldn't bear to stop.</li>
+  <li><strong>The Playground</strong> — improvisational play in any open space. Largely the domain of children, mostly untouched by the videogame industry.</li>
+  <li><strong>Anywhere</strong> — crosswords, Sudoku, and the entire smartphone market. Tiny bites, simple interfaces, played in spare moments.</li>
+</ul>
+
+<div class="lens">
+  <div class="lens-num">LENS #3</div>
+  <div class="lens-title">The Lens of the Venue</div>
+  <ul class="lens-questions">
+    <li>What type of venue best suits the game I'm trying to create?</li>
+    <li>Does my venue have special properties that will influence my game?</li>
+    <li>What elements of my game are in harmony with my venue? What elements are not?</li>
+  </ul>
+</div>
+
+<hr class="fancy">
+
+<h2>Chapter 4 — The Experience Rises Out of a Game</h2>
+<p>What is a game, exactly? Defining it is tricky. Schell's working definitions, distilled over many pages of careful analysis:</p>
+
+<div class="callout gold">
+  <div class="callout-title">The Definitions</div>
+  <p><strong>Fun</strong> is pleasure with surprises.</p>
+  <p><strong>Play</strong> is manipulation that indulges curiosity.</p>
+  <p><strong>A toy</strong> is an object you play with.</p>
+  <p><strong>A good toy</strong> is an object that is fun to play with.</p>
+  <p><strong>A game</strong> is a problem-solving activity, approached with a playful attitude.</p>
+</div>
+
+<div class="lens"><div class="lens-num">LENS #4</div><div class="lens-title">The Lens of Surprise</div><p class="lens-desc">Surprise is so basic that we forget about it. It is at the root of humor, strategy, and problem solving.</p><ul class="lens-questions"><li>What will surprise players when they play my game?</li><li>Does the story have surprises? Do the rules? The artwork? The technology?</li><li>Do your rules let players surprise each other? Themselves?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #5</div><div class="lens-title">The Lens of Fun</div><ul class="lens-questions"><li>What parts of my game are fun? Why?</li><li>What parts need to be more fun?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #6</div><div class="lens-title">The Lens of Curiosity</div><p class="lens-desc">Think about the player's true motivations — not just the goals your game sets, but the reasons the player wants to achieve them.</p><ul class="lens-questions"><li>What questions does my game put into the player's mind?</li><li>What am I doing to make them care about these questions?</li><li>What can I do to make them invent even more questions?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #7</div><div class="lens-title">The Lens of Endogenous Value</div><p class="lens-desc">A game's success hinges on the players' willingness to pretend it is important.</p><ul class="lens-questions"><li>What is valuable to the players in my game?</li><li>How can I make it more valuable to them?</li><li>What is the relationship between value in the game and the players' motivations?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #8</div><div class="lens-title">The Lens of Problem Solving</div><ul class="lens-questions"><li>What problems does my game ask the player to solve?</li><li>Are there hidden problems that arise as part of gameplay?</li><li>How can my game generate new problems so players keep coming back?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 5 — The Game Consists of Elements</h2>
+<p>To do design, you must learn to see past the skin of a game (what players experience) and into its skeleton (the elements that produce that experience). Schell organizes those elements into four categories — the <strong>Elemental Tetrad</strong>:</p>
+
+<div class="tetrad">
+  <div class="tetrad-cell visible"><h4>Aesthetics</h4><p>How the game looks, sounds, feels. The most visible quadrant; the most directly connected to player experience.</p></div>
+  <div class="tetrad-cell visible"><h4>Story</h4><p>The sequence of events that unfolds in your game — linear or branching, scripted or emergent.</p></div>
+  <div class="tetrad-cell hidden"><h4>Mechanics</h4><p>The procedures and rules. What makes a game a game. Goals, constraints, and consequences.</p></div>
+  <div class="tetrad-cell hidden"><h4>Technology</h4><p>The medium itself — paper, plastic chits, polygons. What enables and constrains everything else.</p></div>
+</div>
+<p class="center" style="color: var(--ink-faint); font-size: 0.9rem; font-family: var(--sans);">↑ More visible to players · less visible to players ↓</p>
+
+<p>None of these elements is more important than the others. Each one powerfully influences each of the others. A change in one ripples into the rest. You must develop the rare double vision that sees both skin and skeleton at once — the experience and the elements that produce it.</p>
+
+<div class="lens"><div class="lens-num">LENS #9</div><div class="lens-title">The Lens of the Elemental Tetrad</div><ul class="lens-questions"><li>Is my game design using elements of all four types?</li><li>Could my design be improved by enhancing elements in one or more of the categories?</li><li>Are the four elements in harmony, reinforcing each other and working together toward a common theme?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #10</div><div class="lens-title">The Lens of Holographic Design</div><p class="lens-desc">See everything in your game at once — the four elements and the player experience and how they interrelate.</p><ul class="lens-questions"><li>What elements of the game make the experience enjoyable?</li><li>What elements detract from the experience?</li><li>How can I change game elements to improve the experience?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 6 — The Elements Support a Theme</h2>
+<blockquote>To write a mighty book, you must choose a mighty theme.<cite>Herman Melville</cite></blockquote>
+
+<p>The strongest games have a clear theme that every element reinforces. Two steps:</p>
+<ol><li>Figure out what your theme is.</li><li>Use every means possible to reinforce it.</li></ol>
+<p>Themes come in two flavors. <strong>Experience-based themes</strong> deliver an essential feeling ("the fantasy of being a pirate"). <strong>Truth-based themes</strong> express something we deeply believe ("love is more important than life"). The most powerful games combine both.</p>
+<p>When the Disney VR team built <em>Pirates of the Caribbean: Battle for the Buccaneer Gold</em>, the breakthrough was realizing the ride wasn't about pirates — it was about <em>being</em> a pirate. Once they had that theme, every decision flowed from it: the shape of the CAVE, the metal cannons, the swaying motion platform, the ten-speaker audio, even the bags of fishing nets to hold purses. The strongest games are themed all the way down.</p>
+
+<div class="lens"><div class="lens-num">LENS #11</div><div class="lens-title">The Lens of Unification</div><ul class="lens-questions"><li>What is my theme?</li><li>Am I using every means possible to reinforce that theme?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #12</div><div class="lens-title">The Lens of Resonance</div><p class="lens-desc">Look for hidden power. Resonant themes are buried inside us — and shake us when something causes them to ring.</p><ul class="lens-questions"><li>What is it about my game that feels powerful and special?</li><li>When I describe my game to people, what ideas get them really excited?</li><li>If I had no constraints of any kind, what would this game be like?</li><li>I have certain instincts about how this game should be. What is driving those instincts?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 02 — PROCESS
+     ============================================================ -->
+<header class="page-header" id="process">
+  <div class="eyebrow">Section 02 · Chapters 7–8</div>
+  <h1>Process — Ideas &amp; Iteration</h1>
+  <p>The actual practice of game design: where ideas come from, why prototypes are throwaway, and the unbreakable Rule of the Loop.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 7 — The Game Begins with an Idea</h2>
+<p>You may worry that the method you used to design games — think of an idea, try it out, keep changing it until it's good — isn't the "real" method. Relax. That <em>is</em> the real method. The question is only how to do each step well.</p>
+
+<h3>Infinite inspiration</h3>
+<p>The most original work doesn't come from copying other people in your field. It comes from looking everywhere else — at ballet, at flocks of geese, at paper punch machines, at the messy life around you — and finding inspiration in things that nobody else thought to translate into game form.</p>
+
+<div class="lens"><div class="lens-num">LENS #13</div><div class="lens-title">The Lens of Infinite Inspiration</div><p class="lens-desc">When you know how to listen, everybody is the guru. Stop looking at your game and at games like it. Look everywhere else.</p><ul class="lens-questions"><li>What is an experience I have had in my life that I would want to share with others?</li><li>In what small way can I capture the essence of that experience and put it into my game?</li></ul></div>
+
+<h3>State the problem</h3>
+<blockquote>Don't fall in love with your solution. Fall in love with your problem.<cite>Anonymous</cite></blockquote>
+<p>Most designers jump to solutions too fast. A clear problem statement opens a broader creative space, gives you a measurement of quality (does this solve the problem?), and makes collaboration easier. Notice that "how can I make a browser game teenagers will like?" is constraining — perhaps the question is really "how can I make a browser <em>experience</em> teenagers will like?"</p>
+
+<div class="lens"><div class="lens-num">LENS #14</div><div class="lens-title">The Lens of the Problem Statement</div><ul class="lens-questions"><li>What problem, or problems, am I really trying to solve?</li><li>Have I been making assumptions about this game that have nothing to do with its true purpose?</li><li>Is a game really the best solution? Why?</li><li>How will I be able to tell if the problem is solved?</li></ul></div>
+
+<h3>Your silent partner</h3>
+<p>Most good ideas don't arrive through reasoning. They surface from the subconscious — the same place dreams come from. Schell argues you should treat your subconscious like a separate person and learn to collaborate with it: pay attention to its hints, record its ideas, manage its appetites, and (above all) <em>sleep</em>. Most good ideas come on the other side of rest.</p>
+
+<div class="callout">
+  <div class="callout-title">Five rules for your subconscious</div>
+  <p>1. <strong>Pay attention</strong> — if you ignore its suggestions, they stop coming. 2. <strong>Record your ideas</strong> — until they're written, they clutter your mind. 3. <strong>Manage its appetites judiciously</strong> — basic needs satisfied, it does its best work. 4. <strong>Sleep</strong> — the committee of sleep solves problems daylight can't. 5. <strong>Don't push too hard</strong> — looming over your subconscious slows it down.</p>
+</div>
+
+<h3>Sixteen brainstorming tips (the short version)</h3>
+<ol>
+  <li><strong>Write things down.</strong> Memory is terrible. Externalize.</li>
+  <li><strong>Pen or keyboard, whatever works.</strong> Unlined paper invites circles and arrows.</li>
+  <li><strong>Sketch.</strong> Even bad drawings spark ideas you wouldn't have had.</li>
+  <li><strong>Bring toys.</strong> Visual and tactile stimulation triggers creativity.</li>
+  <li><strong>Change your perspective.</strong> Stand on the chair. Go somewhere new.</li>
+  <li><strong>Immerse yourself.</strong> Become an anthropologist of your target audience.</li>
+  <li><strong>Crack jokes.</strong> Humor unlocks perspectives logic locks shut.</li>
+  <li><strong>Spare no expense.</strong> Don't let cheap materials inhibit million-dollar ideas.</li>
+  <li><strong>Use the walls.</strong> Big paper, sticky notes — get ideas out of your head and onto a surface you can walk around.</li>
+  <li><strong>The space remembers.</strong> Spatial memory is strong; lean on it.</li>
+  <li><strong>Write everything.</strong> Stupid ideas clear the way for good ones.</li>
+  <li><strong>Number your lists.</strong> Numbered things acquire dignity.</li>
+  <li><strong>Destroy your assumptions.</strong> List what you've assumed and ask: what if it weren't true?</li>
+  <li><strong>Mix and match categories.</strong> Lists of mechanics × story × aesthetic × tech yield surprising hybrids.</li>
+  <li><strong>Talk to yourself.</strong> Saying things aloud makes them real.</li>
+  <li><strong>Find a partner.</strong> Two minds bounce. Four is a meeting.</li>
+</ol>
+
+<hr class="fancy">
+
+<h2>Chapter 8 — The Game Improves Through Iteration</h2>
+<blockquote>Once you make a decision, the universe conspires to make it happen.<cite>Emerson</cite></blockquote>
+<p>Pick an idea. Commit. The moment you commit, flaws and benefits become clear that weren't before. Be ready to reverse the decision when you realize it's wrong — ideas are paper cups, not china — but pick, and pick fast.</p>
+
+<h3>The eight filters</h3>
+<p>A finished design must pass through all eight. Change anything, and you have to re-run the whole gauntlet:</p>
+<ol>
+  <li><strong>Artistic impulse</strong> — does it feel right?</li>
+  <li><strong>Demographics</strong> — will the intended audience like it?</li>
+  <li><strong>Experience design</strong> — is it well-crafted under many lenses?</li>
+  <li><strong>Innovation</strong> — is it novel enough?</li>
+  <li><strong>Business and marketing</strong> — will it be profitable?</li>
+  <li><strong>Engineering</strong> — can it be built?</li>
+  <li><strong>Social / community</strong> — does it meet the social goals?</li>
+  <li><strong>Playtesting</strong> — do real players enjoy it?</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #15</div><div class="lens-title">The Lens of the Eight Filters</div><p class="lens-desc">A design is only done when it can pass all eight tests without requiring change.</p></div>
+
+<h3>The Rule of the Loop</h3>
+<div class="callout gold">
+  <div class="callout-title">The Rule of the Loop</div>
+  <p>The more times you test and improve your design, the better your game will be. There are no exceptions.</p>
+</div>
+<p>This is an absolute truth, not a perspective. Faced with a long-term project, you must answer two questions:</p>
+<ol>
+  <li><strong>How can I make every loop count?</strong> → Assess risks; mitigate them.</li>
+  <li><strong>How can I loop as fast as possible?</strong> → Build many rough prototypes.</li>
+</ol>
+
+<h3>From waterfall to agile</h3>
+<p>The waterfall model was a fantasy of orderly steps. It violated the Rule of the Loop. Barry Boehm's spiral model (1986) put iteration at the center, and the 2001 Agile Manifesto codified it: <em>working software over comprehensive documentation; responding to change over following a plan.</em></p>
+
+<h3>Risk mitigation by prototyping</h3>
+<p>Before writing code, list the risks: the unfun mechanic, the engine limit, the schedule risk, the publisher curveball. Then build the smallest possible prototype that tells you whether each risk is real. Cheap prototypes look ugly on purpose — polished ones hide problems and lull you into false security.</p>
+
+<div class="lens"><div class="lens-num">LENS #16</div><div class="lens-title">The Lens of Risk Mitigation</div><p class="lens-desc">Because the sage always confronts difficulties, he never experiences them. — Tao Te Ching</p><ul class="lens-questions"><li>What could keep this game from being great?</li><li>How can we stop that from happening?</li></ul></div>
+
+<h3>Ten prototyping tips</h3>
+<ol>
+  <li><strong>Answer a question.</strong> Every prototype exists to answer one.</li>
+  <li><strong>Forget quality.</strong> Polish wastes time and hides defects.</li>
+  <li><strong>Don't get attached.</strong> Plan to throw it away — you will anyway.</li>
+  <li><strong>Prioritize prototypes.</strong> Biggest risks first.</li>
+  <li><strong>Parallelize.</strong> Artists, engineers, designers can each prototype simultaneously.</li>
+  <li><strong>It doesn't have to be digital.</strong> Paper prototypes spot problems faster.</li>
+  <li><strong>It doesn't have to be interactive.</strong> Animatics and sketches can answer questions too.</li>
+  <li><strong>Pick a fast-loop engine.</strong> Languages that let you change code while the game runs are gold.</li>
+  <li><strong>Build the toy first.</strong> Make sure the core interaction is fun before designing a game around it.</li>
+  <li><strong>Seize opportunities for more loops.</strong> Schedule surprises can be a gift.</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #17</div><div class="lens-title">The Lens of the Toy</div><p class="lens-desc">Stop thinking about whether your game is fun to play. Start thinking about whether it is fun to play with.</p><ul class="lens-questions"><li>If my game had no goal, would it be fun at all?</li><li>When people see my game, do they want to start interacting with it even before they know what to do?</li></ul></div>
+
+<h3>How much is enough?</h3>
+<p>The work is never finished, only abandoned. You must loop enough times to be proud, before you spend the whole budget. Mark Cerny's "Method" observes that preproduction continues until you have <em>two publishable levels</em> — at which point the project is ~30% spent, and the rest can finally be scheduled with confidence.</p>
+
+<div class="callout">
+  <div class="callout-title">Two useful rules of thumb</div>
+  <p><strong>The Plan-to-Cut Rule:</strong> design so that if 50% of your budget vanished, you'd still have a shippable game.</p>
+  <p><strong>The 50% Rule:</strong> all core gameplay should be fully playable at the halfway point in your schedule. Plan to spend the second half polishing.</p>
+</div>
+
+<div class="lens"><div class="lens-num">LENS #18</div><div class="lens-title">The Lens of Passion</div><ul class="lens-questions"><li>Am I filled with blinding passion about how great this game will be?</li><li>If I've lost the passion, can I find it again?</li><li>If the passion isn't coming back, shouldn't I be doing something else?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 03 — THE PLAYER
+     ============================================================ -->
+<header class="page-header" id="player">
+  <div class="eyebrow">Section 03 · Chapters 9–11</div>
+  <h1>The Player</h1>
+  <p>To create a great experience, you must know your audience better than they know themselves. Demographics, psychology, motivation, and the secret workings of the mind that hosts every play experience.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 9 — The Game Is Made for a Player</h2>
+<p>Einstein once accepted an invitation to lecture a small audience of older women on relativity. Looking out at the crowd, he made a different decision: he played them his violin instead. They cared less about physics and more about an intimate encounter with the famous Einstein. He knew his audience. So must you.</p>
+
+<h3>Project yourself</h3>
+<p>The best way to understand your audience is empathy. Walt Disney famously crouched while inspecting Disneyland — to see it the way a child would. You must project yourself into the mind of your player, watching with their eyes, feeling with their hands.</p>
+
+<h3>Age demographics, briefly</h3>
+<ul>
+  <li><strong>0–3</strong> — toys, not games. Touch interfaces are intuitive; abstract controllers are not.</li>
+  <li><strong>4–6</strong> — first interest in simple games, often co-played with parents.</li>
+  <li><strong>7–9</strong> — "the age of reason." Independent gameplaying begins.</li>
+  <li><strong>10–13</strong> — "the age of obsession." Tweens dive deep into their interests.</li>
+  <li><strong>13–18</strong> — teens experiment with identity through play.</li>
+  <li><strong>18–24</strong> — young adults: time, money, and established tastes.</li>
+  <li><strong>25–35</strong> — peak family formation; mostly casual play.</li>
+  <li><strong>35–50</strong> — career and family; play often family-oriented.</li>
+  <li><strong>50+</strong> — empty nesters; social games and old favorites.</li>
+</ul>
+
+<h3>Stereotypes as inclusion tools</h3>
+<p>Generalizations about gender, when handled with care, are tools of inclusion rather than exclusion. Knowing that certain play patterns are more common in different groups lets you design games that <em>support multiple styles of play at once</em>. The classic example: the family target-shooting game whose scoring unintentionally favored rapid-fire players until a second metric — accuracy — was added. Suddenly both styles felt rewarded.</p>
+
+<div class="lens"><div class="lens-num">LENS #19</div><div class="lens-title">The Lens of the Player</div><ul class="lens-questions"><li>What do they like? What don't they like? Why?</li><li>What do they expect to see in a game?</li><li>If I were in their place, what would I want to see?</li><li>What would they like or dislike about my game in particular?</li></ul></div>
+
+<h3>Psychographics &amp; game pleasures</h3>
+<p>Marc LeBlanc's eight game pleasures: <strong>sensation, fantasy, narrative, challenge, fellowship, discovery, expression, submission</strong>. Richard Bartle's four player types — Achievers ♦, Explorers ♠, Socializers ♥, Killers ♣ — map onto a quadrant of acting/interacting vs. world/players. There are many more pleasures: anticipation, completion, schadenfreude, gift giving, humor, possibility, naches, surprise, thrill, fiero, wonder.</p>
+
+<div class="lens"><div class="lens-num">LENS #20</div><div class="lens-title">The Lens of Pleasure</div><ul class="lens-questions"><li>What pleasures does your game give to players? Can these be improved?</li><li>What pleasures are missing from your experience? Why? Can they be added?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 10 — The Experience Is in the Player's Mind</h2>
+<p>The human mind is the most complex object in the known universe. Most of its workings are hidden from us. Game experiences happen entirely inside this black box.</p>
+
+<h3>Four powers that make play possible</h3>
+<ol>
+  <li><strong>Modeling</strong> — the brain doesn't deal with reality; it deals with simplified models of reality. Games are predigested models.</li>
+  <li><strong>Focus</strong> — the brain's ability to pay attention to selected information. The pleasurable extreme is <em>flow</em>.</li>
+  <li><strong>Imagination</strong> — the everyday power to fill gaps. Tell someone "the mailman stole my car," and dozens of details appear unbidden.</li>
+  <li><strong>Empathy</strong> — projecting ourselves into another. We can do it with humans, with animated dogs, with stick figures.</li>
+</ol>
+
+<h3>Flow</h3>
+<p>Mihaly Csikszentmihalyi's well-known concept: when challenges meet skills just right, attention deepens, time falls away, and we feel fulfillment. Flow requires <strong>clear goals</strong>, <strong>no distractions</strong>, <strong>direct feedback</strong>, and a <strong>continuously calibrated challenge</strong>.</p>
+
+<p>Skilled designers move the player up the channel in a "tense / release / tense / release" pattern — gradually raising the challenge, then granting a brief easier period, then raising it again.</p>
+
+<div class="lens"><div class="lens-num">LENS #21</div><div class="lens-title">The Lens of Flow</div><ul class="lens-questions"><li>Does my game have clear goals? Are the player's goals the same goals I intended?</li><li>Does my game provide a steady stream of not-too-easy, not-too-hard challenges?</li><li>Are the player's skills improving at the rate I hoped?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 11 — The Player's Mind Is Driven by Motivation</h2>
+<blockquote>Games are not important. The entire goal of entertainment is to take something unimportant and make it seem very important indeed.<cite>Jesse Schell</cite></blockquote>
+
+<h3>Maslow &amp; needs</h3>
+<p>Maslow's hierarchy is a workable map for thinking about why games engage us. Most game activities live on the self-esteem tier (challenge, mastery), but multiplayer games reach down into love/belonging and safety — which is why they tend to hook deeper.</p>
+
+<h3>Self-determination theory</h3>
+<p>Edward Deci and Richard Ryan proposed three psychological needs:</p>
+<ul>
+  <li><strong>Competence</strong> — I need to feel good at something.</li>
+  <li><strong>Autonomy</strong> — I need freedom to do things my way.</li>
+  <li><strong>Relatedness</strong> — I need to connect with other people.</li>
+</ul>
+
+<div class="lens"><div class="lens-num">LENS #22</div><div class="lens-title">The Lens of Needs</div><ul class="lens-questions"><li>On which levels of Maslow's hierarchy is my game operating?</li><li>Does it fill the needs of competence, autonomy, and relatedness?</li><li>How can I make my game fill more basic needs than it already does?</li></ul></div>
+
+<h3>Intrinsic vs. extrinsic motivation</h3>
+<p>Not a binary — a gradient. A famous study found that paying children to draw caused them to make <em>more</em> pictures of <em>lower</em> quality, and to stop drawing entirely when payment ended. Extrinsic rewards can drain intrinsic motivation.</p>
+
+<h3>Wanna vs. Hafta</h3>
+<p>Pleasure-seeking and pain-avoiding are different brain systems. Many "free-to-play" games drift from wanna to hafta over time — and as designer Sheri Graner Ray put it, "people don't just stop playing these games, they divorce them."</p>
+
+<div class="lens"><div class="lens-num">LENS #23</div><div class="lens-title">The Lens of Motivation</div><ul class="lens-questions"><li>What motivations do players have to play my game?</li><li>Which motivations are internal? Which are external?</li><li>Which are pleasure-seeking? Which are pain-avoiding?</li><li>Which motivations support each other? Which are in conflict?</li></ul></div>
+
+<h3>Novelty</h3>
+<p>Players want what is new. Novelty drives purchases and keeps people playing — especially novelty that <em>makes them think in a new way</em>. <em>Portal</em>'s slogan said it best: "Now you're thinking with portals."</p>
+
+<div class="lens"><div class="lens-num">LENS #24</div><div class="lens-title">The Lens of Novelty</div><ul class="lens-questions"><li>What is novel about my game?</li><li>Does my game have novelties throughout, or just at the beginning?</li><li>When the novelty wears off, will players still enjoy my game?</li></ul></div>
+
+<div class="lens"><div class="lens-num">LENS #25</div><div class="lens-title">The Lens of Judgment</div><p class="lens-desc">People don't hate being judged — they hate being judged unfairly. Games are excellent systems for fair, objective judgment.</p><ul class="lens-questions"><li>What does your game judge about the players?</li><li>How does it communicate this judgment?</li><li>Do players feel the judgment is fair? Do they care?</li><li>Does the judgment make them want to improve?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 04 — MECHANICS
+     ============================================================ -->
+<header class="page-header" id="mechanics">
+  <div class="eyebrow">Section 04 · Chapters 12–15</div>
+  <h1>Mechanics</h1>
+  <p>The skeleton of every game. Seven categories of element, plus the disciplines that hold them in balance: difficulty, choice, puzzles, and interface.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 12 — Some Elements Are Game Mechanics</h2>
+<p>Strip away aesthetics, story, and technology, and what remains are the <strong>mechanics</strong>: the interactions and relationships at the heart of the game. They fall into seven categories.</p>
+
+<h3>1. Space</h3>
+<p>Every game has a space — the "magic circle" where play happens. Spaces are discrete or continuous, have some number of dimensions, and contain bounded areas that may or may not be connected.</p>
+<div class="lens"><div class="lens-num">LENS #26</div><div class="lens-title">The Lens of Functional Space</div><ul class="lens-questions"><li>Is the space of this game discrete or continuous?</li><li>How many dimensions does it have?</li><li>What are the boundaries? Are there subspaces? How are they connected?</li></ul></div>
+
+<h3>2. Time</h3>
+<p>Time, like space, can be discrete (a turn) or continuous (real time). Games use clocks (absolute limits) and races (relative pressure). They can stop time, speed it up, rewind it.</p>
+<div class="lens"><div class="lens-num">LENS #27</div><div class="lens-title">The Lens of Time</div><ul class="lens-questions"><li>What determines the length of my gameplay activities?</li><li>Are my players frustrated because the game ends too early? Bored because it goes too long?</li><li>Would clocks or races make my gameplay more exciting?</li></ul></div>
+
+<h3>3. Objects, attributes, and states</h3>
+<p>Objects are the nouns of mechanics. Each object has attributes; each attribute has a state. State diagrams: every ghost in Pac-Man cycles through Chasing → Blue → Flashing → Eyes → In Cage.</p>
+<div class="lens"><div class="lens-num">LENS #28</div><div class="lens-title">The Lens of the State Machine</div><ul class="lens-questions"><li>What are the objects in my game?</li><li>What are their attributes? What states can those attributes be in?</li><li>What triggers the state changes?</li></ul></div>
+
+<h4>Secrets</h4>
+<p>Critical: who knows what? Public state, private state, state known only to the game, state known only to fate.</p>
+<div class="lens"><div class="lens-num">LENS #29</div><div class="lens-title">The Lens of Secrets</div><ul class="lens-questions"><li>What is known by the game only?</li><li>What is known by all players? By only one?</li><li>Would changing who knows what improve the game?</li></ul></div>
+
+<h3>4. Actions</h3>
+<p>Actions are the verbs. Two kinds: <strong>basic actions</strong> (the moves the rules permit) and <strong>strategic actions</strong> (the meaningful plays that emerge). An elegant game has a small number of basic actions and a large number of strategic ones.</p>
+<p>Five ways to encourage <strong>emergent gameplay</strong>:</p>
+<ol>
+  <li>Add more verbs.</li>
+  <li>Make verbs that can act on many objects.</li>
+  <li>Allow goals to be achieved more than one way.</li>
+  <li>Provide many subjects to control.</li>
+  <li>Make side effects change constraints.</li>
+</ol>
+<div class="lens"><div class="lens-num">LENS #30</div><div class="lens-title">The Lens of Emergence</div><ul class="lens-questions"><li>How many verbs do my players have?</li><li>How many objects can each verb act on?</li><li>How many ways can players achieve their goals?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #31</div><div class="lens-title">The Lens of Action</div><ul class="lens-questions"><li>What are the basic actions in my game?</li><li>What are the strategic actions?</li><li>What actions do players wish they could do but cannot?</li></ul></div>
+
+<h3>5. Rules</h3>
+<p>The most fundamental mechanic. Above all, every game has one top rule: its <em>goal</em>. Good goals are <strong>concrete, achievable, and rewarding</strong>.</p>
+<div class="lens"><div class="lens-num">LENS #32</div><div class="lens-title">The Lens of Goals</div><ul class="lens-questions"><li>What is the ultimate goal of my game? Is it clear to players?</li><li>Are goals concrete, achievable, and rewarding?</li><li>Do I have a good balance of short- and long-term goals?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #33</div><div class="lens-title">The Lens of Rules</div><ul class="lens-questions"><li>What are the foundational rules vs. operational rules of my game?</li><li>Are there laws or house rules forming as the game develops?</li><li>Are there modes? Who enforces the rules?</li></ul></div>
+
+<h3>6. Skill</h3>
+<p>Games demand real skills (which the player has) and feature virtual skills (which the character has). Skills fall into three groups: physical, mental, and social.</p>
+<div class="lens"><div class="lens-num">LENS #34</div><div class="lens-title">The Lens of Skill</div><ul class="lens-questions"><li>What skills does my game require?</li><li>Which skills are dominant? Are these creating the experience I want?</li><li>Can players improve their skills with practice?</li></ul></div>
+
+<h3>7. Chance</h3>
+<p>Probability theory was literally invented to balance a gambling problem (the Chevalier de Méré's lost bets in 1654). Designers use expected value — the average outcome of a decision — to balance options. But beware: players don't choose only by expected value. <em>Regret</em> is a real cost.</p>
+<div class="lens"><div class="lens-num">LENS #35</div><div class="lens-title">The Lens of Expected Value</div><ul class="lens-questions"><li>What is the actual chance of an event? The perceived chance?</li><li>What value does each outcome have — quantifiable and intangible?</li><li>Do the expected values of actions give the player interesting choices?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #36</div><div class="lens-title">The Lens of Chance</div><ul class="lens-questions"><li>What in my game is truly random? What just feels random?</li><li>Does randomness give positive feelings or feelings of hopelessness?</li><li>What is the relationship between chance and skill?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 13 — Game Mechanics Must Be in Balance</h2>
+<blockquote>A false balance is an abomination to the Lord.<cite>Proverbs 11:1</cite></blockquote>
+
+<h3>The twelve balances</h3>
+<ol>
+  <li><strong>Fairness</strong> — symmetrical games are fair by construction; asymmetrical games require careful tuning.</li>
+  <li><strong>Challenge vs. success</strong> — keep the player in the flow channel.</li>
+  <li><strong>Meaningful choices</strong> — beware of dominant strategies and meaningless choices.</li>
+  <li><strong>Triangularity</strong> — a low-risk/low-reward option vs. a high-risk/high-reward one. <em>Space Invaders</em>' flying saucer.</li>
+  <li><strong>Skill vs. chance</strong>.</li>
+  <li><strong>Head vs. hands</strong>.</li>
+  <li><strong>Competition vs. cooperation</strong>.</li>
+  <li><strong>Short vs. long</strong>.</li>
+  <li><strong>Rewards</strong> — variable rewards beat fixed ones.</li>
+  <li><strong>Punishment</strong> — used delicately, creates endogenous value.</li>
+  <li><strong>Freedom vs. controlled experience</strong>.</li>
+  <li><strong>Simple vs. complex</strong> — aim for elegance.</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #37</div><div class="lens-title">The Lens of Fairness</div></div>
+<div class="lens"><div class="lens-num">LENS #38</div><div class="lens-title">The Lens of Challenge</div></div>
+<div class="lens"><div class="lens-num">LENS #39</div><div class="lens-title">The Lens of Meaningful Choices</div></div>
+<div class="lens"><div class="lens-num">LENS #40</div><div class="lens-title">The Lens of Triangularity</div></div>
+<div class="lens"><div class="lens-num">LENS #41</div><div class="lens-title">The Lens of Skill vs. Chance</div></div>
+<div class="lens"><div class="lens-num">LENS #42</div><div class="lens-title">The Lens of Head and Hands</div></div>
+<div class="lens"><div class="lens-num">LENS #43</div><div class="lens-title">The Lens of Competition</div></div>
+<div class="lens"><div class="lens-num">LENS #44</div><div class="lens-title">The Lens of Cooperation</div></div>
+<div class="lens"><div class="lens-num">LENS #45</div><div class="lens-title">The Lens of Competition vs. Cooperation</div></div>
+<div class="lens"><div class="lens-num">LENS #46</div><div class="lens-title">The Lens of Reward</div></div>
+<div class="lens"><div class="lens-num">LENS #47</div><div class="lens-title">The Lens of Punishment</div></div>
+<div class="lens"><div class="lens-num">LENS #48</div><div class="lens-title">The Lens of Simplicity / Complexity</div></div>
+
+<h3>Elegance</h3>
+<p>Count how many purposes each game element serves. Pac-Man's dots: short-term goal, long-term goal, slow you down (triangularity!), award points, and earn extra lives. Five purposes from one element. That's elegance.</p>
+<div class="lens"><div class="lens-num">LENS #49</div><div class="lens-title">The Lens of Elegance</div></div>
+<div class="lens"><div class="lens-num">LENS #50</div><div class="lens-title">The Lens of Character</div><p class="lens-desc">Elegance's opposite. The Leaning Tower of Pisa is not elegant — and that is why we visit it.</p></div>
+<div class="lens"><div class="lens-num">LENS #51</div><div class="lens-title">The Lens of Imagination</div></div>
+<div class="lens"><div class="lens-num">LENS #52</div><div class="lens-title">The Lens of Economy</div></div>
+<div class="lens"><div class="lens-num">LENS #53</div><div class="lens-title">The Lens of Balance</div><ul class="lens-questions"><li>Does my game feel right? Why or why not?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 14 — Puzzles</h2>
+<p>A useful working definition: <strong>a puzzle is a game with a dominant strategy.</strong> Once you find the answer, the puzzle ceases to be fun.</p>
+
+<h3>Ten principles of puzzle design</h3>
+<ol>
+  <li><strong>Make the goal easily understood.</strong></li>
+  <li><strong>Make it easy to get started.</strong> First, build a good toy.</li>
+  <li><strong>Give a sense of progress.</strong></li>
+  <li><strong>Give a sense of solvability.</strong> Rubik's Cube ships in its solved state.</li>
+  <li><strong>Increase difficulty gradually.</strong></li>
+  <li><strong>Parallelism lets the player rest.</strong></li>
+  <li><strong>Pyramid structure extends interest.</strong></li>
+  <li><strong>Hints extend interest.</strong></li>
+  <li><strong>Give the answer.</strong> The "aha" is triggered by seeing the answer.</li>
+  <li><strong>Perceptual shifts are a double-edged sword.</strong></li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #54</div><div class="lens-title">The Lens of Accessibility</div></div>
+<div class="lens"><div class="lens-num">LENS #55</div><div class="lens-title">The Lens of Visible Progress</div></div>
+<div class="lens"><div class="lens-num">LENS #56</div><div class="lens-title">The Lens of Parallelism</div></div>
+<div class="lens"><div class="lens-num">LENS #57</div><div class="lens-title">The Lens of the Pyramid</div></div>
+<div class="lens"><div class="lens-num">LENS #58</div><div class="lens-title">The Lens of the Puzzle</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 15 — Interface</h2>
+<p>The interface is the infinitely thin membrane between player and game. Its goal is not to look nice. Its goal is to <strong>make players feel in control</strong>.</p>
+
+<div class="lens"><div class="lens-num">LENS #59</div><div class="lens-title">The Lens of Control</div><ul class="lens-questions"><li>When players use the interface, does it do what they expect?</li><li>Is your interface easy to master?</li><li>Do your players feel powerful — that is, in control?</li></ul></div>
+
+<h3>The six mappings</h3>
+<p>Between player and game world sit two layers — physical (controllers, screens, speakers) and virtual (menus, HUDs, scoreboards). Six arrows of mapping connect them.</p>
+<div class="lens"><div class="lens-num">LENS #60</div><div class="lens-title">The Lens of Physical Interface</div></div>
+<div class="lens"><div class="lens-num">LENS #61</div><div class="lens-title">The Lens of Virtual Interface</div></div>
+<div class="lens"><div class="lens-num">LENS #62</div><div class="lens-title">The Lens of Transparency</div><p class="lens-desc">No matter how beautiful your interface is, it would be better if there were less of it. — Edward Tufte</p></div>
+
+<h3>Feedback &amp; juiciness</h3>
+<p>The basketball net does nothing for the game; it just shows the ball going in. Tenth-of-a-second rule: any interface that doesn't respond within 100ms feels broken. A "juicy" system rewards every small input with continuous, satisfying feedback.</p>
+
+<div class="lens"><div class="lens-num">LENS #63</div><div class="lens-title">The Lens of Feedback</div></div>
+<div class="lens"><div class="lens-num">LENS #64</div><div class="lens-title">The Lens of Juiciness</div></div>
+<div class="lens"><div class="lens-num">LENS #65</div><div class="lens-title">The Lens of Primality</div><p class="lens-desc">Touch is primal. Animals were doing it 400 million years ago.</p></div>
+<div class="lens"><div class="lens-num">LENS #66</div><div class="lens-title">The Lens of Channels and Dimensions</div></div>
+<div class="lens"><div class="lens-num">LENS #67</div><div class="lens-title">The Lens of Modes</div></div>
+<div class="lens"><div class="lens-num">LENS #67½</div><div class="lens-title">The Lens of Metaphor</div></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 05 — EXPERIENCE DESIGN
+     ============================================================ -->
+<header class="page-header" id="experience">
+  <div class="eyebrow">Section 05 · Chapters 16–23</div>
+  <h1>Experience Design</h1>
+  <p>The shape of interest, the dual nature of story and game, indirect control, transmedia worlds, characters, spaces, presence, and aesthetics. The craft of building the experience itself.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 16 — Interest Curves</h2>
+<blockquote>Start with a bang to get their attention. Then back off, do something smaller, let them know you. Gradually build to a grand finale that exceeds their expectations.<cite>Mark Tripp</cite></blockquote>
+<p>Every entertainment experience can be charted as an <strong>interest curve</strong> — the level of audience interest over time. A good curve has a hook, gradually rising interest punctuated by rests, and a grand finale.</p>
+<p>The most striking insight: interest curves are <strong>fractal</strong>. Each chapter, each level, each challenge inside a game has its own curve.</p>
+
+<div class="lens"><div class="lens-num">LENS #68</div><div class="lens-title">The Lens of Moments</div><ul class="lens-questions"><li>What are the key moments in my game?</li><li>How can I make each moment as powerful as possible?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #69</div><div class="lens-title">The Lens of the Interest Curve</div><ul class="lens-questions"><li>If I draw an interest curve, how is it generally shaped?</li><li>Does it have a hook?</li><li>Does it have rising interest, periods of rest, and a finale?</li><li>Is there a fractal structure?</li></ul></div>
+
+<h3>What comprises interest?</h3>
+<p>Three factors combine: <strong>inherent interest</strong> (some events grip us by nature), <strong>poetry of presentation</strong> (beauty in the rendering), and <strong>projection</strong> (how strongly the audience puts themselves into the experience).</p>
+
+<div class="lens"><div class="lens-num">LENS #70</div><div class="lens-title">The Lens of Inherent Interest</div></div>
+<div class="lens"><div class="lens-num">LENS #71</div><div class="lens-title">The Lens of Beauty</div></div>
+<div class="lens"><div class="lens-num">LENS #72</div><div class="lens-title">The Lens of Projection</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 17 — Story</h2>
+
+<h3>Two methods that actually work</h3>
+<ul>
+  <li><strong>The String of Pearls.</strong> A noninteractive story (the string) punctuated by stretches of free play (the pearls).</li>
+  <li><strong>The Story Machine.</strong> Build rules that generate stories from play. Baseball, golf, <em>The Sims</em>, <em>Minecraft</em>.</li>
+</ul>
+
+<div class="lens"><div class="lens-num">LENS #73</div><div class="lens-title">The Lens of the Story Machine</div><ul class="lens-questions"><li>How can I give players choices that create different stories?</li><li>How can I let players personalize the story?</li><li>Do my rules lead to stories with good interest curves?</li></ul></div>
+
+<h3>Five problems that block branching narrative</h3>
+<ol>
+  <li><strong>Good stories have unity.</strong> Cinderella's beginning only works with Cinderella's ending.</li>
+  <li><strong>Combinatorial explosion.</strong> Ten depth-three branches = 88,573 outcomes.</li>
+  <li><strong>Multiple endings disappoint.</strong></li>
+  <li><strong>Not enough verbs.</strong> Game characters run and shoot; story characters talk and plead.</li>
+  <li><strong>Time travel makes tragedy obsolete.</strong></li>
+</ol>
+
+<h3>The Story Stack</h3>
+<p>From least flexible to most flexible: <strong>Fantasy → Action → Economy → World → Story</strong>. Story is the servant; it must never become the master.</p>
+
+<h3>Eleven story tips</h3>
+<ol>
+  <li><strong>Respect the story stack.</strong></li>
+  <li><strong>Put your story to work</strong> — it can solve technical problems for free.</li>
+  <li><strong>Goals, obstacles, and conflicts.</strong></li>
+  <li><strong>Make it real to you, or it won't be real to them.</strong></li>
+  <li><strong>Provide simplicity and transcendence.</strong></li>
+  <li><strong>Consider the Hero's Journey.</strong></li>
+  <li><strong>Keep your story world consistent.</strong></li>
+  <li><strong>Make your story world accessible.</strong></li>
+  <li><strong>Use clichés judiciously.</strong></li>
+  <li><strong>Sometimes a map brings a story to life.</strong> <em>Treasure Island</em> began as a drawing.</li>
+  <li><strong>Surprise and emotion.</strong></li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #74</div><div class="lens-title">The Lens of the Obstacle</div></div>
+<div class="lens"><div class="lens-num">LENS #75</div><div class="lens-title">The Lens of Simplicity and Transcendence</div></div>
+<div class="lens"><div class="lens-num">LENS #76</div><div class="lens-title">The Lens of the Hero's Journey</div></div>
+<div class="lens"><div class="lens-num">LENS #77</div><div class="lens-title">The Lens of the Weirdest Thing</div></div>
+<div class="lens"><div class="lens-num">LENS #78</div><div class="lens-title">The Lens of Story</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 18 — Indirect Control</h2>
+<p>We don't need to give players <em>real</em> freedom — we need to give them the <em>feeling</em> of freedom.</p>
+<p>Six techniques of indirect control:</p>
+<ol>
+  <li><strong>Constraints.</strong> Two doors instead of an open field.</li>
+  <li><strong>Goals.</strong> A player given the goal "find the bananas" will go where the bananas appear to be.</li>
+  <li><strong>Interface.</strong> A plastic guitar silently rules out a thousand actions.</li>
+  <li><strong>Visual design.</strong> The Disney castle visible from Main Street. The single red line painted on the floor of <em>Aladdin</em>'s throne room that no one consciously remembers following.</li>
+  <li><strong>Characters.</strong> If you make players care about an NPC, you can make them do almost anything.</li>
+  <li><strong>Music.</strong> Restaurants speed up music at lunch and slow it at three.</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #79</div><div class="lens-title">The Lens of Freedom</div></div>
+<div class="lens"><div class="lens-num">LENS #80</div><div class="lens-title">The Lens of Help</div><p class="lens-desc">Deep down, everyone wants to be helpful.</p></div>
+<div class="lens"><div class="lens-num">LENS #81</div><div class="lens-title">The Lens of Indirect Control</div></div>
+
+<h3>Collusion</h3>
+<p>Characters who simultaneously play their role in the world <em>and</em> work for the designer to keep the experience well-paced. The Pirates of the Caribbean enemy ships flee toward interesting islands.</p>
+<div class="lens"><div class="lens-num">LENS #82</div><div class="lens-title">The Lens of Collusion</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 19 — Worlds</h2>
+<p>The successful properties of the past century are not just stories. They are <strong>transmedia worlds</strong>: places that exist apart from any single book, film, or game.</p>
+
+<h3>Properties of strong worlds</h3>
+<ul>
+  <li><strong>Powerful.</strong> They exert a long-lasting pull on the imagination.</li>
+  <li><strong>Long-lived.</strong> Sherlock Holmes is 130. Santa Claus is older.</li>
+  <li><strong>Evolving.</strong> Holmes's deerstalker cap was invented by an illustrator.</li>
+  <li><strong>Rooted in a single medium</strong> — then they expand.</li>
+  <li><strong>Created by a single mind</strong> (or small team).</li>
+  <li><strong>Built to host many stories.</strong></li>
+  <li><strong>Accessible through any gateway.</strong></li>
+  <li><strong>About wish fulfillment.</strong></li>
+</ul>
+
+<div class="lens"><div class="lens-num">LENS #83</div><div class="lens-title">The Lens of Fantasy</div><ul class="lens-questions"><li>What fantasy does my world fulfill?</li><li>Who does the player fantasize about being?</li><li>What does my player fantasize about doing there?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #84</div><div class="lens-title">The Lens of the World</div><ul class="lens-questions"><li>How is my world better than the real world?</li><li>Can there be multiple gateways?</li><li>Is my world centered on a single story, or could many stories happen here?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 20 — Characters</h2>
+
+<h3>Avatars</h3>
+<p>Two patterns dominate: the <strong>ideal form</strong> (the person you'd like to be) and the <strong>blank slate</strong> (iconic, easy to project onto). Mario is both.</p>
+<div class="lens"><div class="lens-num">LENS #85</div><div class="lens-title">The Lens of the Avatar</div></div>
+
+<h3>Tips for compelling characters</h3>
+<ol>
+  <li><strong>List character functions</strong> separately from your characters, then match them.</li>
+  <li><strong>Define and use traits.</strong></li>
+  <li><strong>Use the interpersonal circumplex.</strong> Friendliness vs. dominance.</li>
+  <li><strong>Make a character web.</strong> What does each character think of each of the others?</li>
+  <li><strong>Use status.</strong> Status is something you <em>do</em>, not what you are.</li>
+  <li><strong>Use the power of the voice.</strong></li>
+  <li><strong>Use the power of the face.</strong> Especially the eyes.</li>
+  <li><strong>Powerful stories transform characters.</strong></li>
+  <li><strong>Let your characters surprise us.</strong></li>
+  <li><strong>Avoid the uncanny valley.</strong></li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #86</div><div class="lens-title">The Lens of Character Function</div></div>
+<div class="lens"><div class="lens-num">LENS #87</div><div class="lens-title">The Lens of Character Traits</div></div>
+<div class="lens"><div class="lens-num">LENS #88</div><div class="lens-title">The Lens of the Interpersonal Circumplex</div></div>
+<div class="lens"><div class="lens-num">LENS #89</div><div class="lens-title">The Lens of the Character Web</div></div>
+<div class="lens"><div class="lens-num">LENS #90</div><div class="lens-title">The Lens of Status</div></div>
+<div class="lens"><div class="lens-num">LENS #91</div><div class="lens-title">The Lens of Character Transformation</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 21 — Spaces</h2>
+<blockquote>The primary purpose of architecture is to control a person's experience.<cite>Jesse Schell</cite></blockquote>
+
+<p>Five organizing principles for game space:</p>
+<ul>
+  <li><strong>Linear</strong> — Candyland, Monopoly, Mario, Guitar Hero.</li>
+  <li><strong>Grid</strong> — Chess, Settlers, Minecraft.</li>
+  <li><strong>Web</strong> — Trivial Pursuit, Zork.</li>
+  <li><strong>Points in space</strong> — Bocce, Animal Crossing.</li>
+  <li><strong>Divided space</strong> — Risk, Civilization.</li>
+</ul>
+
+<h3>Christopher Alexander</h3>
+<p>The architect's <em>A Pattern Language</em> describes a "nameless quality" that great spaces share — alive, whole, comfortable, free, eternal, and free from inner contradictions. His fifteen properties of living structures translate surprisingly well to game design.</p>
+
+<div class="lens"><div class="lens-num">LENS #92</div><div class="lens-title">The Lens of Inner Contradiction</div></div>
+<div class="lens"><div class="lens-num">LENS #93</div><div class="lens-title">The Lens of The Nameless Quality</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 22 — Presence</h2>
+<p>VR and AR are not technologies for fooling the eye. They are technologies for fooling the body — or, more precisely, for fooling the mind's sense of where the body is. That sense is called <strong>proprioception</strong>.</p>
+
+<h3>Six presence breakers</h3>
+<ol>
+  <li><strong>Motion sickness.</strong> Keep framerate ≥ 60fps. Avoid virtual camera motion. Don't accelerate. Hide edges. Keep the horizon level.</li>
+  <li><strong>Counter-intuitive interactions.</strong></li>
+  <li><strong>Intensity overload.</strong></li>
+  <li><strong>Unrealistic audio.</strong></li>
+  <li><strong>Proprioceptive disconnect.</strong></li>
+  <li><strong>Lack of identity.</strong></li>
+</ol>
+
+<h3>Six presence builders</h3>
+<ol>
+  <li><strong>Hand presence.</strong> The strongest variety.</li>
+  <li><strong>Social presence.</strong></li>
+  <li><strong>Familiarity.</strong></li>
+  <li><strong>Realistic audio.</strong></li>
+  <li><strong>Proprioceptive alignment.</strong></li>
+  <li><strong>Comedy.</strong> A comedic world tolerates more strangeness.</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #93½</div><div class="lens-title">The Lens of Presence</div><ul class="lens-questions"><li>Is my player experiencing a sense of presence? Could it be stronger?</li><li>What in my game is diminishing or breaking presence?</li><li>What in my game is building or strengthening presence?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 23 — Aesthetics</h2>
+<p>Game designers who dismiss aesthetics as surface miss the point. Good artwork draws players in, makes the world feel real, satisfies a basic pleasure of sensation, builds atmosphere.</p>
+
+<h3>Learn to see</h3>
+<p>The brain's labeling instinct slaps a name on what it sees so it can move on. To make great visual experiences, you must override it — really see shapes, proportions, shadows, relationships.</p>
+
+<h3>Let aesthetics guide design</h3>
+<p>Some studios delay involving artists until the game is "designed." This is backward. Concept art, especially at the start, can completely change a project's direction.</p>
+
+<h3>How much detail?</h3>
+<p>Just enough to be wonderful, no more. J.R.R. Tolkien used "distant mountains" — names of places never visited — to make Middle-earth feel vast. Cinderella's Castle is gorgeous from far away <em>and</em> close up.</p>
+
+<h3>Use audio</h3>
+<p>One study showed that improving audio quality made players rate the <em>graphics</em> higher. Pick music as early as possible. The right piece will guide a thousand later decisions.</p>
+
+<div class="lens"><div class="lens-num">LENS #94</div><div class="lens-title">The Lens of Atmosphere</div><ul class="lens-questions"><li>Without using words, how can I describe the atmosphere of my game?</li><li>How can I use artistic content to deepen that atmosphere?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 06 — COMMUNITY
+     ============================================================ -->
+<header class="page-header" id="community">
+  <div class="eyebrow">Section 06 · Chapters 24–25</div>
+  <h1>Community</h1>
+  <p>Humans are social animals. Most games are played with other people — and the longest-lived games hold communities together for decades.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 24 — Playing with Other Players</h2>
+<blockquote>Man is a social animal. Humans generally avoid being alone whenever possible.<cite>Jesse Schell</cite></blockquote>
+
+<h3>Five reasons we play together</h3>
+<ol>
+  <li><strong>Competition.</strong> Fairness, challenge, worthy opponents, status, strategy.</li>
+  <li><strong>Collaboration.</strong> Actions impossible alone; the deep pleasure of group problem-solving.</li>
+  <li><strong>Meeting up.</strong> Games give friends an excuse to be together.</li>
+  <li><strong>Exploring our friends.</strong> "You can learn more about a man in an hour of play than a year of conversation." — Plato (purportedly)</li>
+  <li><strong>Exploring ourselves.</strong></li>
+</ol>
+
+<p>And: spectation. A game played in a living room is half-watched by everyone else — a streamed game may be watched by millions.</p>
+
+<div class="lens"><div class="lens-num">LENS #95</div><div class="lens-title">The Lens of Spectation</div><ul class="lens-questions"><li>Is my game interesting to watch? Why or why not?</li><li>How can I make it more interesting to watch?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #95½</div><div class="lens-title">The Lens of Cheatability</div><p class="lens-desc">No one wants to worry about losing to a cheater. If players think your game can be cheated, they stop trusting it — and stop playing.</p></div>
+
+<hr class="fancy">
+
+<h2>Chapter 25 — Communities</h2>
+<p>A community is a group of people with a shared interest who get to know each other over time. Around games, communities form for three reasons: social need fulfillment, longer period of contagion, and more hours of play.</p>
+
+<h3>Ten tips for strong communities</h3>
+<ol>
+  <li><strong>Foster friendships.</strong> Three phases: breaking the ice, becoming friends, staying friends.</li>
+  <li><strong>Put conflict at the heart.</strong></li>
+  <li><strong>Use architecture to shape your community.</strong></li>
+  <li><strong>Create community property.</strong></li>
+  <li><strong>Let players express themselves.</strong></li>
+  <li><strong>Support three levels.</strong> Newbies, Players, Elders.</li>
+  <li><strong>Force players to depend on each other.</strong></li>
+  <li><strong>Manage your community.</strong></li>
+  <li><strong>Obligation to others is powerful.</strong></li>
+  <li><strong>Create community events.</strong></li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #96</div><div class="lens-title">The Lens of Friendship</div><ul class="lens-questions"><li>What kind of friendships are my players looking for?</li><li>How do my players break the ice?</li><li>What tools do I give them to maintain their friendships?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #97</div><div class="lens-title">The Lens of Expression</div></div>
+<div class="lens"><div class="lens-num">LENS #98</div><div class="lens-title">The Lens of Community</div></div>
+
+<h3>The challenge of griefing</h3>
+<p>Better to design systems that <em>aren't fun to grief</em>. Common attack surfaces: player-vs-player combat, stealing, trading, obscenities, blocking the way, and loopholes.</p>
+
+<div class="lens"><div class="lens-num">LENS #99</div><div class="lens-title">The Lens of Griefing</div><ul class="lens-questions"><li>What systems in my game are easy to grief?</li><li>How can I make my game boring to grief?</li><li>Am I ignoring any loopholes?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 07 — THE TEAM
+     ============================================================ -->
+<header class="page-header" id="team">
+  <div class="eyebrow">Section 07 · Chapters 26–28</div>
+  <h1>The Team</h1>
+  <p>Game design is rarely a solo activity. The skills of working together — loving the work, communicating clearly, documenting honestly, and playtesting fearlessly — matter as much as the design itself.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 26 — The Designer Usually Works with a Team</h2>
+<div class="callout gold">
+  <div class="callout-title">The secret</div>
+  <p>The secret of successful teamwork is <strong>love</strong>. Not love between teammates. Love of the game you are making together, and the audience you are making it for.</p>
+</div>
+
+<p>Three love problems break teams:</p>
+<ol>
+  <li><strong>Team members incapable of loving any game.</strong> Get them off the team.</li>
+  <li><strong>Members in love with a different game.</strong> Find what they can love about <em>this</em> game.</li>
+  <li><strong>Members in love with different visions of the same game.</strong> Talk it out, hear them out, find shared ground.</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #100</div><div class="lens-title">The Lens of Love</div><ul class="lens-questions"><li>Do I love my project? If not, how can I change that?</li><li>Does everyone on the team love the project? If not, how can that be changed?</li></ul></div>
+
+<h3>Ten keys to team communication</h3>
+<ol>
+  <li><strong>Objectivity.</strong></li>
+  <li><strong>Clarity.</strong></li>
+  <li><strong>Persistence.</strong> Write things down.</li>
+  <li><strong>Comfort.</strong></li>
+  <li><strong>Respect.</strong></li>
+  <li><strong>Trust.</strong></li>
+  <li><strong>Honesty.</strong></li>
+  <li><strong>Privacy.</strong></li>
+  <li><strong>Unity.</strong> "Disagree and commit."</li>
+  <li><strong>Love.</strong></li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #101</div><div class="lens-title">The Lens of the Team</div><ul class="lens-questions"><li>Is this the right team for this project? Why?</li><li>Is the team communicating objectively?</li><li>Is the team ultimately able to unify around decisions?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 27 — Documents</h2>
+<div class="callout warn">
+  <div class="callout-title">The myth</div>
+  <p>The "magic template" for a game design document does not exist. Documents are theories about what your game might be — written, they age the moment they're complete.</p>
+</div>
+
+<h3>What documents are actually for</h3>
+<p>Two purposes only: <strong>memory</strong> and <strong>communication</strong>. The right documents for your project are determined by what needs to be remembered and what needs to be communicated.</p>
+
+<p>Stone Librande's brilliant convention: every game should fit on a single one-page poster diagram showing how the whole thing fits together.</p>
+
+<div class="lens"><div class="lens-num">LENS #102</div><div class="lens-title">The Lens of Documentation</div><ul class="lens-questions"><li>What do we need to remember while making this game?</li><li>What needs to be communicated while making this game?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 28 — Playtesting</h2>
+<div class="callout gold">
+  <div class="callout-title">WUBALEW</div>
+  <p>How often should you playtest? <strong>When useful, but at least every week.</strong></p>
+</div>
+
+<h3>The six questions of any playtest</h3>
+<p><strong>Why?</strong> Every playtest answers specific questions. <strong>Who?</strong> Match the testers to your questions. <strong>When?</strong> Earlier than you think. <strong>Where?</strong> Studio, lab, public venue, player's home, online. <strong>What?</strong> The things you know you're looking for — and the surprises. <strong>How?</strong> Be there if you can be objective.</p>
+
+<h3>FFWWDD — six post-game questions</h3>
+<ol>
+  <li><strong>F — Frustrating.</strong> "What was the most frustrating moment or aspect?"</li>
+  <li><strong>F — Favorite.</strong> "What was your favorite moment or aspect?"</li>
+  <li><strong>W — Wanted.</strong> "Was there anything you wanted to do that you couldn't?"</li>
+  <li><strong>W — Wand.</strong> "If you had a magic wand to change anything, what would it be?"</li>
+  <li><strong>D — Doing.</strong> "What were you doing in the experience?"</li>
+  <li><strong>D — Describe.</strong> "How would you describe this game to your friends and family?"</li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #103</div><div class="lens-title">The Lens of Playtesting</div><ul class="lens-questions"><li>Why are we doing this playtest?</li><li>Who should be there?</li><li>When should we test? Where?</li><li>What will we look for? How will we get the information we need?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 08 — THE BUSINESS
+     ============================================================ -->
+<header class="page-header" id="business">
+  <div class="eyebrow">Section 08 · Chapters 29–32</div>
+  <h1>The Business</h1>
+  <p>Technology, clients, pitches, profit. The forces that surround your design and shape it from the outside — and how to negotiate them while keeping your vision intact.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 29 — Technology</h2>
+
+<h3>Foundational vs. decorational</h3>
+<p>The cake of a cupcake is foundational — without it, no cupcake. The icing is decorational. <em>Steamboat Willie</em> is built on synchronized sound. <em>Sonic the Hedgehog</em> was built on the Genesis's scrolling. <em>Ico</em> turned ragdoll physics — usually decorational — into the foundation of a love story.</p>
+
+<h3>The Hype Cycle</h3>
+<p>Every new technology rides Gartner's curve: technology trigger → peak of inflated expectations → trough of disillusionment → slope of enlightenment → plateau of productivity.</p>
+
+<h3>The Innovator's Dilemma</h3>
+<p>Companies fail by listening to their existing customers. New technologies look "not good enough" — until suddenly they aren't.</p>
+
+<h3>The Law of Divergence</h3>
+<p>Technologies don't converge. They split. The number of remotes in your living room only goes up. The exception is the pocket.</p>
+
+<div class="lens"><div class="lens-num">LENS #104</div><div class="lens-title">The Lens of Technology</div><ul class="lens-questions"><li>What technologies will help deliver the experience I want to create?</li><li>Am I using them foundationally or decorationally?</li><li>Is there a disruptive technology I should consider instead?</li></ul></div>
+<div class="lens"><div class="lens-num">LENS #105</div><div class="lens-title">The Lens of the Crystal Ball</div></div>
+<div class="lens"><div class="lens-num">LENS #106</div><div class="lens-title">The Lens of Utopia</div></div>
+
+<hr class="fancy">
+
+<h2>Chapter 30 — The Client</h2>
+<blockquote>Form follows funding.<cite>Bran Ferren</cite></blockquote>
+
+<h3>Coping with bad suggestions</h3>
+<p>When the client says "these cars need more chrome," the wrong responses are agreeing reflexively or arguing reflexively. The right response is to <strong>understand the problem they're trying to solve</strong>.</p>
+
+<h3>Three layers of desire</h3>
+<p>Every client says one thing with their <strong>words</strong>, thinks another in their <strong>mind</strong>, and feels a third in their <strong>heart</strong>. Listen to all three.</p>
+
+<div class="callout gold">
+  <div class="callout-title">Michelangelo's nose</div>
+  <p>When the mayor of Florence told Michelangelo the nose of his David was too big, Michelangelo invited the mayor up the scaffold to "fix it together," scooped some marble dust into his hand, faked a few chisel taps, and dropped the dust. "I like it better." The deeper layer of desire was creative ownership — and Michelangelo gave it to him without compromising the work.</p>
+</div>
+
+<div class="lens"><div class="lens-num">LENS #107</div><div class="lens-title">The Lens of the Client</div><ul class="lens-questions"><li>What does the client say they want?</li><li>What does the client think they want?</li><li>What does the client really want, deep down in their heart?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 31 — The Pitch</h2>
+
+<h3>The hierarchy of ideas</h3>
+<table class="data-table">
+  <thead><tr><th>Type</th><th>Description</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Idea</td><td>A plain idea</td><td>~$0.08 (dime a dozen)</td></tr>
+    <tr><td>Cool idea</td><td>Captures the imagination</td><td>$5</td></tr>
+    <tr><td>Really cool idea</td><td>A cool idea, shouted</td><td>$5</td></tr>
+    <tr><td>Good idea</td><td>Someone could actually use it</td><td>$100</td></tr>
+    <tr><td>Good idea, right place, right time</td><td>What you're aiming for</td><td>$1,000,000+</td></tr>
+  </tbody>
+</table>
+
+<h3>Twelve pitch tips (short version)</h3>
+<ol>
+  <li><strong>Get in the door</strong> — the back door beats the front door.</li>
+  <li><strong>Show you're serious.</strong></li>
+  <li><strong>Be organized.</strong></li>
+  <li><strong>Be passionate.</strong></li>
+  <li><strong>Assume their point of view.</strong> State platform, audience, and genre <em>first</em>.</li>
+  <li><strong>Design the pitch.</strong></li>
+  <li><strong>Know all the details.</strong></li>
+  <li><strong>Exude confidence.</strong></li>
+  <li><strong>Be flexible.</strong></li>
+  <li><strong>Rehearse.</strong></li>
+  <li><strong>Get them to own it.</strong></li>
+  <li><strong>Follow up.</strong></li>
+</ol>
+
+<div class="lens"><div class="lens-num">LENS #108</div><div class="lens-title">The Lens of the Pitch</div><ul class="lens-questions"><li>Why are you pitching this game to this client?</li><li>What will you consider "a successful pitch"?</li><li>What's in it for the people you are pitching to?</li><li>What do they need to know about your game?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 32 — Profit</h2>
+
+<h3>Follow the money</h3>
+<p>To understand a business model, follow a dollar. In retail, a $50 game's average breakdown: retailer $16, markdown reserve $3, platform holder $7, advertising $6, disk and box $8, publisher $10, developer $3. Free-to-play moves the math entirely: revenue equals lifetime value × users, and you must spend on customer acquisition without exceeding LTV.</p>
+
+<h3>Learn the language</h3>
+<p>SKU, COGS, burn rate, sold-in vs. sold-through, breakeven. For free-to-play: churn, cost of acquisition, DAU, MAU, ARPU, ARPPU, LTV, K-factor, whale.</p>
+
+<h3>The importance of barriers</h3>
+<p>The iOS gold rush collapsed prices to zero. About 90% of iOS games lose money. The slot machine industry, by contrast, has fewer competitors — about 90% of slot games are profitable. Barriers make markets profitable.</p>
+
+<div class="lens"><div class="lens-num">LENS #109</div><div class="lens-title">The Lens of Profit</div><ul class="lens-questions"><li>Where does the money go in my game's business model?</li><li>How much will it cost to produce, market, distribute, and maintain?</li><li>How much money will this game make?</li><li>What are the barriers to entry in the market for this game?</li></ul></div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     SECTION 09 — IMPACT
+     ============================================================ -->
+<header class="page-header" id="impact">
+  <div class="eyebrow">Section 09 · Chapters 33–35</div>
+  <h1>Impact</h1>
+  <p>Games are not trivial amusements. They change the people who play them. The designer's responsibilities, the danger and the promise of the medium, and the question only you can answer.</p>
+</header>
+
+<div class="container-narrow prose">
+
+<h2>Chapter 33 — Games Transform Their Players</h2>
+
+<h3>What games can do for us</h3>
+<ul>
+  <li><strong>Emotional maintenance</strong> — venting, cheering up, gaining perspective, building confidence.</li>
+  <li><strong>Connecting</strong> — a social bridge with shared topics and memories.</li>
+  <li><strong>Exercise</strong> — physical and mental.</li>
+  <li><strong>Education</strong> — though with constraints.</li>
+</ul>
+
+<h3>Why games are powerful learning tools</h3>
+<ul>
+  <li><strong>Visible progress.</strong></li>
+  <li><strong>Making the abstract concrete.</strong></li>
+  <li><strong>Full engagement.</strong></li>
+  <li><strong>Lots of small goals.</strong></li>
+  <li><strong>Conveying systems of relationships</strong> — the thing games do best.</li>
+  <li><strong>Creating teachable moments.</strong></li>
+  <li><strong>Cultivating curiosity</strong> — possibly the most valuable mental asset in the twenty-first century.</li>
+</ul>
+
+<h3>Can games be bad for us?</h3>
+<p>Two real concerns: <strong>violence</strong> and <strong>addiction</strong>. On violence: most players are good at distinguishing fantasy from real action — but rating systems exist for a reason. On addiction: real, especially for MMOs. Shigeru Miyamoto signs autographs for children with: <em>"On a sunny day, play outside."</em></p>
+
+<div class="lens"><div class="lens-num">LENS #110</div><div class="lens-title">The Lens of Transformation</div><ul class="lens-questions"><li>How can my game change players for the better?</li><li>How can my game change players for the worse?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 34 — Responsibility</h2>
+
+<div class="callout warn">
+  <div class="callout-title">There is only one person</div>
+  <p>Only one person can take responsibility for the games you make. That person is you.</p>
+</div>
+
+<p>Corporations have legal responsibility, but not ethical responsibility — they have no souls. Only individuals can take ethical responsibility.</p>
+
+<h3>The ring</h3>
+<p>In 1922, Rudyard Kipling designed a ritual for graduating engineers — an iron ring placed on the pinky of the dominant hand, a lifelong reminder of obligation. The pinky, the smallest finger, secretly guides the hand. Take the invisible ring. It doesn't come off.</p>
+
+<div class="lens"><div class="lens-num">LENS #111</div><div class="lens-title">The Lens of Responsibility</div><ul class="lens-questions"><li>Does my game help people? How?</li></ul></div>
+
+<hr class="fancy">
+
+<h2>Chapter 35 — Purpose</h2>
+<p>The most important kind of listening, we said at the start, is listening to your self. Now is when we do it.</p>
+<p>Why is game design important to you? You may think the question can wait. It can't — life is short.</p>
+
+<div class="lens"><div class="lens-num">LENS #112</div><div class="lens-title">The Lens of the Raven</div><ul class="lens-questions"><li>Is making this game worth my time?</li></ul></div>
+
+<p>Somewhere in you there is a purpose that brought you to this work. Find it. Once you do, your conscious and subconscious motivations will fuse, and your work will gain a focus, a passion, and an intensity it cannot otherwise have.</p>
+
+<div class="lens" style="border-color: var(--accent-2);">
+  <div class="lens-num">LENS #∞</div>
+  <div class="lens-title">The Lens of Your Secret Purpose</div>
+  <p class="lens-desc">The only question that matters.</p>
+  <ul class="lens-questions">
+    <li>Why am I doing this?</li>
+  </ul>
+</div>
+
+<div class="magic-words" style="margin-top: 4rem;">Goodbye.</div>
+
+<p class="center"><a class="back-to-top" href="#top">↑ Back to top</a></p>
+</div>
+
+<!-- ============================================================
+     LENSES REFERENCE
+     ============================================================ -->
+<header class="page-header" id="lenses">
+  <div class="eyebrow">The Designer's Toolbox</div>
+  <h1>The 112 Lenses</h1>
+  <p>A lens is a perspective — a focused set of questions to ask about your game. Each one works best when used alongside others.</p>
+</header>
+
+<div class="container">
+
+  <div class="lens-controls">
+    <input type="search" id="lens-search" class="lens-search" placeholder="Search lenses by name or keyword…">
+    <span class="lens-count" id="lens-count"></span>
+  </div>
+
+  <div class="lens-grid">
+    <div class="lens-item"><div class="lens-num">LENS #1</div><div class="lens-title">Emotion</div><p class="lens-desc">What emotions would I like my player to experience? Why? How can I bridge the gap between what they feel and what I want them to feel?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #2</div><div class="lens-title">Essential Experience</div><p class="lens-desc">What experience do I want the player to have? What is essential to that experience? How can my game capture that essence?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #3</div><div class="lens-title">The Venue</div><p class="lens-desc">What type of venue best suits this game? Does my venue have special properties? Are my elements in harmony with my venue?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #4</div><div class="lens-title">Surprise</div><p class="lens-desc">What will surprise players? Do the story, rules, art, and tech have surprises? Can players surprise each other? Themselves?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #5</div><div class="lens-title">Fun</div><p class="lens-desc">What parts of my game are fun? Why? What parts need to be more fun?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #6</div><div class="lens-title">Curiosity</div><p class="lens-desc">What questions does my game put into the player's mind? What am I doing to make them care? What can I do to make them invent more questions?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #7</div><div class="lens-title">Endogenous Value</div><p class="lens-desc">What is valuable to the players? How can I make it more valuable? What is the relationship between value in the game and the players' motivations?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #8</div><div class="lens-title">Problem Solving</div><p class="lens-desc">What problems does my game ask the player to solve? Are there hidden problems? How can my game generate new problems so players come back?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #9</div><div class="lens-title">The Elemental Tetrad</div><p class="lens-desc">Mechanics, story, aesthetics, technology. Is my design using elements of all four? Are they in harmony, reinforcing a common theme?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #10</div><div class="lens-title">Holographic Design</div><p class="lens-desc">See all four elements and the player experience at once. What makes it enjoyable? What detracts? How can I improve experience?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #11</div><div class="lens-title">Unification</div><p class="lens-desc">What is my theme? Am I using every means possible to reinforce it?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #12</div><div class="lens-title">Resonance</div><p class="lens-desc">What feels powerful and special? What ideas get people excited? If I had no constraints, what would this game be?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #13</div><div class="lens-title">Infinite Inspiration</div><p class="lens-desc">What experience would I want to share with others? How can I capture its essence in my game?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #14</div><div class="lens-title">The Problem Statement</div><p class="lens-desc">What problem am I really trying to solve? Is a game the best solution? How will I know if it's solved?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #15</div><div class="lens-title">The Eight Filters</div><p class="lens-desc">Artistic, demographic, experience, innovation, business, engineering, social, playtesting. Pass all eight without change, and you're done.</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #16</div><div class="lens-title">Risk Mitigation</div><p class="lens-desc">What could keep this game from being great? How can we stop that from happening?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #17</div><div class="lens-title">The Toy</div><p class="lens-desc">If my game had no goal, would it still be fun to play with? Do people want to touch and manipulate it before knowing what to do?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #18</div><div class="lens-title">Passion</div><p class="lens-desc">Am I filled with blinding passion about how great this game will be? If I've lost it, can I find it again?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #19</div><div class="lens-title">The Player</div><p class="lens-desc">Stop thinking about your game. Start thinking about your player. What do they like? What don't they like?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #20</div><div class="lens-title">Pleasure</div><p class="lens-desc">What pleasures does my game give? What pleasures are missing? Sensation, fantasy, narrative, challenge, fellowship, discovery, expression, submission.</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #21</div><div class="lens-title">Flow</div><p class="lens-desc">Does my game have clear goals? Does it provide a steady stream of not-too-easy, not-too-hard challenges?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #22</div><div class="lens-title">Needs</div><p class="lens-desc">On which Maslow levels is my game operating? Does it fill competence, autonomy, and relatedness?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #23</div><div class="lens-title">Motivation</div><p class="lens-desc">What motivations drive play? Internal or external? Pleasure-seeking or pain-avoiding? Which support each other, which conflict?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #24</div><div class="lens-title">Novelty</div><p class="lens-desc">What is novel about my game? Is the novelty just at the beginning? When it wears off, will players still care?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #25</div><div class="lens-title">Judgment</div><p class="lens-desc">What does your game judge about the players? How does it communicate this? Do players feel the judgment is fair?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #26</div><div class="lens-title">Functional Space</div><p class="lens-desc">Is the space discrete or continuous? How many dimensions? What are the boundaries and subspaces?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #27</div><div class="lens-title">Time</div><p class="lens-desc">What determines the length of gameplay activities? Frustrated by ending too early, bored by going too long? Would clocks or races help?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #28</div><div class="lens-title">The State Machine</div><p class="lens-desc">What are the objects, attributes, and states in my game? What triggers state changes?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #29</div><div class="lens-title">Secrets</div><p class="lens-desc">What is known by the game only? By all players? By only some? Would changing who knows what improve the game?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #30</div><div class="lens-title">Emergence</div><p class="lens-desc">How many verbs? How many objects each verb acts on? How many ways to achieve goals? How do side effects change constraints?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #31</div><div class="lens-title">Action</div><p class="lens-desc">What are the basic actions in my game? What are the strategic actions? What do players wish they could do but can't?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #32</div><div class="lens-title">Goals</div><p class="lens-desc">What is the ultimate goal? Is it clear? Are goals concrete, achievable, and rewarding? Good balance of short and long term?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #33</div><div class="lens-title">Rules</div><p class="lens-desc">Foundational vs. operational rules? Modes? Who enforces? Easy to understand, or in need of clarification?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #34</div><div class="lens-title">Skill</div><p class="lens-desc">What skills does my game require? Which are dominant? Can players improve them with practice?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #35</div><div class="lens-title">Expected Value</div><p class="lens-desc">What is the actual chance of an event? The perceived chance? What values do outcomes have? Are the choices interesting?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #36</div><div class="lens-title">Chance</div><p class="lens-desc">What in my game is truly random? What just feels random? Does randomness give players positive or negative feelings?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #37</div><div class="lens-title">Fairness</div><p class="lens-desc">Symmetrical or asymmetrical? Should the game reliably measure skill, or challenge everyone interestingly?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #38</div><div class="lens-title">Challenge</div><p class="lens-desc">What are the challenges? Too easy, too hard, or just right? How does difficulty increase? Is there variety?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #39</div><div class="lens-title">Meaningful Choices</div><p class="lens-desc">Are the choices meaningful? Right number of choices? Are there dominant strategies?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #40</div><div class="lens-title">Triangularity</div><p class="lens-desc">Do I offer a meaningful choice between low risk / low reward and high risk / high reward? Is it balanced?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #41</div><div class="lens-title">Skill vs. Chance</div><p class="lens-desc">Are players here to be judged (skill) or to take risks (chance)? Should chance enliven tedious parts?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #42</div><div class="lens-title">Head and Hands</div><p class="lens-desc">Mindless action or intellectual challenge? Where can the player relax their brain? Where do they get to outwit?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #43</div><div class="lens-title">Competition</div><p class="lens-desc">Does my game give a fair measurement of skill? Do players want to win? Is winning something to be proud of?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #44</div><div class="lens-title">Cooperation</div><p class="lens-desc">Do players have enough opportunity to communicate? Are tasks possible only together? Do they force communication?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #45</div><div class="lens-title">Competition vs. Cooperation</div><p class="lens-desc">Can I give players a choice between cooperative and competitive play? Does my audience prefer one, the other, or a mix?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #46</div><div class="lens-title">Reward</div><p class="lens-desc">What rewards is my game giving? Are players excited or bored by them? Are they variable, building, and related to one another?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #47</div><div class="lens-title">Punishment</div><p class="lens-desc">What are the punishments? Why am I punishing players? Do they seem fair? Could punishments become rewards?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #48</div><div class="lens-title">Simplicity / Complexity</div><p class="lens-desc">Innate complexity vs. emergent complexity. Is my design as simple as it can be while still producing interesting behavior?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #49</div><div class="lens-title">Elegance</div><p class="lens-desc">Count purposes of each element. Combine single-purpose ones. Can multi-purpose elements serve even more purposes?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #50</div><div class="lens-title">Character</div><p class="lens-desc">Is there anything strange that players talk about excitedly? Does the game have lovable quirks? Are there flaws people like?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #51</div><div class="lens-title">Imagination</div><p class="lens-desc">What must the player understand? Can imagination fill the gaps? What details inspire imagination? What stifles it?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #52</div><div class="lens-title">Economy</div><p class="lens-desc">How can players earn? How can they spend? Is money too easy or too hard to get? Are the choices meaningful?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #53</div><div class="lens-title">Balance</div><p class="lens-desc">Does my game feel right? Why or why not?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #54</div><div class="lens-title">Accessibility</div><p class="lens-desc">Will players know how to begin? Does my puzzle or game act like something they've seen before? Does it draw people in?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #55</div><div class="lens-title">Visible Progress</div><p class="lens-desc">What does it mean to make progress? Is there enough? Can I reveal hidden progress?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #56</div><div class="lens-title">Parallelism</div><p class="lens-desc">Are there bottlenecks? Can I offer parallel challenges? Are they different enough to refresh the player?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #57</div><div class="lens-title">The Pyramid</div><p class="lens-desc">Can all pieces of my puzzle feed into a singular climactic challenge? Is the final challenge interesting enough?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #58</div><div class="lens-title">The Puzzle</div><p class="lens-desc">What are the puzzles in my game? Should I have more or less? How do they integrate with the rest of the experience?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #59</div><div class="lens-title">Control</div><p class="lens-desc">Does the interface do what's expected? Is it easy to master? Do players feel powerful — that is, in control?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #60</div><div class="lens-title">Physical Interface</div><p class="lens-desc">What do players pick up and touch? How does it map to actions in the world? What metaphor is the interface using?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #61</div><div class="lens-title">Virtual Interface</div><p class="lens-desc">What information needs to reach the player beyond what they see in the world? When? How can it amplify their power?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #62</div><div class="lens-title">Transparency</div><p class="lens-desc">No matter how beautiful an interface, less is better. Is it simple enough to vanish with practice?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #63</div><div class="lens-title">Feedback</div><p class="lens-desc">What do players need to know at this moment? What do they want to know? How can feedback create the feeling I want?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #64</div><div class="lens-title">Juiciness</div><p class="lens-desc">Is my interface giving continuous feedback for actions? Is there satisfying second-order motion?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #65</div><div class="lens-title">Primality</div><p class="lens-desc">What parts of my game are so primal an animal could do them? What parts could be more primal?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #66</div><div class="lens-title">Channels and Dimensions</div><p class="lens-desc">What data travel between game and player? Which are most important? What channels and dimensions are available?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #67</div><div class="lens-title">Modes</div><p class="lens-desc">What modes do I need and why? Can any be collapsed? When the game changes modes, how does the player know?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #67½</div><div class="lens-title">Metaphor</div><p class="lens-desc">Is my interface already a metaphor for something else? Am I making the most of it — or is it getting in the way?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #68</div><div class="lens-title">Moments</div><p class="lens-desc">What are the key moments? How can I make each moment as powerful as possible?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #69</div><div class="lens-title">The Interest Curve</div><p class="lens-desc">How is the curve shaped? Does it have a hook, rising interest, rests, and a finale? Is the structure fractal?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #70</div><div class="lens-title">Inherent Interest</div><p class="lens-desc">What captures interest immediately? Does the game let players see or do something they have never done?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #71</div><div class="lens-title">Beauty</div><p class="lens-desc">How can each element be more beautiful? How can elements compose into something poetic?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #72</div><div class="lens-title">Projection</div><p class="lens-desc">What can players relate to? What captures their imagination? Do they get to be the character they could imagine being?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #73</div><div class="lens-title">The Story Machine</div><p class="lens-desc">Do my rules generate stories worth telling? Can players personalize them? Are there good interest curves in the stories that arise?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #74</div><div class="lens-title">The Obstacle</div><p class="lens-desc">What is the relationship between protagonist and goal? Who or what is in the way? Do obstacles increase in difficulty?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #75</div><div class="lens-title">Simplicity and Transcendence</div><p class="lens-desc">How is my world simpler than the real world? What transcendent power do I give the player without removing challenge?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #76</div><div class="lens-title">The Hero's Journey</div><p class="lens-desc">Does my story have elements that qualify it as a hero's journey? Would the story be improved by including more archetypal elements?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #77</div><div class="lens-title">The Weirdest Thing</div><p class="lens-desc">What is the weirdest thing in my story? Will it confuse the player? Are there too many weird things? Or none at all?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #78</div><div class="lens-title">Story</div><p class="lens-desc">Does my game need a story? Why? How does it support the other parts of the tetrad?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #79</div><div class="lens-title">Freedom</div><p class="lens-desc">When do players have freedom of action? Do they feel free? Are there places I can let them feel freer?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #80</div><div class="lens-title">Help</div><p class="lens-desc">Within the context of the game, who is the player helping? Can I make them feel more connected to characters who need help?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #81</div><div class="lens-title">Indirect Control</div><p class="lens-desc">Ideally, what would I like players to do? Can constraints, goals, interface, visuals, characters, or music guide them?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #82</div><div class="lens-title">Collusion</div><p class="lens-desc">What do I want the player to experience? How can the characters help fulfill it without compromising their goals?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #83</div><div class="lens-title">Fantasy</div><p class="lens-desc">What fantasy does my world fulfill? Who does the player fantasize about being? What about doing?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #84</div><div class="lens-title">The World</div><p class="lens-desc">How is my world better than the real world? Can there be multiple gateways? Could many stories happen here?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #85</div><div class="lens-title">The Avatar</div><p class="lens-desc">Is the avatar an ideal form players want to project into? Or iconic enough to be a blank slate?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #86</div><div class="lens-title">Character Function</div><p class="lens-desc">What roles do I need filled? Which characters fit which roles? Can any character fill more than one role?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #87</div><div class="lens-title">Character Traits</div><p class="lens-desc">What traits define my character? How do these traits manifest in words, actions, and appearance?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #88</div><div class="lens-title">The Interpersonal Circumplex</div><p class="lens-desc">Plot characters by friendliness and dominance. Are there gaps? Extreme characters? Are friends together or apart?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #89</div><div class="lens-title">The Character Web</div><p class="lens-desc">How does each character feel about each of the others? Are there gaps? Are too many connections similar?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #90</div><div class="lens-title">Status</div><p class="lens-desc">What are the relative status levels of the characters? How can they show appropriate status behaviors?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #91</div><div class="lens-title">Character Transformation</div><p class="lens-desc">How does each character change through the game? Is there enough change? Are the changes surprising and believable?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #92</div><div class="lens-title">Inner Contradiction</div><p class="lens-desc">What is the purpose of my game? Are there parts that contradict that purpose? If so, how can I change them?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #93</div><div class="lens-title">The Nameless Quality</div><p class="lens-desc">Does my design feel alive? Which of Alexander's fifteen properties does it have? Where does it feel like myself?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #93½</div><div class="lens-title">Presence</div><p class="lens-desc">Is my player experiencing presence? Could it be stronger? What is breaking it? What is building it?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #94</div><div class="lens-title">Atmosphere</div><p class="lens-desc">Without using words, how can I describe the atmosphere of my game? How can artistic content deepen it?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #95</div><div class="lens-title">Spectation</div><p class="lens-desc">Is my game interesting to watch? Why or why not? How can it be more spectator-worthy?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #95½</div><div class="lens-title">Cheatability</div><p class="lens-desc">Can players cheat? Will anyone notice? Do players trust my game?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #96</div><div class="lens-title">Friendship</div><p class="lens-desc">What kind of friendships are players looking for? How do they break the ice? Become friends? Stay friends?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #97</div><div class="lens-title">Expression</div><p class="lens-desc">How am I letting players express themselves? Are they proud of their identity?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #98</div><div class="lens-title">Community</div><p class="lens-desc">What conflict is at the heart of the community? Does architecture shape it? Are there events? Why do players need each other?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #99</div><div class="lens-title">Griefing</div><p class="lens-desc">What systems in my game are easy to grief? How can I make my game boring to grief? Am I ignoring any loopholes?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #100</div><div class="lens-title">Love</div><p class="lens-desc">Do I love my project? Does everyone on the team? If not, how can that change?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #101</div><div class="lens-title">The Team</div><p class="lens-desc">Is this the right team for this project? Is communication objective, clear, comfortable, trusted, honest, private, unified?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #102</div><div class="lens-title">Documentation</div><p class="lens-desc">What do we need to remember while making this game? What needs to be communicated?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #103</div><div class="lens-title">Playtesting</div><p class="lens-desc">Why are we testing? Who should be there? When, where, what for, and how?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #104</div><div class="lens-title">Technology</div><p class="lens-desc">What technologies deliver the experience I want? Foundational or decorational? Is there a disruptive technology to use instead?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #105</div><div class="lens-title">The Crystal Ball</div><p class="lens-desc">What will this technology be like in 2, 4, 10 years? Why? Concretely answered, this trains intuition about the future.</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #106</div><div class="lens-title">Utopia</div><p class="lens-desc">Am I creating something that feels magical? Does my game advance the state of the art? Does it make the world better?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #107</div><div class="lens-title">The Client</div><p class="lens-desc">What does the client say they want? What do they think they want? What do they really want, deep down?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #108</div><div class="lens-title">The Pitch</div><p class="lens-desc">Why are you pitching this game to this client? What's in it for them? What do they need to know?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #109</div><div class="lens-title">Profit</div><p class="lens-desc">Where does the money go in my game's business model? Why? How much will it cost? How much will it make?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #110</div><div class="lens-title">Transformation</div><p class="lens-desc">How can my game change players for the better? How might it change them for the worse?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #111</div><div class="lens-title">Responsibility</div><p class="lens-desc">Does my game help people? How?</p></div>
+    <div class="lens-item"><div class="lens-num">LENS #112</div><div class="lens-title">The Raven</div><p class="lens-desc">Is making this game worth my time?</p></div>
+    <div class="lens-item" style="border-color: var(--accent-2);"><div class="lens-num">LENS #∞</div><div class="lens-title">Your Secret Purpose</div><p class="lens-desc">Why am I doing this?</p></div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>The Book</h4>
+      <p style="font-family: var(--serif); color: var(--ink-dim); margin:0;">An educational companion to <em>The Art of Game Design: A Book of Lenses</em> by Jesse Schell, distilled into a single navigable web resource.</p>
+    </div>
+    <div>
+      <h4>Sections</h4>
+      <ul>
+        <li><a href="#foundations">Foundations</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#player">The Player</a></li>
+        <li><a href="#mechanics">Mechanics</a></li>
+        <li><a href="#experience">Experience</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>More</h4>
+      <ul>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#team">The Team</a></li>
+        <li><a href="#business">The Business</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#lenses">All Lenses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>The Magic Words</h4>
+      <p style="font-style: italic; color: var(--accent); margin:0;">I am a game designer.</p>
+    </div>
+  </div>
+  <div style="opacity: 0.6;">Built as an educational resource. All concepts and quotations belong to their original author.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  }
+
+  // Lens search
+  const search = document.getElementById('lens-search');
+  if (search) {
+    const items = Array.from(document.querySelectorAll('.lens-item'));
+    const count = document.getElementById('lens-count');
+    const update = () => {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      items.forEach(it => {
+        const txt = it.textContent.toLowerCase();
+        const match = !q || txt.includes(q);
+        it.classList.toggle('hidden', !match);
+        if (match) shown++;
+      });
+      if (count) count.textContent = `${shown} of ${items.length} lenses`;
+    };
+    search.addEventListener('input', update);
+    update();
+  }
+
+  // Highlight active section in nav as we scroll
+  const sections = ['top','foundations','process','player','mechanics','experience','community','team','business','impact','lenses']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const setActive = () => {
+    const y = window.scrollY + 120;
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= y) current = s;
+    }
+    if (current) {
+      const id = current.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    }
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+});
+</script>
+</body>
+</html>

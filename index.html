@@ -5,22 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Wound and the Witness — A Writer's Analysis of Final Fantasy VII</title>
 <style>
-/* ---- base ---- */
 :root {
   --bg: #0e0f14;
   --bg-alt: #14161d;
+  --bg-card: #181a22;
   --fg: #e7e7ea;
   --fg-dim: #a3a4ad;
+  --fg-mute: #76777f;
   --accent: #7ec8e3;
   --accent-2: #c8a2ff;
+  --accent-3: #ffb86b;
+  --warn: #ff8a8a;
   --rule: #2a2c36;
+  --rule-soft: #20222b;
   --serif: "Iowan Old Style", "Charter", "Source Serif Pro", Georgia, serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -44,45 +47,21 @@ a:hover { color: var(--accent-2); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 32px;
-  background: rgba(14, 15, 20, 0.85);
-  backdrop-filter: blur(8px);
+  padding: 12px 28px;
+  background: rgba(14, 15, 20, 0.88);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--rule);
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 13px;
 }
-
-.topnav .brand {
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--fg);
-}
-
-.topnav ul {
-  display: flex;
-  gap: 22px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.topnav a {
-  color: var(--fg-dim);
-}
-.topnav a:hover { color: var(--fg); }
-.topnav a.is-active { color: var(--fg); }
+.topnav .brand { font-weight: 600; letter-spacing: 0.02em; color: var(--fg); }
+.topnav ul { display: flex; flex-wrap: wrap; gap: 18px; list-style: none; margin: 0; padding: 0; }
+.topnav a { color: var(--fg-dim); }
+.topnav a:hover, .topnav a.is-active { color: var(--fg); }
 
 /* ---- hero ---- */
-.hero {
-  border-bottom: 1px solid var(--rule);
-}
-
-.hero-inner {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 110px 32px 90px;
-}
-
+.hero { border-bottom: 1px solid var(--rule); }
+.hero-inner { max-width: 980px; margin: 0 auto; padding: 110px 32px 90px; }
 .kicker {
   font-family: var(--sans);
   text-transform: uppercase;
@@ -91,7 +70,6 @@ a:hover { color: var(--accent-2); }
   color: var(--accent);
   margin: 0 0 20px;
 }
-
 .hero h1 {
   font-family: var(--serif);
   font-size: clamp(44px, 7vw, 88px);
@@ -100,14 +78,12 @@ a:hover { color: var(--accent-2); }
   margin: 0 0 28px;
   font-weight: 600;
 }
-
 .subtitle {
   font-size: clamp(20px, 2.4vw, 26px);
   color: var(--fg-dim);
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 0 36px;
 }
-
 .hero-meta {
   font-family: var(--sans);
   font-size: 13px;
@@ -117,42 +93,70 @@ a:hover { color: var(--accent-2); }
   flex-wrap: wrap;
   gap: 12px;
 }
+.hero-toc {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-dim);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px 28px;
+}
+.hero-toc a { color: var(--fg-dim); display: block; padding: 4px 0; }
+.hero-toc a:hover { color: var(--fg); }
+.hero-toc .toc-num {
+  font-family: var(--mono);
+  color: var(--accent);
+  margin-right: 10px;
+  font-size: 12px;
+}
 
 /* ---- sections ---- */
-.section {
-  padding: 90px 32px;
-  border-bottom: 1px solid var(--rule);
-}
-
+.section { padding: 88px 32px; border-bottom: 1px solid var(--rule); }
 .section.alt { background: var(--bg-alt); }
-
-.section > * {
-  max-width: 920px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
+.section > * { max-width: 920px; margin-left: auto; margin-right: auto; }
 .section h2 {
   font-family: var(--serif);
-  font-size: clamp(32px, 4vw, 46px);
+  font-size: clamp(30px, 4vw, 44px);
   font-weight: 600;
   letter-spacing: -0.01em;
-  margin: 0 0 28px;
+  margin: 0 0 14px;
 }
-
+.section .section-kicker {
+  font-family: var(--sans);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
 .section h3.sub {
   margin-top: 56px;
   font-size: 22px;
   font-weight: 600;
   color: var(--fg);
 }
-
-.section p { margin: 0 0 18px; }
-
-.lede {
-  font-size: 21px;
+.section h4 {
+  margin-top: 36px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--fg);
 }
+.section p { margin: 0 0 18px; }
+.lede { font-size: 21px; color: var(--fg); }
+
+.callout {
+  border-left: 3px solid var(--accent);
+  background: rgba(126, 200, 227, 0.05);
+  padding: 18px 22px;
+  margin: 28px 0;
+  font-size: 17px;
+  color: var(--fg);
+}
+.callout strong { color: var(--accent); font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 6px; }
 
 /* ---- cards ---- */
 .cards {
@@ -161,14 +165,12 @@ a:hover { color: var(--accent-2); }
   gap: 22px;
   margin-top: 36px;
 }
-
 .card {
   border: 1px solid var(--rule);
   padding: 24px 26px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.015);
+  background: var(--bg-card);
 }
-
 .card h3 {
   font-family: var(--sans);
   font-size: 13px;
@@ -178,54 +180,16 @@ a:hover { color: var(--accent-2); }
   color: var(--accent);
   margin: 0 0 12px;
 }
-
 .card p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--fg-dim); }
 
 /* ---- acts ---- */
-.acts {
-  display: grid;
-  gap: 28px;
-  margin-top: 28px;
-}
-
-.act {
-  border-left: 2px solid var(--accent);
-  padding: 8px 0 8px 28px;
-}
-
-.act header {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  margin-bottom: 10px;
-}
-
-.act-num {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-}
-
-.act h3 {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 600;
-}
-
-.act-loc {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--fg-dim);
-  margin: 0 0 6px;
-}
-
-.act-q {
-  font-size: 16px;
-  color: var(--fg);
-  margin: 0 0 14px;
-}
-
+.acts { display: grid; gap: 28px; margin-top: 28px; }
+.act { border-left: 2px solid var(--accent); padding: 8px 0 8px 28px; }
+.act header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 10px; }
+.act-num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--accent); }
+.act h3 { margin: 0; font-size: 26px; font-weight: 600; }
+.act-loc { font-family: var(--sans); font-size: 13px; color: var(--fg-dim); margin: 0 0 6px; }
+.act-q { font-size: 16px; color: var(--fg); margin: 0 0 14px; }
 .pull {
   border-left: 3px solid var(--accent-2);
   padding: 6px 18px;
@@ -235,41 +199,100 @@ a:hover { color: var(--accent-2); }
   font-size: 19px;
 }
 
-/* ---- characters ---- */
-.char {
-  padding: 28px 0;
-  border-bottom: 1px solid var(--rule);
+/* ---- beat sheet ---- */
+.beat-sheet {
+  margin: 24px 0 36px;
+  border-top: 1px solid var(--rule);
+}
+.beat {
+  display: grid;
+  grid-template-columns: 110px 1fr 1fr;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: baseline;
+}
+.beat-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.beat-name {
+  font-weight: 600;
+  color: var(--fg);
+  font-size: 17px;
+}
+.beat-fn {
+  font-size: 15px;
+  color: var(--fg-dim);
+  font-family: var(--sans);
+  line-height: 1.55;
 }
 
+/* ---- characters ---- */
+.char { padding: 30px 0; border-bottom: 1px solid var(--rule); }
 .char:last-child { border-bottom: none; }
-
-.char h3 {
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 14px;
-  color: var(--fg);
+.char header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.char h3 { font-size: 24px; font-weight: 600; margin: 0; color: var(--fg); }
+.char .char-tag {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 /* ---- scenes ---- */
-.scene {
-  padding: 28px 0;
+.scene { padding: 32px 0; border-bottom: 1px solid var(--rule); }
+.scene:last-child { border-bottom: none; }
+.scene h3 { font-size: 24px; font-weight: 600; margin: 0 0 14px; color: var(--accent-2); }
+.scene ul { margin: 12px 0 18px; padding-left: 22px; }
+.scene li { margin-bottom: 8px; color: var(--fg-dim); }
+
+/* ---- annotated dialogue ---- */
+.annotated {
+  margin: 28px 0;
+  border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
 }
-.scene:last-child { border-bottom: none; }
-
-.scene h3 {
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 14px;
-  color: var(--accent-2);
+.line {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: baseline;
 }
-
-.scene ul {
-  margin: 12px 0 18px;
-  padding-left: 22px;
+.line:last-child { border-bottom: none; }
+.line .dlg {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--fg);
 }
-
-.scene li { margin-bottom: 8px; color: var(--fg-dim); }
+.line .dlg .speaker {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+.line .note {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--fg-dim);
+  line-height: 1.6;
+}
+.line .note .label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+  display: block;
+  margin-bottom: 4px;
+}
 
 /* ---- craft grid ---- */
 .craft-grid {
@@ -278,56 +301,103 @@ a:hover { color: var(--accent-2); }
   gap: 22px;
   margin-top: 28px;
 }
-
 .craft-item {
   border: 1px solid var(--rule);
   padding: 24px;
   border-radius: 4px;
+  background: var(--bg-card);
+}
+.craft-item h3 { font-size: 18px; font-weight: 600; margin: 0 0 12px; color: var(--accent); }
+.craft-item p { margin: 0 0 12px; font-size: 15px; line-height: 1.6; color: var(--fg-dim); }
+.craft-item p:last-child { margin: 0; }
+.craft-item .ex {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--fg-mute);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--rule);
 }
 
-.craft-item h3 {
-  font-size: 18px;
+/* ---- glossary ---- */
+.glossary { margin-top: 28px; }
+.gloss-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 28px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.gloss-row dt {
+  font-family: var(--sans);
   font-weight: 600;
-  margin: 0 0 12px;
+  font-size: 14px;
   color: var(--accent);
+  letter-spacing: 0.02em;
 }
+.gloss-row dd { margin: 0; font-size: 15px; color: var(--fg-dim); line-height: 1.6; }
+.gloss-row dd em { color: var(--fg); font-style: normal; font-family: var(--mono); font-size: 13px; }
 
-.craft-item p {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--fg-dim);
+/* ---- foreshadow table ---- */
+.fs-table { margin-top: 28px; }
+.fs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule-soft);
 }
+.fs-row .setup, .fs-row .payoff {
+  font-size: 15px;
+  color: var(--fg-dim);
+  line-height: 1.55;
+}
+.fs-row .label {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+.fs-row .setup .label { color: var(--accent); }
+.fs-row .payoff .label { color: var(--accent-2); }
+.fs-row .setup q, .fs-row .payoff q { color: var(--fg); font-style: italic; }
 
 /* ---- themes ---- */
-.theme {
-  padding: 26px 0;
-  border-bottom: 1px solid var(--rule);
-}
+.theme { padding: 28px 0; border-bottom: 1px solid var(--rule); }
 .theme:last-child { border-bottom: none; }
+.theme h3 { font-size: 22px; font-weight: 600; margin: 0 0 12px; color: var(--fg); }
 
-.theme h3 {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 0 0 12px;
-  color: var(--fg);
+/* ---- principles ---- */
+.principles { display: grid; gap: 18px; margin-top: 28px; }
+.principle {
+  padding: 22px 26px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent-3);
+  background: var(--bg-card);
+  border-radius: 4px;
 }
+.principle h3 {
+  font-family: var(--sans);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-3);
+  margin: 0 0 10px;
+}
+.principle p { margin: 0; font-size: 16px; color: var(--fg); line-height: 1.6; }
+.principle p + p { margin-top: 10px; color: var(--fg-dim); font-size: 15px; }
 
 /* ---- critique ---- */
-.critique {
-  list-style: none;
-  padding: 0;
-  margin: 24px 0 0;
-}
-
+.critique { list-style: none; padding: 0; margin: 24px 0 0; }
 .critique li {
   padding: 18px 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-soft);
   color: var(--fg-dim);
 }
-
 .critique li strong { color: var(--fg); }
-
 .critique li:last-child { border-bottom: none; }
 
 /* ---- footer ---- */
@@ -338,22 +408,19 @@ footer {
   font-size: 14px;
   font-family: var(--sans);
 }
-
 footer p { max-width: 600px; margin: 0 auto 12px; }
-
-.footer-note {
-  font-style: italic;
-  color: #666870;
-  font-size: 13px;
-}
+.footer-note { font-style: italic; color: var(--fg-mute); font-size: 13px; }
 
 /* ---- responsive ---- */
-@media (max-width: 720px) {
-  .topnav { padding: 12px 16px; }
-  .topnav ul { gap: 14px; }
-  .topnav ul li:not(:first-child):not(:last-child) { display: none; }
+@media (max-width: 800px) {
+  .topnav { padding: 10px 14px; gap: 10px; }
+  .topnav ul { gap: 10px; font-size: 12px; }
   .hero-inner { padding: 70px 20px 50px; }
-  .section { padding: 64px 20px; }
+  .section { padding: 60px 20px; }
+  .beat { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+  .line { grid-template-columns: 1fr; gap: 8px; }
+  .gloss-row { grid-template-columns: 1fr; gap: 4px; }
+  .fs-row { grid-template-columns: 1fr; gap: 14px; }
 }
 </style>
 </head>
@@ -365,10 +432,18 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
     <ul>
       <li><a href="#overview">Overview</a></li>
       <li><a href="#structure">Structure</a></li>
+      <li><a href="#engine">Lie Engine</a></li>
       <li><a href="#characters">Characters</a></li>
-      <li><a href="#scenes">Key Scenes</a></li>
+      <li><a href="#scenes">Scenes</a></li>
+      <li><a href="#annotated">Annotated</a></li>
       <li><a href="#craft">Craft</a></li>
+      <li><a href="#localization">Localization</a></li>
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#choice">Choice</a></li>
+      <li><a href="#foreshadow">Foreshadow</a></li>
+      <li><a href="#pacing">Pacing</a></li>
       <li><a href="#themes">Themes</a></li>
+      <li><a href="#takeaways">Takeaways</a></li>
       <li><a href="#critique">Critique</a></li>
     </ul>
   </nav>
@@ -376,52 +451,93 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
   <div class="hero-inner">
     <p class="kicker">A close reading from a working game writer</p>
     <h1>The Wound and the Witness</h1>
-    <p class="subtitle">How <em>Final Fantasy VII</em>'s screenplay turns a mercenary job into a meditation on memory, complicity, and the death of a planet.</p>
+    <p class="subtitle">A craft document on <em>Final Fantasy VII</em>'s screenplay — its structural architecture, dialogue technique, choice systems, localization, foreshadowing inventory, and the principles other game writers can steal from it.</p>
     <div class="hero-meta">
       <span>~30,000-word script</span>
       <span>·</span>
-      <span>4 Acts</span>
+      <span>4 acts / 3 discs</span>
       <span>·</span>
       <span>9 playable POVs</span>
       <span>·</span>
-      <span>1997</span>
+      <span>1997 / Squaresoft</span>
+      <span>·</span>
+      <span>Loc. by Michael Baskett</span>
     </div>
+
+    <nav class="hero-toc" aria-label="Contents">
+      <a href="#overview"><span class="toc-num">01</span>Overview &amp; Thesis</a>
+      <a href="#structure"><span class="toc-num">02</span>Structural Anatomy</a>
+      <a href="#engine"><span class="toc-num">03</span>The Lie Engine</a>
+      <a href="#characters"><span class="toc-num">04</span>Character Studies</a>
+      <a href="#scenes"><span class="toc-num">05</span>Key Scenes</a>
+      <a href="#annotated"><span class="toc-num">06</span>Annotated Scene</a>
+      <a href="#craft"><span class="toc-num">07</span>Dialogue Craft</a>
+      <a href="#localization"><span class="toc-num">08</span>Localization</a>
+      <a href="#systems"><span class="toc-num">09</span>System Voice</a>
+      <a href="#choice"><span class="toc-num">10</span>Choice Architecture</a>
+      <a href="#foreshadow"><span class="toc-num">11</span>Foreshadowing Inventory</a>
+      <a href="#pacing"><span class="toc-num">12</span>Pacing &amp; Tone</a>
+      <a href="#themes"><span class="toc-num">13</span>Themes</a>
+      <a href="#takeaways"><span class="toc-num">14</span>Working Takeaways</a>
+      <a href="#critique"><span class="toc-num">15</span>Critique</a>
+      <a href="#legacy"><span class="toc-num">16</span>Legacy</a>
+    </nav>
   </div>
 </header>
 
 <main>
 
-<!-- OVERVIEW -->
+<!-- 01 OVERVIEW -->
 <section id="overview" class="section">
-  <h2>Overview</h2>
+  <p class="section-kicker">01 — Overview &amp; Thesis</p>
+  <h2>What kind of script is this, actually?</h2>
+
   <p class="lede">
-    Final Fantasy VII is often discussed as a graphical landmark, a soundtrack, or a fandom phenomenon. Read purely as a <em>screenplay</em>, it is something stranger and more ambitious: a 40-hour interrogation of an unreliable narrator, embedded inside a populist eco-thriller, served through the conventions of a JRPG. The script's central trick — that the protagonist is lying to himself, the player, and the party — is established in the very first scene and not paid off until two thirds of the way through the runtime. Few mainstream narratives, in any medium, sustain a misdirection that long.
+    Final Fantasy VII is often discussed as a graphical landmark, a soundtrack, or a fandom phenomenon. Read purely as a <em>screenplay</em>, it is something stranger and more ambitious: a 30,000-word interrogation of an unreliable narrator embedded inside a populist eco-thriller, served through the conventions of a JRPG. The script's central trick — that the protagonist is lying to himself, the player, and the party — is established in the very first scene and not paid off until two thirds of the way through the runtime. Few mainstream narratives, in any medium, sustain a misdirection that long.
   </p>
 
+  <div class="callout">
+    <strong>Working thesis</strong>
+    FF7's screenplay is a study in <em>narrated identity</em>: a story whose dramatic engine is the gap between who a character claims to be and who they are remembered as. The entire ensemble — Cloud, Tifa, Aeris, Barret, Cid, Vincent, Reeve — is structured around versions of the same question. Memory, performance, and witness are the three vocabularies the script keeps returning to.
+  </div>
+
+  <h3 class="sub">The three plots, stacked</h3>
+  <p>The script attempts three things at once. They are not always in harmony, and the seams are part of the texture:</p>
   <div class="cards">
     <div class="card">
-      <h3>The premise</h3>
-      <p>An ex-elite soldier-for-hire helps an eco-terror cell bomb a reactor in the city of Midgar. The job goes sideways. He spends the next sixty hours discovering that the job, the city, his employer, his memories, and his own face are not what he believed them to be.</p>
+      <h3>The political plot</h3>
+      <p>Shinra Inc. as extractive capital. A reactor blows up in chapter one; the corporation drops a chunk of city onto its own slum and frames the bombers. The first eight hours are class-conscious in a way the genre rarely permits, with named workers and a vertical city whose architecture <em>is</em> the politics.</p>
     </div>
     <div class="card">
-      <h3>The ambition</h3>
-      <p>The script attempts three things at once: a Marxist parable about extractive capitalism (Shinra), a personal trauma narrative about identity (Cloud), and a cosmic-horror plot about a wound in a living planet (Sephiroth / Jenova). The seams show. The reach matters.</p>
+      <h3>The personal plot</h3>
+      <p>Cloud, an ex-elite mercenary, gradually discovers that his memories of being elite are fabricated. The script weaponizes the JRPG's reliance on flashback by giving us a long, vivid one in Act II that turns out to be a forgery — and then making the player, alongside Tifa, rebuild the true version inside the protagonist's mind.</p>
     </div>
     <div class="card">
-      <h3>The voice</h3>
-      <p>Two registers run side by side: the scatological grit of Barret ("the hell you all doin'!?") and the lyrical near-Shakespearean drift of the Cetra and Sephiroth ("In my veins courses the blood of the Ancients"). The collision of registers <em>is</em> the texture of the script.</p>
+      <h3>The cosmic plot</h3>
+      <p>A two-thousand-year-old wound in a living planet. Sephiroth is not the villain so much as the wound's voice. Holy and Meteor are not weapons; they are immune responses. The metaphysical scaffolding is heavy, but the script has the sense to let Bugenhagen — an old man humming into a hologram — deliver it instead of a chosen-one prophecy.</p>
     </div>
   </div>
+
+  <h3 class="sub">What makes it specifically a <em>game</em> script</h3>
+  <p>This is the thing most prose criticism misses. The script is built around two conventions you cannot replicate in linear media:</p>
+  <ul>
+    <li><strong>Choice as confession.</strong> The flower-buying choice in Sector 8, the dress-up at Wall Market, the date selection at Gold Saucer, dozens of dialogue branches — none of them fork the plot. They fork the <em>relationship texture</em>. Aeris remembers whether you bought a flower; Tifa remembers whether you said "I worked hard for it"; the Highwind night sequence runs a different version depending on counters tracked since chapter one. The player isn't choosing what happens; they are <em>composing how they were the kind of person who let it happen</em>.</li>
+    <li><strong>Mechanical performance as character.</strong> Cloud's swagger ("Don't worry about it. It's no big deal. Just what I always do.") is Cloud impersonating Zack. The player has been performing that swagger themselves, picking it from menus. When the truth lands at Mideel, the player is implicated. The script makes the input device part of the lie.</li>
+  </ul>
+
+  <p>That is the level of formal ambition I want to take seriously below. Everything else — the localization, the date mechanics, the dialect, the off-screen deaths — is in service of a script that is doing things only a game can do.</p>
 </section>
 
-<!-- STRUCTURE -->
+<!-- 02 STRUCTURE -->
 <section id="structure" class="section alt">
-  <h2>Structural Anatomy</h2>
+  <p class="section-kicker">02 — Structural Anatomy</p>
+  <h2>Four acts, three discs, and a beat sheet for Disc 1</h2>
+
   <p>FF7 is technically a four-act screenplay disguised as three discs. Each act has a distinct dramatic question, a distinct geography, and a distinct relationship to truth.</p>
 
   <div class="acts">
     <article class="act">
-      <header><span class="act-num">I</span><h3>Banner of Revolution</h3></header>
+      <header><span class="act-num">ACT I</span><h3>Banner of Revolution</h3></header>
       <p class="act-loc">Setting: <em>Midgar, vertical city</em></p>
       <p class="act-q"><strong>Dramatic question:</strong> Will Cloud finish the job and walk away?</p>
       <p>The opening act is a heist movie. It establishes the worldview through architecture: a plate floats above the slums; the rich live on the lid, the poor live in the shadow it casts. The script smartly refuses to lecture about this. It lets Barret yell and Cloud shrug — "It's not my problem" — and lets the player decide who to side with. The act ends with the literal collapse of that architecture (the Sector 7 plate) and the symbolic collapse of Cloud's detachment.</p>
@@ -429,15 +545,15 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
     </article>
 
     <article class="act">
-      <header><span class="act-num">II</span><h3>Pursuit</h3></header>
+      <header><span class="act-num">ACT II</span><h3>Pursuit</h3></header>
       <p class="act-loc">Setting: <em>The world map</em></p>
       <p class="act-q"><strong>Dramatic question:</strong> Who is Sephiroth, and what does he want?</p>
       <p>The act opens up geographically, and the script smartly opens up <em>tonally</em> with it: Wutai's farce, Gold Saucer's date sequence, Cosmo Canyon's lore lecture, Cid's profanity, Junon's military pageant. This is the act of red herrings — the player and Cloud chase a Sephiroth who is, in truth, a hallucination. The Nibelheim flashback at Kalm is the act's anchor: a 20-minute monologue that the rest of the game will spend dismantling.</p>
-      <p>It ends with the death of Aeris. More on that later.</p>
+      <p>It ends with the death of Aeris.</p>
     </article>
 
     <article class="act">
-      <header><span class="act-num">III</span><h3>Turmoil</h3></header>
+      <header><span class="act-num">ACT III</span><h3>Turmoil</h3></header>
       <p class="act-loc">Setting: <em>The interior</em></p>
       <p class="act-q"><strong>Dramatic question:</strong> Who is Cloud?</p>
       <p>The boldest act. The protagonist is removed from the party for hours of runtime; Tifa becomes the playable POV; the player learns the world's politics from <em>inside Shinra HQ</em> while Heidegger and Scarlet plot a public execution. The act climaxes inside Cloud's own mind in the Lifestream — a literalized therapy session, complete with a mosaic of remembered Clouds the player must walk between. It is the rare AAA narrative where the climax is an act of <em>self-correction</em>, not violence.</p>
@@ -445,60 +561,261 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
     </article>
 
     <article class="act">
-      <header><span class="act-num">IV</span><h3>Decisive Battle</h3></header>
+      <header><span class="act-num">ACT IV</span><h3>Decisive Battle</h3></header>
       <p class="act-loc">Setting: <em>The wound</em></p>
       <p class="act-q"><strong>Dramatic question:</strong> Is it worth fighting for a world that may already be lost?</p>
       <p>An unusually contemplative final act. Shinra collapses off-stage. The Sister Ray sequence kills the corporate antagonist before the metaphysical one. The script then deliberately <em>slows down</em>: each party member is sent home to find their own reason. The final boss is preceded not by escalation but by a campfire conversation. "There ain't no gettin' offa this train we on" returns as a benediction.</p>
     </article>
   </div>
 
-  <h3 class="sub">The Disc Breaks as Story Beats</h3>
+  <h3 class="sub">A working beat sheet for Disc 1</h3>
+  <p>What follows is how I would brief a junior writer on the dramatic function of each Disc 1 sequence. The "function" column is what the scene <em>does</em> structurally, separate from what happens in it. This is the level of analysis I find most useful when teaching FF7.</p>
+
+  <div class="beat-sheet">
+    <div class="beat">
+      <span class="beat-id">1.01</span>
+      <span class="beat-name">No. 1 Reactor bombing</span>
+      <span class="beat-fn">Establishes voices, establishes Cloud's detachment, establishes that the script will treat extras (Biggs, Wedge, Jessie) as people. The "Watch out! This isn't just a reactor!!" intrusion plants the unreliable-narrator engine in the first ten minutes.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.02</span>
+      <span class="beat-name">Flower girl, soldier evasion, train</span>
+      <span class="beat-fn">Introduces the optional purchase system and Aeris in three lines. The train ride functions as a train ride functions in any heist movie — recovery, exposition, motif planting ("rails it can't get off").</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.03</span>
+      <span class="beat-name">7th Heaven / meeting Tifa &amp; Marlene</span>
+      <span class="beat-fn">Establishes the "promise" that will pay off later as both romance and identity proof. Marlene's flower acceptance routes a flag that the script will silently track for the rest of Disc 1.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.04</span>
+      <span class="beat-name">No. 5 Reactor / Air Buster / fall</span>
+      <span class="beat-fn">Cliffhanger one. Separates Cloud from the team. Functions as a forcing mechanism for the Aeris meet-cute and as a structural reset before the Wall Market interlude.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.05</span>
+      <span class="beat-name">Sector 5 church / Reno chase</span>
+      <span class="beat-fn">The first time the script slows down. A whole sequence built on Aeris's pace. The barrel-jumping minigame is a smart choice: it makes the player participate in protecting her, which the back half of Act II will need them to remember.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.06</span>
+      <span class="beat-name">Wall Market &amp; Don Corneo</span>
+      <span class="beat-fn">Pure farce, but doing essential prep work. Cloud is forced to wear someone else's clothes. Foreshadows the larger costume he has been wearing all along. The Corneo answer-game ("Why do bad guys talk?") foreshadows the same structure two acts later when Cloud forces Corneo's confession.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.07</span>
+      <span class="beat-name">Sector 7 pillar collapse</span>
+      <span class="beat-fn">First permanent loss. Three named characters die off-screen. The script teaches the player the rules: people die here, and grief is not narrated but performed by absence.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.08</span>
+      <span class="beat-name">Aeris's house / Elmyra's monologue</span>
+      <span class="beat-fn">First exposition dump on the Cetra. The script wisely puts it in the mouth of an adoptive mother, not a sage, so the worldbuilding lands as a domestic story.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.09</span>
+      <span class="beat-name">Shinra HQ infiltration</span>
+      <span class="beat-fn">Tonal pivot from oppressed-slum heist to corporate thriller. The 60-floor stair-climb is a comedic load-bearer that the script gets away with because it gives the players Cid-style banter from Barret two acts before Cid arrives.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.10</span>
+      <span class="beat-name">Hojo's lab / first Sephiroth tease</span>
+      <span class="beat-fn">Reveals that the Jenova specimen exists; reveals that Hojo treats Aeris as livestock. Sets up Sephiroth's "return" by demonstrating what he is returning <em>to</em>.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.11</span>
+      <span class="beat-name">Prison cell night / Sephiroth massacre</span>
+      <span class="beat-fn">Cliffhanger two. Sephiroth's first appearance is bodies in a hallway and a sword in the President's back. He does not speak. The script understands that an off-stage villain who leaves a sword in your boss is more frightening than any monologue.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.12</span>
+      <span class="beat-name">Motorcycle escape</span>
+      <span class="beat-fn">Punctuation. A pure-genre setpiece to release the pressure of the prison sequence and exit Midgar with kinetic momentum, not contemplation.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.13</span>
+      <span class="beat-name">Kalm flashback</span>
+      <span class="beat-fn">The script's thesis statement, told as a lie. Twenty minutes of monologue, the entire game's crisis architecture established here, every detail of which will be reframed in Disc 2.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.14</span>
+      <span class="beat-name">Junon parade / Cargo ship</span>
+      <span class="beat-fn">Re-establishes Shinra after the Midgar departure threatens to drop them as antagonists. The parade rhythm minigame is unironically the script telling you that Shinra's power is a performance everyone has rehearsed.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.15</span>
+      <span class="beat-name">Costa del Sol → Mt. Corel → Gold Saucer</span>
+      <span class="beat-fn">Tonal palette cleanser. Beach, mountain, theme park. Establishes that Sephiroth can be in front of you and you cannot reach him; sets up Barret's backstory; introduces Cait Sith with what will become a betrayal.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.16</span>
+      <span class="beat-name">Corel Prison / Dyne</span>
+      <span class="beat-fn">Barret's act-arc payoff. The script forces the most ideologically loud character to look at his own face in his most damaged friend, and to choose to go on without absolution.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.17</span>
+      <span class="beat-name">Cosmo Canyon / Cave of the Gi</span>
+      <span class="beat-fn">Red XIII's act-arc payoff. The script repeats the structural pattern from Corel: a misremembered father, a confrontation with the truth, an inheritance.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.18</span>
+      <span class="beat-name">Nibelheim "discovery"</span>
+      <span class="beat-fn">First crack in the Kalm flashback. The town is still there. Sephiroth has been reading in the basement for years. Cloud's grasp on his own narrative starts visibly slipping.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.19</span>
+      <span class="beat-name">Rocket Town / acquiring Tiny Bronco</span>
+      <span class="beat-fn">Cid joins. Mobility upgrade. Tonally the loudest party member arrives at the moment the script needs to tilt back toward profanity and momentum after Nibelheim's quiet.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.20</span>
+      <span class="beat-name">Temple of the Ancients</span>
+      <span class="beat-fn">Tseng dies (or appears to). Cloud hands Sephiroth the Black Materia under hypnosis. The protagonist crosses a moral line he did not consent to. Cait Sith sacrifices a body. The act's machine starts roaring toward its end.</span>
+    </div>
+    <div class="beat">
+      <span class="beat-id">1.21</span>
+      <span class="beat-name">Forgotten Capital / Aeris's death</span>
+      <span class="beat-fn">Disc 1 ends. Permanent loss. The script's central permadeath is placed at the disc break — a structural choice that uses the technological seam as a punctuation mark.</span>
+    </div>
+  </div>
+
+  <h3 class="sub">The disc breaks as story beats</h3>
   <p>The disc swap is unintentional dramaturgy, but the script weaponizes it. Disc 1 ends with Aeris's death — a permanent loss for the player and the file. Disc 2 ends with Cloud falling into the Lifestream, identity dissolving. The technological constraint becomes a punctuation mark: each disc ends with a piece of the protagonist erased.</p>
 </section>
 
-<!-- CHARACTERS -->
-<section id="characters" class="section">
-  <h2>Character Studies</h2>
+<!-- 03 LIE ENGINE -->
+<section id="engine" class="section">
+  <p class="section-kicker">03 — The Lie Engine</p>
+  <h2>How the unreliable narrator actually works</h2>
+
+  <p>This is the technique most worth stealing. FF7's unreliable narrator is not a clever twist — it is a mechanism. It runs all 30,000 words. Here is how the parts fit together.</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>1. The intrusion</h3>
+      <p>An off-key line, marked with no quotation marks or speaker tag, surfaces inside Cloud's POV: <em>"Watch out! This isn't just a reactor!!"</em> First reactor, ten minutes in. The reader files it as ambient text. It is, in fact, a memory leaking from the wrong character.</p>
+    </div>
+    <div class="card">
+      <h3>2. The performance</h3>
+      <p>Cloud's lines fall into two registers. Performed: "It's no big deal. Just what I always do." Authentic: "...sigh," "...yeah, sorry," "I know." The performed lines borrow Zack's idiom; the authentic lines are short, declarative, and embarrassed. Once you see it, you can't unsee it.</p>
+    </div>
+    <div class="card">
+      <h3>3. The witness</h3>
+      <p>Tifa says nothing. Her dialogue is full of small flinches: "Cloud... Are you feeling all right?" "Cloud... You just look a little tired I guess." "But, you know, Cloud......" with the trailing dots. The script teaches you to read trailing dots as suppression.</p>
+    </div>
+    <div class="card">
+      <h3>4. The interrogator</h3>
+      <p>Sephiroth's job is structural, not antagonistic. He is the only character who knows the truth and uses it. The Northern Crater illusions and the Mideel reveal are <em>therapeutic</em> in form — a hostile therapist forcing a client to confront a false memory. Replace "puppet" with "patient" and the scene is a Lacanian intervention.</p>
+    </div>
+    <div class="card">
+      <h3>5. The corrector</h3>
+      <p>The Lifestream sequence reframes every false memory by re-staging it from the witness's POV. The script does not invent new information; it gives you the same scenes again with a different camera. This is the technique's most disciplined choice — no retcons, only reframes.</p>
+    </div>
+    <div class="card">
+      <h3>6. The confession</h3>
+      <p>Cloud's Highwind speech is the engine's exhaust. He does not become a different person. He becomes the same person who can describe himself accurately. The script's idea of growth is unusually specific: not strength gained but truth tolerated.</p>
+    </div>
+  </div>
+
+  <p>Why this is hard to write: each layer has to be planted before the player has any reason to look for it. The script cannot say "remember Cloud's odd line in Sector 1" — it has to plant it cleanly enough to be ignored on first read and clearly enough to be recoverable on second. The PS1-era localization helped here. Everything looks slightly off-key in 1997 JRPG translation, so the deliberate off-keyness camouflages.</p>
+
+  <div class="callout">
+    <strong>Stealable principle</strong>
+    If you are writing an unreliable narrator, do not rely on a single twist scene. Run a full mechanism: intrusion, performance, witness, interrogator, corrector, confession. The reveal is not a moment; it is a pattern that the reader has already half-detected.
+  </div>
+</section>
+
+<!-- 04 CHARACTERS -->
+<section id="characters" class="section alt">
+  <p class="section-kicker">04 — Character Studies</p>
+  <h2>The ensemble, line by line</h2>
 
   <div class="char">
-    <h3>Cloud Strife — the unreliable narrator as protagonist</h3>
+    <header><h3>Cloud Strife</h3><span class="char-tag">Protagonist · Unreliable narrator</span></header>
     <p>Cloud is the script's central formal experiment. From the first reactor scene he is given two voices: a performed swagger ("Once this job's over… I'm outta here") and a glitch ("Watch out! This isn't just a reactor!!" — a thought intruding from someone else's memory). The script signals the trick early and trusts the player not to notice.</p>
     <p>The genius is that Cloud's swagger is not arrogance — it is <em>cosplay</em>. He is a failed SOLDIER candidate impersonating his dead friend Zack while wearing the borrowed memory of a charisma he never had. Every "Hmph" and "Don't worry about it. It's no big deal. Just what I always do." is a line he is repeating from someone else.</p>
     <p>What makes this work as <em>game writing</em> rather than novel writing: the player has been performing Cloud's swagger themselves, choosing it from menus. When the truth lands, the player has been complicit in the lie.</p>
+    <p>The performance also explains the otherwise odd choice to give Cloud almost no comedic voice. A character pretending to be cool cannot also be funny. Cid arrives in Act II partly to take over the comic register Cloud cannot occupy without breaking his disguise.</p>
   </div>
 
   <div class="char">
-    <h3>Tifa Lockhart — the witness who holds the secret</h3>
+    <header><h3>Tifa Lockhart</h3><span class="char-tag">Witness · Co-author of memory</span></header>
     <p>Tifa is the most underrated character in the script. She knows from Kalm onward that Cloud's story is wrong (she was there; he wasn't), and she chooses not to say so. Her great line — "I'm not sure about… me. My feelings." — is a moral statement disguised as a romantic one. She is, structurally, the audience's surrogate: she sees the contradiction and protects it because the alternative is worse.</p>
     <p>The Lifestream sequence is therefore <em>her</em> arc as much as Cloud's. "I can help too. We'll work together to try and get the real you back!" turns her from secret-keeper into co-author of the corrected memory. The script earns its romantic payoff (the Highwind night) precisely because it has spent fifty hours making her complicity expensive.</p>
+    <p>One subtle craft point: Tifa never directly contradicts Cloud's lies, even when alone with him. Her dissent is registered through ellipses and flinches. Read the whole script for ellipses-after-Tifa-name and you have her arc.</p>
   </div>
 
   <div class="char">
-    <h3>Aeris Gainsborough — the character who refuses the role</h3>
+    <header><h3>Aeris Gainsborough</h3><span class="char-tag">Refusenik · Walking exposition</span></header>
     <p>Aeris is introduced as a manic-pixie flower girl and almost every line she speaks fights that introduction. "I'm used to it" (re: danger). "Hee, hee! Cloud! You want to go on a date?" is followed minutes later by a quiet meditation on a boyfriend who never came back. She is the script's only character who is allowed to be openly inconsistent — playful and grieving, naive and the most knowledgeable person in the room.</p>
     <p>Her death scene works because the script <em>refuses to comment on it</em>. There is no eulogy in the moment. Cloud's response is not poetic; it is symptomatic — "My fingers are tingling. My mouth is dry. My eyes are burning!" The script understands that grief, in the first hour, is somatic. The eulogy comes later, indirectly, through Bugenhagen and through the Forgotten Capital crystal.</p>
+    <p>Aeris is also the script's main exposition vehicle, and the writing handles this elegantly: she rarely <em>delivers</em> exposition; she <em>reacts</em> to it. The Cetra plot is told through her confusion and partial recall, not her authority.</p>
   </div>
 
   <div class="char">
-    <h3>Barret Wallace — the ideology in a body</h3>
+    <header><h3>Barret Wallace</h3><span class="char-tag">Ideology · Grief · Father</span></header>
     <p>Barret is often dismissed as a caricature. The script earns him. His speeches read as agitprop — "It's the damn Shinra! They're evil and destroyin' our planet" — but the script keeps undermining him: he blew up a reactor and killed civilians, he abandoned a daughter to fight, he was complicit in the original Corel disaster, his best friend Dyne went mad with the same arm. The script asks: what does revolutionary politics look like when the revolutionary is also a grieving, guilty father?</p>
-    <p>The Dyne scene is where the script earns its political seriousness. It does not absolve Barret. "I want to destroy everything… Even me." Dyne is what Barret could have been, and Barret has to kill him.</p>
+    <p>The Dyne scene is where the script earns its political seriousness. It does not absolve Barret. "I want to destroy everything… Even me." Dyne is what Barret could have been, and Barret has to kill him. The act-arc structurally rhymes with the rest of the cast: every party member has a doppelgänger or shadow they confront in Act II.</p>
   </div>
 
   <div class="char">
-    <h3>Sephiroth — antagonist as absence</h3>
+    <header><h3>Red XIII / Nanaki</h3><span class="char-tag">Inherited shame</span></header>
+    <p>Red XIII's arc is small in word count and disproportionate in craft. He believes his father was a coward; he learns his father was the one who held the line. The reveal is staged in a single still frame — Seto petrified mid-leap. The script does not narrate his realization. He just looks. The image is the script.</p>
+    <p>Note the structural rhyme with Cloud: a son's misremembered father (Seto) versus a son's misremembered self (Cloud). The same pattern, scaled differently, run twice in one disc. This is the script's main compositional trick — repeat the same arc with different voltages.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>Cid Highwind</h3><span class="char-tag">Profanity · Dignity · Comic register</span></header>
+    <p>Cid arrives late and reorients the tone. Until him, the comic register has belonged to Barret's outbursts. Cid is more textured: a profane man whose anger is grief about a launch he aborted to save someone he then bullies for fifteen years. The Shera flashback is the script's clearest study in unspoken apology.</p>
+    <p>Cid's late takeover as Highwind party leader, when Cloud is removed in Act III, is the script trusting its supporting cast to carry plot weight. He plays the role exactly like Cloud was supposed to — except more honestly. His "What're we gonna do?" doesn't pretend to know.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>Vincent Valentine</h3><span class="char-tag">Sin · Slow time</span></header>
+    <p>Optional, which is a structural mistake (he should be mandatory), but characterologically the most interesting late-add. Vincent is a man who <em>chose to sleep through his own punishment</em>. Where Cloud invented a self he could live with, Vincent abandoned the self he had. He is the script's grim alternative to Cloud's solution.</p>
+    <p>The Lucrecia waterfall scene is one of the script's quietest. "I wanted to die... But the Jenova inside me wouldn't let me die..." The villain is also the reason the lover is alive. The script lets that contradiction sit without commenting.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>Yuffie Kisaragi</h3><span class="char-tag">Comic relief · Materialist · Patriot</span></header>
+    <p>Yuffie's sidequest is the script's most underrated act-arc. The setup is pure comedy (she steals materia, the party hunts her); the payoff is political (Wutai lost a war, was demilitarized into a tourist village, and her father chose dishonor to keep it alive). The script lets her resent her father <em>and</em> learn he was right, in the same conversation.</p>
+    <p>Note how her dialect — "GROSS-NESS!", "Mind your own beeswax!" — drops away during the climactic pagoda scene. Loss of comic register signals dramatic seriousness more reliably than any stage direction.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>Cait Sith</h3><span class="char-tag">Spy · Toy · Bureaucrat</span></header>
+    <p>The most formally interesting character, narratively. The reveal that he is a Shinra mole — voiced through a stuffed cat by an executive (Reeve) at corporate HQ — is also a sly meta-joke about the JRPG party member as company employee. He is the only character explicitly working for the antagonist while being playable. The script does not punish him; it lets the others continue to use him after extracting a promise.</p>
+    <p>His sacrifice in the Temple of the Ancients (a body, not a life) is the script's inversion of the standard heroic-sacrifice beat. He is a <em>controller</em>, not a self. The script's metaphysical plot is anchored in souls returning to a planet; Cait Sith is the cast member without one. The pun is intentional.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>Sephiroth</h3><span class="char-tag">Antagonist · Absence</span></header>
     <p>Sephiroth has remarkably few lines for a villain on a magazine cover. The script understands that he is most effective when implied: through Cloud's flashback, through bodies in hallways, through the stolen Jenova arm. When he speaks, he speaks in a register no other character uses — biblical, cosmic, second-person. "Soon, you will live again as a part of me." This stylistic isolation is the writing's main tool for menace. He doesn't share dialogue idioms with the protagonists; he isn't <em>in</em> their world.</p>
+    <p>Compare his rhetoric to the prosaic register of Hojo, his actual creator. Hojo says things like "Ha, ha, ha! Ha, ha, ha!" and "Heh, heh, heh." Sephiroth says "I am becoming one with the Planet." The villain has stolen the prophet's voice from the world's mediocre god.</p>
   </div>
 
   <div class="char">
-    <h3>The supporting cast — who get to refuse</h3>
+    <header><h3>The Shinra brass: Rufus, Heidegger, Scarlet, Reeve, Hojo</h3><span class="char-tag">Bureaucracy as villain</span></header>
+    <p>Each Shinra executive is a different failure mode of corporate evil. Rufus is the cynic ("I'll control the world with fear"). Heidegger is the bully who horse-laughs ("Gya, ha, ha!"). Scarlet is the engineer-sadist ("Kyaa haa hah"). Hojo is the scientist who has lost the ability to ask why. Reeve is the conscience the corporation tolerates because his guilt makes him efficient.</p>
+    <p>The script's smartest move is letting Reeve become Cait Sith, which means a Shinra exec is in the party as an antagonist's voicebox. The villainy is structural, not personal — and the corporation contains its own opposition, which it deploys as a pet. That is sharper political writing than the genre usually permits.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>The Turks: Tseng, Reno, Rude, Elena</h3><span class="char-tag">Antagonist · Coworker</span></header>
+    <p>The Turks are the script's most successful supporting block. Their through-line is that they are middle managers doing their jobs. Reno's "It's no big deal. Just part of the job." after dropping a city plate is the most chilling line in the script precisely because it is the most quotidian. The script grants them dignity (they break for vacation in Wutai, they negotiate a temporary truce against Corneo, they refuse to chase the heroes when off-duty) without absolving them.</p>
+    <p>This is hard to write. The genre default is to make middle-management antagonists <em>incompetent</em>. The Turks are competent, lethal, and clearly choosing their employer freely. The script lets them be morally complicated and resists redeeming them.</p>
+  </div>
+
+  <div class="char">
+    <header><h3>The supporting cast — who get to refuse</h3><span class="char-tag">Ensemble · Final act</span></header>
     <p>The Highwind "go home and find your reason" sequence in Act IV is a quiet masterstroke of party writing. Each character is given the option to <em>not return</em>. They all do, but each comes back with a private reason — Barret for Marlene, Red XIII for Bugenhagen, Cid for the dignity he never claimed, Vincent because his sin will not let him sleep, Yuffie because she is incapable of cool detachment. Compare this to the standard JRPG ending where the party "stays together because friendship": FF7 makes them <em>choose individually</em>, and that costs nothing mechanically but everything dramatically.</p>
   </div>
 </section>
 
-<!-- KEY SCENES -->
-<section id="scenes" class="section alt">
-  <h2>Five Scenes That Carry the Weight</h2>
+<!-- 05 KEY SCENES -->
+<section id="scenes" class="section">
+  <p class="section-kicker">05 — Key Scenes</p>
+  <h2>Eight scenes that carry the weight</h2>
 
   <div class="scene">
     <h3>1. The Sector 7 Pillar</h3>
@@ -509,10 +826,21 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
   <div class="scene">
     <h3>2. The Kalm Flashback</h3>
     <p>A 20-minute monologue staged inside an inn upstairs. Structurally extraordinary: a JRPG stops the world, gives the player full control of a flashback that is <em>narrated by the protagonist as he is delivering it</em>, and lets the player wander Nibelheim collecting details that will, fifty hours later, be revealed as forgeries. The flashback ends with Sephiroth burning the town — a "real" memory glued onto a false frame. The audacity is that the game shows you the lie and trusts you to forget you saw it.</p>
+    <p>Note the small details that re-pay later. The cameraman who wants a photo. The villager who calls Cloud "the assistant." Tifa's father warning Sephiroth. Each is information that, in Disc 1, reads as flavor; in Disc 2, reads as evidence.</p>
   </div>
 
   <div class="scene">
-    <h3>3. The Forgotten Capital</h3>
+    <h3>3. The Don Corneo Bedroom</h3>
+    <p>The script's most under-respected scene. A farce structured as a moral exam. Corneo asks the heroes — and later himself, when the Turks arrive — "why do you think I'd swallow my pride and plead for my life?" Choices include "because he's ready to die" and "because he doesn't know what's going on." It's a pop-quiz in genre logic. When Corneo asks himself the question and answers wrong, the script kills him with the same construction. A joke turned into a structural rhyme. The moral grammar of the whole game compressed into a one-room comedy beat.</p>
+  </div>
+
+  <div class="scene">
+    <h3>4. Corel Prison / Dyne</h3>
+    <p>The cleanest doppelgänger scene in the script. Same accident, same operation, same gun-arm — different choice. The script does not let Barret talk Dyne out of it. Dyne dies on his own terms and gives Barret a pendant for Marlene. The dialogue is not eloquent: "Don't… make Marlene… cry." It is small and exact and does not pretend otherwise. The scene's brilliance is structural: the script teaches you that this is what every character will get — not redemption, but a specific request from a specific dead person.</p>
+  </div>
+
+  <div class="scene">
+    <h3>5. The Forgotten Capital</h3>
     <p>Two facts about the Aeris death scene that often go uncredited to the script:</p>
     <ul>
       <li>The dialogue immediately before it is among the most ordinary in the game. "Cloud!" "Aeris?" "We have to find Aeris." The script refuses to foreshadow.</li>
@@ -522,106 +850,436 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
   </div>
 
   <div class="scene">
-    <h3>4. The Lifestream</h3>
+    <h3>6. The Tifa Execution / Highwind Theft</h3>
+    <p>Often overlooked. With Cloud comatose at Mideel, the script puts Tifa in a gas chamber, makes Scarlet slap her in a button-mashing minigame, has Barret rescue her from a literal Mako cannon barrel, and ends with the rebel-faction crew of the Highwind defecting because they liked Cid that one time. It's a deeply silly sequence that does serious structural work: it gives the women's mid-game arc its own action setpiece, gives Barret his single greatest moment of competence, and reframes the Shinra airship as an ensemble asset.</p>
+    <p>The slap minigame in particular is a small craft note. The script could have made Tifa passive. Instead, the player has to literally fight back. Mechanically tiny, dramatically large.</p>
+  </div>
+
+  <div class="scene">
+    <h3>7. The Lifestream</h3>
     <p>Tifa and Cloud walk through fragmented Clouds in a literalized mind-palace. The script does something audacious here: it <em>retells the Kalm flashback</em>, but the camera now points at the witness who was always there. We see Tifa's father, dying. We see young Tifa fall from Mt. Nibel. We see Cloud, the boy who was never invited into the group, watching the well from a distance. The same events, reframed. This is what the script has been building since Disc 1.</p>
     <p>The line that lands the scene is small: "I'm sorry, Cloud. If I had only remembered more clearly what happened, I could have done something sooner." Tifa apologizes for failing to be a better witness. The game's whole moral argument — that we owe each other accurate memory — is in that one apology.</p>
   </div>
 
   <div class="scene">
-    <h3>5. The Highwind Conversation</h3>
+    <h3>8. The Highwind Conversation</h3>
     <p>The final dramatic beat before the descent into the crater. Cloud asks each character what they are fighting for. He explicitly refuses to make it about saving the planet. "I think we all are fighting for ourselves. For ourselves… and that someone… something… whatever it is, that's important to us."</p>
     <p>This is the script's final repudiation of the JRPG "save the world" idiom. The world is being saved as a <em>byproduct</em> of people taking responsibility for one specific thing each. It's the smallest possible scale for the largest possible stakes, and it is the moment the script has been earning for fifty hours.</p>
   </div>
 </section>
 
-<!-- CRAFT -->
+<!-- 06 ANNOTATED SCENE -->
+<section id="annotated" class="section alt">
+  <p class="section-kicker">06 — Annotated Scene</p>
+  <h2>The opening, line by line</h2>
+  <p>Below is the first conversation in the game, with craft notes in the right column. This is the opening sixty seconds and it is doing seven jobs at once.</p>
+
+  <div class="annotated">
+    <div class="line">
+      <div class="dlg"><span class="speaker">Barret</span>"C'mon newcomer. Follow me."</div>
+      <div class="note"><span class="label">Job: Onboarding</span>Establishes the player as a new arrival in two ways at once — narratively (Cloud is new to AVALANCHE) and pedagogically (the player is new to the controls). One line, two contracts signed.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Biggs</span>"Wow! You used to be in SOLDIER all right! ...Not everyday ya find one in a group like AVALANCHE."</div>
+      <div class="note"><span class="label">Job: Backstory by reaction</span>Backstory is delivered as <em>reaction</em>, not assertion. Biggs's awe tells us what SOLDIER means in this world without a glossary. Note the elided "ya" — Biggs's class register is set in his second line ever.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Jessie</span>"SOLDIER? Aren't they the enemy? What's he doing with us in AVALANCHE?"</div>
+      <div class="note"><span class="label">Job: Conflict on arrival</span>The script <em>plants the suspicion the player should have</em>. Why is this guy here? Jessie is functioning as the audience's voice. The next line will dispatch the suspicion narratively while leaving it dramatically active.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Biggs</span>"Hold it, Jessie. He WAS in SOLDIER. He quit them and now is one of us."</div>
+      <div class="note"><span class="label">Job: Lie installation</span>This is the lie. Cloud was never in SOLDIER. The script is, in its fourth line of dialogue, planting the central deception. It is presented as exoneration, which is exactly how cons work.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Biggs</span>"Didn't catch your name..."</div>
+      <div class="note"><span class="label">Job: Name entry</span>The naming prompt — a UI element — is given a diegetic justification. The player is asked to give Cloud his name <em>at the moment Cloud is being asked to perform an identity</em>. This is not accidental. It is the unreliable narrator's first piece of stagecraft: the player names the mask.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Cloud</span>"...Cloud."</div>
+      <div class="note"><span class="label">Job: Voice register</span>The leading ellipsis is Cloud's authentic voice. Three dots before the name. He is hesitating. Compare this to his first declarative line, which is the next one and which is performed.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Cloud</span>"I don't care what your names are. Once this job's over...I'm outta here."</div>
+      <div class="note"><span class="label">Job: Performed swagger</span>This is the Zack voice. Curt, transactional, self-mythologizing. The trailing dots before "I'm outta here" are the tell — a beat of staging the line. The script is making the performance audible. We hear it as cool; later we will hear it as audition.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Barret</span>"The hell you all doin'!? I thought I told you never to move in a group!"</div>
+      <div class="note"><span class="label">Job: Voice contrast</span>Barret's first line establishes the dialect range the script is willing to write. Profanity, elision, command voice. The contrast with Cloud's clipped neutral register sets up the comic-and-political pairing the next eight hours will live inside.</div>
+    </div>
+    <div class="line">
+      <div class="dlg"><span class="speaker">Barret</span>"Ex-SOLDIER, huh? Don't trust ya!"</div>
+      <div class="note"><span class="label">Job: Re-plant the lie</span>The script returns to the deception within four exchanges. The lie has now been stated by Cloud (implicitly), Biggs (defensively), and Barret (suspiciously). Three speakers anchoring one false fact. By the time the player reaches Mideel, sixty hours later, the unreliable-narrator engine has been priming this exact assumption.</div>
+    </div>
+  </div>
+
+  <p>Seven craft jobs in nine lines: onboarding, backstory, conflict, lie installation, name-entry diegesis, voice contrast, dialect range, and trust establishment. Most opening scenes in AAA games do three of these. FF7's opener does all seven and reads as casual workplace banter.</p>
+
+  <div class="callout">
+    <strong>Stealable principle</strong>
+    The first thirty seconds of dialogue should plant the central deception, the dialect range, and the conflict the player will spend hours resolving. Aim for density of <em>jobs</em>, not density of plot.
+  </div>
+</section>
+
+<!-- 07 CRAFT -->
 <section id="craft" class="section">
-  <h2>Craft Notes</h2>
+  <p class="section-kicker">07 — Dialogue Craft</p>
+  <h2>Techniques you can name, and where they show up</h2>
 
   <div class="craft-grid">
     <div class="craft-item">
-      <h3>Dialect as characterization</h3>
-      <p>The localization commits hard to dialect: Barret's elided "th-" ("the hell"), Cid's "&amp;%$#" punctuation, Yuffie's surfer slang, Cait Sith's drawl, Vincent's rhetorical full sentences, Aeris's italicized softness. In a script with limited animation, the prose <em>is</em> the performance. A reader can identify the speaker from a single line with no tag. Few games achieve this.</p>
+      <h3>Dialect as character ID</h3>
+      <p>The localization commits hard: Barret's elided "the" → "th'", Cid's "&amp;%$#" punctuation, Yuffie's surfer slang, Cait Sith's drawl, Vincent's full sentences, Aeris's italicized softness. In a script with limited animation, prose <em>is</em> performance.</p>
+      <span class="ex">Test: cover the speaker tag. Can you identify them in one line? FF7 passes more often than most.</span>
     </div>
     <div class="craft-item">
       <h3>Profanity as register</h3>
-      <p>The censoring marks ("the hell," "&^%$") are doing real tonal work. Profanity in FF7 is not adolescent; it is a <em>class signifier</em>. Barret and Cid are the two characters who curse openly. Sephiroth and Rufus never curse. Cloud only curses when he forgets to perform. The script uses cursing to mark distance from the corporate-mythological register.</p>
+      <p>Profanity is not adolescent here; it's a <em>class signifier</em>. Barret and Cid curse openly. Sephiroth and Rufus never curse. Cloud only curses when he forgets to perform. The asterisks ("&amp;%$#") are doing tonal work the player feels even without parsing them.</p>
+      <span class="ex">Cid: "Don't gimme that, jackass!" / Sephiroth: "Hmph." Two enforcement officers, two universes.</span>
     </div>
     <div class="craft-item">
       <h3>Repetition as motif</h3>
-      <p>"There ain't no gettin' offa this train we on" appears three times across the script — in Midgar (literal), at Mideel (metaphorical), and on the descent to the crater (mythological). The line gets longer in meaning each time without changing one word. This is the cleanest piece of motif construction in the script.</p>
+      <p>"There ain't no gettin' offa this train we on" appears three times — Midgar (literal), Mideel (metaphorical), Northern Crater (mythological). The line gets longer in meaning each time without changing one word. Cleanest piece of motif construction in the script.</p>
+      <span class="ex">A motif must change function across recurrences without changing content. Barret's line passes the test.</span>
     </div>
     <div class="craft-item">
-      <h3>Player choice as confession</h3>
-      <p>The flower-buying choice at the start. The crossdressing options at Wall Market. The date mechanics at Gold Saucer. The script lets the player choose tone, and then <em>holds them to it</em> later. Aeris remembers whether you bought flowers. Tifa remembers whether you said "I worked hard for it" or "I just got lucky." Choice does not branch the plot — it branches the relationship texture, which is harder to write and more honest.</p>
+      <h3>Ellipsis as flinch</h3>
+      <p>Trailing dots are not stylistic; they are <em>diagnostic</em>. Cloud's intrusion thoughts begin with them. Tifa's suppressed dissent ends with them. Aeris's grief over Zack opens with them. The script teaches you to read three dots as a tell, then weaponizes that knowledge in Disc 2.</p>
+      <span class="ex">Tifa: "But, you know, Cloud......" — six dots is more honest than the sentence she finishes.</span>
+    </div>
+    <div class="craft-item">
+      <h3>Choice as confession</h3>
+      <p>Player choice does not branch the plot — it branches the <em>relationship texture</em>. Aeris remembers whether you bought a flower; Tifa remembers whether you said "I worked hard for it"; the date you get is determined by tracked counters going back to chapter one. Honest player accounting.</p>
+      <span class="ex">Choice does not change what happens. It changes who you were when it happened.</span>
     </div>
     <div class="craft-item">
       <h3>Off-screen storytelling</h3>
-      <p>President Shinra is killed off-screen. Hojo's history with Lucrecia is told through a hidden video tape the player may never find. Zack's death is implied through a flashback that Cloud cannot finish. The script has the confidence to put climactic information in optional places. The player who finds it is rewarded with comprehension; the player who doesn't, isn't punished.</p>
+      <p>President Shinra is killed off-screen. Hojo's history with Lucrecia is told through a hidden videotape the player may never find. Zack's death is implied through a flashback Cloud cannot finish. The script has the confidence to put climactic information in optional places.</p>
+      <span class="ex">Confidence: the script doesn't need every player to comprehend everything. It rewards the players who look.</span>
     </div>
     <div class="craft-item">
-      <h3>Comic relief as architecture</h3>
-      <p>The Wall Market crossdressing sequence and the Don Corneo bedroom scene are often singled out as tonal whiplash. Read structurally, they are doing essential work: they isolate Cloud from his SOLDIER persona by forcing him into a costume. The cross-dressing prefigures the larger truth — Cloud has been wearing someone else's costume the entire game. The farce is the foreshadow.</p>
+      <h3>Comic relief as foreshadow</h3>
+      <p>Wall Market crossdressing and the Don Corneo bedroom are often called tonal whiplash. Read structurally, they are doing essential work: they isolate Cloud from his SOLDIER persona by forcing him into a costume. The cross-dressing prefigures the larger truth — Cloud has been wearing someone else's costume the entire game.</p>
+      <span class="ex">A farce that doesn't earn its main plot's themes is just a farce. FF7's farces are setup.</span>
+    </div>
+    <div class="craft-item">
+      <h3>Backstory by reaction</h3>
+      <p>The script almost never delivers backstory through dumps. It delivers it through how characters <em>react</em> to each other. Biggs's awe at "SOLDIER" tells us what SOLDIER means. Tifa's silence about Cloud tells us about Cloud. Reno's casual cruelty tells us about Shinra.</p>
+      <span class="ex">Don't tell us what the world is. Show us what the world makes people do.</span>
+    </div>
+    <div class="craft-item">
+      <h3>Death by description</h3>
+      <p>When grief lands, the script avoids eloquence. "My fingers are tingling. My mouth is dry. My eyes are burning!" is Cloud's line at Aeris's death. The body's symptoms instead of metaphor. The script trusts that the reader does the metaphor.</p>
+      <span class="ex">First-hour grief is somatic. Second-week grief is poetic. The script knows the difference.</span>
+    </div>
+    <div class="craft-item">
+      <h3>Doppelgänger structure</h3>
+      <p>Every major party member meets a darker version of themselves: Barret/Dyne, Red XIII/Seto, Vincent/Hojo, Cid/Shera (his abandoned future), Cloud/Sephiroth, Aeris/Jenova. The script is unusually rigorous about pairing each character with a mirror.</p>
+      <span class="ex">A character without a mirror is just a description. A character with a mirror has a question.</span>
     </div>
   </div>
 </section>
 
-<!-- THEMES -->
-<section id="themes" class="section alt">
-  <h2>Themes</h2>
+<!-- 08 LOCALIZATION -->
+<section id="localization" class="section alt">
+  <p class="section-kicker">08 — Localization</p>
+  <h2>The Baskett translation as a writing object</h2>
+  <p>The English script of FF7 was localized by Michael Baskett, working alone, against deadline, in 1997, without retranslation passes. The result is famously rough in places — Aeris's name was originally "Aerith"; Cait Sith says "kya ha ha"; many lines read as compressed-Japanese-sentence-padding. It is also, in places, brilliant.</p>
+
+  <p>Three reasons it matters as a writing object:</p>
+
+  <h4>1. The localization invented voices the original didn't have</h4>
+  <p>Barret's African-American Vernacular English coding, Cid's profanity, Cait Sith's drawl, Yuffie's surfer slang are largely localizer choices. The Japanese script has class and regional markers but does not have the strong dialect ladder the English script imposes. This was a craft decision — to use the limited translation budget to differentiate speakers <em>by idiom</em> rather than by exposition. It is the single biggest reason the script reads as well as it does.</p>
+
+  <h4>2. The "errors" become tone</h4>
+  <p>"This guy are sick" is the famous line. Read in context (NPC: an exhausted villager describing a dying man), the agreement error reads like dialect. "Off course!" "Don't ack so big" — these are misspellings the player processes as accent. The script's surface roughness, accidentally or otherwise, reinforces its main thematic concern: nobody here is speaking from authority, everyone is improvising their identity.</p>
+
+  <p>If the script had been polished into AAA-localization neutral by a 2010s team, it would lose this. Worse — the unreliable narrator engine partly relies on Cloud's <em>own</em> English sounding slightly off. When everyone's English sounds slightly off, his off-ness camouflages.</p>
+
+  <h4>3. The censoring is louder than profanity</h4>
+  <p>The script censors profanity with random punctuation: "&amp;%$#", "*&amp;^%$", "$#&amp;%". This is a Nintendo-era artifact, but it functions like a prosody mark. The player <em>hears</em> Cid swearing. Self-censoring with visible obscenity is, accidentally, a more literary device than just printing "fuck." It marks the speech act without performing it.</p>
+
+  <div class="callout">
+    <strong>Working note</strong>
+    If you are localizing a script today, the FF7 lesson is not "be sloppy." It is: <em>use idiom to differentiate before you use exposition</em>. A surfer-talking ninja and a profane Britsh pilot communicate ten times more efficiently than two paragraphs of bio text would.
+  </div>
+
+  <h4>4. The set pieces of localization</h4>
+  <p>Two scenes deserve specific localizer credit:</p>
+  <ul>
+    <li><strong>The Don Corneo torture scene.</strong> The "I'll chop them off / rip them off / smash them" rotation depending on which character is asking is a localization-only joke. The Japanese delivers the same tonal beat differently. The English version is a structural rhyme that pays off across three speakers.</li>
+    <li><strong>Cid's launch failure flashback.</strong> The English "GODDAMMIT, Shera... you wanna make me a murderer?" is sharper than the Japanese. The localizer let Cid be cruel <em>at the moment of his greatest decency</em>, which is the dramatic irony the scene needs.</li>
+  </ul>
+</section>
+
+<!-- 09 SYSTEMS -->
+<section id="systems" class="section">
+  <p class="section-kicker">09 — System Voice</p>
+  <h2>The narrator who is the game itself</h2>
+  <p>FF7 has a sneaky third narrator beyond Cloud and the omniscient: the system. Menu text, save points, NPC barks, item names, world-map hints. This is the layer most analyses ignore. It is doing real work.</p>
+
+  <h4>NPC chatter as world description</h4>
+  <p>The script is generous with named-but-unnamed NPCs. Kalm's red-haired man with his "Listen to me!" hook becomes a recurring informant who reports the state of the world from town to town. The Kalm Traveler in his fourth-house upstairs is a quiet world-meter:</p>
+  <ul>
+    <li>Disc 1: "The world's at peace... all's well."</li>
+    <li>Disc 1 mid: "Tomorrow's another day... all's well."</li>
+    <li>Disc 1 late: "I got my health, and enough to eat... all's well."</li>
+  </ul>
+  <p>Three lines, three rounds of optimism, escalating in specificity, in a man whose later dialogue is "If Shinra was our last hope, and they've been beaten by terrorists... Are we all going to die?" The script treats him as a barometer, and his reading is a bit of worldbuilding the player only catches if they revisit. Optional, repeated dialogue as historical record.</p>
+
+  <h4>Item names as moral commentary</h4>
+  <p>Don Corneo's torture room rewards: <em>"Cotton Dress," "Satin Dress," "Silk Dress."</em> Cloud's optional outfit upgrades named for class. Tifa's ultimate weapon: <em>"Premium Heart."</em> Aeris's: <em>"Princess Guard."</em> Cloud's: <em>"Ultima Weapon."</em> The naming convention shifts as the script's mythology deepens. Mundane / ironic / elegiac.</p>
+
+  <h4>Save points as ritual</h4>
+  <p>Save points are silent in FF7, but their <em>placement</em> is voiced. The script puts a save point immediately before Aeris's death. Immediately before the Kalm flashback. Immediately before the Highwind Conversation. The save point is the script's way of saying "this is going to matter." It is the closest thing the game has to a chapter break, and the script uses it dramaturgically.</p>
+
+  <h4>Battle barks as character</h4>
+  <p>"Attack while it's tail's up!" — Cloud's first battle bark, instructing the player. It is also slightly wrong (the Guard Scorpion counterattacks if you attack while its tail is up). The script <em>plants Cloud's intrusive memory</em> in a battle UI line. Re-read: Cloud is repeating advice he heard from someone else, applied incorrectly. The unreliable narrator is in the tutorial.</p>
+
+  <p>This is the level of detail that makes FF7 worth reading as a screenplay. The system text is not stage directions. It is voice.</p>
+</section>
+
+<!-- 10 CHOICE ARCHITECTURE -->
+<section id="choice" class="section alt">
+  <p class="section-kicker">10 — Choice Architecture</p>
+  <h2>What the menus are tracking, and what they reveal</h2>
+
+  <p>FF7 runs invisible counters for every dialogue choice you make involving Aeris, Tifa, Yuffie, and Barret. Those counters compose into the Gold Saucer date, the Highwind night, and a dozen smaller payoffs. The script's choice architecture is the most disciplined in PS1-era RPGs and the design pattern is worth naming explicitly:</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Choices that tier, not branch</h3>
+      <p>No choice in FF7 cuts off content. The Gold Saucer date is variable, but it always happens; the Highwind speech adapts but never absents. The script trusts that <em>texture</em> is more affecting than <em>divergence</em>.</p>
+    </div>
+    <div class="card">
+      <h3>Choices revealed, never explained</h3>
+      <p>The system never tells the player what is being tracked. Aeris simply remembers the flower; Tifa simply phrases the morning differently; Yuffie simply gives or doesn't give materia back. The lack of UI feedback is the design.</p>
+    </div>
+    <div class="card">
+      <h3>Choices with delayed cost</h3>
+      <p>The Aeris flower decision in chapter one (1 gil) determines whether Aeris recognizes you in the church (chapter five) and influences the Gold Saucer date (chapter twenty). A six-second decision propagates twenty hours forward. This is the script's most patient design.</p>
+    </div>
+    <div class="card">
+      <h3>Choices that change the player, not the plot</h3>
+      <p>The Wall Market dress-up offers no plot variance. It offers <em>self-presentation variance</em>. How earnestly did you go about it? The script silently scores you on commitment to the bit and rewards you with Don Corneo picking Cloud. Mechanic and theme aligned.</p>
+    </div>
+  </div>
+
+  <h4 class="sub" style="margin-top:36px;">A working list of tracked variables</h4>
+  <p>Counters the script keeps, as best as can be reconstructed from script branching:</p>
+  <dl class="glossary">
+    <div class="gloss-row"><dt>Aeris affection</dt><dd>Incremented by buying flower, "Don't see many flowers around here", giving Aeris the flower (vs Marlene), bodyguard fee discount, Gold Saucer dialogue, and many side-replies. <em>Drives</em>: Gold Saucer date, Aeris's bodyguard scene tone, several minor lines.</dd></div>
+    <div class="gloss-row"><dt>Tifa affection</dt><dd>Incremented by Sector 7 dialogue choices, "Worried about me!" line, drink at 7th Heaven, Mt. Nibel reactor reactions, Highwind night responses. <em>Drives</em>: Gold Saucer date, Highwind night dialogue, "I just got lucky" vs "I worked hard for it" distinction.</dd></div>
+    <div class="gloss-row"><dt>Yuffie affection</dt><dd>Incremented by recruitment dialogue choices, sailor-suit comment, Junon "Yeah... you look great" reply. <em>Drives</em>: Gold Saucer date eligibility (rare), Yuffie banter variance.</dd></div>
+    <div class="gloss-row"><dt>Barret affection</dt><dd>Incremented by ignoring him, agreeing with his ideology, sailor-suit gag. <em>Drives</em>: Gold Saucer date as a joke route. The script knows.</dd></div>
+    <div class="gloss-row"><dt>Don Corneo dress score</dt><dd>0–20 depending on dress, wig, makeup, perfume, tiara, and underwear collected. Determines who Corneo picks for the night.</dd></div>
+    <div class="gloss-row"><dt>Live TV ratings</dt><dd>Tracked during the Junon parade. Determines the gift Heidegger sends after the parade. A throwaway gag system that the script writes specific reactive dialogue for. Generosity beyond the call.</dd></div>
+  </dl>
+
+  <div class="callout">
+    <strong>Stealable principle</strong>
+    Treat dialogue choices as <em>character accounting</em>, not plot branching. Every reply is an entry in a ledger. The ledger should pay out twenty hours later in a small, specific way that the player feels but cannot prove.
+  </div>
+</section>
+
+<!-- 11 FORESHADOWING INVENTORY -->
+<section id="foreshadow" class="section">
+  <p class="section-kicker">11 — Foreshadowing Inventory</p>
+  <h2>Setups and payoffs, paired</h2>
+  <p>A partial catalog of long-distance setups in the script. Anyone trying to write a long-form game story should study these. The ratio of setup-to-payoff distance is what makes FF7 reread well.</p>
+
+  <div class="fs-table">
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, ch. 1</span><q>Watch out! This isn't just a reactor!!</q> An unattributed thought intrudes on Cloud's POV.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Mideel</span>Revealed as Zack's voice. Cloud has been borrowing Zack's memory of a previous reactor mission since the first ten minutes of the game.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Sector 8</span>Aeris sells flowers. The player can buy one (1 gil). Aeris asks if anyone here has flowers — there are no flowers in Midgar.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 1, Sector 5</span>Aeris's church grows flowers when nothing else in Midgar can. The Cetra connection is planted as a horticultural anomaly before it becomes mythology.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, 7th Heaven</span>Tifa's "promise" flashback. Cloud agreed to come if Tifa was ever in trouble.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Lifestream</span>The promise is the key memory Cloud uses to anchor his real self after the dissolution. The romantic plant becomes the ontological one.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Wall Market</span>Cloud is forced to wear someone else's clothes. The script presents it as comedy.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Mideel</span>Cloud has been wearing someone else's identity all along. The crossdressing was a literal-comic instance of the abstract-tragic structure.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Sector 5 church</span>The flower bed "broke your fall." The roof is broken because something fell.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 1, end</span>Aeris dies in the same kind of garden. Things fall on flowers; flowers cushion or absorb. The stagecraft of her death has been blocked since chapter five.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Kalm</span>Cloud's flashback puts him in a SOLDIER uniform alongside Sephiroth. We see him from outside the helmet only at one point — the truck-sickness scene.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Lifestream</span>The truck-sickness scene is the only shot in which we see Cloud's face during the flashback. This is because Cloud was in Shinra <em>infantry</em>, masked, and only Zack saw his face in the truck. The Kalm flashback secretly shows you the truth.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Cosmo Canyon</span>Bugenhagen explains spirit energy and the Lifestream while floating through a hologram of stars.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 3, Northern Crater</span>Holy as a literal plea to that spiritual current. The lecture you sat through becomes the cosmology you are using.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Costa del Sol</span>Aeris recognizes Zack's parents' house. She mutters "Zack..."</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Mideel</span>Zack is the SOLDIER First Class Cloud has been impersonating. Aeris's first love and Cloud's stolen self are the same person. The Gongaga scene is the script's most efficient piece of co-foreshadowing.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Wall Market diner</span>"Don Corneo, why do you think a bad guy like me would swallow his pride and plead for his life?" The Don asks the question as a joke.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 1, end of Wall Market</span>The Turks ask Corneo the same question. He answers wrong. They kill him with the construction. The joke is the structure.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, prison cell</span>Cloud says: "It's true that sometimes I can't figure out who I am." Tifa says nothing.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Lifestream</span>Tifa's silence at the prison cell is later revealed as the moment she chose not to correct him. The whole Lifestream sequence is her atoning for that single non-line.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 1, Cargo Ship</span>Sephiroth: "...the time...is now..." A piece of Jenova in a Shinra uniform delivers four words of dialogue.</div>
+      <div class="payoff"><span class="label">Payoff · Disc 2, Whirlwind Maze</span>The "Sephiroth" you have been chasing was Jenova in costume, controlled by the real Sephiroth from the Northern Crater. Every appearance of him in Disc 1 retroactively revealed.</div>
+    </div>
+    <div class="fs-row">
+      <div class="setup"><span class="label">Setup · Disc 2, Mideel clinic</span>Cloud, comatose, mutters: "Zac......k. Zack..." Tifa hears it and says "You remembered!!"</div>
+      <div class="payoff"><span class="label">Payoff · same scene</span>This is the Lifestream's first crack. The script's most elegant piece of self-payoff: setup and payoff in the same scene, separated by Tifa's relief.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Stealable principle</strong>
+    The best foreshadowing in long-form games doesn't read as foreshadowing on first pass — it reads as flavor. The bar is: a returning player should say "wait, that was already there?" If they say "ah, the foreshadowing," you planted it too loudly.
+  </div>
+</section>
+
+<!-- 12 PACING -->
+<section id="pacing" class="section alt">
+  <p class="section-kicker">12 — Pacing &amp; Tonal Modulation</p>
+  <h2>How the script breathes</h2>
+
+  <p>FF7 is a 40-hour text. It would not survive if it stayed at one register. The script's tonal modulation is more disciplined than its reputation suggests.</p>
+
+  <h4>The pressure-release pattern</h4>
+  <p>Almost every major dramatic beat is followed by an explicit comic or kinetic palate-cleanser. This is not accidental.</p>
+  <ul>
+    <li>Sector 7 Pillar (devastation) → Sector 6 Wall Market return / Aeris's house (domestic).</li>
+    <li>Shinra HQ massacre / Sephiroth reveal (horror) → Motorcycle escape (kinetic).</li>
+    <li>Kalm flashback (existential) → Mythril Mine / Junon parade (silly).</li>
+    <li>Aeris's death (loss) → Snowboarding minigame on the next continent (kinetic).</li>
+    <li>Mideel reveal (truth) → Huge Materia chase (heist montage).</li>
+    <li>Sister Ray firing / Hojo (climax) → Highwind reunion (warmth).</li>
+  </ul>
+  <p>The script does not let the player sit in any single emotional register for more than an hour. This is a form of authorial respect — it assumes the player needs metabolic time after a major beat.</p>
+
+  <h4>The slow-down</h4>
+  <p>Conversely, the script's most important moments are explicitly <em>slower</em> than what surrounds them. The Kalm flashback is twenty minutes of inn upstairs. The Lifestream sequence is dozens of small interactive memory tiles. The Highwind Conversation is a campfire. The script knows that revelation requires room.</p>
+
+  <h4>Optional content as breath</h4>
+  <p>Chocobo breeding, the Battle Square, Wutai's pagoda, Vincent's Lucrecia waterfall, the underwater Gelnika — all these are placed in Disc 2 specifically. The script needs the player to spend time in the world after Aeris's death and before the final descent. The "side content" is a structural deceleration. A player who skips it will feel the back half rushed for a reason that is not the writer's fault.</p>
+
+  <h4>Sequence rhythm vs scene rhythm</h4>
+  <p>Within scenes, the script favors short paragraphs and frequent speaker switches. Long monologues are rare and earned: Bugenhagen's spirit-energy lecture, Elmyra's adoption story, Cid's launch flashback, Vincent's confession. Each of these is the deepest piece of context for a character or theme, and each is given to a single voice for several screens of text. Otherwise, the dialogue ricochets — three speakers per beat, ellipses doing the connective work.</p>
+</section>
+
+<!-- 13 THEMES -->
+<section id="themes" class="section">
+  <p class="section-kicker">13 — Themes</p>
+  <h2>What the script is actually about</h2>
 
   <div class="theme">
     <h3>Memory as moral act</h3>
     <p>FF7 is fundamentally a story about who has the right to narrate. Sephiroth tries to overwrite Cloud's memory with Hojo's experimental record. Tifa restores it by walking him through her own. Bugenhagen frames the planet itself as a memory-organism — the Lifestream is "spirit energy that returns to the planet," that is, every life remembered by the world. The villain is, in this reading, an editor; the heroes are co-witnesses.</p>
   </div>
-
   <div class="theme">
     <h3>The planet as body</h3>
     <p>The script is unusually consistent in its central metaphor. Mako is "blood." Reactors are needles. Meteor is a "wound." The Northern Crater is a scar from the original Cetra-Jenova catastrophe, two thousand years old, still healing. Weapon is the planet's <em>immune system</em>. This is not just flavor text — it is the moral grammar of every political conflict in the game. To extract is to bleed.</p>
   </div>
-
   <div class="theme">
     <h3>Complicity</h3>
     <p>No character in the script is innocent. Barret bombed reactors. Tifa was AVALANCHE. Cid pushed the Emergency Engine Shutdown that arguably grounded human spaceflight. Vincent watched Lucrecia die and called it punishment. Reeve worked for Shinra. Cait Sith spied on the heroes. Even Cloud handed Sephiroth the Black Materia. The script's most adult choice is that <em>guilt is a precondition for action</em>, not a disqualification.</p>
   </div>
-
   <div class="theme">
     <h3>The cost of "saving the world"</h3>
     <p>Holy "will not save the world" automatically. The Lifestream emerges in the closing FMV not as deus ex machina but as a collective answer — souls that have been witnessed are returning to do work. The closing shot ("Five hundred years later") is not triumphal. The script does not promise that humans survived. It promises only that the planet did. That is unusually severe writing for the genre.</p>
   </div>
+  <div class="theme">
+    <h3>Performed vs inherited identity</h3>
+    <p>Every major character has an identity they were given (Cloud's invented SOLDIER career, Red XIII's father's reputation, Vincent's Turks role, Cid's pilot's pride, Yuffie's princess birth, Barret's miner's heritage) and an identity they perform on top of it. The script treats both as real and asks which the character is willing to take responsibility for. The "fight for your reason" speech in Act IV is the thematic reduction of this whole layer.</p>
+  </div>
+  <div class="theme">
+    <h3>Witness as duty</h3>
+    <p>The line that the script keeps coming back to, in different mouths: "I saw it." Tifa says it about Sephiroth at Nibelheim. Vincent says it about Lucrecia. Bugenhagen says it about the planet. Cloud's whole arc is becoming able to say "I saw it" about himself. The script considers <em>seeing accurately</em> a moral act with the same weight as <em>acting bravely</em>.</p>
+  </div>
 </section>
 
-<!-- CRITIQUE -->
+<!-- 14 TAKEAWAYS -->
+<section id="takeaways" class="section alt">
+  <p class="section-kicker">14 — Working Takeaways</p>
+  <h2>Principles a game writer can steal</h2>
+
+  <div class="principles">
+    <div class="principle">
+      <h3>P1 · The lie should be a system, not a twist</h3>
+      <p>If your game has an unreliable narrator, build the mechanism. Cloud's deception runs across intrusions, performed register, witness silence, antagonist interrogation, restorative co-witness, and final confession. Six layers, all live by chapter one.</p>
+      <p>If you cannot point to all six layers in your script outline, the twist will land as a cheat.</p>
+    </div>
+    <div class="principle">
+      <h3>P2 · Dialect before bio</h3>
+      <p>A reader should be able to identify your speaker from one line, with no tag, by chapter three. If they can't, your characters are bios, not voices. Use idiomatic markers, sentence length, ellipsis habit, profanity license, vocabulary class. Backstory is paper. Voice is performance.</p>
+    </div>
+    <div class="principle">
+      <h3>P3 · Choices are confessions, not branches</h3>
+      <p>Branching plot is expensive and underread. Tracked relational choices are cheap and over-felt. Spend your variability on how characters <em>remember the player</em>, not on what happens. Aeris noting a 1-gil flower three chapters later is worth more than a forked ending.</p>
+    </div>
+    <div class="principle">
+      <h3>P4 · Plant the truth where it reads as flavor</h3>
+      <p>The Kalm flashback's Cloud is wearing infantry armor; the helmet only comes off for two lines. Players don't notice. Returning players notice everything. Plant your twist in places where casual playthrough reads it as ambient detail.</p>
+    </div>
+    <div class="principle">
+      <h3>P5 · Mirror every protagonist with a darker self</h3>
+      <p>FF7 pairs Cloud with Sephiroth, Barret with Dyne, Red XIII with Seto, Vincent with Hojo, Cid with the man he could have stayed. A character without a doppelgänger is a portrait; a character with one is an argument.</p>
+    </div>
+    <div class="principle">
+      <h3>P6 · Grief should be physical before it is poetic</h3>
+      <p>"My fingers are tingling. My mouth is dry." Cloud at Aeris's death. The script knows that the first hour after a loss is somatic. The eulogy comes later, said by someone else, often misattributed. Writing grief as immediate metaphor is the most common amateur tell.</p>
+    </div>
+    <div class="principle">
+      <h3>P7 · Optional content is structural, not extra</h3>
+      <p>Vincent and Yuffie are optional. Wutai, Gold Saucer dating, the Gelnika, Lucrecia's cave, the Chocobo Sage — optional. The script uses these as <em>pacing</em> for the players who find them and respects players who don't. Never put the climax in optional content. Always put the texture there.</p>
+    </div>
+    <div class="principle">
+      <h3>P8 · Use the system as a third narrator</h3>
+      <p>Save points, item names, NPC barks, and menu text are all available to you. They are usually wasted. FF7 plants the unreliable narrator engine in a battle bark. Treat every line of system text as potentially diegetic.</p>
+    </div>
+    <div class="principle">
+      <h3>P9 · Trust the disc break (or whatever break you have)</h3>
+      <p>Disc 1 ends on Aeris's death. Disc 2 ends on Cloud falling into the Lifestream. The technological constraint becomes punctuation. If your game has chapters, save points, or load screens, use them as act breaks. They are free dramaturgy.</p>
+    </div>
+    <div class="principle">
+      <h3>P10 · The final question should be small</h3>
+      <p>"What are you fighting for?" Cloud asks each party member individually. Not "will you save the world." The script's final move is to refuse the genre's largest scale and replace it with the smallest possible one. The world is saved as a byproduct of someone keeping a specific promise to a specific dead person.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 15 CRITIQUE -->
 <section id="critique" class="section">
-  <h2>What Doesn't Work</h2>
+  <p class="section-kicker">15 — Critique</p>
+  <h2>What doesn't work</h2>
   <p>An honest reading has to admit the seams.</p>
 
   <ul class="critique">
-    <li>
-      <strong>The Cetra exposition dumps.</strong> Cosmo Canyon, Icicle Inn, and the Ancient Temple all halt the story to deliver several screens of lore. The Cetra-Jenova-Weapon backstory is over-explained in places where atmosphere would have served better. Compare to the elegance of "I hear the cries of the Planet" — the script knows how to imply, but doesn't always trust itself.
-    </li>
-    <li>
-      <strong>The Aeris-Tifa triangle is undercooked.</strong> The script gives Aeris and Tifa one direct conversation about Cloud (in the Wall Market basement), and after Aeris's death Tifa is rarely allowed to mourn her on-page. The Lifestream sequence repairs this somewhat by reframing Tifa as Aeris's structural successor, but the writing leaves the women's friendship as subtext when it could have been a third leg of the story.
-    </li>
-    <li>
-      <strong>Yuffie and Vincent are optional, which costs them.</strong> Both have richer backstories than several main-line characters. Locking them behind side-quests means many players experience the final act with a thinner ensemble than the script seems to assume. The Highwind speech in particular reads more powerfully when seven characters are present.
-    </li>
-    <li>
-      <strong>The Shinra brass collapse too quickly.</strong> Rufus is built up as a competent, ideological villain ("I'll control the world with fear"), then sidelined and killed off-screen by Diamond Weapon's beam. The political antagonist gets less narrative attention in the back half than he deserves; the story's gravity has shifted entirely to the metaphysical plot, and the corporate critique loses its teeth.
-    </li>
-    <li>
-      <strong>Cait Sith's reveal is rushed.</strong> The "I was a spy" beat at Gold Saucer is one of the script's strongest setups (the fortune that breaks down, the date sequence that ends in betrayal). His later integration into the party — after threatening Marlene's life — happens with surprisingly little friction. The script forgives him faster than the characters realistically would.
-    </li>
-    <li>
-      <strong>The ending is allergic to closure.</strong> "Five hundred years later" is a defensible thematic choice but a frustrating dramatic one. The cast's individual fates — did Cid see Shera again? did Barret return to Marlene? — are abandoned. The script trades emotional payoff for cosmic scale, and the trade does not always feel like the right one.
-    </li>
+    <li><strong>The Cetra exposition dumps.</strong> Cosmo Canyon, Icicle Inn, and the Ancient Temple all halt the story to deliver several screens of lore. The Cetra-Jenova-Weapon backstory is over-explained in places where atmosphere would have served better. Compare to the elegance of "I hear the cries of the Planet" — the script knows how to imply, but doesn't always trust itself.</li>
+    <li><strong>The Aeris-Tifa friendship is undercooked.</strong> The script gives Aeris and Tifa one direct conversation about Cloud (in the Wall Market basement), and after Aeris's death Tifa is rarely allowed to mourn her on-page. The Lifestream sequence repairs this somewhat by reframing Tifa as Aeris's structural successor, but the writing leaves the women's friendship as subtext when it could have been a third leg of the story.</li>
+    <li><strong>Yuffie and Vincent are optional, which costs them.</strong> Both have richer backstories than several main-line characters. Locking them behind side-quests means many players experience the final act with a thinner ensemble than the script seems to assume. The Highwind speech in particular reads more powerfully when seven characters are present.</li>
+    <li><strong>The Shinra brass collapse too quickly.</strong> Rufus is built up as a competent, ideological villain ("I'll control the world with fear"), then sidelined and killed off-screen by Diamond Weapon's beam. The political antagonist gets less narrative attention in the back half than he deserves; the story's gravity has shifted entirely to the metaphysical plot, and the corporate critique loses its teeth.</li>
+    <li><strong>Cait Sith's reveal is rushed.</strong> The "I was a spy" beat at Gold Saucer is one of the script's strongest setups (the fortune that breaks down, the date sequence that ends in betrayal). His later integration into the party — after threatening Marlene's life — happens with surprisingly little friction. The script forgives him faster than the characters realistically would.</li>
+    <li><strong>Hojo as final antagonist is a tonal mistake.</strong> The Sister Ray sequence puts Hojo between the player and Sephiroth; he is a cackling mad scientist where the script needed a structural antagonist. The corporate conspiracy ends with a man ranting about his son. It satisfies plot bookkeeping at the cost of thematic shape.</li>
+    <li><strong>The ending is allergic to closure.</strong> "Five hundred years later" is a defensible thematic choice but a frustrating dramatic one. The cast's individual fates — did Cid see Shera again? did Barret return to Marlene? — are abandoned. The script trades emotional payoff for cosmic scale, and the trade does not always feel like the right one.</li>
+    <li><strong>The flashback-inside-flashback architecture overreaches.</strong> The Lifestream sequence is brilliant when it works and confusing when it doesn't. The Nibelheim-inside-Nibelheim layering, the multiple Clouds, and the unmarked transitions assume more attention than 1997 conventions trained the player to give. Some players exit the sequence not understanding what changed.</li>
+    <li><strong>Romantic ambiguity becomes evasion.</strong> The Cloud-Tifa-Aeris triangle is left structurally unresolved in a way the script frames as respect for the player but reads, in 2020s terms, as unwillingness to write either woman's interiority directly. Aeris dies before the question can be asked. Tifa's love is implied by ellipsis.</li>
   </ul>
 </section>
 
-<!-- COMPARATIVE -->
+<!-- 16 LEGACY -->
 <section id="legacy" class="section alt">
-  <h2>What the Script Did First</h2>
+  <p class="section-kicker">16 — Legacy</p>
+  <h2>What the script did first</h2>
   <p>Several techniques that are now genre-standard were either invented by FF7 or stabilized into the form we recognize:</p>
+
   <div class="cards">
     <div class="card">
       <h3>Playable POV switch</h3>
@@ -633,20 +1291,31 @@ footer p { max-width: 600px; margin: 0 auto 12px; }
     </div>
     <div class="card">
       <h3>Memory-as-mechanic</h3>
-      <p>The Lifestream sequence and the player's ability to walk through the protagonist's mosaicked self anticipates a generation of "psyche levels" — Catherine's vague nightmares, Persona 5's palaces, Hellblade's voices. FF7 staged the inside of a mind as explorable space.</p>
+      <p>The Lifestream sequence and the player's ability to walk through the protagonist's mosaicked self anticipates a generation of "psyche levels" — Catherine's nightmares, Persona 5's Palaces, Hellblade's voices. FF7 staged the inside of a mind as explorable space.</p>
+    </div>
+    <div class="card">
+      <h3>Choice tracking as relationship texture</h3>
+      <p>Mass Effect's Paragon/Renegade, Stardew Valley's heart events, Disco Elysium's thought cabinet — all descend from the FF7 affection-counter pattern. FF7 was the first to make the system invisible to the player by design.</p>
+    </div>
+    <div class="card">
+      <h3>Optional villain content</h3>
+      <p>Hojo's secret video, Lucrecia's cave, the Gelnika Turks fight, Vincent's whole backstory — the practice of putting the antagonist's most revealing material in optional spaces is now standard (FromSoft is the obvious heir) but FF7 was an early disciplined practitioner.</p>
+    </div>
+    <div class="card">
+      <h3>The "world map after Disc 1" structure</h3>
+      <p>Open the world after a controlled vertical opening; let the player triage their party arcs in any order. Every modern open-world RPG with a long urban prologue (Witcher 3, Cyberpunk, Mass Effect) is following this shape.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <p>An analytical reading of the original PlayStation localization. Quotations preserve the script's punctuation, capitalization, and idiosyncratic ellipses, including the censored profanity.</p>
-  <p class="footer-note">Written as a craft document, not a fan tribute. The script earns the seriousness.</p>
+  <p class="footer-note">Written as a craft document for working game writers, not a fan tribute. The script earns the seriousness.</p>
 </footer>
 
 </main>
 
 <script>
-// Highlight active section in top nav while scrolling.
 (function () {
   const links = document.querySelectorAll('.topnav a[href^="#"]');
   const map = new Map();

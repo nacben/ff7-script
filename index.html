@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Philosophy Book — Big Ideas Simply Explained</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5efe2;
+  --bg-deep: #ede4d0;
+  --ink: #1a1a1a;
+  --ink-soft: #3a3a3a;
+  --muted: #6b6256;
+  --accent: #8b1e1e;
+  --accent-deep: #5d1414;
+  --gold: #b8893a;
+  --gold-soft: #d4b07a;
+  --parchment: #f9f4e7;
+  --shadow: rgba(40, 25, 10, 0.15);
+  --rule: rgba(40, 25, 10, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 19px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ===== Background textures ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(184, 137, 58, 0.08), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(139, 30, 30, 0.05), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+main, header, nav, section, footer { position: relative; z-index: 1; }
+
+/* ===== Typography ===== */
+h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.15; }
+.sans { font-family: 'Inter', sans-serif; }
+.serif-italic { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+/* ===== Navigation ===== */
+nav.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(245, 239, 226, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 100;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav.topnav .brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+nav.topnav .brand span { color: var(--accent); }
+
+nav.topnav ul {
+  display: flex;
+  gap: 26px;
+  list-style: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+nav.topnav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+}
+nav.topnav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+@media (max-width: 900px) {
+  nav.topnav ul { display: none; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  background:
+    linear-gradient(180deg, transparent 0%, var(--bg-deep) 100%),
+    radial-gradient(circle at 50% 30%, rgba(184, 137, 58, 0.12), transparent 60%);
+}
+
+.hero .ornament {
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 0.5em;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 9vw, 120px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.hero h1 .red { color: var(--accent); display: block; font-style: italic; font-weight: 400; }
+
+.hero .subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 28px);
+  color: var(--muted);
+  margin: 20px 0 30px;
+  letter-spacing: 0.04em;
+}
+
+.hero .lede {
+  max-width: 720px;
+  font-size: 20px;
+  color: var(--ink-soft);
+  margin: 0 auto 40px;
+  font-weight: 400;
+}
+
+.hero .epochs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.hero .epochs a {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: all 0.25s;
+  border-radius: 2px;
+}
+.hero .epochs a:hover {
+  background: var(--accent);
+  color: var(--parchment);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.scroll-cue {
+  margin-top: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ===== Section structure ===== */
+section.era {
+  padding: 100px 24px 80px;
+  border-top: 1px solid var(--rule);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.era-header {
+  text-align: center;
+  margin-bottom: 70px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.era-header .dates {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.era-header h2 {
+  font-size: clamp(40px, 6vw, 72px);
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+  color: var(--ink);
+}
+.era-header h2 .em { font-style: italic; color: var(--accent); }
+
+.era-header .intro {
+  font-size: 19px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px auto;
+  color: var(--gold);
+  font-size: 14px;
+}
+.divider::before, .divider::after {
+  content: '';
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* ===== Philosopher cards grid ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  padding: 32px 30px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px var(--shadow);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover::before { opacity: 1; }
+
+.card .meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.card h3 {
+  font-size: 26px;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.card .dates {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.card .quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--accent-deep);
+  margin: 16px 0 18px;
+  padding-left: 16px;
+  border-left: 3px solid var(--gold-soft);
+  font-weight: 400;
+}
+
+.card .explain {
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.card .branch {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--rule);
+  font-weight: 500;
+}
+.card .branch strong { color: var(--accent); }
+
+/* Feature card (larger, featured philosopher) */
+.card.feature {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #2a1a14 0%, #1a0e08 100%);
+  color: var(--parchment);
+  border-color: var(--accent-deep);
+  padding: 44px;
+}
+.card.feature h3 { color: var(--parchment); font-size: 36px; }
+.card.feature .dates { color: var(--gold-soft); }
+.card.feature .quote {
+  color: var(--gold-soft);
+  border-left-color: var(--gold);
+  font-size: 26px;
+  margin: 22px 0;
+}
+.card.feature .explain { color: #e8dfca; font-size: 18px; }
+.card.feature .meta { color: var(--gold); }
+.card.feature .branch { color: var(--gold-soft); border-top-color: rgba(212, 176, 122, 0.2); }
+.card.feature .branch strong { color: var(--gold); }
+
+@media (max-width: 720px) {
+  .card.feature { grid-column: span 1; padding: 32px 26px; }
+  .card.feature h3 { font-size: 28px; }
+  .card.feature .quote { font-size: 22px; }
+}
+
+/* ===== Introduction section ===== */
+.intro-section {
+  padding: 100px 24px;
+  background: var(--bg-deep);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .intro-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.intro-grid h2 {
+  font-size: clamp(36px, 5vw, 56px);
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+.intro-grid h2 .em { font-style: italic; color: var(--accent); }
+
+.intro-grid p {
+  font-size: 19px;
+  margin-bottom: 18px;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+
+.branches {
+  background: var(--parchment);
+  padding: 36px 32px;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--gold);
+}
+.branches h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: var(--accent-deep);
+  font-style: italic;
+}
+.branches dl { margin: 0; }
+.branches dt {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--ink);
+  margin-top: 14px;
+}
+.branches dt:first-child { margin-top: 0; }
+.branches dd {
+  margin: 4px 0 0;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ===== Pull quote band ===== */
+.pullquote {
+  padding: 120px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.pullquote blockquote {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.3;
+  color: var(--ink);
+  font-weight: 400;
+  position: relative;
+}
+.pullquote blockquote::before {
+  content: '“';
+  font-size: 140px;
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.4;
+  line-height: 1;
+}
+.pullquote cite {
+  display: block;
+  margin-top: 30px;
+  font-style: normal;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ===== Era theme variants ===== */
+section#ancient { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%); }
+section#medieval { background: var(--bg); }
+section#renaissance { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%); }
+section#revolution { background: var(--bg-deep); }
+section#modern { background: linear-gradient(180deg, var(--bg-deep) 0%, #1a1410 100%); color: var(--parchment); }
+section#modern .era-header h2,
+section#modern .era-header .intro { color: var(--parchment); }
+section#modern .era-header .intro { color: #d4c8b0; }
+section#modern .card {
+  background: #2a201a;
+  border-color: rgba(212, 176, 122, 0.2);
+  color: #e8dfca;
+}
+section#modern .card h3 { color: var(--parchment); }
+section#modern .card .dates { color: var(--gold-soft); }
+section#modern .card .quote { color: var(--gold-soft); border-left-color: var(--gold); }
+section#modern .card .explain { color: #c8baa0; }
+section#modern .card .branch { color: var(--gold-soft); border-top-color: rgba(212, 176, 122, 0.15); }
+section#modern .card .meta { color: var(--gold); }
+
+section#contemporary { background: #14100c; color: var(--parchment); border-top-color: rgba(212, 176, 122, 0.2); }
+section#contemporary .era-header h2 { color: var(--parchment); }
+section#contemporary .era-header h2 .em { color: var(--gold); }
+section#contemporary .era-header .intro { color: #c8baa0; }
+section#contemporary .era-header .dates { color: var(--gold); }
+section#contemporary .card {
+  background: #1f1812;
+  border-color: rgba(212, 176, 122, 0.2);
+  color: #e8dfca;
+}
+section#contemporary .card h3 { color: var(--parchment); }
+section#contemporary .card .dates { color: var(--gold-soft); }
+section#contemporary .card .quote { color: var(--gold-soft); border-left-color: var(--gold); }
+section#contemporary .card .explain { color: #c8baa0; }
+section#contemporary .card .branch { color: var(--gold-soft); border-top-color: rgba(212, 176, 122, 0.15); }
+section#contemporary .card .meta { color: var(--gold); }
+section#contemporary .divider { color: var(--gold); }
+
+/* ===== Footer ===== */
+footer {
+  background: #0d0a08;
+  color: #a89a82;
+  padding: 80px 24px 50px;
+  text-align: center;
+  border-top: 1px solid rgba(212, 176, 122, 0.2);
+}
+footer .ornament { color: var(--gold); font-size: 22px; letter-spacing: 0.5em; margin-bottom: 28px; opacity: 0.7; }
+footer h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--parchment);
+  margin-bottom: 14px;
+  font-style: italic;
+  font-weight: 400;
+}
+footer p {
+  max-width: 600px;
+  margin: 0 auto 18px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #b8a98c;
+}
+footer .credit {
+  margin-top: 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6b6256;
+}
+
+/* ===== Reveal animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-cue { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Selection */
+::selection { background: var(--accent); color: var(--parchment); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand">The <span>Philosophy</span> Book</div>
+  <ul>
+    <li><a href="#ancient">Ancient</a></li>
+    <li><a href="#medieval">Medieval</a></li>
+    <li><a href="#renaissance">Reason</a></li>
+    <li><a href="#revolution">Revolution</a></li>
+    <li><a href="#modern">Modern</a></li>
+    <li><a href="#contemporary">Contemporary</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="ornament">✦ ✦ ✦</div>
+  <h1>The Philosophy<span class="red">Book</span></h1>
+  <p class="subtitle">Big Ideas, Simply Explained</p>
+  <p class="lede">
+    A journey through twenty-six centuries of human thought — from the first
+    rational wonderings of the Greeks and the moral systems of ancient China,
+    through the cathedrals of medieval reason, into the modern struggle to
+    understand the mind, language, freedom, and meaning itself.
+  </p>
+  <div class="epochs">
+    <a href="#ancient">Ancient · 700 BCE</a>
+    <a href="#medieval">Medieval · 250</a>
+    <a href="#renaissance">Renaissance · 1500</a>
+    <a href="#revolution">Revolution · 1750</a>
+    <a href="#modern">Modern · 1900</a>
+    <a href="#contemporary">Contemporary · 1950</a>
+  </div>
+  <div class="scroll-cue">Scroll to begin ↓</div>
+</header>
+
+<!-- ===== INTRODUCTION ===== -->
+<section class="intro-section">
+  <div class="intro-grid">
+    <div>
+      <h2>What <span class="em">is</span> philosophy?</h2>
+      <p>
+        Philosophy is not the preserve of brilliant but eccentric thinkers.
+        It is what every one of us does in those quiet moments when we stop and
+        wonder what life and the universe are really about. We are inquisitive
+        creatures, gifted with reason — and whenever we reason, we philosophize.
+      </p>
+      <p>
+        The earliest philosophers, in ancient Greece, China, and India, were
+        not satisfied with the explanations supplied by religion and custom.
+        They sought rational answers, and — just as importantly — they argued
+        with each other. Ideas were sharpened in debate, refined in dialogue,
+        and passed down through schools of thought that still shape how we
+        think today.
+      </p>
+      <p>
+        Philosophy is less a body of answers than a way of asking. To follow
+        its long argument is to learn how to think.
+      </p>
+    </div>
+    <div class="branches">
+      <h3>The Great Branches of Philosophy</h3>
+      <dl>
+        <dt>Metaphysics</dt>
+        <dd>What exists? What is the ultimate nature of reality?</dd>
+        <dt>Epistemology</dt>
+        <dd>What is knowledge? How can we know what we know?</dd>
+        <dt>Logic</dt>
+        <dd>What is valid reasoning? How does argument work?</dd>
+        <dt>Ethics</dt>
+        <dd>What is the good life? How should we act?</dd>
+        <dt>Aesthetics</dt>
+        <dd>What is beauty? What is art?</dd>
+        <dt>Political Philosophy</dt>
+        <dd>How should we live together? What is justice?</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ANCIENT WORLD ===== -->
+<section class="era" id="ancient">
+  <div class="container">
+    <div class="era-header reveal">
+      <div class="dates">700 BCE — 250 CE</div>
+      <h2>The <span class="em">Ancient</span> World</h2>
+      <div class="divider">✦</div>
+      <p class="intro">
+        Where it begins. In a handful of Greek city-states, in the courts of
+        warring Chinese kingdoms, and beneath a bodhi tree in northern India,
+        a new kind of question is being asked — not <em>what do the gods say?</em>
+        but <em>what can reason show?</em>
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card reveal">
+        <div class="meta">Pre-Socratic · Miletus</div>
+        <h3>Thales of Miletus</h3>
+        <div class="dates">c. 624 – 546 BCE</div>
+        <p class="quote">Everything is made of water.</p>
+        <p class="explain">
+          He was wrong about water, and that is the point — what matters is
+          the move he made. Instead of accepting "the gods did it," he
+          demanded a natural cause: something observable, arguable, and
+          capable of being proven wrong. Every scientific explanation since
+          sits in the chair Thales pulled up. The practical habit to copy:
+          when faced with a mystery, do not stop at "mysterious." Ask what
+          would have to be true for this to happen, then look for evidence.
+          That single discipline separates inquiry from superstition.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Monism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Daoism · China</div>
+        <h3>Laozi</h3>
+        <div class="dates">c. 6th century BCE</div>
+        <p class="quote">The Dao that can be told is not the eternal Dao.</p>
+        <p class="explain">
+          The deepest truths escape language; the moment you name them, you
+          replace the living reality with a label. The remedy is
+          <em>wu wei</em> — not laziness, but action without forcing, like
+          water that wears down stone by yielding to its shape. The practical
+          discipline: stop pushing against the grain of a situation. Observe
+          what it wants to do and align with that. In conflict, yield where
+          you can; in work, choose effort that flows rather than effort that
+          strains. The strongest move is often the one that refuses to insist.
+        </p>
+        <p class="branch"><strong>Tradition</strong> · Chinese · Daoism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Mathematics & Mysticism</div>
+        <h3>Pythagoras</h3>
+        <div class="dates">c. 570 – 495 BCE</div>
+        <p class="quote">Number is the ruler of forms and ideas.</p>
+        <p class="explain">
+          Pluck a string; halve its length and the note jumps an octave; at
+          two-thirds you get a perfect fifth. The world is not chaos beneath
+          the music — it runs on ratios. From this, Pythagoras drew a
+          startling conclusion: matter may be less fundamental than the
+          mathematical structure that organizes it. Modern physics has
+          quietly proved him right, describing reality not in terms of stuff
+          but equations. The takeaway for daily thinking: when something
+          seems random or overwhelming, look for the proportions. Many
+          problems that resist intuition surrender to a sketch, a ratio,
+          or a careful count.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Pythagoreanism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Buddhism · India</div>
+        <h3>Siddhartha Gautama — The Buddha</h3>
+        <div class="dates">c. 563 – 483 BCE</div>
+        <p class="quote">Happy is he who has overcome his ego.</p>
+        <p class="explain">
+          Suffering, the Buddha observed, is not caused by what happens to
+          you but by your craving for things to be different. Lose a job,
+          lose a loved one, lose your reputation — the pain is real, but
+          the <em>suffering</em> is the part you add through clinging. The
+          remedy is not numbness or withdrawal but seeing clearly how the
+          self works: you are not a fixed thing demanding to be served, but
+          a stream of changing experiences. The Eightfold Path is the
+          practical curriculum — right speech (do not lie or wound), right
+          livelihood (do not earn from harm), right mindfulness (watch your
+          mind without becoming it). Try it for a week and notice how much
+          daily misery is reaction rather than event.
+        </p>
+        <p class="branch"><strong>Tradition</strong> · Eastern · Buddhism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Confucianism · China</div>
+        <h3>Confucius</h3>
+        <div class="dates">551 – 479 BCE</div>
+        <p class="quote">Hold faithfulness and sincerity as first principles.</p>
+        <p class="explain">
+          Confucius noticed something we still need: a society does not run
+          on laws so much as on small daily acts of trust. A friend who
+          shows up, a worker who does not cheat, a leader who keeps her
+          word — these accumulate into civilization. No rule can substitute
+          for character, so the only honest way to change others is to
+          change yourself first. Practical test: in every relationship, ask
+          whether you are reliable in the small things. And take his Golden
+          Rule in its sharper, negative form — do not impose on others what
+          you would not choose for yourself. Easier to apply than the
+          positive version: you usually know what you would resent.
+        </p>
+        <p class="branch"><strong>Tradition</strong> · Chinese · Confucianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Flux & Change</div>
+        <h3>Heraclitus</h3>
+        <div class="dates">c. 535 – 475 BCE</div>
+        <p class="quote">Everything is flux.</p>
+        <p class="explain">
+          You cannot step into the same river twice — not only because the
+          river has changed, but because <em>you</em> have. Reality is
+          process, not stuff. Marriages, businesses, bodies, friendships:
+          nothing stays the thing it was without continuous remaking. Two
+          practical consequences. First, expecting permanence is the source
+          of much misery; build for change instead and your projects last
+          longer. Second, opposites need each other — rest only means
+          something against work, joy against sorrow — so a life that flees
+          one half of any pair flattens the other too.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Monism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Eleatic School</div>
+        <h3>Parmenides</h3>
+        <div class="dates">c. 515 – 445 BCE</div>
+        <p class="quote">All is one.</p>
+        <p class="explain">
+          Parmenides reasoned his way to a startling conclusion: change is
+          logically impossible, so the changing world our senses report
+          must be illusion. Few accept the conclusion, but the method made
+          history. He showed that pure reasoning can override even the most
+          vivid evidence, and that what feels obviously true may be
+          incoherent on inspection. Practical takeaway: when your gut and a
+          tight argument disagree, sometimes the gut is right and the
+          argument hides a flaw; sometimes the argument is right and the
+          gut is parochial. Learning to tell which is which is most of
+          philosophy — and most of good judgment.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Monism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">The Sophists</div>
+        <h3>Protagoras</h3>
+        <div class="dates">c. 490 – 420 BCE</div>
+        <p class="quote">Man is the measure of all things.</p>
+        <p class="explain">
+          Truth, beauty, and justice are not engraved on the cosmos; they
+          are judgments people make, shaped by where and when they live. A
+          dish one diner praises another sends back. A practice one culture
+          calls just another calls cruel. Protagoras was the first to face
+          this squarely. The danger is moral paralysis: if every standard
+          is relative, why fight injustice? The honest response is not
+          retreat but humility — your certainties were also shaped, and
+          must be defended in open argument rather than imposed from on
+          high. Useful in any disagreement: stop asking who is
+          <em>cosmically</em> right and ask whose framing, formed by what
+          experience, each of you is using. The argument often becomes
+          tractable the moment you can name the frames.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Relativism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Atomism</div>
+        <h3>Democritus &amp; Leucippus</h3>
+        <div class="dates">c. 460 – 371 BCE</div>
+        <p class="quote">Nothing exists except atoms and empty space.</p>
+        <p class="explain">
+          Two and a half millennia before microscopes confirmed it, the
+          atomists guessed: cut a thing finely enough and you reach
+          particles that cannot be cut further, swimming in emptiness.
+          Their boldness was to drain all mystery from matter — no spirits,
+          no purposes, just configuration and motion. The implications for
+          living are surprisingly direct. At death your atoms disperse and
+          recombine elsewhere; you are not annihilated, only redistributed.
+          And if matter is just arrangement, then minds, moods, and
+          meanings are arrangements too — which is humbling and oddly
+          freeing. Many rigid pictures of the self soften when held
+          against this.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Atomism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Athens · Founder of Western Philosophy</div>
+        <h3>Socrates</h3>
+        <div class="dates">469 – 399 BCE</div>
+        <p class="quote">The unexamined life is not worth living.</p>
+        <p class="explain">
+          Socrates' method is simple and devastating. He asks: what do you
+          mean by <em>justice</em>? You give a definition. He finds a case
+          where it fails. You refine. He finds another. By the fourth round
+          you realize you do not know what you have been confidently using
+          the word to mean. The lesson is not that knowledge is impossible —
+          it is that most certainty is unexamined assumption. Try this on
+          your most-held beliefs about success, love, what counts as a good
+          life. If you cannot answer "what exactly do you mean, and why?"
+          without contradicting yourself, the belief is borrowed rather than
+          yours. Most adult unhappiness is built on borrowed beliefs.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Dialectical Method</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">The Academy · Athens</div>
+        <h3>Plato</h3>
+        <div class="dates">c. 427 – 347 BCE</div>
+        <p class="quote">Earthly knowledge is but shadow.</p>
+        <p class="explain">
+          Plato's cave: prisoners chained facing a wall, watching shadows
+          cast by a fire behind them, certain that the shadows are the
+          world. He thought ordinary experience works the same way — we see
+          imperfect copies and never the perfect <em>Forms</em> that ground
+          them. You do not have to swallow the whole metaphysics to use the
+          picture. Notice how often you mistake one bad relationship for
+          love itself, or one corrupt institution for politics itself.
+          Thinking clearly means distinguishing the case from the kind.
+          And Plato's uncomfortable lesson about teaching: most people,
+          when shown a truth that contradicts their shadows, will turn back
+          to the wall. Be ready for that — in others, and in yourself.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Rationalism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">The Lyceum · Athens</div>
+        <h3>Aristotle</h3>
+        <div class="dates">384 – 322 BCE</div>
+        <p class="quote">Truth resides in the world around us.</p>
+        <p class="explain">
+          Where Plato looked up to perfect Forms, Aristotle looked carefully
+          at what was in front of him: animals, governments, friendships.
+          Each thing has a <em>telos</em> — what it is for, what flourishing
+          looks like for that kind of thing. A good knife cuts; a good eye
+          sees; a good human reasons, befriends, and acts well. From this
+          comes his ethics of virtue, which is the most usable ethical
+          system ever devised. Do not ask "what rule applies here?" Ask
+          "what would a person of good character do?" and then build that
+          character through repeated practice. Courage is not what you feel
+          when the crisis arrives; it is the habit you built in the months
+          before. Generosity, patience, honesty — all are skills, trained
+          like any other.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Empiricism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">The Garden · Athens</div>
+        <h3>Epicurus</h3>
+        <div class="dates">341 – 270 BCE</div>
+        <p class="quote">Death is nothing to us.</p>
+        <p class="explain">
+          Most of what you fear, Epicurus argues, dissolves under analysis.
+          Death cannot harm you because while you exist it is not here, and
+          when it comes you are not. The gods, if they exist, have better
+          things to do than punish you. The recipe for a good life is
+          modest and durable: a few close friends, simple food, distance
+          from politics and ambition, freedom from manufactured wants.
+          Modern life would horrify him — endless craving produced by
+          advertising and status competition. A useful exercise: list
+          everything you currently want, then mark which would actually
+          relieve a real pain, and which are wants for wants' sake. Most
+          chronic dissatisfaction lives in the second column.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Epicureanism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">The Cynics</div>
+        <h3>Diogenes of Sinope</h3>
+        <div class="dates">c. 404 – 323 BCE</div>
+        <p class="quote">He has the most who is most content with the least.</p>
+        <p class="explain">
+          Diogenes lived in a barrel, owned a cup until he saw a child
+          drink from cupped hands and threw the cup away, and mocked
+          Alexander the Great to his face. The performance had a point:
+          almost every misery in a comfortable society comes from desires
+          we have been taught to have. Cut the desire and the misery goes
+          with it. You do not need to move into a barrel. For one week,
+          notice each purchase and ask: did I want this thing, or did I
+          want to want it? The reduction is usually surprising — and so is
+          the freedom that follows.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Cynicism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Stoicism</div>
+        <h3>Zeno of Citium</h3>
+        <div class="dates">c. 332 – 265 BCE</div>
+        <p class="quote">The goal of life is living in agreement with nature.</p>
+        <p class="explain">
+          The Stoic insight is operational. Divide everything in your life
+          into what is in your control (your judgments, choices, attention,
+          effort) and what is not (other people, the weather, the past,
+          most outcomes). Spend your energy only where it can land. Practice
+          this seriously and most anxiety quiets, because most anxiety lives
+          in the second column. The Stoics were not unfeeling — they were
+          strategic about feeling. Marcus Aurelius ran an empire by these
+          lines and Epictetus survived slavery by them; the philosophy
+          bends to fit either palace or chain. Start with the morning
+          question: what part of today is actually mine to shape?
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Stoicism</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PULL QUOTE ===== -->
+<section class="pullquote">
+  <blockquote>
+    Wonder is very much the affection of a philosopher; for there is no other
+    beginning of philosophy than this.
+    <cite>— Plato</cite>
+  </blockquote>
+</section>
+
+<!-- ===== MEDIEVAL WORLD ===== -->
+<section class="era" id="medieval">
+  <div class="container">
+    <div class="era-header reveal">
+      <div class="dates">250 — 1500</div>
+      <h2>The <span class="em">Medieval</span> World</h2>
+      <div class="divider">✦</div>
+      <p class="intro">
+        Athens fades; the cathedrals rise. For a thousand years, philosophy
+        in Christendom, the Islamic world, and Jewish thought wrestles with
+        the same problem: how to reconcile the inheritance of Greek reason
+        with the demands of revealed faith.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card reveal">
+        <div class="meta">Christian Platonism</div>
+        <h3>St. Augustine of Hippo</h3>
+        <div class="dates">354 – 430</div>
+        <p class="quote">God is not the parent of evils.</p>
+        <p class="explain">
+          If God is good, why is there evil? Augustine's answer is two
+          moves. First, evil is not a thing on its own — it is an absence,
+          the way blindness is an absence of sight, or rust the absence of
+          intact metal. Second, the world contains evil because rational
+          beings must be free, and freedom that cannot choose wrongly is
+          not freedom at all. You do not need his theology to use the
+          insight. Many things you call "problems" are actually gaps —
+          missing trust, missing rest, missing competence — and respond
+          not to being attacked but to being filled. Diagnose the absence
+          before swinging at the symptom.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Christian Platonism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Late Roman</div>
+        <h3>Boethius</h3>
+        <div class="dates">c. 480 – 525</div>
+        <p class="quote">God foresees our free thoughts and actions.</p>
+        <p class="explain">
+          Boethius wrote his most famous book in prison, awaiting execution.
+          The puzzle: if anyone — God, a perfect predictor, your future
+          self — already knows what you will do, are you still free? His
+          answer is elegant. Knowing what someone will choose is not the
+          same as causing them to choose it. A friend who predicts your
+          order at a familiar restaurant has not chosen for you. Useful
+          when others argue you out of responsibility because circumstances
+          "made" you act: prediction is not coercion, and being predictable
+          is not the same as being unfree.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Christian Platonism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Islamic Aristotelianism</div>
+        <h3>Avicenna (Ibn Sînâ)</h3>
+        <div class="dates">980 – 1037</div>
+        <p class="quote">The soul is distinct from the body.</p>
+        <p class="explain">
+          Imagine you wake suspended in midair, blindfolded, every sense
+          numb. You feel no body at all. Do you still know that <em>you</em>
+          exist? Avicenna says yes — and reasons that the self therefore
+          cannot be identical to the body. Six centuries later Descartes
+          would repeat the move almost exactly. Modern brain science
+          complicates the conclusion (damaged brains produce damaged
+          selves), but the experiment is still worth running on yourself.
+          It pulls apart what feels welded together and shows how much of
+          your identity is body-based and how much is something else. Most
+          existential questions live in that gap.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Arabic Aristotelianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">The Ontological Argument</div>
+        <h3>St. Anselm</h3>
+        <div class="dates">1033 – 1109</div>
+        <p class="quote">Just by thinking about God we can know he exists.</p>
+        <p class="explain">
+          Anselm's argument has fascinated philosophers for a thousand years
+          because it is so clearly clever, and so unclear whether it works.
+          Define God as the greatest conceivable being. If God existed only
+          in your mind, you could conceive of something greater — namely
+          the same being, but real. So God must exist. Critics from Kant
+          onward have argued that existence is not the kind of property you
+          can build into a definition. The deeper lesson is portable:
+          arguments can be valid (the steps follow correctly) without being
+          sound (the conclusion is actually true). Train yourself to feel
+          the difference. Many persuasive pitches collapse the moment you
+          notice that the conclusion was smuggled into the premises.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Religion</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Islamic Philosophy</div>
+        <h3>Averroes (Ibn Rushd)</h3>
+        <div class="dates">1126 – 1198</div>
+        <p class="quote">Philosophy and religion are not incompatible.</p>
+        <p class="explain">
+          Averroes proposed a domestic peace between faith and reason.
+          Scripture speaks in images because it must reach everyone; the
+          educated have a duty to read it philosophically, taking literal
+          claims as poetry whenever reason demands. The move generalizes
+          well beyond religion. Any inherited story — national, family,
+          professional — can be honored at the level of meaning while being
+          challenged at the level of fact. You do not have to choose
+          between reverence and honesty. Most "either/or" cultural fights
+          are arguments that should have been "both, at different levels."
+        </p>
+        <p class="branch"><strong>Branch</strong> · Arabic Aristotelianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Jewish Philosophy</div>
+        <h3>Moses Maimonides</h3>
+        <div class="dates">1135 – 1204</div>
+        <p class="quote">God has no attributes.</p>
+        <p class="explain">
+          Any positive description shrinks its subject to the size of a
+          thing you can describe. Better, Maimonides argued, to say only
+          what God is not. The technique of <em>negative theology</em> is
+          borrowable for anything genuinely large — love, grief, a person
+          you actually know well. Confident positive descriptions of these
+          tend to flatten and falsify. Try negation instead. "Not what I
+          expected," "not reducible to that other thing," "not what people
+          usually call it" — these often get closer than the confident
+          definitions ever do. The most important things resist direct
+          naming and reveal themselves by what they refuse to be.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Religion</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Sufism · Persia</div>
+        <h3>Jalal ad-Din Rumi</h3>
+        <div class="dates">1207 – 1273</div>
+        <p class="quote">Don't grieve. Anything you lose comes round in another form.</p>
+        <p class="explain">
+          Rumi watched a continuous flow of life: minerals into plants,
+          plants into animals, animals into people, and outward. Loss in
+          one form is appearance in another. You do not have to share his
+          metaphysics to use the consolation. The molecules that made a
+          friend you lost are still in the world, in soil and air and other
+          bodies. The lessons they taught you live on in your choices.
+          Grief is real, but the picture of total annihilation that fuels
+          its worst nights is not the only picture available — and walking
+          back from it lets you grieve without being crushed.
+        </p>
+        <p class="branch"><strong>Tradition</strong> · Islamic · Sufism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Scholasticism · The Synthesis</div>
+        <h3>Thomas Aquinas</h3>
+        <div class="dates">c. 1225 – 1274</div>
+        <p class="quote">The universe has not always existed.</p>
+        <p class="explain">
+          Aquinas refused the easy path of dismissing positions he
+          disagreed with. Aristotle's logic for an eternal universe was
+          sound given his premises; the Bible's claim of a beginning was
+          true on faith; and Aquinas showed that both could stand. God
+          could just as well have created an eternal universe as a starting
+          one. The model is invaluable for any disagreement: do not destroy
+          the strongest version of the position you oppose. Find what
+          survives an honest reading, make peace with that part, and
+          reserve your disagreement for what really matters. You will be
+          right more often, and you will keep more allies.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Christian Aristotelianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">German Mysticism</div>
+        <h3>Nikolaus von Kues</h3>
+        <div class="dates">1401 – 1464</div>
+        <p class="quote">God is the not-other.</p>
+        <p class="explain">
+          Cusa's gambit is to describe the ultimate reality only by what it
+          is not. Even calling God "a being" makes God one item among many.
+          Better to call God the Not-Other — that through which everything
+          else has its existence. The technique transfers. Try defining
+          what it means to be a person, or to love someone, only by
+          negation, and you often get further than by listing positive
+          traits. The most fundamental things resist direct naming, and
+          gain in clarity from being approached sideways.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Religion</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Renaissance Humanism</div>
+        <h3>Desiderius Erasmus</h3>
+        <div class="dates">1466 – 1536</div>
+        <p class="quote">To know nothing is the happiest life.</p>
+        <p class="explain">
+          Half satire, half theology. Erasmus accused the learned of
+          strangling living faith in fine distinctions, and praised the
+          willingness to be foolish — to trust, to love, to act — as the
+          actual human good. The point is sharper than it looks. Some
+          people are paralyzed by needing to understand everything before
+          they commit to anything; the studying becomes a substitute for
+          the living. Erasmus' question to such a person: at what point
+          will you have learned enough to start? If the honest answer is
+          "never," the studying was always a kind of hiding.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Religion · Humanism</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PULL QUOTE ===== -->
+<section class="pullquote">
+  <blockquote>
+    I am myself and my circumstances.
+    <cite>— José Ortega y Gasset</cite>
+  </blockquote>
+</section>
+
+<!-- ===== RENAISSANCE AND THE AGE OF REASON ===== -->
+<section class="era" id="renaissance">
+  <div class="container">
+    <div class="era-header reveal">
+      <div class="dates">1500 — 1750</div>
+      <h2>Renaissance &amp; the Age of <span class="em">Reason</span></h2>
+      <div class="divider">✦</div>
+      <p class="intro">
+        The Church loses its monopoly on truth. Science replaces dogma,
+        humanity replaces God at the center of the picture, and philosophy
+        splits into two rival schools — those who would build knowledge from
+        reason alone, and those who would build it from experience.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card reveal">
+        <div class="meta">Renaissance · Florence</div>
+        <h3>Niccolò Machiavelli</h3>
+        <div class="dates">1469 – 1527</div>
+        <p class="quote">The end justifies the means.</p>
+        <p class="explain">
+          The most-quoted and most-misquoted line in political theory.
+          Machiavelli was not endorsing cruelty for its own sake; he was
+          reporting what actually keeps states intact. Mercy at the wrong
+          moment kills more people than firmness. Goodness against bad
+          actors is suicide. The hard lesson is that political ethics
+          cannot import private virtues uncritically: a leader is
+          responsible for outcomes, not just intentions, and what is right
+          for an individual may be reckless for someone holding power for
+          others. You do not have to accept the trade-off, but you should
+          see clearly what is being traded. Most "principled" politics
+          that fails has refused to look.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Realism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Renaissance Humanism</div>
+        <h3>Michel de Montaigne</h3>
+        <div class="dates">1533 – 1592</div>
+        <p class="quote">Fame and tranquillity can never be bedfellows.</p>
+        <p class="explain">
+          Fame requires the constant attention of strangers, and the price
+          is your own peace. Montaigne is not opposed to ambition; he is
+          reporting the actual mathematics. You cannot care intensely what
+          others think of you and also be at ease — pick one. The corollary
+          is liberating. Most of what you call "how others see me" is in
+          fact a story you tell yourself about an audience that is mostly
+          not watching. Reclaim that attention and spend it on what you
+          actually value. The hours saved on imagined performance are
+          startling.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Humanism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Scientific Revolution · England</div>
+        <h3>Francis Bacon</h3>
+        <div class="dates">1561 – 1626</div>
+        <p class="quote">Knowledge is power.</p>
+        <p class="explain">
+          Bacon broke with the scholarly habit of building philosophy out
+          of older philosophy. Real knowledge comes from observing the
+          world carefully, designing experiments, and discarding treasured
+          theories when evidence demands. He named four "idols" — habits
+          of mind that distort thinking: the biases of being human, the
+          quirks of being yourself, the slipperiness of language, and the
+          inherited authority of older theories. Audit your own thinking
+          against the four occasionally. Most stuck arguments stem from
+          one of them, and naming the idol usually unsticks the argument.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Science · Empiricism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Physicalism · England</div>
+        <h3>Thomas Hobbes</h3>
+        <div class="dates">1588 – 1679</div>
+        <p class="quote">Man is a machine.</p>
+        <p class="explain">
+          Hobbes drew the conclusion others avoided. If everything in the
+          universe is matter in motion, then so are we — thought, feeling,
+          and will included. From this materialism came his politics:
+          without a strong sovereign, rational self-interest leads each
+          person to fear the others, and life becomes a war of all against
+          all. So we trade some freedom for security. Modern liberal
+          democracies still wrestle with the trade. Where exactly is the
+          line between protection and oppression? Hobbes' uncomfortable
+          answer: wherever it must be to keep the war from breaking out.
+          Every concrete debate about state power is haggling over that
+          line.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Physicalism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">The Father of Modern Philosophy · France</div>
+        <h3>René Descartes</h3>
+        <div class="dates">1596 – 1650</div>
+        <p class="quote">I think, therefore I am.</p>
+        <p class="explain">
+          Descartes set himself a brutal exercise: doubt everything you can
+          possibly doubt. The senses can deceive. Mathematics could be the
+          work of an evil deceiver. The whole external world might be a
+          dream. What survives? Only this — the doubting itself is
+          happening, so the doubter must exist. The technique is worth
+          borrowing even if you reject the conclusions. When confused or
+          panicked, ask: what here am I absolutely certain of? You almost
+          always have some solid ground, and the project is to extend it
+          carefully outward. Most paralysis comes from trying to defend an
+          entire belief system at once instead of one piece at a time.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Rationalism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Jansenism · France</div>
+        <h3>Blaise Pascal</h3>
+        <div class="dates">1623 – 1662</div>
+        <p class="quote">Imagination decides everything.</p>
+        <p class="explain">
+          Reason is not master in its own house. A judge in robes seems
+          wise; the same person in pajamas does not. Pascal observed how
+          much of what we call rational decision was actually anchored by
+          a feeling first, with reasons recruited afterward. His famous
+          wager about God is one application; the deeper insight is more
+          general. When you find yourself with strong conviction, ask which
+          came first — the argument or the inclination. If the inclination
+          came first, your argument is doing publicity work, not analysis.
+          Knowing this does not free you from imagination's pull, but it
+          lets you spot it in operation and discount accordingly.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Mind · Voluntarism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Rationalism · Netherlands</div>
+        <h3>Benedictus Spinoza</h3>
+        <div class="dates">1632 – 1677</div>
+        <p class="quote">God is the cause of all things, which are in him.</p>
+        <p class="explain">
+          There is only one substance, Spinoza argued, with infinitely
+          many attributes; we call it God or Nature, indifferently. You,
+          your mind, your body, every passing thought — all are modes of
+          this single substance. The practical consequence is consoling.
+          Nothing is genuinely separate. Your mind and your body are two
+          aspects of the same thing, not warring tenants. Your freedom
+          comes not from rebelling against necessity but from understanding
+          it deeply enough to act in alignment with it. A grief or a joy
+          you can name in detail loses much of its power to throw you.
+          Spinoza's universe is austere but you are not a stranger here.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Monism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Empiricism · England</div>
+        <h3>John Locke</h3>
+        <div class="dates">1632 – 1704</div>
+        <p class="quote">No man's knowledge here can go beyond his experience.</p>
+        <p class="explain">
+          Locke argued that the mind at birth is a blank slate. No innate
+          ideas, no inborn morality — everything we know we built from
+          sensory experience and reflection on it. The political payoff was
+          enormous. If minds are made, not born superior or inferior, then
+          aristocracy, slavery, and rigid hierarchy lose their cosmic
+          justification. Education becomes the central political act. Most
+          of modern liberalism — natural rights, government by consent,
+          religious toleration — traces back to this single picture of
+          human beings as equal, learning creatures. When you find yourself
+          arguing about whether some group is "naturally" suited to a role,
+          Locke's question lands: are you sure that is nature speaking
+          rather than the absence of equal upbringing?
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Empiricism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Rationalism · Germany</div>
+        <h3>Gottfried Leibniz</h3>
+        <div class="dates">1646 – 1716</div>
+        <p class="quote">There are two kinds of truths: truths of reasoning and truths of fact.</p>
+        <p class="explain">
+          Some statements (a triangle has three sides) are necessarily
+          true; denying them is self-contradiction. Others (it rained
+          yesterday) are contingently true; they could have been otherwise.
+          The distinction is one of the most useful tools in clear
+          thinking. Many disputes confuse the two — treating a contingent
+          matter as if it were necessary, or vice versa. "Successful people
+          are X" sounds necessary but is contingent and revisable.
+          "Contradictions cannot both be true" sounds contingent but is
+          necessary. Sort any claim into the right column before arguing
+          about it, and the argument usually gets shorter.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Rationalism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Idealism · Ireland</div>
+        <h3>George Berkeley</h3>
+        <div class="dates">1685 – 1753</div>
+        <p class="quote">To be is to be perceived.</p>
+        <p class="explain">
+          Everything you ever experience is an idea in your mind — colors,
+          sounds, the feel of this page. So what grounds do you have for
+          believing in "matter" as something behind the ideas? Berkeley
+          drew the radical conclusion: there is no matter, only minds and
+          ideas. You can reject the theology that keeps his world stable
+          and still keep the puzzle. We talk easily about a world
+          independent of all observers, but every account of it is itself
+          an observation. The gap between "the world as it is" and "the
+          world as anyone could possibly know it" may be smaller than it
+          looks — which is humbling whenever you are sure you have the
+          situation pegged.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Idealism</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PULL QUOTE ===== -->
+<section class="pullquote">
+  <blockquote>
+    Doubt is not a pleasant condition, but certainty is absurd.
+    <cite>— Voltaire</cite>
+  </blockquote>
+</section>
+
+<!-- ===== AGE OF REVOLUTION ===== -->
+<section class="era" id="revolution">
+  <div class="container">
+    <div class="era-header reveal">
+      <div class="dates">1750 — 1900</div>
+      <h2>The Age of <span class="em">Revolution</span></h2>
+      <div class="divider">✦</div>
+      <p class="intro">
+        Old orders crumble. The American and French revolutions overturn
+        kings; the Industrial Revolution overturns society itself.
+        Philosophers ask new questions about liberty, equality, history, and
+        the human mind — and German Idealism reshapes the map of thought.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card reveal">
+        <div class="meta">The Enlightenment · France</div>
+        <h3>Voltaire</h3>
+        <div class="dates">1694 – 1778</div>
+        <p class="quote">Doubt is not a pleasant condition, but certainty is absurd.</p>
+        <p class="explain">
+          Almost every fact you were taught with confidence as a child has
+          since been revised. Almost every dogma you cling to now will be.
+          Voltaire is not recommending paralysis — he wants you to hold
+          beliefs as best guesses, ready to be improved, and to grant the
+          same provisional status to your opponents. The corollary is his
+          other great commitment: defend the right of someone you disagree
+          with to speak. Not because they are right but because you might
+          be wrong, and you will never discover the error by silencing
+          them. A working principle for any disagreement that matters.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Scepticism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Empiricism's High Point · Scotland</div>
+        <h3>David Hume</h3>
+        <div class="dates">1711 – 1776</div>
+        <p class="quote">Custom is the great guide of human life.</p>
+        <p class="explain">
+          Why do you believe the sun will rise tomorrow? Not because reason
+          proves that it must — Hume showed it does not. You believe because
+          it always has, and habit hardens into expectation. The deeper
+          implication: causation itself is something you project onto
+          repeated sequences, not something you ever directly observe.
+          Almost all everyday knowledge runs on this habit-engine,
+          including most science. The lesson is not to distrust it — it
+          works — but to notice how thin its rational basis really is, and
+          to be generous when other people rely on their own habits rather
+          than on your logic. You are doing the same thing they are.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Empiricism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">The Social Contract · Geneva</div>
+        <h3>Jean-Jacques Rousseau</h3>
+        <div class="dates">1712 – 1778</div>
+        <p class="quote">Man was born free, yet everywhere he is in chains.</p>
+        <p class="explain">
+          Civilization is the deal: in exchange for safety and goods you
+          accept inequality, dependency, and a thousand subtle coercions.
+          Rousseau did not think we could undo it, but he proposed a
+          remedy. A legitimate state is one where the laws come from the
+          general will of all citizens and apply equally to all. You are
+          free not when you obey no rules, but when you have a real voice
+          in making the rules you obey. Apply the test to any institution
+          you live inside — workplace, government, family. Do those subject
+          to it actually shape it? If not, the chains are visible, and so
+          is the work of unbinding them.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Economics · Scotland</div>
+        <h3>Adam Smith</h3>
+        <div class="dates">1723 – 1790</div>
+        <p class="quote">Man is an animal that makes bargains.</p>
+        <p class="explain">
+          No animal trades. Humans do, constantly, and from this single
+          fact Smith built modern economics. When each party pursues
+          self-interest in an open market, an unplanned coordination
+          emerges that no central planner could match. But Smith was no
+          apologist for cruelty. He warned that repetitive factory labor
+          would degrade workers, that monopolies would corrupt the market,
+          and that businessmen left alone would conspire against the
+          public. The working balance he points to is still the right one:
+          markets are remarkable engines for coordination, <em>and</em>
+          they need ethical and regulatory limits to keep doing the job.
+          Either half of the lesson, alone, gets the economy wrong.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Economics</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Transcendental Idealism · Königsberg</div>
+        <h3>Immanuel Kant</h3>
+        <div class="dates">1724 – 1804</div>
+        <p class="quote">There are two worlds: our bodies and the external world.</p>
+        <p class="explain">
+          Kant's Copernican turn: we do not simply see the world as it is,
+          we see it as our minds are built to construct it. Space, time,
+          and basic categories like cause and substance are the lenses you
+          cannot remove; reality in itself lies forever beyond them. From
+          this came his ethics, which gives you a workable test for any
+          action. Ask: could I will that everyone act on this principle?
+          Could everyone lie when it is convenient? No — the practice of
+          lying depends on most people not doing it, so universalizing
+          collapses it. The test sounds abstract but is brutal in practice:
+          most rationalizations for personal exceptions fall apart the
+          moment you try to make the exception the rule.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Transcendental Idealism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Conservatism · Britain</div>
+        <h3>Edmund Burke</h3>
+        <div class="dates">1729 – 1797</div>
+        <p class="quote">Society is indeed a contract.</p>
+        <p class="explain">
+          But not the kind you sign and tear up at will. Society, said
+          Burke, is a partnership between the living, the dead, and those
+          yet to be born. Institutions carry slow knowledge — about what
+          kinds of arrangement actually let people live together — that no
+          one generation could rederive from scratch. Reform yes; sweeping
+          revolution almost never. A working test for any large proposed
+          change: do you understand why the existing arrangement is set
+          up the way it is? If not, the chance you are about to rediscover
+          a known failure is high. Many revolutions repeat the mistakes
+          they were certain they had outgrown.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Utilitarianism · England</div>
+        <h3>Jeremy Bentham</h3>
+        <div class="dates">1748 – 1832</div>
+        <p class="quote">The greatest happiness for the greatest number.</p>
+        <p class="explain">
+          Judge every action and policy by one yardstick: does it produce
+          more pleasure than pain, across everyone affected, counted
+          equally? Bentham's calculus sounds crude until you try it.
+          Aristocratic privilege, cruel laws, and casual exclusions
+          suddenly cannot defend themselves. The famous problem: should we
+          torture one person to save five? Utilitarianism has a hard time
+          refusing, which is the principle's strength and its danger.
+          Knowing where it leads — and where it breaks — is more useful
+          than choosing for or against it in the abstract. Most real ethical
+          decisions sit somewhere between "obvious utilitarian win" and
+          "obvious utilitarian monstrosity," and the practice is in noticing
+          which kind of case you actually have.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Utilitarianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Feminism · England</div>
+        <h3>Mary Wollstonecraft</h3>
+        <div class="dates">1759 – 1797</div>
+        <p class="quote">Mind has no gender.</p>
+        <p class="explain">
+          Wollstonecraft made the empirical argument feminism would lean
+          on for two centuries. Educate women as you educate men, and watch
+          the supposed natural differences shrink. The "weakness" of women
+          is not nature speaking; it is conditioning showing. The move
+          generalizes to most claimed natural differences between groups.
+          Where you see one, look first at the different treatments,
+          expectations, and resources each group receives. The
+          natural-seeming gap usually shrinks across generations of equal
+          access — which is the strongest evidence that it was never
+          natural in the first place.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Feminism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">German Idealism</div>
+        <h3>Georg Hegel</h3>
+        <div class="dates">1770 – 1831</div>
+        <p class="quote">Reality is a historical process.</p>
+        <p class="explain">
+          Nothing real is static. Every position contains its own tension
+          (thesis vs antithesis), and from that tension a richer position
+          eventually emerges (synthesis), which itself contains new
+          tensions. Hegel called this the dialectic, and he thought it ran
+          through ideas, institutions, and history itself. You do not have
+          to swallow the grand metaphysics to use the pattern. When you
+          find yourself stuck between two opposed options, the productive
+          move is usually to find the deeper view that includes what is
+          right in both. The strongest answers to hard problems almost
+          always look like syntheses, not victories of one side.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Idealism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Pessimism · Germany</div>
+        <h3>Arthur Schopenhauer</h3>
+        <div class="dates">1788 – 1860</div>
+        <p class="quote">Every man takes the limits of his own field of vision for the limits of the world.</p>
+        <p class="explain">
+          Each of us silently assumes our own experience is roughly
+          representative. We project our taste, our culture, our
+          temperament onto everyone else and judge them by how well they
+          match. Schopenhauer also taught a harsher lesson behind this:
+          most of what you call yourself is a hungry, restless Will that
+          is satisfied by nothing for long. Relief comes from three
+          places — art, which lifts you briefly out of striving; compassion,
+          which dissolves the boundary between you and others; and the
+          willingness to want less. The Buddha would have nodded. Useful
+          when someone baffles you: their world may not contain the things
+          your world is built around.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Idealism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Existentialism's First Voice · Denmark</div>
+        <h3>Søren Kierkegaard</h3>
+        <div class="dates">1813 – 1855</div>
+        <p class="quote">Anxiety is the dizziness of freedom.</p>
+        <p class="explain">
+          Stand at a cliff edge and notice two distinct fears. One: that
+          you might fall. Two, stranger: that you might jump. The second
+          is the basic structure of being human. Every moment is a choice
+          you could make differently, and noticing this is dizzying. We
+          spend most of our lives escaping the dizziness by routine,
+          conformity, and the comforting story that we "had to" do what we
+          did. Kierkegaard's instruction: don't. Own the choices, including
+          the strange ones. Anxiety is the price of being a self rather
+          than a piece of furniture — and accepting it is the first step
+          toward actually becoming one.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphysics · Existentialism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Communism · Germany</div>
+        <h3>Karl Marx</h3>
+        <div class="dates">1818 – 1883</div>
+        <p class="quote">The history of all hitherto existing society is the history of class struggles.</p>
+        <p class="explain">
+          Look at any society and you find one group controlling the means
+          of producing goods and another group selling its labor to
+          survive. Their interests conflict structurally, no matter how
+          cordial individuals on either side may be. Strip the official
+          self-descriptions and watch the actual flow of money and time.
+          The question Marx forces you to ask of any institution: who owns
+          what, who works for whom, and where does the surplus actually
+          end up? Even if you reject his predictions and his politics, you
+          cannot un-see the lens once you have used it. Most political
+          arguments become clearer the moment you remember to look at who
+          is paying and who is being paid.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Communism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Civil Disobedience · America</div>
+        <h3>Henry David Thoreau</h3>
+        <div class="dates">1817 – 1862</div>
+        <p class="quote">Must the citizen ever resign his conscience to the legislator?</p>
+        <p class="explain">
+          When the law commands what conscience forbids, Thoreau answered:
+          disobey, openly and peacefully, and accept the consequences. The
+          acceptance is the key. Civil disobedience is not the same as
+          evasion — you break the law in public, in order to challenge it,
+          and you take the punishment to demonstrate that the law is
+          worth more attention than the punishment is worth fearing.
+          Gandhi used the method against an empire; King used it against
+          segregation. The criterion for using it well: the wrong must be
+          serious enough to justify the cost, and the action visible
+          enough to demand a response. Quiet noncompliance is sometimes
+          wise, but it does not change laws.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Liberalism · England</div>
+        <h3>John Stuart Mill</h3>
+        <div class="dates">1806 – 1873</div>
+        <p class="quote">Over his own body and mind, the individual is sovereign.</p>
+        <p class="explain">
+          Mill drew the cleanest line liberal politics has managed. The
+          state may stop you from harming others; it may not stop you from
+          harming yourself. You may eat badly, ride a motorcycle without
+          a helmet, or believe nonsense, and the law has no business
+          intervening however much your neighbors disapprove. The
+          principle is harder to apply than it looks — what counts as
+          harm, does offense count, what about slow economic harm? — and
+          two centuries of legal argument live in those questions. But
+          the principle remains the starting point of any serious case
+          for liberty, and a useful filter for any proposed restriction:
+          who is actually being protected, and from what?
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Utilitarianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Pragmatism · America</div>
+        <h3>William James</h3>
+        <div class="dates">1842 – 1910</div>
+        <p class="quote">Act as if what you do makes a difference. It does.</p>
+        <p class="explain">
+          James argued that truth is what works — what helps you act
+          successfully, predict reliably, live well. Some beliefs cannot
+          be settled by evidence in advance; you must decide whether to
+          commit, and the commitment itself shapes whether the belief
+          turns out true. A person lost in a forest who believes the path
+          leads out will take it and find out; the one who does not stays
+          lost. The pragmatist warning is to spot which of your beliefs
+          work this way, and to take responsibility for picking, since
+          picking is unavoidable. Refusing to bet is itself a bet — usually
+          on staying where you are.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Pragmatism</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PULL QUOTE ===== -->
+<section class="pullquote">
+  <blockquote>
+    God is dead. God remains dead. And we have killed him.
+    <cite>— Friedrich Nietzsche</cite>
+  </blockquote>
+</section>
+
+<!-- ===== MODERN WORLD ===== -->
+<section class="era" id="modern">
+  <div class="container">
+    <div class="era-header reveal">
+      <div class="dates">1900 — 1950</div>
+      <h2>The <span class="em">Modern</span> World</h2>
+      <div class="divider">✦</div>
+      <p class="intro">
+        Two world wars, the death of God, the rise of physics and
+        psychoanalysis. Philosophy splits: in Britain and America, the cool
+        precision of logical and linguistic analysis; on the Continent, the
+        passionate search for meaning in a universe without one.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card feature reveal">
+        <div class="meta">Existentialism's Prophet · Germany</div>
+        <h3>Friedrich Nietzsche</h3>
+        <div class="dates">1844 – 1900</div>
+        <p class="quote">Man is something to be surpassed.</p>
+        <p class="explain">
+          Nietzsche announced the death of God, and meant by it more than
+          the loss of religion. The whole moral system propped up by that
+          God — humility, pity, the otherworldly — was, he thought, a slave
+          morality that diminishes life. He called for a revaluation of all
+          values: stop asking "is this commanded?" and start asking "does
+          this make life larger or smaller?" His ideal, the
+          <em>Übermensch</em>, is the human who creates meaning instead of
+          receiving it. Read him as someone who demands more of you, not
+          less. The test he leaves you with: would you live this exact
+          life again, exactly as it has been, eternally? If not, what
+          would you have to change in it — or in yourself — until you
+          could say yes?
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Existentialism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Semiotics · Switzerland</div>
+        <h3>Ferdinand de Saussure</h3>
+        <div class="dates">1857 – 1913</div>
+        <p class="quote">Every message is made of signs.</p>
+        <p class="explain">
+          Words do not name things by some natural link. "Tree" could just
+          as well be <em>arbre</em> or <em>Baum</em>; its meaning comes
+          from its place in a system of differences (tree vs bush, tree
+          vs forest). Once you see this you start to notice it everywhere
+          — in clothing, advertising, architecture. Cultures are systems
+          of signs, and any item gets its meaning from what it is
+          <em>not</em>. Practical use: when something puzzles you, ask
+          what it is set against. A suit means something different on a
+          courtroom day than on a beach holiday because the contrast it
+          fits into has changed. The meaning is in the contrast, not the
+          thing itself.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Language</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Phenomenology · Germany</div>
+        <h3>Edmund Husserl</h3>
+        <div class="dates">1859 – 1938</div>
+        <p class="quote">Experience by itself is not science.</p>
+        <p class="explain">
+          To do philosophy honestly, Husserl said, you must bracket your
+          assumptions — including the assumption that an external world
+          exists — and describe experience purely as it appears. The
+          technique, <em>phenomenology</em>, sounds abstract but is
+          borrowable in daily life. Before judging an experience, describe
+          it: what is actually present, and what is interpretation? In
+          conflict, in pain, in a difficult choice, the simple discipline
+          of describing what <em>is</em> rather than what you have decided
+          it means often dissolves the trouble. Most of the suffering you
+          have ever called "this situation" was the interpretation, not
+          the situation.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ontology · Phenomenology</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Vitalism · France</div>
+        <h3>Henri Bergson</h3>
+        <div class="dates">1859 – 1941</div>
+        <p class="quote">Intuition goes in the very direction of life.</p>
+        <p class="explain">
+          Time as the physicist measures it — uniform ticks — is not time
+          as you live it. Lived time, <em>duration</em>, has flow, weight,
+          density; a minute of waiting feels long and an hour of absorption
+          feels short. The intellect dissects life into still images;
+          intuition catches it moving. The practical use is in the inner
+          life and in the arts: when you cannot describe an experience
+          precisely, do not assume the description has failed. Some real
+          things cannot be cut into pieces without dying. Trust the
+          inarticulate sense more often, especially in matters of timing
+          and people.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Vitalism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Pragmatism · America</div>
+        <h3>John Dewey</h3>
+        <div class="dates">1859 – 1952</div>
+        <p class="quote">We only think when we are confronted with problems.</p>
+        <p class="explain">
+          We do not actually think continuously — we run on habit until
+          something stops working. Thinking is what we do when the habit
+          fails, and it is for the practical job of finding a new habit
+          that does. The implication is methodological: stop asking "what
+          is the truth?" and start asking "what difference would it make
+          if this were true?" If no difference, the question is empty.
+          Useful as a filter on arguments. Many disputes turn out to have
+          no practical consequence whatever, and pruning those saves an
+          enormous amount of life. And many problems you thought were
+          philosophical were really blocked habits demanding a redesign.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Pragmatism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Analytic Philosophy · Britain</div>
+        <h3>Bertrand Russell</h3>
+        <div class="dates">1872 – 1970</div>
+        <p class="quote">The road to happiness lies in an organized diminution of work.</p>
+        <p class="explain">
+          Russell looked at modern economies and saw a strange waste. Some
+          people work brutal hours while others have no work at all; both
+          are miserable. He proposed a four-hour working day for everyone.
+          The specific number is not the point — the question is. Why
+          should leisure be the privilege of one class? A society that
+          took play, learning, and idleness seriously would be wiser,
+          kinder, and probably more productive than one that worships
+          busyness. Audit your own week against this. Is the work earning
+          you a life, or eating it? Most chronic exhaustion in comfortable
+          societies is a sign of a settlement no one was ever asked to
+          consent to.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Analytic Philosophy</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Spain</div>
+        <h3>José Ortega y Gasset</h3>
+        <div class="dates">1883 – 1955</div>
+        <p class="quote">Life is a series of collisions with the future.</p>
+        <p class="explain">
+          You did not choose to be born, or where, or to whom. The
+          circumstances are given. But your life is not the circumstances;
+          it is the choices you make inside them. To live is to project
+          yourself toward possibilities and then collide with a world that
+          talks back. Most people, Ortega warned, settle for living "like
+          everybody else" and call it freedom. The alternative is harder:
+          keep choosing in light of who you actually are, keep being
+          surprised by what resists, keep adjusting. A useful weekly
+          question: which of last week's choices were mine, and which were
+          done for me by the default settings of the people around me?
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ontology · Existentialism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">The Limits of Language · Vienna</div>
+        <h3>Ludwig Wittgenstein</h3>
+        <div class="dates">1889 – 1951</div>
+        <p class="quote">The limits of my language are the limits of my world.</p>
+        <p class="explain">
+          Early Wittgenstein argued that meaningful language pictures
+          facts; anything that cannot be put into such language is,
+          strictly, nonsense — including ethics, religion, and aesthetics.
+          Then he changed his mind. Language is not one mirror but many
+          games, each with its own rules and uses: joking, ordering,
+          comforting, praying. Meaning is use. The pair of theories,
+          taken together, is a master class in noticing how language is
+          doing more than you think — and sometimes less. When an argument
+          loops, suspect that one of you is playing a different game with
+          the same words. Naming the game often ends the loop.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Language · Logic</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Being and Time · Germany</div>
+        <h3>Martin Heidegger</h3>
+        <div class="dates">1889 – 1976</div>
+        <p class="quote">We are ourselves the entities to be analyzed.</p>
+        <p class="explain">
+          What does it mean to <em>be</em>? Heidegger thought philosophy
+          had forgotten the question. Do not start with abstractions;
+          start with the only being for whom being is at issue — yourself.
+          You find yourself already thrown into a world, immersed in
+          projects, finite. Death is the outermost horizon, and most
+          people spend their lives fleeing the knowledge of it into
+          distraction. Authenticity is the willingness to face finitude
+          and choose accordingly. The exercise that follows: imagine
+          today is the last full day you have. What in your current
+          schedule survives the test, and what was always just filler?
+          Most lives, examined this way, reorganize themselves.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ontology · Phenomenology</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Philosophy of Science · Vienna / London</div>
+        <h3>Karl Popper</h3>
+        <div class="dates">1902 – 1994</div>
+        <p class="quote">A scientific statement must be falsifiable.</p>
+        <p class="explain">
+          No matter how many white swans you see, you have not proved
+          "all swans are white"; one black swan refutes it. What makes a
+          theory scientific is not its certainty but its willingness to be
+          wrong. Be suspicious of theories that explain everything and
+          predict nothing — they fit any conceivable evidence after the
+          fact, and what cannot lose cannot teach. Apply Popper's test to
+          claims you take seriously: what specific observation would
+          change my mind? If you cannot answer, you are not holding a
+          belief, you are holding an attachment. Most ideological loyalty,
+          examined this way, turns out to be the second.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Science</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Critical Theory · Frankfurt</div>
+        <h3>Theodor Adorno</h3>
+        <div class="dates">1903 – 1969</div>
+        <p class="quote">Intelligence is a moral category.</p>
+        <p class="explain">
+          Acting well needs feeling and understanding together. Strip
+          either away — through cynicism, distraction, or the steady drip
+          of stereotype that modern media supplies — and the ability to
+          judge drops with it. Adorno's warning: easy pleasures are not
+          neutral. They shape what kind of mind you become capable of
+          using. The remedy is not asceticism but attention. Be willing to
+          be bored, to read difficult things, to sit with uncomfortable
+          feelings until they yield specific information. Most failures
+          of moral courage are failures of attention first.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Frankfurt School</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Existentialism · France</div>
+        <h3>Jean-Paul Sartre</h3>
+        <div class="dates">1905 – 1980</div>
+        <p class="quote">Existence precedes essence.</p>
+        <p class="explain">
+          A knife is made for cutting; its purpose comes before its
+          existence. You are not. You arrive without a manual, and the
+          question of what your life is <em>for</em> has no answer until
+          you make one through your choices. Sartre called this freedom
+          a kind of condemnation because there is no escape from it.
+          Blaming your circumstances does not change the fact that the
+          next move is yours. There is one steep consequence: in choosing
+          how to live, you implicitly recommend that choice to everyone.
+          Most "I had no choice" stories collapse on inspection. Reclaim
+          the choice and you reclaim the life.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Existentialism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Political Philosophy · Germany / America</div>
+        <h3>Hannah Arendt</h3>
+        <div class="dates">1906 – 1975</div>
+        <p class="quote">The banality of evil.</p>
+        <p class="explain">
+          Watching Eichmann at trial, Arendt was struck not by
+          monstrousness but by ordinariness. The architects of the
+          Holocaust were largely dull people who had stopped thinking,
+          dutifully executing orders inside a system whose effects they
+          had ceased to examine. Her warning is sharper now than ever:
+          large-scale evil rarely needs villains. It needs administrators,
+          distractedness, and the absence of the small daily habit of
+          asking "what am I actually doing here, and to whom?" Keep that
+          question alive in your own work. It is the cheapest moral
+          insurance available and most people do not pay the premium.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Existentialism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Ethics of the Other · France</div>
+        <h3>Emmanuel Levinas</h3>
+        <div class="dates">1906 – 1995</div>
+        <p class="quote">Reason lives in language.</p>
+        <p class="explain">
+          Before any word is spoken, the face of another human being
+          addresses you and calls you to responsibility. You can refuse,
+          but you cannot pretend you were not called. Levinas builds
+          ethics from this primary fact, prior to any rule or theory.
+          The implication is severe: the other person's vulnerability is
+          not a problem you choose to take on; it is the situation you
+          are already in by being human. Useful when you find yourself
+          rationalizing a small refusal of help — the question is not
+          whether the duty exists, only whether you will own it or look
+          away.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Phenomenology</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Perception · France</div>
+        <h3>Maurice Merleau-Ponty</h3>
+        <div class="dates">1908 – 1961</div>
+        <p class="quote">In order to see the world we must break with our familiar acceptance of it.</p>
+        <p class="explain">
+          You are not a mind looking out from a body. You <em>are</em> a
+          body, perceiving with skin, balance, hunger, exhaustion. Most
+          philosophy ignored this and got the mind wrong as a result. The
+          lesson reaches well beyond philosophy. Many problems you treat
+          as intellectual — anxiety, decision paralysis, lack of
+          motivation — are partly bodily, and respond to walking, sleeping,
+          eating, and breathing better than to more thinking. Before you
+          try to argue yourself out of a stuck mood, try moving for twenty
+          minutes. The result is often embarrassing for how cleanly it
+          works.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Phenomenology</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Existential Feminism · France</div>
+        <h3>Simone de Beauvoir</h3>
+        <div class="dates">1908 – 1986</div>
+        <p class="quote">Man is defined as a human being and woman as a female.</p>
+        <p class="explain">
+          Throughout Western thought, "the human" has been assumed to be
+          the male. Woman has been defined by her difference from this
+          default — the Other. From this came centuries of treating female
+          experience as a special case rather than a human one. De
+          Beauvoir's escape route is existential: one is not born but
+          becomes a woman. Femininity is a social role, not a biological
+          fate, and an authentic woman is free to refuse the script. The
+          argument generalizes to every group cast as "not the default."
+          Useful test: who is "people" in any sentence you write or hear?
+          When "people" turns out to mean only some people, the unmarked
+          default is doing political work.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Feminism · Existentialism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Philosophy of Language · America</div>
+        <h3>Willard Van Orman Quine</h3>
+        <div class="dates">1908 – 2000</div>
+        <p class="quote">Language is a social art.</p>
+        <p class="explain">
+          Imagine an anthropologist hearing a stranger say "gavagai" each
+          time a rabbit appears. Means "rabbit," surely? Not so fast. It
+          could mean "dinner," "rabbit-stage," "a set of rabbit-parts," or
+          "look, a wood-dwelling thing." Quine called this the
+          indeterminacy of translation, and the lesson is general. Meaning
+          is never a private link between a word and a thing; it lives in
+          the whole web of social practice around that word. Useful when
+          you are certain you know what someone meant — the certainty
+          comes from shared culture more than from telepathy, and it
+          breaks down faster than expected when the cultures differ. In
+          any argument across difference, slow down and check the words.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Language</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Liberty · Latvia / Britain</div>
+        <h3>Isaiah Berlin</h3>
+        <div class="dates">1909 – 1997</div>
+        <p class="quote">The fundamental sense of freedom is freedom from chains.</p>
+        <p class="explain">
+          Berlin separated negative freedom (no one is stopping you) from
+          positive freedom (you are master of yourself, fulfilling your
+          true purpose). Both matter. But the second can be dangerous when
+          wielded by states. Whenever someone insists they are "forcing
+          you to be free" for your own good — to fulfill your true nature,
+          your real interests, your authentic self — Berlin asks you to
+          remember the body count of the twentieth century. Negative
+          freedom is unromantic but it has saved more lives. A useful
+          political reflex: when an argument for restriction appeals to
+          your higher self, ask who is doing the appealing and what they
+          stand to gain.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Analytic Philosophy</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Deep Ecology · Norway</div>
+        <h3>Arne Naess</h3>
+        <div class="dates">1912 – 2009</div>
+        <p class="quote">Think like a mountain.</p>
+        <p class="explain">
+          Environmental ethics often pleads for nature by appealing to
+          human interests: clean air for us, biodiversity for us, climate
+          stability for us. Naess wants something deeper. Recognize that
+          you are not an outside observer of nature but a part of it, and
+          that other living things have value not because they serve you
+          but because they are. The shift in identification is practical.
+          People who experience themselves as part of an ecosystem do not
+          need to be argued into protecting it any more than they need to
+          be argued into protecting their own arm. Start with one place
+          you actually know — the trees on your street, a river you have
+          watched — and the abstract ethics becomes very concrete.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Environmental Philosophy</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">The Absurd · Algeria / France</div>
+        <h3>Albert Camus</h3>
+        <div class="dates">1913 – 1960</div>
+        <p class="quote">Life will be lived all the better if it has no meaning.</p>
+        <p class="explain">
+          The universe is silent. It gives you no purpose, no cosmic plan,
+          no reward at the end. Camus called this absurdity and refused
+          to flinch from it. The honest options are three. Suicide —
+          refuse to play. False hope — pretend the universe answers when
+          it does not. Or revolt — accept the absurdity and live anyway,
+          fully and lucidly, with both eyes open. Sisyphus, condemned to
+          push his stone forever, becomes Camus' image of the third path.
+          The practical instruction: stop looking outside your life for
+          the meaning of it, and start making the life itself the answer.
+          We must imagine Sisyphus happy. The smile is the resistance.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Existentialism</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PULL QUOTE ===== -->
+<section class="pullquote" style="background: #14100c; color: var(--parchment); border-color: rgba(212, 176, 122, 0.2);">
+  <blockquote style="color: var(--parchment);">
+    There is nothing outside of the text.
+    <cite style="color: var(--gold);">— Jacques Derrida</cite>
+  </blockquote>
+</section>
+
+<!-- ===== CONTEMPORARY PHILOSOPHY ===== -->
+<section class="era" id="contemporary">
+  <div class="container">
+    <div class="era-header reveal">
+      <div class="dates">1950 — Present</div>
+      <h2><span class="em">Contemporary</span> Philosophy</h2>
+      <div class="divider">✦</div>
+      <p class="intro">
+        Structuralism, postmodernism, the linguistic turn. New voices —
+        feminist, post-colonial, environmental, African — challenge what
+        philosophy is and whose questions it counts. The conversation, two
+        and a half millennia old, continues.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card reveal">
+        <div class="meta">Semiotics · France</div>
+        <h3>Roland Barthes</h3>
+        <div class="dates">1915 – 1980</div>
+        <p class="quote">Language is a skin.</p>
+        <p class="explain">
+          Even the coolest scholarly prose, Barthes claimed, carries the
+          heat of desire — addressed to a real or imagined someone,
+          brushing against them with words instead of hands. The point is
+          not only about love letters. Every text has an intended audience
+          and an unconscious one. Notice who you are really talking to
+          when you speak, and what you are <em>not</em> saying because
+          you imagine them listening. Most of communication's work happens
+          at this hidden level, and most of communication's failures come
+          from being unaware that this is where you have been writing.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Language · Semiotics</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Philosophy of Science · America</div>
+        <h3>Thomas Kuhn</h3>
+        <div class="dates">1922 – 1996</div>
+        <p class="quote">Normal science does not aim at novelties of fact or theory.</p>
+        <p class="explain">
+          Science does not advance smoothly. It works for long stretches
+          inside a <em>paradigm</em> — a shared framework of assumptions,
+          methods, and example problems. Anomalies pile up, get explained
+          away, until a critical mass forces a revolution and a new
+          paradigm takes over. Newton to Einstein was such a shift. The
+          same pattern shows up in fields, companies, careers, even
+          relationships. Most days are normal-science days, polishing
+          within the model. Recognize the rare moment when the model
+          itself is breaking, and act differently — patching no longer
+          works, and you need to rebuild from new assumptions.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Science</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Justice · America</div>
+        <h3>John Rawls</h3>
+        <div class="dates">1921 – 2002</div>
+        <p class="quote">The principles of justice are chosen behind a veil of ignorance.</p>
+        <p class="explain">
+          Imagine designing the rules of a society without knowing who you
+          will be in it — rich or poor, healthy or sick, talented or not,
+          what religion, what race, what sex. Under that veil, what rules
+          would you choose? Whatever they are, Rawls argues, those are
+          the principles of a just society, because they are immune to
+          self-serving bias. Apply the test to any policy you support.
+          Would you still back it if you did not know whether you would
+          land on the winning or losing side of it? The number of
+          positions that survive this test honestly is smaller than most
+          people expect — and that shrinkage is exactly the point.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Anarchism of Method · Austria</div>
+        <h3>Paul Feyerabend</h3>
+        <div class="dates">1924 – 1994</div>
+        <p class="quote">Anything goes.</p>
+        <p class="explain">
+          Look at how science has actually progressed and you find no
+          single method. Copernicus broke the rules, Galileo finessed his
+          data, Einstein worked from intuitions he could not yet justify.
+          Insistence on a strict "scientific method" would have stopped
+          each of them. Feyerabend's lesson: methods are tools, not
+          commandments. Use whatever works on the problem in front of you.
+          Apply with care — the line between productive heterodoxy and
+          quackery is thin, and "anything goes" is not an excuse to skip
+          the part where you test. But never let methodology bully you
+          out of an idea that the methodology was not built to recognize.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Philosophy of Science</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Postmodernism · France</div>
+        <h3>Jean-François Lyotard</h3>
+        <div class="dates">1924 – 1998</div>
+        <p class="quote">Knowledge is produced to be sold.</p>
+        <p class="explain">
+          In the age of databases and capital-rich research, knowledge has
+          been transformed into a commodity, evaluated less by truth than
+          by usefulness to whoever pays for it. The grand stories that
+          used to justify the pursuit of knowledge — Progress, Reason,
+          Emancipation — have lost their hold. Lyotard called this the
+          postmodern condition. A practical question for any claim you
+          take seriously: who paid for it, what is being sold, and what
+          alternative knowledge was not produced because no one would
+          pay? The answers are often more illuminating than the claim
+          itself.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Postmodernism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Post-Colonial Thought · Martinique</div>
+        <h3>Frantz Fanon</h3>
+        <div class="dates">1925 – 1961</div>
+        <p class="quote">For the black man, there is only one destiny. And it is white.</p>
+        <p class="explain">
+          Colonialism does not stop at the body; it works inward. The
+          colonized learns to measure himself by the colonizer's
+          standards, to aspire to a way of being that, by the framework's
+          own definition, will never be granted. The trap is doubled. To
+          embrace "whiteness" is to validate the system that excludes him;
+          to embrace "blackness" as the colonizer defined it is to wear
+          another mask. Real liberation requires breaking the framework
+          altogether and demanding, simply, human behavior. Generalize the
+          pattern to any group taught to want what despises them: the
+          first move is to refuse the terms of the contest.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Existentialism</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Power and Discourse · France</div>
+        <h3>Michel Foucault</h3>
+        <div class="dates">1926 – 1984</div>
+        <p class="quote">Man is an invention of recent date.</p>
+        <p class="explain">
+          The categories you treat as natural — madness, sexuality,
+          criminality, even "man" himself — have histories. They were
+          invented at particular moments by particular institutions (the
+          clinic, the prison, the school) for particular purposes, mostly
+          tied to power. Foucault's archaeologies show how these
+          categories shape what can be said and thought. Useful exercise:
+          take a label you apply to yourself or others and ask when, by
+          whom, and for what purpose it was created. Most labels are
+          younger than they appear, and many can be put down again. The
+          life that follows is much wider than the one the labels allow.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Discursive Archaeology</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Linguistics &amp; Politics · America</div>
+        <h3>Noam Chomsky</h3>
+        <div class="dates">1928 –</div>
+        <p class="quote">If we choose, we can live in a world of comforting illusion.</p>
+        <p class="explain">
+          Chomsky's central political demand is the principle of
+          universality: apply to your own government the same standards
+          you would apply to others'. The moment you take this test
+          seriously, comfortable national stories begin to crack. Most
+          propaganda survives only because we exempt ourselves from the
+          judgments we readily make about adversaries. The work is to
+          refuse the exemption. The result is uncomfortable, often
+          unpopular, and almost always more accurate than what passes
+          for sober commentary. A useful rule for any news story: would
+          you accept this framing if the actors were swapped?
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Universalism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Critical Theory · Germany</div>
+        <h3>Jürgen Habermas</h3>
+        <div class="dates">1929 –</div>
+        <p class="quote">Society is dependent upon a criticism of its own traditions.</p>
+        <p class="explain">
+          Democracy is not just voting. It requires a healthy public
+          sphere — spaces independent of state and market where citizens
+          reason with each other, justify their views, and revise
+          inherited traditions together. Coffee houses, newspapers,
+          universities, the open internet at its best. When those spaces
+          are captured by money or power, democracy starves even when
+          elections continue. Test the health of any society by the
+          quality of its arguments. Empty insult is a sign of disease;
+          difficult, honest disagreement is a sign of health. The same
+          test works for a workplace, a family, or a friendship.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Deconstruction · France</div>
+        <h3>Jacques Derrida</h3>
+        <div class="dates">1930 – 2004</div>
+        <p class="quote">There is nothing outside of the text.</p>
+        <p class="explain">
+          Every text — every utterance, every system of thought — contains
+          gaps, contradictions, and silences. Meaning is never simply
+          present; it is shaped as much by what is excluded as by what is
+          said. Deconstruction is the patient practice of reading for
+          those exclusions. The famous line does not mean books are all
+          that matter; it means there is no neutral view-from-nowhere
+          from which to settle disputes. Every move is inside a frame
+          that could be otherwise. Useful as a discipline against
+          arrogance: whenever a position presents itself as the obvious
+          one, the work is to find the silent assumption holding it up.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Deconstruction</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="meta">Neopragmatism · America</div>
+        <h3>Richard Rorty</h3>
+        <div class="dates">1931 – 2007</div>
+        <p class="quote">There is nothing deep down inside us except what we have put there ourselves.</p>
+        <p class="explain">
+          Philosophy has long imagined the mind as a mirror trying to
+          copy Reality, and truth as success at copying. Rorty asks us to
+          drop the picture. Truth is not mirroring; it is what your
+          community lets you say after rigorous conversation. Without
+          cosmic foundations we still have plenty: solidarity, hope, the
+          willingness to widen the circle of who counts as "us." The
+          argument can sound nihilistic but Rorty meant it cheerfully.
+          The work of being human is not to discover absolute values but
+          to build better ones together, knowing they are ours. Practical
+          consequence: stop waiting for the universe to validate your
+          ethics and start making them with the people around you.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Pragmatism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Feminism · France</div>
+        <h3>Luce Irigaray</h3>
+        <div class="dates">1932 –</div>
+        <p class="quote">Every desire has a relation to madness.</p>
+        <p class="explain">
+          The supposedly sober traditions of philosophy, Irigaray argued,
+          have always been fueled by desire — and the desire has been
+          male-coded, taking male perspective as if it were universal.
+          The result is a body of thought that pretends to neutrality but
+          excludes half of humanity from full participation. The project
+          is double: expose the false universal, and create authentically
+          female ways of speaking and thinking, not as second-class
+          entries in the existing system but on their own terms. Useful
+          beyond gender: any time a tradition claims to speak for everyone,
+          ask who actually shaped it, and whose experience was the silent
+          template.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Feminism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Post-Colonial Theory · Palestine / America</div>
+        <h3>Edward Said</h3>
+        <div class="dates">1935 – 2003</div>
+        <p class="quote">Every empire tells itself and the world that it is unlike all other empires.</p>
+        <p class="explain">
+          No empire ever calls itself an empire. Each casts its expansions
+          as civilizing, liberating, democratizing — exceptions to the
+          rule that previous empires obeyed. Said's life work was to show
+          how this self-flattery is built into scholarly disciplines,
+          journalism, and popular culture, especially in Western
+          depictions of the East. The practical reflex: whenever your
+          own country explains why this intervention is different, ask
+          what the same words sounded like in the mouth of the last
+          empire that fell. The continuity is rarely flattering, and is
+          usually the part being left out.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Post-colonialism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Feminism · France</div>
+        <h3>Hélène Cixous</h3>
+        <div class="dates">1937 –</div>
+        <p class="quote">Thought has always worked by opposition.</p>
+        <p class="explain">
+          Western thought pairs the world: culture/nature, mind/body,
+          active/passive, reason/emotion, day/night. Cixous noticed that
+          one side is consistently coded male and dominant, the other
+          female and subordinate. The dualisms do real work, but at a
+          cost. Audit your own oppositions. Where you cleanly divide the
+          world into "doing" and "being done to," or "rational" and
+          "emotional," check whether the division is real or whether it
+          is doing the labor of putting one side above the other. Many
+          supposed dichotomies dissolve under examination, and so do the
+          hierarchies that depended on them.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Epistemology · Feminism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Sage Philosophy · Kenya</div>
+        <h3>Henry Odera Oruka</h3>
+        <div class="dates">1944 – 1995</div>
+        <p class="quote">Philosophy is not only a written enterprise.</p>
+        <p class="explain">
+          Africa was long assumed to lack philosophical traditions because
+          so much of its wisdom traveled by speech rather than paper.
+          Oruka took a recorder and a list of questions into Kenyan
+          villages and showed that systematic, critical thinking flourishes
+          there — about justice, freedom, God, the good life. The
+          implication is large. Any history of philosophy that includes
+          only the textually archived will systematically miss what oral
+          cultures, women, and the poor have thought. The work, in any
+          field, is to listen wider than the official archive — and to
+          notice which voices the archive was never built to carry.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Metaphilosophy</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Animal Ethics · Australia</div>
+        <h3>Peter Singer</h3>
+        <div class="dates">1946 –</div>
+        <p class="quote">In suffering, the animals are our equals.</p>
+        <p class="explain">
+          Singer's argument is uncomfortably simple. If suffering matters
+          morally when humans feel it, it matters morally when animals
+          feel it, because the relevant property is the suffering itself.
+          To treat one species as deserving of moral consideration and
+          another as not, simply on the basis of species membership, is
+          structurally similar to racism. Most readers find a way to
+          soften the conclusion; few find a clean way to refuse it. Even
+          partial acceptance changes the questions you ask about what is
+          on your plate, in your wardrobe, and in the products you buy.
+          Consistency is expensive but it is also clarifying.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Ethics · Utilitarianism</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="meta">Marxism · Slovenia</div>
+        <h3>Slavoj Žižek</h3>
+        <div class="dates">1949 –</div>
+        <p class="quote">All the best Marxist analyses are always analyses of a failure.</p>
+        <p class="explain">
+          Žižek's needle: the political left has gotten so good at
+          explaining why every revolution failed that the explanation
+          itself becomes the consolation. As long as the better society
+          remains hypothetical, it cannot be tested, and the analysis can
+          preserve its moral purity. The same trap operates outside
+          Marxism — in any movement that keeps its ideal so far in the
+          future that it never has to deliver. The harder question to
+          ask of any politics, including your own: what would you actually
+          do if you won? If the answer is vague, the program may be
+          designed to lose.
+        </p>
+        <p class="branch"><strong>Branch</strong> · Political Philosophy · Marxism</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="ornament">✦ ✦ ✦</div>
+  <h3>The conversation continues</h3>
+  <p>
+    Twenty-six centuries of thinkers, arguing, disagreeing, refining,
+    sometimes simply astonished. Philosophy is not a body of settled answers
+    but the long, open conversation of humankind with itself.
+  </p>
+  <p style="font-style: italic; color: var(--gold-soft); margin-top: 24px;">
+    “The beginning of thought is in disagreement —<br>not only with others but also with ourselves.”<br>
+    <span style="font-style: normal; font-size: 13px; letter-spacing: 0.2em; color: var(--gold);">— Eric Hoffer</span>
+  </p>
+  <div class="credit">An educational summary inspired by The Philosophy Book (DK)</div>
+</footer>
+
+<script>
+// Reveal-on-scroll
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(r => io.observe(r));
+
+// Mark all cards as reveal targets for staggered appearance
+document.querySelectorAll('.card').forEach((card, i) => {
+  if (!card.classList.contains('reveal')) card.classList.add('reveal');
+  card.style.transitionDelay = (i % 6 * 50) + 'ms';
+  io.observe(card);
+});
+
+// Active nav highlighting
+const sections = document.querySelectorAll('section.era');
+const navLinks = document.querySelectorAll('nav.topnav a');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === '#' + id;
+        link.style.color = isActive ? 'var(--accent)' : '';
+        link.style.borderBottomColor = isActive ? 'var(--accent)' : 'transparent';
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>

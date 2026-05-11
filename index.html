@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Dusk: Room 215 — A Companion Guide</title>
+<style>
+  :root {
+    --ink: #2a1810;
+    --paper: #f4ecd8;
+    --paper-dark: #e8dcc0;
+    --sepia: #7a5c3e;
+    --rust: #a04a2a;
+    --rust-dark: #6b2e1a;
+    --gold: #c89b3c;
+    --shadow: rgba(42, 24, 16, 0.15);
+    --neon: #ff7a3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(255, 122, 58, 0.15) 0%, transparent 50%),
+      linear-gradient(180deg, #1a0f08 0%, #2a1810 60%, #3d2418 100%);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+  }
+
+  .neon-sign {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    letter-spacing: 0.3em;
+    color: var(--neon);
+    text-shadow:
+      0 0 4px var(--neon),
+      0 0 12px rgba(255, 122, 58, 0.6),
+      0 0 24px rgba(255, 122, 58, 0.3);
+    margin-bottom: 2rem;
+    animation: flicker 4s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 92%, 100% { opacity: 1; }
+    93% { opacity: 0.4; }
+    94% { opacity: 1; }
+    95% { opacity: 0.6; }
+    96% { opacity: 1; }
+  }
+
+  h1.hero-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+    color: #f4ecd8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-room {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    max-width: 640px;
+    color: #d4c4a8;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: #b8a684;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hero-meta span { white-space: nowrap; }
+  .hero-meta span + span::before {
+    content: '·';
+    margin-right: 2rem;
+    color: var(--rust);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: #8a7a5a;
+    animation: bob 2s ease-in-out infinite;
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(244, 236, 216, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--sepia);
+    z-index: 100;
+    padding: 0.75rem 1rem;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  nav a {
+    color: var(--sepia);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+
+  nav a:hover { color: var(--rust); border-bottom-color: var(--rust); }
+
+  /* Sections */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: normal;
+    margin-bottom: 1.5rem;
+    color: var(--rust-dark);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    color: var(--rust-dark);
+    margin-bottom: 0.75rem;
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  p { margin-bottom: 1.25rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 1.15rem;
+    color: var(--sepia);
+    font-style: italic;
+    max-width: 760px;
+    margin-bottom: 2.5rem;
+  }
+
+  .divider {
+    text-align: center;
+    color: var(--rust);
+    margin: 3rem 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+  }
+
+  /* Overview cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .info-card {
+    background: var(--paper-dark);
+    padding: 1.5rem;
+    border-left: 3px solid var(--rust);
+    box-shadow: 2px 4px 8px var(--shadow);
+  }
+
+  .info-card .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 0.4rem;
+  }
+
+  .info-card .value {
+    font-size: 1.1rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Characters */
+  .characters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .character-card {
+    background: var(--paper-dark);
+    padding: 1.75rem;
+    border-radius: 2px;
+    box-shadow: 3px 6px 14px var(--shadow);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-top: 4px solid var(--rust);
+  }
+
+  .character-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 10px 20px var(--shadow);
+  }
+
+  .character-card .role {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.3rem;
+  }
+
+  .character-card h4 {
+    font-size: 1.4rem;
+    color: var(--rust-dark);
+    margin-bottom: 0.75rem;
+    font-weight: normal;
+  }
+
+  .character-card .room {
+    font-size: 0.85rem;
+    color: var(--sepia);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
+
+  .character-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  /* Chapters */
+  .chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .chapter {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1.25rem 1.5rem;
+    background: var(--paper-dark);
+    border-left: 4px solid var(--gold);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .chapter:hover {
+    border-left-color: var(--rust);
+    transform: translateX(4px);
+  }
+
+  .chapter .num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--rust);
+    letter-spacing: 0.15em;
+    min-width: 2.5rem;
+  }
+
+  .chapter .time {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--sepia);
+    min-width: 8rem;
+  }
+
+  .chapter .desc {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 640px) {
+    .chapter {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+
+  /* Themes */
+  .themes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .theme {
+    padding: 1.5rem;
+    border-top: 1px solid var(--sepia);
+  }
+
+  .theme-icon {
+    font-size: 1.5rem;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* Mechanics */
+  .mechanic {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  /* Pull quote */
+  .pullquote {
+    margin: 3rem auto;
+    max-width: 700px;
+    padding: 2rem;
+    background: var(--paper-dark);
+    border-left: 4px solid var(--rust);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--sepia);
+    position: relative;
+  }
+
+  .pullquote::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 0.5rem;
+    font-size: 4rem;
+    color: var(--rust);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* Trivia */
+  .trivia {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .trivia-item {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, var(--paper-dark) 0%, var(--paper) 100%);
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .trivia-item strong {
+    color: var(--rust-dark);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-style: italic;
+  }
+
+  /* Footer */
+  footer {
+    background: linear-gradient(180deg, #2a1810 0%, #1a0f08 100%);
+    color: #b8a684;
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  footer p {
+    max-width: 700px;
+    margin: 0 auto 1rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  footer .small {
+    font-size: 0.75rem;
+    color: #8a7a5a;
+    letter-spacing: 0.1em;
+    margin-top: 1.5rem;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Two-column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  /* Floor plan */
+  .floorplan {
+    background: var(--paper-dark);
+    padding: 2rem;
+    margin: 2rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    overflow-x: auto;
+    color: var(--ink);
+    border: 1px solid var(--sepia);
+  }
+
+  .floorplan h4 {
+    font-family: Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--rust-dark);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .floorplan pre {
+    white-space: pre;
+    color: var(--sepia);
+  }
+
+  /* Highlight box */
+  .highlight {
+    background: linear-gradient(135deg, rgba(200, 155, 60, 0.1) 0%, rgba(160, 74, 42, 0.05) 100%);
+    border: 1px solid var(--gold);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-radius: 2px;
+  }
+
+  .highlight h4 {
+    color: var(--rust-dark);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="neon-sign">▢ ▢ ▢ ▢ ▢ ▢ ▢ &nbsp; HOTEL DUSK &nbsp; ▢ ▢ ▢ ▢ ▢ ▢ ▢</div>
+  <h1 class="hero-title">Hotel Dusk</h1>
+  <div class="hero-room">Room 215</div>
+  <p class="hero-subtitle">
+    A point-and-click mystery set on a single rain-swept evening in 1979.
+    One ex-cop, eight strangers, and a hotel where wishes are said to come true.
+  </p>
+  <div class="hero-meta">
+    <span>Cing · 2007</span>
+    <span>Nintendo DS</span>
+    <span>December 28, 1979</span>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; CHECK IN &nbsp; ↓</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#characters">Characters</a></li>
+    <li><a href="#setting">The Hotel</a></li>
+    <li><a href="#chapters">Chapters</a></li>
+    <li><a href="#themes">Themes</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#trivia">Trivia</a></li>
+  </ul>
+</nav>
+
+<section id="overview">
+  <div class="section-label">Welcome</div>
+  <h2>A conversation-driven detective story</h2>
+  <p class="lead">
+    Hotel Dusk: Room 215 is a graphic adventure built almost entirely around talking
+    to people. There are no enemies, no time limits in the traditional sense — only
+    the slow accumulation of trust, suspicion, and truth across a single ten-hour
+    evening at a forgotten roadside hotel in Los Angeles.
+  </p>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">Developer</div>
+      <div class="value">Cing</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Publisher</div>
+      <div class="value">Nintendo</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Director</div>
+      <div class="value">Taisuke Kanasaki</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Platform</div>
+      <div class="value">Nintendo DS</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Released</div>
+      <div class="value">2007 (Worldwide)</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Sequel</div>
+      <div class="value">Last Window (2010)</div>
+    </div>
+  </div>
+
+  <p>
+    Played by holding the Nintendo DS sideways like a small book, the game uses
+    both screens together: one for navigating rooms, the other for examining
+    items, reading dialogue, and writing notes. The hand-drawn, rotoscoped
+    character animations give every conversation a soft, sketchy realism — as
+    if the whole story were being remembered rather than performed.
+  </p>
+</section>
+
+<section id="story">
+  <div class="section-label">The Premise</div>
+  <h2>Kyle Hyde checks in</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>The salesman</h3>
+      <p>
+        Kyle Hyde is a former NYPD detective who quit the force three years ago
+        after a case ended at the wrong end of his own gun. He now works for a
+        Los Angeles company called Red Crown, where his job is officially
+        door-to-door sales — and unofficially, finding things people would rather
+        leave lost.
+      </p>
+      <p>
+        On the evening of December 28, 1979, an errand for his boss Ed sends him
+        to a worn-down hotel a few hours from the city. The place is shabby, the
+        owner is grumpy, and the staff is short. It should be a one-night stop.
+      </p>
+    </div>
+    <div>
+      <h3>The hotel</h3>
+      <p>
+        Hotel Dusk is the kind of place that lives off rumor. According to its
+        owner, Dunning Smith, one room — number 215 — grants wishes. According to
+        local memory, a child once vanished from the building and was never
+        found. Both stories share an oddly specific feature: people who pass
+        through this hotel tend to leave changed.
+      </p>
+      <p>
+        For Kyle, the change begins almost immediately. The names on the guest
+        register are too familiar. The clues left behind are too specific. And
+        the partner he buried three years ago suddenly seems very much alive.
+      </p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    Every guest carries a secret. By morning, every secret is connected.
+  </div>
+</section>
+
+<section id="characters">
+  <div class="section-label">The Cast</div>
+  <h2>Nine strangers under one roof</h2>
+  <p class="lead">
+    Each guest at Hotel Dusk is hiding something — a regret, a grudge, a borrowed
+    name. The game's mystery is built less from plot twists than from the slow
+    overlap of nine private lives.
+  </p>
+
+  <div class="characters">
+    <div class="character-card">
+      <div class="role">Protagonist</div>
+      <h4>Kyle Hyde</h4>
+      <div class="room">Guest · Room 215</div>
+      <p>
+        A 33-year-old ex-detective turned salesman. Sardonic, blunt, and quietly
+        haunted by the partner he was forced to shoot. Carries a small notebook
+        for sketching, writing, and remembering.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Owner</div>
+      <h4>Dunning Smith</h4>
+      <div class="room">Proprietor</div>
+      <p>
+        The Hotel Dusk's prickly, hockey-obsessed owner. Bought the place five
+        years ago for cheap and runs it badly on purpose. He knows more about
+        the building than he lets on.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Staff</div>
+      <h4>Rosa Fox</h4>
+      <div class="room">Maid &amp; Cook</div>
+      <p>
+        The hotel's one-woman labor force. Chatty, intuitive, and a serial
+        collector of celebrity autographs. Talks before she thinks — but reads
+        people faster than anyone.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Staff</div>
+      <h4>Louis "Louie" DeNonno</h4>
+      <div class="room">Bellhop</div>
+      <p>
+        A reformed pickpocket from Manhattan, last seen by Kyle in a holding
+        cell three years ago. Lazy at every job except tending the hotel bar,
+        which he treats like a vocation.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Mila</h4>
+      <div class="room">No Room · Hitchhiker</div>
+      <p>
+        A silent young woman in a white dress, found on the highway and brought
+        to the hotel by another guest. She wears a silver bracelet that Kyle
+        recognizes immediately.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Jeff Angel</h4>
+      <div class="room">Room 213</div>
+      <p>
+        A jittery young man with a fake name, expensive taste, and a much bigger
+        problem than he lets on. Fancies himself a cool customer and is almost
+        always wrong about it.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Martin Summer</h4>
+      <div class="room">Room 211</div>
+      <p>
+        A pompous mystery novelist whose entire career rests on a single
+        decade-old bestseller. He came to the hotel to take delivery of a very
+        specific package.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Helen Parker</h4>
+      <div class="room">Room 212</div>
+      <p>
+        An elderly woman with an eye patch and a request for a particular room.
+        Polite, twinkling, and clearly waiting for someone who hasn't arrived in
+        ten years.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Iris</h4>
+      <div class="room">Room 216</div>
+      <p>
+        A glamorous, sharp-tongued young woman who arrives expressly demanding
+        privacy. She is here on someone else's instructions, and carrying
+        something that someone wants back.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Kevin Woodward</h4>
+      <div class="room">Room 219</div>
+      <p>
+        A surgeon from Santa Monica traveling with his ten-year-old daughter,
+        Melissa. He is tired, defensive, and increasingly easy to find at the
+        hotel bar.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Guest</div>
+      <h4>Melissa Woodward</h4>
+      <div class="room">Room 219</div>
+      <p>
+        Kevin's ten-year-old daughter. Stubborn, lonely, and missing her mother.
+        She tests every adult she meets, including Kyle, who proves a slightly
+        surprising match for her.
+      </p>
+    </div>
+
+    <div class="character-card">
+      <div class="role">Off-screen</div>
+      <h4>Bradley · Ed · Rachel</h4>
+      <div class="room">Voices from the past</div>
+      <p>
+        Kyle's missing partner, his current boss, and the secretary who pages him
+        through the night. None of them appear at the hotel — but the story is,
+        in many ways, a long phone call between them.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="setting">
+  <div class="section-label">The Building</div>
+  <h2>A small hotel, larger inside</h2>
+  <p class="lead">
+    Hotel Dusk is a two-story roadside hotel west of Los Angeles. Twenty years
+    old, once popular, now nearly empty. The whole game takes place inside it.
+  </p>
+
+  <div class="two-col">
+    <div>
+      <h3>First floor</h3>
+      <p>
+        The first floor holds the lobby, a small front desk with a hand-bell,
+        Dunning's private office, the Moonlight Grill restaurant, the Seven
+        Stars bar, the kitchen and pantry, a utility closet, the laundry, the
+        electrical room, and a quiet back room labeled simply Room 111.
+      </p>
+      <p>
+        The staff rooms — for Dunning, Rosa, and Louie — branch off behind
+        unmarked "Staff Only" doors. Each one tells you something about its
+        occupant before they ever open their mouth.
+      </p>
+    </div>
+    <div>
+      <h3>Second floor</h3>
+      <p>
+        The second floor holds the guest rooms: 211 through 220. Each has a name
+        as well as a number — Honor, Angel, Trust, Wish, Success, Bravery — a
+        small affectation the owner is unreasonably proud of.
+      </p>
+      <p>
+        Three rooms have been kept locked for six months: 217, 218, and 220.
+        The reason a guest needs to give for opening one of them turns out to be
+        most of the plot.
+      </p>
+    </div>
+  </div>
+
+  <div class="floorplan">
+    <h4>Hotel Dusk, second floor — roughly</h4>
+<pre>
+    ┌─────┐                                       ┌─────┐
+    │ 211 │  Honor  · Martin Summer               │ 212 │  Angel · Helen Parker
+    ├─────┤                                       ├─────┤
+    │ 213 │  Trust  · Jeff Angel                  │ 214 │  (vacant)
+    ├─────┤                                       ├─────┤
+    │ 215 │  Wish   · Kyle Hyde   ◀ — — — — — ▶   │ 216 │  Success · Iris
+    ├─────┤                                       ├─────┤
+    │ 217 │  (locked, six months)                 │ 218 │  (locked)
+    ├─────┤                                       ├─────┤
+    │ 219 │  Bravery · Kevin &amp; Melissa            │ 220 │  (locked)
+    └─────┘                                       └─────┘
+                       — main stairs —
+                       — back stairs —
+</pre>
+  </div>
+
+  <p>
+    Almost everything in the hotel can be examined, and almost every comment
+    Kyle makes about an object is more interesting than the object itself.
+    Wandering the building is its own minor game: a study of a man making
+    sour, observant company with his own loneliness.
+  </p>
+</section>
+
+<section id="chapters">
+  <div class="section-label">Structure</div>
+  <h2>One evening in ten chapters</h2>
+  <p class="lead">
+    The entire game takes place between roughly 5:00 P.M. on December 28, 1979
+    and 8:00 A.M. the next morning. Each chapter advances the in-game clock,
+    and the building's mood shifts with it — busy, then quiet, then secretive,
+    then dark.
+  </p>
+
+  <div class="chapters">
+    <div class="chapter">
+      <div class="num">CH 1</div>
+      <div class="time">5:00 – 5:30 P.M.</div>
+      <div class="desc">Check-in. Kyle meets the owner, an unhappy child, and a familiar voice from his past.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 2</div>
+      <div class="time">5:30 – 6:00 P.M.</div>
+      <div class="desc">The hotel reveals its old ghost story — and a name from L.A. surfaces in the wrong place.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 3</div>
+      <div class="time">6:00 – 7:00 P.M.</div>
+      <div class="desc">Dinner at the Moonlight Grill. A bookmark, a painting, and a small, very angry daughter.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 4</div>
+      <div class="time">7:00 – 8:00 P.M.</div>
+      <div class="desc">A fountain pen with the wrong name on it. A novelist with a brittle, ten-year-old lie.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 5</div>
+      <div class="time">8:00 – 9:00 P.M.</div>
+      <div class="desc">A theft. A frame-up. A rich boy a long way from home and the case that walks through his door.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 6</div>
+      <div class="time">9:00 – 10:00 P.M.</div>
+      <div class="desc">The Seven Stars opens. Drinks loosen tongues — including those of an old magician.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 7</div>
+      <div class="time">10:00 – 11:00 P.M.</div>
+      <div class="desc">A Christmas tree, three days late. A drunken doctor, an envelope, and the gallery they all keep mentioning.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 8</div>
+      <div class="time">11:00 – 12:00 A.M.</div>
+      <div class="desc">A cassette tape from a bugged room, a pair of sisters, and a game of late-night bowling.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 9</div>
+      <div class="time">12:00 – 2:00 A.M.</div>
+      <div class="desc">Five paintings, one hidden name. Memory returns to the girl who never quite arrived.</div>
+    </div>
+    <div class="chapter">
+      <div class="num">CH 10</div>
+      <div class="time">2:00 A.M. onward</div>
+      <div class="desc">A locked basement, a forged painter, and the long story Dunning Smith has waited ten years to tell.</div>
+    </div>
+  </div>
+</section>
+
+<section id="themes">
+  <div class="section-label">What it is about</div>
+  <h2>Themes &amp; motifs</h2>
+
+  <div class="themes">
+    <div class="theme">
+      <div class="theme-icon">◈</div>
+      <h3>Lost partners</h3>
+      <p>
+        Nearly every character is missing someone — a sister, a mother, a wife,
+        a daughter, a friend. Kyle's search for Bradley is the loudest version
+        of a quieter sorrow that the whole hotel is built on.
+      </p>
+    </div>
+    <div class="theme">
+      <div class="theme-icon">◈</div>
+      <h3>Borrowed names</h3>
+      <p>
+        Pen names, false IDs, code names, signed-in aliases. Identity in
+        Hotel Dusk is something people put on at the front desk and shed in
+        the bar, often in the same evening.
+      </p>
+    </div>
+    <div class="theme">
+      <div class="theme-icon">◈</div>
+      <h3>Art and forgery</h3>
+      <p>
+        A stolen painting, a manufactured painter, a manuscript with the wrong
+        author's name on it. The game keeps asking what a work is worth when
+        nobody is telling the truth about who made it.
+      </p>
+    </div>
+    <div class="theme">
+      <div class="theme-icon">◈</div>
+      <h3>The cost of help</h3>
+      <p>
+        Money raised the wrong way, debts paid in silence, favors turned into
+        leverage. Several characters did terrible things to keep their families
+        together — and the families fell apart anyway.
+      </p>
+    </div>
+    <div class="theme">
+      <div class="theme-icon">◈</div>
+      <h3>Parents and children</h3>
+      <p>
+        Almost every storyline pairs a parent with a child: Dunning and Jenny,
+        Kevin and Melissa, Helen and Alan, Robert Evans and Mila, Jeff and his
+        father. The hotel becomes a kind of waiting room for reunions.
+      </p>
+    </div>
+    <div class="theme">
+      <div class="theme-icon">◈</div>
+      <h3>Wishes</h3>
+      <p>
+        Room 215 is supposed to grant them. Kyle, naturally, doesn't believe
+        a word of it. But the game closes the way fairy tales do: with the
+        suggestion that something, somewhere, was waiting to be asked.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="design">
+  <div class="section-label">How it plays</div>
+  <h2>A game of listening</h2>
+
+  <div class="mechanic">
+    <h3>The notebook</h3>
+    <p>
+      Kyle carries a small notebook that the player fills with names, sketches,
+      diagrams, and connect-the-dot puzzles. Some scenes ask you to literally
+      write or draw with the stylus — circle a discrepancy, sketch a face, copy
+      a clue. The notebook is also where the game stores its list of
+      questions Kyle can ask.
+    </p>
+  </div>
+
+  <div class="mechanic">
+    <h3>Auras</h3>
+    <p>
+      When Kyle says the wrong thing during a conversation, the person he is
+      talking to is briefly outlined in a red — or, more rarely, black — glow.
+      One wrong answer is usually safe. Two or three in a row, and the
+      conversation collapses into a game over. Hotel Dusk is one of the few
+      adventure games where being a jerk has weight.
+    </p>
+  </div>
+
+  <div class="mechanic">
+    <h3>Follow-ups and segues</h3>
+    <p>
+      Many lines of dialogue have an optional follow-up arrow that appears only
+      briefly. Tap it immediately and you press the speaker. Wait a beat first
+      and you hear an extra "segue" sentence that often contains the funniest
+      writing in the game. The pacing of when you tap is part of the joke.
+    </p>
+  </div>
+
+  <div class="mechanic">
+    <h3>The book metaphor</h3>
+    <p>
+      The DS is held vertically, like a novel. Left page is the world; right
+      page is the close reading of it. Even the save screen mimics turning a
+      page. The whole interface argues that you are reading, not playing —
+      which suits a game built almost entirely from prose.
+    </p>
+  </div>
+
+  <div class="mechanic">
+    <h3>Stylus puzzles</h3>
+    <p>
+      Most puzzles are small, tactile, and quietly clever: rewinding a tape
+      with a pencil, dusting an inscription with chalk powder, pouring whiskey
+      from one bottle into another to balance a hidden mechanism, performing
+      mouth-to-mouth, sewing a wing back onto a rag doll.
+    </p>
+  </div>
+
+  <div class="highlight">
+    <h4>"New game plus"</h4>
+    <p>
+      Finishing the game unlocks a second playthrough using the same save file.
+      Most of the dialogue is identical, but Kyle's phone calls with his
+      coworker Rachel are noticeably different — warmer, more candid, and aware
+      of things Rachel could not have known the first time. It's a small, very
+      fond gesture.
+    </p>
+  </div>
+</section>
+
+<section id="trivia">
+  <div class="section-label">Marginalia</div>
+  <h2>Notes from the lobby</h2>
+
+  <div class="trivia">
+    <div class="trivia-item">
+      <strong>The art style</strong>
+      Character animation in Hotel Dusk is rotoscoped from filmed footage of
+      real actors, which is why the gestures feel oddly specific — a particular
+      way of leaning on a counter, a particular way of looking away.
+    </div>
+    <div class="trivia-item">
+      <strong>Cing</strong>
+      The studio that made Hotel Dusk also made Another Code (Trace Memory) and
+      its sequel Another Code: R. Cing went bankrupt in 2010, shortly after
+      Last Window, the direct sequel to Hotel Dusk.
+    </div>
+    <div class="trivia-item">
+      <strong>Regional differences</strong>
+      The European release rewrites large amounts of dialogue, mostly to soften
+      American slang and to add small clarifying hints in two or three of the
+      trickier confrontations.
+    </div>
+    <div class="trivia-item">
+      <strong>That title font</strong>
+      The neon "DUSK" sign on the cover, glimpsed through Kyle's car window,
+      is one of the most quietly evocative logos on the Nintendo DS — a hotel
+      reduced to one flickering vowel.
+    </div>
+    <div class="trivia-item">
+      <strong>Last Window</strong>
+      The 2010 sequel, Last Window: The Secret of Cape West, is set a year
+      later in Kyle Hyde's own apartment building. It was released in Europe
+      and Japan but never officially in North America.
+    </div>
+    <div class="trivia-item">
+      <strong>Why 1979?</strong>
+      The period setting lets the game lean on its diners, payphones, pagers,
+      cassette tapes, and roadside neon. It is also old enough that everyone
+      in the building can be plausibly off the grid for a single night.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="divider">· · · · ·</div>
+  <h2 style="text-align: center;">If you've never played it</h2>
+  <p style="text-align: center; max-width: 700px; margin: 0 auto;">
+    Hotel Dusk is a quiet game. It rewards slow reading, sour humor, and a
+    willingness to let a conversation be uncomfortable. It is also, by the end
+    of its ten hours, one of the warmer stories on its console — a mystery
+    less interested in who did it than in who can still be helped.
+  </p>
+  <p style="text-align: center; max-width: 700px; margin: 2rem auto 0; font-style: italic; color: var(--sepia);">
+    Check in. Talk to everyone. Take notes.
+  </p>
+</section>
+
+<footer>
+  <p>
+    <strong style="color: #d4b870;">Hotel Dusk: Room 215</strong> was developed
+    by Cing and published by Nintendo in 2007 for the Nintendo DS. This page is
+    an unofficial fan-made companion guide, written as a descriptive overview
+    of the game's characters, setting, and design.
+  </p>
+  <p>
+    All trademarks, character names, and the underlying work belong to their
+    respective rights holders. No game dialogue is reproduced on this page.
+  </p>
+  <div class="small">
+    A SINGLE-NIGHT MYSTERY · 1979 · LOS ANGELES
+  </div>
+</footer>
+
+</body>
+</html>

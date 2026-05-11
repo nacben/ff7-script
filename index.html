@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Writer's Journey — A Guide to the Monomyth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf6ef;
+  --bg-cream: #f3ecde;
+  --bg-dark: #1a1612;
+  --bg-darker: #0f0d0a;
+  --ink: #2a241c;
+  --ink-soft: #4a4034;
+  --ink-muted: #786a58;
+  --gold: #b8893a;
+  --gold-bright: #d4a651;
+  --gold-deep: #8c6520;
+  --rust: #a04a2a;
+  --line: #d9cdb4;
+  --line-dark: #3a3128;
+  --serif: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold-deep); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--rust); }
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
+h3 { font-size: 1.4rem; margin-bottom: .6rem; }
+h4 { font-size: 1.15rem; }
+p { margin-bottom: 1rem; }
+em { font-style: italic; }
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(250, 246, 239, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.brand {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.nav-links { list-style: none; display: flex; gap: 1.6rem; flex-wrap: wrap; }
+.nav-links a {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  padding: 0.3rem 0;
+  cursor: pointer;
+}
+.nav-links a:hover { color: var(--gold-deep); }
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(184,137,58,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(160,74,42,0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #f8f1e0 0%, #f3ecde 100%);
+  z-index: -1;
+}
+.hero-content { max-width: 800px; position: relative; z-index: 1; }
+.kicker {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gold-deep);
+  margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  font-weight: 400;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+.hero-title em { font-style: italic; color: var(--gold-deep); font-weight: 300; }
+.hero-sub {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: var(--ink-soft);
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+}
+.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  padding: 0.95rem 2rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  transition: all 0.25s;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-primary:hover { background: var(--gold-deep); color: var(--bg); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 6px); }
+}
+
+/* SECTIONS */
+.section { padding: 6rem 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+.container.narrow { max-width: 780px; }
+.section-head { text-align: center; margin-bottom: 4rem; }
+.section-head .kicker { display: block; }
+.lede {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--ink-soft);
+  max-width: 680px;
+  margin: 1.2rem auto 0;
+  line-height: 1.55;
+}
+.section-dark { background: var(--bg-dark); color: #d8cfbe; }
+.section-dark h2, .section-dark h3 { color: #f3e8d0; }
+.section-dark .kicker { color: var(--gold-bright); }
+
+/* QUOTE */
+.quote-section { background: var(--bg-cream); padding: 5rem 2rem; text-align: center; }
+.pull-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  position: relative;
+  padding: 0 2rem;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.quote-mark {
+  font-size: 5rem;
+  font-family: var(--serif);
+  position: absolute;
+  top: -2rem;
+  left: -1rem;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+}
+.pull-quote cite {
+  display: block;
+  font-size: 0.95rem;
+  font-style: normal;
+  color: var(--ink-muted);
+  margin-top: 1.5rem;
+  font-family: var(--sans);
+  letter-spacing: 0.05em;
+}
+
+/* CARDS */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.card {
+  background: var(--bg);
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s;
+}
+.card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px -10px rgba(42,36,28,0.15);
+}
+.card-num {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.card h3 { margin-bottom: 0.8rem; }
+
+/* SPLIT */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+@media (max-width: 800px) { .split { grid-template-columns: 1fr; gap: 3rem; } }
+.split-text h2 { color: #f3e8d0; }
+.split-text p { color: #c4b9a4; margin-bottom: 1.2rem; }
+.split-text em { color: var(--gold-bright); font-style: italic; }
+
+/* CIRCLE */
+.circle-diagram { display: flex; justify-content: center; align-items: center; padding: 2rem; }
+.circle {
+  width: 340px; height: 340px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  position: relative;
+  display: flex; justify-content: center; align-items: center;
+}
+.circle::before { content: ""; position: absolute; inset: 14px; border: 0.5px solid rgba(184,137,58,0.3); border-radius: 50%; }
+.circle-center { text-align: center; font-family: var(--serif); font-size: 1.3rem; color: var(--gold-bright); font-style: italic; letter-spacing: 0.02em; }
+.label { position: absolute; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.25em; color: var(--gold-bright); font-weight: 500; }
+.label-top { top: -1.4rem; left: 50%; transform: translateX(-50%); }
+.label-right { right: -1.4rem; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: left center; }
+.label-bottom { bottom: -1.4rem; left: 50%; transform: translateX(-50%); }
+.label-left { left: -1.4rem; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: right center; }
+
+/* SECTION HEADER (within page) */
+.section-header {
+  padding: 5rem 2rem 3rem;
+  text-align: center;
+  background: var(--bg-cream);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.section-header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+.section-header .lede { margin-top: 1rem; }
+
+/* STAGES */
+.stages-list { max-width: 880px; margin: 0 auto; }
+.stage {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.stage:last-child { border-bottom: none; }
+.stage-num {
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+  font-weight: 400;
+}
+.stage-body h3 { margin-bottom: 0.6rem; font-size: 1.6rem; }
+.stage-act {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--bg);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+.stage-act.act-2 { background: var(--rust); }
+.stage-act.act-3 { background: var(--ink); }
+.stage-body p { color: var(--ink-soft); margin-bottom: 0.6rem; }
+.stage-example {
+  font-style: italic;
+  color: var(--ink-muted);
+  font-size: 0.94rem;
+  padding: 0.8rem 1rem;
+  background: var(--bg-cream);
+  border-left: 2px solid var(--gold);
+  margin-top: 0.8rem;
+}
+
+/* ARCHETYPES */
+.archetypes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.archetype {
+  background: var(--bg);
+  padding: 2.2rem;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.archetype::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--rust));
+}
+.archetype h3 { font-size: 1.45rem; margin-bottom: 0.5rem; display: flex; align-items: baseline; gap: 0.6rem; }
+.archetype-symbol { font-size: 1.8rem; color: var(--gold); }
+.archetype-role { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 0.8rem; }
+.archetype p { color: var(--ink-soft); margin-bottom: 0.7rem; }
+.archetype-examples { font-size: 0.88rem; color: var(--ink-muted); margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line); }
+
+/* ACTS */
+.acts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.act { padding: 2.5rem 2rem; background: var(--bg-cream); border-top: 4px solid var(--gold); }
+.act-2-block { border-top-color: var(--rust); }
+.act-3-block { border-top-color: var(--ink); }
+.act-roman { font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--gold-deep); margin-bottom: 0.4rem; }
+.act h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+.act p { color: var(--ink-soft); font-size: 0.97rem; }
+
+/* GUIDE */
+.guide-block {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.5rem;
+}
+.guide-block h3 { color: var(--gold-deep); margin-bottom: 0.8rem; }
+.prompt-list { list-style: none; padding: 0; }
+.prompt-list li {
+  padding: 0.8rem 0 0.8rem 2rem;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.prompt-list li::before {
+  content: "✎";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+.prompt-list li:last-child { border-bottom: none; }
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 0.6rem 0 0.6rem 1.8rem;
+  position: relative;
+  color: var(--ink-soft);
+}
+.checklist li::before {
+  content: "☐";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 1.15rem;
+  line-height: 1;
+  top: 0.6rem;
+}
+
+/* EXAMPLES */
+.example-card {
+  background: var(--bg-cream);
+  padding: 2.2rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--gold);
+}
+.example-card h3 { font-size: 1.55rem; margin-bottom: 0.3rem; }
+.example-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 1rem;
+}
+.example-card dl {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+.example-card dt { font-weight: 600; color: var(--ink); }
+.example-card dd { color: var(--ink-soft); }
+@media (max-width: 600px) {
+  .example-card dl { grid-template-columns: 1fr; gap: 0.2rem; }
+  .example-card dt { margin-top: 0.6rem; }
+  .stage { grid-template-columns: 60px 1fr; gap: 1rem; }
+  .stage-num { font-size: 2.2rem; }
+}
+
+/* TOC */
+.toc { background: var(--bg-cream); padding: 2rem; margin: 2rem 0 3rem; border-radius: 2px; }
+.toc h3 { margin-bottom: 1rem; color: var(--gold-deep); }
+.toc ul { list-style: none; padding: 0; columns: 2; column-gap: 2rem; }
+@media (max-width: 600px) { .toc ul { columns: 1; } }
+.toc li { padding: 0.35rem 0; font-size: 0.95rem; }
+.toc a { color: var(--ink); }
+.toc a:hover { color: var(--gold-deep); }
+
+/* PROSE */
+.prose {
+  max-width: 760px;
+  margin: 0 auto;
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.prose p { margin-bottom: 1.3rem; }
+.prose h2 { font-family: var(--serif); margin-top: 3rem; margin-bottom: 1rem; color: var(--ink); }
+.prose h3 { margin-top: 2rem; color: var(--ink); }
+.prose em { color: var(--gold-deep); }
+.prose strong { color: var(--ink); font-weight: 600; }
+.drop-cap::first-letter {
+  font-size: 4.5rem;
+  float: left;
+  line-height: 0.9;
+  padding-right: 0.6rem;
+  padding-top: 0.4rem;
+  font-family: var(--serif);
+  color: var(--gold-deep);
+  font-style: italic;
+}
+
+/* DIVIDER */
+.divider { text-align: center; margin: 3rem 0; color: var(--gold); letter-spacing: 1rem; font-size: 0.9rem; }
+.divider::before { content: "⟁  ⟁  ⟁"; }
+
+/* FOOTER */
+.footer { background: var(--bg-darker); color: #8a7d68; padding: 3rem 2rem; text-align: center; font-size: 0.9rem; }
+.footer em { color: #c4b9a4; }
+.footer-small { font-size: 0.78rem; margin-top: 1rem; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">⟁ The Writer's Journey</a>
+    <ul class="nav-links">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#monomyth">The Monomyth</a></li>
+      <li><a href="#stages">17 Stages</a></li>
+      <li><a href="#archetypes">Archetypes</a></li>
+      <li><a href="#writers">For Writers</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="top" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="kicker">An Educational Guide for Storytellers</p>
+    <h1 class="hero-title">The Writer's<br><em>Journey</em></h1>
+    <p class="hero-sub">Discover the universal pattern beneath every great story — Joseph Campbell's monomyth, distilled for the modern writer.</p>
+    <div class="hero-cta">
+      <a href="#monomyth" class="btn btn-primary">Begin the Journey</a>
+      <a href="#writers" class="btn btn-ghost">For Writers</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</header>
+
+<section class="quote-section">
+  <blockquote class="pull-quote">
+    <span class="quote-mark">"</span>
+    A hero ventures forth from the world of common day into a region of supernatural wonder; fabulous forces are there encountered, and a decisive victory is won; the hero comes back from this mysterious adventure with the power to bestow boons on his fellows.
+    <cite>— Joseph Campbell, <em>The Hero with a Thousand Faces</em> (1949)</cite>
+  </blockquote>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">What You'll Learn</p>
+      <h2>One Story, Told a Thousand Ways</h2>
+      <p class="lede">Joseph Campbell discovered that myths across cultures — from ancient Sumer to Polynesia, from the Buddha to King Arthur — share a single underlying structure. This guide teaches that structure as a living tool for writers.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card">
+        <div class="card-num">I</div>
+        <h3>The Pattern</h3>
+        <p>Explore the three great acts of every hero tale: Departure, Initiation, and Return. Understand why the same shape returns in every age and language.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">II</div>
+        <h3>The Stages</h3>
+        <p>Walk step-by-step through the seventeen stages Campbell mapped — from the Call to Adventure, through the Belly of the Whale, to the Freedom to Live.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">III</div>
+        <h3>The Craft</h3>
+        <p>Apply mythic structure to your novel, screenplay, or short story. Practical worksheets, character archetypes, and writing prompts await below.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="container">
+    <div class="split">
+      <div class="split-text">
+        <p class="kicker">Why It Matters</p>
+        <h2>The map beneath the story</h2>
+        <p>Campbell wasn't prescribing a formula — he was describing a discovery. The hero's journey is not a checklist but a deep grammar of transformation. Once you see it, you cannot unsee it. It shapes <em>Star Wars</em>, <em>The Odyssey</em>, <em>The Lord of the Rings</em>, <em>Harry Potter</em>, <em>Spirited Away</em>, and the quietest literary novels alike.</p>
+        <p>For writers, this knowledge is more than academic. It is a compass for when the draft drifts, a diagnostic when a scene falls flat, and a deep well of resonance when you reach the climax. Knowing the pattern lets you honor it — or break it with intention.</p>
+      </div>
+      <div class="split-art">
+        <div class="circle-diagram">
+          <div class="circle">
+            <span class="label label-top">DEPARTURE</span>
+            <span class="label label-right">INITIATION</span>
+            <span class="label label-bottom">RETURN</span>
+            <span class="label label-left">CALL</span>
+            <div class="circle-center"><span>The<br>Monomyth</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THE MONOMYTH ===================== -->
+<div id="monomyth" class="section-header">
+  <p class="kicker">Part One</p>
+  <h2>The Monomyth</h2>
+  <p class="lede">One story, told everywhere — the universal grammar of transformation.</p>
+</div>
+
+<section class="section">
+  <div class="prose">
+    <p class="drop-cap">In 1949, the comparative mythologist Joseph Campbell published a book that quietly rewrote how the modern world thinks about story. Drawing on Sanskrit scripture, Sumerian cuneiform, Native American folktales, Polynesian legend, Greek tragedy, Christian saints' lives, the Arabian Nights, and the depth psychology of Freud and Jung, Campbell argued that beneath the dazzling variety of the world's myths lies a single recurring pattern.</p>
+    <p>He borrowed a word from James Joyce to name it: the <em>monomyth</em>. One myth, taking a thousand faces.</p>
+    <p>The pattern is simple to state. A hero leaves the familiar world, crosses into a realm of trial and wonder, undergoes a transformation, and returns home changed — bearing some gift that the ordinary world needs. That is the whole arc. What makes the monomyth powerful is not its skeleton but its depth: each stage maps a psychological truth about how human beings grow, suffer, and become more than they were.</p>
+
+    <h2>The Three Acts</h2>
+    <p>Campbell divided the journey into three movements, which he called <strong>Departure</strong>, <strong>Initiation</strong>, and <strong>Return</strong>. Writers, screenwriters, and dramatists have long recognized in these three movements the bones of every well-told tale.</p>
+
+    <div class="acts">
+      <div class="act">
+        <div class="act-roman">I.</div>
+        <h3>Departure</h3>
+        <p>The hero is summoned out of ordinary life. A messenger arrives, an accident occurs, a longing rises — something tears the familiar fabric. After resistance, mentorship, and the crossing of a guarded threshold, the hero enters the unknown. This is the act of <em>leaving</em>.</p>
+      </div>
+      <div class="act act-2-block">
+        <div class="act-roman">II.</div>
+        <h3>Initiation</h3>
+        <p>In the strange new world, the hero faces trials. Allies and enemies appear. A great ordeal — symbolic death, confrontation with the deepest fear, union with the long-lost source — transforms them at the core. Knowledge or power is won. This is the act of <em>becoming</em>.</p>
+      </div>
+      <div class="act act-3-block">
+        <div class="act-roman">III.</div>
+        <h3>Return</h3>
+        <p>The transformed hero must come home. The journey back is its own trial: how to carry the gift across the threshold, how to speak the unspeakable to those who never left. The boon is delivered. This is the act of <em>integration</em>.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Why does the same story keep appearing?</h2>
+    <p>Campbell offered several answers, and modern readers can choose among them. Some scholars argue for <strong>diffusion</strong> — that the tales travelled with traders, missionaries, and migrating peoples, leaving deep deposits in every culture they touched. Others, following Carl Jung, see in the monomyth the work of the <em>collective unconscious</em>: a shared mental inheritance throwing up the same symbolic figures wherever human beings dream.</p>
+    <p>A simpler explanation, and perhaps the truest, is that the journey describes something every life contains. We are all born small and ignorant. We all face thresholds we did not choose. We all must, at some point, leave the safety of what we knew — through love, through loss, through ambition, through grief — and return changed, with something to give. Myth is not foreign to our experience. Myth is the shape of our experience told back to us in pictures large enough to hold its meaning.</p>
+
+    <h2>What the monomyth is not</h2>
+    <p>Three cautions are worth speaking aloud, because the hero's journey has sometimes been misunderstood — even, occasionally, by its enthusiasts.</p>
+    <p><strong>It is not a formula.</strong> Campbell did not give writers a paint-by-numbers kit. He described a deep structure that often surfaces — not a checklist every story must obey. The greatest works of literature use the pattern with extraordinary freedom: compressing it, inverting it, telling it from the villain's perspective, leaving stages out, doubling stages back. Mastery means understanding the pattern so well that you can depart from it on purpose.</p>
+    <p><strong>It is not only for men.</strong> Campbell wrote in a particular historical moment, and his prose often defaults to masculine pronouns and male exemplars. But the heroines of myth — Psyche, Inanna, Demeter, the Lady of Tubber Tintye, the unnumbered fairy-tale princesses who descend into the dark and rise again with treasure — are everywhere in the source material. Later writers (Maureen Murdock, Clarissa Pinkola Estés, and others) have mapped the journey afresh from women's experience. The pattern is human; it belongs to all who undertake the inward voyage.</p>
+    <p><strong>It is not always heroic in the swords-and-dragons sense.</strong> The hero may be a quiet protagonist who never raises a weapon. The "dragon" may be a memory, a marriage, an addiction, a country's silence about its past. The "elixir" may be a poem, a forgiveness, the courage to leave. Campbell's vocabulary is mythic because myth is the oldest map we have — but the territory it describes is always the inner life of a real person making a real change.</p>
+  </div>
+</section>
+
+<!-- ===================== THE 17 STAGES ===================== -->
+<div id="stages" class="section-header">
+  <p class="kicker">Part Two</p>
+  <h2>The Seventeen Stages</h2>
+  <p class="lede">A detailed map of the hero's journey — every threshold, every trial, every return. Use it as a compass, not a cage.</p>
+</div>
+
+<section class="section">
+  <div class="container narrow">
+    <div class="toc">
+      <h3>Contents</h3>
+      <ul>
+        <li><strong>Act I — Departure</strong></li>
+        <li><a href="#s1">1. The Call to Adventure</a></li>
+        <li><a href="#s2">2. Refusal of the Call</a></li>
+        <li><a href="#s3">3. Supernatural Aid</a></li>
+        <li><a href="#s4">4. Crossing the First Threshold</a></li>
+        <li><a href="#s5">5. The Belly of the Whale</a></li>
+        <li><strong>Act II — Initiation</strong></li>
+        <li><a href="#s6">6. The Road of Trials</a></li>
+        <li><a href="#s7">7. Meeting with the Goddess</a></li>
+        <li><a href="#s8">8. Temptation</a></li>
+        <li><a href="#s9">9. Atonement with the Father</a></li>
+        <li><a href="#s10">10. Apotheosis</a></li>
+        <li><a href="#s11">11. The Ultimate Boon</a></li>
+        <li><strong>Act III — Return</strong></li>
+        <li><a href="#s12">12. Refusal of the Return</a></li>
+        <li><a href="#s13">13. The Magic Flight</a></li>
+        <li><a href="#s14">14. Rescue from Without</a></li>
+        <li><a href="#s15">15. Crossing the Return Threshold</a></li>
+        <li><a href="#s16">16. Master of Two Worlds</a></li>
+        <li><a href="#s17">17. Freedom to Live</a></li>
+      </ul>
+    </div>
+
+    <div class="stages-list">
+      <article class="stage" id="s1">
+        <div class="stage-num">1</div>
+        <div class="stage-body">
+          <span class="stage-act">Act I · Departure</span>
+          <h3>The Call to Adventure</h3>
+          <p>Something disturbs the hero's ordinary world. A herald arrives — a phone call, a letter, a stranger, a wound, a dream — and the familiar life suddenly reveals an edge. Beyond that edge lies a realm the hero did not know existed, or had been careful to forget.</p>
+          <p>The call need not be grand. It can be the small intuition that this job, this marriage, this town is not the whole story. What matters is that the hero senses an opening.</p>
+          <div class="stage-example">Bilbo Baggins answers the door to Gandalf. Luke Skywalker finds Leia's message in R2-D2. Clarice Starling is summoned to interview Hannibal Lecter.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s2">
+        <div class="stage-num">2</div>
+        <div class="stage-body">
+          <span class="stage-act">Act I · Departure</span>
+          <h3>Refusal of the Call</h3>
+          <p>The hero says <em>no</em>. Fear, duty, inertia, sensible reasons — there are always sensible reasons — keep the hero pinned to the ordinary. Refusal is not weakness; it is the natural reaction of any creature asked to leave its shell. But sustained refusal turns the hero's world into a wasteland of unlived life.</p>
+          <p>For the writer, this stage establishes the cost of staying. We must feel what the hero would lose by accepting <em>and</em> by refusing.</p>
+          <div class="stage-example">Moses pleads that he is slow of speech. Frodo wishes the Ring had never come to him. Neo, in the alley, climbs back from the ledge.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s3">
+        <div class="stage-num">3</div>
+        <div class="stage-body">
+          <span class="stage-act">Act I · Departure</span>
+          <h3>Supernatural Aid</h3>
+          <p>Once the hero commits — or just before — a helper appears. A wise old woman, a hermit, a tinker, a talking animal, a fairy godmother. The mentor offers protection: an amulet, a sword, a piece of advice, a map. More than the gift, what the mentor offers is permission. <em>You are allowed to do this. You are not alone.</em></p>
+          <div class="stage-example">Athena guides Telemachus. Obi-Wan gives Luke his father's lightsaber. The Fairy Godmother dresses Cinderella. Mr. Miyagi waits with the wax.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s4">
+        <div class="stage-num">4</div>
+        <div class="stage-body">
+          <span class="stage-act">Act I · Departure</span>
+          <h3>Crossing the First Threshold</h3>
+          <p>The hero leaves the known world for the unknown. The threshold is always guarded — by a gatekeeper, a customs officer, a dragon at the gate, a parent at the door, the inner voice that says <em>turn back</em>. To pass, the hero must answer a question, defeat or befriend the guardian, or simply find the courage to step through.</p>
+          <p>Once crossed, the threshold cannot be uncrossed. The hero is now in a place where the old rules no longer apply.</p>
+          <div class="stage-example">Alice falls down the rabbit hole. Dorothy steps from sepia Kansas into Technicolor Oz. The Pevensie children push past the coats and feel snow under their feet.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s5">
+        <div class="stage-num">5</div>
+        <div class="stage-body">
+          <span class="stage-act">Act I · Departure</span>
+          <h3>The Belly of the Whale</h3>
+          <p>The hero is swallowed. The final transition out of the ordinary world is figured as a kind of death — a descent into darkness, captivity, dismemberment, or annihilation of the old self. This is not yet the great ordeal; it is the irrevocable severance from the person the hero used to be.</p>
+          <p>From here, there is no going back to who they were. The hero has been digested by the journey.</p>
+          <div class="stage-example">Jonah inside the great fish. Pinocchio swallowed by the whale. Neo swallowed by the white pod and unplugged from the Matrix.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s6">
+        <div class="stage-num">6</div>
+        <div class="stage-body">
+          <span class="stage-act act-2">Act II · Initiation</span>
+          <h3>The Road of Trials</h3>
+          <p>In the strange land, the hero is tested again and again. Each trial reveals a weakness and forges a new strength. Some are physical — monsters, riddles, races. Many are moral — temptations to betray, to lie, to give up. The hero usually fails some of these. That failure is part of the design. The road of trials is how the journey teaches.</p>
+          <div class="stage-example">Odysseus and the Cyclops, the Sirens, the cattle of the Sun. Psyche sorting seeds, gathering golden fleece, fetching water from the dragon-guarded spring. Hercules' twelve labors.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s7">
+        <div class="stage-num">7</div>
+        <div class="stage-body">
+          <span class="stage-act act-2">Act II · Initiation</span>
+          <h3>Meeting with the Goddess</h3>
+          <p>At the deepest point of the journey, the hero encounters a figure of unconditional love — an incarnation of the life-giving, world-mothering principle. The goddess may be a literal lover, a mentor, a vision, a moment of communion with the natural world. In her presence, the hero is recognized and seen whole.</p>
+          <p>This stage carries the message: <em>you are not separate. The world is not your enemy.</em></p>
+          <div class="stage-example">Dante meeting Beatrice in Paradise. Odysseus finding Penelope. Frodo in Lothlórien with Galadriel.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s8">
+        <div class="stage-num">8</div>
+        <div class="stage-body">
+          <span class="stage-act act-2">Act II · Initiation</span>
+          <h3>Temptation</h3>
+          <p>Sometimes translated as <em>Woman as Temptress</em>, this stage is better understood, especially today, as <em>the lure of comfort that would end the journey</em>. The hero meets something — pleasure, security, despair, easy power — that whispers <em>stop here</em>. The temptation is real, because what it offers is real. The hero must choose the harder path of continuing.</p>
+          <p>The temptress is not an indictment of love or of women; she is whatever within the hero wants to settle for less than the full transformation.</p>
+          <div class="stage-example">Odysseus tarrying with Calypso. The Buddha facing Mara's daughters. Frodo's moment with the Mirror of Galadriel.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s9">
+        <div class="stage-num">9</div>
+        <div class="stage-body">
+          <span class="stage-act act-2">Act II · Initiation</span>
+          <h3>Atonement with the Father</h3>
+          <p>The hero confronts the figure who holds ultimate authority — the father, the king, the law, the inner judge. This is the most psychologically charged stage. The "father" is the part of the self, and of the world, that says what is permitted. To win atonement, the hero must see that figure clearly, without the distortions of childhood fear or rebellion, and be seen in return.</p>
+          <p>It is not victory over the father. It is <em>at-one-ment</em> — coming to share, for a moment, the same view.</p>
+          <div class="stage-example">Luke unmasking Darth Vader on the second Death Star. Simba seeing Mufasa in the clouds. Telemachus reunited with Odysseus.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s10">
+        <div class="stage-num">10</div>
+        <div class="stage-body">
+          <span class="stage-act act-2">Act II · Initiation</span>
+          <h3>Apotheosis</h3>
+          <p>The hero is transfigured. The old self dies — sometimes literally — and a larger, more conscious self takes its place. The hero sees the unity behind the world's opposites: life and death, self and other, suffering and joy. They become, for a moment, divine — not in arrogance, but in the sense that the boundaries of the small self dissolve.</p>
+          <div class="stage-example">The Buddha's enlightenment beneath the Bodhi tree. Christ's transfiguration. Neo seeing the code beneath the Matrix.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s11">
+        <div class="stage-num">11</div>
+        <div class="stage-body">
+          <span class="stage-act act-2">Act II · Initiation</span>
+          <h3>The Ultimate Boon</h3>
+          <p>The hero attains the gift the journey was undertaken to win — the elixir, the grail, the secret name, the medicine, the knowledge, the freed princess. Often the boon is something the hero already carried inside them, now finally recognized. Sometimes it is wrested from a guardian in a final, decisive act.</p>
+          <p>This is the climax. The promise of the journey is fulfilled.</p>
+          <div class="stage-example">Prometheus returning with fire. The Grail won by Galahad. Frodo at the Crack of Doom — though here, beautifully, the boon is delivered by the hero's failure, not his success.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s12">
+        <div class="stage-num">12</div>
+        <div class="stage-body">
+          <span class="stage-act act-3">Act III · Return</span>
+          <h3>Refusal of the Return</h3>
+          <p>Having tasted transcendence, the hero is tempted to stay. Why go back to the ordinary world with its small concerns, its uncomprehending faces? Many heroes — many real people — never return. They remain in the cave with the vision, the monastery with the silence, the romance with the dream. Mythology does not condemn these refusals, but it marks them as incomplete.</p>
+          <div class="stage-example">The Buddha hesitating, after enlightenment, to teach. Saints who vanish into the desert. The artist who locks the masterpiece in a drawer.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s13">
+        <div class="stage-num">13</div>
+        <div class="stage-body">
+          <span class="stage-act act-3">Act III · Return</span>
+          <h3>The Magic Flight</h3>
+          <p>If the boon was won against the will of its guardian, the return becomes a chase. The hero flees, pursued by the powers of the deep, hurling magical objects behind them to slow the pursuit — a comb that becomes a forest, a mirror that becomes a lake. The flight is comic, frantic, and absolutely necessary; what we have won, the world tries to claim back.</p>
+          <div class="stage-example">Jason fleeing with the Golden Fleece. Indiana Jones outrunning the boulder. The fairy-tale child fleeing the witch's hut.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s14">
+        <div class="stage-num">14</div>
+        <div class="stage-body">
+          <span class="stage-act act-3">Act III · Return</span>
+          <h3>Rescue from Without</h3>
+          <p>Sometimes the hero cannot return alone. The transformation has been too complete; the boundary between worlds is too thick. Allies from the ordinary world must come and bring them back — sometimes against the hero's will. The rescue reminds us that no journey is purely solitary. We are returned to community by community.</p>
+          <div class="stage-example">Sam carrying Frodo up Mount Doom. Eurydice almost rescued from the underworld. Hansel and Gretel led home by the white bird.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s15">
+        <div class="stage-num">15</div>
+        <div class="stage-body">
+          <span class="stage-act act-3">Act III · Return</span>
+          <h3>Crossing the Return Threshold</h3>
+          <p>The hero must re-enter the ordinary world and somehow translate the gift into ordinary language. This is harder than the outward crossing. The old world has not changed; only the hero has. How do you speak of fire to those who have never been burned? How do you explain a dream over breakfast?</p>
+          <p>Many returning heroes are not believed, not understood, dismissed as mad or naive. The threshold must be crossed nevertheless.</p>
+          <div class="stage-example">Rip Van Winkle awakening to a world that has moved on. The astronaut returning to Earth. Plato's prisoner emerging from the cave.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s16">
+        <div class="stage-num">16</div>
+        <div class="stage-body">
+          <span class="stage-act act-3">Act III · Return</span>
+          <h3>Master of Two Worlds</h3>
+          <p>The fully realized hero learns to move freely between the two realms — the spiritual and the material, the inner and the outer, the timeless vision and the daily work. They are not lost in the marketplace, nor estranged from the mountaintop. The skill is not transcendence, but translation.</p>
+          <div class="stage-example">Christ ascending and yet promising to remain. The bodhisattva who returns from nirvana to teach. The artist who writes by morning and parents by afternoon.</div>
+        </div>
+      </article>
+
+      <article class="stage" id="s17">
+        <div class="stage-num">17</div>
+        <div class="stage-body">
+          <span class="stage-act act-3">Act III · Return</span>
+          <h3>Freedom to Live</h3>
+          <p>The journey ends in a particular kind of freedom — not freedom from life, but freedom <em>for</em> it. The hero no longer fears death, because they have already died and been reborn. They no longer cling to the past, because they have already lost everything they thought they were. They can be fully present in this moment, which is, after all, the only moment we ever have.</p>
+          <p>This is the boon for the writer too: a story that grants its readers, for a few hours, the same freedom.</p>
+          <div class="stage-example">Odysseus at home in Ithaca, the bow strung, the suitors gone, his wife restored, his land at peace. The end of every comedy. The deep stillness at the close of a great novel.</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ARCHETYPES ===================== -->
+<div id="archetypes" class="section-header">
+  <p class="kicker">Part Three</p>
+  <h2>The Archetypes</h2>
+  <p class="lede">Recurring figures who appear in every mythology — and in every well-built story. Learn to recognize them, and you will learn to populate your fiction with characters that feel inevitable.</p>
+</div>
+
+<section class="section">
+  <div class="container narrow">
+    <div class="prose">
+      <p>An archetype is not a stereotype. A stereotype is a flattened cliché; an archetype is a deep psychological function. The same archetype can wear a thousand costumes — wise old wizard, kindly grandmother, dying mother, library cat, AI assistant — and remain itself. What matters is the <em>role the figure plays in the hero's transformation</em>, not the surface details of who they are.</p>
+      <p>Below are the principal archetypes Campbell named, augmented with vocabulary from later writers such as Christopher Vogler and Carl Jung. Each is described twice: <em>what they do in the story</em>, and <em>what they represent in the psyche</em>.</p>
+    </div>
+
+    <div class="archetypes-grid">
+      <article class="archetype">
+        <div class="archetype-role">Protagonist</div>
+        <h3><span class="archetype-symbol">☉</span> The Hero</h3>
+        <p>The one through whose eyes we see, who undertakes the journey of change. The hero is not necessarily the strongest or most virtuous character; the hero is the one with the most to learn.</p>
+        <p>In the psyche, the hero is the part of us willing to leave the comfortable for the true — the ego in the process of becoming something larger.</p>
+        <p class="archetype-examples">Odysseus · Frodo · Jane Eyre · Mulan · Katniss</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Guide</div>
+        <h3><span class="archetype-symbol">☆</span> The Mentor</h3>
+        <p>The wise figure who offers gifts, warnings, and training. The mentor has often made the journey themselves and bears its scars. Their power is real, but limited — they cannot make the trip for the hero.</p>
+        <p>Internally, the mentor is the higher self, the still small voice, the accumulated wisdom of teachers we have known.</p>
+        <p class="archetype-examples">Athena · Gandalf · Obi-Wan · Mr. Miyagi · Dumbledore · the Fairy Godmother</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Gatekeeper</div>
+        <h3><span class="archetype-symbol">⌘</span> The Threshold Guardian</h3>
+        <p>Whoever stands at the edge of the unknown and tests the hero's commitment. Not the main villain — more like the bouncer at the door of the deeper story. Sometimes hostile, sometimes ambiguous, often simply doing their job.</p>
+        <p>The guardian is the part of us that asks: <em>are you serious about this?</em> Refused, the guardian becomes our enemy. Engaged respectfully, the guardian becomes our ally.</p>
+        <p class="archetype-examples">The Sphinx · Cerberus · the customs officer · the skeptical editor · the difficult first chapter</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Messenger</div>
+        <h3><span class="archetype-symbol">✦</span> The Herald</h3>
+        <p>The one who announces the call to adventure. The herald may be a person, an event, or an object. Often they appear briefly, deliver the summons, and disappear, having done their work.</p>
+        <p>In the psyche, the herald is whatever cracks open our complacency — a dream, a death in the family, a news report, a sudden longing we cannot name.</p>
+        <p class="archetype-examples">The white rabbit · Hagrid at the door · the letter under the saucer · the strange phone call</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Trickster</div>
+        <h3><span class="archetype-symbol">♆</span> The Shapeshifter</h3>
+        <p>A figure of ambiguous loyalty. We are never quite sure whose side they are on. They reveal new faces in every scene. Their function is to keep the hero — and the reader — uncertain, alert, paying attention.</p>
+        <p>The shapeshifter often represents the unfamiliar gender or hidden side of the hero's own nature, and the difficulty of trusting what we do not fully understand.</p>
+        <p class="archetype-examples">Loki · Hermes · Severus Snape · Han Solo (at first) · the unreliable lover</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Adversary</div>
+        <h3><span class="archetype-symbol">☾</span> The Shadow</h3>
+        <p>The antagonist, the dragon, the dark twin. Not necessarily evil — often the shadow is a version of the hero who took a different path, made a different choice, never grew. The shadow is most powerful when we see ourselves in it.</p>
+        <p>In the psyche, the shadow is everything we have disowned: our rage, our envy, our hunger, our cowardice. The hero who refuses to recognize their shadow remains forever its servant.</p>
+        <p class="archetype-examples">Darth Vader · Voldemort · Captain Ahab's whale · the Minotaur · the ex one cannot forgive</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Companion</div>
+        <h3><span class="archetype-symbol">♁</span> The Ally</h3>
+        <p>The friend, the partner, the loyal companion. The ally walks with the hero, shares the trials, sometimes carries them when they cannot walk. The ally also serves the writer's craft: someone for the hero to speak to, someone whose love we fear to lose.</p>
+        <p>The ally is the part of us that remembers we are not alone, the inner companion who survives when all the outer ones fall away.</p>
+        <p class="archetype-examples">Samwise Gamgee · Patroclus · Watson · Hermione · the dog at the foot of the bed</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Mystery</div>
+        <h3><span class="archetype-symbol">♀</span> The Goddess</h3>
+        <p>The figure of unconditional love, deep wisdom, life-giving abundance. The goddess sees the hero whole and welcomes them. The encounter is one of recognition rather than conquest.</p>
+        <p>In the psyche, this is the source — the original wholeness from which we came and toward which we move. The goddess is not always female; she is whatever incarnates the principle of being-loved-into-being.</p>
+        <p class="archetype-examples">Beatrice · Galadriel · Demeter · the grandmother in the kitchen · the sea</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Authority</div>
+        <h3><span class="archetype-symbol">♂</span> The Father / King</h3>
+        <p>The figure of law, judgment, order, and inheritance. The father may bless or curse, recognize or reject. The hero must, at some point, face him — not to defeat him, but to come to terms with what he represents.</p>
+        <p>Internally, this is the inner judge, the conscience, the voice that says what is allowed. Healing the relationship with this figure is one of the deepest tasks of a life.</p>
+        <p class="archetype-examples">King Lear · Mufasa · Darth Vader (also a shadow) · the high priest · the boss</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Fool</div>
+        <h3><span class="archetype-symbol">⚘</span> The Trickster-Clown</h3>
+        <p>The fool who turns out to be wise. The jester who tells the king truths no one else dares speak. The clown disrupts, deflates pomposity, opens locked doors with a sly question, and reminds the story not to take itself too seriously.</p>
+        <p>The trickster is the part of us that refuses to be solemn — and that, paradoxically, often delivers the real revelation.</p>
+        <p class="archetype-examples">Hermes · Coyote · Anansi · the Fool in <em>Lear</em> · Puck · Bugs Bunny</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Innocent</div>
+        <h3><span class="archetype-symbol">❀</span> The Child / Innocent</h3>
+        <p>The figure of purity, wonder, and vulnerability. The child reminds the hero what they are fighting for, and what they themselves once were. To protect the child is often the deepest motive of the journey.</p>
+        <p>In the psyche, the inner child is the still-living core of openness and play — the part the wounded adult tries to wall off but cannot afford to lose.</p>
+        <p class="archetype-examples">Tiny Tim · the children in <em>The Lion, the Witch and the Wardrobe</em> · Cosette · the inner self before the world taught it shame</p>
+      </article>
+
+      <article class="archetype">
+        <div class="archetype-role">Ruler</div>
+        <h3><span class="archetype-symbol">⚔</span> The Tyrant / Holdfast</h3>
+        <p>The shadow ruler — Holdfast, in Campbell's vivid name — who clings to power and refuses the cycle of renewal. The tyrant was once a hero; that is the tragedy. Their refusal to step aside turns the kingdom into a wasteland.</p>
+        <p>Inside, the tyrant is the rigid identity that will not allow new growth: the role, the certainty, the success that has become a prison.</p>
+        <p class="archetype-examples">King Minos · Macbeth · Sauron · the Wizard of Oz behind the curtain · the closed mind</p>
+      </article>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="prose">
+      <h2>How to use the archetypes</h2>
+      <p>A character may embody several archetypes at once, or different archetypes at different points in the story. Gandalf is the Mentor in <em>The Hobbit</em> and partly the Hero in <em>The Lord of the Rings</em>. Darth Vader begins as Shadow and ends, astonishingly, as the redeemed Father.</p>
+      <p>Treat archetypes as <em>functions</em>, not labels. Ask of each character in your draft: <em>what does this person do for the hero's transformation?</em> If the answer is unclear, that character may need sharpening or merging. If a stage of the journey lacks the figure it requires, you may need to invent one.</p>
+      <p>The deepest use of archetype, though, is this: every figure in the story is also a part of the hero's own self. The mentor is the wisdom they did not know they had. The shadow is the disowned hunger they must reclaim. The goddess is the love they cannot yet give themselves. Stories work on us because we are, secretly, every character in them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOR WRITERS ===================== -->
+<div id="writers" class="section-header">
+  <p class="kicker">Part Four</p>
+  <h2>For Writers</h2>
+  <p class="lede">Turning the map into a manuscript — practical craft notes, worksheets, and prompts for using the monomyth in your own work.</p>
+</div>
+
+<section class="section">
+  <div class="container narrow">
+    <div class="prose">
+      <h2>First, a warning</h2>
+      <p>The hero's journey is a powerful tool. It is also, in unimaginative hands, the surest road to a forgettable story. The pattern is everywhere because it is true to human experience — but a story that only fulfills the pattern, without surprising us inside it, will feel like a costume rather than a body.</p>
+      <p>Use the journey to <em>diagnose</em>, not to <em>generate</em>. Write the story you must write; then ask the monomyth what is missing, what is rushed, what is hiding in the wrong stage. The pattern is most useful when it reveals the shape your story was always trying to take.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="guide-block">
+      <h3>Starting Worksheet · Find Your Hero's Wound</h3>
+      <p>Every meaningful journey begins with a wound — an unresolved place in the hero's life that the call to adventure will press against. Before plotting the journey, answer these questions about your protagonist:</p>
+      <ul class="prompt-list">
+        <li>What does your hero believe about themselves that is not quite true?</li>
+        <li>What did they lose, miss, or fail to receive in childhood that still shapes them?</li>
+        <li>What are they pretending not to want?</li>
+        <li>What would the people who know them best say is their blind spot?</li>
+        <li>What is the lie they tell themselves to get through the day?</li>
+      </ul>
+      <p>The hero's wound is also the doorway. The call to adventure will pierce exactly here.</p>
+    </div>
+
+    <div class="guide-block">
+      <h3>Mapping Worksheet · Plot Your Stages</h3>
+      <p>Take a draft, an outline, or a vague idea and place it against the seventeen stages. Not every stage will land — some stories collapse the road of trials into a single scene, some begin already past the threshold. The goal is to see where energy is missing.</p>
+      <ul class="checklist">
+        <li>What is the ordinary world? Sketch it in one paragraph. What does it offer the hero? What does it deny them?</li>
+        <li>What is the call to adventure? Is it specific, embodied, unmistakable?</li>
+        <li>Who refuses, and why? If the hero leaps eagerly, where is the cost?</li>
+        <li>Who or what is the mentor? What single gift do they give that will matter later?</li>
+        <li>What is the threshold? Can you write the moment of crossing as a discrete scene?</li>
+        <li>What is the deepest trial? Have you earned it through enough smaller trials first?</li>
+        <li>What is the boon? Can the hero name it? Can the reader?</li>
+        <li>What is the cost of return? What does the hero have to give up to come home?</li>
+        <li>How is the ordinary world changed by the journey's end?</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>Prompts for the Stuck Writer</h3>
+      <p>Pick whichever question feels most uncomfortable to answer. That is usually the one your story needs.</p>
+      <ul class="prompt-list">
+        <li>If your hero refused the call entirely, what life would they live? Write that scene.</li>
+        <li>Write a letter from the mentor to the hero, sent five years before the story begins.</li>
+        <li>Describe the threshold guardian's morning. What do they want? Who do they love?</li>
+        <li>Write the temptation scene in which the hero almost gives up — and means it.</li>
+        <li>Imagine your antagonist as a hero in their own story. What is their call to adventure?</li>
+        <li>Write the moment, in the underworld, when your hero forgets why they came.</li>
+        <li>Write the elixir in the form of a single object the hero carries home in a pocket.</li>
+        <li>Write the scene, after the story ends, in which the hero tries to explain it to a child.</li>
+      </ul>
+    </div>
+
+    <div class="guide-block">
+      <h3>Craft Notes · Common Pitfalls</h3>
+      <p><strong>The Reluctant Hero who is too reluctant.</strong> Refusal of the call must have an end. A hero who spends the first hundred pages saying no will lose your reader. Once you have established the cost of leaving, push them across the threshold.</p>
+      <p><strong>The Mentor who solves the problem.</strong> If the mentor's gift is too powerful, the hero has nothing left to do. The mentor should equip, not rescue. Often the mentor dies, leaves, or proves unreliable precisely so the hero must stand alone in the final trial.</p>
+      <p><strong>The Trials that don't change anything.</strong> Each trial should cost the hero something or teach them something. If you could remove a trial without altering the next scene, it is decoration, not story.</p>
+      <p><strong>The Boon that's only an object.</strong> A magical artifact is fine, but a boon that is <em>only</em> a thing — and not also a self-knowledge, a reconciliation, a moral transformation — will feel hollow. Always ask: what has the hero become, that they were not at the beginning?</p>
+      <p><strong>The Return that is skipped.</strong> Many drafts end at the moment of triumph. But the return — the carrying of the gift back to the ordinary world — is often where the real meaning lives. Do not stop at the climax. Show us what is given.</p>
+    </div>
+
+    <div class="guide-block">
+      <h3>The Three-Sentence Test</h3>
+      <p>If you can finish these three sentences about your story, you have a working monomyth:</p>
+      <ol style="font-family: var(--serif); font-size: 1.15rem; padding-left: 1.5rem; color: var(--ink-soft);">
+        <li style="margin-bottom: 0.8rem;"><strong>At the start,</strong> my hero believes _______________, and lives a life shaped by that belief.</li>
+        <li style="margin-bottom: 0.8rem;"><strong>The call to adventure</strong> forces them to confront _______________, which they cannot do without becoming _______________.</li>
+        <li style="margin-bottom: 0.8rem;"><strong>By the end,</strong> they have brought home _______________, which transforms their ordinary world by _______________.</li>
+      </ol>
+      <p>If the blanks resist filling, the journey is not yet clear. Sit with the questions. The answers, once they come, will not only orient your plot — they will tell you whose story this really is.</p>
+    </div>
+
+    <div class="guide-block">
+      <h3>Subverting the Pattern</h3>
+      <p>Once you know the pattern, you may break it on purpose. Some of the most powerful stories do exactly this:</p>
+      <ul class="checklist">
+        <li><strong>The Hero Who Fails.</strong> What if the boon is never won? What if the journey teaches that the goal was wrong? (<em>Heart of Darkness</em>, <em>The Great Gatsby</em>.)</li>
+        <li><strong>The Anti-Return.</strong> What if the hero crosses the threshold and never comes back? (<em>Into the Wild</em>, many tragedies of exile.)</li>
+        <li><strong>The Endless Trials.</strong> What if there is no boon, only the dignity of continuing? (<em>Waiting for Godot</em>, <em>The Road</em>.)</li>
+        <li><strong>The Story Without a Hero.</strong> What if everyone is a hero in their own arc, and the novel is the music of their interweaving? (<em>Middlemarch</em>, <em>Mrs. Dalloway</em>.)</li>
+        <li><strong>The Recursive Journey.</strong> What if the journey is the same journey, told over and over, never quite reaching the boon? (<em>Groundhog Day</em>, the modernist novel of consciousness.)</li>
+      </ul>
+      <p>To subvert well, you must first know what you are subverting. The pattern is the silent backbeat against which your variation will sound.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="prose">
+      <h2>One last word</h2>
+      <p>Stories matter because they teach us how to die a little — how to leave who we were, become someone new, and bring the gift home. Every story you write is also, secretly, a journey you are taking. The hero's wound is your wound. The boon you give your reader is the one you most needed yourself.</p>
+      <p>This is why the work is hard. It is also why it is worth doing.</p>
+      <p>Now close the tab. Open the document. Begin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<div id="examples" class="section-header">
+  <p class="kicker">Part Five</p>
+  <h2>Examples in the Wild</h2>
+  <p class="lede">The same skeleton, wearing wildly different skin. Studying how varied stories embody — and bend — the pattern is the fastest way to internalize it.</p>
+</div>
+
+<section class="section">
+  <div class="container narrow">
+    <div class="prose">
+      <p>What follows are short structural readings of well-known stories. None of these readings claim to be the only way to see the work; they are demonstrations of how the monomyth provides one useful lens. Try reading your own favorite books and films this way. You will be surprised how often the bones are visible — and how often the most interesting stories deviate from them at the crucial moment.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <article class="example-card">
+      <p class="example-meta">Ancient Greek Epic</p>
+      <h3>The Odyssey</h3>
+      <p>The archetypal long-form hero's journey, told in reverse: we meet Odysseus already past the boon (the fall of Troy) and watch him struggle for the return. The whole poem is one extended Act III, with the trials of the road embedded as flashbacks and detours.</p>
+      <dl>
+        <dt>Call</dt><dd>The war's end — the longing for Ithaca.</dd>
+        <dt>Mentor</dt><dd>Athena, who shape-shifts to guide both Odysseus and his son Telemachus.</dd>
+        <dt>Belly of the Whale</dt><dd>The cave of the Cyclops; the descent to the underworld in Book XI.</dd>
+        <dt>Temptation</dt><dd>Calypso's promise of immortality; the lotus-eaters' forgetfulness.</dd>
+        <dt>Boon</dt><dd>Self-knowledge, the renewed marriage, the kingdom set right.</dd>
+        <dt>Return</dt><dd>Disguised as a beggar, Odysseus must re-cross the threshold of his own home unrecognized.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">Modern Fantasy</p>
+      <h3>The Lord of the Rings</h3>
+      <p>Tolkien's epic moves through every stage with care, but its great innovation is that the climactic boon is delivered through failure: at the Crack of Doom, Frodo cannot give up the Ring. The triumph is in spite of his collapse, not because of his strength. The pattern bends to a Christian-shaped grace.</p>
+      <dl>
+        <dt>Call</dt><dd>The Ring discovered to be Sauron's; Gandalf's arrival at Bag End.</dd>
+        <dt>Refusal</dt><dd>"I wish it need not have happened in my time."</dd>
+        <dt>Threshold</dt><dd>Leaving the Shire; the ferry at Bucklebury.</dd>
+        <dt>Mentor</dt><dd>Gandalf — who, true to form, "dies" so Frodo must continue alone.</dd>
+        <dt>Goddess</dt><dd>Galadriel in Lothlórien.</dd>
+        <dt>Shadow</dt><dd>Gollum, who is also a dark mirror of Frodo himself.</dd>
+        <dt>Return</dt><dd>The Scouring of the Shire — and Frodo's discovery that he cannot stay.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">Cinema · Science Fiction</p>
+      <h3>Star Wars (1977)</h3>
+      <p>The most famous example of the hero's journey applied deliberately to a screenplay. George Lucas read Campbell and used the pattern as scaffolding. Watch the film with the seventeen stages in hand and you can almost mark them off.</p>
+      <dl>
+        <dt>Ordinary World</dt><dd>Luke on Tatooine, dreaming of escape.</dd>
+        <dt>Call</dt><dd>Leia's message in R2-D2.</dd>
+        <dt>Refusal</dt><dd>"I can't get involved. I've got work to do."</dd>
+        <dt>Mentor</dt><dd>Obi-Wan and the lightsaber.</dd>
+        <dt>Threshold</dt><dd>The cantina at Mos Eisley.</dd>
+        <dt>Belly of the Whale</dt><dd>Caught in the Death Star's tractor beam.</dd>
+        <dt>Atonement</dt><dd>Reserved, brilliantly, for the third film of the trilogy.</dd>
+        <dt>Boon</dt><dd>The trench run — and Luke's trust in the Force.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">Animated Film</p>
+      <h3>Spirited Away</h3>
+      <p>Hayao Miyazaki's masterpiece is a textbook Departure-Initiation-Return, but cast as a girl's coming of age, with no swords and no slain dragons in the conventional sense. The "boon" is Chihiro's own restored agency and the freeing of her parents.</p>
+      <dl>
+        <dt>Ordinary World</dt><dd>The family car; Chihiro sullen in the back seat.</dd>
+        <dt>Threshold</dt><dd>The tunnel and the dry riverbed.</dd>
+        <dt>Belly of the Whale</dt><dd>Her parents become pigs; she is trapped in the bathhouse.</dd>
+        <dt>Mentor</dt><dd>Haku and Kamaji, both ambiguous helpers.</dd>
+        <dt>Shadow</dt><dd>No-Face, who mirrors the bathhouse's own greed.</dd>
+        <dt>Boon</dt><dd>Remembering her name; freeing Haku from his curse.</dd>
+        <dt>Return</dt><dd>Back through the tunnel; her parents none the wiser.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">Literary Novel</p>
+      <h3>Jane Eyre</h3>
+      <p>A heroine's journey of fierce interior development. The pattern is present but disguised in domestic and Gothic furniture. Jane crosses multiple thresholds — Gateshead, Lowood, Thornfield, Moor House, Ferndean — each a stage of self-possession.</p>
+      <dl>
+        <dt>Call</dt><dd>The advertisement for a governess.</dd>
+        <dt>Mentor</dt><dd>Helen Burns, who dies and leaves her wisdom in Jane.</dd>
+        <dt>Goddess / Shadow</dt><dd>Bertha Mason, the locked-away double of Jane's own passion.</dd>
+        <dt>Temptation</dt><dd>Marriage to Rochester on impossible terms.</dd>
+        <dt>Refusal of Return</dt><dd>The flight to the moors and St. John Rivers' counter-offer.</dd>
+        <dt>Boon</dt><dd>"Reader, I married him" — but only as an equal.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">Contemporary Novel</p>
+      <h3>Beloved</h3>
+      <p>Toni Morrison's novel uses the hero's journey at the deepest mythic level. Sethe's "ordinary world" is a haunted house; the "belly of the whale" is the past she has not been able to enter. The pattern is fragmented because the trauma is fragmented — and the boon, when it arrives, is the painful, necessary act of remembering.</p>
+      <dl>
+        <dt>Call</dt><dd>Paul D's arrival at 124.</dd>
+        <dt>Threshold</dt><dd>The literal incarnation of the dead daughter as Beloved.</dd>
+        <dt>Trials</dt><dd>The unfolding memories of Sweet Home, the schoolteacher, the milk.</dd>
+        <dt>Atonement</dt><dd>Community of women returning to the porch.</dd>
+        <dt>Boon</dt><dd>"This is not a story to pass on" — and yet, by telling it, it is passed on.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">Subverted Pattern</p>
+      <h3>The Great Gatsby</h3>
+      <p>An anti-monomyth. Gatsby believes himself the hero of a love story, but the journey he undertakes — to recapture a past, to reverse time — was always impossible. The "boon" turns out to be an illusion, the green light at the end of the dock. Fitzgerald uses the shape of the hero's journey to break our hearts with what it cannot deliver.</p>
+      <dl>
+        <dt>Call</dt><dd>Daisy's voice, "full of money."</dd>
+        <dt>Mentor</dt><dd>None — and that absence is the wound.</dd>
+        <dt>Trials</dt><dd>The accumulation of wealth, the curated parties.</dd>
+        <dt>Failure</dt><dd>The boon (Daisy) cannot be won, because she was never what he thought.</dd>
+        <dt>Anti-Return</dt><dd>Death in the pool. Only Nick crosses back to the ordinary world, changed.</dd>
+      </dl>
+    </article>
+
+    <article class="example-card">
+      <p class="example-meta">A Personal Journey</p>
+      <h3>Your Own Story</h3>
+      <p>The most important example. Somewhere in your life is a passage of change — a leaving, an ordeal, a returning. Try writing it through the seventeen stages. Not because every life fits the pattern neatly, but because the practice reveals which stages your imagination already knows by heart, and which ones you have not yet had to live.</p>
+      <p>The stages you cannot easily fill from your own experience are often the ones your fiction most needs to explore. The story you most need to tell is hiding in those blanks.</p>
+    </article>
+
+    <div class="divider"></div>
+
+    <div class="prose">
+      <h2>Read more</h2>
+      <p>For deeper study, return to the sources. Joseph Campbell's <em>The Hero with a Thousand Faces</em> (1949) is the foundational text — dense, learned, and rewarding. Christopher Vogler's <em>The Writer's Journey</em> translates the framework specifically for screenwriters. Maureen Murdock's <em>The Heroine's Journey</em> offers a complementary map drawn from women's psychological experience. Clarissa Pinkola Estés' <em>Women Who Run with the Wolves</em> tells the journey through wild, folkloric stories of feminine becoming. Carl Jung's writings on archetypes — particularly <em>The Archetypes and the Collective Unconscious</em> — supply the psychological foundation Campbell built upon.</p>
+      <p>And then, of course, read the myths themselves: Homer, the Eddas, the Mahabharata, the Bible, Ovid, the Arabian Nights, the folk tales of every people you can find. The pattern lives there, in its original wildness. The more deeply you drink from those wells, the more your own writing will taste of something old and true.</p>
+    </div>
+
+    <p style="text-align:center; margin-top:3rem;"><a href="#top" class="btn btn-primary">Return to the Beginning ↑</a></p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>An educational resource inspired by Joseph Campbell's <em>The Hero with a Thousand Faces</em> (1949).</p>
+    <p class="footer-small">This site offers original commentary and synthesis for educational purposes. For full study, read Campbell's book and the works named in the further-reading section above.</p>
+  </div>
+</footer>
+
+</body>
+</html>

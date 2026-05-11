@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HyperNormalisation — How We Got to This Strange Place</title>
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --bg-2:#101014;
+    --ink:#e9e6df;
+    --ink-dim:#a39e93;
+    --rule:#22232a;
+    --accent:#d94f2b;
+    --accent-2:#e6c068;
+    --accent-3:#5b7fb3;
+    --max:1180px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+    line-height:1.65;
+    font-size:18px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:var(--accent-2);text-decoration:none;border-bottom:1px dotted rgba(230,192,104,.4)}
+  a:hover{color:#fff;border-bottom-color:#fff}
+
+  /* === Top nav === */
+  nav.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,10,12,.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.top .wrap{
+    max-width:var(--max);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  nav.top .brand{font-weight:700;color:var(--ink)}
+  nav.top .brand span{color:var(--accent)}
+  nav.top ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  nav.top a{color:var(--ink-dim);border:none}
+  nav.top a:hover{color:#fff}
+  @media (max-width:760px){nav.top ul{display:none}}
+
+  /* === Hero === */
+  header.hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:80px 24px;
+    overflow:hidden;
+    background:
+      radial-gradient(1200px 600px at 20% 20%, rgba(217,79,43,.18), transparent 60%),
+      radial-gradient(900px 500px at 80% 80%, rgba(91,127,179,.18), transparent 60%),
+      linear-gradient(180deg, #050507 0%, #0a0a0c 100%);
+  }
+  header.hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px);
+    pointer-events:none;
+    mix-blend-mode:overlay;
+  }
+  .hero-inner{position:relative;z-index:2;max-width:980px;text-align:center}
+  .hero .kicker{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    letter-spacing:.4em;font-size:12px;color:var(--ink-dim);
+    text-transform:uppercase;margin-bottom:30px;
+  }
+  .hero h1{
+    font-family:"Iowan Old Style",Georgia,serif;
+    font-weight:400;
+    font-size:clamp(48px, 9vw, 116px);
+    line-height:.95;
+    letter-spacing:-.02em;
+    margin:0 0 28px;
+  }
+  .hero h1 .ital{font-style:italic;color:var(--accent-2)}
+  .hero .sub{
+    font-size:clamp(18px,2.2vw,24px);
+    color:var(--ink-dim);
+    max-width:720px;margin:0 auto 40px;
+    font-style:italic;
+  }
+  .hero .meta{
+    display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .hero .meta span b{display:block;color:var(--ink);font-weight:600;margin-top:4px;letter-spacing:.05em;text-transform:none;font-size:14px}
+  .scroll-cue{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    font-family:-apple-system,sans-serif;font-size:11px;letter-spacing:.3em;color:var(--ink-dim);
+    text-transform:uppercase;
+  }
+  .scroll-cue::after{
+    content:"";display:block;width:1px;height:40px;background:var(--ink-dim);
+    margin:14px auto 0;animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.2}50%{opacity:.9}}
+
+  /* === Section base === */
+  section{padding:100px 24px;position:relative}
+  .wrap{max-width:var(--max);margin:0 auto}
+  .narrow{max-width:780px;margin:0 auto}
+  .section-tag{
+    font-family:-apple-system,sans-serif;font-size:12px;letter-spacing:.4em;
+    color:var(--accent);text-transform:uppercase;margin-bottom:18px;
+  }
+  h2{
+    font-family:"Iowan Old Style",Georgia,serif;font-weight:400;
+    font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-.01em;
+    margin:0 0 28px;
+  }
+  h2 .ital{font-style:italic;color:var(--accent-2)}
+  h3{
+    font-family:"Iowan Old Style",Georgia,serif;font-weight:400;
+    font-size:clamp(24px,3vw,34px);margin:0 0 14px;
+  }
+  p{margin:0 0 1.1em}
+  .lede{font-size:1.18em;color:var(--ink);line-height:1.55}
+  .lede::first-letter{
+    font-size:3.4em;float:left;line-height:.85;padding:6px 12px 0 0;
+    font-style:italic;color:var(--accent);
+  }
+
+  /* Pull quote */
+  blockquote.pull{
+    margin:50px 0;padding:30px 36px;
+    border-left:3px solid var(--accent);
+    background:linear-gradient(90deg, rgba(217,79,43,.07), transparent);
+    font-style:italic;font-size:1.25em;line-height:1.45;
+  }
+  blockquote.pull cite{
+    display:block;margin-top:14px;font-style:normal;font-size:.7em;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);
+  }
+
+  /* === Concept hero panel === */
+  .concept{
+    background:linear-gradient(180deg,#0e0e12 0%, #0a0a0c 100%);
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  }
+  .definition{
+    background:#08080a;border:1px solid var(--rule);
+    padding:40px;margin:40px 0;position:relative;
+  }
+  .definition::before{
+    content:"DEFINITION";position:absolute;top:-10px;left:24px;
+    background:var(--bg);padding:0 12px;font-size:11px;letter-spacing:.3em;
+    color:var(--accent);font-family:-apple-system,sans-serif;
+  }
+  .definition .word{
+    font-size:42px;font-style:italic;margin-bottom:8px;color:var(--accent-2);
+  }
+  .definition .pron{color:var(--ink-dim);font-size:14px;margin-bottom:18px}
+
+  /* === Timeline === */
+  .timeline{
+    position:relative;padding:30px 0;
+  }
+  .timeline::before{
+    content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+    background:var(--rule);transform:translateX(-50%);
+  }
+  .tl-item{
+    display:grid;grid-template-columns:1fr 80px 1fr;gap:20px;align-items:start;
+    margin-bottom:60px;position:relative;
+  }
+  .tl-year{
+    text-align:center;font-family:-apple-system,sans-serif;
+    font-size:14px;letter-spacing:.15em;color:var(--accent);
+    background:var(--bg);padding:6px 0;border:1px solid var(--rule);border-radius:2px;
+    position:relative;z-index:2;
+  }
+  .tl-card{
+    background:#0e0e12;border:1px solid var(--rule);padding:22px 24px;
+  }
+  .tl-card h4{margin:0 0 8px;font-size:20px;font-family:"Iowan Old Style",Georgia,serif;font-weight:400;color:var(--accent-2)}
+  .tl-card p{margin:0;color:var(--ink-dim);font-size:15px;line-height:1.55}
+  .tl-item.left .tl-card{grid-column:1}
+  .tl-item.left .tl-spacer{grid-column:3}
+  .tl-item.right .tl-spacer{grid-column:1}
+  .tl-item.right .tl-card{grid-column:3}
+  @media (max-width:760px){
+    .timeline::before{left:20px}
+    .tl-item{grid-template-columns:50px 1fr;gap:14px}
+    .tl-year{grid-column:1;font-size:11px;padding:4px 0}
+    .tl-card,.tl-item.left .tl-card,.tl-item.right .tl-card{grid-column:2}
+    .tl-spacer{display:none}
+  }
+
+  /* === Figure cards === */
+  .figures{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;
+    margin-top:40px;
+  }
+  .fig{
+    background:#0e0e12;border:1px solid var(--rule);padding:28px;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .fig:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .fig .role{
+    font-family:-apple-system,sans-serif;font-size:11px;letter-spacing:.25em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+  }
+  .fig h4{
+    margin:0 0 6px;font-family:"Iowan Old Style",Georgia,serif;font-weight:400;
+    font-size:26px;color:var(--ink);
+  }
+  .fig .years{color:var(--ink-dim);font-size:13px;margin-bottom:14px;font-style:italic}
+  .fig p{margin:0;font-size:15px;color:var(--ink-dim);line-height:1.55}
+
+  /* === Threads (large reading sections) === */
+  .thread{
+    border-top:1px solid var(--rule);
+  }
+  .thread .sup{
+    font-family:-apple-system,sans-serif;font-size:11px;letter-spacing:.4em;
+    color:var(--ink-dim);text-transform:uppercase;margin-bottom:12px;
+  }
+  .thread .grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;
+  }
+  @media (max-width:900px){.thread .grid{grid-template-columns:1fr;gap:30px}}
+  .thread .sticky{position:sticky;top:90px}
+  .thread .num{
+    font-family:"Iowan Old Style",Georgia,serif;font-style:italic;font-size:14px;
+    letter-spacing:.3em;color:var(--accent);margin-bottom:14px;
+  }
+  .body p{font-size:17px;color:#cfccc4}
+  .body p:first-of-type::first-letter{
+    font-size:3em;float:left;line-height:.9;padding:4px 10px 0 0;
+    color:var(--accent);font-style:italic;
+  }
+
+  /* === Concept grid === */
+  .concepts{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;
+    background:var(--rule);border:1px solid var(--rule);
+  }
+  .concepts > div{
+    background:#0c0c10;padding:30px;
+  }
+  .concepts h4{
+    margin:0 0 8px;color:var(--accent-2);
+    font-family:"Iowan Old Style",Georgia,serif;font-weight:400;font-size:22px;
+  }
+  .concepts p{margin:0;font-size:15px;color:var(--ink-dim);line-height:1.55}
+
+  /* === Annotated quote === */
+  .annot{
+    background:linear-gradient(180deg,#0d0d11 0%, #0a0a0c 100%);
+    padding:60px 40px;margin:40px 0;border:1px solid var(--rule);
+  }
+  .annot .q{
+    font-family:"Iowan Old Style",Georgia,serif;font-style:italic;
+    font-size:clamp(22px,3vw,30px);line-height:1.4;color:var(--ink);
+    max-width:780px;margin:0 auto 22px;text-align:center;
+  }
+  .annot .src{
+    text-align:center;font-size:12px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--ink-dim);font-family:-apple-system,sans-serif;
+  }
+
+  /* === Glossary === */
+  dl.glossary{margin:0}
+  dl.glossary dt{
+    font-style:italic;font-size:1.25em;color:var(--accent-2);
+    margin-top:32px;margin-bottom:6px;
+  }
+  dl.glossary dd{
+    margin:0;color:var(--ink-dim);font-size:16px;line-height:1.6;
+    padding-left:18px;border-left:2px solid var(--rule);
+  }
+
+  /* === Footer === */
+  footer{
+    background:#050507;border-top:1px solid var(--rule);
+    padding:60px 24px 40px;color:var(--ink-dim);font-size:14px;
+  }
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px}
+  footer h5{color:var(--ink);font-family:-apple-system,sans-serif;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin:0 0 10px}
+  footer p{margin:0 0 6px;font-size:13px;line-height:1.55}
+
+  /* small helpers */
+  .hr-fade{
+    height:1px;background:linear-gradient(90deg,transparent,var(--rule),transparent);
+    border:0;margin:0;
+  }
+  .label{
+    display:inline-block;padding:4px 10px;background:rgba(217,79,43,.12);
+    color:var(--accent);font-family:-apple-system,sans-serif;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    border:1px solid rgba(217,79,43,.3);margin-bottom:18px;
+  }
+
+  /* Two columns reading */
+  .two-col{
+    column-count:2;column-gap:50px;
+  }
+  @media (max-width:760px){.two-col{column-count:1}}
+  .two-col p{break-inside:avoid}
+
+  /* Index list */
+  ol.index{
+    counter-reset:idx;list-style:none;padding:0;margin:40px 0 0;
+    border-top:1px solid var(--rule);
+  }
+  ol.index li{
+    counter-increment:idx;
+    padding:22px 4px;border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:baseline;
+  }
+  ol.index li::before{
+    content:counter(idx,decimal-leading-zero);
+    font-family:-apple-system,sans-serif;font-size:13px;color:var(--accent);letter-spacing:.1em;
+  }
+  ol.index li .t{font-family:"Iowan Old Style",Georgia,serif;font-size:20px;color:var(--ink)}
+  ol.index li .y{color:var(--ink-dim);font-size:13px;letter-spacing:.15em;font-family:-apple-system,sans-serif}
+
+  /* Tag scrolling banner */
+  .marquee{
+    overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    padding:14px 0;background:#070709;
+  }
+  .marquee .track{
+    display:inline-flex;white-space:nowrap;animation:scroll 60s linear infinite;
+    font-family:-apple-system,sans-serif;font-size:12px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--ink-dim);
+  }
+  .marquee .track span{padding:0 30px;border-right:1px solid var(--rule)}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand">Hyper<span>Normal</span>isation</div>
+    <ul>
+      <li><a href="#concept">Concept</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#figures">Figures</a></li>
+      <li><a href="#threads">Threads</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">A Study Companion · Adam Curtis · 2016</div>
+    <h1>Hyper<span class="ital">Normal</span>isation</h1>
+    <p class="sub">“We live in a strange time. Extraordinary events keep happening that undermine the stability of our world — yet those in control seem unable to deal with them, and no-one has any vision of a different or a better kind of future.”</p>
+    <div class="meta">
+      <span>Runtime<b>2h 46m</b></span>
+      <span>Span<b>1975 – 2016</b></span>
+      <span>Director<b>Adam Curtis</b></span>
+      <span>Form<b>Collage Documentary</b></span>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>New York 1975</span><span>The retreat</span><span>Damascus</span><span>Kissinger's balance</span><span>Constructive ambiguity</span><span>The fake world</span><span>Cyberspace</span><span>The human bomb</span><span>Perception management</span><span>Aladdin</span><span>Eliza</span><span>Filter bubbles</span><span>Non-linear war</span><span>Surkov</span><span>Brexit</span><span>Trump</span>
+    <span>New York 1975</span><span>The retreat</span><span>Damascus</span><span>Kissinger's balance</span><span>Constructive ambiguity</span><span>The fake world</span><span>Cyberspace</span><span>The human bomb</span><span>Perception management</span><span>Aladdin</span><span>Eliza</span><span>Filter bubbles</span><span>Non-linear war</span><span>Surkov</span><span>Brexit</span><span>Trump</span>
+  </div>
+</div>
+
+<!-- ===== CONCEPT ===== -->
+<section id="concept" class="concept">
+  <div class="wrap narrow">
+    <div class="section-tag">I · The Core Idea</div>
+    <h2>A simpler version of the world, <span class="ital">because the simplicity was reassuring.</span></h2>
+
+    <p class="lede">Over the past forty years, the film argues, politicians, financiers and technological utopians — rather than face up to the real complexities of the world — retreated. In their place they constructed a simpler version of reality in order to hang on to power. And, because the simplicity was reassuring, all of us went along with it. Even those who thought they were attacking the system became part of the trickery, because they too had retreated into the make-believe world.</p>
+
+    <div class="definition">
+      <div class="word">hyper·normal·isation</div>
+      <div class="pron">/ˌhʌɪpə(r)ˌnɔːm(ə)lʌɪˈzeɪʃ(ə)n/ &nbsp;·&nbsp; noun</div>
+      <p>A term coined by the anthropologist <em>Alexei Yurchak</em> to describe the late Soviet Union: a society in which everyone knew the system was failing, but because no-one could imagine an alternative, everyone played along — pretending the fake was real. The fakeness becomes <em>hypernormal</em>: so embedded that it is impossible to see beyond it.</p>
+    </div>
+
+    <blockquote class="pull">
+      “You were so much a part of the system that it was impossible to see beyond it. The fakeness was hypernormal.”
+      <cite>— Narration, on the late Soviet experience</cite>
+    </blockquote>
+
+    <p>This site is a companion to Adam Curtis's 2016 documentary. It maps the film's central characters, dates, ideas and threads — from the New York fiscal crisis of 1975 and the suicide-bomb politics of Damascus, to BlackRock's risk computer, the dream of cyberspace, and the shape-shifting politics of Trump, Surkov and Brexit. Use it as a study aid, a glossary, or a way back into the argument.</p>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="narrow">
+      <div class="section-tag">II · A Timeline of the Retreat</div>
+      <h2>1975 – 2016</h2>
+      <p class="lede">Two cities, one moment. The story begins in <em>New York</em> and <em>Damascus</em> in 1975 — when two ideas about how to run the world without politics first took hold. From there, the threads unspool for forty years.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>The New York Fiscal Crisis</h4>
+          <p>The banks refuse to roll over the city's debt. President Ford declines to help. A nine-member committee — eight bankers — takes control of the city's finances and imposes austerity. The financial system begins to run society.</p>
+        </div>
+        <div class="tl-year">1975 · NYC</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">1975 · Damascus</div>
+        <div class="tl-card">
+          <h4>Kissinger versus Assad</h4>
+          <p>In a series of confrontations, Henry Kissinger plays "constructive ambiguity," fracturing the Arab world to keep his global balance of power stable. President Hafez al-Assad realises he has been betrayed. The retreat into revenge begins.</p>
+        </div>
+      </div>
+
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>Stalker, the Strugatskys, the Zone</h4>
+          <p>In a stagnant USSR, science-fiction writers Arkady and Boris Strugatsky describe a world where shadows move the wrong way and reality is unstable. Tarkovsky films <em>Stalker</em>. The mood seeps westward.</p>
+        </div>
+        <div class="tl-year">1979</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">1982 – 83</div>
+        <div class="tl-card">
+          <h4>The Human Bomb</h4>
+          <p>Ayatollah Khomeini reinterprets martyrdom; tens of thousands of Iranian boys are sent into Iraqi minefields. Assad takes the idea and weaponises it through Hezbollah. Two truck bombs in Beirut kill 241 US marines. Reagan withdraws.</p>
+        </div>
+      </div>
+
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>Reagan, Gaddafi, Perception Management</h4>
+          <p>Unable to face Syria, the US attacks Libya instead — "a soft target." Gaddafi is built into a fake global supervillain. The administration coins <em>perception management</em>: facts become something to handle, not to obey.</p>
+        </div>
+        <div class="tl-year">1986</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">1989 – 91</div>
+        <div class="tl-card">
+          <h4>The Soviet Collapse</h4>
+          <p>The empire implodes. None of the experts see it coming. In its wake, the German thinker Ulrich Beck describes a "runaway world": politics shrinks from ambition to risk management.</p>
+        </div>
+      </div>
+
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>Cyberspace as Utopia</h4>
+          <p>John Perry Barlow publishes <em>A Declaration of the Independence of Cyberspace</em>. The radicals retreat from the world into the network. Two hackers — Phiber Optik and Acid Phreak — try to warn that corporations are watching.</p>
+        </div>
+        <div class="tl-year">1996</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">1996 onward</div>
+        <div class="tl-card">
+          <h4>Hamas and the suicide wave</h4>
+          <p>Israel deports 415 Hamas militants to Lebanon, where they learn from Hezbollah. The technique jumps from Shia to Sunni. A wave of attacks destroys the peace process; Netanyahu takes power.</p>
+        </div>
+      </div>
+
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>9/11</h4>
+          <p>Suicide bombing, on a continental scale. The complex politics that produced it is replaced by a simple story of evil tyrants and rogue states.</p>
+        </div>
+        <div class="tl-year">2001</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">2003 – 04</div>
+        <div class="tl-card">
+          <h4>Iraq, and the source from <em>The Rock</em></h4>
+          <p>MI6 reports nerve agents in "linked hollow glass spheres" — a detail from a 1996 Sean Connery film. The line between intelligence and fiction dissolves. Bashar al-Assad pipelines foreign fighters into Iraq; al-Qaeda turns suicide bombing on Shi'ites.</p>
+        </div>
+      </div>
+
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>Gaddafi Rehabilitated</h4>
+          <p>Tony Blair flies to a desert tent. PR firms reframe the colonel as a "modern world thinker." Lord Giddens finds his ideas "intelligent and perceptive." Gaddafi confesses to a bombing many believe Syria committed.</p>
+        </div>
+        <div class="tl-year">2004 – 09</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">2008</div>
+        <div class="tl-card">
+          <h4>The Crash, and No Consequences</h4>
+          <p>The banks are saved; almost no-one is prosecuted. Inequality grows. The system cannot be allowed to destabilise. Something begins to fester outside the dream.</p>
+        </div>
+      </div>
+
+      <div class="tl-item left">
+        <div class="tl-card">
+          <h4>Occupy, Tahrir, Arab Spring</h4>
+          <p>Leaderless networks gather millions. But the network can summon a crowd; it cannot supply a vision. In Egypt, the Muslim Brotherhood rushes in; then the military returns, welcomed back with laser pens.</p>
+        </div>
+        <div class="tl-year">2011 – 13</div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item right">
+        <div class="tl-spacer"></div>
+        <div class="tl-year">2014 – 16</div>
+        <div class="tl-card">
+          <h4>Non-linear War, Brexit, Trump</h4>
+          <p>Vladislav Surkov funds every side at once. Putin's troops arrive in Syria and never quite leave. Donald Trump shape-shifts past the journalists. Britain votes leave. The fake world wobbles, but does not yet break.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FIGURES ===== -->
+<section id="figures" style="background:#0c0c10">
+  <div class="wrap">
+    <div class="narrow">
+      <div class="section-tag">III · Dramatis Personae</div>
+      <h2>The cast of <span class="ital">a world without politics.</span></h2>
+      <p class="lede">Curtis tells the story through a small repertoire of figures — bankers, technologists, dictators, hackers, hippies and theorists — whose decisions, fantasies and resentments thread through forty years. Each helped, in different ways, to either build the simplified world or to expose it.</p>
+    </div>
+
+    <div class="figures">
+      <div class="fig">
+        <div class="role">Statesman · United States</div>
+        <h4>Henry Kissinger</h4>
+        <div class="years">b. 1923 · Secretary of State</div>
+        <p>Imported Cold War systems thinking into diplomacy. Treated the world as an interconnected machine to be kept in balance. His "constructive ambiguity" in 1975 broke Assad's trust in the West — and released, Assad warned, "demons hidden under the surface of the Arab world."</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">President · Syria</div>
+        <h4>Hafez al-Assad</h4>
+        <div class="years">1930 – 2000</div>
+        <p>Wanted a unified Arab world that could stand up to the West. After Kissinger's betrayal, retreated into a palace above Damascus and into "a brutal, vengeful" politics of revenge. Brought the suicide bomb out of Iran and used it as a proxy weapon.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Real-estate developer · Celebrity</div>
+        <h4>Donald Trump</h4>
+        <div class="years">b. 1946</div>
+        <p>Negotiated New York's largest-ever tax break from a city on its knees. Lost his empire to the banks. Re-emerged as a brand and, eventually, as a politician whose campaign weaponised the very disbelief that the system had cultivated for forty years.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Ayatollah · Iran</div>
+        <h4>Ruhollah Khomeini</h4>
+        <div class="years">1902 – 1989</div>
+        <p>Reinterpreted Shia martyrdom into an offensive weapon — telling followers they could choose the time of their own deaths if they killed many enemies in the process. The seed of modern suicide bombing.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Colonel · Libya</div>
+        <h4>Muammar Gaddafi</h4>
+        <div class="years">1942 – 2011</div>
+        <p>An isolated, theatrical revolutionary whom the Reagan administration inflated into a global supervillain — and whom Tony Blair, two decades later, rehabilitated into a "modern world thinker." Killed by a drone-led rebel mob in 2011, beside the ruins of a house the Americans had bombed in 1986.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Songwriter · Cyber-utopian</div>
+        <h4>John Perry Barlow</h4>
+        <div class="years">1947 – 2018</div>
+        <p>Wrote for the Grateful Dead; co-founded the EFF; declared cyberspace independent of governments in 1996. Imagined the internet as the place radical dreams could come true — and so helped make it a place where retreat replaced political action.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Novelist</div>
+        <h4>William Gibson</h4>
+        <div class="years">b. 1948</div>
+        <p>Coined "cyberspace" in 1982. His novels imagined the network as a place of corporate brutality, not liberation. The hackers Phiber Optik and Acid Phreak believed Gibson — not Barlow — had got the future right.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Founder · BlackRock</div>
+        <h4>Larry Fink</h4>
+        <div class="years">b. 1952</div>
+        <p>Sacked in 1986 after losing $100m, he built Aladdin: a computer that watches the world and moves assets to avoid surprise. It now guides ~7% of global wealth — a private machine for managing the future.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Computer Scientist · MIT</div>
+        <h4>Joseph Weizenbaum</h4>
+        <div class="years">1923 – 2008</div>
+        <p>Built ELIZA in 1966 as a parody. Discovered, with horror, that people poured their lives into the machine. Showed that in an age of individualism, a mirror is more soothing than a person.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Political Technologist · Kremlin</div>
+        <h4>Vladislav Surkov</h4>
+        <div class="years">b. 1964</div>
+        <p>Imported avant-garde theatre into politics. Funded fascists and anti-fascists, liberals and neo-Nazis — and let everyone know it. "A ceaseless shape-shifting that is unstoppable because it is indefinable."</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Sociologist · West Germany</div>
+        <h4>Ulrich Beck</h4>
+        <div class="years">1944 – 2015</div>
+        <p>Described the post-Cold War "runaway world": a society too complex and dangerous to be steered toward a better future. Politicians, he warned, would shrink to managing risk — peering nervously into the dark ahead.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Singer · Witness</div>
+        <h4>Patti Smith</h4>
+        <div class="years">b. 1946</div>
+        <p>"I could not identify with the political movements any longer." The mid-70s New York radical whose "cool detachment" stood in for a generation's retreat from collective action into individual self-expression.</p>
+      </div>
+
+      <div class="fig">
+        <div class="role">Jihadi strategist</div>
+        <h4>Abu Musab al-Suri</h4>
+        <div class="years">b. 1958</div>
+        <p>Argued that bin Laden was wrong to hit the West head-on. Advocated small, random, civilian attacks by lone actors — to spread fear, doubt and uncertainty, and corrode the credibility of Western politics. Many of his predictions came true.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THREADS ===== -->
+<section id="threads">
+  <div class="wrap narrow">
+    <div class="section-tag">IV · The Threads</div>
+    <h2>Five strands of <span class="ital">the same retreat.</span></h2>
+    <p class="lede">The film is not a single story but a collage of threads that twist around each other. Each one starts somewhere ordinary — a city in trouble, a chat program, an LSD party — and ends in something that we now recognise as the texture of our daily lives.</p>
+  </div>
+
+  <!-- thread 1 -->
+  <article class="thread" style="margin-top:60px">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="sticky">
+            <div class="num">Thread 01</div>
+            <span class="label">Finance Takes the Wheel</span>
+            <h3>New York, 1975: when the banks stopped showing up.</h3>
+          </div>
+        </div>
+        <div class="body">
+          <p>For thirty years, New York's politicians had borrowed steadily to fund welfare and services. As the middle class fled in the early 1970s, the tax base went with them — and the banks lent more, until the day they didn't. At a routine bond auction in 1975, no buyer appeared. The meeting was rescheduled; then rescheduled again.</p>
+
+          <p>President Ford refused to help. A new committee — eight bankers, one outsider — took control of the city's finances. Teachers, policemen and firemen were sacked. The bankers told the city that this was not negotiation: it was the logic of the market, with which one cannot bargain.</p>
+
+          <p>No-one resisted. The radicals who, a decade earlier, had dreamt of revolution had moved into Manhattan's abandoned buildings and turned inward. <em>"I could not identify with the political movements any longer,"</em> Patti Smith said. Self-expression replaced collective action. Donald Trump, meanwhile, saw an opportunity, negotiated the city's largest-ever tax break, and began rebuilding the skyline for the rich.</p>
+
+          <p>The lesson of 1975 was simple, and it would echo down forty years: <em>shifting paper around can produce more money in a single transaction than fixing a city ever will</em>. Politics had ceded the wheel to finance, and almost nobody complained.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- thread 2 -->
+  <article class="thread">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="sticky">
+            <div class="num">Thread 02</div>
+            <span class="label">The Human Bomb</span>
+            <h3>From Khomeini's minefields to a discothèque in Berlin.</h3>
+          </div>
+        </div>
+        <div class="body">
+          <p>Suicide is forbidden in the Koran. Martyrdom, traditionally, is something <em>chosen for you</em> — by God, on the battlefield. Ayatollah Khomeini changed this. Facing Iraqi tanks supplied by the United States, he told tens of thousands of schoolboys that the ultimate penitence was not to whip oneself in the procession of Husayn but to walk, deliberately, into a minefield.</p>
+
+          <p>Hafez al-Assad of Syria took this idea and turned it into a foreign-policy instrument. Through the new militant group Hezbollah, two trucks were driven into the US Marine barracks in Beirut in October 1983; 241 Americans died. Within four months Reagan had withdrawn from Lebanon, "paralysed," in George Shultz's words, "by the complexity that we faced."</p>
+
+          <p>The weapon then mutated. In 1992 Israel deported 415 Hamas militants to a Lebanese mountainside controlled by Hezbollah. They spent six months there. They came back with the technique, and an Egyptian theologian, Sheikh Qaradawi, with the ruling that justified it. The wave of bombs that followed destroyed the very thing Assad had originally said he wanted: a political solution for the Palestinians.</p>
+
+          <p>By 2003, foreign fighters were funnelled through Syria to kill Americans in Iraq — and then to kill Shi'ites. By 2016, the original Iranian Shia weapon was being used against Iran's allies by Sunni groups like Isis. <em>Once unleashed, it could not be controlled.</em></p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- thread 3 -->
+  <article class="thread">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="sticky">
+            <div class="num">Thread 03</div>
+            <span class="label">Perception Management</span>
+            <h3>Gaddafi, the UFOs, and a source from <em>The Rock</em>.</h3>
+          </div>
+        </div>
+        <div class="body">
+          <p>In 1985 the Reagan administration faced a problem: it needed an enemy it could plausibly fight. Syria — the real mastermind of attacks in Rome and Vienna — was too dangerous. Italy's investigators said so on the record. The White House attacked Libya anyway, because it was a soft target. Colonel Gaddafi, theatrical and isolated, was inflated into a global supervillain — and was delighted to play the part.</p>
+
+          <p>The phrase the administration gave its own programme was <em>perception management</em>. It did not matter whether stories were true; it mattered whether they distracted. Around the same time, US Air Force counter-intelligence agents allegedly fed forged documents about alien craft to civilian observers, to disguise tests of secret aircraft. The two operations had the same logic: <em>reality is something you handle</em>.</p>
+
+          <p>Twenty years later the technique reached its apex. As Iraq fell apart, Tony Blair flew to a desert tent and rehabilitated Gaddafi as a "modern world thinker." Public-relations firms were paid millions to "reframe the narrative." Lord Anthony Giddens visited and found the colonel's ideas "intelligent and perceptive." When the Arab Spring arrived, Gaddafi was re-cast yet again — back into the villain he had been before. None of the academics and presenters who had praised him acknowledged the switch.</p>
+
+          <p>The most surreal moment of all came at MI6 in 2002, where a star source described chemical weapons being carried in "linked hollow glass spheres" — a detail copied wholesale from the 1996 action film <em>The Rock</em>. A nation went to war. Reality and fiction had finally fully blurred.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- thread 4 -->
+  <article class="thread">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="sticky">
+            <div class="num">Thread 04</div>
+            <span class="label">Cyberspace</span>
+            <h3>From acid to algorithms, the radicals built a place to hide.</h3>
+          </div>
+        </div>
+        <div class="body">
+          <p>The novelist William Gibson coined "cyberspace" as a warning: a corporate-controlled hyperreality that could destroy the minds of intruders. The technologists of the West Coast, many of them veterans of the LSD counterculture, inverted his vision. They imagined the network as a safe, hierarchy-free utopia — an alternative reality to retreat to from the harshness of Reagan's America.</p>
+
+          <p>John Perry Barlow's <em>Declaration of the Independence of Cyberspace</em> in 1996 made the vision famous, and it became the dominant story of the internet for two decades. But two young New York hackers, Phiber Optik and Acid Phreak, set out to prove Barlow wrong. They broke into the credit-data systems of the giant corporation TRW — the same firm that had run the Cold War for the Pentagon — stole Barlow's own credit history, and posted it online. Their point: behind the rhetoric, real, opaque, financial power was being built.</p>
+
+          <p>By 2010 the architecture of "cyberspace" had absorbed an idea first prototyped at MIT in 1966: Joseph Weizenbaum's <em>ELIZA</em>, a parody therapist that simply reflected the user's own words back. He'd built it to mock A.I. research; he discovered, instead, that people loved being mirrored. Modern feed algorithms scale that discovery to billions: filter bubbles, recommendation engines, news feeds shaped to confirm pre-existing belief. <em>Angry people click more.</em></p>
+
+          <p>The Occupy movement and the Arab Spring believed leaderless networks could replace politics. They could gather a crowd. They could not supply a vision of what to do once gathered.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- thread 5 -->
+  <article class="thread">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="sticky">
+            <div class="num">Thread 05</div>
+            <span class="label">Risk Management</span>
+            <h3>Aladdin, Prozac, and the small horizon of the present.</h3>
+          </div>
+        </div>
+        <div class="body">
+          <p>After the Soviet collapse, the German sociologist Ulrich Beck described what was coming: a "runaway world" too interconnected to steer. Politicians, he predicted, would give up the idea of building futures and instead spend their days peering forward, trying to anticipate dangers and steer around them. Conservatism by default.</p>
+
+          <p>That world is already built. In a shed in East Wenatchee, Washington, BlackRock's Aladdin computer — twenty-five million lines of code — watches the world in real time, runs millions of correlations against fifty years of past events, and quietly nudges some $15 trillion of assets out of the way of trouble. It does not change anything. It keeps things the same.</p>
+
+          <p>The same town, by coincidence or not, had one of America's highest rates of Prozac use. "It's like everybody's brainwashing each other into being happy," says one resident. Stability of mood, stability of markets, stability of the news feed: the same dream, scaled across every layer of life.</p>
+
+          <p>But the system has a flaw. The past is not always a good guide to the future. Donald Trump learned this in his Atlantic City casino, when the mathematician Jess Marcum predicted that the gambler Kashiwagi <em>had to lose</em> — and he did, after five agonising days, only to be murdered in his kitchen before paying. Trump's casino went bankrupt anyway. The model was right. The world was not what the model said.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ===== KEY CONCEPTS ===== -->
+<section style="background:#0c0c10">
+  <div class="wrap">
+    <div class="narrow">
+      <div class="section-tag">V · Vocabulary of the Fake World</div>
+      <h2>The phrases the film teaches you.</h2>
+      <p class="lede">Curtis weaves together a small lexicon of technical terms borrowed from sociology, intelligence, banking, theatre and Soviet anthropology. Together they describe how a society can be made simultaneously legible and unreal.</p>
+    </div>
+
+    <div class="concepts" style="margin-top:40px">
+      <div>
+        <h4>Hypernormalisation</h4>
+        <p>Coined by Alexei Yurchak. The condition in which everyone knows the official reality is fake, but plays along because no alternative is imaginable.</p>
+      </div>
+      <div>
+        <h4>Constructive Ambiguity</h4>
+        <p>Kissinger's term for telling different parties incompatible things and letting each believe their preferred reading. A diplomatic art that became a political technique.</p>
+      </div>
+      <div>
+        <h4>Perception Management</h4>
+        <p>The Reagan-era doctrine in which facts are tools, not constraints. The job of communication is not to inform but to distract, to dramatise, to focus attention on simple villains.</p>
+      </div>
+      <div>
+        <h4>The Delicate Balance of Terror</h4>
+        <p>The Cold War nuclear doctrine that taught a generation of strategists, including Kissinger, to think of the world as an interconnected mechanism to be kept in stable equilibrium.</p>
+      </div>
+      <div>
+        <h4>The Runaway World</h4>
+        <p>Ulrich Beck's name for the post-Cold War condition: too complex and technologically charged to steer toward any future. Politicians become risk-managers, not architects.</p>
+      </div>
+      <div>
+        <h4>Cyberspace</h4>
+        <p>William Gibson's coinage; later inverted by the Californian counterculture into a utopian alternative to politics. In Curtis's reading, a place radicals fled <em>into</em> rather than fought <em>from</em>.</p>
+      </div>
+      <div>
+        <h4>Filter Bubble</h4>
+        <p>The algorithmic enclosure that feeds individuals more of what they already like. The descendant of Weizenbaum's ELIZA: a mirror dressed as a world.</p>
+      </div>
+      <div>
+        <h4>Non-linear Warfare</h4>
+        <p>Surkov's concept: a conflict whose purpose is not victory but the production of permanent uncertainty, so that no observer can tell what the participants are really trying to do.</p>
+      </div>
+      <div>
+        <h4>The Stalker / The Zone</h4>
+        <p>From the Strugatskys and Tarkovsky. A reality in which shadows go the wrong way and minds are bent by hidden forces. The film's metaphor for the world we now inhabit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ANNOTATED QUOTES ===== -->
+<section>
+  <div class="wrap narrow">
+    <div class="section-tag">VI · Voices from the Film</div>
+    <h2>What people said, <span class="ital">on the way in.</span></h2>
+
+    <div class="annot">
+      <p class="q">“It was the mood of the era, and the revolution was deferred indefinitely. And while we were dozing, the money crept in.”</p>
+      <p class="src">— On 1970s New York</p>
+    </div>
+
+    <div class="annot">
+      <p class="q">“We became paralysed by the complexity that we faced.”</p>
+      <p class="src">— George Shultz, on the US retreat from Lebanon, 1984</p>
+    </div>
+
+    <div class="annot">
+      <p class="q">“Governments of the industrial world: cyberspace does not lie within your borders. We will create a civilisation of the mind in cyberspace. May it be more humane and fair than the world your governments have made before.”</p>
+      <p class="src">— John Perry Barlow, <em>A Declaration of the Independence of Cyberspace</em>, 1996</p>
+    </div>
+
+    <div class="annot">
+      <p class="q">“It was their game. Not our game.”</p>
+      <p class="src">— Saif al-Islam Gaddafi, on his father's confession to the Lockerbie bombing</p>
+    </div>
+
+    <div class="annot">
+      <p class="q">“A ceaseless shape-shifting that is unstoppable because it is indefinable.”</p>
+      <p class="src">— A journalist, on Vladislav Surkov's politics</p>
+    </div>
+
+    <div class="annot">
+      <p class="q">“I am Aladdin. And, today, I'll find the numbers behind the numbers. I will see the trends the models don't. The connections. The risks.”</p>
+      <p class="src">— BlackRock's risk computer, narrating itself</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GLOSSARY ===== -->
+<section id="glossary" style="background:#0c0c10">
+  <div class="wrap narrow">
+    <div class="section-tag">VII · Reference</div>
+    <h2>A short glossary.</h2>
+    <p class="lede">For quick navigation back into the film's ideas.</p>
+
+    <dl class="glossary">
+      <dt>Aladdin</dt>
+      <dd>BlackRock's risk-management computer, housed in East Wenatchee, Washington. Watches ~$15 trillion of assets and uses fifty years of correlations to move capital away from coming disturbances.</dd>
+
+      <dt>The Arab Spring</dt>
+      <dd>The 2010–2012 wave of uprisings across the Arab world. Curtis reads it as the test case for the leaderless-network idea — a movement that could topple a tyrant but could not propose a successor society.</dd>
+
+      <dt>BlackRock</dt>
+      <dd>Asset manager founded by Larry Fink in 1988 after he was sacked for a $100m loss. Builder of Aladdin and a central node of the post-political risk-management system.</dd>
+
+      <dt>Bayesian Belief Networks</dt>
+      <dd>Probabilistic models, developed by Judea Pearl and others, that allow software to predict outcomes from incomplete data. The mathematical backbone of modern recommendation systems.</dd>
+
+      <dt>Eliza</dt>
+      <dd>A 1966 chatbot built at MIT by Joseph Weizenbaum as a parody of A.I. Mirrored back users' own statements; users loved it and disclosed deeply personal things to it. The ancestor of feeds that flatter you.</dd>
+
+      <dt>Hezbollah</dt>
+      <dd>The Lebanese Shia militant group, founded under Iranian and Syrian sponsorship in the early 1980s. The vector by which Assad introduced suicide bombing to the West.</dd>
+
+      <dt>Hamas</dt>
+      <dd>Sunni Islamist movement based in Gaza. Adopted suicide bombing after a 1992 Israeli mass-deportation accidentally placed Hamas militants in Hezbollah-controlled territory for six months.</dd>
+
+      <dt>Intelligent Agent</dt>
+      <dd>A piece of software designed to act on a user's behalf, modelled (after economics) as a simple rational actor. Curtis quotes Jaron Lanier's warning: agents see only a cartoon of you, and you see only a cartoon of the world through them.</dd>
+
+      <dt>The IRA</dt>
+      <dd>The Irish Republican Army; recipient of arms and funds from Gaddafi in the 1970s as part of his self-styled global revolutionary project.</dd>
+
+      <dt>Lockerbie</dt>
+      <dd>The 1988 bombing of Pan Am Flight 103 over Scotland. Initially attributed to Syria; eighteen months later, blamed on Libya — a switch many in intelligence and journalism considered politically convenient at best.</dd>
+
+      <dt>The Muslim Brotherhood</dt>
+      <dd>The transnational Sunni Islamist organisation whose Egyptian branch won the post-Mubarak election, only to be ousted in 2013 by a military coup welcomed by many of the same liberals who had started the revolution.</dd>
+
+      <dt>Occupy</dt>
+      <dd>The 2011 movement that grew out of post-crash anger at financial corruption. Used the "human microphone" as a model of leaderless organisation; collapsed under the absence of a vision of the future.</dd>
+
+      <dt>Optic Nerve</dt>
+      <dd>A post-9/11 surveillance programme that captured webcam stills from millions of users worldwide. It found no terrorists. It found a great deal of other material.</dd>
+
+      <dt>Phiber Optik & Acid Phreak</dt>
+      <dd>Two New York hackers who broke into TRW's credit databases to demonstrate, against Barlow, that cyberspace was already corporate, hierarchical and monitored.</dd>
+
+      <dt>Roadside Picnic</dt>
+      <dd>The 1972 Strugatsky novel, set in a "Zone" of impossible physics, adapted by Tarkovsky as <em>Stalker</em> (1979). The film's dominant metaphor for life inside hypernormalisation.</dd>
+
+      <dt>The Third Way / Third Universal Theory</dt>
+      <dd>Coincidentally similar names for Anthony Giddens's centrist political philosophy and for Gaddafi's idiosyncratic alternative to capitalism and communism. PR firms exploited the resemblance to rehabilitate the colonel.</dd>
+
+      <dt>TRW</dt>
+      <dd>Aerospace and defence firm whose computer systems were repurposed in the 1980s to run consumer credit-rating databases. A symbol, for Curtis, of the migration of Cold War infrastructure into civilian financial control.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ===== FURTHER VIEWING / READING ===== -->
+<section>
+  <div class="wrap narrow">
+    <div class="section-tag">VIII · Going Further</div>
+    <h2>If this is the door, what's behind it?</h2>
+
+    <p>Curtis's films are not arguments to be agreed or disagreed with so much as moods to be tested against your own observations. The most useful thing you can do, after watching, is to read the writers he draws from and decide for yourself.</p>
+
+    <ol class="index">
+      <li><span class="t">Alexei Yurchak — <em>Everything Was Forever, Until It Was No More</em></span><span class="y">2005</span></li>
+      <li><span class="t">Arkady &amp; Boris Strugatsky — <em>Roadside Picnic</em></span><span class="y">1972</span></li>
+      <li><span class="t">Andrei Tarkovsky — <em>Stalker</em> (film)</span><span class="y">1979</span></li>
+      <li><span class="t">Ulrich Beck — <em>Risk Society: Towards a New Modernity</em></span><span class="y">1986</span></li>
+      <li><span class="t">William Gibson — <em>Neuromancer</em></span><span class="y">1984</span></li>
+      <li><span class="t">John Perry Barlow — <em>A Declaration of the Independence of Cyberspace</em></span><span class="y">1996</span></li>
+      <li><span class="t">Joseph Weizenbaum — <em>Computer Power and Human Reason</em></span><span class="y">1976</span></li>
+      <li><span class="t">Jaron Lanier — <em>You Are Not a Gadget</em></span><span class="y">2010</span></li>
+      <li><span class="t">Patrick Seale — <em>Asad: The Struggle for the Middle East</em></span><span class="y">1988</span></li>
+      <li><span class="t">Peter Pomerantsev — <em>Nothing Is True and Everything Is Possible</em></span><span class="y">2014</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== CLOSING ===== -->
+<section style="background:linear-gradient(180deg,#0a0a0c 0%,#050507 100%)">
+  <div class="wrap narrow" style="text-align:center">
+    <div class="section-tag" style="color:var(--accent-2)">IX · Coda</div>
+    <h2 style="margin-bottom:40px">“And while we were dozing, <span class="ital">the money crept in.</span>”</h2>
+    <p class="lede" style="text-align:left">The argument the film leaves you with is not that any single figure — Assad, Trump, Putin, Surkov, Fink — built the world we now live in. It is that for forty years, in countless small retreats, a great many people on every side gave up on the difficult task of describing the world honestly and trying to change it. Politicians retreated into management. Radicals retreated into self-expression. Technologists retreated into utopia. Bankers retreated into models. And the rest of us, finding the simplicity reassuring, retreated along with them.</p>
+    <p class="lede" style="text-align:left">Outside the dream, dark and destructive forces were left to fester and grow. They are now, the film argues, returning to pierce the fragile surface of our carefully constructed fake world. What happens next will depend on whether anyone — including us — is willing to come back out.</p>
+
+    <hr class="hr-fade" style="margin:60px 0"/>
+
+    <p style="color:var(--ink-dim);font-size:14px">
+      A study companion to Adam Curtis's <em>HyperNormalisation</em> (BBC, 2016).<br/>
+      Educational, non-commercial. All quoted material remains the property of its creators.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h5>The Film</h5>
+      <p>HyperNormalisation</p>
+      <p>Directed by Adam Curtis</p>
+      <p>BBC iPlayer, 2016 · 166 min.</p>
+    </div>
+    <div>
+      <h5>Featured Music</h5>
+      <p>“The Vanishing American Family” — Scuba Z</p>
+      <p>“Something I Can Never Have” — Nine Inch Nails</p>
+      <p>“Dream, Baby, Dream” — Suicide</p>
+      <p>“Standing Room Only” — Barbara Mandrell</p>
+    </div>
+    <div>
+      <h5>This Site</h5>
+      <p>A single-file educational companion.</p>
+      <p>Built to be read, not optimised.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // tiny intersection animation
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.tl-item, .fig, .annot, .concepts > div, .thread, ol.index li').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .7s ease, transform .7s ease';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>

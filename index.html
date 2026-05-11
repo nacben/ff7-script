@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Hero's Journey — A Writer's Compendium to Joseph Campbell's Monomyth</title>
+<meta name="description" content="A comprehensive, beautiful guide for writers to Joseph Campbell's The Hero with a Thousand Faces — the monomyth, the stages of the hero's journey, archetypes, and practical craft applications." />
+<style>
+  /* ---------- Reset & Base ---------- */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  :root{
+    --bg:#0e0b08;
+    --bg-2:#15110c;
+    --bg-3:#1c170f;
+    --ink:#efe4cc;
+    --ink-soft:#cdbfa1;
+    --ink-dim:#9a8b6e;
+    --gold:#c8a24b;
+    --gold-bright:#e9c46a;
+    --gold-deep:#8a6a2a;
+    --crimson:#8a2a2a;
+    --line:rgba(200,162,75,0.25);
+    --max:1180px;
+    --serif:"Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
+    --sans:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --display:"Cinzel", "Trajan Pro", Georgia, serif;
+  }
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.7;font-size:18px}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -100px, rgba(200,162,75,0.12), transparent 60%),
+      radial-gradient(900px 500px at -100px 30%, rgba(138,42,42,0.10), transparent 60%),
+      linear-gradient(180deg,#0e0b08 0%, #120e0a 100%);
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease}
+  a:hover{border-bottom-color:var(--gold-bright)}
+
+  /* ---------- Typography ---------- */
+  h1,h2,h3,h4{font-family:var(--display);font-weight:600;letter-spacing:0.04em;color:var(--ink);line-height:1.2}
+  h1{font-size:clamp(2.6rem,6vw,5.2rem);letter-spacing:0.06em}
+  h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:1rem;color:var(--gold-bright)}
+  h3{font-size:1.45rem;color:var(--gold);margin:1.5rem 0 .6rem}
+  h4{font-family:var(--serif);font-style:italic;font-weight:500;color:var(--ink);font-size:1.2rem;letter-spacing:0;margin:1rem 0 .3rem}
+  p{margin-bottom:1rem;color:var(--ink-soft)}
+  p strong{color:var(--ink)}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:0.32em;font-size:.78rem;color:var(--gold);font-weight:500}
+  blockquote{
+    font-family:var(--serif);font-style:italic;font-size:1.22rem;line-height:1.6;
+    color:var(--ink);
+    border-left:2px solid var(--gold);
+    padding:0.4rem 0 0.4rem 1.6rem;margin:1.6rem 0;
+    background:linear-gradient(90deg, rgba(200,162,75,0.05), transparent);
+  }
+  blockquote cite{display:block;font-style:normal;font-family:var(--sans);font-size:.82rem;color:var(--ink-dim);letter-spacing:0.18em;text-transform:uppercase;margin-top:.6rem}
+  .lead{font-size:1.25rem;color:var(--ink);line-height:1.65}
+  .small{font-size:.9rem;color:var(--ink-dim)}
+
+  /* ---------- Layout ---------- */
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
+  section{padding:6rem 0;position:relative}
+  section + section{border-top:1px solid var(--line)}
+
+  /* ---------- Nav ---------- */
+  nav.top{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    backdrop-filter:blur(14px);
+    background:rgba(14,11,8,0.72);
+    border-bottom:1px solid var(--line);
+  }
+  nav.top .inner{display:flex;align-items:center;justify-content:space-between;max-width:var(--max);margin:0 auto;padding:.9rem 1.5rem}
+  nav.top .brand{font-family:var(--display);letter-spacing:0.22em;font-size:.92rem;color:var(--gold-bright);text-transform:uppercase}
+  nav.top ul{display:flex;gap:1.4rem;list-style:none;flex-wrap:wrap}
+  nav.top a{font-family:var(--sans);font-size:.82rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-soft);border:none}
+  nav.top a:hover{color:var(--gold-bright)}
+  @media (max-width:780px){
+    nav.top ul{display:none}
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;text-align:center;padding:8rem 1.5rem 5rem;
+  }
+  header.hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at center, rgba(233,196,106,0.10), transparent 55%),
+      conic-gradient(from 90deg at 50% 50%, rgba(200,162,75,0.05), rgba(138,42,42,0.05), rgba(200,162,75,0.05));
+    pointer-events:none;
+  }
+  header.hero .ornament{
+    width:120px;height:120px;margin:0 auto 2rem;position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  header.hero .ornament::before,
+  header.hero .ornament::after{
+    content:"";position:absolute;inset:0;border:1px solid var(--gold);border-radius:50%;
+    animation:spin 60s linear infinite;
+  }
+  header.hero .ornament::after{
+    inset:14px;border-style:dashed;border-color:var(--gold-deep);
+    animation-duration:80s;animation-direction:reverse;
+  }
+  header.hero .ornament span{
+    width:38px;height:38px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold-deep) 70%, #2a1c0a);
+    box-shadow:0 0 40px rgba(233,196,106,0.45);
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  header.hero h1{margin-bottom:1.2rem;text-shadow:0 1px 30px rgba(233,196,106,0.15)}
+  header.hero .subtitle{
+    font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2vw,1.5rem);
+    color:var(--ink-soft);max-width:720px;margin:0 auto 2rem
+  }
+  header.hero .meta{color:var(--ink-dim);font-family:var(--sans);letter-spacing:0.28em;text-transform:uppercase;font-size:.78rem}
+  header.hero .cta{margin-top:3rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:.9rem 1.6rem;
+    font-family:var(--sans);letter-spacing:0.2em;text-transform:uppercase;font-size:.78rem;
+    border:1px solid var(--gold);color:var(--gold-bright);border-radius:2px;
+    transition:all .2s ease;background:transparent
+  }
+  .btn:hover{background:var(--gold);color:#1c170f;border-bottom:1px solid var(--gold)}
+  .btn.solid{background:var(--gold);color:#1c170f}
+  .btn.solid:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+
+  /* ---------- Section Header ---------- */
+  .section-head{text-align:center;max-width:760px;margin:0 auto 4rem}
+  .section-head .eyebrow{margin-bottom:.8rem;display:inline-block}
+  .section-head p{margin-top:1rem;color:var(--ink-soft);font-size:1.1rem}
+  .rule{
+    width:90px;height:1px;background:var(--gold);
+    margin:1.4rem auto;position:relative
+  }
+  .rule::before,.rule::after{
+    content:"";position:absolute;top:-2px;width:5px;height:5px;background:var(--gold);
+    border-radius:50%;
+  }
+  .rule::before{left:-10px}
+  .rule::after{right:-10px}
+
+  /* ---------- Pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .pillar{
+    background:linear-gradient(180deg, rgba(28,23,15,0.85), rgba(21,17,12,0.85));
+    border:1px solid var(--line);
+    padding:2rem 1.6rem;border-radius:4px;
+    position:relative;overflow:hidden;
+    transition:transform .3s ease,border-color .3s ease;
+  }
+  .pillar:hover{transform:translateY(-4px);border-color:var(--gold)}
+  .pillar .num{
+    font-family:var(--display);font-size:3.5rem;color:var(--gold-deep);
+    opacity:.5;line-height:1;margin-bottom:.5rem
+  }
+  .pillar h3{margin-top:0}
+  .pillar p{font-size:.98rem}
+  @media (max-width:820px){
+    .pillars{grid-template-columns:1fr}
+  }
+
+  /* ---------- Journey Circle ---------- */
+  .journey{padding:5rem 0}
+  .circle-wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+  }
+  .circle-svg{width:100%;max-width:540px;margin:0 auto;display:block}
+  .circle-legend ol{list-style:none;counter-reset:step}
+  .circle-legend li{
+    counter-increment:step;
+    padding:.7rem 0 .7rem 3rem;
+    position:relative;color:var(--ink-soft);
+    border-bottom:1px dashed rgba(200,162,75,0.15);
+    font-size:.98rem;
+  }
+  .circle-legend li:last-child{border-bottom:none}
+  .circle-legend li::before{
+    content:counter(step,upper-roman);
+    position:absolute;left:0;top:.85rem;
+    font-family:var(--display);color:var(--gold);font-size:.95rem;letter-spacing:0.1em;
+    width:2.2rem;text-align:right;
+  }
+  .circle-legend li b{color:var(--ink);font-weight:600;font-family:var(--display);letter-spacing:0.04em}
+  @media (max-width:880px){
+    .circle-wrap{grid-template-columns:1fr;gap:2rem}
+  }
+
+  /* ---------- Stage Cards ---------- */
+  .acts{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-top:2rem}
+  .act{
+    background:
+      linear-gradient(135deg, rgba(28,23,15,0.9), rgba(15,12,8,0.9));
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:2.5rem;
+    position:relative;
+  }
+  .act::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .act .act-head{display:flex;align-items:baseline;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+  .act .act-head .roman{
+    font-family:var(--display);font-size:2.8rem;color:var(--gold);letter-spacing:0.1em
+  }
+  .act .act-head h2{margin:0;color:var(--ink)}
+  .act > p.lead{margin-bottom:2rem;font-style:italic;color:var(--ink)}
+  .stages{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+  @media (max-width:820px){.stages{grid-template-columns:1fr}}
+  .stage{
+    padding:1.4rem;border:1px solid var(--line);border-radius:4px;
+    background:rgba(14,11,8,0.55);transition:all .2s ease;
+  }
+  .stage:hover{border-color:var(--gold);background:rgba(28,23,15,0.85)}
+  .stage h4{color:var(--gold-bright);font-family:var(--display);font-style:normal;font-size:1.02rem;letter-spacing:0.08em;margin-bottom:.5rem;text-transform:uppercase}
+  .stage .stage-num{font-family:var(--sans);font-size:.7rem;letter-spacing:0.3em;color:var(--gold-deep);display:block;margin-bottom:.3rem}
+  .stage p{font-size:.95rem;color:var(--ink-soft);margin:0}
+  .stage .craft{
+    margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(200,162,75,0.15);
+    font-size:.86rem;color:var(--ink-dim);font-style:italic;
+  }
+  .stage .craft strong{color:var(--gold);font-style:normal;font-family:var(--sans);font-size:.7rem;letter-spacing:0.25em;text-transform:uppercase;display:block;margin-bottom:.3rem}
+
+  /* ---------- Two Column ---------- */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  @media (max-width:820px){.two-col{grid-template-columns:1fr}}
+
+  /* ---------- Archetypes ---------- */
+  .arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:2rem}
+  .arch{
+    padding:1.6rem;border:1px solid var(--line);
+    border-radius:4px;background:rgba(20,16,11,0.6);
+    transition:all .25s ease;
+  }
+  .arch:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .arch .glyph{
+    font-family:var(--display);font-size:1.8rem;color:var(--gold);
+    margin-bottom:.5rem;display:block
+  }
+  .arch h4{font-family:var(--display);font-style:normal;color:var(--ink);margin:0 0 .4rem;letter-spacing:0.06em}
+  .arch p{font-size:.92rem;margin:0;color:var(--ink-soft)}
+
+  /* ---------- Quote Banner ---------- */
+  .banner{
+    text-align:center;padding:5rem 1.5rem;
+    background:
+      radial-gradient(ellipse at center, rgba(200,162,75,0.07), transparent 60%),
+      linear-gradient(180deg, var(--bg-2), var(--bg));
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .banner blockquote{
+    border:none;background:none;padding:0;font-size:clamp(1.4rem,2.6vw,2rem);
+    line-height:1.5;max-width:880px;margin:0 auto;color:var(--ink);
+    font-family:var(--serif);font-style:italic;
+  }
+  .banner blockquote::before{
+    content:"\201C";display:block;font-family:var(--display);font-size:5rem;color:var(--gold);
+    line-height:.4;margin-bottom:1rem;
+  }
+  .banner cite{margin-top:2rem;display:block;color:var(--gold);letter-spacing:0.28em;text-transform:uppercase;font-size:.78rem;font-family:var(--sans);font-style:normal}
+
+  /* ---------- Craft Application ---------- */
+  .craft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+  .craft-card{
+    padding:2rem 1.6rem;
+    background:linear-gradient(180deg,#1c170f 0%, #15110c 100%);
+    border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:4px;
+  }
+  .craft-card h4{color:var(--gold-bright);margin-top:0;font-family:var(--display);font-style:normal;letter-spacing:0.06em}
+  .craft-card ul{list-style:none;padding-left:0}
+  .craft-card li{
+    padding:.5rem 0 .5rem 1.5rem;position:relative;color:var(--ink-soft);font-size:.95rem;
+    border-bottom:1px dashed rgba(200,162,75,0.12);
+  }
+  .craft-card li:last-child{border-bottom:none}
+  .craft-card li::before{
+    content:"❖";position:absolute;left:0;top:.5rem;color:var(--gold);font-size:.7rem;
+  }
+
+  /* ---------- Compare table ---------- */
+  .compare{
+    margin-top:2rem;border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    background:rgba(20,16,11,0.6);
+  }
+  .compare-row{
+    display:grid;grid-template-columns:1fr 1fr;
+    border-bottom:1px solid var(--line);
+  }
+  .compare-row:last-child{border-bottom:none}
+  .compare-row > div{padding:1rem 1.3rem}
+  .compare-row .a{border-right:1px solid var(--line);background:rgba(200,162,75,0.04);color:var(--ink);font-family:var(--display);letter-spacing:0.06em;font-size:.95rem}
+  .compare-row .b{color:var(--ink-soft);font-size:.95rem}
+  .compare-head{font-family:var(--sans);text-transform:uppercase;letter-spacing:0.22em;font-size:.72rem;color:var(--gold);background:rgba(200,162,75,0.08) !important}
+  .compare-head .a,.compare-head .b{font-family:var(--sans);font-style:normal;letter-spacing:0.22em;color:var(--gold)}
+  @media (max-width:680px){.compare-row{grid-template-columns:1fr}.compare-row .a{border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* ---------- Cosmogonic ---------- */
+  .cosmo{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2rem}
+  .cosmo .phase{
+    text-align:center;padding:1.6rem 1rem;border:1px solid var(--line);
+    border-radius:4px;background:rgba(14,11,8,0.5);
+    transition:all .3s ease;position:relative;
+  }
+  .cosmo .phase:hover{border-color:var(--gold);background:rgba(28,23,15,0.85)}
+  .cosmo .symbol{
+    font-family:var(--display);font-size:2rem;color:var(--gold);
+    margin-bottom:.5rem;display:block
+  }
+  .cosmo h4{font-family:var(--display);font-style:normal;font-size:.95rem;color:var(--ink);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 .5rem}
+  .cosmo p{font-size:.85rem;color:var(--ink-soft);margin:0}
+  @media (max-width:880px){.cosmo{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.cosmo{grid-template-columns:1fr}}
+
+  /* ---------- Closing ---------- */
+  .closing{text-align:center;padding:7rem 1.5rem}
+  .closing h2{margin-bottom:1rem}
+  .closing p{max-width:680px;margin:0 auto 1rem;color:var(--ink-soft);font-size:1.1rem}
+  .closing .ornament{
+    width:60px;height:60px;margin:2rem auto 1rem;
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.5rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:3rem 1.5rem 2.5rem;text-align:center;
+    border-top:1px solid var(--line);
+    color:var(--ink-dim);font-size:.85rem;font-family:var(--sans);
+    background:#0a0805;
+  }
+  footer p{margin:0 0 .4rem;color:var(--ink-dim)}
+  footer a{color:var(--gold)}
+
+  /* ---------- Decorative dividers ---------- */
+  .divider-orn{
+    text-align:center;color:var(--gold);font-size:1.4rem;margin:3rem 0;letter-spacing:1rem;
+    opacity:.7;
+  }
+
+  /* ---------- About card ---------- */
+  .author{
+    display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:center;
+    padding:2.5rem;border:1px solid var(--line);border-radius:6px;
+    background:linear-gradient(135deg, rgba(28,23,15,0.85), rgba(15,12,8,0.85));
+    margin-top:2rem;
+  }
+  .author .portrait{
+    aspect-ratio:1;border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%, var(--gold), var(--gold-deep) 60%, #2a1c0a 100%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-size:3.6rem;color:#1c170f;
+    border:2px solid var(--gold);
+    box-shadow:0 0 40px rgba(233,196,106,0.2);
+  }
+  @media (max-width:680px){.author{grid-template-columns:1fr;text-align:center}.author .portrait{max-width:160px;margin:0 auto}}
+
+  /* ---------- Selection ---------- */
+  ::selection{background:var(--gold);color:#1c170f}
+
+  /* ---------- Scrollbar ---------- */
+  ::-webkit-scrollbar{width:10px;background:#0a0805}
+  ::-webkit-scrollbar-thumb{background:var(--gold-deep);border-radius:5px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="top" aria-label="Primary">
+  <div class="inner">
+    <div class="brand">The Hero's Journey</div>
+    <ul>
+      <li><a href="#monomyth">The Monomyth</a></li>
+      <li><a href="#departure">Departure</a></li>
+      <li><a href="#initiation">Initiation</a></li>
+      <li><a href="#return">Return</a></li>
+      <li><a href="#archetypes">Archetypes</a></li>
+      <li><a href="#craft">For Writers</a></li>
+      <li><a href="#about">Campbell</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="ornament" aria-hidden="true"><span></span></div>
+    <p class="meta">Bollingen Series XVII · A Writer's Compendium</p>
+    <h1>The Hero with<br/>a Thousand Faces</h1>
+    <p class="subtitle">Joseph Campbell's enduring map of the monomyth — and the singular story every storyteller has been telling since the world began.</p>
+    <div class="cta">
+      <a href="#monomyth" class="btn solid">Begin the Journey</a>
+      <a href="#craft" class="btn">For Writers</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============= INTRODUCTION ============= -->
+<section id="intro">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Prologue</span>
+      <div class="rule"></div>
+      <h2>One Story, A Thousand Faces</h2>
+      <p>Whether whispered by a red-eyed witch doctor of the Congo, sung in the sonnets of Lao-tse, argued by Aquinas, or caught in a bizarre Eskimo fairy tale — it is always the one, shape-shifting yet marvelously constant story.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <blockquote>
+          A hero ventures forth from the world of common day into a region of supernatural wonder: fabulous forces are there encountered and a decisive victory is won: the hero comes back from this mysterious adventure with the power to bestow boons on his fellow man.
+          <cite>— Joseph Campbell</cite>
+        </blockquote>
+        <p>This is the <strong>monomyth</strong> — Campbell's elegant compression of every quest-tale humanity has ever told. From Prometheus to Jason, from the Buddha beneath the Bo Tree to Moses on Sinai, the structure repeats itself, scaled to the soul of every culture.</p>
+        <p>For writers, this is not merely scholarship. It is a working map. To understand the monomyth is to inherit the deep grammar of story itself — the rhythm by which characters become real, and tales become true.</p>
+      </div>
+      <div>
+        <h3>Why It Matters to Writers</h3>
+        <p>Campbell's work is not a formula to be slavishly imitated. It is a <em>field of resonance</em>. The stages he names already live within your reader — in dream, memory, and yearning. When your story aligns with them, you tap a current older than literature.</p>
+        <p>Star Wars borrowed it openly. So did The Matrix, The Lord of the Rings, Harry Potter, countless games and graphic novels. But the deeper invitation is not to copy these — it is to <em>see what they saw</em>: that beneath every great story stands an architecture of transformation.</p>
+        <p class="small">This site is a distilled reader's companion to Campbell's 1949 classic, organized for the working storyteller.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= MONOMYTH PILLARS ============= -->
+<section id="monomyth">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Three Movements</span>
+      <div class="rule"></div>
+      <h2>Separation · Initiation · Return</h2>
+      <p>The nuclear unit of the monomyth — the rhythm beneath every hero-tale, every rite of passage, every transformation worth the telling.</p>
+    </div>
+
+    <div class="pillars">
+      <article class="pillar">
+        <div class="num">I</div>
+        <h3>Departure</h3>
+        <p>The hero is summoned from the familiar world. A herald appears; a call is heard. Whether answered eagerly or refused in fear, the threshold of adventure waits, and beyond it: the unknown.</p>
+      </article>
+      <article class="pillar">
+        <div class="num">II</div>
+        <h3>Initiation</h3>
+        <p>In a realm of fluid, ambiguous forms, the hero faces trials, meets the goddess, confronts the father, and — if worthy — seizes the ultimate boon. This is the crucible where self is unmade and remade.</p>
+      </article>
+      <article class="pillar">
+        <div class="num">III</div>
+        <h3>Return</h3>
+        <p>The hero brings the elixir back across the threshold. The two worlds — magical and mundane — must now be reconciled. Mastery here is the freedom to live, fully, in both.</p>
+      </article>
+    </div>
+
+    <div class="divider-orn">❖ ❖ ❖</div>
+
+    <div class="circle-wrap">
+      <svg class="circle-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="gold-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#e9c46a" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#8a6a2a" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c8a24b" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#c8a24b" stop-opacity="0.2"/>
+          </linearGradient>
+        </defs>
+        <circle cx="250" cy="250" r="240" fill="url(#gold-grad)"/>
+        <circle cx="250" cy="250" r="220" fill="none" stroke="#c8a24b" stroke-width="0.5" stroke-opacity="0.4"/>
+        <circle cx="250" cy="250" r="180" fill="none" stroke="#c8a24b" stroke-width="0.5" stroke-opacity="0.3" stroke-dasharray="3 4"/>
+        <circle cx="250" cy="250" r="80" fill="none" stroke="#c8a24b" stroke-width="1" stroke-opacity="0.6"/>
+        <circle cx="250" cy="250" r="6" fill="#e9c46a"/>
+
+        <!-- Threshold line (horizontal) -->
+        <line x1="20" y1="250" x2="480" y2="250" stroke="#c8a24b" stroke-width="0.5" stroke-opacity="0.4" stroke-dasharray="6 4"/>
+        <text x="40" y="245" fill="#9a8b6e" font-family="Inter" font-size="9" letter-spacing="2">KNOWN WORLD</text>
+        <text x="350" y="270" fill="#9a8b6e" font-family="Inter" font-size="9" letter-spacing="2">UNKNOWN WORLD</text>
+
+        <!-- 12 stages around -->
+        <g font-family="Cinzel" font-size="11" fill="#e9c46a" text-anchor="middle">
+          <text x="250" y="50">CALL</text>
+          <text x="370" y="90">REFUSAL</text>
+          <text x="450" y="180">HELPER</text>
+          <text x="450" y="260">THRESHOLD</text>
+          <text x="450" y="340">BELLY</text>
+          <text x="370" y="430">TRIALS</text>
+          <text x="250" y="470">REWARD</text>
+          <text x="130" y="430">FLIGHT</text>
+          <text x="50" y="340">RESCUE</text>
+          <text x="50" y="260">RETURN</text>
+          <text x="50" y="180">TWO WORLDS</text>
+          <text x="130" y="90">FREEDOM</text>
+        </g>
+
+        <!-- Hero in center -->
+        <text x="250" y="245" fill="#efe4cc" font-family="Cinzel" font-size="11" text-anchor="middle" letter-spacing="2">HERO</text>
+        <text x="250" y="262" fill="#9a8b6e" font-family="Cinzel" font-size="8" text-anchor="middle" letter-spacing="3">SELF</text>
+      </svg>
+
+      <div class="circle-legend">
+        <h3 style="margin-top:0">The Wheel of the Journey</h3>
+        <p>Campbell described seventeen stages in all, gathered into three great movements. The journey is a circle: the hero leaves the known world, descends into transformation, and returns transfigured.</p>
+        <ol>
+          <li><b>Departure</b> — Call, Refusal, Supernatural Aid, Crossing the Threshold, Belly of the Whale</li>
+          <li><b>Initiation</b> — Road of Trials, Meeting the Goddess, Temptation, Atonement, Apotheosis, Ultimate Boon</li>
+          <li><b>Return</b> — Refusal, Magic Flight, Rescue, Crossing the Return Threshold, Master of Two Worlds, Freedom to Live</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PART I: DEPARTURE ============= -->
+<section id="departure">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Part One · Movement I</span>
+      <div class="rule"></div>
+      <h2>The Departure</h2>
+      <p>How the ordinary breaks open. How a life is summoned beyond itself.</p>
+    </div>
+
+    <article class="act">
+      <div class="act-head">
+        <span class="roman">I</span>
+        <h2>Five Stages of Leaving</h2>
+      </div>
+      <p class="lead">A blunder — apparently the merest chance — reveals an unsuspected world, and the individual is drawn into a relationship with forces that are not rightly understood.</p>
+
+      <div class="stages">
+        <div class="stage">
+          <span class="stage-num">Stage One</span>
+          <h4>The Call to Adventure</h4>
+          <p>A herald appears — frog, dark forest, golden ball lost in the well. Destiny has summoned the hero. The known world is suddenly revealed as too small.</p>
+          <div class="craft"><strong>For the Writer</strong>Make the call <em>specific</em>. The frog must speak. The dream must wake them at 3 a.m. The letter must arrive at breakfast. Concreteness is the soul of myth.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Two</span>
+          <h4>Refusal of the Call</h4>
+          <p>The hero hesitates, builds walls, retreats into duty or boredom. The flowering world becomes a wasteland. To refuse one's life is to summon its doom.</p>
+          <div class="craft"><strong>For the Writer</strong>Refusal earns the hero's courage. Without resistance, acceptance is hollow. Let your protagonist say <em>no</em> first — and mean it.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Three</span>
+          <h4>Supernatural Aid</h4>
+          <p>An old crone, a wise wizard, Spider Woman, the Virgin, Hermes the guide. Whoever answers the call finds protective figures and amulets along the way.</p>
+          <div class="craft"><strong>For the Writer</strong>Mentors must give something <em>concrete</em> — a thread, a charm, a phrase, a tool. Then they must withdraw. Help that lingers becomes hindrance.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Four</span>
+          <h4>Crossing the First Threshold</h4>
+          <p>The hero passes beyond the guardians at the edge of the known. Beyond lies darkness, danger — and, for those who dare, the path of becoming.</p>
+          <div class="craft"><strong>For the Writer</strong>Make the threshold visible. A door, a coast, a station platform, a kiss. The reader must <em>feel</em> the crossing in their body.</div>
+        </div>
+        <div class="stage" style="grid-column:1/-1">
+          <span class="stage-num">Stage Five</span>
+          <h4>The Belly of the Whale</h4>
+          <p>The hero is swallowed into the unknown and seems to die. This is no defeat — it is the womb of transformation. The old self must be undone before a new self can be born. The temple's inner sanctum, the whale's interior, the dragon's gut: all are one place.</p>
+          <div class="craft"><strong>For the Writer</strong>Symbolic death is the price of admission to the real story. Whatever your hero was — the version that walked in — must be left at the door.</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= QUOTE BANNER ============= -->
+<div class="banner">
+  <div class="wrap">
+    <blockquote>
+      The cave you fear to enter holds the treasure you seek.
+    </blockquote>
+    <cite>— Joseph Campbell</cite>
+  </div>
+</div>
+
+<!-- ============= PART II: INITIATION ============= -->
+<section id="initiation">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Part One · Movement II</span>
+      <div class="rule"></div>
+      <h2>The Initiation</h2>
+      <p>The dream-landscape where the hero is tested, broken, and re-forged. Here lives the heart of every transformation.</p>
+    </div>
+
+    <article class="act">
+      <div class="act-head">
+        <span class="roman">II</span>
+        <h2>Six Stages of Becoming</h2>
+      </div>
+      <p class="lead">Once having traversed the threshold, the hero moves in a dream landscape of curiously fluid, ambiguous forms, where they must survive a succession of trials.</p>
+
+      <div class="stages">
+        <div class="stage">
+          <span class="stage-num">Stage Six</span>
+          <h4>The Road of Trials</h4>
+          <p>A succession of ordeals — dragons slain, riddles answered, deserts crossed. Each trial strips away another layer of the false self.</p>
+          <div class="craft"><strong>For the Writer</strong>Trials must <em>escalate</em>, and each must <em>reveal</em>. A trial that only tests muscle is shallow; a trial that costs something internal is deep.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Seven</span>
+          <h4>Meeting with the Goddess</h4>
+          <p>The mystical union — with the totality of life itself, embodied. She is mother, lover, queen of the world. The hero discovers they are loved by being.</p>
+          <div class="craft"><strong>For the Writer</strong>This is not always romance. It is the moment the hero feels the universe accept them. Locate it in your story — even if it's a glance, a song, a kindness.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Eight</span>
+          <h4>Woman as the Temptress</h4>
+          <p>The flesh, the world, the seduction away from the path. Whatever pulls the hero back into the small self — comfort, vanity, vengeance, despair.</p>
+          <div class="craft"><strong>For the Writer</strong>Temptation must look like wisdom. The deepest test is the one that promises peace if the hero will only stop.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Nine</span>
+          <h4>Atonement with the Father</h4>
+          <p>Confrontation with the ultimate authority — the source of law, judgment, and being. The hero must abandon ego and meet the terrible Other face to face.</p>
+          <div class="craft"><strong>For the Writer</strong>"Atonement" = at-one-ment. This is not victory over the father, but reconciliation with the order they represent — even by overthrowing them.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Ten</span>
+          <h4>Apotheosis</h4>
+          <p>A moment of divine knowing. The hero glimpses the unity behind the pairs of opposites. They are, briefly, transparent to transcendence.</p>
+          <div class="craft"><strong>For the Writer</strong>This is the still point. Slow the prose. Let it breathe. The reader should feel held outside time for a paragraph or a page.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Eleven</span>
+          <h4>The Ultimate Boon</h4>
+          <p>The grail, the fire, the elixir, the truth. What the hero came for — though it often turns out to be other than what they sought.</p>
+          <div class="craft"><strong>For the Writer</strong>The boon is rarely the object. It is the <em>capacity</em> the hero gains by reaching it. Treasure is metaphor; transformation is the gift.</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= PART III: RETURN ============= -->
+<section id="return">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Part One · Movement III</span>
+      <div class="rule"></div>
+      <h2>The Return</h2>
+      <p>The boon must come home. The two worlds must be reconciled. This — Campbell insists — is the hardest stage of all.</p>
+    </div>
+
+    <article class="act">
+      <div class="act-head">
+        <span class="roman">III</span>
+        <h2>Six Stages of Coming Home</h2>
+      </div>
+      <p class="lead">The hero has yet to confront society with their ego-shattering, life-redeeming elixir, and take the return blow of reasonable queries, hard resentment, and good people at a loss to comprehend.</p>
+
+      <div class="stages">
+        <div class="stage">
+          <span class="stage-num">Stage Twelve</span>
+          <h4>Refusal of the Return</h4>
+          <p>Why come back? The bliss of the deep abode is not lightly abandoned. Many heroes choose to stay in the timeless realm — and the world is poorer for it.</p>
+          <div class="craft"><strong>For the Writer</strong>Make the temptation to stay real. The hero who returns easily has won nothing. The hero who chooses to come back has chosen <em>us</em>.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Thirteen</span>
+          <h4>The Magic Flight</h4>
+          <p>If the hero has stolen the boon against the gods' will, the return becomes a chase — magical obstacles flung behind, transformations, narrow escapes.</p>
+          <div class="craft"><strong>For the Writer</strong>The chase is not action filler. Each obstacle the hero discards is a part of themselves they are willing to leave behind.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Fourteen</span>
+          <h4>Rescue from Without</h4>
+          <p>Sometimes the world must reach in and pull the hero out — friends, lovers, the long arm of grace. The hero is not always self-saved.</p>
+          <div class="craft"><strong>For the Writer</strong>Let the community help. Pure self-rescue is a modern fetish. The old tales know: we are saved by what loves us.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Fifteen</span>
+          <h4>Crossing the Return Threshold</h4>
+          <p>The transcendent must be translated into the ordinary. The hero re-enters a world that has forgotten the language they now speak.</p>
+          <div class="craft"><strong>For the Writer</strong>This is where many novels stumble. The mystical insight must somehow <em>survive</em> the kitchen, the office, the weather. Earn that survival.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Sixteen</span>
+          <h4>Master of the Two Worlds</h4>
+          <p>The freedom to pass back and forth — between vision and action, dream and waking, the eternal and the daily. This is the gift of the completed journey.</p>
+          <div class="craft"><strong>For the Writer</strong>Show this through gesture, not declaration. A small moment, fully inhabited, can communicate mastery more than a speech.</div>
+        </div>
+        <div class="stage">
+          <span class="stage-num">Stage Seventeen</span>
+          <h4>Freedom to Live</h4>
+          <p>No longer anxious for the future, no longer wounded by the past. The hero acts cleanly in the present. This is the boon, finally given to the world.</p>
+          <div class="craft"><strong>For the Writer</strong>End on action, not reflection. The transformed hero <em>does</em> something. Their freedom is shown by what they choose, lightly, without protest.</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============= COSMOGONIC CYCLE ============= -->
+<section id="cosmogonic">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Part Two</span>
+      <div class="rule"></div>
+      <h2>The Cosmogonic Cycle</h2>
+      <p>Beyond the personal hero, Campbell traces the great round: how worlds emerge, flourish, dissolve, and emerge again. The same rhythm — at cosmic scale.</p>
+    </div>
+
+    <div class="cosmo">
+      <div class="phase">
+        <span class="symbol">○</span>
+        <h4>Emanations</h4>
+        <p>The void breaks open. Forms pour from the unmanifest into being. Creation begins.</p>
+      </div>
+      <div class="phase">
+        <span class="symbol">☽</span>
+        <h4>Virgin Birth</h4>
+        <p>Out of the Mother of the World, life unfolds — countless, particular, and fated.</p>
+      </div>
+      <div class="phase">
+        <span class="symbol">✦</span>
+        <h4>Transformations</h4>
+        <p>The hero appears in many guises: warrior, lover, emperor, redeemer, saint.</p>
+      </div>
+      <div class="phase">
+        <span class="symbol">◐</span>
+        <h4>Dissolutions</h4>
+        <p>All forms return to the source. The world ends so the world may begin again.</p>
+      </div>
+    </div>
+
+    <div class="divider-orn">❖</div>
+
+    <div class="two-col">
+      <div>
+        <h3>Why This Matters for Storytellers</h3>
+        <p>The hero's journey is not only a single life — it is a fractal. The same arc operates at every scale: a scene, a chapter, a character arc, a saga, a civilization. To master one is to glimpse all.</p>
+        <p>When you write, you are not <em>making up</em> this pattern. You are uncovering it. Your task is less invention than recognition.</p>
+      </div>
+      <div>
+        <h3>The Paradox of the Dual Focus</h3>
+        <p>Campbell insists on a profound paradox: viewed from the source, all is harmony — even tragedy. Viewed from the surface, all is striving and pain. The great storyteller holds both at once.</p>
+        <p>This is the secret of tone. Comedy and tragedy are not opposites but rotations of a single revelation. The myth-mind knows both, simultaneously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ARCHETYPES ============= -->
+<section id="archetypes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Faces of the Hero</span>
+      <div class="rule"></div>
+      <h2>Seven Transformations</h2>
+      <p>Across cultures, the hero appears in many costumes. Campbell shows that these are not contradictions but stages — modes the journey can take, depending on the age and need.</p>
+    </div>
+
+    <div class="arch-grid">
+      <div class="arch">
+        <span class="glyph">①</span>
+        <h4>The Primordial Hero</h4>
+        <p>The world-shaper, half-divine. The culture-bringer who teaches fire, agriculture, law. Prometheus, Fu Hsi, the first ancestors.</p>
+      </div>
+      <div class="arch">
+        <span class="glyph">②</span>
+        <h4>The Human Hero</h4>
+        <p>Born of mortal parents, often abandoned, often discovered. The child of destiny — Moses in the bulrushes, Sargon in the basket, Krishna among the cowherds.</p>
+      </div>
+      <div class="arch">
+        <span class="glyph">③</span>
+        <h4>The Warrior</h4>
+        <p>Slayer of dragons, breaker of tyranny. Champion not of what has been, but of what is becoming. Cuchulainn, Theseus, the monster-slayer.</p>
+      </div>
+      <div class="arch">
+        <span class="glyph">④</span>
+        <h4>The Lover</h4>
+        <p>Whose journey is to win the beloved — the other half of the self. The bride is the world. The quest is union, and the dragon is whatever forbids it.</p>
+      </div>
+      <div class="arch">
+        <span class="glyph">⑤</span>
+        <h4>The Emperor & Tyrant</h4>
+        <p>The hero who rules. When centered in the source, a true king. When grasping for self, the dragon Holdfast — the very tyrant the next hero must overthrow.</p>
+      </div>
+      <div class="arch">
+        <span class="glyph">⑥</span>
+        <h4>The World Redeemer</h4>
+        <p>One who returns from the highest mansion with knowledge that "I and the father are one." Krishna, Christ, Buddha — bringers of universal teaching.</p>
+      </div>
+      <div class="arch">
+        <span class="glyph">⑦</span>
+        <h4>The Saint</h4>
+        <p>The world-renouncer, who passes beyond the cycle entirely. Their myth opens out into silence — for the form has dissolved into its source.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= COMPARE TABLE ============= -->
+<section id="opposites">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Symbolic Field</span>
+      <div class="rule"></div>
+      <h2>Pairs of Opposites</h2>
+      <p>Mythology speaks the language of reconciled polarities. To pass through the wall of opposites is the supreme work — and the central trick of the storyteller's craft.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-row compare-head">
+        <div class="a">The Eternal</div>
+        <div class="b">The Manifest</div>
+      </div>
+      <div class="compare-row"><div class="a">The Void</div><div class="b">The World</div></div>
+      <div class="compare-row"><div class="a">Eternity</div><div class="b">Time</div></div>
+      <div class="compare-row"><div class="a">Nirvana</div><div class="b">Samsara</div></div>
+      <div class="compare-row"><div class="a">Truth</div><div class="b">Illusion</div></div>
+      <div class="compare-row"><div class="a">Enlightenment</div><div class="b">Compassion</div></div>
+      <div class="compare-row"><div class="a">The God</div><div class="b">The Goddess</div></div>
+      <div class="compare-row"><div class="a">The Enemy</div><div class="b">The Friend</div></div>
+      <div class="compare-row"><div class="a">Death</div><div class="b">Birth</div></div>
+      <div class="compare-row"><div class="a">Subject</div><div class="b">Object</div></div>
+      <div class="compare-row"><div class="a">The Jewel</div><div class="b">The Lotus</div></div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:1.5rem">Om mani padme hum — "The jewel is in the lotus." The eternal lives in the temporal. The work of myth is to make this visible.</p>
+  </div>
+</section>
+
+<!-- ============= QUOTE BANNER ============= -->
+<div class="banner">
+  <div class="wrap">
+    <blockquote>
+      Myth is the secret opening through which the inexhaustible energies of the cosmos pour into human cultural manifestation.
+    </blockquote>
+    <cite>— Joseph Campbell, The Hero with a Thousand Faces</cite>
+  </div>
+</div>
+
+<!-- ============= FOR WRITERS ============= -->
+<section id="craft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Working Storyteller</span>
+      <div class="rule"></div>
+      <h2>Applications for Writers</h2>
+      <p>Campbell did not write a writing manual. But every page of <em>The Hero with a Thousand Faces</em> is craft instruction, if you read it as such. Here is the practical inheritance.</p>
+    </div>
+
+    <div class="craft-grid">
+      <div class="craft-card">
+        <h4>① Mapping Your Story</h4>
+        <ul>
+          <li>Locate your hero's call. Is it concrete enough?</li>
+          <li>Find the threshold. Where, exactly, is it crossed?</li>
+          <li>Identify the nadir — the belly, the death.</li>
+          <li>Name the boon — what is brought back?</li>
+          <li>Test the return. Does the ordinary world receive it?</li>
+        </ul>
+      </div>
+      <div class="craft-card">
+        <h4>② Character Through Trial</h4>
+        <ul>
+          <li>Every trial should cost something of the old self.</li>
+          <li>Helpers must be specific — give them faces, names, gifts.</li>
+          <li>The mentor withdraws; the hero must finish alone.</li>
+          <li>The shadow is the unlived part of the hero.</li>
+          <li>The "father" is whatever holds ultimate authority — interrogate it.</li>
+        </ul>
+      </div>
+      <div class="craft-card">
+        <h4>③ Mythic Resonance</h4>
+        <ul>
+          <li>Use elemental images: water, fire, threshold, tree, cave, road.</li>
+          <li>Trust the symbol — don't explain it.</li>
+          <li>Let opposites coexist: tragedy with comedy, terror with grace.</li>
+          <li>The literal and the symbolic should speak at once.</li>
+          <li>Allow the numinous — the moment that exceeds explanation.</li>
+        </ul>
+      </div>
+      <div class="craft-card">
+        <h4>④ The Refusal — Yours</h4>
+        <ul>
+          <li>Every writer refuses the call before answering it.</li>
+          <li>Procrastination is the dragon at your own threshold.</li>
+          <li>The story you are most afraid to write is the one.</li>
+          <li>Your private wound is the universal door.</li>
+          <li>Begin badly. Begin anyway. Begin.</li>
+        </ul>
+      </div>
+      <div class="craft-card">
+        <h4>⑤ Beyond Imitation</h4>
+        <ul>
+          <li>Don't follow the structure — let it surface.</li>
+          <li>Originality is depth, not novelty.</li>
+          <li>Read across cultures: the Vedas, the Eddas, the Mabinogion.</li>
+          <li>Borrow images, not plots.</li>
+          <li>The monomyth is a permission, not a prison.</li>
+        </ul>
+      </div>
+      <div class="craft-card">
+        <h4>⑥ The Return Home</h4>
+        <ul>
+          <li>The final test is reintegration — the ordinary world must hold the change.</li>
+          <li>End with action, not commentary.</li>
+          <li>A small gesture can carry a vast transformation.</li>
+          <li>Resist the tidy ending; trust the resonant one.</li>
+          <li>The reader, too, must cross back. Let them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider-orn">❖ ❖ ❖</div>
+
+    <div class="two-col">
+      <div>
+        <h3>The Modern Hero's Task</h3>
+        <p>Campbell, writing in 1949, saw that the old gods had grown silent. The community no longer dreams together. The hero's deed must now be inward — to rediscover, alone, the unity that mythology once revealed in common.</p>
+        <p>For the contemporary writer, this is the great vocation: to be the carrier of meaning in a fractured age. Not to invent new mythologies wholesale — but to recover, transmute, and offer back the old patterns in language a living reader can receive.</p>
+      </div>
+      <div>
+        <h3>What the Reader Wants</h3>
+        <p>Not novelty. Not cleverness. Not even, finally, surprise. The reader wants — without knowing it — to be taken across a threshold, broken open, given a boon, and returned to their life with something that was not there before.</p>
+        <p>This is the contract every story silently makes. The hero's journey is simply the most honest map of how to keep it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ABOUT CAMPBELL ============= -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Author</span>
+      <div class="rule"></div>
+      <h2>Joseph Campbell</h2>
+      <p>1904 — 1987 · Scholar, mythologist, teacher; the great translator of the world's symbolic inheritance for the modern reader.</p>
+    </div>
+
+    <div class="author">
+      <div class="portrait">JC</div>
+      <div>
+        <p>Born in 1904, Joseph Campbell devoted his life to the comparative study of myth, religion, and literature. His thesis — that the world's great stories share a common architecture rooted in the human psyche — found its most enduring expression in <em>The Hero with a Thousand Faces</em>, first published in 1949.</p>
+        <p>Drawing from Freud and Jung, from the Vedas and the Bible, from Eskimo folktale and Welsh legend and Sumerian temple-tablet, Campbell traced the monomyth across cultures and centuries. His later works — <em>The Masks of God</em>, <em>The Power of Myth</em> — extended this vision, and his ideas shaped a generation of storytellers from George Lucas to Ursula K. Le Guin.</p>
+        <p>Campbell's central conviction was simple, and revolutionary: <em>the mythic is not what was; it is what is</em>. Beneath the surface of every modern life, the old story still unfolds. To attend to it — as reader, as writer, as person — is to participate in the ancient and ongoing work of being human.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= CLOSING ============= -->
+<div class="closing">
+  <div class="wrap">
+    <div class="ornament">✦</div>
+    <h2>Follow Your Bliss</h2>
+    <p>"We must let go of the life we have planned, so as to accept the one that is waiting for us."</p>
+    <p class="small" style="margin-top:2rem">— Joseph Campbell</p>
+    <div class="cta" style="margin-top:3rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#monomyth" class="btn">Return to the Beginning</a>
+      <a href="#craft" class="btn solid">Begin Your Own Journey</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>A reader's compendium to <em>The Hero with a Thousand Faces</em> by Joseph Campbell.</p>
+  <p>Bollingen Series XVII · First published 1949 · Commemorative Edition 2004</p>
+  <p style="margin-top:1rem;opacity:.7">Quotations from the work of Joseph Campbell are presented here for educational and scholarly purposes.</p>
+</footer>
+
+<script>
+  // Smooth highlight nav on scroll
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navLinks = document.querySelectorAll('nav.top a');
+  const setActive = () => {
+    let current = '';
+    const scrollY = window.scrollY + 120;
+    sections.forEach(s => {
+      if (scrollY >= s.offsetTop) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold-bright)' : '';
+    });
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+
+  // Subtle reveal on intersect
+  const reveal = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.stage, .pillar, .arch, .craft-card, .phase, .author').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    reveal.observe(el);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Archive of Archetypal Symbols — Reflections on the Imagery of the Soul</title>
+<style>
+  :root {
+    --bg: #0e0c0a;
+    --bg-2: #15110d;
+    --bg-3: #1c1812;
+    --ink: #e8dfcf;
+    --ink-dim: #b3a890;
+    --ink-faint: #7a6f5a;
+    --gold: #c9a96a;
+    --gold-bright: #e2c389;
+    --rust: #a8512c;
+    --moss: #6b7a4e;
+    --line: #2b251c;
+    --serif: "Cormorant Garamond", "EB Garamond", "Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at top, rgba(201, 169, 106, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(168, 81, 44, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* ---------- HEADER / HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(226, 195, 137, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(168, 81, 44, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero-mark {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.05;
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+    z-index: 1;
+  }
+
+  .hero h1 .accent { color: var(--gold-bright); font-style: normal; }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    max-width: 640px;
+    color: var(--ink-dim);
+    font-style: italic;
+    z-index: 1;
+    margin-bottom: 3rem;
+  }
+
+  .hero-quote {
+    max-width: 560px;
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.2rem 0;
+    margin-bottom: 2rem;
+    z-index: 1;
+  }
+
+  .hero-quote cite { display: block; margin-top: 0.5rem; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  nav.tome-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(14, 12, 10, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .nav-brand {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .nav-links a:hover { color: var(--gold-bright); }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---------- INTRO ---------- */
+  .intro {
+    max-width: 760px;
+    margin: 6rem auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .intro p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+
+  .intro p:first-of-type::first-letter {
+    font-size: 4rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.3rem 0.7rem 0 0;
+    color: var(--gold);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* ---------- SEARCH ---------- */
+  .search-bar {
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+    position: relative;
+  }
+
+  .search-bar input {
+    width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    padding: 0.9rem 1.2rem 0.9rem 3rem;
+    border-radius: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-bar input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px rgba(201, 169, 106, 0.3);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--ink-faint);
+    pointer-events: none;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-roman {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .section-desc {
+    max-width: 620px;
+    margin: 0 auto;
+    color: var(--ink-dim);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
+  /* ---------- CATEGORIES ---------- */
+  .category {
+    margin-bottom: 5rem;
+  }
+
+  .category-title {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-ornament {
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.8em;
+  }
+
+  /* ---------- SYMBOL GRID ---------- */
+  .symbol-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .symbol-card {
+    background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border: 1px solid var(--line);
+    padding: 2rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .symbol-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .symbol-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .symbol-card:hover::before { opacity: 1; }
+
+  .symbol-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+    color: var(--gold);
+    transition: color 0.3s, transform 0.5s;
+  }
+
+  .symbol-card:hover .symbol-icon {
+    color: var(--gold-bright);
+    transform: scale(1.1);
+  }
+
+  .symbol-name {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .symbol-tagline {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 6, 4, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    z-index: 200;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1rem;
+    overflow-y: auto;
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    max-width: 760px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--ink-dim);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 0.5rem;
+  }
+
+  .modal-close:hover { color: var(--gold-bright); }
+
+  .modal-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .modal-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: block;
+    color: var(--gold);
+  }
+
+  .modal-title {
+    font-size: 3rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .modal-tagline {
+    text-align: center;
+    color: var(--ink-dim);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .modal-body {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  .modal-body p { margin-bottom: 1.2rem; }
+
+  .modal-body .pull-quote {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 2px solid var(--gold);
+    color: var(--gold-bright);
+    font-style: italic;
+    font-size: 1.15rem;
+  }
+
+  .modal-themes {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .modal-themes-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .themes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .theme-tag {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--line);
+    color: var(--ink-dim);
+    border-radius: 2px;
+    background: var(--bg-3);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg-2);
+    padding: 4rem 2rem 3rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  .footer-mark {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    color: var(--gold);
+  }
+
+  .footer-title {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .footer-text {
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
+  .footer-credit {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .footer-credit a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ---------- UTILITIES ---------- */
+  .hidden { display: none !important; }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .hero { padding: 3rem 1.5rem; }
+    .nav-links { gap: 0.8rem; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.1em; }
+    .section { padding: 3rem 1.5rem; }
+    .modal { padding: 2rem 1.5rem; }
+    .modal-title { font-size: 2.2rem; }
+    .symbol-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+    .symbol-card { padding: 1.5rem 1rem; min-height: 180px; }
+    .symbol-name { font-size: 1.2rem; }
+    .symbol-icon { width: 48px; height: 48px; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* Selection */
+  ::selection { background: var(--gold); color: var(--bg); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <svg class="hero-mark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.8" style="color: var(--gold);">
+    <circle cx="50" cy="50" r="44"/>
+    <circle cx="50" cy="50" r="32"/>
+    <circle cx="50" cy="50" r="20"/>
+    <circle cx="50" cy="50" r="3" fill="currentColor"/>
+    <line x1="50" y1="6" x2="50" y2="14"/>
+    <line x1="50" y1="86" x2="50" y2="94"/>
+    <line x1="6" y1="50" x2="14" y2="50"/>
+    <line x1="86" y1="50" x2="94" y2="50"/>
+  </svg>
+  <div class="hero-eyebrow">The Archive of Archetypal Symbols</div>
+  <h1>Reflections on the <span class="accent">Imagery</span> of the Soul</h1>
+  <p class="hero-sub">A wandering through creation and cosmos, plant and animal, body and spirit — the universal symbols by which the psyche speaks to itself.</p>
+  <blockquote class="hero-quote">
+    "When the soul wants to experience something she throws out an image in front of her and then steps into it."
+    <cite>— Meister Eckhart</cite>
+  </blockquote>
+  <div class="scroll-cue">↓ Enter</div>
+</header>
+
+<!-- NAV -->
+<nav class="tome-nav">
+  <div class="nav-inner">
+    <div class="nav-brand">⊙ Archive of Symbols</div>
+    <ul class="nav-links">
+      <li><a href="#cosmos">Creation &amp; Cosmos</a></li>
+      <li><a href="#plant">Plant World</a></li>
+      <li><a href="#animal">Animal World</a></li>
+      <li><a href="#human">Human World</a></li>
+      <li><a href="#spirit">Spirit World</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<section class="intro">
+  <p>A symbol is not a sign or a decoration. It is a threshold — an image that gathers more meaning than any single explanation can hold. To dwell with a symbol is to allow the seen to point toward the unseen, the particular toward the universal.</p>
+  <p>What follows is a curated wandering through some of the great archetypal images that have appeared again and again across cultures and centuries — in myth, in dream, in art, in the quiet attentiveness of poets and the careful labor of alchemists.</p>
+</section>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="11" cy="11" r="7"/>
+    <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+  </svg>
+  <input type="text" id="searchInput" placeholder="Search a symbol — moon, river, mask, mirror…" autocomplete="off">
+</div>
+
+<!-- SECTIONS GET INJECTED HERE -->
+<main id="sections"></main>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+  <article class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-eyebrow" id="modalSection"></div>
+    <div id="modalIconWrap"></div>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <p class="modal-tagline" id="modalTagline"></p>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-themes">
+      <div class="modal-themes-label">Associated Themes</div>
+      <div class="themes-list" id="modalThemes"></div>
+    </div>
+  </article>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="footer-mark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+    <circle cx="50" cy="50" r="40"/>
+    <circle cx="50" cy="50" r="6" fill="currentColor"/>
+  </svg>
+  <div class="footer-title">An offering of images</div>
+  <p class="footer-text">"A still vital symbol remains partially unknown, compels our attention, and unfolds in new meanings and manifestations over time."</p>
+  <p class="footer-credit">
+    Inspired by the work of <a href="https://aras.org" target="_blank" rel="noopener">The Archive for Research in Archetypal Symbolism (ARAS)</a> and their masterwork <em>The Book of Symbols</em>. Descriptions written for this exhibit as an educational introduction.
+  </p>
+</footer>
+
+<script>
+// =====================================================
+// SYMBOL DATA
+// All descriptions are original educational summaries
+// written for this exhibit, inspired by the themes of
+// The Book of Symbols (ARAS / Taschen).
+// =====================================================
+
+const SYMBOLS = {
+  cosmos: {
+    title: "Creation & Cosmos",
+    roman: "I",
+    desc: "The first images: the egg before time, the breath that stirs the waters, the star that orients the wanderer, the sun and moon dividing day from night.",
+    categories: [
+      {
+        name: "Creation & Cosmos",
+        symbols: [
+          {
+            name: "Egg",
+            tagline: "The world enclosed in a perfect form",
+            icon: "egg",
+            themes: ["beginning", "potential", "wholeness", "rebirth"],
+            essay: [
+              "Before all things, an egg. Across the world's creation myths a primordial egg appears — golden, dark, floating in a cosmic sea — containing within itself the totality that is yet to unfold. The Vedic Hiranyagarbha, the Orphic egg of Night, the cosmic egg of P'an-ku: all describe the same intuition that wholeness precedes division.",
+              "The egg is the form of potentiality, self-contained and self-nourishing. Inside its shell, hidden processes ripen toward a moment of cracking open. In this it offers an image of the psyche's own gestations — the long, dim incubations that precede every new thought, every awakening, every birth.",
+              "In alchemy, the philosophical egg was the sealed vessel within which transformation occurred. To brood upon an image, an idea, a wound, was to allow the egg to do its quiet work."
+            ],
+            quote: "Everything is contained in the egg, and needs only brooding."
+          },
+          {
+            name: "Breath",
+            tagline: "The animating spirit, invisible yet essential",
+            icon: "breath",
+            themes: ["spirit", "life force", "soul", "inspiration"],
+            essay: [
+              "Breath is the most intimate evidence of being alive — the rhythm we share with all creatures, with the wind, with the tides. In Sanskrit prana, in Greek pneuma, in Hebrew ruach, in Latin spiritus: across languages the same word names both the air we take in and the spirit that animates us.",
+              "To breathe is to participate in an endless exchange with the world. We are continuously taking in what surrounds us, releasing it transformed. The ancient image of the divine breathing life into clay still describes the mystery of how an unmoving form becomes a living being.",
+              "Each inhalation is an acceptance, each exhalation a release. The contemplative traditions found in this rhythm a doorway to the deeper self — a place where the small ego could surrender to a larger, sustaining presence."
+            ]
+          },
+          {
+            name: "Star",
+            tagline: "Orientation, fate, the spark of consciousness",
+            icon: "star",
+            themes: ["guidance", "destiny", "the eternal", "individual spark"],
+            essay: [
+              "A star is a point of light in a vast darkness — a navigator's friend, a pilgrim's guide, a poet's longing. Long before we knew that stars were suns, they were beacons by which we found our way.",
+              "Symbolically, a star is what stands out from the surrounding obscurity. Within a person, the inner star is the inkling of one's own particular vocation, the small persistent gleam that orients a life from within. The Gnostic image of the soul as a spark fallen from the celestial fire belongs to this constellation of meanings.",
+              "We wish on stars, we are born under stars, we follow stars. They name the place where the personal touches the cosmic — where each life feels intimately, mysteriously connected to something far larger than itself."
+            ]
+          },
+          {
+            name: "Sun",
+            tagline: "Consciousness, sovereignty, the source of warmth",
+            icon: "sun",
+            themes: ["clarity", "vitality", "kingship", "illumination"],
+            essay: [
+              "The sun is the primary fact. Without it, nothing. Every living thing on earth ultimately eats sunlight, breathes the oxygen that sunlight made, takes its rhythms from the sun's daily and yearly arcs.",
+              "As a symbol, the sun stands for the daylight consciousness — the clear, focused, discriminating awareness by which we make our way in the world. The sun is the king and the hero, the eye that sees, the gold that does not tarnish.",
+              "But the sun is also fierce. Too much of its light parches, blinds, withers. The wisdom traditions counsel that solar clarity must be balanced by lunar reflection — that the bright, decisive ego must learn to honor the moister, slower wisdom of the moon and the depths."
+            ]
+          },
+          {
+            name: "Moon",
+            tagline: "Reflection, cycles, the wisdom of the indirect",
+            icon: "moon",
+            themes: ["change", "intuition", "the feminine", "imagination"],
+            essay: [
+              "The moon is constant only in her changing. She waxes and wanes, hides and reveals, pulls the tides, marks the months. To live by the moon is to live with the rhythms of return — to trust that what disappears will come again.",
+              "Where the sun proposes one bright answer, the moon offers many soft truths. Her light does not insist; it reveals what wants to be seen. By moonlight, the world becomes uncanny, dreamlike, more real to the imagination than to the daylight intellect.",
+              "Across cultures the moon has been the great mother, the maiden-mother-crone, the patroness of mysteries. Within the psyche she is the receptive, image-making faculty — the part that listens to dreams and feels the meaning beneath events."
+            ]
+          },
+          {
+            name: "Eclipse",
+            tagline: "When the lights are briefly extinguished",
+            icon: "eclipse",
+            themes: ["conjunction", "shadow", "fear", "wonder"],
+            essay: [
+              "The eclipse is the moment when the ordinary lights fail — when sun meets moon and one swallows the other, and the daytime world is briefly returned to twilight or to night.",
+              "For the ancients this was always an event of cosmic weight: an omen, a wounding of the heavens, a brief death of the great luminaries. And yet, after the few minutes of disorientation, the light returns. The eclipse, more than any other phenomenon, demonstrates that even what seems most permanent has its hidden interruptions.",
+              "Within a life, an eclipse-like moment may come: a period when the familiar light by which one had lived suddenly goes out. The work then is not to panic but to wait through the darkness, knowing that the sun is not gone, only briefly veiled."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Water",
+        symbols: [
+          {
+            name: "Ocean",
+            tagline: "The mother of all things, the unconscious deep",
+            icon: "ocean",
+            themes: ["origin", "unconscious", "vastness", "the maternal"],
+            essay: [
+              "We came from the sea. The salt in our blood is the salt of an ancient ocean; the womb that held us was a small inland version of those primordial waters. To stand at the edge of the sea is to stand at the edge of one's own beginning.",
+              "The ocean is the great image of the unconscious — vast, dark below the surface, full of life we cannot see. We can sail across its skin, but its depths remain mostly impenetrable. From it surface storms, fish, treasures and terrors.",
+              "To dream of the sea is to be reminded of one's smallness within something much larger, and also of one's continuity with that something. The ocean both threatens to dissolve us and offers the consoling truth that we are not, finally, separate from it."
+            ]
+          },
+          {
+            name: "River",
+            tagline: "Time, flow, the life that does not return",
+            icon: "river",
+            themes: ["time", "passage", "transformation", "destiny"],
+            essay: [
+              "You cannot step into the same river twice. The river is the great image of time and of life moving — always going, never the same, always in some way the same.",
+              "Rivers gather and carry. They have a source, a course, a mouth. They link mountains to seas, separate one bank from another, and offer themselves as borders, as ways, as places of purification.",
+              "Within the soul, the river represents the felt sense of one's own life moving forward — sometimes broad and slow, sometimes rushing, occasionally pooled into stillness. To consent to be the river one has been given, neither damming nor abandoning its course, is part of the long work of acceptance."
+            ]
+          },
+          {
+            name: "Whirlpool",
+            tagline: "The vortex that pulls toward the center",
+            icon: "whirlpool",
+            themes: ["descent", "fascination", "danger", "the abyss"],
+            essay: [
+              "A whirlpool turns smoothly at its edges, viciously at its center. It draws everything toward a single point of disappearance — calm on its surface, ravenous below.",
+              "Symbolically, the whirlpool is the image of any compelling fascination that pulls one downward and inward: addiction, obsession, a paralyzing affect. To be caught in the vortex is to circle ever more tightly around something one cannot quite name.",
+              "And yet the whirlpool is also a passage. Some myths describe the eye of the vortex as an opening to another world — a place where the surface logic fails and a different reality becomes briefly visible. The traveler who survives such a descent may return with knowledge unobtainable elsewhere."
+            ]
+          },
+          {
+            name: "Waterfall",
+            tagline: "Inexhaustible descent of the living water",
+            icon: "waterfall",
+            themes: ["release", "abundance", "purity", "renewal"],
+            essay: [
+              "A waterfall is what happens when a river finds itself suddenly without ground beneath it. It does not stop. It pours, ceaselessly, transforming itself from stream to mist to stream again.",
+              "Standing near a waterfall, one feels the air change — cool, charged, alive. The continuous falling has a sound that is also a silence: the noise of pure ongoingness.",
+              "As an image, the waterfall offers the sense of an inexhaustible source. Whatever it gives, more comes. It models a generosity that does not deplete itself, a giving that is also a being given to from above."
+            ]
+          },
+          {
+            name: "Flood",
+            tagline: "Dissolution as the precondition for renewal",
+            icon: "flood",
+            themes: ["overwhelm", "destruction", "renewal", "purification"],
+            essay: [
+              "The flood myth is nearly universal. From the ancient Sumerians to the Hebrews to the peoples of Mesoamerica, almost every culture remembers a time when the waters rose and covered the world.",
+              "The flood is the image of the unconscious overflowing its banks — when feeling, memory, longing, terror, all the things normally contained, suddenly inundate the structures of ordinary life. After such a flooding, things are not as they were.",
+              "And yet the flood myths almost always include a vessel: an ark, a basket, a boat. Something is preserved. The work in any flooding is to attend to what the ark must carry — what is essential, what must survive, so that on the other side, a new world can be sown."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Fire, Light, & Darkness",
+        symbols: [
+          {
+            name: "Fire",
+            tagline: "Warmth, transformation, the dangerous gift",
+            icon: "fire",
+            themes: ["passion", "destruction", "purification", "creativity"],
+            essay: [
+              "Fire is alive. It eats, it breathes, it propagates, it dies. Of all the elements, it is the one most like a creature — and the one most like a god.",
+              "The story of how humans came to possess fire is told everywhere as a story of theft or gift: Prometheus stealing it from the gods, the trickster Coyote carrying it home, the sun-bird bringing it to a cold earth. Fire is the technology that made human culture possible, and also the force that can undo it.",
+              "Within the soul, fire names the burning urgencies — passion, anger, longing, the creative drive that will not be denied. To carry such fire wisely is the slow work of a lifetime. Untended, it consumes. Honored and contained, it cooks the matter of life into nourishment."
+            ]
+          },
+          {
+            name: "Spark",
+            tagline: "The smallest beginning, the seed of light",
+            icon: "spark",
+            themes: ["inception", "potential", "soul", "creativity"],
+            essay: [
+              "Strike steel against flint and a spark leaps out — improbably bright, almost too quick to see. From that small jumping point of light an entire fire can grow.",
+              "The spark is the image of the smallest beginning that contains everything. The Gnostics imagined the soul as a divine spark fallen into matter, awaiting return. Mystics speak of the spark within, the funkelein in Meister Eckhart's German, the inmost point where the human and the divine touch.",
+              "Every creative act begins with a spark — a sudden small idea, a flash of insight, a moment of recognition. The discipline is to notice such sparks when they appear, and to give them the patient kindling they need to become fires."
+            ]
+          },
+          {
+            name: "Dawn",
+            tagline: "The interval where night becomes day",
+            icon: "dawn",
+            themes: ["beginning", "hope", "annunciation", "threshold"],
+            essay: [
+              "Dawn is not yet day. It is the long, slow lightening — the moment when the eastern sky reveals what was already there beneath the dark. Birds begin to call. The world remembers its shapes.",
+              "Mythically, dawn is the rosy-fingered maiden, the herald, the announcer. She does not deliver the sun; she prepares the world to receive it. In her hands the boundary between night and day becomes a soft, gradual blending rather than a hard line.",
+              "An inner dawn is the felt anticipation of a clarity not yet arrived — a sense, often subtle, that something is about to be revealed. The work of those moments is patience: the sun rises in its own time, and cannot be hurried."
+            ]
+          },
+          {
+            name: "Night",
+            tagline: "Where seeing happens through other eyes",
+            icon: "night",
+            themes: ["mystery", "dream", "the unconscious", "rest"],
+            essay: [
+              "Night is the world's other half. For all our love of light, half of life happens in the dark — sleep, dream, love, fear, the slow growths and dissolutions that do not want to be watched.",
+              "In the dark we see differently. Our other senses sharpen. The familiar furniture of the day becomes uncanny; the imagination has more room. Many of the most important encounters in scripture and myth happen at night: wrestling with angels, hearing the voice of God, receiving the dream that changes everything.",
+              "To welcome night is to consent to not knowing for a while — to allow the day's certainties to soften, the questions to deepen, the unconscious to bring up what it has been quietly working on."
+            ]
+          },
+          {
+            name: "Darkness",
+            tagline: "The fertile ground of all that is not yet known",
+            icon: "darkness",
+            themes: ["mystery", "the hidden", "depth", "potential"],
+            essay: [
+              "Darkness is not the absence of light. It is its own substance — the medium in which seeds germinate, in which embryos grow, in which the long and unwitnessed parts of every life proceed.",
+              "Religious traditions have known two darknesses: the darkness of ignorance, which is to be lit, and the darkness of mystery, which is more luminous than light. The latter is the dark cloud on Sinai, the dark night of the soul, the unknowable depth in which the divine is most fully present.",
+              "Within the psyche, darkness names the unconscious — not as something merely lacking, but as the vast generative ground from which consciousness itself continually emerges. To honor one's own darkness is to refuse the false brightness that pretends to know everything."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Earth",
+        symbols: [
+          {
+            name: "Stone",
+            tagline: "Endurance, the foundation that does not yield",
+            icon: "stone",
+            themes: ["permanence", "the self", "memory", "weight"],
+            essay: [
+              "A stone is older than memory. We build with stones, we mark graves with stones, we throw stones, we set stones for boundaries. The mineral world is the slowest of the worlds, and stones are its envoys.",
+              "Across cultures, sacred stones name the places where the eternal touches the ordinary. The black stone of the Kaaba, Jacob's pillow at Bethel, the stone in the sword: these are nodes where something transcendent is held by something local.",
+              "The alchemists sought the philosopher's stone — not a literal mineral but an inner achievement, something so durably itself that even the strongest fires could not unmake it. In each life there is, perhaps, the quiet labor of finding one's own stone."
+            ]
+          },
+          {
+            name: "Mountain",
+            tagline: "The high place where heaven and earth meet",
+            icon: "mountain",
+            themes: ["aspiration", "encounter", "transcendence", "solitude"],
+            essay: [
+              "Mountains rise above the inhabited world. Their summits are often hidden in cloud; their slopes are difficult; their air is thin. To climb a mountain is to leave behind the small concerns of the valley and enter a sparser, clearer atmosphere.",
+              "In nearly every tradition, mountains are where humans go to meet the holy. Moses on Sinai, the Buddha at the foot of the snow peaks, the hermits in the high Tibetan caves: the mountain offers the conditions for an unusual kind of attention.",
+              "The inward mountain is the climb toward whatever one most wants to know or to become. It cannot be rushed. There are false summits. The mountain itself does not care whether one arrives — but the going changes the goer."
+            ]
+          },
+          {
+            name: "Cave",
+            tagline: "The womb of the earth, the place of inward sight",
+            icon: "cave",
+            themes: ["interiority", "incubation", "rebirth", "the unconscious"],
+            essay: [
+              "A cave is the earth opened. To go into one is to leave behind the daylight and enter a chamber where the rules are different — cool, echoing, lit only by what light one brings.",
+              "Our oldest art is on the walls of caves. Long before temples, the deep dark spaces of the earth were the first sanctuaries — places of initiation, of vision, of the marking of importance.",
+              "Inwardly, the cave names the recess where the most private and most ancient parts of oneself dwell. To go in is frightening, and necessary. The journey is rarely linear. But what is found there is often what one most needed."
+            ]
+          },
+          {
+            name: "Forest",
+            tagline: "The wild place outside the boundaries of the known",
+            icon: "forest",
+            themes: ["wildness", "trial", "encounter", "the unknown"],
+            essay: [
+              "In fairy tales the forest is where everything important happens. One leaves the village — leaves the known, the rule-bound, the legible — and enters the trees. There one meets the witch, the wolf, the spirit, the unexpected helper.",
+              "A forest is many things at once: a system of trees, a society of creatures, a darkness, a shelter, a maze. It is hard to see far. The paths are unreliable. Sounds carry strangely.",
+              "The forest within is the territory of the unknown self — the parts of oneself that do not fit into the orderly life one has built. To enter it consciously is the work of the seeker. Many of the most important transformations begin only after one has gotten properly lost among the trees."
+            ]
+          },
+          {
+            name: "Desert",
+            tagline: "The dry place where pretense burns away",
+            icon: "desert",
+            themes: ["solitude", "trial", "purification", "vision"],
+            essay: [
+              "The desert is what is left when everything inessential has been removed. Heat, sand, sky. Few creatures, fewer plants. The body suffers; the mind clarifies, or breaks.",
+              "Across the wisdom traditions, the desert is where one goes to meet oneself without distraction. The Hebrew prophets, the Christian desert fathers, the Sufi mystics, the Indigenous vision-seekers: again and again the dry place has been chosen as the school of inner truth.",
+              "Within a life, a desert season comes uninvited. Familiar nourishments dry up. Old certainties evaporate. What remains, in time, is what cannot be taken — the small, hard, true things that the desert has burned everything else down to."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  plant: {
+    title: "Plant World",
+    roman: "II",
+    desc: "Rooted, patient, turning toward light: the trees that connect worlds, the flowers that bloom and fade, the fruits in which sweetness ripens.",
+    categories: [
+      {
+        name: "Trees",
+        symbols: [
+          {
+            name: "Tree",
+            tagline: "The axis between worlds, rooted and reaching",
+            icon: "tree",
+            themes: ["growth", "the self", "axis mundi", "endurance"],
+            essay: [
+              "A tree connects three worlds at once. Its roots are in the dark earth; its trunk holds the middle realm of weather and creatures; its branches reach into the open sky. In this simple structure, every tree models the wholeness toward which a life can grow.",
+              "World-trees stand at the center of many cosmologies: Yggdrasil in the Norse imagination, the Bodhi tree under which the Buddha awoke, the Tree of Life in the garden of Eden. To climb such a tree is to travel between the realms; to sit beneath it is to find a stillness that includes them all.",
+              "A tree's growth is slow, particular, irreversible. It does not hurry. Each year it lays down another ring of itself, more or less in response to the conditions it was given. The inner tree is what one has actually become — not what one imagined, but what time and weather have shaped."
+            ]
+          },
+          {
+            name: "Oak",
+            tagline: "Stature, strength, the long-rooted",
+            icon: "oak",
+            themes: ["strength", "endurance", "wisdom", "the patriarch"],
+            essay: [
+              "The oak is the great long-lived tree of the temperate world. A mature oak may have witnessed centuries; its wood is dense, its roots deep, its presence imposing.",
+              "Sacred to the thunder gods — Zeus, Jupiter, Thor, Perun — oaks were the temples of older religions before walls were built. To stand under an old oak is still to feel something of that presence: an authority that does not need to assert itself.",
+              "The inward oak names what has grown sturdy and weathered in a person: the deep convictions, the unshakable loyalties, the parts of character that storms have tested and not broken."
+            ]
+          },
+          {
+            name: "Olive",
+            tagline: "Peace, anointing, the silver-green of long survival",
+            icon: "olive",
+            themes: ["peace", "wisdom", "longevity", "blessing"],
+            essay: [
+              "The olive is a tree of the dry Mediterranean — twisted, modest in appearance, almost ageless. An olive tree can live a thousand years and continue to bear fruit. Its wood is hard, its oil precious.",
+              "Across the cultures of the ancient Mediterranean, the olive named what endures gracefully. Athena gave Athens the olive; the dove brought Noah an olive branch; kings and priests were anointed with olive oil. The tree's gifts — light for lamps, food for the table, balm for wounds — were the gifts of civilized life.",
+              "An olive branch still names the gesture of peace, the offering across the breach. It is small, gnarled, and indestructible: an emblem of the kind of patience that outlasts conflict."
+            ]
+          },
+          {
+            name: "Pine",
+            tagline: "Evergreen patience through every winter",
+            icon: "pine",
+            themes: ["endurance", "constancy", "wisdom", "winter"],
+            essay: [
+              "The pine does not lose its green. While the deciduous trees flame and fade and stand bare, the pine holds. It is the tree of the cold places, the high places, the long winters.",
+              "In Chinese and Japanese art the old pine, twisted by wind and snow, became the great image of the cultivated character — the person whose deep practice has weathered into a particular, knotted beauty. Such a tree, painted in ink, says everything about steadfastness without using a word.",
+              "Inwardly, the pine names whatever in oneself does not need the favorable season. The constancy of attention, of love, of practice — small, dark green, continuing — when much else has fallen away."
+            ]
+          },
+          {
+            name: "Roots",
+            tagline: "The hidden depths from which the visible draws life",
+            icon: "roots",
+            themes: ["ancestry", "the unconscious", "nourishment", "ground"],
+            essay: [
+              "Roots are what we do not see. A great tree may carry as much of itself below the ground as above. The visible glory of the canopy depends entirely on the long, dark, patient work of the roots.",
+              "To speak of one's roots is to speak of where one comes from — the family, the place, the language, the inherited stories that have made one possible. We can be cut off from these and still go on for a while, but eventually the question of nourishment returns.",
+              "The inner work of rooting is the work of finding what actually sustains. Not what one wishes sustained one, not what is fashionable, but what — when tested — actually reaches water."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Magical Plants & Flowers",
+        symbols: [
+          {
+            name: "Garden",
+            tagline: "Nature shaped by attention and love",
+            icon: "garden",
+            themes: ["paradise", "cultivation", "the soul", "delight"],
+            essay: [
+              "A garden is what happens when nature is met by long, careful attention. It is neither wilderness nor city. It is the chosen middle place where wildness and design make something together.",
+              "Across cultures the garden has been the image of paradise — the enclosed, watered place where every fruit is ripe and the lion lies down with the lamb. Eden is a garden; the Quran promises gardens to the blessed; the Japanese temple garden offers, in a few stones and trees, a complete world.",
+              "The inward garden is the life one has actually tended. It is not the life one might have lived elsewhere. It is the small, particular plot one has been given, and what has grown in it because one returned to it day after day."
+            ]
+          },
+          {
+            name: "Flower",
+            tagline: "Brief, perfect, the gift of bloom",
+            icon: "flower",
+            themes: ["beauty", "transience", "the soul", "opening"],
+            essay: [
+              "A flower is what a plant does when it is ready to give itself away. Pollen, nectar, color, scent — everything offered. After the flowering, the work of the seed begins.",
+              "Flowers have always been used to mark the heightened moments: birth, marriage, death, holy days. They are the language we reach for when ordinary speech feels insufficient. Their beauty is real, and brief, and somehow these two facts together make them indispensable.",
+              "Within a life, what flowers is what one has prepared, often unknowingly, to give. The bloom is not the achievement; it is the offering. After it, the season turns."
+            ]
+          },
+          {
+            name: "Lotus",
+            tagline: "Beauty rising unstained from the mud",
+            icon: "lotus",
+            themes: ["awakening", "purity", "the self", "transcendence"],
+            essay: [
+              "The lotus is rooted in the dark sediment of a pond. Its stem rises through the murky water. Its bloom opens, unsoiled, on the surface — clean, fragrant, perfectly composed.",
+              "Across the religious traditions of Asia, the lotus has been the great image of awakening. The Buddha sits upon it; the gods of India are born from it; the Egyptian sun rose from its blue petals. The lotus does not deny the mud. It is from the mud that it draws its life. But what reaches the light is something the mud could not have predicted.",
+              "Inwardly, the lotus names the possibility that the most difficult ground may yield the most luminous bloom. Nothing in one's history is wasted. Everything goes into the flower."
+            ]
+          },
+          {
+            name: "Rose",
+            tagline: "Love, with thorns",
+            icon: "rose",
+            themes: ["love", "beauty", "mystery", "the heart"],
+            essay: [
+              "The rose is the flower of love — and of love's complications. Its petals are layered, secret, drawing the eye inward toward a hidden center. Its scent is unmistakable. Its thorns are not decorative.",
+              "Sacred to Aphrodite and to the Virgin Mary, sung by the Persian Sufi poets and the medieval troubadours, the rose has gathered around itself a longer history than almost any other flower. It is the bloom by which we name what is most precious.",
+              "The mystical rose is the soul opening, slowly, around its own deep center. The thorns are not contradictions to its beauty; they belong to it. Real love has always known this."
+            ]
+          },
+          {
+            name: "Apple",
+            tagline: "Forbidden, golden, the fruit of choice",
+            icon: "apple",
+            themes: ["knowledge", "temptation", "love", "wholeness"],
+            essay: [
+              "The apple is so ordinary that it is easy to forget how much it carries. The apple in Eden, the apple of discord, the apple given by the witch, the apple in the lap of the lover, the apple a day: across stories the same fruit appears at the moments of decision.",
+              "Cut crosswise, an apple reveals a five-pointed star in its core — a small mandala hidden inside the everyday. Perhaps this is why so many myths have placed an apple at the threshold of awakening.",
+              "To eat the apple is to choose to know — to leave behind a simpler innocence for a more complicated wisdom. The choice is always available, and always costly, and almost always worth it."
+            ]
+          },
+          {
+            name: "Pomegranate",
+            tagline: "The fruit of the underworld, full of seeds",
+            icon: "pomegranate",
+            themes: ["death", "rebirth", "fertility", "the underworld"],
+            essay: [
+              "A pomegranate is a hard ruby skin around an interior of countless small jeweled seeds. To open one is to be reminded that multiplicity can be contained inside a single round thing.",
+              "Persephone ate the pomegranate's seeds in the underworld and so was bound to return there each year. Across the ancient Mediterranean the fruit was associated with the great goddesses, with the mysteries of fertility, with the cycling of death and life.",
+              "Within the soul, the pomegranate names the secret connections — what we have eaten of the depths that ties us to them, what we have taken in that has become part of us, the small ruby seeds of experience we cannot unswallow."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  animal: {
+    title: "Animal World",
+    roman: "III",
+    desc: "Our older relatives: the snake at the root of the tree, the bird in its branches, the wolf at the forest edge, the great fish in the deep.",
+    categories: [
+      {
+        name: "Primordial Creatures",
+        symbols: [
+          {
+            name: "Snake",
+            tagline: "Wisdom and danger coiled together",
+            icon: "snake",
+            themes: ["transformation", "wisdom", "danger", "renewal"],
+            essay: [
+              "The snake is one of the oldest of symbols, and one of the most paradoxical. Sheds its skin and lives. Bites and kills. Coils around the tree of life, and around the staff of healing. We have feared it and revered it without ever quite resolving the relation.",
+              "Because it sheds its skin, the snake speaks of renewal — the capacity to leave behind an outworn self and emerge as something fresh and bright. Because its bite is sometimes fatal, it speaks of the close link between transformation and death.",
+              "Within the psyche, the snake names the instinctual energies that arrive without permission — the libidinal currents, the sudden awakenings, the kundalini rising. These energies are not safe, and they are not bad. They are the deep aliveness of the body, and they require respect."
+            ]
+          },
+          {
+            name: "Frog",
+            tagline: "The amphibian between two worlds",
+            icon: "frog",
+            themes: ["transformation", "the threshold", "fertility", "rebirth"],
+            essay: [
+              "A frog begins life in water as a tadpole and ends it on land as a frog. The whole of its biography is a transformation between two elements. In this it is the great animal teacher of metamorphosis.",
+              "Frogs were sacred in ancient Egypt as emblems of fertility and the renewing waters of the Nile. In fairy tales the frog often hides a prince — the small, dampish, slightly ugly creature that turns out to contain something royal.",
+              "When one feels oneself in the in-between — no longer quite what one was, not yet what one will be — the frog offers companionship. The amphibian condition is awkward, and necessary, and brief."
+            ]
+          },
+          {
+            name: "Turtle",
+            tagline: "The ancient one who carries the world",
+            icon: "turtle",
+            themes: ["endurance", "wisdom", "groundedness", "patience"],
+            essay: [
+              "The turtle is older than the dinosaurs. In many creation myths it is the great being on whose back the world rests. The turtle moves slowly, lives long, carries its house with it.",
+              "Where the hare runs ahead and arrives nowhere, the turtle continues. Where the eagle soars and sees from above, the turtle is in close, slow contact with the ground. Each animal teaches its own wisdom; the turtle's wisdom is the wisdom of staying with things.",
+              "The inner turtle is the part that does not need to be quick. It knows that the long way is often the only way, and that what matters most rarely yields to hurry."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Water Creatures",
+        symbols: [
+          {
+            name: "Fish",
+            tagline: "The dweller in the deep, the soul in its element",
+            icon: "fish",
+            themes: ["the unconscious", "the soul", "abundance", "mystery"],
+            essay: [
+              "The fish lives where we cannot — fully submerged in the medium that would drown us. To see a fish is to glimpse a kind of being for whom the deep is home.",
+              "Across cultures fish have stood for the contents of the unconscious — the small bright ideas that occasionally surface from below, the great unknown creatures of the depths, the abundance of what we cannot see.",
+              "In early Christianity, the fish became a symbol for Christ and for the souls of believers — small living things drawn up from the waters. The image still carries: each of us moves through depths most of the time invisible to others, and occasionally something silver flashes near the surface and is gone."
+            ]
+          },
+          {
+            name: "Whale",
+            tagline: "The great being of the ocean depths",
+            icon: "whale",
+            themes: ["the unconscious", "vastness", "transformation", "the maternal"],
+            essay: [
+              "A whale is impossibly large. To stand near one is to feel one's own scale recalibrated. They sing across thousands of miles of ocean. They live for a century or more. Their brains are bigger than ours.",
+              "The biblical Jonah is swallowed by a great fish and lives three days inside it before being delivered onto a different shore. The whale-belly is the classic image of the dark interior chamber where a life is reshaped against its will.",
+              "To be in the whale is to be temporarily unfindable, even to oneself. Eventually one is released. But the person who comes out is not the same one who went in."
+            ]
+          },
+          {
+            name: "Dolphin",
+            tagline: "Joy and intelligence in the wild waters",
+            icon: "dolphin",
+            themes: ["joy", "rescue", "intelligence", "play"],
+            essay: [
+              "Dolphins have always been the friendly mind of the sea. Ancient sailors told stories of dolphins guiding lost ships to shore, lifting drowning swimmers to the surface, accompanying boats for the simple pleasure of the company.",
+              "They are intelligent — perhaps as intelligent as we are, in their own way. They play. They name themselves. They grieve their dead. They invite encounter without quite belonging to our world.",
+              "The dolphin within is the playful, intelligent, helpful aspect of the unconscious — the part that lifts us when we are sinking, that comes alongside in difficult crossings, that reminds us the depths are not only dark."
+            ]
+          },
+          {
+            name: "Shell",
+            tagline: "The protected interior, the spiraling chamber",
+            icon: "shell",
+            themes: ["protection", "interiority", "growth", "the feminine"],
+            essay: [
+              "A shell is what a soft creature builds around itself. It is house and armor at once — and, in the case of the great spiral shells, a slow record of the creature's life, each chamber the shape of the body that once filled it.",
+              "Aphrodite was born of a shell. The pilgrim to Santiago wears a shell. Across cultures the shell has been associated with the feminine, with the protected interior, with the place from which life emerges.",
+              "To hold a spiraled shell to one's ear is to hear what sounds like the sea. It is in fact one's own blood — but the confusion is instructive. What is most interior may sound like what is most vast."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Birds",
+        symbols: [
+          {
+            name: "Bird",
+            tagline: "The messenger between earth and heaven",
+            icon: "bird",
+            themes: ["spirit", "freedom", "the soul", "transcendence"],
+            essay: [
+              "Birds have always been our envoys to the sky. They go where we cannot follow. They sing in languages we do not know. They appear, they cross overhead, they vanish.",
+              "Across cultures the soul has been imagined as a bird — leaving the body at death, carrying messages between the living and the dead, escorting the spirit to whatever lies beyond. The ancient Egyptian ba-soul was a bird with a human face.",
+              "When something within rises and wants to take flight — a longing, a knowing, an inspiration — it comes with a kind of feathered weightlessness. The work is to listen to what such a bird is saying before it goes."
+            ]
+          },
+          {
+            name: "Dove",
+            tagline: "Peace, spirit, the gentle bringer",
+            icon: "dove",
+            themes: ["peace", "spirit", "annunciation", "love"],
+            essay: [
+              "The dove is the quietest of the great birds. It does not boast. It coos. Its flight is direct and unfussed. It mates for life.",
+              "Sacred to Aphrodite and to the Holy Spirit, the dove has carried the meanings of love and of inspiration at the gentlest end of their spectrum. Noah's dove brought back the olive branch — the small green sign that the floodwaters were receding.",
+              "What annunciation feels like, when it comes, is often not a thunderbolt but a dove: a small, soft arrival of something true, easy to miss if one is not paying attention."
+            ]
+          },
+          {
+            name: "Crow & Raven",
+            tagline: "Knowing watchers of the dark and the threshold",
+            icon: "crow",
+            themes: ["wisdom", "death", "magic", "the trickster"],
+            essay: [
+              "Crows and ravens are very intelligent and not at all interested in flattering us. They watch. They remember faces. They use tools. They play. And they have always been associated with the borders of life and death.",
+              "Odin had two ravens, Thought and Memory, who flew across the world each day and returned to whisper its news in his ear. Apollo's crow was a messenger. In Indigenous traditions of the Pacific Northwest, Raven is the great trickster-creator, who brings light to the world by stealing it.",
+              "When the crows arrive in a dream or a life, something is being seen that ordinary attention would miss. They are not omens of doom. They are reminders that an older intelligence is at work, and is taking note."
+            ]
+          },
+          {
+            name: "Owl",
+            tagline: "Night vision, the wisdom that sees in the dark",
+            icon: "owl",
+            themes: ["wisdom", "night", "death", "second sight"],
+            essay: [
+              "Owls see what others cannot. At night, when most of the world has closed its eyes, the owl is awake and watching with eyes evolved for the dark.",
+              "Sacred to Athena, the owl has been the emblem of the wisdom that knows how to see in difficult conditions. But the owl is also a hunter, and a frequent companion of death in folk traditions — the bird whose cry near the house tells of a passing.",
+              "The inner owl is the part of oneself that does its best work in the harder times. Wisdom about love, about loss, about the deep currents of a life — these tend to ripen at night, in the quiet hours, with the eyes of the owl."
+            ]
+          },
+          {
+            name: "Eagle",
+            tagline: "Sovereignty, the high view, the solar bird",
+            icon: "eagle",
+            themes: ["vision", "power", "spirit", "sovereignty"],
+            essay: [
+              "An eagle sees a rabbit from a mile away. The eagle's eye is a marvel — fine-resolved, far-reaching, attuned to motion. From the height of its circling it takes in a whole landscape at once.",
+              "Across cultures the eagle has been the king of birds, the bird of the sun, the bird of the gods. Zeus's eagle, the eagle of the Roman legions, the thunderbird of North American peoples, the double-headed eagle of empires: again and again, the eagle stands for sovereignty.",
+              "The inner eagle is the capacity to take the long view — to lift above the small struggles of the moment and see one's life as a whole landscape. Such a vision is hard to sustain, and indispensable when it comes."
+            ]
+          },
+          {
+            name: "Peacock",
+            tagline: "Glory, the many-eyed splendor",
+            icon: "peacock",
+            themes: ["beauty", "immortality", "wholeness", "display"],
+            essay: [
+              "A peacock spreads its tail and the world momentarily stops. The eyes of the tail look back. The display is excessive, gorgeous, almost embarrassing — and somehow exactly right.",
+              "The alchemists saw in the peacock's tail an image of an important stage of the work: cauda pavonis, the moment when all the colors appear, when the matter of the soul reveals its full spectrum after long obscurity.",
+              "When something within finally opens to its full coloring, after seasons of monochrome work, the peacock's spread is what it feels like. The display is not vanity. It is the soul saying: this too is what I am."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Wild & Domestic Animals",
+        symbols: [
+          {
+            name: "Great Cats",
+            tagline: "Lion, tiger, leopard, jaguar — sovereign hunters",
+            icon: "cat",
+            themes: ["power", "instinct", "sovereignty", "grace"],
+            essay: [
+              "The great cats are perfectly themselves. They do not apologize. A lion at rest, a leopard moving through tall grass, a tiger emerging from the forest edge: each is a complete and self-contained presence.",
+              "Across cultures the great cats have stood for sovereignty and for the wild force at the heart of life. The lion is the sun, the king, the courage of the heart; the tiger is the warrior, the goddess in her fierce mood; the jaguar is the night-walker, the lord of the underworld.",
+              "Inwardly, the great cat is the energy of one's own instinct — graceful, deadly, dignified. It is not to be tamed into a house pet. It is to be respected as a powerful animal living in one's own body."
+            ]
+          },
+          {
+            name: "Wolf",
+            tagline: "The wild kin who lives by the pack",
+            icon: "wolf",
+            themes: ["wildness", "loyalty", "the shadow", "instinct"],
+            essay: [
+              "The wolf has been our oldest companion and our oldest enemy. From the same wolf came the dog at our hearth and the gray shape at the forest edge that frightened our ancestors. The relation is ancient and ambivalent.",
+              "In myth the wolf can be devouring — the wolf in the fairy tale, the wolf at the door, Fenrir who will eat the sun at the end of the world. But the wolf can also be nurturing: the she-wolf who suckled Romulus and Remus, the wolf-mother of many origin stories.",
+              "Inwardly, the wolf names the wild kin within — the part that lives by instinct, that runs with others of its kind, that does not belong to civilization. To know this part of oneself, neither denying it nor surrendering to it, is part of the long work."
+            ]
+          },
+          {
+            name: "Bear",
+            tagline: "The great mother who sleeps through winter",
+            icon: "bear",
+            themes: ["strength", "the maternal", "healing", "withdrawal"],
+            essay: [
+              "The bear stands on its hind legs and looks like one of us. It eats berries, fish, honey. It has hands that can be hand-like. In winter it goes into the den and disappears for months. In spring it returns, often with cubs.",
+              "Across the Northern world the bear has been honored as a great spirit — sometimes addressed as Grandmother, sometimes as an ancestor. The bear's annual disappearance and return made it a natural emblem of cycles, of the death and rebirth that the year itself enacts.",
+              "The inward bear is the capacity for deep withdrawal — to disappear, to sleep, to be unproductive for a season, and to return restored. Cultures that have forgotten this rhythm tend to exhaust themselves. The bear remembers."
+            ]
+          },
+          {
+            name: "Elephant",
+            tagline: "Memory, gentleness in great size",
+            icon: "elephant",
+            themes: ["memory", "wisdom", "the maternal", "strength"],
+            essay: [
+              "Elephants remember. They remember their dead. They remember each other across decades. They remember the water sources, the routes, the kind humans, the cruel ones. Their memory is one of the great wonders of the natural world.",
+              "Sacred in India in the form of Ganesha, the elephant-headed god who removes obstacles, and in the white elephant who appeared to the Buddha's mother in a dream: the elephant has been the great image of a wisdom that combines enormous power with extraordinary gentleness.",
+              "An elephant could destroy you and almost never does. The inward elephant is the part of oneself that has come into its full strength and uses it tenderly — that has nothing left to prove, and so can afford to be kind."
+            ]
+          },
+          {
+            name: "Horse",
+            tagline: "Power that carries us beyond our limits",
+            icon: "horse",
+            themes: ["power", "freedom", "instinct", "partnership"],
+            essay: [
+              "The horse changed human history. Once we partnered with horses, we could travel farther, carry more, fight harder, see more of the world. The horse extended what a human body could do.",
+              "Wild, the horse is freedom itself — the herd running together across open country. Tamed, it is loyalty and labor and the long apprenticeship of two beings learning each other.",
+              "Inwardly, the horse names the instinctual energy that carries one. Held lightly by a confident rider, it goes far. Held tightly, it fights. Released without direction, it runs. The relation between the rider and the horse is the relation between conscious purpose and instinctual power, and it asks for a lifetime of practice."
+            ]
+          },
+          {
+            name: "Dog",
+            tagline: "The faithful companion across the threshold",
+            icon: "dog",
+            themes: ["loyalty", "guidance", "the threshold", "love"],
+            essay: [
+              "The dog was probably the first animal to come to live with us. Some thousands of years ago, certain wolves edged closer to the human fires, and a long covenant began.",
+              "Dogs accompany us. They guard the home, herd the flock, hunt with us, sleep at the foot of the bed. In myth, dogs guard the gates of the underworld — Cerberus, Anubis — and guide the souls of the dead through the difficult crossing.",
+              "The inward dog is the loyal, present, devoted part of oneself — the part that stays when more interesting things are happening elsewhere, that loves without explanation, that recognizes the beloved even when much else has been forgotten."
+            ]
+          },
+          {
+            name: "Cat",
+            tagline: "The household familiar of the night",
+            icon: "housecat",
+            themes: ["mystery", "independence", "the feminine", "the threshold"],
+            essay: [
+              "The cat sits at the boundary of the wild and the tame. It lives with us but never quite belongs to us. It comes when called only when it wishes. It hunts by night. It sleeps anywhere.",
+              "Sacred in ancient Egypt as the goddess Bastet, persecuted in medieval Europe as the witch's familiar, the cat has carried our ambivalence about the wild feminine for a long time. Both reverences and fears were responses to the same fact: the cat is its own creature.",
+              "Inwardly, the cat names the unowned, unbiddable part of one's life — the part that knows things without explanation, that refuses to be useful, that comes and goes by its own logic, and that one would not be without."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  human: {
+    title: "Human World",
+    roman: "IV",
+    desc: "The body and its parts, the work of the hands, the tools and houses and roads — the human-made world through which the inner life is also lived.",
+    categories: [
+      {
+        name: "Human Body",
+        symbols: [
+          {
+            name: "Eye",
+            tagline: "The window of the soul, the organ of recognition",
+            icon: "eye",
+            themes: ["seeing", "consciousness", "knowledge", "the witness"],
+            essay: [
+              "The eye is the organ by which we know that the world exists outside us and that we exist within it. To meet another's eyes is to recognize, suddenly, that there is a someone there.",
+              "Across cultures the eye has been the great image of consciousness — the Eye of Horus, the eye in the triangle, the third eye of inner vision, the eye of God. To be seen is to be acknowledged; to see is to receive.",
+              "The inner eye is the faculty of recognition — the part that registers what is really there, beyond what one wishes were there. To open this eye is sometimes painful, and almost always necessary."
+            ]
+          },
+          {
+            name: "Heart",
+            tagline: "The center where feeling and meaning meet",
+            icon: "heart",
+            themes: ["love", "courage", "the center", "feeling"],
+            essay: [
+              "The heart is the center. Long before we knew its anatomical function we treated it as the place where one's truest knowing happened — the seat of love, of courage, of the considered self.",
+              "In ancient Egypt the heart was weighed against a feather at the moment of judgment after death. The light heart passed; the heavy one did not. Many traditions have made similar measurements: the heart's lightness, its openness, its capacity for love is what is finally asked after.",
+              "To live from the heart is not to live by feeling alone. It is to live from the deeper, slower center where feeling and reason and intuition meet and decide together. Such a center is not given. It is grown, over a long time."
+            ]
+          },
+          {
+            name: "Hand",
+            tagline: "What makes, what gives, what holds",
+            icon: "hand",
+            themes: ["making", "blessing", "agency", "touch"],
+            essay: [
+              "Our hands made us. Or rather, the long evolutionary story of our hands and our brains together made us into the kind of creature that builds, paints, plays music, signs, writes, holds another's hand.",
+              "The hand gives, takes, blesses, strikes, makes, points, soothes. A handprint on a cave wall says: I was here. A hand laid on a head says: you are loved. A hand held out says: I have nothing hidden.",
+              "What one does with one's hands, over time, is much of what one becomes. The inner hand is the capacity to act in the world — to make, to give, to touch — in ways that match what one most deeply means."
+            ]
+          },
+          {
+            name: "Blood",
+            tagline: "The river of life that runs within",
+            icon: "blood",
+            themes: ["life", "kinship", "sacrifice", "passion"],
+            essay: [
+              "Blood is life made visible. As long as it stays inside us, we live. When it appears outside, something is wrong, or something significant is happening — birth, injury, sacrifice, the marking of a covenant.",
+              "Across cultures blood has meant the deepest kinship, the strongest bond, the most serious promise. To be of one blood is to be more than friend. To share blood in oath is to make a relation that cannot easily be dissolved.",
+              "The inner blood is whatever runs through the whole of one's life and keeps it one life — the loves, the loyalties, the slow continuous currents of being-oneself that cannot be set aside for long without harm."
+            ]
+          },
+          {
+            name: "Tears",
+            tagline: "The body's eloquence when words fail",
+            icon: "tears",
+            themes: ["grief", "release", "compassion", "feeling"],
+            essay: [
+              "Tears are the body knowing something the mind has not yet articulated. They come, often without permission, when something inside is too full to be held silently.",
+              "Across cultures tears have been honored as a kind of speech. The great religious traditions have prized the gift of tears as a sign that the heart is unhardened, that feeling still runs.",
+              "To weep is not weakness. It is the soul making room. After tears, things are usually a little different — softer, more permeable, more able to receive what comes next."
+            ]
+          },
+          {
+            name: "Spine",
+            tagline: "The axis along which the body stands",
+            icon: "spine",
+            themes: ["strength", "the axis", "energy", "uprightness"],
+            essay: [
+              "The spine is the axis. From the small disks of the lower back to the long curve of the neck, the spine is what allows a vertebrate creature to stand. Along it run the great nerves; through it climbs, in the imagination of the yogis, the kundalini fire.",
+              "To have a spine, in colloquial speech, is to have the inner uprightness to stand in difficult conditions without collapsing. The metaphor is exact. Without a literal spine, the body folds. Without a figurative one, the person folds also.",
+              "The inner spine is what one has built into oneself by long practice — the alignment that allows one to receive what comes without being knocked over."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Tools & Objects",
+        symbols: [
+          {
+            name: "Sword",
+            tagline: "The clean cut of discrimination",
+            icon: "sword",
+            themes: ["truth", "discrimination", "courage", "decision"],
+            essay: [
+              "A sword cuts. That is its whole vocation. The sword divides one thing from another — the joined from the to-be-separated, the true from the false, the kept from the let-go.",
+              "Across traditions the sword has been the emblem of the discriminating mind — the faculty that can finally say, this and not that. In Buddhist iconography the bodhisattva Manjushri carries a flaming sword that cuts through ignorance. In Christian art the angels of judgment hold swords. In the legends of kings, the sword pulled from the stone confers sovereignty.",
+              "The inner sword is the willingness to make the cut that needs making — to leave the situation that is poisoning one, to speak the difficult truth, to commit to one path and let the others go."
+            ]
+          },
+          {
+            name: "Mirror",
+            tagline: "The faithful and treacherous double",
+            icon: "mirror",
+            themes: ["self-knowledge", "reflection", "illusion", "vanity"],
+            essay: [
+              "A mirror returns one's face. The first time a child recognizes itself in a mirror is a small and astonishing moment: that, the child realizes, is what others see when they see me.",
+              "Mirrors are also the great image of self-reflection. Without something to reflect the soul back to itself, the soul does not quite know what it is. The mirror is also the friend, the analyst, the artwork, the beloved — whoever returns one to oneself in a way one can then look at.",
+              "But mirrors deceive. Narcissus drowned in one. The mirror that returns only the surface, with no depth behind it, becomes a trap. The work is to look into the mirrors that show the whole of oneself, not just the parts one would prefer."
+            ]
+          },
+          {
+            name: "Key",
+            tagline: "What opens what was closed",
+            icon: "key",
+            themes: ["access", "secret", "authority", "discovery"],
+            essay: [
+              "A key is small and very specific. It opens this lock and not any other. To have the key is to have the access; to lose it is to be shut out.",
+              "Across cultures keys have been the emblem of authority — the keys of the kingdom, the keys to the city — and of secret access: the key to a hidden room, the key to a code, the key that unlocks the inner chamber.",
+              "Within the soul, the right key is often something quite small: a phrase, an image, a memory, a person, that suddenly opens a door one had not realized was locked. Such keys cannot be forced. They tend to turn up at the moment one is finally ready to use them."
+            ]
+          },
+          {
+            name: "Veil",
+            tagline: "What is hidden in order to be revealed",
+            icon: "veil",
+            themes: ["mystery", "modesty", "revelation", "concealment"],
+            essay: [
+              "A veil hides — and by hiding, it draws attention. Behind the veil is what is too sacred, too intimate, or too dangerous to be looked at directly.",
+              "Across traditions, veils mark the threshold of the holy. The Holy of Holies was behind a veil. The bride is veiled. The mystic speaks of the many veils between the soul and the divine. To unveil is a major event — never lightly undertaken, and not always permitted.",
+              "There is what one shows and what one keeps. The work of relationship, and of the inner life, is to learn which veils belong to honest privacy and which have become mere concealments — and to lift the latter without violence to the former."
+            ]
+          },
+          {
+            name: "Wheel",
+            tagline: "The turning of time, the recurring round",
+            icon: "wheel",
+            themes: ["time", "fate", "the cycle", "the law"],
+            essay: [
+              "The wheel is one of the great human inventions, and one of the great human metaphors. It turns. What was on top comes down; what was down comes up. The wheel of the year, the wheel of fortune, the wheel of the law: again and again the round figure stands for the cycling of things.",
+              "Buddhism's wheel of dharma names the turning of the teaching — the law itself in motion. The medieval wheel of fortune showed kings rising to the top and falling to the bottom, all on the same revolving rim.",
+              "To know oneself on the wheel is to hold one's current position lightly. Whether on the rise or on the fall, the wheel will turn. The wisdom is to live well on whichever spoke one currently occupies, knowing it is not the whole of the wheel."
+            ]
+          },
+          {
+            name: "Boat",
+            tagline: "What carries us across the waters",
+            icon: "boat",
+            themes: ["passage", "containment", "journey", "trust"],
+            essay: [
+              "A boat is a small enclosed thing trusted upon a vast unenclosed thing. To board a boat is to consent to be carried by waters one cannot stand on.",
+              "Across cultures the boat has been the image of the soul's passage — across the river of death, across the sea of life, across the difficult crossings between one stage of being and another. Charon's ferry, Noah's ark, the ship of the dead in Egyptian and Norse imagination: again and again the same figure.",
+              "The inner boat is whatever holds one through the difficult crossings — the practices, the relationships, the convictions that keep one above water when the ground is far below. Choose the boat carefully. Some are seaworthy; some are not."
+            ]
+          }
+        ]
+      },
+      {
+        name: "House & Home",
+        symbols: [
+          {
+            name: "House",
+            tagline: "The shape of the dwelling life",
+            icon: "house",
+            themes: ["belonging", "the self", "shelter", "interiority"],
+            essay: [
+              "A house is shelter. It is also identity. The arrangement of a house — its rooms, its doors, its windows, what is allowed in and what is kept out — is a kind of portrait of the person who lives there.",
+              "In dreams, houses are often the image of the dreamer's own psyche. The unknown upstairs room, the flooded basement, the kitchen that opens onto a forest: these are the dream-architecture of the inner life.",
+              "To make a home is one of the great human acts. Not to acquire a building, but to make a place in which one can actually live — where the self can rest, the loved can be welcomed, and the deeper rhythms of being are honored."
+            ]
+          },
+          {
+            name: "Door",
+            tagline: "The threshold between inside and out",
+            icon: "door",
+            themes: ["threshold", "passage", "choice", "welcome"],
+            essay: [
+              "A door is a permission. Closed, it keeps the outside out. Open, it allows the crossing. The frame of the door is the frame of the choice: here, the threshold; there, the other side.",
+              "Almost every important transition in the symbolic life happens at a door. The door opens onto the unknown, onto the beloved, onto the next room of the house of oneself. To pause at a door — really pause — is to honor the change about to be made.",
+              "Some doors should stay closed. Some should be opened. The discernment between them, and the courage to act on the discernment, is much of what makes a life one's own."
+            ]
+          },
+          {
+            name: "Window",
+            tagline: "What lets the world and the light come in",
+            icon: "window",
+            themes: ["perception", "longing", "the threshold", "light"],
+            essay: [
+              "A window is a controlled opening — letting in light, letting out smoke, letting one look without going out and letting another look in without coming in. The window mediates.",
+              "To stand at a window is a posture of longing or of contemplation. Looking out, one is partly inside and partly elsewhere. Many of the most quietly important moments in a life happen at a window.",
+              "The inner window is the faculty by which one stays in contact with the world while remaining oneself — neither walled in nor dispersed. Through it, light comes in. Through it, what is inside is sometimes seen."
+            ]
+          },
+          {
+            name: "Hearth",
+            tagline: "The fire at the center of the home",
+            icon: "hearth",
+            themes: ["home", "warmth", "the center", "kinship"],
+            essay: [
+              "The hearth is where the household gathers. Before central heating and electric stoves, the hearth was the practical center of the home — the source of warmth, of cooked food, of light in the dark hours. People sat around it. Stories were told there.",
+              "The Roman goddess Vesta, the Greek Hestia, watched over the hearth fire. To let the fire go out was a small disaster. To keep it burning was a daily, sacred act.",
+              "The inner hearth is the place in oneself where what one most loves is kept warm. It does not need to be large. It does need to be tended. Without it, a life becomes cold even when it is busy."
+            ]
+          },
+          {
+            name: "Mirror (in the house)",
+            tagline: "The self met in passing",
+            icon: "mirror",
+            themes: ["self-knowledge", "the ordinary", "encounter", "reflection"],
+            essay: [
+              "There is something different about the mirror in the bathroom, the mirror in the entryway, the mirror over the chest of drawers. These are not the great mirrors of myth. They are the mirrors one passes a dozen times a day, half-noticing oneself.",
+              "In these glances, a slow self-portrait accumulates. We see ourselves age. We see our moods. We see, sometimes, that we are not who we thought we were today.",
+              "The household mirror is the witness of the ordinary. It is not flattering. It is not cruel. It just gives back what is there. To meet oneself in it without judgment, day after day, is a small daily practice."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  spirit: {
+    title: "Spirit World",
+    roman: "V",
+    desc: "The angels, the gods, the rituals, the masks, the deaths and returns — the symbolic life of the soul.",
+    categories: [
+      {
+        name: "Mythical Beings",
+        symbols: [
+          {
+            name: "Angel",
+            tagline: "The messenger who is also a presence",
+            icon: "angel",
+            themes: ["annunciation", "guidance", "the numinous", "presence"],
+            essay: [
+              "An angel, in the traditions, is not a sweet thing. The first words of an angel in scripture are very often: do not be afraid. The angel had to say this because they evidently were afraid.",
+              "Angels are messengers — the word means messenger — but they are also presences. To meet one is to encounter something that is not human, not animal, not material in the ordinary sense, and yet undeniably there. The encounter rearranges the encounterer.",
+              "Whether one believes in angels or not, the experiences they describe are part of life: the unexpected helper, the right word at the right moment, the sudden sense of being not alone in a difficult place. The shape one gives such moments matters less than the willingness to notice them."
+            ]
+          },
+          {
+            name: "Dragon",
+            tagline: "The guardian of the treasure that asks to be earned",
+            icon: "dragon",
+            themes: ["the threshold", "danger", "the unconscious", "transformation"],
+            essay: [
+              "In the West, the dragon is to be slain. In the East, the dragon is to be honored. The same creature carries opposite valences depending on which tradition one stands in. Both are right.",
+              "The dragon guards what is precious — gold, princesses, water, wisdom — and does not give it up easily. To face the dragon is to undertake the encounter without which the treasure cannot be claimed. Some dragons must be defeated; some must be befriended; the trick is knowing which.",
+              "The inner dragon is the great resistance — the part of oneself that protects the inmost value with such ferocity that one cannot get near it without a struggle. The struggle is the point. What is not earned this way is not actually one's own."
+            ]
+          },
+          {
+            name: "Unicorn",
+            tagline: "The pure creature glimpsed at the edge of the woods",
+            icon: "unicorn",
+            themes: ["purity", "the unspoiled", "longing", "grace"],
+            essay: [
+              "The unicorn does not exist. This may be the most important thing about it. The unicorn is precisely the image of what is too pure to be caught, too rare to be common, glimpsed and not held.",
+              "In the medieval tapestries the unicorn lays its head in the lap of a maiden — and there, finally, can be approached. The image is not about possession. It is about the conditions under which the elusive will draw near.",
+              "What in oneself is unicorn — the small, perfect, almost-not-real intuition, the gift one is half-afraid to claim — does not yield to pursuit. It yields to a quality of attention. Sit very still. Stop trying to grasp. The unicorn may come close."
+            ]
+          },
+          {
+            name: "Mermaid",
+            tagline: "The being who lives half in another element",
+            icon: "mermaid",
+            themes: ["the unconscious", "longing", "the feminine", "danger"],
+            essay: [
+              "A mermaid is human above and other below — fish, sea-creature, the part that lives where we cannot. She sings; she is dangerous; she is beautiful; she belongs to the water more than to us.",
+              "Across maritime cultures the mermaid has been the image of the alluring depths — what draws sailors off course, what lives in the part of the world we cannot enter without drowning. She is both a real beloved and a fatal fascination, and stories struggle to keep the two apart.",
+              "The inner mermaid is whatever pulls one toward what one cannot quite live in — a beauty, a music, a love that belongs to a different element. To hear her song without crashing the ship is the difficult skill."
+            ]
+          },
+          {
+            name: "Witch",
+            tagline: "The woman who knows what the village has forgotten",
+            icon: "witch",
+            themes: ["wisdom", "the wild", "danger", "the feminine"],
+            essay: [
+              "The witch is the woman who lives at the edge of the village — alone, often old, in possession of knowledge the village no longer remembers. She knows herbs, she knows the moon, she knows what to do when ordinary remedies fail.",
+              "She is feared, and consulted, and sometimes burned. The history of witches is in part the history of cultures that could not bear the kind of knowledge they themselves needed.",
+              "The inner witch is the part that knows what cannot be said in public — the dark knowing, the inconvenient knowing, the knowing that does not flatter the powers of the day. To make peace with this part of oneself is a real piece of work, and necessary."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Rituals & Sacred Systems",
+        symbols: [
+          {
+            name: "Mandala",
+            tagline: "The picture of wholeness around a center",
+            icon: "mandala",
+            themes: ["wholeness", "the self", "order", "the center"],
+            essay: [
+              "A mandala is a circle around a center. The forms inside the circle are arranged symmetrically — fours, eights, twelves — so that the whole figure is in balance and the eye is led to the middle.",
+              "Across cultures, when humans want to picture the complete cosmos or the complete self, they draw something like a mandala. Tibetan Buddhists make them in colored sand and then sweep them away. Medieval cathedrals laid out floor labyrinths in the same pattern. Jung discovered that his patients, when approaching some inner integration, often spontaneously drew mandalas without knowing what they were.",
+              "The mandala is the image of the self — not the small ego, but the whole of what one is, gathered around its quiet center. To draw one, to walk one, to dream one, is to remember that wholeness is the deeper structure under the temporary chaos."
+            ]
+          },
+          {
+            name: "Labyrinth",
+            tagline: "The winding path that always leads to the center",
+            icon: "labyrinth",
+            themes: ["pilgrimage", "the journey", "the unconscious", "patience"],
+            essay: [
+              "A labyrinth is not a maze. A maze has dead ends; a labyrinth has only one path. It folds and folds and folds, but it always reaches the center, and it always leads back out.",
+              "To walk a labyrinth is to undertake a small symbolic pilgrimage. The path goes far from the center just when it seemed close; it comes close just when it seemed lost. The walking does the work that no straight line could do.",
+              "The inner labyrinth is the indirect path by which most real growth actually happens. We rarely arrive at the center of ourselves by going straight. We get there by patient turning, doubling back, and going further than we thought."
+            ]
+          },
+          {
+            name: "Mask",
+            tagline: "The face we put on to meet the gods",
+            icon: "mask",
+            themes: ["transformation", "persona", "ritual", "the other"],
+            essay: [
+              "A mask hides — and by hiding, it allows. To put on a mask is, in many traditions, to permit some force larger than the small self to come through. The dancer in the mask is no longer only the dancer.",
+              "In ritual contexts, masks made it possible to embody gods, ancestors, animals, demons. The mask was not a disguise but a vessel. Outside ritual, masks can become traps: the persona that hardens, the face one shows that no longer matches the face inside.",
+              "The work is to know which mask one is wearing, and why. Some are honest accommodations to a public life; some are imprisonments. The one we cannot remove is the one we have most forgotten we put on."
+            ]
+          },
+          {
+            name: "Crossroads",
+            tagline: "Where paths meet and a decision is asked",
+            icon: "crossroads",
+            themes: ["choice", "fate", "the threshold", "encounter"],
+            essay: [
+              "A crossroads is a place where the road forks, or where two roads cross. Either way, a choice has to be made. Across cultures, crossroads have been places of unusual power — places where one might meet a god, a devil, a trickster, a fate.",
+              "Hermes was a god of the crossroads. Hecate stood at the three-way intersection. In Afro-Caribbean traditions, Eshu / Papa Legba is the lord of the crossing. These figures, mischievous and oracular, embody what crossroads actually feel like: charged, ambiguous, asking for a choice one is not quite ready to make.",
+              "The inward crossroads come more often than we like. The road we were on ends. Two or three new roads open. Which one is taken matters. Sometimes the choice is made for us; sometimes we must make it ourselves; almost always, looking back, we cannot quite remember how we chose."
+            ]
+          },
+          {
+            name: "Spiral",
+            tagline: "The pattern that returns at a deeper level",
+            icon: "spiral",
+            themes: ["growth", "return", "evolution", "the cosmos"],
+            essay: [
+              "A spiral is a circle that does not close. It comes back near where it was, but not to the same place. From galaxies to seashells to fingerprints to the structure of DNA, the spiral is one of nature's most basic shapes.",
+              "As a symbol it names the way real growth actually happens. Not in a straight line, but in returns — coming back to the same questions, the same wounds, the same loves — each time at a slightly different turn of the spiral.",
+              "The pattern that seemed like mere repetition is, viewed from a longer perspective, a movement. We are not stuck. We are slowly winding our way around the deeper center."
+            ]
+          },
+          {
+            name: "Blessing",
+            tagline: "The bestowing of well-being from one to another",
+            icon: "blessing",
+            themes: ["grace", "kinship", "transmission", "love"],
+            essay: [
+              "To bless is to say, with seriousness, may it be well with you. The blessing is given with the hand, with the eye, with the breath. It passes from one person to another, from elder to younger, from priest to congregation, from parent to child.",
+              "A real blessing is more than a kind wish. It is a small participation in something larger — a willingness to channel toward the other a goodness one does not finally own. Cultures that have lost the practice of blessing have lost something difficult to replace.",
+              "We are all of us blessed by people we will never repay, and we owe blessings to people we may never meet. The economy of blessing is not zero-sum. It enlarges with use."
+            ]
+          }
+        ]
+      },
+      {
+        name: "Soul & Psyche",
+        symbols: [
+          {
+            name: "Transformation",
+            tagline: "What was, becoming what will be",
+            icon: "transformation",
+            themes: ["change", "the self", "the work", "becoming"],
+            essay: [
+              "Transformation is not improvement. Improvement is the same person, polished. Transformation is something else: the recognizable continuity remains, but the substance has changed. The caterpillar does not become a better caterpillar; it becomes a butterfly.",
+              "In the alchemical imagination, transformation was the whole point of the work. Lead becoming gold was the outer figure; the inner figure was the self becoming what it could be, through long, often unpleasant operations of heat and dissolution and recombination.",
+              "Real transformation is rare and slow, and often missed in the middle of it. We mostly know it has happened only after. The work is to consent to the process when it comes, even when it is uncomfortable, and to trust that what wants to emerge knows what it is doing."
+            ]
+          },
+          {
+            name: "Shape-Shifting",
+            tagline: "The fluid self that crosses the boundaries",
+            icon: "shapeshift",
+            themes: ["transformation", "the fluid", "magic", "the unconscious"],
+            essay: [
+              "Across cultures, certain figures — shamans, witches, tricksters, gods — can change shape. They become animals, they take on other faces, they slip from one form to another. The boundary that for ordinary mortals is fixed is, for these figures, porous.",
+              "Shape-shifting in story names what happens, in subtler forms, in every life. We are not the same self at every moment. We move between aspects of ourselves: the worker, the child, the lover, the mourner, the maker. We forget that this is what we are doing, and then we remember.",
+              "The inner shape-shifter is the part that knows the self is plural. To honor this without losing one's center is a delicate skill — and one that the most interesting people seem, in their own way, to have learned."
+            ]
+          },
+          {
+            name: "Chakras",
+            tagline: "The subtle centers along the body's axis",
+            icon: "chakra",
+            themes: ["energy", "the subtle body", "ascent", "wholeness"],
+            essay: [
+              "The chakras are, in the Indian subtle anatomy, the wheels of energy arranged along the central axis of the body — from the base of the spine to the crown of the head. Each has its color, its element, its associated qualities.",
+              "Whether one takes them as literal energy centers or as a sophisticated psychological map, the chakra system says something interesting: that the human being is not flat. We have depth, and the depth is structured. The instinctual ground, the watery emotional life, the fiery will, the open heart, the speaking truth, the inner seeing, the crown of integration: each layer of being has its own work.",
+              "To attend to one's whole vertical — not only the head, not only the heart, not only the gut — is the work the system points toward."
+            ]
+          },
+          {
+            name: "Pearl",
+            tagline: "The treasure formed by long, hidden work",
+            icon: "pearl",
+            themes: ["the soul", "patience", "wisdom", "the hidden"],
+            essay: [
+              "A pearl is the slow answer of an oyster to an irritation. A grain of sand enters; the oyster cannot expel it; over years it lays smooth layer upon smooth layer around the irritant, and what emerges is the pearl.",
+              "Across cultures the pearl has been the image of wisdom hard-won — the precious small thing that took a long time to grow. The kingdom of heaven, the pearl of great price, the pearl in the dragon's claw: again and again the same figure.",
+              "The inner pearl is what one has made, over years, around the irritants of one's life — the difficulties one could not get rid of and so finally consented to live with. Around such irritations, given enough time and enough patience, something luminous can form."
+            ]
+          },
+          {
+            name: "Ancestor",
+            tagline: "The ones who came before and who remain present",
+            icon: "ancestor",
+            themes: ["lineage", "memory", "presence", "continuity"],
+            essay: [
+              "We come from somewhere. Before our parents were our grandparents, and before them their parents, and on backward into a depth of generations none of us can fully fathom. We carry pieces of all of them in our bodies and in our habits.",
+              "Across cultures the ancestors have been honored as present, not absent. They watch. They are consulted. They are not gone; they are differently located. The shrines and offerings and stories that maintain the relation are not nostalgia. They are a recognition that none of us made ourselves alone.",
+              "To know one's ancestors — by name where possible, by quality where not — is to know more of who one is. We are the latest chapter of a long book, and the chapter we write will be read, in turn, by those who follow."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+};
+
+// =====================================================
+// SVG ICONS
+// =====================================================
+const ICONS = {
+  egg: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="50" cy="55" rx="28" ry="38"/><ellipse cx="50" cy="55" rx="14" ry="20" opacity="0.4"/><circle cx="50" cy="55" r="3" fill="currentColor"/></svg>`,
+  breath: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20,50 Q35,30 50,50 T80,50"/><path d="M20,60 Q35,40 50,60 T80,60" opacity="0.6"/><path d="M20,70 Q35,50 50,70 T80,70" opacity="0.3"/></svg>`,
+  star: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="50,10 58,38 88,38 64,56 72,86 50,68 28,86 36,56 12,38 42,38"/><circle cx="50" cy="50" r="3" fill="currentColor"/></svg>`,
+  sun: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="18"/><g><line x1="50" y1="8" x2="50" y2="22"/><line x1="50" y1="78" x2="50" y2="92"/><line x1="8" y1="50" x2="22" y2="50"/><line x1="78" y1="50" x2="92" y2="50"/><line x1="20" y1="20" x2="30" y2="30"/><line x1="70" y1="70" x2="80" y2="80"/><line x1="80" y1="20" x2="70" y2="30"/><line x1="30" y1="70" x2="20" y2="80"/></g></svg>`,
+  moon: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M65,15 A35,35 0 1,0 65,85 A28,28 0 1,1 65,15 Z" fill="currentColor" fill-opacity="0.1"/></svg>`,
+  eclipse: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="32" fill="currentColor" fill-opacity="0.85"/><circle cx="58" cy="46" r="26" fill="var(--bg-2)"/></svg>`,
+  ocean: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10,40 Q25,30 40,40 T70,40 T100,40"/><path d="M10,55 Q25,45 40,55 T70,55 T100,55"/><path d="M10,70 Q25,60 40,70 T70,70 T100,70"/><path d="M10,85 Q25,75 40,85 T70,85 T100,85"/></svg>`,
+  river: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M30,10 Q50,30 35,50 Q20,70 50,90"/><path d="M50,10 Q70,30 55,50 Q40,70 70,90" opacity="0.5"/></svg>`,
+  whirlpool: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M50,50 m-35,0 a35,35 0 1,1 70,0 a30,30 0 1,1 -60,0 a25,25 0 1,1 50,0 a20,20 0 1,1 -40,0 a15,15 0 1,1 30,0 a10,10 0 1,1 -20,0"/></svg>`,
+  waterfall: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M30,15 Q35,40 30,80"/><path d="M50,15 Q55,40 50,80"/><path d="M70,15 Q75,40 70,80"/><path d="M15,85 Q50,90 85,85"/></svg>`,
+  flood: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5,30 Q25,20 45,30 T85,30 T125,30"/><path d="M5,50 Q25,40 45,50 T85,50 T125,50"/><path d="M5,70 Q25,60 45,70 T85,70 T125,70"/><polygon points="50,75 35,90 65,90" fill="currentColor" opacity="0.4"/></svg>`,
+  fire: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M50,90 Q20,70 35,40 Q42,55 48,45 Q50,20 65,30 Q60,50 75,55 Q80,75 50,90 Z"/><path d="M50,75 Q40,65 45,50 Q50,60 55,50 Q60,60 55,75 Q53,80 50,75 Z" fill="currentColor" opacity="0.3"/></svg>`,
+  spark: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="4" fill="currentColor"/><line x1="50" y1="15" x2="50" y2="30"/><line x1="50" y1="70" x2="50" y2="85"/><line x1="15" y1="50" x2="30" y2="50"/><line x1="70" y1="50" x2="85" y2="50"/><line x1="25" y1="25" x2="35" y2="35"/><line x1="65" y1="65" x2="75" y2="75"/><line x1="75" y1="25" x2="65" y2="35"/><line x1="35" y1="65" x2="25" y2="75"/></svg>`,
+  dawn: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><line x1="10" y1="70" x2="90" y2="70"/><path d="M20,70 A30,30 0 0,1 80,70"/><line x1="35" y1="40" x2="35" y2="50"/><line x1="50" y1="30" x2="50" y2="40"/><line x1="65" y1="40" x2="65" y2="50"/></svg>`,
+  night: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M65,20 A30,30 0 1,0 65,80 A24,24 0 1,1 65,20 Z" fill="currentColor" fill-opacity="0.15"/><circle cx="25" cy="30" r="1" fill="currentColor"/><circle cx="35" cy="55" r="1" fill="currentColor"/><circle cx="20" cy="70" r="1" fill="currentColor"/><circle cx="40" cy="80" r="1" fill="currentColor"/></svg>`,
+  darkness: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="50" cy="50" r="35" fill="currentColor" fill-opacity="0.5"/><circle cx="50" cy="50" r="35"/></svg>`,
+  stone: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M25,75 Q15,60 25,40 Q40,25 60,28 Q80,35 78,55 Q80,75 60,80 Q40,82 25,75 Z"/><path d="M35,55 L45,50 L55,58 L50,65 Z" opacity="0.4"/></svg>`,
+  mountain: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="10,85 35,40 55,60 75,25 95,85"/><line x1="30" y1="50" x2="40" y2="50" opacity="0.4"/><line x1="70" y1="35" x2="80" y2="35" opacity="0.4"/></svg>`,
+  cave: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15,85 Q15,30 50,25 Q85,30 85,85"/><path d="M35,85 Q35,55 50,50 Q65,55 65,85" fill="currentColor" fill-opacity="0.5"/></svg>`,
+  forest: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="25,75 15,55 22,55 12,35 25,35 18,15 32,15 25,35 38,35 28,55 35,55"/><polygon points="65,80 53,60 60,60 48,40 62,40 55,20 70,20 62,40 76,40 65,60 72,60"/></svg>`,
+  desert: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="75" cy="25" r="10"/><path d="M5,75 Q25,65 45,75 T85,75 T125,75"/><path d="M5,85 Q25,80 45,85 T85,85 T125,85"/></svg>`,
+  tree: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="50" y1="40" x2="50" y2="85"/><circle cx="50" cy="30" r="20"/><path d="M50,40 L35,30 M50,40 L65,30 M50,55 L35,50 M50,55 L65,50" opacity="0.6"/><path d="M35,85 L40,90 M50,85 L50,93 M65,85 L60,90" opacity="0.5"/></svg>`,
+  oak: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="50" y1="50" x2="50" y2="88"/><path d="M50,50 Q30,45 25,30 Q35,20 45,30 Q40,15 55,18 Q70,15 65,30 Q75,25 80,35 Q75,50 50,50 Z"/><circle cx="38" cy="45" r="2"/><circle cx="62" cy="45" r="2"/></svg>`,
+  olive: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20,50 Q30,45 40,50 Q50,55 60,50 Q70,45 80,50"/><ellipse cx="30" cy="45" rx="6" ry="3" transform="rotate(-30 30 45)"/><ellipse cx="50" cy="55" rx="6" ry="3" transform="rotate(20 50 55)"/><ellipse cx="70" cy="45" rx="6" ry="3" transform="rotate(-30 70 45)"/><circle cx="40" cy="55" r="3"/><circle cx="60" cy="48" r="3"/></svg>`,
+  pine: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="50,10 35,30 45,30 30,50 45,50 25,75 75,75 55,50 70,50 55,30 65,30"/><rect x="46" y="75" width="8" height="15"/></svg>`,
+  roots: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><line x1="50" y1="10" x2="50" y2="40"/><path d="M50,40 Q40,55 25,60 Q15,65 12,80"/><path d="M50,40 Q60,55 75,60 Q85,65 88,80"/><path d="M50,40 Q50,60 45,75 Q43,85 40,90"/><path d="M50,40 Q50,60 55,75 Q57,85 60,90"/></svg>`,
+  garden: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="15" y="15" width="70" height="70" rx="2"/><circle cx="35" cy="35" r="6"/><circle cx="65" cy="35" r="6"/><circle cx="35" cy="65" r="6"/><circle cx="65" cy="65" r="6"/><circle cx="50" cy="50" r="4" fill="currentColor"/></svg>`,
+  flower: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="50" cy="50" r="8" fill="currentColor"/><ellipse cx="50" cy="28" rx="8" ry="14"/><ellipse cx="50" cy="72" rx="8" ry="14"/><ellipse cx="28" cy="50" rx="14" ry="8"/><ellipse cx="72" cy="50" rx="14" ry="8"/><ellipse cx="34" cy="34" rx="8" ry="14" transform="rotate(-45 34 34)"/><ellipse cx="66" cy="66" rx="8" ry="14" transform="rotate(-45 66 66)"/><ellipse cx="66" cy="34" rx="8" ry="14" transform="rotate(45 66 34)"/><ellipse cx="34" cy="66" rx="8" ry="14" transform="rotate(45 34 66)"/></svg>`,
+  lotus: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><ellipse cx="50" cy="55" rx="8" ry="22"/><ellipse cx="50" cy="55" rx="22" ry="8"/><ellipse cx="50" cy="55" rx="20" ry="14" transform="rotate(45 50 55)"/><ellipse cx="50" cy="55" rx="20" ry="14" transform="rotate(-45 50 55)"/><circle cx="50" cy="55" r="4" fill="currentColor"/><line x1="50" y1="80" x2="50" y2="90"/></svg>`,
+  rose: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="50" cy="45" r="22"/><circle cx="50" cy="45" r="16"/><circle cx="50" cy="45" r="10"/><circle cx="50" cy="45" r="4" fill="currentColor"/><line x1="50" y1="67" x2="50" y2="88"/><path d="M50,75 Q40,72 35,78" /></svg>`,
+  apple: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M30,45 Q20,55 25,75 Q30,90 50,90 Q70,90 75,75 Q80,55 70,45 Q60,38 50,42 Q40,38 30,45 Z"/><path d="M50,42 Q52,30 60,25"/><path d="M58,30 Q65,28 68,22" opacity="0.5"/></svg>`,
+  pomegranate: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="55" r="28"/><path d="M50,27 L50,18 L42,12 M50,18 L58,12"/><circle cx="42" cy="48" r="2" fill="currentColor"/><circle cx="50" cy="50" r="2" fill="currentColor"/><circle cx="58" cy="48" r="2" fill="currentColor"/><circle cx="38" cy="58" r="2" fill="currentColor"/><circle cx="50" cy="60" r="2" fill="currentColor"/><circle cx="62" cy="58" r="2" fill="currentColor"/><circle cx="42" cy="68" r="2" fill="currentColor"/><circle cx="50" cy="70" r="2" fill="currentColor"/><circle cx="58" cy="68" r="2" fill="currentColor"/></svg>`,
+  snake: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20,30 Q40,30 40,50 Q40,70 60,70 Q80,70 80,50 Q80,30 60,30"/><circle cx="22" cy="30" r="2" fill="currentColor"/><path d="M18,28 L13,25 M18,32 L13,35"/></svg>`,
+  frog: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><ellipse cx="50" cy="60" rx="30" ry="22"/><circle cx="38" cy="40" r="8"/><circle cx="62" cy="40" r="8"/><circle cx="38" cy="40" r="3" fill="currentColor"/><circle cx="62" cy="40" r="3" fill="currentColor"/><path d="M40,65 Q50,72 60,65"/></svg>`,
+  turtle: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="50" cy="55" rx="30" ry="22"/><path d="M50,33 L50,77 M28,55 Q40,45 50,55 Q60,45 72,55 Q60,65 50,55 Q40,65 28,55"/><circle cx="78" cy="50" r="6"/><line x1="25" y1="65" x2="20" y2="75"/><line x1="75" y1="65" x2="80" y2="75"/></svg>`,
+  fish: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20,50 Q35,30 65,30 Q80,30 80,50 Q80,70 65,70 Q35,70 20,50 Z"/><path d="M20,50 L8,38 L8,62 Z"/><circle cx="65" cy="45" r="2" fill="currentColor"/><path d="M50,40 Q55,45 50,50 Q55,55 50,60" opacity="0.4"/></svg>`,
+  whale: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15,55 Q15,40 35,38 Q70,38 75,55 Q75,68 65,72 Q40,72 35,68 Q15,68 15,55 Z"/><path d="M75,55 L90,42 L88,58 L90,68 Z"/><circle cx="32" cy="50" r="1.5" fill="currentColor"/><path d="M40,42 Q42,30 50,32"/><path d="M55,40 Q58,38 56,35" opacity="0.5"/></svg>`,
+  dolphin: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18,55 Q25,40 45,40 Q70,38 78,52 Q82,60 75,68 Q70,72 60,68 Q40,68 25,65 Q18,62 18,55 Z"/><path d="M48,40 Q50,30 58,28 Q60,38 55,42"/><path d="M78,52 L92,45 L88,58 Z"/><circle cx="35" cy="52" r="1.5" fill="currentColor"/></svg>`,
+  shell: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M50,85 Q15,80 15,45 Q15,15 50,15 Q85,15 85,45 Q85,80 50,85 Z"/><path d="M50,85 L50,45 M50,85 Q35,82 30,55 M50,85 Q65,82 70,55 M50,85 Q40,78 25,35 M50,85 Q60,78 75,35"/></svg>`,
+  bird: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M15,55 Q30,30 50,50 Q70,30 85,55"/><path d="M40,52 Q50,65 60,52" opacity="0.5"/></svg>`,
+  dove: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M30,55 Q40,45 55,48 Q72,52 78,42 Q75,55 65,58 Q60,68 50,68 Q40,68 35,62 Q30,62 30,55 Z"/><path d="M30,55 Q22,50 18,42 Q20,50 28,52" opacity="0.7"/><circle cx="72" cy="50" r="1.5" fill="currentColor"/><path d="M78,42 L85,40"/></svg>`,
+  crow: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="50" cy="55" rx="25" ry="18"/><circle cx="38" cy="50" r="6"/><circle cx="38" cy="50" r="2" fill="currentColor"/><path d="M22,50 L8,48 L15,55 Z"/><line x1="50" y1="73" x2="48" y2="85"/><line x1="55" y1="73" x2="58" y2="85"/></svg>`,
+  owl: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="50" cy="55" rx="28" ry="32"/><circle cx="38" cy="48" r="9"/><circle cx="62" cy="48" r="9"/><circle cx="38" cy="48" r="4" fill="currentColor"/><circle cx="62" cy="48" r="4" fill="currentColor"/><path d="M45,55 L50,62 L55,55 Z" fill="currentColor"/><path d="M28,28 L35,38 M72,28 L65,38"/></svg>`,
+  eagle: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10,40 Q30,25 50,45 Q70,25 90,40"/><path d="M50,45 L50,68 L42,72 L50,80 L58,72 L50,68"/><circle cx="50" cy="42" r="2" fill="currentColor"/><path d="M48,40 L46,36 L50,38 L54,36 L52,40"/></svg>`,
+  peacock: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M50,85 Q50,70 50,55 Q35,40 25,25 M50,55 Q40,38 30,18 M50,55 Q50,35 50,15 M50,55 Q60,38 70,18 M50,55 Q65,40 75,25"/><circle cx="25" cy="22" r="3"/><circle cx="30" cy="15" r="3"/><circle cx="50" cy="12" r="3"/><circle cx="70" cy="15" r="3"/><circle cx="75" cy="22" r="3"/><circle cx="50" cy="65" r="5"/></svg>`,
+  cat: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="55" r="28"/><polygon points="28,40 24,22 40,32"/><polygon points="72,40 76,22 60,32"/><circle cx="40" cy="52" r="2" fill="currentColor"/><circle cx="60" cy="52" r="2" fill="currentColor"/><path d="M50,60 L50,65"/><path d="M45,68 Q50,72 55,68"/><line x1="32" y1="60" x2="20" y2="58"/><line x1="32" y1="63" x2="20" y2="65"/><line x1="68" y1="60" x2="80" y2="58"/><line x1="68" y1="63" x2="80" y2="65"/></svg>`,
+  wolf: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M30,55 L20,30 L35,40 L50,30 L65,40 L80,30 L70,55 Q70,75 50,80 Q30,75 30,55 Z"/><circle cx="42" cy="55" r="2" fill="currentColor"/><circle cx="58" cy="55" r="2" fill="currentColor"/><polygon points="46,65 50,72 54,65"/></svg>`,
+  bear: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="55" r="28"/><circle cx="28" cy="35" r="8"/><circle cx="72" cy="35" r="8"/><circle cx="40" cy="50" r="2" fill="currentColor"/><circle cx="60" cy="50" r="2" fill="currentColor"/><ellipse cx="50" cy="65" rx="6" ry="4" fill="currentColor"/></svg>`,
+  elephant: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20,55 Q20,30 50,30 Q80,30 80,55 L80,75 L65,75 L65,65 L55,65 L55,75 L45,75 L45,90 Q40,95 35,90 Q30,80 35,72"/><circle cx="42" cy="48" r="2" fill="currentColor"/><circle cx="62" cy="48" r="2" fill="currentColor"/></svg>`,
+  horse: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M25,50 L25,80 M35,50 L35,80 M55,50 L55,80 M65,50 L65,80"/><path d="M20,50 Q20,30 35,30 L45,20 L55,25 L75,25 L85,40 L80,55 L65,55 L25,55 Z"/><circle cx="78" cy="35" r="1.5" fill="currentColor"/></svg>`,
+  dog: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M30,60 Q30,40 50,40 Q70,40 70,60 L70,80 L58,80 L58,72 L42,72 L42,80 L30,80 Z"/><polygon points="30,40 22,25 35,35"/><polygon points="70,40 78,25 65,35"/><circle cx="42" cy="55" r="2" fill="currentColor"/><circle cx="58" cy="55" r="2" fill="currentColor"/><ellipse cx="50" cy="65" rx="3" ry="2" fill="currentColor"/></svg>`,
+  housecat: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M30,80 Q30,55 50,50 Q70,55 70,80 Z"/><polygon points="32,55 28,38 42,48"/><polygon points="68,55 72,38 58,48"/><circle cx="42" cy="62" r="1.5" fill="currentColor"/><circle cx="58" cy="62" r="1.5" fill="currentColor"/><path d="M70,75 Q85,75 85,55"/></svg>`,
+  eye: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10,50 Q30,25 50,25 Q70,25 90,50 Q70,75 50,75 Q30,75 10,50 Z"/><circle cx="50" cy="50" r="14"/><circle cx="50" cy="50" r="6" fill="currentColor"/><circle cx="46" cy="46" r="2" fill="var(--bg-2)"/></svg>`,
+  heart: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M50,82 C30,68 12,55 12,38 C12,25 22,18 32,18 C40,18 46,22 50,28 C54,22 60,18 68,18 C78,18 88,25 88,38 C88,55 70,68 50,82 Z"/></svg>`,
+  hand: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M35,90 L35,55 Q30,55 30,45 L30,30 Q30,25 35,25 Q40,25 40,30 L40,50 L40,25 Q40,18 47,18 Q53,18 53,25 L53,50 L53,22 Q53,15 60,15 Q66,15 66,22 L66,50 L66,30 Q66,25 71,25 Q76,25 76,30 L76,55 Q76,80 65,90 Z"/></svg>`,
+  blood: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M50,15 Q30,40 30,60 Q30,80 50,80 Q70,80 70,60 Q70,40 50,15 Z" fill="currentColor" fill-opacity="0.2"/><path d="M50,35 Q42,50 45,60" opacity="0.4"/></svg>`,
+  tears: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M35,15 Q25,45 30,60 Q35,72 45,72 Q55,72 55,60 Q55,45 45,15 Z"/><path d="M65,30 Q58,55 65,68 Q72,75 78,68 Q82,55 75,30 Z" opacity="0.5"/></svg>`,
+  spine: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><line x1="50" y1="10" x2="50" y2="90"/><ellipse cx="50" cy="20" rx="8" ry="3"/><ellipse cx="50" cy="32" rx="8" ry="3"/><ellipse cx="50" cy="44" rx="8" ry="3"/><ellipse cx="50" cy="56" rx="8" ry="3"/><ellipse cx="50" cy="68" rx="8" ry="3"/><ellipse cx="50" cy="80" rx="8" ry="3"/></svg>`,
+  sword: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="50" y1="10" x2="50" y2="75"/><line x1="35" y1="75" x2="65" y2="75"/><rect x="47" y="75" width="6" height="12"/><line x1="42" y1="87" x2="58" y2="87"/><circle cx="50" cy="92" r="3"/></svg>`,
+  mirror: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="50" cy="42" rx="25" ry="32"/><ellipse cx="50" cy="42" rx="20" ry="27" fill="currentColor" fill-opacity="0.15"/><line x1="50" y1="74" x2="50" y2="88"/><path d="M40,88 L60,88"/></svg>`,
+  key: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="30" cy="50" r="15"/><circle cx="30" cy="50" r="5"/><line x1="45" y1="50" x2="85" y2="50"/><line x1="70" y1="50" x2="70" y2="60"/><line x1="80" y1="50" x2="80" y2="62"/></svg>`,
+  veil: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M15,15 Q50,12 85,15 Q85,55 80,75 Q60,90 50,88 Q40,90 20,75 Q15,55 15,15 Z"/><path d="M15,15 Q50,30 85,15" opacity="0.5"/><path d="M25,40 Q50,50 75,40" opacity="0.3"/><path d="M30,60 Q50,68 70,60" opacity="0.3"/></svg>`,
+  wheel: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="6"/><line x1="50" y1="12" x2="50" y2="88"/><line x1="12" y1="50" x2="88" y2="50"/><line x1="23" y1="23" x2="77" y2="77"/><line x1="77" y1="23" x2="23" y2="77"/></svg>`,
+  boat: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10,65 L20,80 L80,80 L90,65 Z"/><line x1="50" y1="20" x2="50" y2="65"/><path d="M50,25 L75,55 L50,55 Z"/><path d="M5,75 Q15,72 25,75 Q35,72 45,75 Q55,72 65,75 Q75,72 85,75 Q92,72 100,75" opacity="0.5"/></svg>`,
+  house: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="50,15 15,45 15,85 85,85 85,45"/><rect x="42" y="58" width="16" height="27"/><rect x="25" y="55" width="10" height="10"/><rect x="65" y="55" width="10" height="10"/></svg>`,
+  door: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M25,15 L25,90 L75,90 L75,15 Q50,10 25,15 Z"/><circle cx="65" cy="55" r="2" fill="currentColor"/><line x1="35" y1="30" x2="65" y2="30" opacity="0.4"/><line x1="35" y1="50" x2="65" y2="50" opacity="0.4"/><line x1="35" y1="70" x2="65" y2="70" opacity="0.4"/></svg>`,
+  window: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="20" y="20" width="60" height="65" rx="2"/><line x1="50" y1="20" x2="50" y2="85"/><line x1="20" y1="52" x2="80" y2="52"/></svg>`,
+  hearth: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="15" y="60" width="70" height="25"/><path d="M30,60 Q30,40 40,45 Q42,30 50,35 Q55,25 60,38 Q72,42 70,60"/><path d="M40,60 Q45,55 48,58 Q50,50 53,55 Q60,55 60,60" fill="currentColor" opacity="0.3"/><line x1="10" y1="85" x2="90" y2="85"/></svg>`,
+  angel: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="28" r="10"/><path d="M50,38 L50,75 M40,50 L60,50"/><path d="M50,42 Q25,40 15,55 Q30,52 40,55" /><path d="M50,42 Q75,40 85,55 Q70,52 60,55"/><ellipse cx="50" cy="20" rx="14" ry="3"/></svg>`,
+  dragon: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10,55 Q15,40 30,42 Q40,30 50,40 Q60,30 70,42 Q85,40 90,55 Q85,68 70,68 Q60,75 50,68 Q40,75 30,68 Q15,68 10,55 Z"/><circle cx="32" cy="50" r="2" fill="currentColor"/><circle cx="68" cy="50" r="2" fill="currentColor"/><path d="M40,38 L40,30 M50,32 L50,24 M60,38 L60,30"/></svg>`,
+  unicorn: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20,75 Q20,55 35,50 L45,40 L55,40 L70,30 L80,38 L75,55 Q75,75 70,80 L25,80 Z"/><line x1="55" y1="40" x2="62" y2="15"/><path d="M55,40 L60,18 L58,20 L62,15 L64,22" opacity="0.5"/><circle cx="68" cy="42" r="1.5" fill="currentColor"/><path d="M70,40 Q75,35 78,38"/></svg>`,
+  mermaid: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="25" r="8"/><path d="M50,33 Q40,40 45,55 Q50,65 50,75 Q60,82 70,75 L80,85 L70,82 L65,90"/><path d="M45,55 L55,55"/><path d="M50,75 L40,80 L45,85" opacity="0.6"/></svg>`,
+  witch: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="50,15 30,38 70,38"/><circle cx="50" cy="50" r="14"/><path d="M50,64 L50,85"/><line x1="35" y1="75" x2="65" y2="75"/><circle cx="45" cy="48" r="1.5" fill="currentColor"/><circle cx="55" cy="48" r="1.5" fill="currentColor"/><path d="M45,55 Q50,58 55,55"/></svg>`,
+  mandala: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="20"/><circle cx="50" cy="50" r="8"/><circle cx="50" cy="50" r="3" fill="currentColor"/><line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/><line x1="18" y1="18" x2="82" y2="82"/><line x1="82" y1="18" x2="18" y2="82"/></svg>`,
+  labyrinth: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M50,50 L50,30 L70,30 L70,50 L70,70 L30,70 L30,30 L50,30"/><path d="M50,50 L60,50 L60,60 L40,60 L40,40 L60,40" opacity="0.6"/></svg>`,
+  mask: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M25,30 Q25,15 50,15 Q75,15 75,30 L75,55 Q75,80 50,85 Q25,80 25,55 Z"/><ellipse cx="38" cy="42" rx="6" ry="8" fill="currentColor"/><ellipse cx="62" cy="42" rx="6" ry="8" fill="currentColor"/><path d="M40,65 Q50,72 60,65"/></svg>`,
+  crossroads: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="10" y1="50" x2="90" y2="50"/><line x1="50" y1="10" x2="50" y2="90"/><circle cx="50" cy="50" r="6"/></svg>`,
+  spiral: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M50,50 m0,-3 a3,3 0 1,1 0,6 a8,8 0 1,1 0,-16 a14,14 0 1,1 0,28 a20,20 0 1,1 0,-40 a26,26 0 1,1 0,52 a32,32 0 1,1 0,-64"/></svg>`,
+  blessing: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M40,90 L40,50 Q30,50 30,42 L30,28 Q30,22 36,22 Q42,22 42,28 L42,42 L42,18 Q42,12 50,12 Q58,12 58,18 L58,42 L58,22 Q58,16 65,16 Q71,16 71,22 L71,42 L71,28 Q71,22 78,22 Q83,22 83,28 L83,55 Q83,80 70,90 Z"/><circle cx="55" cy="38" r="3" fill="currentColor" opacity="0.6"/></svg>`,
+  transformation: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="30" cy="50" r="14"/><circle cx="70" cy="50" r="14" stroke-dasharray="3 2"/><path d="M44,50 L56,50"/><polygon points="56,46 62,50 56,54"/></svg>`,
+  shapeshift: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M50,15 Q70,15 75,35 Q75,55 65,60 Q60,70 70,80 Q55,82 50,72 Q45,82 30,80 Q40,70 35,60 Q25,55 25,35 Q30,15 50,15 Z"/><circle cx="42" cy="40" r="1.5" fill="currentColor"/><circle cx="58" cy="40" r="1.5" fill="currentColor"/></svg>`,
+  chakra: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="50" y1="5" x2="50" y2="95" opacity="0.3"/><circle cx="50" cy="15" r="5"/><circle cx="50" cy="28" r="5"/><circle cx="50" cy="41" r="5"/><circle cx="50" cy="54" r="5"/><circle cx="50" cy="67" r="5"/><circle cx="50" cy="80" r="5"/><circle cx="50" cy="93" r="3" fill="currentColor"/></svg>`,
+  pearl: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20,70 Q20,50 30,45 Q50,40 70,45 Q80,50 80,70 Q50,80 20,70 Z"/><circle cx="50" cy="55" r="14" fill="currentColor" fill-opacity="0.2"/><circle cx="50" cy="55" r="14"/><circle cx="45" cy="50" r="3" fill="var(--bg-2)" opacity="0.6"/></svg>`,
+  ancestor: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="22" r="8"/><path d="M40,30 L40,50 L42,80 L58,80 L60,50 L60,30"/><circle cx="50" cy="22" r="14" opacity="0.4"/><circle cx="50" cy="22" r="20" opacity="0.2"/></svg>`
+};
+
+// =====================================================
+// RENDER
+// =====================================================
+
+function renderSections() {
+  const root = document.getElementById('sections');
+  Object.entries(SYMBOLS).forEach(([sectionId, section]) => {
+    const sec = document.createElement('section');
+    sec.className = 'section';
+    sec.id = sectionId;
+
+    let html = `
+      <div class="section-header">
+        <div class="section-roman">${section.roman}</div>
+        <h2 class="section-title">${section.title}</h2>
+        <p class="section-desc">${section.desc}</p>
+      </div>
+    `;
+
+    section.categories.forEach(category => {
+      html += `<div class="category">`;
+      html += `<div class="category-title">${category.name}</div>`;
+      html += `<div class="category-ornament">∴</div>`;
+      html += `<div class="symbol-grid">`;
+      category.symbols.forEach((symbol, idx) => {
+        const iconSvg = ICONS[symbol.icon] || ICONS.star;
+        html += `
+          <div class="symbol-card" data-section="${sectionId}" data-symbol="${symbol.name}" tabindex="0" role="button" aria-label="Open ${symbol.name}">
+            <div class="symbol-icon">${iconSvg}</div>
+            <div>
+              <div class="symbol-name">${symbol.name}</div>
+              <div class="symbol-tagline">${symbol.tagline}</div>
+            </div>
+          </div>
+        `;
+      });
+      html += `</div></div>`;
+    });
+
+    sec.innerHTML = html;
+    root.appendChild(sec);
+  });
+}
+
+// =====================================================
+// MODAL
+// =====================================================
+function openModal(sectionId, symbolName) {
+  const section = SYMBOLS[sectionId];
+  let symbol = null;
+  for (const cat of section.categories) {
+    symbol = cat.symbols.find(s => s.name === symbolName);
+    if (symbol) break;
+  }
+  if (!symbol) return;
+
+  document.getElementById('modalSection').textContent = section.title;
+  document.getElementById('modalIconWrap').innerHTML = `<div class="modal-icon">${ICONS[symbol.icon] || ICONS.star}</div>`;
+  document.getElementById('modalTitle').textContent = symbol.name;
+  document.getElementById('modalTagline').textContent = symbol.tagline;
+
+  let body = '';
+  symbol.essay.forEach((p, i) => {
+    body += `<p>${p}</p>`;
+    if (i === 0 && symbol.quote) {
+      body += `<div class="pull-quote">${symbol.quote}</div>`;
+    }
+  });
+  document.getElementById('modalBody').innerHTML = body;
+
+  const themesEl = document.getElementById('modalThemes');
+  themesEl.innerHTML = '';
+  symbol.themes.forEach(t => {
+    const span = document.createElement('span');
+    span.className = 'theme-tag';
+    span.textContent = t;
+    themesEl.appendChild(span);
+  });
+
+  const modal = document.getElementById('modal');
+  modal.classList.add('open');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// =====================================================
+// SEARCH
+// =====================================================
+function setupSearch() {
+  const input = document.getElementById('searchInput');
+  input.addEventListener('input', e => {
+    const q = e.target.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.symbol-card');
+    const categories = document.querySelectorAll('.category');
+
+    if (!q) {
+      cards.forEach(c => c.style.display = '');
+      categories.forEach(c => c.style.display = '');
+      return;
+    }
+
+    cards.forEach(card => {
+      const name = card.dataset.symbol.toLowerCase();
+      const tag = card.querySelector('.symbol-tagline').textContent.toLowerCase();
+      const match = name.includes(q) || tag.includes(q);
+      card.style.display = match ? '' : 'none';
+    });
+
+    // Hide categories that have no visible cards
+    categories.forEach(cat => {
+      const visibleCards = cat.querySelectorAll('.symbol-card:not([style*="display: none"])');
+      cat.style.display = visibleCards.length > 0 ? '' : 'none';
+    });
+  });
+}
+
+// =====================================================
+// INIT
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderSections();
+  setupSearch();
+
+  // Card click + keyboard
+  document.addEventListener('click', e => {
+    const card = e.target.closest('.symbol-card');
+    if (card) {
+      openModal(card.dataset.section, card.dataset.symbol);
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const focused = document.activeElement;
+      if (focused.classList.contains('symbol-card')) {
+        e.preventDefault();
+        openModal(focused.dataset.section, focused.dataset.symbol);
+      }
+    }
+    if (e.key === 'Escape') closeModal();
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target.id === 'modal') closeModal();
+  });
+});
+</script>
+
+</body>
+</html>

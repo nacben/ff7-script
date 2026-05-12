@@ -378,6 +378,68 @@
     border-left: 2px solid var(--gold);
   }
 
+  /* Craft lessons */
+  .lessons {
+    counter-reset: lesson;
+    margin-top: 2rem;
+  }
+
+  .lesson {
+    counter-increment: lesson;
+    background: var(--paper-dark);
+    padding: 2rem 2rem 2rem 5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    box-shadow: 2px 4px 10px var(--shadow);
+    border-left: 3px solid var(--gold);
+  }
+
+  .lesson::before {
+    content: counter(lesson, decimal-leading-zero);
+    position: absolute;
+    left: 1.25rem;
+    top: 1.75rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+    font-weight: bold;
+  }
+
+  .lesson h3 {
+    font-size: 1.25rem;
+    color: var(--rust-dark);
+    margin-bottom: 0.5rem;
+    font-style: normal;
+  }
+
+  .lesson .takeaway {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--sepia);
+    font-size: 0.9rem;
+    color: var(--sepia);
+  }
+
+  .lesson .takeaway strong {
+    color: var(--rust-dark);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  @media (max-width: 640px) {
+    .lesson { padding: 1.5rem 1.25rem 1.5rem 1.25rem; }
+    .lesson::before {
+      position: static;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  }
+
   /* Pull quote */
   .pullquote {
     margin: 3rem auto;
@@ -532,6 +594,7 @@
     <li><a href="#chapters">Chapters</a></li>
     <li><a href="#themes">Themes</a></li>
     <li><a href="#design">Design</a></li>
+    <li><a href="#craft">For Writers</a></li>
     <li><a href="#trivia">Trivia</a></li>
   </ul>
 </nav>
@@ -1023,6 +1086,234 @@
       coworker Rachel are noticeably different — warmer, more candid, and aware
       of things Rachel could not have known the first time. It's a small, very
       fond gesture.
+    </p>
+  </div>
+</section>
+
+<section id="craft">
+  <div class="section-label">For Writers</div>
+  <h2>Storytelling lessons from Hotel Dusk</h2>
+  <p class="lead">
+    Hotel Dusk is a useful study text for novelists, screenwriters, and game
+    writers because it solves a specific, difficult problem: how to make
+    nine separate strangers feel like one connected story without resorting
+    to coincidence. The techniques below are transferable.
+  </p>
+
+  <div class="lessons">
+    <div class="lesson">
+      <h3>Introduce characters through friction, not exposition</h3>
+      <p>
+        Almost every guest in Hotel Dusk first appears doing something mildly
+        irritating — blocking the stairs, complaining at the front desk,
+        demanding the wrong room, hiding their face. Personality lands faster
+        when the reader has to react to it than when the reader has to absorb
+        a description of it.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Open a character's first scene with a small social violation rather
+        than a paragraph of description. Let the reader form an opinion before
+        they get a biography.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Give every named character one secret</h3>
+      <p>
+        Hotel Dusk gives all twelve speaking characters something they do not
+        want to say aloud. The secrets are scaled — a fake name, a stolen
+        manuscript, a missing daughter — but every door in the building hides
+        one. The cumulative effect is that the whole building feels
+        load-bearing.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Make a list of your speaking characters and write one sentence each
+        beginning "What they will not say is…". If two or more are blank,
+        those characters are scenery, not people.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Let an object pass through hands</h3>
+      <p>
+        A fountain pen drops in the restaurant, is picked up by a bellhop,
+        handed to a salesman, denied by a novelist, claimed by an old woman,
+        and ends up linking a stolen book, a missing son, and a mother's
+        regret. The pen is the plot. Coincidence becomes structure when an
+        object connects scenes that the characters could not.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Choose one small physical object — a key, a bracelet, a photograph —
+        and make it the only legitimate way information moves between two
+        characters who never speak.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Write the silence around a revelation</h3>
+      <p>
+        Hotel Dusk almost never has a character blurt out their secret. They
+        deflect, change the subject, get angry, leave the room. The reader
+        knows something is wrong long before they know what. The withholding
+        is the suspense.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Identify the most important thing a character knows. Then write three
+        scenes in a row where they almost say it and don't. The reveal in
+        scene four will hit four times as hard.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Use a sour narrator to keep the warmth honest</h3>
+      <p>
+        Kyle Hyde is cynical, blunt, and openly tired of other people. That
+        voice is what lets the story's sentimental moments — a Christmas tree
+        decorated three days late, a daughter forgiving her father — land
+        without becoming saccharine. A guarded narrator earns the reader's
+        trust by refusing easy emotion until late.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        If your draft feels mawkish, your POV character is probably too
+        agreeable. Make them measurably more skeptical for the first half;
+        the second half will warm up without you doing anything.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Constrain location, expand meaning</h3>
+      <p>
+        One building, one night. The hotel never gets bigger, but the things
+        it contains keep accumulating significance — a painting on a wall
+        becomes a clue, a wine label becomes a memory, a basement becomes a
+        confession. Constraints force the writer to load every object with
+        more than one job.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Cut your setting in half. If your story spans three cities, force it
+        to one street. The objects you already wrote will start carrying
+        weight you hadn't planned for.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Use parallel families instead of one big one</h3>
+      <p>
+        The game tells the same story — a parent and a child separated by
+        something the parent did — at least four times, with different
+        outcomes. Variation is what turns a motif into a theme. A single
+        dramatized father-daughter relationship is a subplot. Four of them
+        becomes a question the story is asking.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Pick the relationship at the heart of your story. Find two or three
+        minor characters and quietly give them their own version of it. Do
+        not comment on the parallel; let it work on the reader unconsciously.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Misdirect with truth, not lies</h3>
+      <p>
+        The hotel's owner spends the first hour pushing a hokey "wishes come
+        true" story that the protagonist dismisses as a sales pitch. By the
+        end of the game, the ghost story and the wish story both turn out to
+        be partially true — just attached to different events than the reader
+        assumed. Real red herrings are facts the reader misfiles.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Tell the reader the answer in chapter one in language they will not
+        recognize as the answer. The reread should reward, not embarrass.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Put consequences on dialogue choices</h3>
+      <p>
+        In the game, the wrong line of dialogue makes the listener bristle —
+        and three wrong lines end the scene. This is a useful instinct even
+        in prose. If your protagonist can say anything to anyone without
+        cost, the conversation is a delivery system for information, not a
+        scene. Stakes belong inside dialogue, not only outside it.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        For each significant conversation, decide in advance what the
+        speaker could lose by saying the wrong thing. If the answer is
+        nothing, the scene is probably not earning its space.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Carry exposition on a phone line</h3>
+      <p>
+        Kyle's backstory — the partner he shot, the case that ended his
+        career — is delivered almost entirely through phone calls with
+        people who are not in the building. The voices on the other end have
+        their own attitudes, their own jokes, their own affection for him,
+        which keeps the exposition from sounding like exposition.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        Don't have your protagonist remember their past alone. Give them a
+        long-distance friend who keeps bringing it up at inconvenient
+        moments, slightly differently each time.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Leave the segue beat</h3>
+      <p>
+        The game's funniest writing lives in the half-second after the
+        obvious response — a second sentence the speaker mutters under their
+        breath, a thought the narrator has but doesn't say out loud. Comedy
+        and character both live in that extra beat. Cutting straight to the
+        next plot point removes them.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        After each line of important dialogue in your draft, write one extra
+        sentence of internal reaction or unspoken aside. Keep the best
+        third. Delete the rest. The page will feel twice as alive.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>End on a doorway</h3>
+      <p>
+        The story closes with the protagonist driving away from a problem he
+        has not fully solved, in the company of a person he has only just
+        met. Almost every character ends one chapter of their life and
+        begins another, but no arc closes completely. Stories that end on
+        new beginnings stay with the reader longer than stories that end on
+        full stops.
+      </p>
+      <div class="takeaway">
+        <strong>Try this</strong>
+        After you write your ending, write the first paragraph of what
+        happens next. If that paragraph is more interesting than your
+        ending, you ended a chapter too early — or one chapter too late.
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <h4>One craft note that runs underneath all of these</h4>
+    <p>
+      Hotel Dusk is roughly fifteen hours of almost pure dialogue, and it is
+      readable because the writers paid attention to the smallest unit of
+      drama: the line. Every line either reveals character, advances
+      information, or earns laughter. Lines that did none of these things
+      are not there. If you take only one principle away from the game,
+      take that one.
     </p>
   </div>
 </section>

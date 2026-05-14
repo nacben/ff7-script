@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improv Wisdom — Don't Prepare, Just Show Up · Patricia Ryan Madson</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    /* ===================== TOKENS ===================== */
+    :root {
+      --bg:          #faf8f5;
+      --white:       #ffffff;
+      --pri:         #1a4a5c;
+      --pri-d:       #0d2d3a;
+      --pri-l:       #2a6a80;
+      --acc:         #c17f3e;
+      --acc-l:       #e09c55;
+      --coral:       #d4735a;
+      --cream:       #f5efe4;
+      --cream-d:     #e0d0b8;
+      --text:        #2c2824;
+      --muted:       #6b6055;
+      --border:      #ddd0b8;
+      --shadow:      rgba(26,74,92,0.12);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:17px;}
+
+    /* ===================== PROGRESS BAR ===================== */
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--acc),var(--coral));z-index:200;width:0;transition:width .1s linear;}
+
+    /* ===================== NAV ===================== */
+    nav{position:fixed;top:3px;left:0;right:0;z-index:100;background:rgba(13,45,58,.97);backdrop-filter:blur(12px);}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:0 24px;height:56px;}
+    .nav-brand{color:var(--acc-l);font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+    .nav-links{display:flex;gap:2px;list-style:none;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;flex:1;}
+    .nav-links::-webkit-scrollbar{display:none;}
+    .nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.72rem;font-weight:500;padding:6px 9px;border-radius:4px;transition:color .2s,background .2s;white-space:nowrap;letter-spacing:.04em;}
+    .nav-links a:hover,.nav-links a.active{color:var(--acc-l);background:rgba(193,127,62,.15);}
+    @media(max-width:700px){.nav-links{display:none;}}
+
+    /* ===================== HERO ===================== */
+    .hero{min-height:100vh;background:linear-gradient(145deg,#0a2535 0%,#1a4a5c 45%,#2a6a80 80%,#1e5468 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 24px 70px;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%, rgba(193,127,62,.15) 0%, transparent 50%),radial-gradient(circle at 80% 20%, rgba(42,106,128,.3) 0%, transparent 50%);pointer-events:none;}
+    .hero-bg-yes{position:absolute;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(8rem,22vw,18rem);color:rgba(255,255,255,.04);line-height:1;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none;font-weight:700;}
+    .hero-content{position:relative;max-width:760px;}
+    .hero-eyebrow{color:var(--acc-l);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4.2rem);color:white;line-height:1.15;margin-bottom:12px;font-weight:700;}
+    .hero-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,2.8vw,1.7rem);color:var(--acc-l);margin-bottom:24px;}
+    .hero-author{color:rgba(255,255,255,.65);font-size:.95rem;margin-bottom:48px;font-weight:300;letter-spacing:.05em;}
+    .hero-dedication{background:rgba(255,255,255,.07);border-left:3px solid var(--acc-l);padding:20px 28px;text-align:left;color:rgba(255,255,255,.78);font-family:'Lora',serif;font-style:italic;font-size:.98rem;border-radius:0 8px 8px 0;margin-bottom:48px;line-height:1.85;}
+    .hero-dedication strong{color:var(--acc-l);font-style:normal;}
+    .hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:white;text-decoration:none;padding:14px 32px;border-radius:50px;font-weight:600;font-size:.95rem;transition:background .2s,transform .2s;margin-bottom:32px;}
+    .hero-cta:hover{background:var(--acc-l);transform:translateY(-2px);}
+    .hero-scroll{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:.8rem;letter-spacing:.1em;text-decoration:none;animation:bob 2.5s ease-in-out infinite;}
+    @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+    /* ===================== SHARED LAYOUT ===================== */
+    .container{max-width:860px;margin:0 auto;padding:0 24px;}
+    .container-wide{max-width:1080px;margin:0 auto;padding:0 24px;}
+    section{padding:80px 0;}
+    p{margin-bottom:20px;}
+    p:last-child{margin-bottom:0;}
+    strong{color:var(--pri);}
+
+    /* ===================== RUMI EPIGRAPH ===================== */
+    .rumi{background:linear-gradient(135deg,var(--pri) 0%,var(--pri-l) 100%);padding:70px 24px;text-align:center;}
+    .rumi blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,2.4vw,1.45rem);color:rgba(255,255,255,.9);line-height:1.9;max-width:680px;margin:0 auto 24px;}
+    .rumi cite{color:var(--acc-l);font-size:.82rem;letter-spacing:.12em;font-style:normal;font-weight:700;}
+
+    /* ===================== OVERVIEW GRID ===================== */
+    .overview{background:var(--pri-d);padding:80px 0;}
+    .section-label{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:10px;}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--pri);margin-bottom:12px;line-height:1.2;}
+    .overview .section-title{color:white;}
+    .overview .section-label{color:var(--acc-l);}
+    .overview p{color:rgba(255,255,255,.7);margin-bottom:40px;}
+    .maxim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+    .maxim-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:24px;text-decoration:none;transition:transform .2s,background .2s,border-color .2s;display:block;}
+    .maxim-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.1);border-color:rgba(193,127,62,.5);}
+    .mc-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--acc-l);font-weight:700;line-height:1;margin-bottom:6px;opacity:.7;}
+    .mc-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:white;font-weight:700;margin-bottom:6px;}
+    .mc-tag{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+    /* ===================== PROLOGUE ===================== */
+    #prologue{background:var(--white);border-bottom:1px solid var(--border);}
+    #prologue .section-title{color:var(--pri);}
+
+    /* ===================== MAXIM BASE ===================== */
+    .maxim{padding:80px 0;}
+    .maxim:nth-child(odd){background:var(--white);}
+    .maxim:nth-child(even){background:var(--bg);}
+    .maxim-stripe{height:4px;background:linear-gradient(90deg,var(--acc),var(--coral));}
+    .maxim-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:44px;}
+    .maxim-num{font-family:'Playfair Display',serif;font-size:clamp(4rem,8vw,6rem);color:var(--cream-d);line-height:.9;flex-shrink:0;font-weight:700;margin-top:4px;}
+    .maxim-title-block .maxim-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:6px;}
+    .maxim-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.2rem);color:var(--pri);line-height:1.1;font-weight:700;}
+    @media(max-width:640px){.maxim-header{flex-direction:column;gap:12px;}.maxim-num{font-size:3.5rem;}}
+
+    /* ===================== OPENING QUOTE ===================== */
+    .oq{border-left:4px solid var(--acc);padding:20px 28px;margin-bottom:40px;background:var(--cream);border-radius:0 8px 8px 0;}
+    .oq p{font-family:'Lora',serif;font-style:italic;font-size:1.1rem;color:var(--pri);margin-bottom:8px;}
+    .oq cite{font-size:.8rem;color:var(--muted);font-style:normal;font-weight:600;letter-spacing:.1em;}
+
+    /* ===================== PULL QUOTE ===================== */
+    .pq{text-align:center;padding:36px 24px;margin:36px 0;}
+    .pq p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.2rem,2.8vw,1.75rem);color:var(--pri);line-height:1.55;margin-bottom:10px;}
+    .pq cite{color:var(--acc);font-size:.8rem;font-weight:700;letter-spacing:.1em;font-style:normal;}
+
+    /* ===================== TRY THIS ===================== */
+    .try{background:linear-gradient(135deg,#fff9f0,#fff3e0);border:1px solid var(--cream-d);border-top:4px solid var(--acc);border-radius:0 0 12px 12px;padding:28px 32px;margin:28px 0;}
+    .try-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+    .try-label::before{content:'▶';font-size:.65rem;}
+    .try p{color:#5a4a35;font-size:.93rem;margin-bottom:10px;}
+    .try p:last-child{margin-bottom:0;}
+
+    /* ===================== STORY BOX ===================== */
+    .story{background:var(--cream);border-radius:12px;padding:28px 32px;margin:28px 0;border:1px solid var(--cream-d);}
+    .story-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:10px;}
+    .story p{font-size:.95rem;color:var(--muted);}
+
+    /* ===================== KEY CONCEPT ===================== */
+    .kc{background:linear-gradient(135deg,var(--pri) 0%,var(--pri-l) 100%);color:white;padding:28px 32px;border-radius:12px;margin:28px 0;}
+    .kc p{color:rgba(255,255,255,.9);font-size:1.02rem;margin-bottom:0;}
+    .kc strong{color:var(--acc-l);}
+
+    /* ===================== SUMMARY ===================== */
+    .summary{background:var(--pri);padding:32px 36px;border-radius:16px;margin-top:48px;}
+    .summary-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;color:var(--acc-l);margin-bottom:18px;}
+    .summary ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 24px;}
+    @media(max-width:560px){.summary ul{grid-template-columns:1fr;}}
+    .summary ul li{display:flex;align-items:flex-start;gap:10px;font-size:.87rem;color:rgba(255,255,255,.87);line-height:1.5;}
+    .summary ul li::before{content:'✦';color:var(--acc-l);flex-shrink:0;font-size:.65rem;margin-top:4px;}
+
+    /* ===================== ZEN LIST ===================== */
+    .zen-list{background:var(--cream);border-radius:12px;padding:24px 28px;margin:24px 0;}
+    .zen-list p{font-family:'Playfair Display',serif;font-style:italic;color:var(--pri);font-size:1.05rem;margin-bottom:8px;}
+    .zen-list p:last-child{margin-bottom:0;}
+
+    /* ===================== DIVIDER ===================== */
+    .divider{display:flex;align-items:center;gap:16px;margin:36px 0;}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+    .divider span{color:var(--acc);font-size:1.1rem;}
+
+    /* ===================== TWO COLUMN ===================== */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0;}
+    @media(max-width:600px){.two-col{grid-template-columns:1fr;}}
+    .col-card{background:var(--cream);border-radius:10px;padding:22px;}
+    .col-card h4{font-family:'Playfair Display',serif;color:var(--pri);margin-bottom:10px;font-size:1rem;}
+    .col-card p{font-size:.9rem;color:var(--muted);}
+
+    /* ===================== TIPS GRID ===================== */
+    .tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:28px 0;}
+    .tip{background:rgba(26,74,92,.06);border:1px solid rgba(26,74,92,.1);border-radius:10px;padding:20px;font-size:.9rem;color:var(--muted);line-height:1.6;}
+    .tip strong{display:block;color:var(--pri);margin-bottom:6px;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;}
+
+    /* ===================== EPILOGUE ===================== */
+    #epilogue{background:linear-gradient(160deg,var(--pri) 0%,var(--pri-d) 100%);padding:80px 0;}
+    #epilogue .section-label{color:var(--acc-l);}
+    #epilogue .section-title{color:white;}
+    #epilogue p{color:rgba(255,255,255,.82);}
+    .water-tank{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:32px 36px;margin:40px 0;}
+    .water-tank-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--acc-l);margin-bottom:16px;font-style:italic;}
+    .water-tank p{color:rgba(255,255,255,.8);}
+    #epilogue .pq p{color:rgba(255,255,255,.95);}
+
+    /* ===================== QUICK REF ===================== */
+    .quick-ref{background:var(--white);padding:80px 0;border-top:1px solid var(--border);}
+    .qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:36px;}
+    .qr-item{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:all .2s;}
+    .qr-item:hover{border-color:var(--acc);background:var(--cream);}
+    .qr-num{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--acc);font-weight:700;line-height:1;min-width:30px;}
+    .qr-text{font-size:.82rem;font-weight:600;color:var(--pri);text-transform:uppercase;letter-spacing:.05em;line-height:1.3;}
+
+    /* ===================== FOOTER ===================== */
+    footer{background:#080f14;color:rgba(255,255,255,.5);padding:56px 24px;text-align:center;}
+    .footer-brand{font-family:'Playfair Display',serif;font-style:italic;font-size:1.6rem;color:var(--acc-l);margin-bottom:12px;}
+    footer p{font-size:.85rem;margin-bottom:6px;}
+    footer a{color:var(--acc-l);text-decoration:none;}
+
+    /* ===================== SIDE DOTS ===================== */
+    #side-dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:80;}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--cream-d);border:none;cursor:pointer;transition:all .3s;padding:0;}
+    .dot.active,.dot:hover{background:var(--acc);transform:scale(1.5);}
+    @media(max-width:960px){#side-dots{display:none;}}
+
+    /* ===================== ANIMATIONS ===================== */
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ===================== NAV ===================== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Improv Wisdom</a>
+    <ul class="nav-links">
+      <li><a href="#prologue">Prologue</a></li>
+      <li><a href="#m1">Say Yes</a></li>
+      <li><a href="#m2">Don't Prepare</a></li>
+      <li><a href="#m3">Show Up</a></li>
+      <li><a href="#m4">Start Anywhere</a></li>
+      <li><a href="#m5">Be Average</a></li>
+      <li><a href="#m6">Pay Attention</a></li>
+      <li><a href="#m7">Face Facts</a></li>
+      <li><a href="#m8">Stay on Course</a></li>
+      <li><a href="#m9">Wake Up</a></li>
+      <li><a href="#m10">Make Mistakes</a></li>
+      <li><a href="#m11">Act Now</a></li>
+      <li><a href="#m12">Take Care</a></li>
+      <li><a href="#m13">Enjoy Ride</a></li>
+      <li><a href="#epilogue">Epilogue</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===================== SIDE DOTS ===================== -->
+<div id="side-dots">
+  <button class="dot" data-target="prologue" title="Prologue"></button>
+  <button class="dot" data-target="m1" title="Say Yes"></button>
+  <button class="dot" data-target="m2" title="Don't Prepare"></button>
+  <button class="dot" data-target="m3" title="Just Show Up"></button>
+  <button class="dot" data-target="m4" title="Start Anywhere"></button>
+  <button class="dot" data-target="m5" title="Be Average"></button>
+  <button class="dot" data-target="m6" title="Pay Attention"></button>
+  <button class="dot" data-target="m7" title="Face the Facts"></button>
+  <button class="dot" data-target="m8" title="Stay on Course"></button>
+  <button class="dot" data-target="m9" title="Wake Up to the Gifts"></button>
+  <button class="dot" data-target="m10" title="Make Mistakes"></button>
+  <button class="dot" data-target="m11" title="Act Now"></button>
+  <button class="dot" data-target="m12" title="Take Care of Each Other"></button>
+  <button class="dot" data-target="m13" title="Enjoy the Ride"></button>
+  <button class="dot" data-target="epilogue" title="Epilogue"></button>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg-yes">YES!</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Patricia Ryan Madson · Stanford Drama Faculty</div>
+    <h1>Improv Wisdom</h1>
+    <div class="hero-sub">Don't Prepare, Just Show Up</div>
+    <div class="hero-author">Thirteen Maxims for a Spontaneous Life</div>
+    <div class="hero-dedication">
+      <em>For Mama, Virginia Louise Pittman Ryan — she always said yes.</em><br>
+      <em>For my husband, Ronald Whitney Madson — my improv partner in life.</em>
+    </div>
+    <a href="#overview" class="hero-cta">Explore the 13 Maxims</a><br>
+    <a href="#prologue" class="hero-scroll">↓ &nbsp; Begin Reading</a>
+  </div>
+</section>
+
+<!-- ===================== RUMI EPIGRAPH ===================== -->
+<div class="rumi">
+  <blockquote>
+    "There is another kind of tablet, one already completed and preserved inside you.<br>
+    A spring overflowing its springbox. A freshness in the center of the chest.<br>
+    This second knowing is a fountainhead from within you, moving out."
+  </blockquote>
+  <cite>— RUMI, "Two Kinds of Intelligence," translated by Coleman Barks</cite>
+</div>
+
+<!-- ===================== OVERVIEW ===================== -->
+<section class="overview" id="overview">
+  <div class="container-wide">
+    <div class="section-label">The 13 Maxims</div>
+    <div class="section-title">Your Passport to the Improvisers' World</div>
+    <p>These principles, drawn from the art of theatrical improvisation, offer practical wisdom for navigating the unrehearsed performance we call daily life. Each maxim is a doorway — simple to enter, profound to explore.</p>
+    <div class="maxim-grid">
+      <a class="maxim-card" href="#m1"><div class="mc-num">01</div><div class="mc-title">Say Yes</div><div class="mc-tag">The password to a world of action, possibility &amp; adventure</div></a>
+      <a class="maxim-card" href="#m2"><div class="mc-num">02</div><div class="mc-title">Don't Prepare</div><div class="mc-tag">Empty yourself. Substitute attention for planning</div></a>
+      <a class="maxim-card" href="#m3"><div class="mc-num">03</div><div class="mc-title">Just Show Up</div><div class="mc-tag">Move your body toward your dreams. Location is everything</div></a>
+      <a class="maxim-card" href="#m4"><div class="mc-num">04</div><div class="mc-title">Start Anywhere</div><div class="mc-tag">All starting points are equally valid. Begin now</div></a>
+      <a class="maxim-card" href="#m5"><div class="mc-num">05</div><div class="mc-title">Be Average</div><div class="mc-tag">Close enough is perfect. Celebrate the obvious</div></a>
+      <a class="maxim-card" href="#m6"><div class="mc-num">06</div><div class="mc-title">Pay Attention</div><div class="mc-tag">Life is attention. What you notice becomes your world</div></a>
+      <a class="maxim-card" href="#m7"><div class="mc-num">07</div><div class="mc-title">Face the Facts</div><div class="mc-tag">Say yes, then work with what has been given</div></a>
+      <a class="maxim-card" href="#m8"><div class="mc-num">08</div><div class="mc-title">Stay on Course</div><div class="mc-tag">Every improvisation has a point. Ask: what is my purpose?</div></a>
+      <a class="maxim-card" href="#m9"><div class="mc-num">09</div><div class="mc-title">Wake Up to the Gifts</div><div class="mc-tag">The glass is always half full. Discover your interdependence</div></a>
+      <a class="maxim-card" href="#m10"><div class="mc-num">10</div><div class="mc-title">Make Mistakes, Please</div><div class="mc-tag">If you're not making mistakes, you're not improvising</div></a>
+      <a class="maxim-card" href="#m11"><div class="mc-num">11</div><div class="mc-title">Act Now</div><div class="mc-tag">Ready, fire, aim. Action is discovery</div></a>
+      <a class="maxim-card" href="#m12"><div class="mc-num">12</div><div class="mc-title">Take Care of Each Other</div><div class="mc-tag">Make your partner look good. Be a guardian angel</div></a>
+      <a class="maxim-card" href="#m13"><div class="mc-num">13</div><div class="mc-title">Enjoy the Ride</div><div class="mc-tag">Have fun. If something's not to your liking, change your liking</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROLOGUE ===================== -->
+<section id="prologue" class="maxim">
+  <div class="container fade-in">
+    <div class="section-label">Prologue</div>
+    <div class="section-title">Painting Outside the Lines</div>
+
+    <p>When Patricia Ryan Madson was eleven years old, her mother bought her a paint-by-numbers kit — a leafy maple tree. She painted carefully, always getting the prescribed colors just right, critical if she went over a line. "My formula painting seemed beautiful to me," she recalls. Thus she found her way to live: <strong>Always go by the rules. Use the recipe. Follow the pattern. Rehearse the script.</strong></p>
+
+    <p>Years later, as an acting professor at Denison University, she followed every rule in the academic book. She chaired committees, won teaching prizes, allied herself with the right people — and was <em>still</em> denied tenure. Her teaching, the letter said, "lacked intellectual distinction." She had never taken a chance. She had never once followed an impulse or listened to the beat of her own drum.</p>
+
+    <div class="pq">
+      <p>"Making decisions solely to please others is a formula destined to fail. I had tried to be worthy of receiving tenure. I didn't understand that this worthiness could come only from honoring my own voice."</p>
+    </div>
+
+    <p>Denison's rejection became a gift. She promised herself she would never again make choices simply to impress others. She took up tai chi, studied Eastern religion, traveled widely, and began to improvise. In the summer of 1977, she drove across the United States in a rusty mint green Mercury Marquis Brougham to take a position heading Stanford's undergraduate acting program.</p>
+
+    <p>During a trip to Kyoto, she stumbled into an art supply store and accidentally purchased a tiny watercolor set and blank postcards. Sitting on a bench in a park near a temple, she looked at peach-colored azaleas and thought: <em>I'm not an artist — so it doesn't matter what I do. Why not just play?</em> She began to improvise. The lines and numbers had disappeared. She could discover what was there.</p>
+
+    <div class="kc">
+      <p><strong>Life is an improvisation,</strong> and if we are lucky, a long one. A good improviser is someone who is awake, not entirely self-focused, and moved by a desire to do something useful and give something back — and who acts upon this impulse. The password to this world is <strong>yes!</strong></p>
+    </div>
+
+    <p>Keith Johnstone, pioneer of improv theater, captures the essential choice: <em>"There are people who prefer to say 'Yes,' and there are people who prefer to say 'No.' Those who say 'Yes' are rewarded by the adventures they have, and those who say 'No' are rewarded by the safety they attain."</em></p>
+
+    <p>What is heartening is the growing pile of testimonials from students who have tried improv and found encouragement and answers. Their stories illustrate the journey of opening oneself to possibility. This book will introduce you to thirteen improv maxims — not as theatrical tricks, but as principles for a more spontaneous, generous, and fully alive existence.</p>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 1: SAY YES ===================== -->
+<section id="m1" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">01</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The First Maxim</div>
+        <div class="maxim-title">Say Yes</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>… yes I said yes I will Yes.</p>
+      <cite>— JAMES JOYCE, Ulysses</cite>
+    </div>
+
+    <p>This is going to sound crazy: <strong>Say yes to everything. Accept all offers. Go along with the plan. Support someone else's dream.</strong> Cultivate all the ways you can imagine to express affirmation. When the answer to all questions is yes, you enter a new world — a world of action, possibility, and adventure.</p>
+
+    <p>The world of yes is the single most powerful secret of improvising. It allows players who have no history with one another to create a scene effortlessly. Safety lies in knowing your partner will go along with whatever idea you present. Don't confuse this with being a "yes-man," implying mindless pandering. <strong>Saying yes is an act of courage and optimism</strong>; it allows you to share control. Yes expands your world.</p>
+
+    <div class="story">
+      <div class="story-label">Story in Practice</div>
+      <p>Gertrude, a mother of three, reported: "My eight-year-old burst into the kitchen shrieking, 'Mommy, there's a monster in the closet!' Normally I would have offered a reality check. Instead, considering the rule of yes, I turned from the dishes and said: 'There is? Wow, let's go see!' We had a dynamic encounter with the monster, capturing it and squealing with delight. It was a magical shared adventure."</p>
+    </div>
+
+    <p>Saying yes prevents you from committing the cardinal sin of <strong>blocking</strong>. Blocking comes in many forms: saying no, having a better idea, changing the subject, correcting the speaker, or simply not listening. We block not only others but ourselves: "I'm not good at this, so why bother?" The critic in us wakes up and runs the show.</p>
+
+    <div class="kc">
+      <p>The spirit of improvising is embodied in <strong>"yes, and"</strong> — agreement begins the process, and then you add something. Try substituting <strong>"yes and"</strong> for <strong>"yes but"</strong>. This gets the ball rolling and builds rather than deflates.</p>
+    </div>
+
+    <p>As Kathleen Norris writes: "To say 'yes' is to make a leap of faith, to risk oneself in a new and often scary relationship. The vocabulary of faith begins." Exercising the yes muscle builds optimism. Saying yes to life will not banish problems, but a positive perspective is easier on those around us — and on ourselves.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Support someone else's dreams.</strong> Pick a person — your spouse, child, boss — and for a week, agree with all their ideas. Find something right about everything they say or do. Look for every opportunity to offer support. Consider their convenience and time preferences ahead of your own. Give them the spotlight. Notice the results.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>For one day, say yes to everything.</strong> Set your own preferences aside. Notice the results. See how often it may not be convenient or easy. Use common sense — the goal is to stretch your yes muscle, not to compromise your health or safety.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The First Maxim · Say Yes</div>
+      <ul>
+        <li>Just say yes</li>
+        <li>Become a "can-do" person</li>
+        <li>Look for what is right</li>
+        <li>Agree with those around you</li>
+        <li>Cultivate yes phrases: "You bet," "Good idea"</li>
+        <li>Substitute "Yes and" for "Yes but"</li>
+        <li>Add something to build the conversation</li>
+        <li>Exercise the yes muscle — it builds optimism</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 2: DON'T PREPARE ===================== -->
+<section id="m2" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">02</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Second Maxim</div>
+        <div class="maxim-title">Don't Prepare</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>Empty yourself of everything.</p>
+      <cite>— LAO TSE, Tao Te Ching</cite>
+    </div>
+
+    <p><strong>Give up planning. Clear your mind instead of filling it.</strong> Don't spend your energy preparing for the future. Redirect it to the present moment. Instead of packing, show up empty-handed but alert, cheerful, and ready to receive unexpected gifts. Change the habit of getting ready for life in favor of getting on with it now.</p>
+
+    <p>We often substitute planning, ruminating, or list-making for actually doing something about our dreams. The habit of excessive planning impedes our ability to see what is actually in front of us. The mind that is occupied is missing the present.</p>
+
+    <p>Substitute <strong>attention for preparation</strong>. Then you will be working in real time. Focusing attention on the present puts you in touch with a kind of natural wisdom. When you enter the moment with heightened awareness, what you need to do becomes obvious. You discover that you already have the answers.</p>
+
+    <div class="pq">
+      <p>"Each of us is full of images, words, solutions, advice, stories. Trust your imagination. Trust your mind. Allow yourself to be surprised."</p>
+    </div>
+
+    <div class="kc">
+      <p>The second maxim's real advice is to <strong>let go of ego involvement</strong>. When we give up the struggle to show off our talent, a natural wisdom can emerge. All of our past experience prepares us for this moment. We are overflowing with ideas. The trick is to <strong>stop choosing</strong> and welcome what is there.</p>
+    </div>
+
+    <p>If the notion of not being prepared is simply too much, try: <em>"Be prepared to let go"</em> or <em>"Be ready to go wherever things are going."</em> Cultivate a flexible mind that is ready to act.</p>
+
+    <p><strong>Coping with Fear:</strong> Performance anxiety comes from excessive self-focus. "Everyone is looking at me. I am not good enough." The improv fix: don't believe the voice that tells you that you "can't" do anything. Redirect your attention from the symptoms to something constructive. Don't fight the fear or attend to it — that simply fuels it. Notice and accept whatever you feel, and turn your attention to doing something useful.</p>
+
+    <p>As the Indian Buddhist writer Vasubandhu identified, the five universal human fears include speaking in front of people — right alongside fear of death. So, as improvisers, we notice our fear, and just get on with the improvisation. No big deal.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Spend a day without a plan.</strong> Instead of following ordinary routines, open your eyes especially wide and move along with curiosity and attention. Don't consult your to-do list — instead, decide what to do based on what needs to be done right now, using your heightened awareness.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · The Gift Box</div>
+      <p>Imagine a box, beautifully wrapped, sitting in front of you. Pick it up. Feel the weight. Carefully open the package. Look inside. <em>What's the first thing you see?</em> Take out the gift and examine it. Thank the giver.</p>
+      <p>Did you surprise yourself? Perhaps you "thought up" what should be in the box before you opened it — like unwrapping a gift you packed yourself. Trust that the gift is already there. Then discover what it is. <strong>There is always something in the box.</strong></p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Second Maxim · Don't Prepare</div>
+      <ul>
+        <li>Give up planning; drop thinking ahead</li>
+        <li>Attend carefully to what's happening now</li>
+        <li>Allow yourself to be surprised</li>
+        <li>Stockpiling ideas for future use is unnecessary</li>
+        <li>Trust your imagination; there's always something in the box</li>
+        <li>Welcome whatever floats into your mind</li>
+        <li>Fear is misplaced attention — redirect it</li>
+        <li>Confidence follows success, not the other way around</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 3: JUST SHOW UP ===================== -->
+<section id="m3" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">03</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Third Maxim</div>
+        <div class="maxim-title">Just Show Up</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>Stop talking. Start walking.</p>
+      <cite>— L. M. HEROUX</cite>
+    </div>
+
+    <p>This principle is deceptively simple: <strong>Just show up. Where we are makes a difference.</strong> Move your body toward your dreams — to the gym, the office, the yoga class, your kitchen, the improv class, the garage, the word processor, the senior center. You know where. Be there physically.</p>
+
+    <p>It's surprising how powerful this maxim is. How often we avoid showing up for the things we need to do. Procrastination, laziness, fears — it's easy to find a reason for not going. The "just" in this maxim reminds us that showing up is already enough. Woody Allen quipped that it is "eighty percent of success." Prerequisites such as motivation, desire, and warm, fuzzy feelings aren't necessary.</p>
+
+    <div class="kc">
+      <p><strong>Motivation is not a prerequisite for showing up.</strong> If improvisers had to wait for inspiration or a good idea, few scenes would ever begin. Players step onto the stage because that is where things are happening. They just show up. Then the magic begins.</p>
+    </div>
+
+    <p><strong>Using Rituals:</strong> Daily rites that precede the main event can be powerful triggers. Celebrated choreographer Twyla Tharp's morning ritual is putting on leg warmers, going to the sidewalk, and hailing a taxi to her workout studio. The moment she steps into the taxi, her day is on the right track. Such rituals provide stability — and ironically, stability is a vital element when we improvise.</p>
+
+    <p><strong>Showing Up for Others:</strong> Showing up is the key principle when we offer service. So often it is our presence alone, rather than some special ability, that makes the difference. Don't wait for a convenient time to do those things that are important to you.</p>
+
+    <p><strong>Changing Location:</strong> Once we are in the right place, how do we stay alert? A very simple technique involves changing physical location. During workshops, ask students to "change where you are in the room." As we move, we help our minds stay alert and avoid getting stuck in a rut. Simply changing where we do things can have a positive effect.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Create a simple ritual.</strong> Identify a habit you wish you had (exercising, meditating, paying bills). Think of what will make the habit easy or more attractive to do. Lay out clothing, clean your desk, organize your workspace. Set a time to do the preparatory ritual each day. Focus on doing it faithfully.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Just show up.</strong> Make a list of five places that are your "hot spots" — places where the important things in life happen for you. Put the book down, pick one of the places on your list, and show up there.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Third Maxim · Just Show Up</div>
+      <ul>
+        <li>Walk, run, bike, skip to where you need to be</li>
+        <li>Motivation is not a prerequisite</li>
+        <li>Start your day with what is important</li>
+        <li>Use rituals to get things going</li>
+        <li>Showing up to help others is already service</li>
+        <li>Change your vantage point to refresh your mind</li>
+        <li>Location, location, location — in real estate and in life</li>
+        <li>Be on time; lost time is never found</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 4: START ANYWHERE ===================== -->
+<section id="m4" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">04</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Fourth Maxim</div>
+        <div class="maxim-title">Start Anywhere</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>How lovely to think that no one need wait a moment; we can start now, start slowly changing the world!</p>
+      <cite>— THE DIARY OF ANNE FRANK</cite>
+    </div>
+
+    <p>Professional improv actors understand this vital principle: <strong>All starting points are equally valid.</strong> They begin where they are, often in the middle. There's no need to find the right starting place. With a big task or a confusing problem, when you don't know where to start, begin with the most obvious thing, whatever is in front of you.</p>
+
+    <p>The notion that there is such a thing as a proper beginning, and the search to find that ideal starting place, robs us of time. We distance ourselves from the task, and the vision of what it will take to do it makes tackling the job seem mountainous. Once a job is under way you have a new and more realistic perspective. <strong>You are inside the problem while looking at it, rather than standing safely at the perimeter.</strong></p>
+
+    <div class="story">
+      <div class="story-label">Story in Practice</div>
+      <p>Mary, a housewife overwhelmed with clutter, sat amid growing piles becoming more depressed. "I don't know where to begin," she moaned. The author visited and simply started cleaning as she talked — picking up toys, loading dishes, putting away milk cartons. "Just look around and do what seems obvious to you." In less than twenty minutes the kitchen was under control. In an hour, much of the basic housework was done. The secret: start anywhere.</p>
+    </div>
+
+    <p>This maxim also applies to speech. To respond to a question, begin immediately using the first words that come to you. <strong>Trust your mind. Your first thought is a reasonable starting place.</strong> Don't hesitate. Once you begin speaking, you have something to work with and build on. Writers write to discover what they have to say. It is the same with speech: speak to discover what you want to say.</p>
+
+    <p>Instead of scripted notes for a lecture, try writing <em>questions</em> to yourself. Then answer each question using natural speech patterns. When you are answering a question, your mind becomes active in organizing information in real time. The result is more natural, more connected.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Start anywhere.</strong> Identify a project or task that needs to be done. When you put this book down, follow your first thought and begin the job. Do the very first thing that comes to mind. Continue doing what comes next.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Improvise a Monologue</div>
+      <p>Improvise a short monologue right now. Compose your thoughts as you go along. Don't hesitate. Use one of these topics:</p>
+      <p><em>"If there were four more hours in the day, how would you spend them?"</em></p>
+      <p><em>"Talk about something beautiful you saw recently."</em></p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Fourth Maxim · Start Anywhere</div>
+      <ul>
+        <li>All starting points are equally valid</li>
+        <li>Begin with what seems obvious</li>
+        <li>Once under way, any task seems smaller</li>
+        <li>When speaking, write questions — then answer them</li>
+        <li>Talk to your audience; don't give a lecture</li>
+        <li>Trust your mind</li>
+        <li>Edit and develop ideas as you speak</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 5: BE AVERAGE ===================== -->
+<section id="m5" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">05</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Fifth Maxim</div>
+        <div class="maxim-title">Be Average</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>When I told some New Yorkers about dumbness in a workshop two months ago, they were so relieved. They were tired of being alert and intelligent.</p>
+      <cite>— NATALIE GOLDBERG, The Essential Writer's Notebook</cite>
+    </div>
+
+    <p>A Bay Area builder's motto: <em>"Perfect is close enough."</em> When he built his own getaway cabin, it became: <em>"Close enough is perfect."</em> This makes a lot of sense. <strong>Giving it all you've got commonly backfires.</strong> There is a paradox: when we are trying hard, the result is often disappointing. A healthier climate is one in which we tell ourselves to just be average. Take the pressure off.</p>
+
+    <div class="zen-list">
+      <p>"Dare to be dull." — Keith Johnstone</p>
+      <p>"Be nothing special." — David K. Reynolds</p>
+      <p>"Cultivate ordinary mind." — A Zen saying</p>
+    </div>
+
+    <p>This rule may seem simplistic, but don't underestimate how well it works. Poet William Stafford used to rise every morning at four and write a poem. Someone asked: "But surely you can't write a good poem every day, Bill. What happens then?" <em>"Oh,"</em> he said, <em>"then I lower my standards."</em></p>
+
+    <div class="kc">
+      <p>Giving up on perfection is the first step; the next is to <strong>stop trying to come up with something different</strong>. Striving for an original idea takes us away from our everyday intelligence. "The real voyage of discovery lies not in seeking new landscapes but in having new eyes." — Marcel Proust. <strong>Your unique view will be a revelation to someone else.</strong></p>
+    </div>
+
+    <p>Do what is natural, what is easy, what is apparent to you. When 25 students each open the same imaginary shoe box, they find 25 distinctly different gifts: a snow globe, a brick, a deck of playing cards, a live mouse, running shoes, seashells. Your ordinary perspective is already unique. Ingrid Bergman understood: "Be yourself. The world worships the original."</p>
+
+    <p>This practice applies to speech as well. Say what you want to say in the way that seems natural to you. The author's grandmother once said, solemnly fingering the obituary page: "People are dying today that have never died before." She embodied the spontaneous life, expressing ideas just as she saw them. It is inescapable: each of us sees the world in a different way. We need only to trust that our vantage point is worthy.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Do it naturally.</strong> If there is something important that you need to do, approach the problem as though you didn't need to do your best. What is the most obvious way of solving it? How would you proceed if finding a solution was "nothing special?"</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Fifth Maxim · Be Average</div>
+      <ul>
+        <li>Close enough is perfect</li>
+        <li>Dare to be dull</li>
+        <li>Think "inside" the box</li>
+        <li>Celebrate the obvious</li>
+        <li>What is ordinary to you is often a revelation to others</li>
+        <li>"Classics" and "favorites" can be fresh ideas too</li>
+        <li>Don't make jokes. Make sense</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 6: PAY ATTENTION ===================== -->
+<section id="m6" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">06</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Sixth Maxim</div>
+        <div class="maxim-title">Pay Attention</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>If I have made any valuable discoveries, it has been owing more to patient attention than to any other talent.</p>
+      <cite>— SIR ISAAC NEWTON</cite>
+    </div>
+
+    <p>How are your powers of observation? How much do you notice and remember? <strong>This skill is at the heart of all improvising. What we notice becomes our world.</strong> So observe what is going on around you. Open your eyes, notice the detail. See what is actually happening. Pay attention to everything.</p>
+
+    <p>One of the oldest Zen stories: a student climbs a tall mountain to ask the wise man the meaning of life. He replies that there are three secrets. The first is attention. After two more laborious trips to the top, the student learns that secret number two and secret number three are also attention.</p>
+
+    <div class="kc">
+      <p>Our quality of life is directly tied to this maxim. <strong>Life is attention, and what we are attending to determines to a great extent how we experience the world.</strong> We are usually focused on ourselves — our problems, desires, fears. The detail of each day takes place in front of us, moment by precious moment. How much are we missing? Almost everything.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Eyes Closed Exercise</div>
+      <p>Keep your eyes on this paragraph and keep reading until the instruction says "Close your eyes." Once your eyes are shut, describe in as much detail as you can the immediate environment. Point to specific objects. Describe colors, shapes, and the layout of the room. Continue until you can't think of anything else to report.</p>
+      <p><strong>Now, close your eyes.</strong></p>
+      <p>How did your description match reality? What obvious items did you overlook? What surprised you when you opened your eyes?</p>
+    </div>
+
+    <p><strong>On Remembering Names:</strong> "I'm just no good at names" is simply a lie. You have memorized the table of elements, dozens of phone numbers, song lyrics. It is simply a matter of attention and requires a little effort. Repeat a name several times out loud when you first hear it. Look directly and fully at the person. Write it down if you have the chance. Make the decision to be a person who notices and remembers names — then start learning them.</p>
+
+    <div class="tips">
+      <div class="tip"><strong>Total Listening</strong>Once a day devote your attention 100% to someone who is speaking to you. Focus completely. Listen as if you needed to repeat what is being said in perfect detail.</div>
+      <div class="tip"><strong>Notice Something New</strong>Use this when in a familiar environment. See how many new things you can observe. What hasn't you noticed that has been there all along? Repeat in the same location at other times.</div>
+      <div class="tip"><strong>Attend to One Thing</strong>Choose an ordinary activity and pay attention only to what you are doing for the duration of the task. Avoid multitasking. If eating, simply eat.</div>
+      <div class="tip"><strong>Neighborhood Walk</strong>Go for a 15-minute walk imagining you've just landed from another planet. Use all five senses. What surprises you? What needs doing? What is especially beautiful?</div>
+    </div>
+
+    <p>The Japanese tea ceremony teaches "tea talk" — guests speak only about what is inside the teahouse. The saying <em>Ichi go, ichi ei</em> means "One time, one meeting." This particular gathering will never happen again. <strong>Live it now. Savor the detail.</strong></p>
+
+    <div class="summary">
+      <div class="summary-title">The Sixth Maxim · Pay Attention</div>
+      <ul>
+        <li>Life is attention</li>
+        <li>Notice everything, particularly the details</li>
+        <li>Become a detective</li>
+        <li>Shift your attention from yourself to others</li>
+        <li>Make an effort to remember names and faces</li>
+        <li>Keep on waking up</li>
+        <li>This moment happens only once — treasure it</li>
+        <li>Avoid multitasking; attend to one thing at a time</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 7: FACE THE FACTS ===================== -->
+<section id="m7" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">07</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Seventh Maxim</div>
+        <div class="maxim-title">Face the Facts</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>To achieve excellence, we must first understand the reality of the everyday, with all its demands and potential frustrations.</p>
+      <cite>— MIHALY CSIKSZENTMIHALYI, Finding Flow</cite>
+    </div>
+
+    <p>Improvisers need to enter the same reality in order to work together effortlessly. They establish the facts of the scene and agree to accept things as they are — in short, <strong>they act realistically.</strong> This maxim follows from the cardinal principle of saying yes. First we say yes, and then we work with what has been given.</p>
+
+    <p>The Japanese have a word for this rule: <strong>arugamama</strong> — the virtue of abiding with things as they are. It implies a realistic and responsive approach to life. The most consistent road to unhappiness comes from turning a blind eye to reality. Wishing things were different simply wastes time. <strong>The improviser builds bridges over rocky terrain and turns lemons into lemonade.</strong></p>
+
+    <div class="kc">
+      <p>Wishing others would change is another way we avoid facing reality. Other people's behavior often gets on our nerves. Usually they don't change. We need to <strong>accept these differences and get on with the show</strong>. Dealing well with people we like is easy; the mark of a fine improviser is the ability to work skillfully, kindly, and respectfully with those with whom we have difficulty.</p>
+    </div>
+
+    <p><strong>Embracing the Wobble:</strong> Improvising has much in common with riding a bicycle, surfing, or skiing. Things are not stable, linear, or predictable. The situation is always in flux. Our footing keeps changing. A physiotherapist told the author: "No, no, no. I don't want you to make it easier. I want you to struggle. That's how the muscles will learn to heal. Stay with the uncertainty. Really, it's all about the struggle."</p>
+
+    <p>In the act of balancing, we come alive. As we come to accept insecurity as our home ground, it becomes familiar and less frightening. We can stop trying to flee from the wobble. Perhaps, like surfers, we can come to feel the power of the waves, the majesty of the elements, and a sense of our own place in this swirling universe.</p>
+
+    <div class="try">
+      <div class="try-label">Try This · Write Down the Facts</div>
+      <p>Identify an issue in your life that needs attention. Write a detailed description of the issue, indicating what the facts are. Avoid judgment or emotional commentary. Use simple, declarative sentences. Create an objective picture of the problem first.</p>
+      <p>Now, taking into account all the facts, what needs to be done? Propose a course of action, and spell out the steps you need to take. Then take that first step.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Seventh Maxim · Face the Facts</div>
+      <ul>
+        <li>Don't fight reality</li>
+        <li>Accept other people as they are</li>
+        <li>Work with what you have been given</li>
+        <li>What are the facts? You are probably not noticing all of them</li>
+        <li>Embrace the wobble</li>
+        <li>Insecurity is normal — count on it</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 8: STAY ON COURSE ===================== -->
+<section id="m8" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">08</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Eighth Maxim</div>
+        <div class="maxim-title">Stay on Course</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>God has given each of us our "marching orders." Our purpose here on Earth is to find those orders and carry them out. Those orders acknowledge our special gifts.</p>
+      <cite>— SØREN KIERKEGAARD</cite>
+    </div>
+
+    <p>An improvisation always has a point. It is never simply "whatever." At home we improvise to fix a broken picture frame, help a neighbor, honor a promise. At work we may improvise to meet a deadline or solve a problem with limited resources. <strong>Some guiding force underlies each moment. We need to keep in mind what we are aiming for.</strong></p>
+
+    <p>Instead of asking "What do I feel like doing?" substitute <strong>"What is my purpose now?"</strong> We have become a culture in which "How do you feel?" is the most commonly asked question — as if our emotions were the most important thing in life. Most definitions of "purpose" suggest a moral component: the proper activity for a person, the right thing to be doing. It always implies conscious intention.</p>
+
+    <div class="kc">
+      <p>Use the litmus of purpose when overwhelmed with feelings or confused about a decision. One writer keeps a card above his computer: <em>"There is Reality's work that only you can do."</em> What work has been given to you that is uniquely yours? <strong>What would not get done if you were not here?</strong></p>
+    </div>
+
+    <p>Check out your talents and passions. What do you find easy to do? What seems natural? What do you love doing? It could be that your preferences, natural abilities, and even your fascinations are all part of the answer to the question of your purpose.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>"What is my purpose now?"</strong> Use this question as a weathervane. Ask it often, especially when you are anxious or unsure of what to do next. When you have the answer, act upon it.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>What would not get done if you were not here?</strong> Consider your unique vantage point, your talents, your loves, what you have been given to do. What are you here to do? If you keep a journal, pose this question and answer it in writing.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Eighth Maxim · Stay on Course</div>
+      <ul>
+        <li>Every improvisation has a point</li>
+        <li>Don't let feelings alone run your show</li>
+        <li>There is meaning in everything we do, even small tasks</li>
+        <li>Keep an eye on where you are going</li>
+        <li>If you miss the target, adjust your aim</li>
+        <li>Ask often: "What is my purpose?"</li>
+        <li>What would not get done if you were not here?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 9: WAKE UP TO THE GIFTS ===================== -->
+<section id="m9" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">09</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Ninth Maxim</div>
+        <div class="maxim-title">Wake Up to the Gifts</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>One of the key principles of the Zen cook is that nothing exists by itself. Everything is interdependent.</p>
+      <cite>— BERNARD GLASSMAN AND RICK FIELDS, Instructions to the Cook</cite>
+    </div>
+
+    <p>To the improv professional, the glass is always half full. There is always something there to work with — you just need to see it. <strong>Everywhere you turn, something or someone is helping you.</strong> You may have been asleep to all this, however. Waking up can be illuminating. There are gifts everywhere if we learn to see them.</p>
+
+    <p>There are three ways to look at any person or event:</p>
+
+    <div class="three-lenses" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;">
+      <div style="background:var(--cream);border-radius:10px;padding:20px;text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🔍</div>
+        <strong style="display:block;color:var(--coral);margin-bottom:8px;font-size:.85rem;">The Critical Method</strong>
+        <p style="font-size:.85rem;color:var(--muted);margin:0;">See what's wrong with it. The self looms large. Common in higher education.</p>
+      </div>
+      <div style="background:var(--cream);border-radius:10px;padding:20px;text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">⚖️</div>
+        <strong style="display:block;color:var(--pri-l);margin-bottom:8px;font-size:.85rem;">The Scientific Method</strong>
+        <p style="font-size:.85rem;color:var(--muted);margin:0;">See it objectively. Both self and others are meant to disappear.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,#fff9f0,#fff3e0);border-radius:10px;padding:20px;text-align:center;border:1px solid var(--cream-d);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🎁</div>
+        <strong style="display:block;color:var(--acc);margin-bottom:8px;font-size:.85rem;">The Improviser's Method</strong>
+        <p style="font-size:.85rem;color:var(--muted);margin:0;">See the gift in it. Others loom large. Results can be astonishing.</p>
+      </div>
+    </div>
+
+    <p>In 1987, the author spent a week at a Zen temple in Japan doing an unusual practice — investigating her debt to the world, using the Japanese technique called <strong>Naikan</strong>. For fourteen hours each day, sitting quietly on a straw mat, she reflected on three questions about important relationships:</p>
+
+    <div class="zen-list">
+      <p>What have I received from others during my life?</p>
+      <p>What have I given back to them?</p>
+      <p>What trouble or bother have I caused them?</p>
+    </div>
+
+    <p>What she discovered astounded her — a world that had been there, but was formerly unseen — a place where she was receiving far more than she had been giving. <em>"I walked into a brand-new movie of my life, one in which I wasn't the star, but one of many players."</em></p>
+
+    <div class="kc">
+      <p>If you adopt the gift perspective, you will discover that you are in debt. When we see ourselves as rich — having received much — it is natural to want to give back. Understanding the debt provides a moral imperative to become a lively participant in <strong>the culture of the gift</strong>. The gift must keep on moving. Keep it in motion, moving forward.</p>
+    </div>
+
+    <p><strong>Understanding Interdependence:</strong> We are not alone. The improviser notices that his path has been swept by others and that many hands are making the job light. Are you sitting right now? Then a chair, sofa, or bed is supporting you. Someone designed it, manufactured it, brought it to you. It is fair to say you are receiving a service from all those people whose efforts were part of the story. The chair is a silent gift.</p>
+
+    <p>Never let an hour go by without giving credit to someone. Be extravagant with your positive findings. Watch your world grow rich as you appreciate it and speak about it often.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Make a list of what you have received from others today.</strong> Find the particulars. What unseen faces have been helping you today? Define both gifts and givers.</p>
+      <p><em>Examples: "My husband took out the trash." "The postal worker weighed my package." "A neighbor gave me tomatoes from her garden." "The road crew is resurfacing the road in front of our house."</em></p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Practice Thanksgiving</div>
+      <p><strong>See how many times each day you can find to say thank you.</strong> Express thanks out loud, looking for variations: "Thanks," "It was kind of you," "I appreciate it," "How thoughtful of you."</p>
+      <p>Write a thank-you note or email every day. Be sure to mention the specific detail of what you appreciate.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Ninth Maxim · Wake Up to the Gifts</div>
+      <ul>
+        <li>Notice that the glass is half full</li>
+        <li>Treasure the details</li>
+        <li>Who or what is helping you right now?</li>
+        <li>Thank those with thankless jobs</li>
+        <li>What are you doing to give back?</li>
+        <li>Keep the gift moving forward</li>
+        <li>Our smallest actions count — everything has potential to help</li>
+        <li>Make "thank you" your mantra</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 10: MAKE MISTAKES ===================== -->
+<section id="m10" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">10</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Tenth Maxim</div>
+        <div class="maxim-title">Make Mistakes, Please</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>The hardest thing to learn is not "how to juggle," but how to let the balls drop.</p>
+      <cite>— ANTHONY FROST, Improvisation in Drama</cite>
+    </div>
+
+    <p>There is a sign in the classroom: <em>"If you are not making mistakes, you are not doing improv."</em> Mistakes are our friends, our partners in the game. They are necessary. Making mistakes is how we function. <strong>We don't consider them as something to be avoided; they are part of our operating system.</strong></p>
+
+    <p>When we say "Make mistakes, please," what we really want is for you to do something risky or challenging — something out of your comfort zone, where mistakes are possible and likely — and to proceed boldly. Turtles are a good model, since they make progress only when they stick their necks out.</p>
+
+    <div class="kc">
+      <p>A mistake is most often a result we had not planned — something unexpected, an odd outcome or side journey, usually something new. The real question to ask is not <em>"How on earth did I do that?"</em> but rather: <strong>"What comes next? What can I make of this? What kind of bonus might this be?"</strong></p>
+    </div>
+
+    <p><strong>The Circus Bow:</strong> When a circus clown slips in their routine, instead of shrinking and berating themselves, they turn to the crowd and take a magnificent bow with arms high in the air, proclaiming "Ta-dah!" as if they had just pulled off a master stunt. This pulls attention out into the world again, looking around and standing tall. A mistake should wake us up. Become more alert, more alive. <strong>Ta-dah! New territory.</strong> Now, what can I make of this?</p>
+
+    <p>Thomas Edison's experiments to find the proper medium for the filament in the electric lightbulb produced more than 3,000 attempts. "Of the 200 light bulbs that didn't work, every failure told me something that I was able to incorporate into the next attempt." Surviving a mistake can build character.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h4>Celia the Planner</h4>
+        <p>Subscribes to all gourmet magazines, reads them cover to cover. Plans carefully, spends days finding ingredients. Follows recipes faithfully. Meals are sometimes works of art, some are so-so, a few not so great.</p>
+      </div>
+      <div class="col-card">
+        <h4>Dalla the Improviser</h4>
+        <p>Uses "twiddledee-bits" — leftover sauces, fading mustard, jalapeño jelly. Looks in the refrigerator for what "needs to be eaten." Meals are sometimes brilliant, some so-so, a few not so great. About the same results, different path.</p>
+      </div>
+    </div>
+
+    <p>Notice that both cooks have about the same number of successes and failures. <strong>Planning carefully is no guarantee that things will turn out error-free.</strong> The French word <em>bricolage</em> describes Dalla's method: the art of commandeering the materials at hand to solve the problem. Improvising with what is already there is not only a backup — it is a way of life.</p>
+
+    <div class="try">
+      <div class="try-label">Try This · Take a Circus Bow</div>
+      <p>The next time you notice that you have made a mistake, done something silly or dumb, do the Circus Bow. Raise your arms in the air, smile, turn left and right. Say "Ta-dah!" brightly. Then look around and see what needs to be done next — and do it.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Bricolage</div>
+      <p>Instead of running to the store to buy something, solve a problem using only the materials at hand. Use the comics or an old calendar as gift wrap. Create a meal with what you already have in your pantry.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Tenth Maxim · Make Mistakes, Please</div>
+      <ul>
+        <li>If you're not making mistakes, you're not improvising</li>
+        <li>Be like a turtle: stick out your neck to make progress</li>
+        <li>When you screw up, say "Ta-dah!" and take a bow</li>
+        <li>Mistake? Focus on what comes next</li>
+        <li>Let go of outcomes; cultivate a flexible mind</li>
+        <li>Mistakes may actually be blessings</li>
+        <li>Become a confident mistake-maker; lighten up</li>
+        <li>Try bricolage — use what is there artfully</li>
+        <li>Admitting a mistake shows character</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 11: ACT NOW ===================== -->
+<section id="m11" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">11</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Eleventh Maxim</div>
+        <div class="maxim-title">Act Now</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>I cannot do / All the good / That the world / Needs / But the world / Needs all the good / That I can do.</p>
+      <cite>— JANA STANFIELD, "All the Good"</cite>
+    </div>
+
+    <p>The essence of improvisation is action — <strong>doing it in real time.</strong> We act in order to discover what comes next. We act because we have a purpose or a question. Using action as our first response is not always easy. For many of us, moving forward comes only after reflection, comparison, and planning. Only when we are sure, when we've got "all our ducks in a row," do we proceed.</p>
+
+    <p>For the improviser it is: <strong>ready, fire, aim.</strong> We begin before there is a plan. What we do moves us forward and gives us more information about how to proceed. The doing itself becomes the teacher and guide. Nike's slogan "Just do it" reminds us that it's unnecessary to be motivated, get ourselves together, or even feel like doing it.</p>
+
+    <div class="kc">
+      <p>Japanese psychiatrist Dr. Shōma Morita founded a mental-health movement based on the healing power of action. He helped his patients see that constructive action was already a cure — suggesting that instead of trying to overcome neurotic thinking, they should focus on doing what they needed to do in their lives, and doing it well. <strong>Motivation is not required. Action is.</strong></p>
+    </div>
+
+    <p><strong>Acting with a Buddy:</strong> Joining a class or a club is a natural way to increase your chances to get going. We get energy from one another. What seems like a chore when alone can become a party when done with a gang of friends. Are your friendships based solely on supportive talk? Relationships grow when we do useful things together.</p>
+
+    <p><strong>Not Doing — When Stillness Is the Right Action:</strong> "Don't just do something. Stand there." A reflexive reaction to a situation can rob us of a truly intelligent response. Charging ahead can be foolhardy. Our goal is always <em>appropriate</em> action — doing what is needed. Occasionally this means doing nothing while being watchful.</p>
+
+    <p><strong>Doing It a Different Way:</strong> The call to action also provides a platform for developing flexibility. Change how you do something. Try doing it a different way. Change some simple habit — drink your morning coffee from a bowl, walk a different route home, shift your daily schedule by one hour.</p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Schedule that job you have been avoiding.</strong> Write it on your calendar. Set a specific time and show up. Focus on taking the first step. What action will begin the task? Make a phone call? Pull everything out of the refrigerator? Pick up the broom?</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Do the essential job first.</strong> What is it that really needs to be done? Try doing it first thing in the morning, before anything else.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Harness Friendship</div>
+      <p>Make plans with a friend to meet regularly for something you both need to do (a 7 AM power walk three times a week). Or invite a buddy to join you in a job you've been putting off. Make a pact to trade help.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Eleventh Maxim · Act Now</div>
+      <ul>
+        <li>The essence of improvising is action</li>
+        <li>Act in order to discover what comes next</li>
+        <li>You don't need to feel like doing something to do it</li>
+        <li>Schedule a difficult task and stick to your timetable</li>
+        <li>Invite a buddy to join you</li>
+        <li>Do the hard thing first</li>
+        <li>For a new perspective, try doing something a different way</li>
+        <li>Sometimes not doing is what is needed</li>
+        <li>If you can't get out of it, get into it</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 12: TAKE CARE OF EACH OTHER ===================== -->
+<section id="m12" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">12</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Twelfth Maxim</div>
+        <div class="maxim-title">Take Care of Each Other</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>We are creatures of community. Those individuals, societies, and cultures who learned to take care of each other, to love each other, and to nurture relationships were more likely to survive.</p>
+      <cite>— DR. DEAN ORNISH, "Love and Survival"</cite>
+    </div>
+
+    <p>Consummate improvisers are marked by their generosity, courtesy, and ability to watch out for the needs of their teammates. <strong>A person who observes this maxim is someone you would want with you in a foxhole.</strong> We are told early in training to make our partner look good — to do whatever is necessary to honor and advance all of their offers.</p>
+
+    <p>There's a Zen koan about two monks in a blizzard. The elder monk falls into a snowy crevasse. The younger monk sees there is no way to pull his friend to safety. The koan asks what the young monk should do. The answer: he should jump into the abyss with his fellow monk. Sometimes the only thing we can do is to join the suffering of others — to be there alongside them. There is no fix, no remedy. But we dare not leave our comrade alone in distress.</p>
+
+    <div class="kc">
+      <p><strong>Sharing Control:</strong> The improv working paradigm is one of shared control. It differs from "I lead and you follow" in that both parties must stay alert and energized, and actual leadership changes moment by moment. All are always responsible, while neither is "in control" in an absolute sense. The rule: all improvisers have the right and responsibility to move the scene forward.</p>
+    </div>
+
+    <p>The old response "It's not my job" is never acceptable for the improviser. It's always my job if the job needs doing and I am there to do it. Those who "drive" (always dominate) and those who "wimp" (fail to contribute) are making improv errors. The improvisers' spirit is fiercely egalitarian.</p>
+
+    <p><strong>Playing with Kindness:</strong> Of all accolades given the Stanford Improvisors, the one most prized: "SImps are the nicest players in the league. They are just so darned pleasant to be around." Working together with so many unknowns, sometimes kindness among players is all we have. Looking for ways to "make my partner look good" starts a chain of happy events.</p>
+
+    <p>Generosity is a corollary to kindness. Entrepreneur Professor Tom Byers' five rules for success sound a lot like improv advice: 1) Show up on time. 2) Be nice to people. 3) Do what you say you'll do. 4) Deliver more than you promise. 5) Work with enthusiasm and passion.</p>
+
+    <div class="try">
+      <div class="try-label">Try This · Become a Guardian Angel</div>
+      <p>Pick a friend, coworker, or family member and decide to look out for this person. Maintain a watchful eye to see if there is anything you can do to smooth their path, make their world brighter, or help with their projects. Write them notes of thanks or encouragement.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Really Listen</div>
+      <p><strong>Listen as if your life depended upon it.</strong> Listen not only for content but also for tone and rhythm, for the quality of what is being said. Challenge yourself to remember what you hear. Once a day, give someone your 100% attention.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Consider others first.</strong> Devote a whole day to putting the convenience of others ahead of your own. Check this against your habitual response. Notice when this is hard for you. Discover how rich this can make you feel.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Twelfth Maxim · Take Care of Each Other</div>
+      <ul>
+        <li>Be someone's guardian angel; make your partner look good</li>
+        <li>Rescue or join someone struggling</li>
+        <li>Share control; don't hog it</li>
+        <li>Kindness is essential during chaos or crisis</li>
+        <li>Try giving yourself away</li>
+        <li>Always put positive thoughts into words and action</li>
+        <li>Do "random acts of kindness"</li>
+        <li>Put other people's convenience ahead of your own</li>
+        <li>Listen as if your life depended on it</li>
+        <li>Deliver more than you promise</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== MAXIM 13: ENJOY THE RIDE ===================== -->
+<section id="m13" class="maxim">
+  <div class="container fade-in">
+    <div class="maxim-header">
+      <div class="maxim-num">13</div>
+      <div class="maxim-title-block">
+        <div class="maxim-label">The Thirteenth Maxim</div>
+        <div class="maxim-title">Enjoy the Ride</div>
+      </div>
+    </div>
+
+    <div class="oq">
+      <p>Sometimes your joy is the source of your smile, but sometimes your smile can be the source of your joy.</p>
+      <cite>— THICH NHAT HANH</cite>
+    </div>
+
+    <p>The classroom in the Drama Department at Stanford rings with noise, thumping, shrieks, and gales of laughter. Passersby wonder how this levity can contribute to serious learning. It does. <strong>Having fun loosens the mind. A flexible mind works differently from a rigid mind.</strong> The pleasure that accompanies mirth makes learning easier and creates a climate for social as well as intellectual discovery.</p>
+
+    <p>Traditionally, "fun" isn't a word associated with work. It happens after work. Children and puppies have fun. Adults engage in serious work. <strong>Let's change all that.</strong></p>
+
+    <p>Science recognizes the value of play in nature. Animals galumph, rolling in leaves, working off excess energy and calories, playing. Enjoyment is a way of approaching an activity, not the activity itself. A friend can turn a trip to Disneyland into work with an obsessive need to see and do everything in an orderly fashion. On the other hand, cleaning out the garage can be a playful activity, if you turn on your favorite music and dance your way into cobwebs.</p>
+
+    <div class="kc">
+      <p>"Angels fly because they take themselves lightly." Step back, take a breath, and <strong>lighten up</strong>. It takes so little to create the context for human play: the unexpected, the spontaneous, giving without thought of return, falling down and getting up, being playful, being silly. Create a space where there are no wrong answers. Hang out there. Invite some friends. Improvise.</p>
+    </div>
+
+    <p><strong>Smiling:</strong> A waitress in her early sixties, with the widest and most sincere smile visible in some time, looked the author straight in the eye — appearing genuinely pleased to be serving her. She smiled broadly as she delivered the tuna sandwich, assuring the author she was eager to provide anything else wanted. Here was a worker doing a simple job who was fully engaged, who showed all the signs she was enjoying her work, her life. Why is this a rare thing?</p>
+
+    <div class="pq">
+      <p>"Joy seems not so much dependent on the conditions of our external reality as on our way of looking at life. We apportion value. It is not intrinsic."</p>
+    </div>
+
+    <p>Beyond all other freedoms, our greatest liberty is our ability to choose our attitude. Viktor Frankl documented this great truth in <em>Man's Search for Meaning</em>. Travel guru Rick Steves: "Be fanatically positive and militantly optimistic. If something's not to your liking, change your liking."</p>
+
+    <p>Fun isn't always possible, and it is never a prerequisite for doing what we need to do. Some jobs require persistence and action, whether appealing or not. <strong>The point is to look for ways to enjoy what we are doing instead of waiting until we are engaged in a pleasurable task.</strong></p>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Make up the words to a song right now and sing it.</strong> Invent the tune or use a melody you already know — just add new words. Sing about your day. Now.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This</div>
+      <p><strong>Spend one whole day giving away smiles</strong> to everyone you encounter. Smile at yourself in the mirror too. Notice the effect of a smile.</p>
+    </div>
+
+    <div class="try">
+      <div class="try-label">Try This · Play Games Together</div>
+      <p>Invite friends over for a "gaming night" and potluck. Try "How Many Uses for This Object?" Pass a household object around the group (a wooden spatula, a dish towel). As each person holds it, they suggest a possible use. The last person with an idea wins. Note: there are no wrong answers.</p>
+    </div>
+
+    <div class="summary">
+      <div class="summary-title">The Thirteenth Maxim · Enjoy the Ride</div>
+      <ul>
+        <li>Find joy in whatever you are doing, including ordinary tasks</li>
+        <li>Look for ways to play — play is essential to human growth</li>
+        <li>Learning is enhanced when we lighten up</li>
+        <li>Laughter is good medicine</li>
+        <li>If something's not to your liking, change your liking</li>
+        <li>Give away smiles every day</li>
+        <li>Do something just for the fun of it</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="maxim-stripe"></div>
+
+<!-- ===================== EPILOGUE ===================== -->
+<section id="epilogue">
+  <div class="container fade-in">
+    <div class="section-label">Epilogue</div>
+    <div class="section-title">Some Improvisations Take Longer Than Others</div>
+
+    <p>It will seem comically ironic that a little book on the subject of improvising took more than twenty years to write. The first draft of this manuscript dates back to 1981. I kept on saying yes to the voice that wanted to tell this story. I showed up year after year, day after day to my writing desk. I've made whale-sized mistakes trying to find the right form for the message. I've returned over and over to my purpose of writing a book that will share the mysteries of improvising with everyone. <strong>So you see, improvisations come in many sizes, forms, and time frames.</strong></p>
+
+    <p>Perhaps there is a great dream gathering dust on the shelf of your life. It is never too late to start it or make progress if it is under way but neglected. Profound difficulties and bad habits are often surmountable. The phenomenal growth of twelve-step programs worldwide is a testament to the determination of millions to improve how they live.</p>
+
+    <div class="water-tank">
+      <div class="water-tank-title">A Fable: The Water Tank</div>
+      <p>In the small town of Tuvida, water allotment was legislated. When a child was born, the town council held a drawing and assigned the child's water allowance for life — anything from 100 to 100 million gallons. Everyone's tank appeared enormous — enough water for seventy to a hundred years. But there was no way to determine how much was actually inside.</p>
+      <p style="margin-top:16px;">Citizens dealt with this reality in many ways — some rationed parsimoniously, some put in hot tubs and swimming pools. But the one thing no one ever chose to do was to turn on the spigot and just let the water run freely.</p>
+      <p style="margin-top:16px;font-style:italic;color:var(--acc-l);">Think of the minutes in your life as drops of water from your tank. Your tap isn't dripping, is it?</p>
+    </div>
+
+    <p>I have always been moved by the Buddhist story of the blind turtle. According to the legend, a man threw a wooden yoke into the sea. Once every hundred years a blind turtle would rise from the bottom and swim to the surface. How often will this turtle poke his head through the floating ring? <em>These are the odds we have of being given a human rebirth, according to the ancients.</em> It seems wrong to waste it, don't you think?</p>
+
+    <div class="pq">
+      <p>"Why waste another moment? Today is an ideal day to begin. Just jump on the stage of life and try. Then you will have earned your membership in our secret society of improvisers."</p>
+      <cite>— PATRICIA RYAN MADSON</cite>
+    </div>
+
+    <p>I wish you good fortune and great adventures as you skip, jump, and stumble along this way. <strong>Step on stage. Take a bow. Have a good time. Improvise!</strong></p>
+  </div>
+</section>
+
+<!-- ===================== QUICK REFERENCE ===================== -->
+<section class="quick-ref" id="quick-ref">
+  <div class="container-wide">
+    <div class="section-label">Quick Reference</div>
+    <div class="section-title">The 13 Maxims at a Glance</div>
+    <p style="color:var(--muted);">Your pocket guide to spontaneous living — keep these close.</p>
+    <div class="qr-grid">
+      <a href="#m1" class="qr-item"><div class="qr-num">1</div><div class="qr-text">Say Yes</div></a>
+      <a href="#m2" class="qr-item"><div class="qr-num">2</div><div class="qr-text">Don't Prepare</div></a>
+      <a href="#m3" class="qr-item"><div class="qr-num">3</div><div class="qr-text">Just Show Up</div></a>
+      <a href="#m4" class="qr-item"><div class="qr-num">4</div><div class="qr-text">Start Anywhere</div></a>
+      <a href="#m5" class="qr-item"><div class="qr-num">5</div><div class="qr-text">Be Average</div></a>
+      <a href="#m6" class="qr-item"><div class="qr-num">6</div><div class="qr-text">Pay Attention</div></a>
+      <a href="#m7" class="qr-item"><div class="qr-num">7</div><div class="qr-text">Face the Facts</div></a>
+      <a href="#m8" class="qr-item"><div class="qr-num">8</div><div class="qr-text">Stay on Course</div></a>
+      <a href="#m9" class="qr-item"><div class="qr-num">9</div><div class="qr-text">Wake Up to the Gifts</div></a>
+      <a href="#m10" class="qr-item"><div class="qr-num">10</div><div class="qr-text">Make Mistakes, Please</div></a>
+      <a href="#m11" class="qr-item"><div class="qr-num">11</div><div class="qr-text">Act Now</div></a>
+      <a href="#m12" class="qr-item"><div class="qr-num">12</div><div class="qr-text">Take Care of Each Other</div></a>
+      <a href="#m13" class="qr-item"><div class="qr-num">13</div><div class="qr-text">Enjoy the Ride</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-brand">Improv Wisdom</div>
+  <p>by Patricia Ryan Madson</p>
+  <p style="margin-top:16px;font-size:.8rem;opacity:.6;">Stanford Drama Faculty · Founder, the Stanford Improvisors · Author</p>
+  <p style="margin-top:20px;font-size:.8rem;">"The password to the improvisers' world is <em>yes!</em>"</p>
+  <p style="margin-top:24px;font-size:.75rem;opacity:.4;">Based on <em>Improv Wisdom: Don't Prepare, Just Show Up</em> © 2005 Patricia Ryan Madson. Bell Tower / Crown Publishing.</p>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+  // Progress bar
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = (scrolled / total * 100) + '%';
+  }, { passive: true });
+
+  // Nav active state & side dots
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const dots = document.querySelectorAll('.dot');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+        dots.forEach(d => {
+          d.classList.toggle('active', d.dataset.target === id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => io.observe(s));
+
+  // Dot clicks
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      document.getElementById(d.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Fade in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -80px 0px' });
+
+  fadeEls.forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>

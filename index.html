@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Psychology Book — Big Ideas, Simply Explained</title>
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5efe4;
+    --paper-2: #ebe2d1;
+    --accent: #b8341b;
+    --accent-2: #c47a2c;
+    --muted: #6b5d4f;
+    --line: #2a201a;
+    --shadow: rgba(26, 20, 16, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  nav.topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(245, 239, 228, 0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 1000;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav.topbar .brand {
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+  nav.topbar ul {
+    display: flex;
+    gap: 1.4rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  nav.topbar a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  nav.topbar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(196, 122, 44, 0.18) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(184, 52, 27, 0.15) 0%, transparent 40%),
+      linear-gradient(135deg, #f5efe4 0%, #e8dec9 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(42, 32, 26, 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+  }
+  header.hero .eyebrow {
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    z-index: 1;
+  }
+  header.hero h1 {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    z-index: 1;
+  }
+  header.hero h1 .accent { color: var(--accent); display: block; }
+  header.hero .tagline {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 3rem;
+    z-index: 1;
+  }
+  header.hero .quote-strip {
+    z-index: 1;
+    max-width: 800px;
+    padding: 2rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 3rem;
+  }
+  header.hero .quote-strip p {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  header.hero .quote-strip cite {
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  header.hero .scroll-hint {
+    z-index: 1;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  section .section-intro {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+  section .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    border: 1px solid var(--accent);
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+  }
+  section h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  section .lede {
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ---------- INTRO PROSE ---------- */
+  .intro-prose {
+    background: var(--paper-2);
+    padding: 5rem 2rem;
+    margin-top: -2rem;
+  }
+  .intro-prose .inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .intro-prose p {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+  }
+  .intro-prose .first::first-letter {
+    font-size: 5rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.3rem 0.5rem 0 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .intro-prose blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* ---------- MOVEMENT CARDS ---------- */
+  .movements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .movement {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    border-left: 4px solid var(--accent);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .movement:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--shadow); }
+  .movement .num {
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    font-weight: bold;
+  }
+  .movement h3 {
+    font-size: 1.4rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .movement p { font-size: 0.95rem; color: var(--muted); }
+  .movement .year {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-wrap {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6rem 2rem;
+  }
+  .timeline-wrap .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .timeline-wrap h2 { color: var(--paper); }
+  .timeline-wrap .section-tag {
+    color: var(--accent-2);
+    border-color: var(--accent-2);
+  }
+  .timeline-wrap .lede { color: rgba(245, 239, 228, 0.7); }
+  .timeline {
+    position: relative;
+    margin-top: 4rem;
+    padding-left: 2rem;
+    border-left: 2px solid var(--accent-2);
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    padding-left: 1.5rem;
+  }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -2.7rem;
+    top: 0.4rem;
+    width: 14px;
+    height: 14px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 2px var(--accent-2);
+  }
+  .tl-item .yr {
+    font-size: 0.9rem;
+    color: var(--accent-2);
+    letter-spacing: 0.2em;
+    font-weight: bold;
+  }
+  .tl-item h4 {
+    font-size: 1.2rem;
+    margin: 0.3rem 0 0.5rem;
+  }
+  .tl-item p {
+    color: rgba(245, 239, 228, 0.7);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- THINKER CARDS ---------- */
+  .thinkers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .thinker {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    border-top: 4px solid var(--accent);
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .thinker:hover { transform: translateY(-4px); }
+  .thinker .dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .thinker h3 {
+    font-size: 1.5rem;
+    margin: 0.3rem 0;
+  }
+  .thinker .school {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .thinker .big-idea {
+    font-style: italic;
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+  .thinker .desc { font-size: 0.95rem; color: var(--muted); }
+
+  /* ---------- QUOTE GRID ---------- */
+  .quote-section {
+    background: linear-gradient(135deg, #e8dec9 0%, #d8c9ab 100%);
+    padding: 6rem 2rem;
+  }
+  .quote-section .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .qcard {
+    background: var(--paper);
+    padding: 2rem;
+    border-radius: 4px;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .qcard:hover { transform: scale(1.02); }
+  .qcard::before {
+    content: '"';
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    font-size: 6rem;
+    color: var(--accent);
+    font-family: Georgia, serif;
+    line-height: 1;
+    opacity: 0.3;
+  }
+  .qcard p {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .qcard cite {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* ---------- DETAILED CONCEPT BLOCKS ---------- */
+  .concept-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 4rem 0;
+    align-items: start;
+  }
+  .concept-block.reverse { grid-template-columns: 1fr 1fr; }
+  .concept-block .visual {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .concept-block .visual.hierarchy {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  .concept-block .visual.hierarchy .tier {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 4px;
+    color: var(--paper);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+  .concept-block .visual.hierarchy .t1 { background: #b8341b; width: 40%; }
+  .concept-block .visual.hierarchy .t2 { background: #c47a2c; width: 55%; }
+  .concept-block .visual.hierarchy .t3 { background: #d4a04a; width: 70%; color: var(--ink); }
+  .concept-block .visual.hierarchy .t4 { background: #8a9b5e; width: 85%; }
+  .concept-block .visual.hierarchy .t5 { background: #4f7a8e; width: 100%; }
+  .concept-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .concept-block .attrib {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .concept-block p { margin-bottom: 1rem; }
+
+  /* ---------- EXPERIMENT BLOCKS ---------- */
+  .experiments {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .experiment {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    border-top: 4px solid var(--ink);
+    position: relative;
+  }
+  .experiment .ticker {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .experiment h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .experiment .who {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .experiment p { font-size: 0.95rem; }
+  .experiment .finding {
+    background: var(--paper);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- CALLOUT ---------- */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 2rem;
+    text-align: center;
+    margin: 0;
+  }
+  .callout .inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .callout h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--paper);
+  }
+  .callout p { color: rgba(245, 239, 228, 0.85); font-size: 1.15rem; }
+
+  /* ---------- GLOSSARY ---------- */
+  .glossary-section {
+    background: var(--paper-2);
+    padding: 6rem 2rem;
+  }
+  .glossary-section .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .glossary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem 2rem;
+    margin-top: 3rem;
+  }
+  .term {
+    border-bottom: 1px solid rgba(42, 32, 26, 0.15);
+    padding-bottom: 1rem;
+  }
+  .term dt {
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+  .term dd {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+  }
+  footer .inner { max-width: 800px; margin: 0 auto; }
+  footer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  footer p {
+    color: rgba(245, 239, 228, 0.6);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  footer .meta {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 239, 228, 0.15);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 228, 0.4);
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 768px) {
+    nav.topbar { padding: 0.7rem 1rem; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+    nav.topbar ul { gap: 0.8rem; font-size: 0.7rem; }
+    nav.topbar a { font-size: 0.7rem; }
+    section { padding: 4rem 1.25rem; }
+    .concept-block { grid-template-columns: 1fr; gap: 1.5rem; }
+    header.hero { padding-top: 8rem; }
+  }
+
+  /* ---------- ANIMATIONS ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .reveal-delay-1 { animation-delay: 0.15s; }
+  .reveal-delay-2 { animation-delay: 0.3s; }
+  .reveal-delay-3 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">The Psychology Book</div>
+  <ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#roots">Roots</a></li>
+    <li><a href="#behaviorism">Behaviorism</a></li>
+    <li><a href="#psychotherapy">Psychotherapy</a></li>
+    <li><a href="#cognitive">Cognitive</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#developmental">Developmental</a></li>
+    <li><a href="#difference">Difference</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ul>
+</nav>
+
+<!-- ================== HERO ================== -->
+<header class="hero">
+  <div class="eyebrow reveal">Big Ideas · Simply Explained</div>
+  <h1 class="reveal reveal-delay-1">
+    The Psychology<br>
+    <span class="accent">Book</span>
+  </h1>
+  <p class="tagline reveal reveal-delay-2">
+    A journey through the minds that mapped the mind — from Galen's humors
+    to Freud's unconscious, from Pavlov's bells to Bandura's Bobo dolls.
+  </p>
+  <div class="quote-strip reveal reveal-delay-3">
+    <p>"We become ourselves through others."</p>
+    <cite>— Lev Vygotsky</cite>
+  </div>
+  <div class="scroll-hint">Scroll to begin ↓</div>
+</header>
+
+<!-- ================== INTRODUCTION ================== -->
+<section id="intro" class="intro-prose">
+  <div class="inner">
+    <span class="section-tag">Introduction</span>
+    <h2>What is psychology?</h2>
+    <p class="first">Among all the sciences, psychology is perhaps the most mysterious to the general public, and the most prone to misconceptions. Even though its language has infiltrated everyday culture — "ego," "denial," "complex," "conditioning" — most people have only a hazy idea of what the subject is really about. For some, it conjures images of people in white coats staffing an institution for mental disorders or conducting laboratory experiments on rats. Others may imagine a man with a middle-European accent psychoanalyzing a patient on a couch or, if film scripts are to be believed, plotting to exercise some form of mind control.</p>
+    <p>The word itself comes from the ancient Greek <em>psyche</em>, meaning "soul" or "mind," and <em>logia</em>, "study" or "account." But the modern definition is more precise: <strong>psychology is the science of mind and behavior</strong> — a bridge between philosophy and physiology. Where physiology describes the physical structures of brain and nervous system, and philosophy is concerned with abstract ideas and arguments, psychology investigates the mental processes that take place between them: how we come to think what we think, perceive what we perceive, remember what we remember, and behave as we behave.</p>
+    <blockquote>
+      "Psychology has a long past, but only a short history." — Hermann Ebbinghaus
+    </blockquote>
+    <p>All the sciences evolved from philosophy, but the intangible nature of subjects such as consciousness, perception, and memory meant that psychology was slow in making the transition from philosophical speculation to scientific practice. In some universities, particularly in the US, psychology departments started out as branches of the philosophy department, while in others — notably in Germany — they were established within the science faculties. The discipline did not become truly scientific until <strong>1879</strong>, when Wilhelm Wundt founded the world's first laboratory of experimental psychology at the University of Leipzig.</p>
+    <p>From the very beginning, two distinct approaches emerged. In the US, the philosophical inheritance produced theorists like <strong>William James</strong>, who treated psychology as speculative inquiry into consciousness and selfhood. In Europe, pioneers like Wundt and <strong>Hermann Ebbinghaus</strong> took the scientific path, examining sensory perception, reaction time, and memory under controlled laboratory conditions. Both schools were limited, however, by their reliance on introspection — the technique of studying one's own mind from the inside. Pioneers became the subjects of their own investigations, restricting the field to whatever they could observe in themselves.</p>
+    <p>The breakthrough came from outside psychology entirely. In the 1890s, the Russian physiologist <strong>Ivan Pavlov</strong> demonstrated that animals could be conditioned to produce a specific response on cue, opening the door to a wholly new movement: <strong>behaviorism</strong>. Its champions — Thorndike, Watson, Skinner — argued that since mental processes could not be observed directly, psychology must content itself with what could be measured: behavior. For nearly half a century in America, this view dominated.</p>
+    <p>At the same time, an entirely different revolution was beginning in Vienna. A young neurologist named <strong>Sigmund Freud</strong>, working from clinical case histories rather than laboratory data, was developing psychoanalysis — a theory of the unconscious that placed buried memories, repressed desires, and childhood development at the center of mental life. His ideas spread rapidly across Europe and America, attracting brilliant successors and breakaway disciples: Adler, Jung, Klein, Horney, Lacan, Fromm.</p>
+    <p>By the mid-twentieth century, both behaviorism and orthodox psychoanalysis were losing ground. The <strong>cognitive revolution</strong> of the 1950s — fueled by advances in computing, linguistics, and neuroscience — restored mental processes to the center of psychological study. The brain, now imagined as an information-processing system, could be investigated empirically. Memory, attention, perception, language, and decision-making became hot fields of research, and entirely new branches sprang up: social psychology examined how groups shape individuals; developmental psychology charted the long climb from infancy to old age; the psychology of difference asked what makes one mind unlike another.</p>
+    <p>Today the discipline overlaps with medicine, neuroscience, education, economics, law, politics, anthropology, and computer science. Its findings inform government policy, advertising, courtroom procedure, child-rearing manuals, and the design of cockpits and apps. Some of psychology's discoveries have confirmed common sense; others have overturned it. Its great experimentalists — Milgram, Asch, Zimbardo, Loftus, Harlow — have repeatedly shown us things about ourselves we would rather not know.</p>
+    <p>This book traces that astonishing arc through <strong>seven great movements</strong>, each a different lens on what it means to think, feel, learn, and become.</p>
+
+    <div class="movements">
+      <div class="movement">
+        <div class="num">01</div>
+        <span class="year">pre–1879</span>
+        <h3>Philosophical Roots</h3>
+        <p>From the four humors to mind/body dualism — the centuries of wondering before psychology had a name.</p>
+      </div>
+      <div class="movement">
+        <div class="num">02</div>
+        <span class="year">1890s–1950s</span>
+        <h3>Behaviorism</h3>
+        <p>If the mind can't be seen, study what it does. Conditioning, learning, and the science of stimulus and response.</p>
+      </div>
+      <div class="movement">
+        <div class="num">03</div>
+        <span class="year">1900–present</span>
+        <h3>Psychotherapy</h3>
+        <p>Freud's unconscious, Jung's archetypes, Rogers' empathy — healing the wounds we cannot see.</p>
+      </div>
+      <div class="movement">
+        <div class="num">04</div>
+        <span class="year">1950s–present</span>
+        <h3>Cognitive Psychology</h3>
+        <p>The mind as information processor — memory, attention, perception, and the architecture of thought.</p>
+      </div>
+      <div class="movement">
+        <div class="num">05</div>
+        <span class="year">1930s–present</span>
+        <h3>Social Psychology</h3>
+        <p>How others shape us: conformity, obedience, prejudice, and the invisible pressures of being human together.</p>
+      </div>
+      <div class="movement">
+        <div class="num">06</div>
+        <span class="year">1930s–present</span>
+        <h3>Developmental Psychology</h3>
+        <p>From infant to adult — Piaget's stages, Bowlby's attachments, and the long becoming of a self.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== TIMELINE ================== -->
+<section class="timeline-wrap">
+  <div class="inner">
+    <div class="section-intro">
+      <span class="section-tag">A Brief History</span>
+      <h2>150 years of asking why</h2>
+      <p class="lede">From the first laboratory in Leipzig to the cognitive revolution of the 1960s, psychology has continually redefined what it means to be human.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="yr">c. 400 BCE</div><h4>Humorism</h4><p>Hippocrates suggests four bodily fluids determine temperament. Galen, 500 years later, would systematize this into the sanguine, choleric, phlegmatic, and melancholic types — a theory that dominated Western medicine until the Renaissance.</p></div>
+      <div class="tl-item"><div class="yr">1649</div><h4>Mind/Body Dualism</h4><p>Descartes publishes <em>The Passions of the Soul</em>, claiming that "there is a reasoning soul in this machine" — and locating it in the pineal gland. The Cartesian split between mind and body would shape psychology for three centuries.</p></div>
+      <div class="tl-item"><div class="yr">1819</div><h4>The Lucid Sleep</h4><p>Abbé Faria publishes <em>On the Cause of Lucid Sleep</em>, demonstrating that hypnosis works through suggestion alone — Mesmer's magnets were never needed. Paves the way for Charcot and the discovery of the unconscious.</p></div>
+      <div class="tl-item"><div class="yr">1859</div><h4>Origin of Species</h4><p>Darwin's evolutionary framework makes possible the comparative study of mind across species — and forces psychology to consider continuity between human and animal cognition.</p></div>
+      <div class="tl-item"><div class="yr">1879</div><h4>The First Laboratory</h4><p>Wilhelm Wundt opens the world's first laboratory of experimental psychology at the University of Leipzig. Psychology is now, formally, a science.</p></div>
+      <div class="tl-item"><div class="yr">1885</div><h4>The Forgetting Curve</h4><p>Hermann Ebbinghaus publishes <em>Memory</em>, the first rigorous experimental study of human learning — using thousands of nonsense syllables and himself as the sole subject.</p></div>
+      <div class="tl-item"><div class="yr">1890</div><h4>Principles of Psychology</h4><p>William James's landmark two-volume work introduces the "stream of consciousness" and establishes American psychology as a serious philosophical and scientific enterprise.</p></div>
+      <div class="tl-item"><div class="yr">1900</div><h4>The Unconscious</h4><p>Sigmund Freud publishes <em>The Interpretation of Dreams</em>, founding psychoanalysis and giving the twentieth century a new map of the mind.</p></div>
+      <div class="tl-item"><div class="yr">1905</div><h4>Measuring Intelligence</h4><p>Alfred Binet and Théodore Simon develop the first intelligence test in France — initially to identify children needing extra educational support, soon to be widely (and sometimes misused) across the world.</p></div>
+      <div class="tl-item"><div class="yr">1913</div><h4>The Behaviorist Manifesto</h4><p>John B. Watson's lecture <em>Psychology as the Behaviorist Views It</em> declares that psychology must abandon mental states and study only observable behavior. Behaviorism will dominate US psychology for fifty years.</p></div>
+      <div class="tl-item"><div class="yr">1920</div><h4>Little Albert</h4><p>Watson and Rosalie Rayner condition an eleven-month-old infant to fear a white rat — and, by generalization, all furry things. Ethically appalling; experimentally definitive proof that emotion can be classically conditioned in humans.</p></div>
+      <div class="tl-item"><div class="yr">1927</div><h4>Conditioned Reflexes</h4><p>Pavlov's English-language <em>Conditioned Reflexes</em> brings his decades of work to a global audience and supplies behaviorism with its methodological template.</p></div>
+      <div class="tl-item"><div class="yr">1932</div><h4>The Cognitive Map</h4><p>Edward Tolman's <em>Purposive Behavior in Animals and Men</em> challenges strict behaviorism by showing that rats build mental representations of mazes long before reward.</p></div>
+      <div class="tl-item"><div class="yr">1938</div><h4>Operant Conditioning</h4><p>B.F. Skinner's <em>The Behavior of Organisms</em> establishes operant conditioning as the master concept of behaviorist learning theory.</p></div>
+      <div class="tl-item"><div class="yr">1943</div><h4>Hierarchy of Needs</h4><p>Abraham Maslow publishes <em>A Theory of Human Motivation</em>, laying the groundwork for humanistic psychology and the "third force" between behaviorism and psychoanalysis.</p></div>
+      <div class="tl-item"><div class="yr">1946</div><h4>Search for Meaning</h4><p>Viktor Frankl, surviving Auschwitz, writes <em>Man's Search for Meaning</em> in nine days. Logotherapy is born.</p></div>
+      <div class="tl-item"><div class="yr">1951</div><h4>Asch Conformity</h4><p>Solomon Asch's line studies reveal that 75% of participants will conform to a unanimous wrong answer at least once. The quiet capitulation of perception to peer pressure.</p></div>
+      <div class="tl-item"><div class="yr">1953</div><h4>Watson & Crick</h4><p>The discovery of DNA's structure begins biology's molecular revolution, eventually shaping every branch of psychology touching genetics, neuroscience, or evolution.</p></div>
+      <div class="tl-item"><div class="yr">1956</div><h4>The Cognitive Revolution</h4><p>George Armitage Miller's <em>The Magical Number Seven, Plus or Minus Two</em>, alongside breakthroughs from Bruner, Chomsky, and Newell & Simon, decisively launches modern cognitive psychology.</p></div>
+      <div class="tl-item"><div class="yr">1959</div><h4>Harlow's Monkeys</h4><p>Harry Harlow shows that infant macaques separated from their mothers cling to a soft cloth surrogate over a wire one that holds the food bottle. Contact comfort, not nutrition, is the foundation of attachment.</p></div>
+      <div class="tl-item"><div class="yr">1961</div><h4>Bobo Doll</h4><p>Albert Bandura's children imitate the violent adults they have just watched, founding social learning theory.</p></div>
+      <div class="tl-item"><div class="yr">1963</div><h4>Obedience to Authority</h4><p>Stanley Milgram's electric-shock experiments at Yale reveal that 65% of ordinary people will administer apparently lethal shocks to a stranger when ordered by a calm authority figure.</p></div>
+      <div class="tl-item"><div class="yr">1967</div><h4>Cognitive Therapy</h4><p>Aaron Beck publishes <em>Depression: Causes and Treatment</em>, founding cognitive therapy and, with it, the empirical revolution in clinical psychology.</p></div>
+      <div class="tl-item"><div class="yr">1969</div><h4>Attachment Theory</h4><p>John Bowlby's <em>Attachment</em> (Volume 1) consolidates decades of work into the scientific framework for understanding the emotional bonds that shape human development.</p></div>
+      <div class="tl-item"><div class="yr">1971</div><h4>Stanford Prison Experiment</h4><p>Philip Zimbardo locks 24 students in a basement; six days later he must terminate the experiment as guards turn cruel and prisoners break down. The power of situation laid bare.</p></div>
+      <div class="tl-item"><div class="yr">1972</div><h4>Episodic Memory</h4><p>Endel Tulving distinguishes episodic from semantic memory, redrawing the basic architecture of human memory research.</p></div>
+      <div class="tl-item"><div class="yr">1974</div><h4>Heuristics and Biases</h4><p>Kahneman and Tversky's landmark <em>Science</em> paper launches behavioral economics by showing the systematic biases of human decision-making.</p></div>
+      <div class="tl-item"><div class="yr">1979</div><h4>MBSR</h4><p>Jon Kabat-Zinn founds the Stress Reduction Clinic at UMass, bringing meditation into clinical medicine and seeding the modern mindfulness movement.</p></div>
+      <div class="tl-item"><div class="yr">1980</div><h4>DSM-III</h4><p>The American Psychiatric Association releases the third edition of the <em>Diagnostic and Statistical Manual</em>, radically reshaping psychiatric diagnosis along symptom-based, atheoretical lines.</p></div>
+      <div class="tl-item"><div class="yr">1990s+</div><h4>Positive Psychology</h4><p>Martin Seligman, Mihály Csíkszentmihályi, and others redirect psychology to ask not just what makes us ill, but what makes us flourish.</p></div>
+      <div class="tl-item"><div class="yr">2000s+</div><h4>Neuroscience Era</h4><p>fMRI, optogenetics, and computational modeling reshape every branch of psychology — even as the "replication crisis" forces a hard reckoning with the field's methodological foundations.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== PHILOSOPHICAL ROOTS ================== -->
+<section id="roots">
+  <div class="section-intro">
+    <span class="section-tag">Part One</span>
+    <h2>Philosophical Roots</h2>
+    <p class="lede">Long before psychology had a name, philosophers wrestled with the same questions: What is the mind? Where does it live? Why do we feel what we feel?</p>
+  </div>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="dates">c. 129 — c. 201 CE</div>
+      <h3>Galen of Pergamon</h3>
+      <span class="school">Humorism</span>
+      <p class="big-idea">"The four temperaments of personality."</p>
+      <p class="desc">A Roman physician, surgeon, and philosopher who served emperors including Marcus Aurelius, Galen built on Hippocrates' theory that four bodily fluids — blood (<em>sanguis</em>), phlegm, yellow bile (<em>kholé</em>), and black bile (<em>melas kholé</em>) — produce four corresponding temperaments. The <strong>sanguine</strong> person is warm-hearted, cheerful, optimistic; the <strong>phlegmatic</strong> is quiet, rational, and consistent; the <strong>choleric</strong> is fiery and passionate; the <strong>melancholic</strong> is poetic, artistic, and prone to sadness. Imbalances, Galen taught, could be remedied through diet, exercise, purging, or blood-letting. He wrote over 500 medical works and learned anatomy by dissecting monkeys and pigs (assuming, incorrectly, that they were close to human bodies). His doctrines dominated Western medicine until the Renaissance, when in 1543 Andreas Vesalius identified more than 200 anatomical errors in his work. Yet Galen's intuition that mind and body are deeply linked — and his interest in personality types — still echoes in modern theories from Eysenck onward.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1596 — 1650</div>
+      <h3>René Descartes</h3>
+      <span class="school">Mind/Body Dualism</span>
+      <p class="big-idea">"There is a reasoning soul in this machine."</p>
+      <p class="desc">A frail child who contracted tuberculosis from his mother (she died shortly after his birth), Descartes spent each morning of his life in bed, doing what he called "systematic meditation" — about philosophy, science, and mathematics. In <em>De Homine</em> (1633) and <em>The Passions of the Soul</em> (1649), he described the human being as a duality: a nonmaterial thinking <strong>mind</strong> and a mechanical <strong>body</strong> driven by "animal spirits" coursing through the nerves. The mind, he argued, was seated in the brain's tiny <strong>pineal gland</strong> — chosen because it is a single organ centrally placed to unify the inputs of the paired eyes and ears. Inspired by the hydraulic fountains of Versailles, he likened the soul to a fountaineer at the reservoir, opening and closing valves to direct the flow of behavior. His dualism made the mind a legitimate object of study independent of the body, and shaped centuries of thought about consciousness, free will, and reflex. Descartes died in 1650 in Sweden, having been summoned at dawn by Queen Christina to give philosophy lessons — a routine his fragile health could not survive.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1756 — 1819</div>
+      <h3>Abbé Faria</h3>
+      <span class="school">Hypnosis · Suggestion</span>
+      <p class="big-idea">"Dormez!"</p>
+      <p class="desc">Born José Custódio de Faria in Portuguese Goa, this priest, traveler, and revolutionary survived political exile and imprisonment during the French Revolution before turning his attention to the trances popularized by Franz Mesmer. Mesmer believed an invisible "animal magnetism" flowed between magnets and patients, producing convulsions that cured illness. Faria, after years of careful observation, concluded that the magnets did nothing. The real force was inside the subject. Anyone with sufficient concentration could enter the state Faria called <strong>"lucid sleep"</strong> — induced by the gentle but commanding word <em>"Dormez!"</em> ("Sleep!") delivered to a relaxed, focused mind. The hypnotist, he insisted, was not a magician but a "concentrator," helping the subject focus inward. In 1843 the Scottish surgeon James Braid coined the term "hypnosis" (from the Greek <em>hypnos</em>, sleep) and confirmed that the phenomenon was simply heightened suggestibility. Faria's insight opened the road that led, decades later, through Charcot and Janet to Freud's discovery of the unconscious.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1776 — 1841</div>
+      <h3>Johann Friedrich Herbart</h3>
+      <span class="school">Structuralism</span>
+      <p class="big-idea">"Concepts become forces when they resist one another."</p>
+      <p class="desc">A German philosopher who took over Immanuel Kant's chair at Königsberg, Herbart imagined the mind as a dynamic system in which ideas — which he called <em>Vorstellungen</em> — behave like magnets, attracting compatible ideas and repelling incompatible ones. When two ideas directly contradict each other, the stronger pushes the weaker beneath the "threshold of consciousness" into what he called a "state of tendency" — anticipating, by nearly a century, Freud's concept of the unconscious. Herbart was the first to seriously propose that the mind has structure, that mental life can be described mechanistically, and that some of our thoughts operate outside our awareness. Sigmund Freud would later build psychoanalysis on essentially Herbartian foundations.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1813 — 1855</div>
+      <h3>Søren Kierkegaard</h3>
+      <span class="school">Existentialism</span>
+      <p class="big-idea">"Be that self which one truly is."</p>
+      <p class="desc">The melancholy Danish philosopher who founded existentialism began his lifelong meditation on selfhood after breaking off his engagement to Regine Olsen — convinced that his nature was unsuited to marriage. In <em>The Sickness Unto Death</em> (1849), he diagnosed the universal human condition of <strong>despair</strong>, which he traced not to any external misfortune but to alienation from one's own true self. He distinguished several levels: the lowest is ignorance of having a self at all; the deeper levels involve acute self-awareness coupled with a profound dislike of what one finds. The man who longs to become an emperor, he wrote, secretly wants to be rid of his current self; if he succeeds, he has lost the only self he had. The only cure is to <em>will to be the self which one truly is</em>. Kierkegaard's emphasis on individual responsibility, authenticity, and the courage to confront despair would later flow into the humanistic psychology of Rogers and the existential therapy of R.D. Laing and Rollo May.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1822 — 1911</div>
+      <h3>Francis Galton</h3>
+      <span class="school">Bio-psychology · Individual Differences</span>
+      <p class="big-idea">"Personality is composed of nature and nurture."</p>
+      <p class="desc">A polymathic English Victorian, half-cousin to Charles Darwin, Galton wrote prolifically on meteorology, fingerprinting, anthropology, statistics, and the human mind. In <em>Hereditary Genius</em> (1869), he surveyed the family trees of judges, statesmen, scientists, and oarsmen, concluding that talent ran in families — though he could not separate inheritance from privileged upbringing. He coined the phrase <strong>"nature versus nurture"</strong> and, in 1875, conducted the first systematic <strong>twin study</strong>, finding that twins remained strikingly similar throughout life regardless of their environment. He pioneered the questionnaire, the correlation coefficient, and statistical regression. But Galton also founded <strong>eugenics</strong>, the idea that humans could be selectively "bred" to enhance desirable traits — a doctrine later seized upon to monstrous effect by 20th-century regimes. His legacy is consequently a divided one: methodological brilliance entangled with ideological poison.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1825 — 1893</div>
+      <h3>Jean-Martin Charcot</h3>
+      <span class="school">Neurology</span>
+      <p class="big-idea">"The laws of hysteria are universal."</p>
+      <p class="desc">A founder of modern neurology, Charcot ran the vast Salpêtrière hospital in Paris, where thousands of female patients had been confined under the diagnosis of <em>hysteria</em> — a catch-all label for extreme emotional behavior, paralysis, fits, blindness, and convulsions without organic cause. Charcot gave electrifying public demonstrations in which he hypnotized hysterical patients on stage, reproducing and then "curing" their symptoms. He insisted hysteria was a real neurological disease following lawful, universal phases. Among the doctors who traveled to Paris to watch him work were Alfred Binet, Pierre Janet, and a young Viennese neurologist named Sigmund Freud — who would carry Charcot's interest in the hidden mechanisms beneath conscious life back home and turn them into psychoanalysis.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1832 — 1920</div>
+      <h3>Wilhelm Wundt</h3>
+      <span class="school">Experimental Psychology</span>
+      <p class="big-idea">"The beginnings of the mental life date from the beginnings of life."</p>
+      <p class="desc">The official founder of psychology as a scientific discipline, Wundt was a German physiologist and philosopher who in <strong>1879</strong> opened the world's first laboratory of experimental psychology at the University of Leipzig. He insisted that consciousness — "inner experience" — could be measured scientifically, and devised meticulous experiments measuring reaction times, just-noticeable differences in tone and brightness, and the contents of momentary awareness. He distinguished three components of every sensation — quality, intensity, and "feeling-tone" — and proposed that consciousness contains three categories of action: <em>representation</em>, <em>willing</em>, and <em>feeling</em>. Late in life, in his ten-volume <em>Cultural Psychology</em>, he argued that the higher reaches of mental life — language, myth, law, art — could only be understood as products of community, not laboratory. He produced over 490 scientific works (perhaps the most prolific output of any scientist) and trained the first generation of professional psychologists, including Edward Titchener, James Cattell, and G. Stanley Hall.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1842 — 1910</div>
+      <h3>William James</h3>
+      <span class="school">Functionalism · Pragmatism</span>
+      <p class="big-idea">"We know the meaning of 'consciousness' so long as no one asks us to define it."</p>
+      <p class="desc">America's father of psychology was the elder brother of novelist Henry James, and one of the most beautiful prose stylists ever to write science. After bouts of physical illness, depression, and a false start as a painter, he qualified as a doctor in 1869 but never practiced medicine. Instead he taught at Harvard, where he established the first US courses in experimental psychology and trained an entire generation of American psychologists. His monumental <em>Principles of Psychology</em> (1890) introduced the unforgettable image of consciousness as a <strong>stream</strong> — fluid, continuous, ever-changing, and uniquely personal — and made the radical case that the self is not a thing but a process. With the Danish physiologist Carl Lange, he proposed the counterintuitive <strong>James-Lange theory of emotion</strong>: we don't run because we are afraid; we are afraid because we are running. He also helped found <strong>pragmatism</strong>, the philosophy that judges ideas by their usefulness in practice rather than by their correspondence to abstract truth — a stance that has shaped American thought ever since.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1844 — 1924</div>
+      <h3>G. Stanley Hall</h3>
+      <span class="school">Developmental Psychology</span>
+      <p class="big-idea">"Adolescence is a new birth."</p>
+      <p class="desc">A student of William James at Harvard and Wilhelm Wundt at Leipzig, Hall earned the first US doctorate in psychology, founded the first US psychology lab (at Johns Hopkins), launched the <em>American Journal of Psychology</em>, and became the first president of the American Psychological Association in 1892. His massive two-volume work <em>Adolescence</em> (1904) was the first scholarly treatment of teenage years as a distinct developmental stage, characterized by what Hall called <em>Sturm und Drang</em> ("Storm and Stress"): heightened sensation-seeking, rebellion, moodiness, idealism, and a "curve of despondency" that peaks around fifteen. Many of his observations — adolescents' sharpened self-criticism, vulnerability to depression, peak in criminal activity around eighteen — remain confirmed by modern research.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1850 — 1909</div>
+      <h3>Hermann Ebbinghaus</h3>
+      <span class="school">Memory · Experimental Psychology</span>
+      <p class="big-idea">"24 hours after learning something, we forget two-thirds of it."</p>
+      <p class="desc">Working alone, with no laboratory, the German psychologist Ebbinghaus pioneered the experimental study of memory by inventing roughly 2,300 three-letter <strong>nonsense syllables</strong> (ZUC, QAX, NOL) — designed to eliminate the role of meaning and association — and then forcing himself to memorize lists of them, hour after hour, day after day, for years. From the data he derived the famous <strong>forgetting curve</strong>: a steep loss of recall in the first hour after learning, with about 60 percent gone in nine hours and two-thirds within twenty-four. He also discovered the <em>spacing effect</em>, the <em>serial position effect</em>, and the principle that overlearning protects memory. His meticulous, mathematical approach proved that even the most ephemeral mental phenomena could be measured — and laid the methodological foundation for all subsequent experimental psychology.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1856 — 1926</div>
+      <h3>Emil Kraepelin</h3>
+      <span class="school">Medical Psychiatry</span>
+      <p class="big-idea">"A peculiar destruction of the internal connections of the psyche."</p>
+      <p class="desc">A student of Wundt who became the founder of modern scientific psychiatry, Kraepelin believed mental illnesses had biological origins and could be classified like physical diseases. His 1883 <em>Textbook of Psychiatry</em> introduced the systematic nosology still used today. He named <strong>dementia praecox</strong> (now called <strong>schizophrenia</strong>) and divided it into four subtypes: <em>simple</em> (slow withdrawal), <em>paranoid</em> (delusions of persecution), <em>hebephrenic</em> (incoherent speech, inappropriate emotion), and <em>catatonic</em> (extreme rigidity or excitement). His emphasis on biology and classification underlies the modern <em>Diagnostic and Statistical Manual</em>, and his framework opened the way for biochemical and pharmacological treatment of severe mental illness.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1857 — 1911</div>
+      <h3>Alfred Binet</h3>
+      <span class="school">Intelligence Theory</span>
+      <p class="big-idea">"The intelligence of an individual is not a fixed quantity."</p>
+      <p class="desc">When the French government in 1904 needed a way to identify schoolchildren requiring special educational support, it turned to Binet — a largely self-taught psychologist who had spent years observing his own two daughters and patients at Charcot's Salpêtrière hospital. With his collaborator Théodore Simon, Binet built the world's first intelligence test, the <strong>Binet–Simon Scale</strong> (1905), composed of 30 graded tasks: following a moving light, naming body parts, repeating digit sequences, defining words, distinguishing similar objects, constructing sentences from given words. The test introduced the concept of <strong>mental age</strong>, soon translated by William Stern into the <em>intelligence quotient</em> (IQ). Crucially, Binet himself believed intelligence was not fixed but malleable — growing as the child grew, shaped by environment and education, and impossible to capture in a single number. He was horrified, later, when the American psychologists Henry Goddard and Lewis Terman translated his test and used it to justify forced sterilization and rigid social sorting.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1859 — 1947</div>
+      <h3>Pierre Janet</h3>
+      <span class="school">Neurological Science · Dissociation</span>
+      <p class="big-idea">"The unconscious sees the men behind the curtains."</p>
+      <p class="desc">A French philosopher and physician who joined Charcot at the Salpêtrière in 1889, Janet was the first to describe and name <strong>dissociation</strong> — the splitting of mental processes from ordinary awareness — as a psychiatric condition. His patient "Lucie" displayed three distinct personalities; one of them, under hypnosis, could recall a terrifying childhood incident at age seven when two men hid behind a curtain to frighten her. The buried memory, Janet realized, was driving Lucie's adult panic attacks. "These people are persecuted by something," he wrote, "and you must investigate carefully to get to the root." Janet's idea of a "subconscious" reservoir of unprocessed trauma directly anticipated Freud's unconscious — a fact Freud rarely acknowledged. Largely forgotten during the mid-twentieth century, Janet has been rediscovered by modern researchers of dissociative identity disorder and trauma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== BEHAVIORISM ================== -->
+<section id="behaviorism" style="background: var(--paper-2);">
+  <div class="section-intro">
+    <span class="section-tag">Part Two</span>
+    <h2>Behaviorism</h2>
+    <p class="lede">If the mind cannot be observed, then psychology — the behaviorists declared — must study only what can be measured: behavior itself.</p>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Ivan Pavlov · 1849–1936</span>
+      <h3>The sight of tasty food makes a hungry man's mouth water.</h3>
+      <p>The son of a Russian village priest, Pavlov originally trained for the clergy before abandoning seminary to study natural science at the University of St. Petersburg. His pioneering research on the digestive secretions of dogs won him the <strong>Nobel Prize in Physiology or Medicine in 1904</strong> — but the discovery that would actually reshape twentieth-century psychology was an accident.</p>
+      <p>While measuring saliva flow during feeding, Pavlov noticed something strange: his dogs began drooling not only when food appeared, but at the sound of the keeper's footsteps, the rattle of the food cart, even the sight of an empty bowl. He systematically explored this phenomenon by ringing a bell — or sounding a metronome, buzzer, or whistle — immediately before presenting food. After repeated pairings, the previously neutral sound alone would trigger salivation.</p>
+      <p>He named the process <strong>classical conditioning</strong> and worked out its terms: the food was an <em>unconditioned stimulus</em> (US) producing an unlearned <em>unconditioned response</em> (UR); the bell, after pairing, became a <em>conditioned stimulus</em> (CS) producing a learned <em>conditioned response</em> (CR). He also showed the response could be <em>extinguished</em> by repeatedly ringing the bell without food, and demonstrated that fear and anxiety responses could be conditioned in the same way as salivation. Pavlov never considered himself a psychologist — he disliked the word — but his rigorous, objective methodology gave American behaviorists exactly the model they needed.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🔔 + 🍖 → 💧</div>
+        <div style="font-style:italic;color:var(--muted);">Unconditioned stimulus + neutral stimulus<br>→ neutral stimulus alone elicits<br>conditioned response</div>
+        <div style="margin-top:2rem;font-size:0.85rem;color:var(--ink);text-align:left;line-height:1.7;">
+          <strong>Key terms:</strong><br>
+          US — Unconditioned Stimulus (food)<br>
+          UR — Unconditioned Response (salivation)<br>
+          CS — Conditioned Stimulus (bell)<br>
+          CR — Conditioned Response (learned salivation)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:var(--accent);">THE PUZZLE BOX</div>
+        <div style="font-size:0.95rem;line-height:1.8;color:var(--muted);">A hungry cat trapped inside<br>→ flails, paws, scrambles<br>→ accidentally trips the latch<br>→ escapes & eats food reward<br><br><strong style="color:var(--ink);">On each subsequent trial:<br>fewer wasted actions, faster escape.</strong><br><br>Profitless acts stamped out.<br>Rewarded acts stamped in.<br><br><em>"The greater the satisfaction or<br>discomfort, the greater the<br>strengthening or weakening<br>of the bond."</em></div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">Edward Thorndike · 1874–1949</span>
+      <h3>Profitless acts are stamped out.</h3>
+      <p>The son of a Methodist minister from Massachusetts, Thorndike studied with William James at Harvard before completing his doctoral research at Columbia in 1898. Originally hoping to study learning in human children, he switched to animal subjects when none were available — and ended up writing one of the founding texts of behaviorism, <em>Animal Intelligence</em> (1911).</p>
+      <p>His most famous experiments used hand-built <strong>puzzle boxes</strong>: wooden crates with various escape mechanisms — a loop of string to pull, a panel to press, a button to push — only one of which would release the door. A hungry cat placed inside would initially scrabble, bite, and claw at random. By trial and error it would eventually trip the correct mechanism, escape, and receive food. On each successive trial, the time to escape grew shorter as useless actions dropped away.</p>
+      <p>From these observations Thorndike formulated his <strong>Law of Effect</strong>: when a response is followed by a satisfying outcome, the connection between situation and response is strengthened; when followed by an annoying outcome, it is weakened. He called his approach <strong>connectionism</strong>, proposing that learning was the literal forging of neural bonds between stimuli and responses — a notion that anticipated modern neuroscience by decades.</p>
+      <p>Thorndike's later work spanned educational psychology (he was a passionate reformer of teacher training), animal intelligence, and intelligence testing — devising the <strong>CAVD</strong> test (Completion, Arithmetic, Vocabulary, Directions) and proposing that intelligence has mechanical, abstract, and social dimensions. His Law of Effect would directly inspire B.F. Skinner's theory of operant conditioning.</p>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">John B. Watson · 1878–1958</span>
+      <h3>Anyone, regardless of their nature, can be trained to be anything.</h3>
+      <p>Raised poor in South Carolina by an alcoholic father and devoutly religious mother, Watson grew into a brilliant, rebellious, and combative scholar. After completing his PhD at the University of Chicago, he moved to Johns Hopkins, where in <strong>1913</strong> he delivered the lecture <em>Psychology as the Behaviorist Views It</em> — soon dubbed the <strong>"behaviorist manifesto."</strong> Psychology, he declared, must abandon talk of mental states (which can never be objectively observed) and focus solely on the "prediction and control of behavior."</p>
+      <p>In 1920, with his research assistant Rosalie Rayner, Watson conducted his notorious <strong>"Little Albert" experiment</strong>. They placed a healthy nine-month-old infant on a mattress with a white rat, a rabbit, a dog, a monkey, and various inanimate objects, and observed that the baby showed no fear of any of them. Then they began striking a steel bar with a hammer immediately behind Albert's head whenever he reached for the rat. After only seven pairings across two sessions, Albert burst into tears at the mere sight of the rat. Worse — his terror generalized to all white furry things: a rabbit, a dog, a fur coat, even a Santa Claus mask. Watson had demonstrated classical conditioning of human emotion. The fate of Little Albert is unknown; recent historical detective work suggests he may have died young from hydrocephalus.</p>
+      <p>Watson's career at Johns Hopkins ended in scandal in 1920 when his affair with Rayner became public. Banished from academia, he reinvented himself as a wildly successful advertising executive at J. Walter Thompson, applying conditioning principles to consumer behavior. He also published bestselling childcare manuals advocating cold, unsentimental parenting — advice now widely regarded as harmful, and which damaged a generation of children (including his own; his granddaughter, actress Mariette Hartley, later wrote of the family fallout). His infamous boast — "Give me a dozen healthy infants… and I'll guarantee to take any one at random and train him to become any type of specialist I might select" — remains the most extreme statement of environmental determinism ever made.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;font-style:italic;color:var(--muted);">
+        "Give me a dozen healthy infants, well-formed, and my own specified world to bring them up in, and I'll guarantee to take any one at random and train him to become any type of specialist I might select — doctor, lawyer, artist, merchant-chief, and, yes, even beggar-man and thief, regardless of his talents, penchants, tendencies, abilities, vocations, and race of his ancestors."
+        <div style="margin-top:1.5rem;font-style:normal;color:var(--ink);font-weight:bold;">— Watson, <em>Behaviorism</em> (1924)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.1rem;font-weight:bold;color:var(--accent);margin-bottom:1rem;">THE SKINNER BOX</div>
+        <div style="font-size:0.95rem;line-height:1.9;color:var(--muted);">Rat placed in soundproof chamber<br>with a small lever and food dispenser.<br><br>Rat presses lever (by accident)<br>→ food pellet drops<br>→ rat presses again, and again<br><br>Positive reinforcement<br>shapes behavior over time —<br><strong style="color:var(--ink);">no preceding stimulus required.</strong><br><br>Skinner could schedule rewards by ratio<br>(every 5th press) or interval (every 30s),<br>fixed or variable, and watch how<br>each schedule produced<br>a distinctive behavior pattern.</div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">B.F. Skinner · 1904–1990</span>
+      <h3>Behavior is shaped by positive and negative reinforcement.</h3>
+      <p>Burrhus Frederic Skinner originally wanted to be a novelist. After reading Pavlov and Watson while at Hamilton College, he switched to psychology and earned his Harvard PhD in 1931. He spent his career building the most rigorous behaviorist framework ever devised — a position he called <strong>radical behaviorism</strong>.</p>
+      <p>Where Pavlov's classical conditioning concerned reflex responses to preceding stimuli, Skinner focused on voluntary behavior shaped by its <em>consequences</em>. In his famous operant chambers — soon dubbed <strong>"Skinner boxes"</strong> — rats and later pigeons could press levers or peck disks to obtain food. Skinner could measure response rates with mechanical precision, and discovered that behavior was molded not just by whether reinforcement occurred, but by its <strong>schedule</strong>: variable-ratio reinforcement (rewards delivered after an unpredictable number of responses, as in slot machines) produced the most persistent behavior of all.</p>
+      <p>He distinguished between <strong>positive reinforcement</strong> (adding something pleasant after a behavior), <strong>negative reinforcement</strong> (removing something unpleasant), and <strong>punishment</strong> (adding an aversive stimulus) — and demonstrated that punishment is far less effective than reinforcement at producing lasting behavior change. He also developed <strong>shaping</strong>: rewarding successive approximations to a target behavior. With this method he trained pigeons to play table tennis, dance in figure-eights, and — in the wartime <strong>"Project Pigeon"</strong> — guide missiles by pecking at images of targets projected inside the nose cone (the military thought it too eccentric to deploy).</p>
+      <p>An inveterate inventor, Skinner also designed teaching machines for incremental classroom feedback (anticipating modern adaptive learning software) and the "baby tender," a climate-controlled crib for his infant daughter that the press misreported as a Skinner box for humans, dogging him for years. His 1948 utopian novel <em>Walden Two</em> imagined a society engineered by positive reinforcement, and his 1971 <em>Beyond Freedom and Dignity</em> argued that free will is an illusion — every act is determined by genetic and environmental history. Brilliant, charismatic, and combative, he remained the most influential — and most controversial — psychologist in America until his death from leukemia in 1990, the day after finishing his final article.</p>
+    </div>
+  </div>
+
+  <div class="experiments">
+    <div class="experiment">
+      <div class="ticker">Imprinting</div>
+      <h3>Konrad Lorenz & the Goslings</h3>
+      <div class="who">1903–1989 · Ethology</div>
+      <p>Working at his family's summer house in Altenberg, Austria, the zoologist Konrad Lorenz discovered that newly hatched geese and ducks will form an instant, lifelong bond with the first moving object they encounter — even a pair of Wellington boots. He named the process <strong>imprinting</strong> and showed it has three crucial features that distinguish it from ordinary learning: it occurs only during a brief <em>critical period</em> just after hatching, it is irreversible, and it is genetically programmed. He extended these ideas to "fixed-action patterns" — innate behavioral sequences triggered by specific stimuli, central to the science of ethology. In 1973 he shared the Nobel Prize in Physiology or Medicine. His earlier collaboration with the Nazi regime, however, remains a stain on his legacy.</p>
+      <div class="finding">"Imprinting cannot be forgotten."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Latent Learning</div>
+      <h3>Edward Tolman & the Cognitive Map</h3>
+      <div class="who">1886–1959 · Cognitive Behaviorism</div>
+      <p>Trained at MIT and influenced by Gestalt psychology in Germany, Tolman ran rats through mazes at Berkeley with a behaviorist's rigor but a cognitivist's mind. In his classic experiment, one group of rats was rewarded for completing the maze every day; a second group received no reward; a third was rewarded only after the eleventh day. The third group, given no reason to learn, nevertheless mastered the maze almost instantly once food appeared — proving that they had been silently building a mental representation all along. Tolman called these representations <strong>cognitive maps</strong>, and the silent acquisition <strong>latent learning</strong>. His work bridged behaviorism and cognitive psychology and laid groundwork for the cognitive revolution. He also famously refused to sign the McCarthy-era loyalty oath at Berkeley, leading a landmark legal fight for academic freedom.</p>
+      <div class="finding">"That great God-given maze which is our human world."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Brain & Memory</div>
+      <h3>Karl Lashley & the Search for the Engram</h3>
+      <div class="who">1890–1958 · Neuropsychology</div>
+      <p>Lashley spent thirty years trying to find the physical seat of memory — the "engram" — by training rats to run mazes, then surgically removing different portions of their cerebral cortex and retesting them. The result was puzzling and profound: no matter <em>which</em> part he removed, only the <em>amount</em> mattered. Memory, it seemed, was distributed rather than localized. His principle of <strong>equipotentiality</strong> ("learning is just not possible," he half-joked at the end) shaped the next generation's pursuit of distributed, network-based theories of memory and cognition.</p>
+      <div class="finding">"Learning is just not possible."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">One-Trial Learning</div>
+      <h3>Edwin Guthrie & Contiguity</h3>
+      <div class="who">1886–1959 · Learning Theory</div>
+      <p>The American philosopher-turned-psychologist Edwin Guthrie disagreed with the prevailing view that conditioning required repeated pairings. A stimulus and response, he argued, are fully associated on their very first co-occurrence; what we mistake for gradual strengthening is really the accumulation of many simple movement-associations into complex acts. "Once a rat has visited our grain sack," he wrote, "we can plan on its return." His <strong>theory of contiguity</strong> remains the simplest of all learning theories.</p>
+      <div class="finding">"Once a rat has visited our grain sack we can plan on its return."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Instinct Denied</div>
+      <h3>Zing-Yang Kuo & the Cat and Rat</h3>
+      <div class="who">1898–1970 · Behavioral Epigenetics</div>
+      <p>The Chinese-American psychologist Kuo took behaviorism to its extreme, denying the existence of instinct altogether. In his famous experiments, kittens raised from birth in the same cage as rats grew up not just to tolerate them but to play with them and treat them as companions — refusing to chase them even when food-deprived. Predatory "instinct," Kuo argued, is itself a product of early experience. His work was largely lost to the West during the political upheaval in China, but anticipated modern epigenetic theories of behavior.</p>
+      <div class="finding">"Nothing is more natural than for the cat to 'love' the rat."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Desensitization</div>
+      <h3>Joseph Wolpe & War Neurosis</h3>
+      <div class="who">1915–1997 · Behavior Therapy</div>
+      <p>Treating South African and Allied soldiers returning from WWII with what was then called "war neurosis" (now PTSD), the young psychiatrist Joseph Wolpe found that psychoanalytic talk-therapy was failing his patients. Drawing on Pavlov and Hull, he reasoned that fear, like salivation, was a conditioned response — and could be unlearned. His method was <strong>reciprocal inhibition</strong>: train the patient in deep muscle relaxation, then have them imagine progressively more frightening scenes from a hierarchy of fears. Because relaxation and anxiety are physically incompatible, the relaxed body cannot remain afraid. <em>"Stop imagining the scene and relax,"</em> he would say — and the fear would dissolve. The technique, now called <strong>systematic desensitization</strong>, remains the most effective treatment ever devised for phobias and a foundation stone of cognitive-behavioral therapy.</p>
+      <div class="finding">"Stop imagining the scene and relax."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== PSYCHOTHERAPY ================== -->
+<section id="psychotherapy">
+  <div class="section-intro">
+    <span class="section-tag">Part Three</span>
+    <h2>Psychotherapy</h2>
+    <p class="lede">If behaviorism studied the surface, psychotherapy plumbed the depths — the unconscious, the soul, the buried wound. From Freud's couch to Rogers' empathy, this is the long conversation between healer and human.</p>
+  </div>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="dates">1856 — 1939</div>
+      <h3>Sigmund Freud</h3>
+      <span class="school">Psychoanalysis</span>
+      <p class="big-idea">"The unconscious is the true psychical reality."</p>
+      <p class="desc">Born Sigismund Schlomo Freud in Moravia, he moved to Vienna at age four and remained there until forced into London exile in 1938 by Nazi persecution. Trained as a neurologist, he opened a clinical practice in 1886 and — influenced by Charcot's hypnotic work and Josef Breuer's case of "Anna O" (Bertha Pappenheim, who coined the phrase "the talking cure") — developed an entirely new approach to mental suffering. Over four decades he constructed <strong>psychoanalysis</strong>, the most influential theory of mind of the modern era. Its foundations include: the <strong>unconscious</strong> as a vast repository of repressed wishes and memories; the structural model of <strong>id</strong> (primitive drives, ruled by the Pleasure Principle), <strong>ego</strong> (the rational mediator, ruled by the Reality Principle), and <strong>superego</strong> (the internalized voice of parents and society); <strong>dream analysis</strong> as "the royal road to the unconscious"; <strong>free association</strong> as the technique for accessing it; the centrality of <strong>repression</strong>, <strong>transference</strong>, <strong>defense mechanisms</strong>, and infantile sexuality. He saw libido (life instinct) and a death drive in perpetual conflict. His key works — <em>The Interpretation of Dreams</em> (1900), <em>The Psychopathology of Everyday Life</em> (1904), <em>Three Essays on the Theory of Sexuality</em> (1905), <em>Civilization and Its Discontents</em> (1930) — gave the twentieth century a new vocabulary for the self. After enduring sixteen years of mouth cancer (Freud was an inveterate cigar smoker), he died by physician-assisted morphine overdose in London in 1939. Whether you accept his theories or reject them, you cannot escape them.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1870 — 1937</div>
+      <h3>Alfred Adler</h3>
+      <span class="school">Individual Psychology</span>
+      <p class="big-idea">"The neurotic carries a feeling of inferiority with him constantly."</p>
+      <p class="desc">A childhood illness brought Adler close to death at age five and led him to decide to become a physician. Born in Vienna, he trained as an ophthalmologist before turning to psychiatry and joining Freud's Vienna Psychoanalytic Society in 1902. He became one of its first members — and one of the first to break away (in 1911), disagreeing with Freud's overwhelming emphasis on sexuality. Adler founded <strong>Individual Psychology</strong>, which emphasized the social, conscious, and goal-directed dimensions of personality. His most enduring concept is the <strong>inferiority complex</strong>: every child grows up surrounded by taller, stronger, more capable adults, and this universal experience of smallness drives a lifelong "striving for superiority" — the engine, in Adler's view, of all human achievement. In healthy development, success relieves inferiority feelings and produces confidence; in pathological development, no amount of success satisfies and the result is either a fixed inferiority complex or a compensatory superiority complex. Adler also introduced ideas about birth order, social interest, and the lifestyle — and influenced Maslow, Frankl, Ellis, and the modern self-help movement.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1875 — 1961</div>
+      <h3>Carl Jung</h3>
+      <span class="school">Analytical Psychology</span>
+      <p class="big-idea">"The collective unconscious is made up of archetypes."</p>
+      <p class="desc">A Swiss psychiatrist, son of a pastor, and once Freud's heir apparent, Jung broke from him around 1913 over disagreements about sexuality and the nature of the unconscious. He proposed that beneath Freud's personal unconscious lies a far deeper layer — the <strong>collective unconscious</strong> — shared by all humans and inherited as part of our psychological structure. This stratum is populated by <strong>archetypes</strong>: universal symbolic forms that appear across cultures in myths, dreams, religion, and art. Key archetypes include the <strong>Persona</strong> (the social mask), the <strong>Shadow</strong> (the rejected and disowned parts of the self), the <strong>Anima</strong> (the feminine within men), the <strong>Animus</strong> (the masculine within women), the <strong>Self</strong> (the integrating wholeness), the Wise Old Man, the Great Mother, the Trickster, and the Divine Child. Jung also introduced the personality dimensions of <strong>introversion</strong> and <strong>extraversion</strong>, which became the foundation of the Myers-Briggs Type Indicator. He saw the goal of life as <em>individuation</em> — the lifelong process of integrating these inner forces into a unified self. He explored alchemy, eastern religions, mythology, and the occult, and was one of the first western psychologists to take spirituality seriously as a psychological phenomenon.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1882 — 1960</div>
+      <h3>Melanie Klein</h3>
+      <span class="school">Object Relations</span>
+      <p class="big-idea">"The struggle between the life and death instincts persists throughout life."</p>
+      <p class="desc">Born in Austria into a family marked by depression and early loss (her sister died when she was four, her brother to suicide later), Klein channelled her own suffering into pioneering the psychoanalysis of children. Where Anna Freud insisted children's egos were too undeveloped for true analysis, Klein invented <strong>play therapy</strong>, treating children's play with toys as the equivalent of adult free association. She extended Freud's theory of life and death instincts down to earliest infancy, arguing that the newborn already experiences primitive feelings of love and hate, oscillating between the "paranoid-schizoid position" (splitting the world into all-good and all-bad objects) and the "depressive position" (recognizing that the loved and hated objects are the same person — usually mother). Her ideas underlie modern <strong>object relations theory</strong> and the work of Winnicott, Bion, and the British "Independent" school.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1885 — 1952</div>
+      <h3>Karen Horney</h3>
+      <span class="school">Neo-Freudian</span>
+      <p class="big-idea">"The tyranny of the shoulds."</p>
+      <p class="desc">A German-born psychoanalyst who emigrated to the US in 1932, Horney broke with Freudian orthodoxy over its view of women — challenging the concept of "penis envy" by arguing that men's envy of women's capacity to bear children was at least as significant, and that cultural rather than biological factors shaped female psychology. Her broader theoretical contribution was the diagnosis of <strong>"the tyranny of the shoulds"</strong>: the internalized list of impossible demands that neurotic people impose on themselves. <em>I should be perfect. I should be loved by everyone. I should never make mistakes. I should be strong.</em> She described how the psyche splits into three competing selves — the <strong>real self</strong> (authentic but unrealized), the <strong>ideal self</strong> (the perfectionist fantasy), and the <strong>despised self</strong> (the failed real self as judged by the ideal). Therapy, she argued, must liberate us from this trap. In 1941 she founded the American Institute for Psychoanalysis, training her own generation of therapists.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1893 — 1970</div>
+      <h3>Fritz Perls</h3>
+      <span class="school">Gestalt Therapy</span>
+      <p class="big-idea">"Truth can be tolerated only if you discover it yourself."</p>
+      <p class="desc">Trained as a psychoanalyst in Berlin, Perls fled the Nazis to South Africa with his wife Laura Posner — also a psychologist — where they began developing what would become <strong>Gestalt therapy</strong>, an eclectic synthesis of psychoanalysis, Gestalt psychology, existentialism, and Eastern philosophy. Where Freud probed the past, Gestalt insists on the present moment: "be here now." Where psychoanalysis was a one-way relationship of analyst to patient, Gestalt is warm, confrontational, and collaborative. Perls emphasized <strong>personal responsibility</strong> — we make our own perceptions, and therefore our own reality — and the practice of <strong>awareness</strong>. He encouraged patients to change passive language ("I can't") into active ("I won't"), reclaiming agency. His famous "Gestalt Prayer" — <em>"I do my thing and you do your thing… You are you and I am I"</em> — captured the era's mood and made him a star of the 1960s human-potential movement at the Esalen Institute. Confrontational, charismatic, and frequently obnoxious, Perls became famous for his ability to provoke insight by deliberately frustrating his clients.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1895 — 1982</div>
+      <h3>Anna Freud</h3>
+      <span class="school">Ego Psychology</span>
+      <p class="big-idea">"The superego becomes clear only when it confronts the ego with hostility."</p>
+      <p class="desc">Sigmund's youngest daughter — and the only one of his children to follow him into psychoanalysis — Anna Freud became a foundational figure in child psychoanalysis and the developer of <strong>ego psychology</strong>. In <em>The Ego and the Mechanisms of Defense</em> (1936), she catalogued the strategies by which the ego protects itself from unbearable anxiety: repression, denial, projection, regression, displacement, sublimation, intellectualization, reaction formation, and many more. Her work made the previously mysterious "defenses" into observable, testable concepts. She also created the Hampstead Child Therapy Clinic in London (where the family had fled in 1938) and worked tirelessly to apply psychoanalysis to the practical care of children — particularly war orphans and refugees.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1896 — 1971</div>
+      <h3>Donald Winnicott</h3>
+      <span class="school">Object Relations · Pediatric Psychoanalysis</span>
+      <p class="big-idea">"It is notoriously inadequate to take an adopted child into one's home and love him."</p>
+      <p class="desc">An English pediatrician (the first in Britain to also train as a psychoanalyst), Winnicott developed his ideas from forty years of clinical work with mothers and infants. He introduced the indispensable concept of the <strong>"good-enough mother"</strong>: one who does not need to be perfect, only reliably responsive most of the time, providing what he called a <em>holding environment</em>. He coined the term <strong>transitional object</strong> (the teddy bear, the security blanket) and described how it bridges the infant's inner and outer worlds. His most provocative paper, <em>Hate in the Countertransference</em> (1947), argued that mothers and therapists alike must tolerate their hatred of difficult, demanding children — and that for an adopted or previously neglected child to feel truly loved, the new parents must be able to bear his testing rage without retaliating. Healing comes not from sentimentality, he insisted, but from honest, durable presence.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1900 — 1980</div>
+      <h3>Erich Fromm</h3>
+      <span class="school">Humanistic Psychoanalysis</span>
+      <p class="big-idea">"Man's main task is to give birth to himself."</p>
+      <p class="desc">A German-American psychoanalyst, social theorist, and philosopher whose work braided together Freud, Marx, Buddhism, and the Hebrew prophets. In <em>The Fear of Freedom</em> (1941, also called <em>Escape from Freedom</em>), written as fascism engulfed Europe, Fromm argued that modern people, liberated from traditional social bonds, often find freedom unbearable and flee into authoritarianism, conformity, or destructiveness. In <em>The Art of Loving</em> (1956), one of the best-selling psychology books ever published, he reframed love not as a feeling but as an <strong>active capacity</strong> requiring care, responsibility, respect, and knowledge — and warned that most relationships fail because we want to possess rather than truly know the other. He distinguished four "nonproductive" character orientations — <em>receptive</em>, <em>exploitative</em>, <em>hoarding</em>, <em>marketing</em> — plus a destructive <em>necrophilous</em> type and the healthy <em>productive</em> orientation. Throughout, he insisted that the central human task is to give birth to oneself: to escape the prison of conformity and become genuinely free.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1901 — 1981</div>
+      <h3>Jacques Lacan</h3>
+      <span class="school">Structural Psychoanalysis</span>
+      <p class="big-idea">"The unconscious is the discourse of the Other."</p>
+      <p class="desc">The most influential French psychoanalyst, Lacan re-read Freud through the lens of structural linguistics and continental philosophy, producing a body of work famous for its difficulty and brilliance. His most important contribution is the <strong>"mirror stage"</strong> (1949), describing how the infant first identifies with its reflected image between six and eighteen months — a moment of jubilant misrecognition that founds the lifelong split between the self as it experiences itself (fragmented, incomplete) and the self as it sees itself (whole, unified). He argued that the unconscious is structured "like a language," and that we can never truly know ourselves outside the symbols and roles given to us by the social world — what he called <strong>the Other</strong>. Expelled from the International Psychoanalytical Association in 1953 for his unorthodox practice (sessions of variable length, sometimes only minutes long), he founded his own school and influenced generations of philosophers, literary critics, and clinicians.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1902 — 1987</div>
+      <h3>Carl Rogers</h3>
+      <span class="school">Humanistic / Person-Centered</span>
+      <p class="big-idea">"The good life is a process, not a state of being."</p>
+      <p class="desc">A devoutly raised Midwesterner who briefly studied for the ministry before turning to psychology, Rogers spent his life rejecting the medical-model view of patients as broken objects to be fixed. He pioneered <strong>client-centered therapy</strong> (later renamed person-centered), in which the therapist offers three indispensable conditions: <em>genuineness</em>, <em>empathic understanding</em>, and — most famously — <strong>unconditional positive regard</strong>. Given these conditions, Rogers believed, people will move spontaneously toward growth, congruence, and self-actualization. He insisted that the client, not the therapist, knows best what direction therapy should take. His ideas reshaped not just psychotherapy but education, parenting, conflict mediation, and management. In his late seventies he traveled the world working on peace dialogues between hostile groups (Catholics and Protestants in Northern Ireland, Black and White South Africans) — and was nominated for the Nobel Peace Prize in the year of his death.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1905 — 1997</div>
+      <h3>Viktor Frankl</h3>
+      <span class="school">Logotherapy</span>
+      <p class="big-idea">"Suffering ceases to be suffering at the moment it finds a meaning."</p>
+      <p class="desc">A Viennese psychiatrist who had been developing a theory of meaning-centered therapy before the war, Frankl was sent in 1942 to Theresienstadt, then to Auschwitz, then to Dachau. His pregnant wife, his parents, and his brother were all murdered. Liberated in 1945, he sat down and in nine days dictated the book that would become <em>Man's Search for Meaning</em> (1946) — one of the most widely read works ever written about human suffering. From his observations of who survived and who did not, Frankl concluded that life's primary motivation is not pleasure (Freud) or power (Adler) but the search for <strong>meaning</strong>. Even in the death camps, those who could find purpose — in love, in a task, even in the dignity of how they bore unavoidable suffering — were more likely to endure. His <strong>logotherapy</strong> (from the Greek <em>logos</em>, meaning) became the "third Viennese school of psychotherapy."</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1908 — 1970</div>
+      <h3>Abraham Maslow</h3>
+      <span class="school">Humanistic</span>
+      <p class="big-idea">"What a man can be, he must be."</p>
+      <p class="desc">Born in Brooklyn to Russian-Jewish immigrant parents, Maslow grew up an unhappy, bookish only-child described by his mother as a "Golden Siggie" but treated by other relatives as ugly and unwanted. He found refuge in libraries and, eventually, in the radically optimistic psychology he founded. Rejecting the obsession of psychoanalysis and behaviorism with pathology and animal models, he proposed psychology should study healthy, accomplished, flourishing human beings. His <strong>hierarchy of needs</strong> (1943) climbs from physiological needs (food, water) through safety, love and belonging, esteem, cognitive needs, aesthetic needs, and finally <strong>self-actualization</strong>: the realization of one's fullest unique potential. He studied "self-actualized" exemplars — Einstein, Eleanor Roosevelt, Lincoln, Jane Addams — and identified their common qualities: realism, autonomy, spontaneity, problem-centeredness, creativity, peak experiences, deep relationships with a few people, and unsentimental ethical concern for humanity. Late in life he added a higher tier still: <strong>self-transcendence</strong>, devotion to something larger than the self. Maslow co-founded the "Third Force" of humanistic psychology with Carl Rogers and Rollo May.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1909 — 1994</div>
+      <h3>Rollo May</h3>
+      <span class="school">Existential Psychology</span>
+      <p class="big-idea">"One does not become fully human painlessly."</p>
+      <p class="desc">An American psychologist who studied with Adler, suffered tuberculosis confinement that left him reading Kierkegaard for two years, and emerged as the leading American voice of <strong>existential psychotherapy</strong>. His <em>The Meaning of Anxiety</em> (1950) reframed anxiety not as a pathology to be eliminated but as an inescapable companion of genuine living — the price of freedom. He insisted that suffering and joy, despair and creativity, are not opposites but partners in becoming a full human being. With <em>Existence</em> (1958) he introduced European existential analysis to American psychology, paving the way for humanistic and transpersonal therapies.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1913 — 2007</div>
+      <h3>Albert Ellis</h3>
+      <span class="school">REBT</span>
+      <p class="big-idea">"Rational beliefs create healthy emotional consequences."</p>
+      <p class="desc">A New Yorker who began as a sex therapist and Freudian analyst before becoming disillusioned with psychoanalysis's slow, costly results, Ellis invented <strong>Rational Emotive Behavior Therapy (REBT)</strong> in 1955 — the first systematic cognitive therapy and the direct precursor of all later cognitive-behavioral approaches. Drawing on the Stoic philosopher Epictetus ("men are disturbed not by events but by their views of them"), Ellis taught that emotional suffering arises not from circumstances but from the irrational beliefs we hold about them — and especially from "musts" and "shoulds." His <strong>ABCDE model</strong>: an <em>Activating event</em> triggers a <em>Belief</em>, which produces an emotional <em>Consequence</em>; therapy involves <em>Disputing</em> the irrational belief to produce a healthier <em>Effect</em>. Brash, profane, hilarious, and tireless, Ellis ran free Friday-night workshops in Manhattan for decades, demonstrating REBT on volunteers from the audience.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1916 — 1988</div>
+      <h3>Virginia Satir</h3>
+      <span class="school">Family Therapy</span>
+      <p class="big-idea">"The family is the factory where people are made."</p>
+      <p class="desc">A Wisconsin farm girl who became one of the founders of <strong>family systems therapy</strong>, Satir worked from the conviction that mental health problems are best understood not in the individual but in the patterns of communication within their family. She identified five communication "stances" that family members adopt under stress: the <em>placator</em> (apologetic, seeking approval), the <em>blamer</em> (aggressive, finding fault), the <em>computer</em> (cool, intellectual, emotionally absent), the <em>distractor</em> (irrelevant, evasive), and the healthy <em>leveler</em> (congruent, honest, direct). Her warmth, her belief in human worth, and her insistence on the healing power of authentic communication shaped a generation of therapists and was instrumental in establishing family therapy as a major modality.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1920 — 1996</div>
+      <h3>Timothy Leary</h3>
+      <span class="school">Experimental · Psychedelic</span>
+      <p class="big-idea">"Turn on, tune in, drop out."</p>
+      <p class="desc">A respected Harvard psychologist until his controversial psilocybin and LSD research with prisoners and divinity students cost him his position in 1963, Leary became the most flamboyant promoter of psychedelics as tools for psychological growth and spiritual transformation. His 1967 slogan — <em>Turn On</em> (activate the nervous system through psychedelics or meditation), <em>Tune In</em> (interact harmoniously with the world from this new perspective), <em>Drop Out</em> (detach from involuntary commitments and false attachments) — was widely misread as a call to abandon productivity, when Leary meant something closer to the existential injunction to live deliberately. He spent years on the run from US drug authorities before imprisonment and, much later, became an early proponent of cyberculture and personal computing.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1921 — 2007</div>
+      <h3>Paul Watzlawick</h3>
+      <span class="school">Brief Therapy · Communication Theory</span>
+      <p class="big-idea">"Insight may cause blindness."</p>
+      <p class="desc">An Austrian-American psychotherapist working at the Mental Research Institute in Palo Alto, Watzlawick was a leader of the <strong>brief therapy</strong> movement, which challenged the assumption that lasting change requires deep insight into the unconscious origins of one's problems. He argued that focusing too much on causes can actually obscure solutions — sometimes change happens fastest when we simply alter present behavior and break the self-reinforcing loops that keep problems alive. He formulated influential axioms of human communication ("one cannot not communicate"), and his deceptively simple books — <em>The Pursuit of Unhappiness</em>, <em>How Real Is Real?</em> — became cult classics for their wry exposure of the ways we mystify our own difficulties.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1927 — 1989</div>
+      <h3>R.D. Laing</h3>
+      <span class="school">Anti-Psychiatry · Existential</span>
+      <p class="big-idea">"Madness need not be all breakdown. It may also be break-through."</p>
+      <p class="desc">A Glasgow-born psychiatrist who trained at the Tavistock Clinic in London, Laing became the most charismatic voice of the <strong>anti-psychiatry movement</strong>. In <em>The Divided Self</em> (1960) and <em>Sanity, Madness and the Family</em> (1964), he argued that what psychiatry labels schizophrenia is often an intelligible — even meaningful — response to intolerable family situations and existential predicaments. He pioneered a humane, drug-free approach at Kingsley Hall in London, where therapists and patients lived together as equals. Some of his patients recovered remarkably; others did not. His insistence that the disturbed person be listened to as a person, not just classified as a case, transformed how mental illness is understood — even as his later experiments with mysticism and rebirth therapy alienated his medical colleagues.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1930 — 2019</div>
+      <h3>Dorothy Rowe</h3>
+      <span class="school">Personal Construct Theory</span>
+      <p class="big-idea">"Only good people get depressed."</p>
+      <p class="desc">An Australian-British psychologist who spent decades working with depressed patients, Rowe argued — provocatively, but compassionately — that depression is built on a foundation of self-blame, perfectionism, and a powerful (if often unrecognized) belief in a "Just World." When bad things happen to good people, we want to blame ourselves so we can preserve our sense that the world is fundamentally fair and predictable. Depressed people, she observed, are typically those who take their moral responsibilities most seriously. Therapy involves loosening the grip of these "constructs" — releasing oneself from the impossible standard of being personally responsible for every misfortune.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1937 — </div>
+      <h3>Boris Cyrulnik</h3>
+      <span class="school">Positive Psychology · Resilience</span>
+      <p class="big-idea">"Our history does not determine our destiny."</p>
+      <p class="desc">As a six-year-old French Jewish child in 1944, Cyrulnik escaped a Nazi roundup by hiding in a hospital toilet. His parents were murdered at Auschwitz. He lived in foster homes and farms, eventually became a neuropsychiatrist, and spent his career studying the question that had defined his own life: why do some children survive devastating trauma and not only recover but thrive? His answer — <strong>resilience</strong> — is not a fixed personal trait but an ongoing relational process. The traumatized child needs at least one steady, loving relationship; meaning made of suffering; humor and storytelling; and the freedom to integrate the wound into a new identity rather than be defined by it.</p>
+    </div>
+  </div>
+
+  <!-- Maslow Pyramid -->
+  <div class="concept-block" style="margin-top:5rem;">
+    <div>
+      <span class="attrib">Abraham Maslow · 1943</span>
+      <h3>The Hierarchy of Needs</h3>
+      <p>Maslow proposed that human motivation climbs a ladder. The bottom rungs — food, water, safety — must be secured before we can attend to belonging, esteem, or growth. At the summit lies <strong>self-actualization</strong>: becoming what one is uniquely meant to be.</p>
+      <p>Later in life, Maslow added a higher tier still: <strong>self-transcendence</strong> — devoting oneself to something beyond the self, whether other people, an ideal, or the universe entire.</p>
+      <p>Though contested by modern researchers, the pyramid endures because it captures something true: that human flourishing has structure, and that we cannot ask people to seek meaning before we have helped them eat.</p>
+    </div>
+    <div class="visual hierarchy">
+      <div class="tier t1">Self-Transcendence</div>
+      <div class="tier t2">Self-Actualization</div>
+      <div class="tier t3">Esteem & Recognition</div>
+      <div class="tier t4">Love & Belonging</div>
+      <div class="tier t5">Safety · Physiological</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CALLOUT QUOTES ================== -->
+<section class="quote-section">
+  <div class="inner">
+    <div class="section-intro">
+      <span class="section-tag">In Their Own Words</span>
+      <h2>Voices from the field</h2>
+    </div>
+    <div class="quotes">
+      <div class="qcard"><p>What we believe with all our hearts is not necessarily the truth.</p><cite>Elizabeth Loftus</cite></div>
+      <div class="qcard"><p>Insight may cause blindness.</p><cite>Paul Watzlawick</cite></div>
+      <div class="qcard"><p>Only good people get depressed.</p><cite>Dorothy Rowe</cite></div>
+      <div class="qcard"><p>People do what they are told to do.</p><cite>Stanley Milgram</cite></div>
+      <div class="qcard"><p>Turn on, tune in, drop out.</p><cite>Timothy Leary</cite></div>
+      <div class="qcard"><p>The unconscious is the discourse of the Other.</p><cite>Jacques Lacan</cite></div>
+      <div class="qcard"><p>Instinct is a dynamic pattern.</p><cite>Wolfgang Köhler</cite></div>
+      <div class="qcard"><p>A man with conviction is a hard man to change.</p><cite>Leon Festinger</cite></div>
+      <div class="qcard"><p>We can listen to only one voice at once.</p><cite>Donald Broadbent</cite></div>
+      <div class="qcard"><p>Time's arrow is bent into a loop.</p><cite>Endel Tulving</cite></div>
+      <div class="qcard"><p>You cannot understand a system until you try to change it.</p><cite>Kurt Lewin</cite></div>
+      <div class="qcard"><p>Our history does not determine our destiny.</p><cite>Boris Cyrulnik</cite></div>
+      <div class="qcard"><p>The unconscious is the true psychical reality.</p><cite>Sigmund Freud</cite></div>
+      <div class="qcard"><p>What a man can be, he must be.</p><cite>Abraham Maslow</cite></div>
+      <div class="qcard"><p>Be that self which one truly is.</p><cite>Søren Kierkegaard</cite></div>
+      <div class="qcard"><p>The good life is a process, not a state of being.</p><cite>Carl Rogers</cite></div>
+      <div class="qcard"><p>Anything that grows has a ground plan.</p><cite>Erik Erikson</cite></div>
+      <div class="qcard"><p>The collective unconscious is made up of archetypes.</p><cite>Carl Jung</cite></div>
+      <div class="qcard"><p>Suffering ceases to be suffering at the moment it finds a meaning.</p><cite>Viktor Frankl</cite></div>
+      <div class="qcard"><p>Most human behavior is learned through modeling.</p><cite>Albert Bandura</cite></div>
+      <div class="qcard"><p>The more you see it, the more you like it.</p><cite>Robert Zajonc</cite></div>
+      <div class="qcard"><p>One does not become fully human painlessly.</p><cite>Rollo May</cite></div>
+      <div class="qcard"><p>The language organ grows like any other body organ.</p><cite>Noam Chomsky</cite></div>
+      <div class="qcard"><p>Ecstasy is a step into an alternative reality.</p><cite>Mihály Csíkszentmihályi</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== COGNITIVE PSYCHOLOGY ================== -->
+<section id="cognitive">
+  <div class="section-intro">
+    <span class="section-tag">Part Four</span>
+    <h2>Cognitive Psychology</h2>
+    <p class="lede">The Calculating Brain. By the 1950s, computers gave psychologists a new metaphor: the mind as information processor. The "cognitive revolution" reopened doors behaviorism had nailed shut.</p>
+  </div>
+
+  <div class="experiments">
+    <div class="experiment">
+      <div class="ticker">Insight Learning</div>
+      <h3>Wolfgang Köhler & the Chimpanzees</h3>
+      <div class="who">1887–1967 · Gestalt Psychology</div>
+      <p>Stranded on Tenerife by the outbreak of World War I, the German Gestalt psychologist Köhler spent six years running ingenious experiments at the Prussian Academy's primate research station. He suspended bananas out of reach and scattered crates and sticks around the cage. The chimps' problem-solving, he saw, was not the gradual trial-and-error of Thorndike's cats; instead the animal would pause, stare at the situation, and — suddenly — act decisively, stacking the crates or fitting two sticks together to reach the prize.</p>
+      <p>His chimpanzee Sultan became famous for assembling a longer pole from two shorter ones in a flash of apparent insight. Köhler called this <strong>insight learning</strong>: solutions arrive whole, the product of perceiving a situation in a new configuration (<em>Gestalt</em>). With Max Wertheimer and Kurt Koffka, he founded the Gestalt school, which insisted that <em>the whole is greater than the sum of its parts</em> — and that perception, learning, and thinking must be studied as organized wholes, not analyzable atoms.</p>
+      <div class="finding">"Instinct is a dynamic pattern." Solutions arrive whole, in a moment of restructured perception.</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Interrupted Memory</div>
+      <h3>Bluma Zeigarnik & the Waiters of Berlin</h3>
+      <div class="who">1901–1988 · Gestalt · Memory</div>
+      <p>The Russian psychologist Bluma Zeigarnik, working under Kurt Lewin in Berlin, was sitting in a café when she noticed something curious: the waiters could recite the orders of customers who hadn't yet paid — but completely forgot the same orders the moment the bill was settled. Lewin encouraged her to investigate.</p>
+      <p>In her 1927 experiments, Zeigarnik gave participants a series of small tasks — counting, puzzle-solving, modeling clay — and interrupted them halfway through about half of them. Later, when asked what tasks they had done, participants recalled the <strong>interrupted tasks roughly twice as well as the completed ones</strong>. She inferred that goal-directed tension is held in mind until the goal is reached; closure releases the memory. The <strong>Zeigarnik effect</strong> has gone on to shape advertising (cliffhangers, unresolved jingles), education (interleaved practice), and our understanding of intrusive thoughts and rumination.</p>
+      <div class="finding">"Interruption of a task greatly improves its chances of being remembered."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Cell Assemblies</div>
+      <h3>Donald Hebb & the Wiring of Memory</h3>
+      <div class="who">1904–1985 · Neuropsychology</div>
+      <p>The Canadian psychologist Donald Hebb, working at McGill University, asked the question Lashley could not answer: if memory is distributed across the brain, what is its physical substrate? In <em>The Organization of Behavior</em> (1949), Hebb proposed that learning is the gradual strengthening of synaptic connections between neurons that fire together. He called these groups of co-activated neurons <strong>cell assemblies</strong>; chains of cell assemblies became <strong>phase sequences</strong>, the neural correlates of thought.</p>
+      <p>The principle is now universally summarized as <strong>"neurons that fire together, wire together"</strong> — Hebbian learning — and is the conceptual foundation of modern neuroscience, neural networks, and machine learning. When a baby hears footsteps and is then picked up, the firing of "footsteps" neurons becomes linked to the firing of "being picked up" neurons; over time, just the footsteps trigger the whole assembly.</p>
+      <div class="finding">"When a baby hears footsteps, an assembly is excited."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Constructivist Learning</div>
+      <h3>Jerome Bruner & the Spiral Curriculum</h3>
+      <div class="who">1915–2016 · Cognitive Development</div>
+      <p>One of the founders of the cognitive revolution, Bruner co-founded Harvard's Center for Cognitive Studies in 1960 with George Miller. He argued that knowing is not a static product but a dynamic process — an active construction by the learner. In his hugely influential <em>The Process of Education</em> (1960), he proposed the <strong>spiral curriculum</strong>: any subject can be taught honestly in some intellectually respectable form to a child at any developmental stage, then revisited and deepened year after year. He also identified three modes of representation by which children encode experience: <em>enactive</em> (through action), <em>iconic</em> (through images), and <em>symbolic</em> (through language). His ideas transformed American education and remain foundational to modern teaching practice.</p>
+      <div class="finding">"Knowing is a process, not a product."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Cognitive Dissonance</div>
+      <h3>Leon Festinger & the Doomsday Cult</h3>
+      <div class="who">1919–1989 · Social Cognition</div>
+      <p>In late 1954, Festinger noticed a strange item in a Chicago newspaper: a housewife named Dorothy Martin claimed to have received messages from aliens on the planet Clarion warning that the world would end on December 21, 1954, in a great flood — but that true believers would be rescued by flying saucers at midnight. With colleagues Henry Riecken and Stanley Schachter, Festinger infiltrated the small "Seekers" cult to observe what would happen when the prophecy failed.</p>
+      <p>What happened was extraordinary. As midnight passed without aliens, the group sat in agonized silence — until at 4:45 a.m. their leader announced she had received a new message: God, moved by their faith, had spared the world. Far from abandoning the cult, members became <em>more</em> evangelical, calling newspapers and proselytizing to strangers — behavior they had previously avoided. Festinger generalized the principle: when our actions conflict with our beliefs, we experience <strong>cognitive dissonance</strong>, an unpleasant psychological tension that we are powerfully motivated to reduce. Rather than admit they were wrong, the Seekers re-framed the evidence to fit. <em>A man with conviction is a hard man to change.</em></p>
+      <div class="finding">"A man with conviction is a hard man to change."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Working Memory</div>
+      <h3>George Armitage Miller & the Magical Seven</h3>
+      <div class="who">1920–2012 · Cognitive Psychology</div>
+      <p>In his landmark 1956 paper <em>The Magical Number Seven, Plus or Minus Two: Some Limits on Our Capacity for Processing Information</em>, Miller pulled together a wide range of evidence — judgments of tone pitch, brightness, line length, taste — and found a recurring upper bound: people could reliably distinguish about <strong>seven categories</strong> at a time. The same number turned up in span-of-attention experiments, in short-term memory studies, and in studies of how many digits people could recall.</p>
+      <p>Miller's brilliant move was to suggest that the bottleneck wasn't bits but <strong>chunks</strong>: meaningful units of information. A random sequence of 21 letters is overwhelming; the same 21 letters chunked as seven three-letter words can be easily held in mind. We expand the capacity of working memory not by adding bandwidth but by <em>encoding more deeply</em>. This insight became the foundation of modern theories of working memory and helped launch the cognitive revolution. Miller went on to develop WordNet (a lexical database that shaped early natural language processing) and remained a central figure in cognitive science for half a century.</p>
+      <div class="finding">"The magical number 7, plus or minus 2."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Cognitive Therapy</div>
+      <h3>Aaron Beck & the Surface of Thought</h3>
+      <div class="who">1921–2021 · Cognitive Behavioral Therapy</div>
+      <p>Trained as a psychoanalyst, Beck began the 1960s as a Freudian researching depression — and ended the decade overturning Freudian assumptions. He noticed that his depressed patients reported, almost continuously, a stream of brief, involuntary, negative thoughts: <em>"I'm a failure." "Nobody likes me." "Nothing will ever get better."</em> These <strong>automatic thoughts</strong> seemed to <em>cause</em> the depression rather than merely express it, and they shared a recognizable shape — what Beck called the <strong>cognitive triad</strong>: a negative view of the self, the world, and the future.</p>
+      <p>Beck developed <strong>cognitive therapy</strong>: a structured, time-limited treatment in which patients learn to identify their automatic thoughts, test them against evidence, and replace cognitive distortions (all-or-nothing thinking, catastrophizing, mind-reading, personalization) with more accurate appraisals. He created the Beck Depression Inventory (still one of the most widely used assessment tools in psychiatry), the Beck Anxiety Inventory, and the Beck Hopelessness Scale. Merged with behavior therapy in the 1980s, his approach became <strong>cognitive-behavioral therapy (CBT)</strong> — the most extensively researched and empirically supported psychotherapy in the world, used to treat depression, anxiety, PTSD, OCD, eating disorders, and many other conditions.</p>
+      <div class="finding">"There's more to the surface than meets the eye."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Selective Attention</div>
+      <h3>Donald Broadbent & the Cocktail Party Problem</h3>
+      <div class="who">1926–1993 · Attention</div>
+      <p>A former Royal Air Force pilot who turned to psychology after the war, Broadbent built on the wartime experience of air traffic controllers who could only attend to one radio voice at a time. In his classic <strong>dichotic listening</strong> experiments at Cambridge's Applied Psychology Unit, he played different messages simultaneously to a participant's left and right ears, then asked what they had heard. Participants could "shadow" (repeat back) one channel reliably but had almost no recall of the other — only that someone had been speaking.</p>
+      <p>From this Broadbent developed the first formal model of attention: information flows from the senses into a brief <em>sensory store</em>, then through a <strong>selective filter</strong> that lets only one channel through to the limited-capacity processing system. The filter operates on physical features (location, pitch, loudness) rather than meaning. His <em>Perception and Communication</em> (1958) was the founding text of modern cognitive psychology, applying information-theoretic models drawn from Shannon and Wiener to human cognition.</p>
+      <div class="finding">"We can listen to only one voice at once."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Memory Systems</div>
+      <h3>Endel Tulving & Episodic vs. Semantic Memory</h3>
+      <div class="who">1927– · Memory</div>
+      <p>The Estonian-Canadian psychologist Endel Tulving fundamentally restructured how we think about memory. Before Tulving, "long-term memory" was treated as a single store. In his landmark 1972 paper, he distinguished <strong>episodic memory</strong> (autobiographical recall of specific experiences in time and place — your first kiss, last night's dinner) from <strong>semantic memory</strong> (general world knowledge, facts, vocabulary — the capital of France, what a hammer is for). Brain damage can devastate one while sparing the other; they involve different neural systems.</p>
+      <p>Episodic memory, Tulving argued, is uniquely human — it allows us to perform <strong>"mental time travel,"</strong> revisiting our past and projecting ourselves into possible futures. He also formulated the <strong>encoding specificity principle</strong>: retrieval is most successful when the cues at recall match the conditions at encoding. This is why familiar smells or songs can unlock memories that direct effort cannot reach.</p>
+      <div class="finding">"Time's arrow is bent into a loop."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Mental Imagery</div>
+      <h3>Roger Shepard & Mental Rotation</h3>
+      <div class="who">1929–2022 · Cognitive Psychology</div>
+      <p>In a beautifully elegant 1971 experiment, Shepard and Jacqueline Metzler showed participants pairs of three-dimensional objects drawn at different orientations and asked: <em>are these the same shape, or mirror images?</em> The reaction times revealed something extraordinary: the more degrees of rotation needed to align the two figures, the longer participants took to answer — at a constant rate of about 60° per second. People were apparently <em>rotating the figure in their minds</em>, in real time, just as they would rotate a physical object in their hands. This was decisive evidence that mental imagery is not metaphor but a genuine cognitive process. Shepard's broader claim: <em>perception is internally guided hallucination</em> — the brain is always generating a model of the world and checking it against incoming data.</p>
+      <div class="finding">"Perception is externally guided hallucination."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Heuristics & Biases</div>
+      <h3>Daniel Kahneman & Amos Tversky</h3>
+      <div class="who">1934– / 1937–1996 · Behavioral Economics</div>
+      <p>For decades, economists assumed humans were rational utility-maximizers. The Israeli psychologists Kahneman and Tversky proved otherwise. Across hundreds of experiments, they showed that human judgment under uncertainty is governed not by probability but by mental shortcuts they called <strong>heuristics</strong> — and that these shortcuts produce systematic, predictable <em>biases</em>.</p>
+      <p>The <em>availability heuristic</em>: we judge events more probable if examples come easily to mind (so we overestimate plane crashes, underestimate boring causes of death). The <em>representativeness heuristic</em>: we judge by resemblance to stereotypes, ignoring base rates. <em>Anchoring</em>: arbitrary numbers shape our estimates. Their <strong>prospect theory</strong> showed that losses loom psychologically larger than equivalent gains, and that we are risk-averse for gains but risk-seeking for losses. Kahneman received the 2002 Nobel Prize in Economic Sciences (Tversky having died of cancer in 1996) and his book <em>Thinking, Fast and Slow</em> made these ideas globally famous.</p>
+      <div class="finding">"We are constantly on the lookout for causal connections."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Mood & Memory</div>
+      <h3>Gordon H. Bower & State-Dependent Recall</h3>
+      <div class="who">1932–2020 · Cognitive Psychology</div>
+      <p>The Stanford psychologist Gordon Bower demonstrated that memory is profoundly intertwined with emotion. In experiments using hypnotic suggestion to induce specific moods, he showed two robust effects. <strong>Mood-congruent memory</strong>: people in a happy mood notice and recall predominantly positive events from their lives; people in a sad mood recall predominantly negative ones — a feedback loop that helps explain how depression sustains itself. <strong>Mood-dependent retrieval</strong>: information learned while in one mood is best recalled when that mood is reinstated. Events and the emotions that accompanied them are stored together, each serving as a retrieval cue for the other.</p>
+      <div class="finding">"Events and emotion are stored in memory together."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Emotions</div>
+      <h3>Paul Ekman & the Universal Face</h3>
+      <div class="who">1934– · Emotions Research</div>
+      <p>Anthropologists like Margaret Mead had argued that facial expressions were culturally learned and varied from society to society. Ekman set out to test this — and overturned it. Traveling to the isolated Fore tribe of Papua New Guinea, he showed villagers photographs of American faces and read stories about emotional situations. The Fore (who had no exposure to Western media) reliably matched faces to emotions just as Americans did, and the facial expressions they themselves produced for those emotions were instantly recognizable to American observers.</p>
+      <p>Ekman concluded that <strong>six basic emotions</strong> — happiness, sadness, anger, fear, surprise, disgust — are biologically universal, with characteristic facial signatures evolved in our species. (He later added contempt.) He went on to develop the <strong>Facial Action Coding System (FACS)</strong>, a detailed catalogue of every observable facial muscle movement, and to study <em>microexpressions</em> — fleeting half-second betrayals of suppressed emotion that have been applied to lie detection, terrorism prevention, and even animation (Ekman consulted on Pixar's <em>Inside Out</em>).</p>
+      <div class="finding">"Emotions are a runaway train."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Positive Psychology</div>
+      <h3>Mihály Csíkszentmihályi & Flow</h3>
+      <div class="who">1934–2021 · Positive Psychology</div>
+      <p>The Hungarian-American psychologist Csíkszentmihályi (pronounced <em>chick-sent-me-high-ee</em>) spent decades interviewing rock climbers, surgeons, chess masters, dancers, and artists about the experience of being completely absorbed in their work. He discovered they all described the same state, using nearly identical language: time disappears, self-consciousness vanishes, action and awareness merge, action feels effortless and rewarding in itself.</p>
+      <p>He named this state <strong>flow</strong>, and identified its conditions: a clear goal, immediate feedback, a balance between skill and challenge (too easy → boredom; too hard → anxiety), and total focus. Flow, he argued, is the closest thing most of us experience to ordinary ecstasy — and the more flow we find in life, the more meaningful our lives feel. His work helped found <strong>positive psychology</strong>, the scientific study of what makes life worth living.</p>
+      <div class="finding">"Ecstasy is a step into an alternative reality."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Flourishing</div>
+      <h3>Martin Seligman & the Three Happy Lives</h3>
+      <div class="who">1942– · Positive Psychology</div>
+      <p>Seligman first became famous for his 1960s discovery of <strong>learned helplessness</strong>: dogs given inescapable shocks eventually stopped trying to escape even when escape became possible. The phenomenon, he later showed, was a model of depression. Then, as president of the American Psychological Association in 1998, he announced a new mission for psychology: to study not just what makes people miserable, but what makes them flourish.</p>
+      <p>From cross-cultural studies he identified three distinct routes to happiness: <strong>the Pleasant Life</strong> (maximizing positive emotions in the moment); <strong>the Engaged Life</strong> (deep involvement in activities that produce flow); and <strong>the Meaningful Life</strong> (using one's strengths in the service of something larger than oneself). The Pleasant Life proved fragile; the Engaged and Meaningful lives proved durable — and people who scored highest in life satisfaction tended to combine all three. He also discovered that highly happy people are consistently socially connected: solitude does not produce flourishing.</p>
+      <div class="finding">"Happy people are extremely social."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Memory Reliability</div>
+      <h3>Elizabeth Loftus & the Lost in the Mall</h3>
+      <div class="who">1944– · Memory · Forensic Psychology</div>
+      <p>Through decades of research, the American psychologist Elizabeth Loftus has shown that human memory is not a recording but a reconstruction — and a startlingly malleable one. Her classic 1974 experiment, the <strong>"car crash study,"</strong> showed participants film of a traffic accident and asked: how fast were the cars going when they <em>contacted</em> each other? Or <em>hit</em>? Or <em>smashed</em>? The verb alone changed estimated speeds — and a week later, those who heard "smashed" were more likely to falsely "remember" broken glass at the scene.</p>
+      <p>Her 1995 <strong>"Lost in the Mall"</strong> study took this further: working with family members of participants, she planted entirely fabricated childhood memories of being lost in a shopping mall. Within a few suggestive interview sessions, about a quarter of participants developed apparently vivid memories of an event that never happened. Loftus has testified in hundreds of legal cases — challenging the reliability of eyewitness testimony, exposing the dangers of "recovered memory" therapy, and earning both gratitude (from the wrongly accused) and threats (from those who believed her work undermined abuse survivors).</p>
+      <div class="finding">"What we believe with all our hearts is not necessarily the truth."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Memory's Failings</div>
+      <h3>Daniel Schacter & the Seven Sins</h3>
+      <div class="who">1952– · Cognitive Neuroscience</div>
+      <p>The Harvard memory researcher Daniel Schacter — a student of Endel Tulving — synthesized decades of memory research into a now-classic taxonomy of memory's characteristic failures, published in <em>The Seven Sins of Memory</em> (2001). The "sins of omission" are: <strong>transience</strong> (the gradual loss of memory over time), <strong>absent-mindedness</strong> (lapses of attention at encoding or retrieval), and <strong>blocking</strong> (the tip-of-the-tongue phenomenon). The "sins of commission" are: <strong>misattribution</strong> (assigning a memory to the wrong source), <strong>suggestibility</strong> (incorporating false information from outside sources), <strong>bias</strong> (current beliefs distorting recall of the past), and <strong>persistence</strong> (the involuntary intrusion of memories one would rather forget — central to PTSD).</p>
+      <p>These failings, Schacter argues, are not design flaws but the necessary by-products of a memory system that has evolved to be flexible, adaptive, and useful — not a perfect recorder. A literal memory would be ruinously inefficient.</p>
+      <div class="finding">"The seven sins of memory."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Mindfulness</div>
+      <h3>Jon Kabat-Zinn & MBSR</h3>
+      <div class="who">1944– · Mindfulness</div>
+      <p>A molecular biologist trained at MIT who studied Zen and Vipassana meditation, Kabat-Zinn founded the Stress Reduction Clinic at the University of Massachusetts Medical Center in 1979. There he developed <strong>Mindfulness-Based Stress Reduction (MBSR)</strong>, an eight-week secular program adapting Buddhist meditation techniques to clinical use. Patients learned to observe their thoughts and bodily sensations non-judgmentally — <em>"one is not one's thoughts."</em> Clinical trials demonstrated significant benefits for chronic pain, anxiety, depression, and stress-related illness. Later collaborations produced Mindfulness-Based Cognitive Therapy (MBCT) for the prevention of depressive relapse.</p>
+      <div class="finding">"One is not one's thoughts."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Evolutionary Mind</div>
+      <h3>Steven Pinker & the Adapted Mind</h3>
+      <div class="who">1954– · Evolutionary Psychology</div>
+      <p>The Canadian-American cognitive scientist Steven Pinker has been the most prominent recent advocate of <strong>evolutionary psychology</strong>: the view that the human mind, like the human body, is a product of natural selection, and that many of our cognitive and emotional capacities are evolved adaptations. In <em>The Language Instinct</em> (1994) he popularized Chomsky's view that language is biologically innate; in <em>How the Mind Works</em> (1997) he proposed the mind as a system of evolved computational modules; and in <em>The Blank Slate</em> (2002) he attacked what he saw as the unscientific dogma that human nature is wholly socially constructed. He has been controversial — accused of biological determinism — but his work has helped restore biology to a central place in psychological theory.</p>
+      <div class="finding">"The fear is that biology will debunk all that we hold sacred."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">OCD & CBT</div>
+      <h3>Paul Salkovskis & Inflated Responsibility</h3>
+      <div class="who">1950s– · Cognitive Behavioral Therapy</div>
+      <p>The British clinical psychologist Paul Salkovskis revolutionized treatment of obsessive-compulsive disorder by reframing it as a disorder not of intrusive thoughts (everyone has those) but of <strong>inflated responsibility</strong>: the conviction that one is uniquely able — and morally obligated — to prevent harm. The compulsions (hand-washing, checking, counting) are attempts to discharge this unbearable responsibility. His cognitive-behavioral treatment combines exposure with response prevention and explicit cognitive work to dispute the responsibility appraisal, and has dramatically improved outcomes for OCD sufferers worldwide.</p>
+      <div class="finding">"Compulsive behavior rituals are attempts to control intrusive thoughts."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== SOCIAL PSYCHOLOGY ================== -->
+<section id="social" style="background:var(--paper-2);">
+  <div class="section-intro">
+    <span class="section-tag">Part Five</span>
+    <h2>Social Psychology</h2>
+    <p class="lede">Being in a world of others. The most disturbing — and important — findings in psychology have come from studying not what individuals do alone, but what they do together.</p>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Solomon Asch · 1951</span>
+      <h3>How strong is the urge toward social conformity?</h3>
+      <p>Solomon Asch, a Polish-born American social psychologist, wanted to know how far a person's perception of reality could be bent by group pressure. He devised what looked like a trivial visual experiment: participants were shown a standard line, then asked to identify which of three comparison lines matched it. The correct answer was obvious. Tested alone, people made fewer than 1% errors.</p>
+      <p>But Asch then placed each genuine subject in a room with seven to nine confederates posing as fellow participants. On critical trials, the confederates — each in turn — gave the same wrong answer aloud, in clear, confident voices. The real subject answered last or next-to-last, having heard everyone else commit to an obviously false response.</p>
+      <p>The results were stunning: <strong>75% of participants conformed to the group at least once</strong>, and 32% conformed on the majority of trials. Many <em>knew</em> they were wrong but went along to avoid being seen as foolish, or began to doubt their own eyes. Asch ran many variations and found that even a single dissenting confederate — someone else who gave the right answer — was enough to dramatically reduce conformity, suggesting that what we most fear is being the lone voice. The line experiment revealed the quiet, daily, near-universal capitulation of independent perception to peer pressure.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="display:flex;gap:1.5rem;justify-content:center;align-items:flex-end;margin-bottom:1.5rem;">
+          <div style="width:6px;height:120px;background:var(--ink);"></div>
+          <div style="display:flex;gap:1rem;align-items:flex-end;">
+            <div style="width:6px;height:80px;background:var(--ink);"></div>
+            <div style="width:6px;height:120px;background:var(--ink);"></div>
+            <div style="width:6px;height:100px;background:var(--ink);"></div>
+          </div>
+        </div>
+        <div style="font-style:italic;color:var(--muted);font-size:0.9rem;">Which matches the reference line?<br>Everyone in the room confidently<br>says the obviously wrong one.<br>What do you say?</div>
+        <div style="margin-top:1.5rem;font-size:0.85rem;color:var(--ink);text-align:left;line-height:1.7;">
+          <strong>Results across 12 critical trials:</strong><br>
+          • 25% never conformed<br>
+          • 75% conformed at least once<br>
+          • 32% conformed on the majority<br>
+          • Just <em>one</em> dissenter cuts conformity by ¾
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:3rem;color:var(--accent);margin-bottom:0.5rem;">65%</div>
+        <div style="font-size:1rem;color:var(--ink);font-weight:bold;margin-bottom:1rem;">of participants administered<br>the maximum 450-volt shock</div>
+        <div style="font-size:0.9rem;color:var(--muted);font-style:italic;">Psychiatrists predicted fewer than 0.1%.</div>
+        <div style="margin-top:1.5rem;font-size:0.85rem;color:var(--ink);text-align:left;line-height:1.7;">
+          <strong>The shock scale:</strong><br>
+          15v — Slight shock<br>
+          75v — Moderate shock<br>
+          135v — Strong shock<br>
+          255v — Intense shock<br>
+          315v — Extreme intensity<br>
+          375v — <em>Danger: severe shock</em><br>
+          435v — XXX
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">Stanley Milgram · 1961–1963</span>
+      <h3>People do what they are told to do.</h3>
+      <p>Milgram, the son of Jewish refugees, grew up haunted by a single question: how could ordinary Germans have followed orders to murder millions? Was there something specific to German culture, or was the willingness to obey monstrous orders latent in all of us? At Yale in 1961, beginning shortly after the trial of Adolf Eichmann, he devised an experiment to find out.</p>
+      <p>Participants — ordinary New Haven residents, mostly men aged 20 to 50, recruited via newspaper ad and paid four dollars — were told they were taking part in a study of memory. They drew lots (rigged) to play "teacher"; another man (an actor) played "learner." The teacher's job was to administer increasingly powerful electric shocks for each wrong answer, ranging from 15 to a horrifying 450 volts, labeled <em>Danger: Severe Shock</em> and finally just <em>XXX</em>. The learner's cries of pain (pre-recorded) escalated until, around 300 volts, he fell silent.</p>
+      <p>Whenever the teacher hesitated, the experimenter — in a gray lab coat — would calmly say: <em>"Please continue. The experiment requires that you continue. It is absolutely essential that you continue. You have no other choice; you must go on."</em> No physical force was used. No threats. Just authority.</p>
+      <p><strong>Sixty-five percent of participants administered the maximum 450-volt shock</strong>, despite the learner's screams and apparent collapse. Forty psychiatrists Milgram surveyed in advance had predicted that fewer than one in a thousand would do so. Many participants showed visible distress — trembling, sweating, nervous laughter, three suffered seizures — yet they continued. The capacity to obey unspeakable orders, Milgram concluded, is not a German trait. It is a human one. The findings have been replicated across decades and cultures.</p>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Philip Zimbardo · 1971</span>
+      <h3>What happens when you put good people in an evil place?</h3>
+      <p>A childhood classmate of Milgram in the Bronx, Zimbardo took the question of situational influence even further. He wanted to know: if you stripped away individual differences entirely, would the social roles of "guard" and "prisoner" themselves be enough to produce cruelty and despair? In August 1971, he answered with one of the most controversial experiments in the history of psychology.</p>
+      <p>Twenty-four mentally healthy male college students were carefully screened, then assigned by coin-flip to play guards or prisoners in a mock prison constructed in the basement of Stanford's psychology building. "Prisoners" were arrested at their homes by real Palo Alto police, fingerprinted, stripped, deloused, dressed in numbered smocks, and chained at the ankle. Guards wore uniforms and mirrored sunglasses to obscure their eyes, and were given clubs, whistles, and total authority over the prisoners — but instructed not to use physical violence.</p>
+      <p>Within 36 hours, the first prisoner had to be released after a breakdown. Within days, guards were inventing psychologically degrading punishments: forced exercise, sleep deprivation, denial of bathroom access, hooding, humiliation, mock sexual acts. Prisoners had become passive, depressed, and despairing. One went on hunger strike; others wept and begged to leave. Zimbardo himself, playing the "prison superintendent," lost moral perspective and had to be jolted back to reality by his then-girlfriend (later wife) Christina Maslach, who visited the basement and was horrified by what she saw.</p>
+      <p>The two-week experiment was terminated after just <strong>six days</strong>. Subsequent critics have argued that Zimbardo's coaching of the guards influenced their behavior, and that the experiment's scientific value is contested. But its broader lesson remains: institutions and roles have astonishing power to reshape behavior, and the line between "us" and "the perpetrators of cruelty" is far thinner than we want to believe. Decades later, when the Abu Ghraib torture scandal broke, Zimbardo served as expert witness for one of the implicated guards — arguing that the situation, not the dispositions of individual soldiers, was the root cause.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.1rem;font-weight:bold;color:var(--accent);margin-bottom:1rem;">STANFORD, AUGUST 1971</div>
+        <div style="font-size:0.95rem;color:var(--muted);line-height:1.9;text-align:left;padding-left:1.5rem;">
+          <div><strong style="color:var(--ink);">Day 1</strong> · Awkward role-play, jokes</div>
+          <div><strong style="color:var(--ink);">Day 2</strong> · Prisoners rip off numbers, barricade cells</div>
+          <div><strong style="color:var(--ink);">Day 3</strong> · Guards retaliate with fire extinguishers, strip prisoners</div>
+          <div><strong style="color:var(--ink);">Day 4</strong> · First prisoner has emotional breakdown — released</div>
+          <div><strong style="color:var(--ink);">Day 5</strong> · Hooded prisoners forced to perform humiliating acts</div>
+          <div style="color:var(--accent);font-weight:bold;margin-top:0.5rem;">Day 6 · Maslach intervenes; experiment terminated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="thinkers" style="margin-top:4rem;">
+    <div class="thinker">
+      <div class="dates">1890 — 1947</div>
+      <h3>Kurt Lewin</h3>
+      <span class="school">Field Theory · Group Dynamics</span>
+      <p class="big-idea">"You cannot understand a system until you try to change it."</p>
+      <p class="desc">A Polish-born Jewish psychologist who fled the Nazis to America in 1933, Lewin is widely considered the <strong>father of social psychology</strong> and a founder of organizational development. His <strong>field theory</strong> represented behavior with the deceptively simple equation <em>B = f(P, E)</em>: behavior is a function of the person interacting with the environment, or what he called the <strong>"life space"</strong> — the total psychological field of forces acting on someone at a given moment. He invented sensitivity training and the T-group; pioneered <strong>action research</strong>, applying experimental methods to real-world social problems (he led wartime studies on persuading American housewives to eat organ meats during food shortages); and formulated the still-used three-stage model of change: <em>unfreeze → change → refreeze</em>. He died of a heart attack at just 56, leaving behind a generation of students who would shape postwar social psychology: Festinger, Bandura, Schachter, and others.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1922 — 1982</div>
+      <h3>Erving Goffman</h3>
+      <span class="school">Dramaturgical Theory</span>
+      <p class="big-idea">"Life is a dramatically enacted thing."</p>
+      <p class="desc">A Canadian sociologist who worked at the boundary of sociology and social psychology, Goffman published the field-defining <em>The Presentation of Self in Everyday Life</em> (1959), arguing that all of social interaction is a theatrical performance. We have a <strong>front stage</strong> (where we present a carefully managed image to our audience) and a <strong>back stage</strong> (where the performer drops the mask: the kitchen behind the restaurant, the locker room behind the game). We engage in <strong>impression management</strong> — costumes, props, scripts, mannerisms — and we collaborate with others to maintain each other's faces. His later books <em>Stigma</em> (1963) and <em>Asylums</em> (1961) revolutionized how we think about mental illness, criminal records, and "total institutions" like prisons and psychiatric hospitals.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1923 — 2008</div>
+      <h3>Robert Zajonc</h3>
+      <span class="school">Mere Exposure · Affect</span>
+      <p class="big-idea">"The more you see it, the more you like it."</p>
+      <p class="desc">A Polish-born survivor of a Nazi bombing that killed his parents, Zajonc became one of social psychology's most original thinkers. His 1968 paper on the <strong>mere exposure effect</strong> showed — through repeated demonstrations with random Chinese characters, made-up words, and unfamiliar faces — that repeated exposure to a neutral stimulus reliably increases liking, even when participants are not consciously aware of having seen the stimulus before. The effect underlies friendship formation, advertising, propaganda, and political familiarity. Zajonc also championed the radical claim that <strong>"preferences need no inferences"</strong>: emotional responses can precede and operate independently of conscious thought — that affect comes first, cognition second.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1923 — </div>
+      <h3>Janet Taylor Spence</h3>
+      <span class="school">Feminist Psychology</span>
+      <p class="big-idea">"Who likes competent women?"</p>
+      <p class="desc">An American social psychologist who began her career studying anxiety, Spence turned in the 1970s to gender — at a moment when most psychological literature exaggerated, rather than examined, differences between men and women. Her 1972 study <em>Who Likes Competent Women?</em> was a landmark in the new field of gender studies, and her <strong>Attitudes Toward Women Scale (AWS)</strong> became a standard tool for measuring sex-role beliefs. She showed that competence in women was not, as had been claimed, universally penalized — and that traditional notions of "masculinity" and "femininity" were better conceived as independent dimensions than as opposite poles of a single scale.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1925 — </div>
+      <h3>William Glasser</h3>
+      <span class="school">Choice Theory · Reality Therapy</span>
+      <p class="big-idea">"We are, by nature, social beings."</p>
+      <p class="desc">An American psychiatrist who rejected the medical model of mental illness, Glasser developed <strong>Reality Therapy</strong> (1965), a present-focused approach in which clients are helped to assess whether their current behavior is meeting their needs and, if not, to choose differently. His later <strong>Choice Theory</strong> proposed that all behavior is internally motivated by five basic genetic needs: survival, love and belonging, power, freedom, and fun. Most psychological problems, he argued, arise from troubled relationships — and most can be addressed by changing how we connect with others rather than by medicating brain chemistry.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1925 — </div>
+      <h3>Roger Brown</h3>
+      <span class="school">Psycholinguistics · Memory</span>
+      <p class="big-idea">"Flashbulb memories are fired by events of high emotionality."</p>
+      <p class="desc">A Harvard psycholinguist who also made major contributions to memory research, Brown (with James Kulik in 1977) introduced the concept of <strong>flashbulb memories</strong>: the unusually vivid, detailed, and persistent recollections of where we were and what we were doing when we heard of a shocking public event — the JFK assassination, the moon landing, the 9/11 attacks. Such memories <em>feel</em> photographic, though later research by Ulric Neisser and others has shown that they are no more accurate than ordinary memories — only more confidently held.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1925 — </div>
+      <h3>Serge Moscovici</h3>
+      <span class="school">Social Representations · Minority Influence</span>
+      <p class="big-idea">"The goal is not to advance knowledge, but to be in the know."</p>
+      <p class="desc">A Romanian-French social psychologist who survived the wartime massacre of Jews in Bucharest, Moscovici transformed European social psychology. His theory of <strong>social representations</strong> — the shared frameworks of common-sense ideas that allow members of a society to communicate and orient themselves — explained how scientific concepts (Freud, evolution, COVID) get translated into popular understanding. He also showed that consistent <strong>minorities</strong>, not just majorities, can change attitudes — a counter to Asch's emphasis on conformity, with profound implications for social and political change.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1929 — </div>
+      <h3>Melvin Lerner</h3>
+      <span class="school">Just-World Hypothesis</span>
+      <p class="big-idea">"We believe people get what they deserve."</p>
+      <p class="desc">A Canadian-American social psychologist who in 1965 demonstrated a deeply unsettling pattern in human cognition. Participants who witnessed an innocent stranger receiving painful electric shocks tended to <em>derogate</em> her — deciding she must somehow have deserved her fate. Lerner concluded that we have a powerful, mostly unconscious need to believe that the world is just — that good things happen to good people and bad to bad — and that when reality threatens this belief, we will rewrite the moral status of victims rather than accept the world's randomness. The <strong>just-world hypothesis</strong> explains victim-blaming, attitudes toward poverty and illness, and many forms of social cruelty.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1932 — </div>
+      <h3>Elliot Aronson</h3>
+      <span class="school">Cognitive Dissonance · Social Cognition</span>
+      <p class="big-idea">"People who do crazy things are not necessarily crazy."</p>
+      <p class="desc">A student of both Maslow and Festinger, Aronson made cognitive dissonance into a workhorse of social psychology and authored one of the field's most beloved textbooks, <em>The Social Animal</em>. He has shown how ordinary people, placed under situational pressures, can be moved to commit cruel acts — and then will reshape their beliefs to justify what they have done (this is one of the engines of escalating war crimes and prejudice). On the constructive side, his <strong>jigsaw classroom</strong> technique — in which racially and academically diverse students must depend on each other to assemble pieces of a lesson — has reduced prejudice and improved learning in thousands of schools.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1942 — 1989</div>
+      <h3>Ignacio Martín-Baró</h3>
+      <span class="school">Liberation Psychology</span>
+      <p class="big-idea">"Trauma must be understood in terms of the relationship between the individual and society."</p>
+      <p class="desc">A Spanish-born Jesuit priest and social psychologist who took Salvadoran citizenship and devoted his career to the rural poor and victims of the Salvadoran civil war, Martín-Baró argued that mainstream Western psychology was too individualistic and politically blind to address the suffering of the global south. His <strong>liberation psychology</strong> insists that mental health cannot be understood apart from political and economic oppression. On the night of November 16, 1989, soldiers of the Salvadoran army's Atlacatl Battalion entered the Universidad Centroamericana and murdered Martín-Baró, five fellow Jesuits, their housekeeper, and her daughter — for the threat their voices posed to the regime. His writings continue to inspire critical, socially engaged psychology around the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== DEVELOPMENTAL ================== -->
+<section id="developmental">
+  <div class="section-intro">
+    <span class="section-tag">Part Six</span>
+    <h2>Developmental Psychology</h2>
+    <p class="lede">From infant to adult. How does a person come to be? Through stages, through attachments, through language, through play — through countless invisible negotiations with the world.</p>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Jean Piaget · 1896–1980</span>
+      <h3>The goal of education is to create men and women who are capable of doing new things.</h3>
+      <p>The Swiss biologist-turned-psychologist Jean Piaget was a child prodigy who published his first scientific paper at age eleven (on an albino sparrow). After studying mollusks for his doctorate, he turned to studying children — and overturned the prevailing assumption that they were just small adults with less knowledge. Children, he argued, are <em>qualitatively different thinkers</em>, progressing through four distinct cognitive stages, each with its own logic and limitations.</p>
+      <p>In the <strong>sensorimotor stage</strong> (0–2 years), infants learn through sensing and acting on the world. The great achievement here is <em>object permanence</em>: realizing that things continue to exist even when out of sight. In the <strong>pre-operational stage</strong> (2–7), children use symbols and language but think egocentrically — unable to take others' perspectives — and are fooled by appearances (a tall thin glass <em>looks</em> like more juice than a short fat one). In the <strong>concrete operational stage</strong> (7–11), children master <em>conservation</em>: quantities stay the same despite changes in shape. In the <strong>formal operational stage</strong> (11+), abstract and hypothetical reasoning becomes possible.</p>
+      <p>Piaget described two key processes by which children's mental models develop. In <strong>assimilation</strong>, new experiences are fit into existing <em>schemas</em> (a child sees a horse and calls it a "doggy"). In <strong>accommodation</strong>, the schema itself is changed to accommodate experience that doesn't fit (the child realizes horses are different and creates a new category). Cognitive growth is the back-and-forth of these processes seeking <em>equilibration</em>. His insistence that children construct their own knowledge through active exploration — <em>"to know is to invent"</em> — reshaped Western education across the twentieth century.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;width:100%;">
+        <div style="font-weight:bold;color:var(--accent);font-size:0.9rem;letter-spacing:0.2em;margin-bottom:1.5rem;">PIAGET'S STAGES</div>
+        <div style="text-align:left;font-size:0.92rem;line-height:1.9;color:var(--muted);">
+          <div><strong style="color:var(--ink);">0–2 yrs · Sensorimotor</strong><br>Object permanence. Learning through senses and motor action.</div>
+          <div style="margin-top:0.8rem;"><strong style="color:var(--ink);">2–7 yrs · Pre-operational</strong><br>Symbolic thinking, egocentrism, fooled by appearances.</div>
+          <div style="margin-top:0.8rem;"><strong style="color:var(--ink);">7–11 yrs · Concrete operational</strong><br>Conservation, logical reasoning with concrete objects.</div>
+          <div style="margin-top:0.8rem;"><strong style="color:var(--ink);">11+ yrs · Formal operational</strong><br>Abstract, hypothetical, scientific reasoning.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.05rem;font-weight:bold;color:var(--accent);margin-bottom:1rem;">HARLOW'S MONKEYS, 1959</div>
+        <div style="font-size:0.95rem;line-height:1.9;color:var(--muted);">
+          Two surrogate "mothers" in the cage:<br>
+          a bare wire frame holding a bottle,<br>
+          and a soft terrycloth cylinder with no food.<br><br>
+          <strong style="color:var(--ink);">The infants chose comfort —<br>spending up to 22 hours/day<br>clinging to the cloth mother.</strong><br><br>
+          They only visited the wire mother to eat,<br>
+          then rushed back to cloth for safety.<br><br>
+          When frightened, they fled to cloth.<br>
+          When exploring, they used cloth as base.<br><br>
+          <em>"Contact comfort"</em>, not nutrition,<br>
+          is the basis of attachment.
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">John Bowlby, Harry Harlow & Mary Ainsworth</span>
+      <h3>Early emotional bonds are an integral part of human nature.</h3>
+      <p>The British psychiatrist <strong>John Bowlby</strong> (1907–1990), commissioned by the World Health Organization after World War II to study the fate of orphaned and displaced children, was struck by how those without consistent caregivers suffered lasting cognitive, emotional, and social damage no matter how well their physical needs were met. He proposed <strong>attachment theory</strong>: human infants are biologically programmed to form a primary bond with a caregiver (usually but not necessarily the biological mother), a survival imperative as fundamental as feeding. The quality of that bond establishes an "internal working model" that shapes relationships across life.</p>
+      <p>The American psychologist <strong>Harry Harlow</strong> (1905–1981) provided dramatic experimental support. Working with infant rhesus macaques separated from their mothers, he offered them two surrogate "mothers": one made of cold wire mesh but holding a feeding bottle, the other a soft cloth-covered cylinder offering no food. The behaviorist prediction — based on the idea that attachment is "cupboard love" formed by association with feeding — was that the infants would prefer the wire mother. They did not. They clung to the soft mother almost constantly, visiting wire only briefly to feed before returning to comfort. <strong>Contact comfort</strong>, Harlow concluded, is a need at least as primary as food.</p>
+      <p>The Canadian-American psychologist <strong>Mary Ainsworth</strong> (1913–1999), Bowlby's collaborator, devised the <strong>Strange Situation</strong> procedure (1969) to classify attachment patterns in human infants. A one-year-old and mother are observed through a sequence of separations and reunions with a stranger. From thousands of observations, Ainsworth identified three patterns: <strong>securely attached</strong> infants (about 60–65%) use the mother as a safe base, are upset by separation, and are easily comforted on reunion; <strong>insecure-avoidant</strong> infants (about 20%) seem indifferent to mother's presence or absence; <strong>insecure-resistant</strong> (or ambivalent) infants (about 10–15%) cling and resist comfort. A fourth category, <strong>disorganized</strong>, was later added by Mary Main for children who showed contradictory behaviors associated with severe early trauma.</p>
+    </div>
+  </div>
+
+  <div class="thinkers" style="margin-top:4rem;">
+    <div class="thinker">
+      <div class="dates">1896 — 1934</div>
+      <h3>Lev Vygotsky</h3>
+      <span class="school">Sociocultural Theory</span>
+      <p class="big-idea">"We become ourselves through others."</p>
+      <p class="desc">A Russian Jewish psychologist who died of tuberculosis at just 37, Vygotsky produced a body of work so original it was suppressed in the Soviet Union for two decades and only translated into English in the 1960s. Where Piaget saw the lone child explorer testing the world independently, Vygotsky saw a child embedded in a <strong>sociocultural context</strong>, learning through interaction with parents, teachers, and more skilled peers — and through the gradual internalization of the cultural tools (especially language) they provide. His most enduring concept is the <strong>zone of proximal development</strong>: the gap between what a learner can do alone and what they can do with skilled guidance. Teaching, he argued, should aim into this zone — not what the child can already do, nor what is hopelessly beyond reach, but the next achievable step with help. The concept gave rise to the modern educational notion of <em>scaffolding</em>.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1903 — 1990</div>
+      <h3>Bruno Bettelheim</h3>
+      <span class="school">Child Psychology</span>
+      <p class="big-idea">"A child is not beholden to any particular parent."</p>
+      <p class="desc">An Austrian-American psychologist who survived eleven months in Dachau and Buchenwald, Bettelheim ran the Sonia Shankman Orthogenic School for emotionally disturbed children in Chicago for nearly 30 years. His <em>The Children of the Dream</em> (1969) studied Israeli kibbutz children raised communally, finding that — contrary to Bowlby's emphasis on the singular mother-child bond — children could thrive emotionally with multiple stable caregivers. His <em>The Uses of Enchantment</em> (1976) made the psychoanalytic case for fairy tales as essential to children's emotional development. His reputation was later damaged by allegations of cruelty toward his own pupils and by revelations of plagiarism, leaving a complicated legacy.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1902 — 1994</div>
+      <h3>Erik Erikson</h3>
+      <span class="school">Psychosocial Development</span>
+      <p class="big-idea">"Anything that grows has a ground plan."</p>
+      <p class="desc">Born in Germany to a Danish mother and an unknown father, Erikson — who chose his surname (literally "son of Erik") to fit his evolving identity — extended Freud's stages of psychosexual development across the whole lifespan, transforming them into <strong>eight psychosocial stages</strong>, each centered on a particular conflict to be resolved: <em>trust vs. mistrust</em> (infancy), <em>autonomy vs. shame and doubt</em> (toddlerhood), <em>initiative vs. guilt</em> (preschool), <em>industry vs. inferiority</em> (school age), <em>identity vs. role confusion</em> (adolescence), <em>intimacy vs. isolation</em> (young adulthood), <em>generativity vs. stagnation</em> (middle age), and <em>integrity vs. despair</em> (old age). He coined the phrase <strong>"identity crisis"</strong> and was the first major theorist to treat adolescence as a distinct developmental task and old age as a stage of significant psychological work, not just decline.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1908 — 1979</div>
+      <h3>Françoise Dolto</h3>
+      <span class="school">Child Psychoanalysis</span>
+      <p class="big-idea">"We prepare children for a life about whose course we know nothing."</p>
+      <p class="desc">A French pediatrician and psychoanalyst, daughter and disciple of Jacques Lacan's circle, Dolto became one of France's most beloved public intellectuals through her radio broadcasts giving psychoanalytic advice to parents in the 1970s. She believed children should be treated as full speaking subjects from earliest infancy, that they understand far more than adults realize, and that their unspoken truths must be respected. She founded the Maison Verte, an innovative drop-in space where infants and toddlers could meet other children and where parents could receive support — a model since copied worldwide.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1914 — 2005</div>
+      <h3>Kenneth Clark</h3>
+      <span class="school">Race & Child Development</span>
+      <p class="big-idea">"Who teaches a child to hate and fear a member of another race?"</p>
+      <p class="desc">An African-American psychologist who, with his wife Mamie Phipps Clark, designed the famous <strong>doll studies</strong> of the 1940s: Black children, when shown a Black doll and a White doll and asked which was "nice" or which they preferred, overwhelmingly chose the White doll. The studies provided scientific evidence of the psychological damage of segregation, and the Clarks' research was cited by the US Supreme Court in <em>Brown v. Board of Education</em> (1954), the landmark decision outlawing school segregation. Kenneth Clark became the first Black president of the American Psychological Association in 1971.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1917 — </div>
+      <h3>Eleanor E. Maccoby</h3>
+      <span class="school">Gender Development</span>
+      <p class="big-idea">"Girls get better grades than boys."</p>
+      <p class="desc">A pioneering Stanford developmental psychologist who spent decades studying gender differences, Maccoby's monumental <em>The Psychology of Sex Differences</em> (1974, with Carol Jacklin) reviewed roughly 1,400 studies and concluded that most claimed differences between boys and girls were either unreliable or far smaller than commonly believed. The few robust differences — verbal ability, mathematical and spatial ability, aggression, and school performance — were modest compared to within-sex variation. Her work was a turning point in the empirical study of gender and helped demolish many sex-role stereotypes.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1925 — 2021</div>
+      <h3>Albert Bandura</h3>
+      <span class="school">Social Learning Theory</span>
+      <p class="big-idea">"Most human behavior is learned through modeling."</p>
+      <p class="desc">The Canadian-American psychologist Albert Bandura — long ranked the fourth most-cited psychologist of all time after Skinner, Freud, and Piaget — challenged behaviorism's assumption that all learning requires direct reinforcement. In his 1961 <strong>Bobo doll experiments</strong>, children watched an adult either beat or ignore a large inflatable clown. Children who had seen the violent adult later imitated the violence with high fidelity — punching, kicking, hitting the doll with a hammer — and even invented new forms of aggression. Children who had not seen the violent model played peacefully. From this Bandura developed <strong>social learning theory</strong>: humans learn primarily by <em>observing and imitating</em> models, not just by direct reward and punishment. He later expanded this into <strong>social cognitive theory</strong>, introducing the concept of <strong>self-efficacy</strong> — our belief in our capacity to accomplish a task — which has become one of the most powerful predictors in psychology.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1927 — 1987</div>
+      <h3>Lawrence Kohlberg</h3>
+      <span class="school">Moral Development</span>
+      <p class="big-idea">"Morality develops in six stages."</p>
+      <p class="desc">An American psychologist who extended Piaget's stage theory to moral reasoning. Using moral dilemmas — most famously the <em>Heinz dilemma</em>, in which a man must decide whether to steal a drug to save his dying wife — Kohlberg identified six stages organized in three levels. At the <strong>preconventional level</strong>, morality is governed by punishment (stage 1) and self-interest (stage 2). At the <strong>conventional level</strong>, by social conformity (stage 3) and respect for law (stage 4). At the <strong>postconventional level</strong>, by social contract (stage 5) and finally by universal ethical principles (stage 6). Carol Gilligan later criticized Kohlberg's model as biased toward a "male" justice orientation, and proposed a complementary "ethic of care" more characteristic of women's moral reasoning — sparking decades of debate about gender and ethics.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1928 — </div>
+      <h3>Noam Chomsky</h3>
+      <span class="school">Nativism · Linguistics</span>
+      <p class="big-idea">"The language organ grows like any other body organ."</p>
+      <p class="desc">The American linguist's 1959 review of B.F. Skinner's <em>Verbal Behavior</em> is widely credited with ending behaviorism's reign and launching the cognitive revolution. Children, Chomsky argued, cannot possibly learn language through reinforcement alone — the input they receive is too limited and too riddled with errors to explain the speed, sophistication, and creativity of their language acquisition. He proposed instead a <strong>Language Acquisition Device (LAD)</strong>: an innate, biologically determined cognitive structure that pre-equips human infants with the deep grammatical principles common to all human languages. The specific language a child learns depends on environment, but the capacity to learn <em>any</em> human language is genetic. His <strong>universal grammar</strong> theory transformed linguistics and gave the nativist side of the nature-nurture debate its most powerful modern statement.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1958 — </div>
+      <h3>Simon Baron-Cohen</h3>
+      <span class="school">Theory of Mind · Autism</span>
+      <p class="big-idea">"Autism is an extreme form of the male brain."</p>
+      <p class="desc">A British clinical psychologist (and cousin of the comedian Sacha Baron Cohen), he is one of the world's leading researchers on autism. His 1985 false-belief experiments (with Alan Leslie and Uta Frith) — most famously the <strong>Sally-Anne test</strong> — demonstrated that children with autism have specific difficulty with <strong>theory of mind</strong>: the ability to understand that other people have beliefs, desires, and intentions different from one's own. He later proposed the controversial <strong>empathizing-systemizing theory</strong>, suggesting that autism represents an extreme of the "systemizing" cognitive style (interest in patterns, rules, mechanical systems) coupled with deficits in "empathizing" — a profile statistically more common in males. The theory remains debated, but his clinical and research work has profoundly shaped how autism is understood and supported.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== DIFFERENCE ================== -->
+<section id="difference" style="background:var(--paper-2);">
+  <div class="section-intro">
+    <span class="section-tag">Part Seven</span>
+    <h2>Psychology of Difference</h2>
+    <p class="lede">Personality and Intelligence. What makes us individuals? Why are no two minds the same? And how — carefully, with humility — might we begin to measure such things?</p>
+  </div>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="dates">1897 — 1967</div>
+      <h3>Gordon Allport</h3>
+      <span class="school">Trait Theory · Personality Psychology</span>
+      <p class="big-idea">"Did Robinson Crusoe lack personality traits before the advent of Friday?"</p>
+      <p class="desc">Allport founded modern personality psychology and was one of the first to take seriously the scientific study of the individual. As a young man he visited Sigmund Freud in Vienna, who tried to interpret a casual remark about a fastidious boy on Allport's train as evidence of Allport's own unconscious — leaving Allport convinced that psychoanalysis often goes too deep too quickly. With his brother Floyd, he undertook the <strong>lexical hypothesis</strong>: if any human trait is psychologically important, it will eventually be encoded in language. The two scoured Webster's <em>New International Dictionary</em> in 1936 and identified 17,953 trait-related words — the seed of all modern trait taxonomies (including the Big Five). Allport distinguished three levels of trait: <strong>cardinal traits</strong> (rare, dominant: a person ruled by ambition, or by altruism); <strong>central traits</strong> (the five-to-ten characteristic dispositions we'd use to describe someone); and <strong>secondary traits</strong> (preferences and tendencies that emerge only in particular circumstances). His <em>The Nature of Prejudice</em> (1954) remains a foundational text on the psychology of intergroup hostility.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1897 — 1987</div>
+      <h3>J.P. Guilford</h3>
+      <span class="school">Creativity · Intelligence</span>
+      <p class="big-idea">"Name as many uses as you can think of for a toothpick."</p>
+      <p class="desc">The American psychologist J.P. Guilford spent decades challenging the assumption that intelligence was a single, unitary "g" factor. In his <strong>Structure of Intellect</strong> model, he proposed that there are at least 150 distinct intellectual abilities, organized by content (visual, auditory, symbolic, semantic), product (units, classes, relations, systems), and operation (cognition, memory, evaluation, and the two crucial ones: convergent and divergent production). His decisive contribution was distinguishing <strong>convergent thinking</strong> (zeroing in on a single correct answer, as in standard IQ tests) from <strong>divergent thinking</strong> (generating many possible solutions to an open-ended problem). His <strong>Alternative Uses Test</strong> — "name as many uses as you can think of for a toothpick / a brick / a paperclip" — became the foundation of nearly all psychological measurement of creativity.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1905 — 1998</div>
+      <h3>Raymond Cattell</h3>
+      <span class="school">Intelligence · Personality Psychometrics</span>
+      <p class="big-idea">"General intelligence consists of both fluid and crystallized intelligence."</p>
+      <p class="desc">A British-American psychologist who pioneered the use of factor analysis to identify the underlying dimensions of personality and intelligence. From Allport's 17,953 trait terms, Cattell reduced the list to 4,500 by removing synonyms and rare words, then used factor analysis to extract <strong>sixteen primary personality factors</strong> — the basis of his still-used <strong>16PF Questionnaire</strong>. In intelligence research, his most influential distinction was between <strong>fluid intelligence</strong> (Gf): the capacity for novel problem-solving, pattern recognition, and abstract reasoning, which peaks in young adulthood and gradually declines; and <strong>crystallized intelligence</strong> (Gc): accumulated knowledge, vocabulary, and skill, which keeps growing well into old age. His career was overshadowed by his lifelong promotion of eugenics-adjacent ideas, which led to controversy when the American Psychological Association awarded him a Gold Medal shortly before his death.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1916 — 1997</div>
+      <h3>Hans J. Eysenck</h3>
+      <span class="school">Personality · Biological Psychology</span>
+      <p class="big-idea">"There is an association between insanity and genius."</p>
+      <p class="desc">A German-British psychologist who fled the Nazis in 1934 and became one of the most cited (and most controversial) psychologists of the twentieth century, Eysenck proposed that personality could be reduced to three biologically grounded "superfactors," known as the <strong>PEN model</strong>: <em>Psychoticism</em> (tough-mindedness, aggression, creativity, nonconformity), <em>Extraversion</em> (sociability, sensation-seeking, low cortical arousal), and <em>Neuroticism</em> (emotional reactivity, anxiety, vulnerability to stress). Each had a specific neurophysiological substrate, he argued. He also proposed that creative genius and psychotic illness share a common cognitive feature — <em>over-inclusive thinking</em>, the tendency to perceive unusual associations between distant ideas — which when combined with intelligence and ego strength produces genius, but when combined with psychological vulnerability produces madness. He was also famously skeptical of the effectiveness of psychotherapy and a fierce advocate for behavior therapy.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1917 — 1998</div>
+      <h3>David C. McClelland</h3>
+      <span class="school">Need Theory · Achievement Motivation</span>
+      <p class="big-idea">"Three key motivations drive performance."</p>
+      <p class="desc">A Harvard psychologist who fundamentally changed how organizations think about hiring and performance. Drawing on Henry Murray's earlier work, McClelland used the <strong>Thematic Apperception Test (TAT)</strong> — in which subjects tell stories about ambiguous pictures, projecting their motivations into the narrative — to measure three core needs: <strong>need for achievement (nAch)</strong>, the drive to excel against a standard; <strong>need for power (nPow)</strong>, the drive to influence and control others; and <strong>need for affiliation (nAff)</strong>, the drive for warm relationships. He showed that need for achievement, in particular, predicts entrepreneurial success better than intelligence or socioeconomic background, and that effective managers tend to combine moderate-high nPow (socialized rather than personal) with relatively lower nAff. His 1973 paper <em>Testing for Competence Rather Than for Intelligence</em> launched the modern field of competency-based assessment.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1927 — 2015</div>
+      <h3>Nico Frijda</h3>
+      <span class="school">Emotion Theory</span>
+      <p class="big-idea">"Emotion is an essentially unconscious process."</p>
+      <p class="desc">A Dutch psychologist whose <em>The Emotions</em> (1986) is the closest thing the field has to a unified theory of emotion. Frijda argued that emotions are <strong>action tendencies</strong>: each emotion prepares the body and mind for a specific kind of response (fear → flight, anger → attack, love → approach). They arise unconsciously, driven by appraisals of how events bear on our concerns and goals, and they precede the conscious feelings we then interpret and name. He formulated specific "laws of emotion" including the law of <em>situational meaning</em> (emotions arise from how events are perceived, not events themselves), the law of <em>habituation</em> (continued exposure dulls emotional response), and the law of <em>asymmetry</em> (negative emotions adapt more slowly than positive ones — explaining why bad feelings often outlast their causes).</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1930 — 2018</div>
+      <h3>Walter Mischel</h3>
+      <span class="school">Personality · Self-Regulation</span>
+      <p class="big-idea">"Behavior without environmental cues would be absurdly chaotic."</p>
+      <p class="desc">Born in Vienna and forced to flee the Nazis as a child, Mischel produced two of the most influential bodies of work in personality psychology. First, in <em>Personality and Assessment</em> (1968), he challenged the trait-theory orthodoxy by showing that personality traits typically correlate with behavior at only around r = 0.30 — meaning <em>situations matter at least as much as dispositions</em>. He proposed a "cognitive-affective" model in which behavior reflects characteristic <em>if-then</em> contingencies (a person isn't simply "aggressive" — they're aggressive in particular situations).</p>
+      <p class="desc">Second, his celebrated <strong>marshmallow test</strong> (begun in the late 1960s at Stanford) presented four- and five-year-olds with one marshmallow and a choice: eat it now, or wait fifteen minutes alone with the treat and receive two. The longitudinal follow-ups showed that children who could delay gratification had, decades later, better SAT scores, higher educational attainment, lower body mass, and better social and emotional outcomes. (Later research has nuanced the finding — early-childhood self-control reflects family circumstances at least as much as individual willpower — but the marshmallow test became a cultural touchstone.)</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1929 — 2012</div>
+      <h3>David Rosenhan</h3>
+      <span class="school">Antipsychiatry · Diagnosis</span>
+      <p class="big-idea">"We cannot distinguish the sane from the insane in psychiatric hospitals."</p>
+      <p class="desc">An American psychologist whose 1973 study <em>On Being Sane in Insane Places</em>, published in <em>Science</em>, became one of the most influential — and disputed — critiques of psychiatry ever conducted. Eight sane volunteers (including Rosenhan himself) presented at twelve different psychiatric hospitals across the US, complaining only that they heard a voice saying "empty," "hollow," or "thud." All were admitted; eleven were diagnosed with schizophrenia. Once admitted, they behaved entirely normally — yet stayed an average of <strong>19 days</strong> (one stayed 52), were given a combined total of 2,100 pills, and were discharged not as "cured" but as "schizophrenia in remission." The label clung. Even staff noted "patient engages in writing behavior" when participants took notes. Rosenhan concluded that psychiatric diagnosis told us less about patients than about the institution that named them. Recent investigation has cast doubt on whether all of Rosenhan's pseudo-patients existed, but the study's impact on diagnostic reform — including the revision of the DSM — was profound.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1919–1999 / 1903–1984</div>
+      <h3>Thigpen & Cleckley</h3>
+      <span class="school">Dissociative Identity Disorder</span>
+      <p class="big-idea">"The three faces of Eve."</p>
+      <p class="desc">In 1954, Georgia psychiatrists Corbett Thigpen and Hervey Cleckley reported on a patient — soon famous as "Eve White" — who appeared to host three distinct personalities: the shy, conservative "Eve White"; the flirtatious, irresponsible "Eve Black"; and a more integrated personality called "Jane." The case, told in <em>The Three Faces of Eve</em> (1957) and the film of the same name, brought multiple personality disorder (now called Dissociative Identity Disorder) into public consciousness. The real patient, Chris Costner Sizemore, later wrote that she had actually experienced over twenty personalities and that the doctors' triumphant "cure" was premature. The case raised — and continues to raise — fundamental questions about the unity of the self.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CALLOUT ================== -->
+<section class="callout">
+  <div class="inner">
+    <h2>Psychology has questioned deeply held beliefs, unearthed unsettling truths, and provided startling insights into the mysterious world of the human mind.</h2>
+    <p>— Adapted from the Introduction</p>
+  </div>
+</section>
+
+<!-- ================== GLOSSARY ================== -->
+<section id="glossary" class="glossary-section">
+  <div class="inner">
+    <div class="section-intro">
+      <span class="section-tag">Reference</span>
+      <h2>A short glossary</h2>
+      <p class="lede">Key terms drawn from across the book — the vocabulary of mind.</p>
+    </div>
+    <dl class="glossary">
+      <div class="term"><dt>Anima / Animus</dt><dd>In Jungian psychology, the unconscious feminine aspect of a man's psyche (Anima) and the unconscious masculine aspect of a woman's psyche (Animus). Integrating these is part of individuation.</dd></div>
+      <div class="term"><dt>Archetypes</dt><dd>Jung's universal symbolic patterns within the collective unconscious — the Mother, the Shadow, the Wise Old Man, the Hero, the Trickster — that organize experience and recur across cultures and centuries.</dd></div>
+      <div class="term"><dt>Attachment</dt><dd>The emotionally significant bond, especially between infant and caregiver, from which security, exploration, and the lifelong "internal working model" of relationships develop. See Bowlby, Harlow, Ainsworth.</dd></div>
+      <div class="term"><dt>Automatic Thoughts</dt><dd>The continuous stream of brief, involuntary appraisals, often negative and unexamined, that Aaron Beck identified as central to depression and anxiety.</dd></div>
+      <div class="term"><dt>Behaviorism</dt><dd>The psychological approach (Watson, Skinner) that takes observable behavior — not the inner mind — as its only legitimate subject of study. Dominant in US psychology from roughly 1913 to the late 1950s.</dd></div>
+      <div class="term"><dt>Big Five</dt><dd>The current consensus model of personality, identifying five major dimensions: Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism (OCEAN).</dd></div>
+      <div class="term"><dt>Catharsis</dt><dd>In psychoanalysis, the release of repressed emotion through bringing it to conscious awareness. Originally borrowed from Aristotle's account of tragedy.</dd></div>
+      <div class="term"><dt>Chunking</dt><dd>Miller's principle that working memory holds about 7 ± 2 meaningful units. By grouping smaller bits into larger chunks, we can vastly increase what we hold in mind.</dd></div>
+      <div class="term"><dt>Classical Conditioning</dt><dd>Pavlovian learning: a neutral stimulus, after repeated pairing with an unconditioned stimulus, comes to trigger the conditioned response on its own.</dd></div>
+      <div class="term"><dt>Cognitive Dissonance</dt><dd>The mental discomfort (Festinger) of holding two inconsistent beliefs — and the various, often unconscious, strategies we use to reduce it, including denial, rationalization, and changing our minds.</dd></div>
+      <div class="term"><dt>Cognitive Map</dt><dd>Tolman's term for the mental representation an animal or person builds of its environment — used for spatial navigation but also, more broadly, for any structured internal model of the world.</dd></div>
+      <div class="term"><dt>Cognitive Therapy / CBT</dt><dd>Beck's evidence-based approach: identify, evaluate, and revise the automatic thoughts and beliefs that maintain distress. Now blended with behavioral techniques into the world's most widely used psychotherapy.</dd></div>
+      <div class="term"><dt>Collective Unconscious</dt><dd>Jung's deepest layer of mind: not personal but species-wide, populated by inherited archetypes — symbols and patterns shared by all humans.</dd></div>
+      <div class="term"><dt>Conservation</dt><dd>The Piagetian insight, mastered in the concrete operational stage, that quantity is preserved despite changes in form: pouring water from a tall thin glass to a short fat one does not change how much there is.</dd></div>
+      <div class="term"><dt>Defense Mechanisms</dt><dd>Anna Freud's catalogue of unconscious strategies the ego uses to protect itself from anxiety: repression, denial, projection, regression, displacement, sublimation, rationalization, intellectualization, reaction formation.</dd></div>
+      <div class="term"><dt>Dichotic Listening</dt><dd>An experimental paradigm in which different auditory messages are played simultaneously to a participant's two ears. Used by Broadbent to study selective attention.</dd></div>
+      <div class="term"><dt>Dissociation</dt><dd>The splitting of normally integrated mental processes — memory, identity, perception — from conscious awareness. Mild forms are universal; severe forms occur in trauma-related disorders. First named by Pierre Janet.</dd></div>
+      <div class="term"><dt>Divergent Thinking</dt><dd>Guilford's term for the type of thinking required by open-ended problems: generating many possible solutions rather than narrowing to one. The cognitive engine of creativity.</dd></div>
+      <div class="term"><dt>Ego / Id / Superego</dt><dd>Freud's three parts of the psyche: the rational mediator (ego), the primal drives ruled by the Pleasure Principle (id), and the internalized voice of parents and society (superego).</dd></div>
+      <div class="term"><dt>Episodic Memory</dt><dd>Tulving's term for memory of specific personal experiences in time and place (your first day of school) — as distinct from semantic memory (general facts) and procedural memory (skills).</dd></div>
+      <div class="term"><dt>Extraversion / Introversion</dt><dd>Jung's personality dimensions, refined by Eysenck and now central to nearly every modern personality framework. Reflects whether energy is primarily oriented outward (toward people and stimulation) or inward (toward inner experience).</dd></div>
+      <div class="term"><dt>Field Theory</dt><dd>Lewin's view that behavior must be understood as a function of the total "life space" — the dynamic interaction of person and environment at a given moment.</dd></div>
+      <div class="term"><dt>Flow</dt><dd>Csíkszentmihályi's state of total absorption in an activity that perfectly balances skill with challenge — characterized by focus, clarity, time distortion, and intrinsic reward.</dd></div>
+      <div class="term"><dt>Forgetting Curve</dt><dd>Ebbinghaus's empirical finding that memory drops steeply in the first hour after learning, then more gradually — losing about two-thirds of newly learned material within 24 hours.</dd></div>
+      <div class="term"><dt>Free Association</dt><dd>The psychoanalytic technique of voicing whatever comes to mind, however irrelevant or embarrassing, in hopes of bypassing conscious censorship and accessing unconscious material.</dd></div>
+      <div class="term"><dt>Gestalt</dt><dd>German for "form" or "configuration." A school of psychology (Köhler, Wertheimer, Koffka) emphasizing that perception, thinking, and learning are organized wholes, not collections of atomic parts.</dd></div>
+      <div class="term"><dt>Heuristic</dt><dd>A mental shortcut for judgment under uncertainty (Kahneman & Tversky). Generally adaptive but prone to systematic biases — availability, representativeness, anchoring.</dd></div>
+      <div class="term"><dt>Hierarchy of Needs</dt><dd>Maslow's pyramidal model in which human motivation climbs from physiological needs through safety, belonging, esteem, cognitive needs, and aesthetic needs to self-actualization and self-transcendence.</dd></div>
+      <div class="term"><dt>Humorism</dt><dd>The ancient theory (Hippocrates, Galen) that four bodily fluids — blood, phlegm, yellow bile, black bile — determine temperament. Dominant in Western medicine for 1,400 years.</dd></div>
+      <div class="term"><dt>Hypnosis</dt><dd>A state of focused attention and heightened suggestibility. From Faria's "lucid sleep" through Charcot's clinical use to modern hypnotherapy.</dd></div>
+      <div class="term"><dt>Identity Crisis</dt><dd>Erik Erikson's term (now in everyday English) for the developmental conflict of adolescence, in which the young person must integrate prior identifications into a coherent sense of who they are and who they will become.</dd></div>
+      <div class="term"><dt>Imprinting</dt><dd>Lorenz's term for the rapid, irreversible bond formed by young animals to the first moving figure they encounter during a brief "critical period" just after birth.</dd></div>
+      <div class="term"><dt>Inferiority Complex</dt><dd>Adler's term for the universal childhood experience of feeling small in a world of giants — and the lifelong striving for competence and superiority it generates.</dd></div>
+      <div class="term"><dt>Information Processing</dt><dd>The metaphor that powered the cognitive revolution: the mind as a system that encodes, stores, transforms, and retrieves information, analogous (but not identical) to a computer.</dd></div>
+      <div class="term"><dt>Intelligence Quotient (IQ)</dt><dd>A numeric index of intellectual ability. Originally Stern's ratio of mental age to chronological age × 100; now standardized so that the population mean is 100 and standard deviation 15.</dd></div>
+      <div class="term"><dt>Just-World Hypothesis</dt><dd>Lerner's finding that people have a strong (often unconscious) need to believe the world is fair, and will rewrite the moral status of victims rather than accept random misfortune.</dd></div>
+      <div class="term"><dt>Latent Learning</dt><dd>Tolman's discovery that learning can occur without reinforcement — and only becomes visible in behavior when a reason to use it appears.</dd></div>
+      <div class="term"><dt>Law of Effect</dt><dd>Thorndike's principle: responses followed by satisfying outcomes are repeated; those followed by frustration die away. The foundation of all reinforcement-based learning theory.</dd></div>
+      <div class="term"><dt>Locus of Control</dt><dd>The degree to which a person believes outcomes in their life are due to their own actions (internal) versus external forces such as luck, fate, or powerful others.</dd></div>
+      <div class="term"><dt>Mere Exposure Effect</dt><dd>Zajonc's finding that repeated, even unconscious, exposure to a stimulus reliably increases liking for it.</dd></div>
+      <div class="term"><dt>Mindfulness</dt><dd>The practice of non-judgmental, present-moment awareness, adapted from Buddhist meditation by Kabat-Zinn and integrated into modern cognitive therapy (MBSR, MBCT).</dd></div>
+      <div class="term"><dt>Mirror Stage</dt><dd>Lacan's account of the moment between 6 and 18 months when the infant first identifies with its reflected image, founding the lifelong split between fragmented experience and unified self-image.</dd></div>
+      <div class="term"><dt>Operant Conditioning</dt><dd>Skinner's principle: voluntary behavior is shaped by its consequences. Reinforced behaviors increase; punished behaviors decrease. The basis of behavioral training, parenting, and modern habit science.</dd></div>
+      <div class="term"><dt>Person-Centered Therapy</dt><dd>Rogers's approach: the therapist offers genuineness, empathic understanding, and unconditional positive regard, trusting the client's own capacity for growth.</dd></div>
+      <div class="term"><dt>Personality Trait</dt><dd>A stable, enduring disposition to think, feel, and act in characteristic ways across situations. Allport's foundational unit; refined by Cattell, Eysenck, and the Big Five.</dd></div>
+      <div class="term"><dt>Prospect Theory</dt><dd>Kahneman and Tversky's account of decision-making under risk: people evaluate outcomes relative to a reference point, and losses loom larger than equivalent gains.</dd></div>
+      <div class="term"><dt>Psychoanalysis</dt><dd>Freud's body of theories and clinical methods for exploring unconscious processes through dialogue — the "talking cure."</dd></div>
+      <div class="term"><dt>Reciprocal Inhibition</dt><dd>Wolpe's principle that two incompatible emotional states (relaxation and anxiety) cannot coexist — the basis of systematic desensitization.</dd></div>
+      <div class="term"><dt>Repression</dt><dd>The Freudian defense mechanism by which unbearable thoughts, memories, or impulses are banished from consciousness — though they continue to exert influence from the unconscious.</dd></div>
+      <div class="term"><dt>Schema</dt><dd>A mental framework that organizes knowledge and guides expectation. Central to Piaget's theory of cognitive development and Bartlett's theory of memory reconstruction.</dd></div>
+      <div class="term"><dt>Self-Actualization</dt><dd>Maslow's summit: the realization of one's fullest unique potential — characterized by autonomy, creativity, peak experiences, and a few deep relationships.</dd></div>
+      <div class="term"><dt>Self-Efficacy</dt><dd>Bandura's term for one's belief in one's capability to perform a specific task. One of psychology's most consistent predictors of effort, persistence, and achievement.</dd></div>
+      <div class="term"><dt>Shadow</dt><dd>The Jungian archetype representing the disowned, rejected, "dark" aspects of the self — encountered in dreams, projection, and the inner work of individuation.</dd></div>
+      <div class="term"><dt>Social Learning Theory</dt><dd>Bandura's account of learning through observation and imitation of models, not just direct reinforcement. The basis of his Bobo doll studies and his broader social cognitive theory.</dd></div>
+      <div class="term"><dt>Strange Situation</dt><dd>Ainsworth's standardized procedure for classifying infant attachment patterns through observed responses to separations and reunions with a caregiver.</dd></div>
+      <div class="term"><dt>Stream of Consciousness</dt><dd>William James's image of the mind as a flowing, ever-changing, deeply personal river of thought, sensation, and feeling — not a chain of discrete ideas.</dd></div>
+      <div class="term"><dt>Sublimation</dt><dd>The defense mechanism in which unacceptable impulses are channelled into socially valued activities — aggression into sport, lust into art.</dd></div>
+      <div class="term"><dt>Systematic Desensitization</dt><dd>Wolpe's clinical technique for treating phobias: pair deep muscle relaxation with gradual exposure to increasingly feared stimuli.</dd></div>
+      <div class="term"><dt>Theory of Mind</dt><dd>The cognitive ability to attribute mental states — beliefs, desires, intentions — to oneself and to others, and to recognize that others may hold beliefs different from one's own. Typically develops around age four.</dd></div>
+      <div class="term"><dt>Transference</dt><dd>In psychoanalysis, the unconscious displacement of feelings about an important earlier figure (typically a parent) onto the therapist — a key channel of analytic work.</dd></div>
+      <div class="term"><dt>Unconditional Positive Regard</dt><dd>Rogers's therapeutic stance: accept the client fully, without conditions, simply because they are a human being — not because they meet certain standards.</dd></div>
+      <div class="term"><dt>Unconscious</dt><dd>The vast part of the psyche operating beneath conscious awareness. In Freud's view, repository of repressed wishes; in Jung's, of inherited archetypes; in cognitive science, of automatic, parallel processing.</dd></div>
+      <div class="term"><dt>Working Memory</dt><dd>The limited-capacity mental workspace in which we hold and manipulate information for current tasks. Roughly seven chunks at a time, according to Miller — closer to four, according to later researchers.</dd></div>
+      <div class="term"><dt>Zeigarnik Effect</dt><dd>The tendency to remember interrupted or incomplete tasks better than completed ones. Discovered by Bluma Zeigarnik in 1927 from observations of Berlin waiters.</dd></div>
+      <div class="term"><dt>Zone of Proximal Development</dt><dd>Vygotsky's name for the gap between what a learner can do unaided and what they can do with skilled guidance — the optimal zone for instruction.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
+<footer>
+  <div class="inner">
+    <h3>To examine ourselves is to begin to understand</h3>
+    <p>"Among all the sciences, psychology is perhaps the most mysterious to the general public…</p>
+    <p>and yet it informs every decision we make, every relationship we form, every word we speak."</p>
+    <div class="meta">
+      An educational tribute to <em>The Psychology Book</em> · Big Ideas, Simply Explained<br>
+      Featuring the work of more than fifty thinkers from Galen to Baron-Cohen.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll active-nav highlighting
+  const navLinks = document.querySelectorAll('nav.topbar a');
+  const sections = document.querySelectorAll('section[id], header.hero');
+
+  function onScroll() {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 120;
+      if (window.scrollY >= top) current = sec.id || '';
+    });
+    navLinks.forEach(link => {
+      link.style.color = '';
+      link.style.borderBottomColor = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--accent)';
+        link.style.borderBottomColor = 'var(--accent)';
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Reveal on intersection
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.thinker, .experiment, .qcard, .movement, .tl-item, .concept-block, .term').forEach(el => {
+    el.style.opacity = '0';
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>

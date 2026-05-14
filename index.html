@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Talk to Anyone — 92 Little Tricks | Leil Lowndes</title>
+<style>
+:root {
+  --bg: #0c0c1a;
+  --surface: #111126;
+  --card: #161630;
+  --card-hover: #1d1d40;
+  --border: #252548;
+  --gold: #d4a843;
+  --gold-l: #f2c76a;
+  --teal: #4ecdc4;
+  --text: #e8e3d5;
+  --muted: #8a86a0;
+  --dim: #5a5672;
+  --p1:#e05c8a;--p2:#4ecdc4;--p3:#d4a843;--p4:#9b6bd6;
+  --p5:#e07840;--p6:#3db89e;--p7:#5b98d9;--p8:#d45555;--p9:#7eb840;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.7;overflow-x:hidden;}
+
+/* ─── PROGRESS BAR ─── */
+#pgbar{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.05);z-index:1000;}
+#pgfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--teal));width:0%;transition:width .1s;}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:4rem 2rem;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,#1a0f3a 0%,var(--bg) 65%);}
+.hero::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);animation:hpulse 7s ease-in-out infinite;}
+@keyframes hpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5;}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1;}}
+.hero-badge{font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:1.2rem;opacity:.85;}
+.hero-title{font-size:clamp(2.4rem,6vw,5.2rem);font-weight:700;line-height:1.08;margin-bottom:.8rem;
+  background:linear-gradient(140deg,#fff 0%,var(--gold-l) 55%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1;}
+.hero-sub{font-size:clamp(.95rem,2.2vw,1.3rem);color:var(--muted);margin-bottom:.8rem;font-style:italic;max-width:560px;}
+.hero-author{font-size:.95rem;color:var(--gold);letter-spacing:.12em;margin-bottom:2.8rem;}
+.hero-stats{display:flex;gap:3rem;margin-bottom:2.8rem;flex-wrap:wrap;justify-content:center;}
+.stat{text-align:center;}
+.stat-n{font-size:2.8rem;font-weight:700;color:var(--gold);display:block;line-height:1;}
+.stat-l{font-size:.78rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.2rem;}
+.hero-quote{max-width:680px;font-size:1rem;color:var(--muted);line-height:1.85;
+  border-left:3px solid var(--gold);padding-left:1.5rem;text-align:left;margin-bottom:2.8rem;}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--dim);
+  font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;
+  animation:bounce 2.2s ease-in-out infinite;}
+.scroll-cue span{font-size:1.4rem;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(9px);}}
+
+/* ─── STICKY NAV ─── */
+.snav{position:sticky;top:0;z-index:100;background:rgba(12,12,26,.96);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.7rem 1.5rem;}
+.snav-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+.snav-label{font-size:.8rem;color:var(--gold);font-weight:600;white-space:nowrap;}
+.snav-parts{display:flex;gap:.35rem;flex-wrap:wrap;flex:1;}
+.nbtn{padding:.28rem .7rem;border:1px solid var(--border);background:transparent;color:var(--muted);
+  border-radius:20px;font-size:.72rem;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:inherit;}
+.nbtn:hover,.nbtn.on{border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,.1);}
+.mcount{font-size:.78rem;color:var(--muted);white-space:nowrap;}
+.mcount em{color:var(--teal);font-style:normal;font-weight:700;}
+
+/* ─── PART DOTS ─── */
+.dots{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.55rem;z-index:50;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;
+  transition:all .2s;position:relative;}
+.dot:hover,.dot.on{transform:scale(1.4);}
+.dot-tip{position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  background:var(--surface);border:1px solid var(--border);border-radius:6px;
+  padding:.25rem .6rem;font-size:.7rem;white-space:nowrap;color:var(--text);
+  opacity:0;pointer-events:none;transition:opacity .15s;}
+.dot:hover .dot-tip{opacity:1;}
+@media(max-width:900px){.dots{display:none;}}
+
+/* ─── MAIN ─── */
+.main{max-width:1440px;margin:0 auto;padding:4rem 1.5rem;}
+
+/* ─── PART SECTION ─── */
+.psec{margin-bottom:5.5rem;opacity:0;transform:translateY(28px);
+  transition:opacity .65s ease,transform .65s ease;}
+.psec.vis{opacity:1;transform:translateY(0);}
+.phdr{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2.5rem;
+  padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.pnum{font-size:3.5rem;font-weight:700;line-height:1;min-width:70px;
+  text-align:right;font-style:italic;flex-shrink:0;}
+.pinfo{flex:1;}
+.plabel{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem;}
+.ptitle{font-size:clamp(1.2rem,2.8vw,1.9rem);font-weight:700;line-height:1.2;}
+.pdesc{font-size:.92rem;color:var(--muted);margin-top:.45rem;font-style:italic;}
+.pcnt{font-size:.75rem;color:var(--muted);background:var(--card);padding:.35rem .75rem;
+  border-radius:20px;border:1px solid var(--border);white-space:nowrap;flex-shrink:0;align-self:flex-start;margin-top:.5rem;}
+
+/* ─── GRID ─── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.4rem;}
+
+/* ─── CARD ─── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.4rem;position:relative;transition:all .3s;overflow:hidden;
+  display:flex;flex-direction:column;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--pcolor,var(--gold));opacity:0;transition:opacity .3s;}
+.card:hover{background:var(--card-hover);border-color:rgba(212,168,67,.28);
+  transform:translateY(-3px);box-shadow:0 10px 35px rgba(0,0,0,.45);}
+.card:hover::before{opacity:1;}
+.card.done{border-color:rgba(78,205,196,.35);background:rgba(78,205,196,.04);}
+.card.done::after{content:'✓';position:absolute;top:.9rem;right:.9rem;
+  width:22px;height:22px;background:var(--teal);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:#0c0c1a;font-weight:900;line-height:22px;text-align:center;}
+
+.ctop{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.75rem;}
+.cnum{font-size:2rem;font-weight:700;line-height:1;min-width:44px;
+  color:var(--pcolor,var(--gold));opacity:.25;font-style:italic;flex-shrink:0;}
+.cname{font-size:1.05rem;font-weight:700;line-height:1.3;padding-top:.15rem;}
+
+/* Key principle — shown first, prominently */
+.ckey{background:rgba(212,168,67,.07);border-left:3px solid var(--pcolor,var(--gold));
+  border-radius:0 8px 8px 0;padding:.65rem 1rem;font-size:.85rem;line-height:1.6;
+  color:var(--text);font-weight:600;margin-bottom:.85rem;}
+
+/* Concrete how-to */
+.cdesc{font-size:.875rem;color:var(--muted);line-height:1.75;margin-bottom:.9rem;flex:1;}
+
+.cfoot{display:flex;align-items:center;justify-content:space-between;
+  padding-top:.85rem;border-top:1px solid var(--border);margin-top:auto;}
+.mbtn{background:transparent;border:1px solid var(--border);color:var(--muted);
+  padding:.3rem .75rem;border-radius:20px;font-size:.72rem;cursor:pointer;
+  transition:all .2s;font-family:inherit;display:flex;align-items:center;gap:.35rem;}
+.mbtn:hover{border-color:var(--teal);color:var(--teal);}
+.done .mbtn{border-color:var(--teal);color:var(--teal);background:rgba(78,205,196,.1);}
+.ptag{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.22rem .55rem;border-radius:20px;color:var(--pcolor,var(--gold));
+  border:1px solid rgba(var(--pcolor-rgb,212,168,67),.3);
+  background:rgba(var(--pcolor-rgb,212,168,67),.08);}
+
+/* ─── INTRO BLURB ─── */
+.intro{max-width:820px;margin:0 auto 5rem;padding:0 1.5rem;}
+.intro h2{font-size:1.4rem;color:var(--gold);margin-bottom:1.2rem;}
+.intro p{font-size:.98rem;color:var(--muted);line-height:1.85;margin-bottom:1.1rem;}
+.intro blockquote{border-left:3px solid var(--gold);padding-left:1.4rem;
+  margin:1.8rem 0;color:var(--text);font-style:italic;font-size:1.02rem;line-height:1.75;}
+
+/* ─── FOOTER ─── */
+footer{background:var(--surface);border-top:1px solid var(--border);
+  padding:2.5rem 2rem;text-align:center;}
+footer p{color:var(--dim);font-size:.82rem;line-height:1.9;}
+footer strong{color:var(--muted);}
+
+/* ─── MOBILE ─── */
+@media(max-width:700px){
+  .snav-inner{flex-direction:column;align-items:stretch;}
+  .snav-parts{overflow-x:auto;flex-wrap:nowrap;padding-bottom:.3rem;}
+  .grid{grid-template-columns:1fr;}
+  .phdr{flex-wrap:wrap;}
+  .hero-stats{gap:1.5rem;}
+  .intro{padding:0 .5rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="pgbar"><div id="pgfill"></div></div>
+
+<div class="dots" id="dots"></div>
+
+<section class="hero" id="top">
+  <div class="hero-badge">Communication Mastery · Study Guide</div>
+  <h1 class="hero-title">How to Talk to Anyone</h1>
+  <p class="hero-sub">92 Little Tricks for Big Success in Relationships</p>
+  <div class="hero-author">by Leil Lowndes</div>
+
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-n">9</span><div class="stat-l">Parts</div></div>
+    <div class="stat"><span class="stat-n">92</span><div class="stat-l">Techniques</div></div>
+    <div class="stat"><span class="stat-n">85%</span><div class="stat-l">of Success = Communication</div></div>
+    <div class="stat"><span class="stat-n">10K</span><div class="stat-l">Signals / Second</div></div>
+  </div>
+
+  <div class="hero-quote">
+    "What it boils down to is their more skillful way of dealing with fellow human beings.
+    Nobody gets to the top alone. Over the years, people who seem to have it all have captured
+    the hearts and conquered the minds of hundreds of others who helped boost them, rung by rung,
+    to the top of whatever corporate or social ladder they chose."
+  </div>
+
+  <div class="scroll-cue" onclick="document.getElementById('nav').scrollIntoView({behavior:'smooth'})">
+    Explore all 92 techniques <span>↓</span>
+  </div>
+</section>
+
+<nav class="snav" id="nav">
+  <div class="snav-inner">
+    <div class="snav-label">Jump to</div>
+    <div class="snav-parts" id="navParts"></div>
+    <div class="mcount">Mastered: <em id="mc">0</em>/92</div>
+  </div>
+</nav>
+
+<main class="main" id="main">
+
+  <div class="intro">
+    <h2>The Core Idea</h2>
+    <p>
+      Successful people aren't necessarily smarter, better educated, or better-looking.
+      What separates them is their mastery of human interaction — a learnable skill.
+      Leil Lowndes spent years studying top communicators, analyzing their body language,
+      word choices, timing, and social instincts, then broke each insight into a concrete,
+      nameable technique anyone can practice.
+    </p>
+    <blockquote>
+      "Your body is a twenty-four-hour broadcasting station revealing to anyone within eyeshot
+      precisely how you feel at any given moment. Every smile, every frown, every syllable can
+      draw others toward you or make them want to run away."
+    </blockquote>
+    <p>
+      Each card shows the core principle first, then the concrete how-to.
+      Click <strong>Mark mastered</strong> to track your progress.
+    </p>
+  </div>
+
+  <div id="content"></div>
+
+</main>
+
+<footer>
+  <p>
+    <strong>How to Talk to Anyone</strong> by Leil Lowndes (2003) · Educational study guide
+    summarizing the 92 techniques for personal learning purposes.
+  </p>
+</footer>
+
+<script>
+const PARTS = [
+  {
+    id:'part1', num:'I', color:'#e05c8a',
+    title:'How to Intrigue Everyone Without Saying a Word',
+    desc:'Body language communicates more than 80% of your first impression — before you speak a single word.',
+    techs:[
+      {num:1,name:'The Flooding Smile',
+       key:'Delay your smile by one full second. Let it build slowly and reach your eyes. The pause signals it\'s genuine — meant only for this person.',
+       desc:'When meeting someone, hold eye contact for a beat before smiling. Register their face. Then let a warm smile slowly spread across yours. A smile that fires the instant you see anyone reads as a social reflex, not a real reaction.'},
+      {num:2,name:'Sticky Eyes',
+       key:'Keep eye contact even after they stop talking. When you must look away, do it slowly — reluctantly — as if pulling against resistance.',
+       desc:'Maintain eye contact through silences and transitions. When you look away, do it gradually, not with a snap. Breaking contact instantly signals you\'ve stopped listening. Lingering contact signals fascination.'},
+      {num:3,name:'Epoxy Eyes',
+       key:'In a group, fix your gaze on the person you want to impact — not on whoever is currently speaking.',
+       desc:'While someone else is talking, keep your eyes on your target rather than the speaker. Watch their reactions. They\'ll feel uniquely important — as if you\'re more interested in how they receive the words than in the words themselves.'},
+      {num:4,name:'Hang by Your Teeth',
+       key:'Before walking through any door, picture a bar in the doorframe. Bite it and let it lift you — head up, shoulders back, spine long.',
+       desc:'Use every doorway as a posture reset. Visualize being lifted by the jaw: head rises, shoulders settle back, chest opens, weight shifts to the balls of your feet. Do it sixty times a day and it becomes automatic within weeks.'},
+      {num:5,name:'The Big-Baby Pivot',
+       key:'When introduced to someone new, pivot your entire body toward them — feet, torso, face, full attention. Not just your head.',
+       desc:'Give new people the same 100% full-body pivot you\'d give a toddler who just smiled at you. Most people turn only their head; a full-body pivot signals "you are worth my complete attention." The contrast is immediately felt.'},
+      {num:6,name:'Hello Old Friend',
+       key:'Before approaching anyone, mentally pretend they\'re a beloved friend you haven\'t seen in years. Hold that feeling — don\'t say it.',
+       desc:'The pretense reshapes your body automatically: eyes soften, posture opens, arms extend slightly, warmth comes through your voice. You don\'t fake it — you feel it internally and your body broadcasts it without effort.'},
+      {num:7,name:'Limit the Fidget',
+       key:'In important conversations, suppress all hand-to-face movement, hair touching, object fidgeting, and seat-shifting. Let the itch go.',
+       desc:'Every extraneous physical movement — especially hands near the face — reads subliminally as nervousness or deception, even when you\'re completely truthful. Stay still when it matters. Stillness signals confidence and honesty.'},
+      {num:8,name:'Hans\'s Horse Sense',
+       key:'While speaking, devote half your attention to your listener\'s physical reactions. Adjust in real time based on what their body tells you.',
+       desc:'Watch for leaning in (keep going), head turning (change the subject), arms crossing (hand them something), eyes glazing (cut to the point). Their body reveals their actual response before their words do. Respond to the body, not the politeness.'},
+      {num:9,name:'Watch the Scene Before You Make the Scene',
+       key:'Before any important social event, close your eyes and vividly visualize success: see yourself walking in confidently, hear yourself speaking easily.',
+       desc:'Spend two minutes before the event running a mental movie: perfect posture, flooding smile, comfortable conversation, warm reception. Professional athletes do this before every competition. Vivid rehearsal activates the same neural pathways as the real event.'}
+    ]
+  },
+  {
+    id:'part2', num:'II', color:'#4ecdc4',
+    title:'How to Know What to Say After You Say Hi',
+    desc:'Small talk is not about facts or words — it\'s about melody. About making comforting sounds that put people at ease.',
+    techs:[
+      {num:10,name:'Make a Mood Match',
+       key:'Before speaking, read your listener\'s current energy — rushed, excited, tired, bored. Match that energy first, then lead them somewhere else.',
+       desc:'Launching into a conversation at a different intensity than your listener\'s feels like an assault. Spend the first thirty seconds mirroring their pace and tone. Once you\'re synchronized, you can gradually shift the energy in the direction you want.'},
+      {num:11,name:'Prosaic with Passion',
+       key:'Deliver even ordinary observations with genuine animation. Your energy matters more than your words.',
+       desc:'Studies show 80% of your listener\'s impression has nothing to do with what you say. The weather, the room, the food — any topic delivered with authentic enthusiasm holds attention. Flat delivery kills even interesting content.'},
+      {num:12,name:'Always Wear a Whatzit',
+       key:'Wear or carry one unusual item at every gathering — something that gives strangers a socially acceptable reason to approach you.',
+       desc:'An interesting pin, an antique watch, an unusual bag, an unexpected accessory. When someone says "What IS that?" you have an instant, organic conversation opener and they came to you. Removes the burden of cold approach from both sides.'},
+      {num:13,name:'Whoozat',
+       key:'When you want to meet someone specific, find the host and ask who they are. Get one fact, then use it to introduce yourself directly.',
+       desc:'Go to the host: "That person over there looks fascinating — who are they?" Get their name, profession, one interesting detail. Then walk up: "Hi, you\'re [name] — I heard you [fact]." You arrive with context and they arrive feeling notable.'},
+      {num:14,name:'Eavesdrop In',
+       key:'Stand near a group, listen for any word you can build on, then step in: "Excuse me, I couldn\'t help overhearing — you mentioned…"',
+       desc:'Find a conversational hook in what they\'re already discussing — a place, a topic, an opinion. Jump in with that hook as your opening. Yes, they\'ll notice briefly. But within seconds you\'re in the conversation. It\'s the fastest entry that exists.'},
+      {num:15,name:'Never the Naked City',
+       key:'Never answer "Where are you from?" with just a city name. Prepare two interesting facts about your hometown in advance.',
+       desc:'A one-word answer drops a frozen steak on a china platter. Prepare a fact that\'s surprising or relatable: what your city is known for, a quirky distinction, something a visitor would find interesting. Give people something to grab onto and run with.'},
+      {num:16,name:'Never the Naked Job',
+       key:'Don\'t state your title and go silent. Briefly connect your work to something your listener can relate to or find interesting.',
+       desc:'Tailor the story to who\'s asking. "I\'m an attorney" tells a non-attorney nothing. "I\'m an attorney — right now I\'m on a case where a mother was fired for taking maternity leave" opens a real conversation. The specific situation is the door.'},
+      {num:17,name:'Never the Naked Introduction',
+       key:'When introducing two people, always add a conversational hook after each name. Never just state names and wait.',
+       desc:'"Susan, this is John — he sailed his own boat around Cape Cod. John, Susan edits the Shoestring Gourmet." Now they have something to discuss without your help. A naked introduction leaves both people stranded. A baited one creates conversation that runs itself.'},
+      {num:18,name:'Be a Word Detective',
+       key:'Listen for anomalies — an unexpected word, an offhand reference, a brief aside. That slip reveals what your partner actually wants to talk about.',
+       desc:'When someone says something slightly unusual — a specific place name, an unexpected qualifier, an out-of-place reference — spring on it: "You mentioned [word] — tell me more about that." The topic they let slip is nearly always the topic they care about most.'},
+      {num:19,name:'The Swiveling Spotlight',
+       key:'Keep the conversational spotlight on your partner. The longer you keep it off yourself, the more interesting they find you.',
+       desc:'Respond to everything they say with a question or observation about them. Don\'t redirect to your own experience. The person who asks the best questions and seems most interested in the answers is always remembered as the most interesting person in the room.'},
+      {num:20,name:'Parroting',
+       key:'When conversation stalls, repeat your partner\'s last three or four words in a slightly questioning tone. They\'ll expand immediately.',
+       desc:'It\'s the simplest conversation technique: echo back what they just said. They hear their own words as an invitation to say more, and they always accept. You contribute almost nothing — and the conversation flows without effort on your part.'},
+      {num:21,name:'Encore!',
+       key:'Ask someone to retell a story you\'ve already heard to a new audience: "Tell them about the time you…"',
+       desc:'A request to repeat a story is implicit proof the original was worth telling again. The teller becomes animated and grateful. You\'ve shone the spotlight on them in front of others — one of the most generous social acts available.'},
+      {num:22,name:'Ac-cen-tu-ate the Positive',
+       key:'Early in any relationship, lead with energy and positivity. Save your vulnerabilities and confessions for after a friendship is established.',
+       desc:'Sharing struggles as a bonding move backfires early on — your new acquaintance has no context for them. Without knowing you well, every skeleton looks enormous. Positive energy first; the humanizing imperfections come later when they have the framework to appreciate them.'},
+      {num:23,name:'The Latest News',
+       key:'Before any gathering, spend five minutes scanning today\'s news. Anything current is instant conversational material.',
+       desc:'Turn on the radio or scan headlines on the way there. One or two current stories means you\'re never at a loss when conversation stalls or someone asks "did you see what happened with…?" Recency is the easiest form of relevance.'}
+    ]
+  },
+  {
+    id:'part3', num:'III', color:'#d4a843',
+    title:'How to Talk Like a VIP',
+    desc:'In the business world, 85% of success is directly due to communications skills. Every cliché, every insensitive remark costs you a rung.',
+    techs:[
+      {num:24,name:'What Do You Do — NOT!',
+       key:'Never ask "What do you do?" Replace it with "How do you spend most of your time?" — which lets anyone answer comfortably.',
+       desc:'"What do you do?" labels you as a networker, and it causes real pain to anyone between jobs, raising children, or unhappy in their career. The replacement question is gracious and open. It signals you see the whole person, not just their utility.'},
+      {num:25,name:'The Nutshell Résumé',
+       key:'Customize your answer to "What do you do?" every time. Consider what this particular person would find most interesting or relevant.',
+       desc:'Before answering, ask: could they refer business? Buy from me? Hire me? Become a friend? Then tailor the story accordingly. The same job can be described dozens of ways — the right version for this listener is the one that opens the right door.'},
+      {num:26,name:'Your Personal Thesaurus',
+       key:'Replace fifty common words with richer ones. "Smart" → "astute." "Good" → "exemplary." One swap per day for two months puts you in the verbal elite.',
+       desc:'Look up words you use daily and find two stronger alternatives for each. The difference between a distinguished vocabulary and a flat one is around fifty words. Keep a running list; use one new word per day until it\'s natural.'},
+      {num:27,name:'Kill the Quick Me Too!',
+       key:'When someone shares an interest, don\'t immediately announce you share it. Let them talk at length first. Then reveal it casually.',
+       desc:'The later the reveal, the more impact it has. Announcing "Me too!" right away is mildly interesting. Letting them enjoy their passion fully — then revealing you share it — makes you intriguing and confident rather than eager and reactive.'},
+      {num:28,name:'Comm-YOU-nication',
+       key:'Start sentences with "you" instead of "I" whenever possible. It shifts the frame to their perspective and activates their sense of ownership.',
+       desc:'"Can you do without me Friday?" outperforms "Can I take Friday off?" because it centers their authority. "You\'ll love this restaurant" closes faster than "It\'s a good restaurant." Every "you" saves your listener the mental step of translating "I" into "me."'},
+      {num:29,name:'The Exclusive Smile',
+       key:'Don\'t give everyone the same smile. Let each smile grow from something specific you find in that particular person\'s face.',
+       desc:'A reflexive identical smile given to every person feels like a strobe light — impressive at first, hollow within minutes. Pause briefly before each smile. Let it arise from a genuine observation about the specific person in front of you.'},
+      {num:30,name:'Don\'t Touch a Cliché',
+       key:'Eliminate tired phrases from your speech entirely. Around high achievers, clichés signal lazy thinking.',
+       desc:'"At the end of the day," "it is what it is," "think outside the box," "that said" — every cliché marks the speaker as someone who borrows thoughts rather than forming them. Replace each one with specific, vivid language. Even a clumsy original phrase beats a polished cliché.'},
+      {num:31,name:'Use Jawsmith\'s Jive',
+       key:'Build a collection of memorable phrases, clever analogies, and well-chosen quotations. One perfectly placed original line makes you quotable.',
+       desc:'Browse quotation books. Craft your own analogies. Professional speakers and trial lawyers do this weekly — because a pithy, memorable phrase is a weapon. Make your language visual, specific, and occasionally surprising.'},
+      {num:32,name:'Call a Spade a Spade',
+       key:'Use direct, plain language. Reaching for euphemisms signals discomfort and costs you credibility.',
+       desc:'Say "toilet," not "lavatory." Say "rich," not "financially comfortable." Say "fired," not "let go." Big players name things accurately. Every euphemism is a small signal that you\'re managing your own discomfort rather than communicating clearly.'},
+      {num:33,name:'Trash the Teasing',
+       key:'Never tease — not about weight, hair, age, habits, or anything personal. High achievers remember teasing and categorize the people who do it.',
+       desc:'What feels like affectionate ribbing to you can feel like a public exposure to them. Even if everyone laughs, the target knows. High achievers are the ones who build the glass ceilings — and they remember who made them the butt of the joke.'},
+      {num:34,name:'It\'s the Receiver\'s Ball',
+       key:'Before delivering any news, consider how the receiver will feel about it — not how you feel. Match your tone to their likely emotional response.',
+       desc:'Good news delivered with flat affect feels wrong. Bad news delivered cheerfully feels cruel. A doctor recommending surgery speaks with compassion. A manager who can\'t promote someone takes on a sympathetic tone. The words are secondary to the emotional register you choose.'},
+      {num:35,name:'The Broken Record',
+       key:'When someone presses you on an unwelcome topic, respond once calmly. If they press again, repeat the exact same words in the exact same tone.',
+       desc:'Don\'t escalate, explain further, or vary your response. Pure repetition — same words, same calm tone — ends the pursuit without argument. Three identical responses and most people stop. You have given all the ground you\'re going to give.'},
+      {num:36,name:'Big Shots Don\'t Slobber',
+       key:'When meeting a celebrity or VIP, don\'t gush. If you speak at all, say what their work gave you — briefly and specifically.',
+       desc:'"Your film changed how I think about grief" beats "I\'m such a huge fan." Speak from your own experience; you can\'t be wrong about that. Mention only recent accomplishments — referencing old work signals you haven\'t kept up. Then step back.'},
+      {num:37,name:'Never the Naked Thank You',
+       key:'Always follow "thank you" with "for [specific thing]." The naked "thanks" is so automatic people don\'t register it.',
+       desc:'"Thank you for being so patient with me." "Thank you for coming all this way." "Thank you for your candor." The specific reason transforms a reflexive phrase into a real acknowledgment. From A to Z: "Thank you for asking" through "Thank you for your time."'}
+    ]
+  },
+  {
+    id:'part4', num:'IV', color:'#9b6bd6',
+    title:'How to Be an Insider in Any Crowd',
+    desc:'You don\'t need to be an expert — just enough insider lingo to ask the right opening questions. One exposure gives you 80% of what you need.',
+    techs:[
+      {num:38,name:'Scramble Therapy',
+       key:'Once a month, do something completely outside your normal world. One exposure gives you the lingo and questions to connect with anyone from that world.',
+       desc:'Kayaking, stamp collecting, an improv class, a cooking competition, a bird-watching walk. You don\'t need to become an expert. A single genuine experience gives you authentic curiosity and the right vocabulary to ask real questions — which is all it takes.'},
+      {num:39,name:'Learn a Little Jobbledygook',
+       key:'Before meeting people from an unfamiliar field, call an insider and ask: "What are the first two questions people in your industry ask each other?"',
+       desc:'Use those questions verbatim. Two insider questions make you feel like a peer. "What medium do you work in?" told to an artist. "What are you flying these days?" told to a pilot. The questions signal you understand their world without claiming expertise.'},
+      {num:40,name:'Baring Their Hot Button',
+       key:'Before any industry gathering, call an insider and ask: "What\'s the hot issue everyone\'s talking about right now?" Then bring it up.',
+       desc:'Every profession has burning concerns the outside world ignores — regulatory battles, market disruptions, internal politics. Find the current one and name it. You\'ll trigger genuine, energetic conversation immediately, rather than the polite surface-level talk strangers settle for.'},
+      {num:41,name:'Read Their Rags',
+       key:'Before meeting someone from a specific world, read one issue of their trade magazine. You\'ll absorb the lingo, current controversies, and insider perspective.',
+       desc:'Every industry, hobby, and interest has dedicated publications. One issue gives you enough to ask the right questions, recognize the important names, and avoid the obvious outsider mistakes. The investment is thirty minutes; the payoff is being treated as a peer.'},
+      {num:42,name:'Clear Customs',
+       key:'Before visiting a foreign country or meeting people from another culture, research the specific dos and don\'ts for that culture — cards, gifts, gestures, dress.',
+       desc:'Business cards in East Asia are presented and received with both hands. Gifts aren\'t opened in front of the giver in Japan. Jeans to a client meeting anywhere in the region is a misstep. One cultural faux pas in the first fifteen minutes can close every door permanently.'},
+      {num:43,name:'Bluffing for Bargains',
+       key:'Before any major purchase, visit two or three vendors and learn the insider language. Then use the terms naturally with your preferred seller.',
+       desc:'Telling a painter you know the walls need "very little prepping" and "no cutting in" and to "leave no holidays" signals you know fair value — and prices drop. Informed buyers are treated as peers, not marks. Spend time learning before spending money buying.'}
+    ]
+  },
+  {
+    id:'part5', num:'V', color:'#e07840',
+    title:'How to Sound Like You\'re Peas in a Pod',
+    desc:'People are most receptive to those they believe share their values. These techniques create the sensation of deep similarity — even with new acquaintances.',
+    techs:[
+      {num:44,name:'Be a Copycat',
+       key:'Mirror your partner\'s movement style — their pace, the scale of their gestures, their physical energy. This subliminal alignment makes them feel comfortable.',
+       desc:'If they\'re still and precise, be still and precise. If they\'re expansive and quick, match that energy. Pretend they\'re your dance instructor: are they balletic or jazzy? Matching movement style is one of the fastest ways to create a feeling of shared identity.'},
+      {num:45,name:'Echoing',
+       key:'Use your conversation partner\'s exact words — don\'t paraphrase. Hearing their own words from your mouth creates subliminal rapport.',
+       desc:'If they say "firm" not "office," say "firm." If they say "toddler" not "baby," say "toddler." If they say "gig" not "job," say "gig." Paraphrasing into your own words subtly says "I translated you." Exact echoing says "I received you as you are."'},
+      {num:46,name:'Potent Imaging',
+       key:'Choose analogies from your listener\'s world, not yours. The analogy lands harder and signals you understand their perspective.',
+       desc:'If your boss has a boat, say the plan will "hold water." If your client is a pilot, it will "really take off." If they garden, you\'re "sowing the seeds for success." Football metaphors land with football fans; they confuse everyone else. Match the metaphor to the person.'},
+      {num:47,name:'Employ Empathizers',
+       key:'Replace unconscious "uh-huh" grunts with full sentences: "I see what you mean," "That\'s a significant concern," "I can understand why that mattered."',
+       desc:'Unconscious ummers come across as checked out — because they are. They agree to things they don\'t remember agreeing to. Full sentences prove you\'re actually tracking the conversation. They also give you a moment to formulate your actual response.'},
+      {num:48,name:'Anatomically Correct Empathizers',
+       key:'Listen to whether your partner speaks through visual, auditory, or kinesthetic language. Match their dominant sense in your responses.',
+       desc:'Visual: "I see what you mean," "That looks right to me." Auditory: "That sounds right," "I hear what you\'re saying." Kinesthetic: "I have a gut feeling," "That sits well with me." People feel most understood by someone who speaks their native sensory language.'},
+      {num:49,name:'The Premature We',
+       key:'Use "we," "us," and "our" early in a new relationship — before they\'ve naturally emerged. The words create subliminal togetherness.',
+       desc:'"We should check that out" instead of "you might want to check that out." "If we keep having this weather…" instead of "if the weather stays good…" The pronoun signals alliance. Friends use it naturally; using it prematurely accelerates the feeling of friendship.'},
+      {num:50,name:'Instant History',
+       key:'During any first meeting, find one specific shared moment and name it. Reference it again at the end. It becomes your private touchstone.',
+       desc:'A shared laugh, a surprising coincidence, an absurd observation. Find it, name it, return to it. "Quack" as a greeting — chosen to revive a specific shared memory — floods back warmth instantly regardless of how much time has passed. That\'s worth more than any follow-up email.'}
+    ]
+  },
+  {
+    id:'part6', num:'VI', color:'#3db89e',
+    title:'How to Differentiate Praise from Flattery',
+    desc:'Skilled praise gives a relationship immediate liftoff. Unskilled flattery can wreck your chances of ever being trusted again.',
+    techs:[
+      {num:51,name:'Grapevine Glory',
+       key:'To compliment someone effectively, tell their colleague instead. Overheard praise is trusted completely; direct praise is suspected of self-interest.',
+       desc:'Tell Jane\'s close colleague: "Jane said something so brilliant in that meeting — someday she\'ll run this company." Within 24 hours, the colleague tells Jane everything. The indirect route removes all suspicion of brownnosing and doubles the emotional impact.'},
+      {num:52,name:'Carrier Pigeon Kudos',
+       key:'Whenever you hear someone praised, immediately carry that compliment to its subject. Everyone loves the bearer of good news.',
+       desc:'"Sam, I heard Carl talking about what you did on the Henderson account — he was genuinely impressed." The gratitude your subject feels attaches to you as much as to the original complimenter. You become the person who makes others feel recognized.'},
+      {num:53,name:'Implied Magnificence',
+       key:'Embed positive assumptions about someone into ordinary sentences. Don\'t state the compliment — imply it as an obvious given.',
+       desc:'"Anyone as perceptive as you would have caught that immediately." "Someone with your instincts for people probably knew before anyone else." The implication feels more genuine than the stated version because it treats the quality as an established fact, not an opinion.'},
+      {num:54,name:'Accidental Adulation',
+       key:'Hide praise in the parenthetical part of your sentence — as if it slipped out. The recipient hears only the praise; your main point gets lost in the glow.',
+       desc:'"I must have been boring you — anyone as knowledgeable as you probably knew all this already." The parenthetical praise arrives unexpectedly and feels unplanned, which is exactly why it lands. Planned compliments are processed skeptically; accidental ones go straight through.'},
+      {num:55,name:'Killer Compliment',
+       key:'Find one specific, genuine, unusual quality in someone you want to keep in your life. Say their name first. Then deliver it.',
+       desc:'"Sarah — you have an unusually good instinct for when to speak and when to wait." Specific and unique, not generic. Never use it on groups. Always deliver it privately, at the end of the conversation, as a closing note. It\'s the last thing they\'ll think about when they get home.'},
+      {num:56,name:'Little Strokes',
+       key:'Drop quick, brief acknowledgments freely throughout the day: "Nice call," "Good catch," "Well handled." Don\'t save praise for formal moments.',
+       desc:'Most people never hear that they\'re doing well unless something goes wrong. A quick "that was sharp" costs nothing and stays with someone for days. The absence of acknowledgment is noticed; its presence creates loyalty that formal reviews can\'t replicate.'},
+      {num:57,name:'The Knee-Jerk Wow!',
+       key:'The moment someone finishes a performance — a presentation, a dish, a negotiation — say something positive immediately. Timing beats accuracy.',
+       desc:'The window is narrow: the first few seconds after the performance ends. Their euphoria is at its peak and their judgment is suspended. An immediate "you were terrific" lands permanently. Accurate feedback offered two minutes later, once judgment returns, lands much softer.'},
+      {num:58,name:'Boomeranging',
+       key:'When someone compliments you, don\'t deflect or contradict. Simply reflect the warmth back: "That\'s very kind of you" or "I\'m so glad you said that."',
+       desc:'A compliment dismissed or argued against dies — and the person who gave it often stops giving them. A compliment reflected back with warmth encourages more. The French do this instinctively: "How kind of you." Three words, and the door stays open.'},
+      {num:59,name:'The Tombstone Game',
+       key:'Ask someone what they\'d want on their tombstone. Remember it. Don\'t mention it again. Weeks later, use it as a targeted compliment.',
+       desc:'"Joe, the reason I value working with you is that you\'re a man of your word." If that\'s what Joe said he\'d want engraved, the compliment lands like nothing else — because it\'s precisely what he values most about himself. It can\'t be faked, and he knows it.'}
+    ]
+  },
+  {
+    id:'part7', num:'VII', color:'#5b98d9',
+    title:'How to Direct Dial Their Hearts',
+    desc:'Your body language comprises more than half your personality — and none of it travels through wires. On the phone, you must translate it into sound.',
+    techs:[
+      {num:60,name:'Talking Gestures',
+       key:'On the phone, consciously verbalize everything your body would signal in person. Turn nods into "I see," smiles into warmth in your voice. Then amplify by 30%.',
+       desc:'You lose 30% of your energy through the phone line. Compensate by verbalizing reactions: "You don\'t say!" for raised eyebrows, "That\'s fascinating" for a lean-forward, real laughter for a smile. Treat every call as a radio performance where the audience can only hear you.'},
+      {num:61,name:'Name Shower',
+       key:'Use your caller\'s name more often on the phone than you would in person. It substitutes for the eye contact, touch, and body language you\'ve lost.',
+       desc:'"Thanks, Sam." "Let\'s do it, Betty." "That makes sense, Demetri." What feels excessive face-to-face feels warm and attentive over the phone. The name keeps the connection alive through silences and transitions and signals the call has your full attention.'},
+      {num:62,name:'Oh Wow, It\'s You!',
+       key:'Answer professionally and neutrally. Then, once you know who\'s calling, let warmth flood visibly into your voice — reserved specifically for them.',
+       desc:'Answer crisp and professional. After they identify themselves, shift: let a smile engulf your voice as if you were specifically hoping they\'d call. Even if you weren\'t. The technique works even on difficult calls — the warmth changes the receiver\'s posture toward you before you\'ve said a word.'},
+      {num:63,name:'The Sneaky Screen',
+       key:'If you must screen calls, have staff say "I\'ll put you right through!" before asking who\'s calling. The caller never feels screened — just unlucky with timing.',
+       desc:'When the VIP is unavailable, the message is: "I\'m so sorry, she just stepped out — I know she\'ll be sorry she missed your call." The caller processes this as bad luck, not rejection. The feeling of being screened is one of the most memorable negative impressions you can make.'},
+      {num:64,name:'Salute the Spouse',
+       key:'When calling someone\'s home, genuinely greet whoever answers. When calling someone\'s office repeatedly, learn and use their assistant\'s name.',
+       desc:'Anyone close enough to answer the phone is close enough to influence the VIP\'s opinion of you. A fund-raiser who twice failed to acknowledge the mogul\'s wife never got the contribution — she said so at tea. Two words from her could have meant millions.'},
+      {num:65,name:'What Color Is Your Time?',
+       key:'Before making your point in any call, ask: "Is this a good time?" If they\'re rushed, schedule a call when they\'re not.',
+       desc:'Critical information delivered at the wrong moment gets zero retention. Red (rushed), yellow (make it quick), green (let\'s talk). No matter how important your news: if their tank is full of something else, your words go nowhere. Ask first, always.'},
+      {num:66,name:'Constantly Changing Outgoing Message',
+       key:'Change your voicemail message every day. Keep it short, professional, and neutral — no music, jokes, or quotes.',
+       desc:'Callers consistently rate people with daily updated messages as more competent and reliable than those with static recordings. The update signals you\'re active, organized, and paying attention. The content should be clean and short — the update itself is the message.'},
+      {num:67,name:'Your Ten-Second Audition',
+       key:'When voicemail picks up, treat the first ten seconds as a performance. One compelling reason they\'ll want to call back, then your number.',
+       desc:'"This is [name]. I have the answer to the question you raised last Tuesday — call me at [number]." If you\'re caught off guard when voicemail answers, hang up before the beep. Call back when you have a clear, specific opener. A flat "call me back" gets deleted.'},
+      {num:68,name:'The Ho-Hum Caper',
+       key:'When calling through a gatekeeper, use the pronoun instead of the VIP\'s name: "Hi, this is [name] — is she in?"',
+       desc:'The casual "she" signals to the assistant that you and the VIP are already acquainted — why else would you refer to her so informally? The gatekeeper now can\'t be sure you\'re a cold caller. The same information delivered with "May I speak with Ms. Smith?" gets you screened.'},
+      {num:69,name:'I Hear Your Other Line',
+       key:'When you hear a phone ringing in the background, stop mid-sentence and say: "I hear your other line — go ahead and get that if you need to."',
+       desc:'The moment they hear that other ring, they stop receiving anything you\'re saying. Their entire attention shifts to: how do I interrupt this person without being rude? Address it directly and immediately. They\'ll recognize you as a top communicator for noticing.'},
+      {num:70,name:'Instant Replay',
+       key:'Record important business calls and listen again. The second listen reveals hesitation, real enthusiasm, and unstated concerns you missed while speaking.',
+       desc:'What you heard and what was said are often different. When you\'re talking, you\'re managing the conversation in real time and miss subtleties. The recording reveals the pause before the "yes," the slight change in energy around a specific number, the topic they circled back to twice.'}
+    ]
+  },
+  {
+    id:'part8', num:'VIII', color:'#d45555',
+    title:'How to Work a Party Like a Politician Works a Room',
+    desc:'Politicians don\'t waft into parties with fluffy thoughts about the food. They run a campaign checklist: who, when, what, why, where, how.',
+    techs:[
+      {num:71,name:'Munching or Mingling',
+       key:'Eat before you arrive. Holding food or drink at a party creates physical barriers and occupies your hands. Parties are for connecting, not consuming.',
+       desc:'When people scan a room for someone to approach, they subconsciously skip anyone with a full plate. You can\'t shake hands, exchange cards, or fully engage while managing food. Politicians arrive fed. The party is purely for human connection.'},
+      {num:72,name:'Rubberneck the Room',
+       key:'Stop in the doorway when you arrive. Slowly survey the room before moving. Choose your first three targets before you step in.',
+       desc:'Don\'t scurry in or make a beeline for the first familiar face. The deliberate pause signals stage presence and gives you intelligence: who\'s there, how the energy is distributed, who\'s already in conversation with whom. You enter with a plan, not just a direction.'},
+      {num:73,name:'Be the Chooser, Not the Choosee',
+       key:'Don\'t wait to be approached. Decide who you want to meet and go to them. The right connection will not always walk to you first.',
+       desc:'The best mentor, the right collaborator, the most valuable friendship — it may be at this party. But they are not necessarily going to cross the room to find you. Waiting to be chosen is the strategy of people who leave parties having met no one new.'},
+      {num:74,name:'Come-Hither Hands',
+       key:'Stand with arms at your sides, palms subtly visible, legs slightly apart. Any object held in front of your body is a subliminal wall.',
+       desc:'Open palms are one of the oldest signals of "I have nothing to hide, I accept you." Crossed arms and clutched bags signal "stay away." A shoulder bag hangs behind you; a hand-clutched bag blocks the path. Open body language is the first requirement for anyone to approach.'},
+      {num:75,name:'Tracking',
+       key:'Keep notes from every conversation. When you see them again, reference a specific detail: "Did your son make the team?"',
+       desc:'The question confirms what everyone secretly knows: they are the center of their own universe, and they\'re important enough that you remembered. One specific reference — especially on an anniversary or follow-up to something they mentioned weeks ago — hits harder than any formal gesture.'},
+      {num:76,name:'The Business Card Dossier',
+       key:'Immediately after a conversation, write on the back of their card: what they mentioned, a preference, a goal, a joke. Reference it in your next communication.',
+       desc:'"Had any good Sancerre lately?" in a postcard months later — referencing one sentence from a party — signals you were actually present for the conversation. It\'s a level of attention most people never receive, and they don\'t forget the person who paid it.'},
+      {num:77,name:'Eyeball Selling',
+       key:'While making a case, watch their body more than their face. Head fully facing you: keep going. Head turning: change direction. Arms crossing: hand them something.',
+       desc:'Their body reveals their actual response before their words do. Someone who says "yes" while their head moves side to side is not saying yes. Someone who leans in even slightly while you\'re talking is inviting you to continue. Respond to the body, not the social performance.'}
+    ]
+  },
+  {
+    id:'part9', num:'IX', color:'#7eb840',
+    title:'How to Break the Most Treacherous Glass Ceiling of All',
+    desc:'Some bright individuals hit their heads on a thick invisible shield as they climb. Only top communicators recognize it and navigate the unspoken rules.',
+    techs:[
+      {num:78,name:'See No Bloopers, Hear No Bloopers',
+       key:'When a colleague spills, stumbles, or fumbles, act as if it didn\'t happen. Don\'t say "Whoops!" — don\'t acknowledge it at all.',
+       desc:'The last thing someone needs after a spill or slip is someone drawing attention to it. Simply continue the conversation as if nothing occurred. Big players do this automatically for each other. It is one of the most valued and rarely taught forms of social grace.'},
+      {num:79,name:'Lend a Helping Tongue',
+       key:'When someone\'s story is cut off by an interruption, let the interruption run, then say: "Now please get back to your story — you were just getting to the part about…"',
+       desc:'The person whose story was interrupted is stranded — too polite to say "as I was saying." You rescue them, and they remember it. Big players have long memories for people who saved them from small humiliations. The gratitude is real and disproportionate to the effort.'},
+      {num:80,name:'Bare the Buried WIIFM',
+       key:'When you propose a meeting or ask a favor, state openly what you want and what they\'ll get — even if their benefit is just a good lunch.',
+       desc:'Hidden agendas, when discovered, destroy trust permanently and retroactively. "I\'d love to get lunch — I want to pick your brain about X, and I can share what I\'ve been seeing in Y" tells them everything. Concealing your agenda robs them of the ability to say yes willingly.'},
+      {num:81,name:'Let \'Em Savor the Favor',
+       key:'After someone agrees to help you, wait at least 24 hours before following up. Let them feel generous before you ask them to deliver.',
+       desc:'Calling within the hour to collect transforms the favor from a gift into a transaction and signals poor judgment about social timing. The person who agreed needs time to feel good about what they just did. Give it to them — then follow up.'},
+      {num:82,name:'Tit for (Wait… Wait) Tat',
+       key:'After someone does you a significant favor, wait weeks before calling in their reciprocal debt — even if it\'s obvious they owe you one.',
+       desc:'The too-quick return request makes the favor feel like barter. The delay preserves the fiction — and sometimes the reality — that you did it out of friendship, not accounting. Let them enjoy the glow of gratitude before you make any request at all.'},
+      {num:83,name:'Parties Are for Pratter',
+       key:'Never raise business complaints, controversial opinions, or grievances at social events. Parties are diplomatic safe zones.',
+       desc:'Big players, even when standing next to their enemies, smile and nod at the buffet table. They leave tough talk for tough settings. One remark at a Christmas party — however correct — can quietly dim your prospects for years without anyone telling you why.'},
+      {num:84,name:'Dinners Are for Dining',
+       key:'At business meals, discuss ideas and positives only. No negotiations, no complaints, no pressure. Save any controversy for the conference table.',
+       desc:'The dining table is a sacred safe haven: brainstorming, free association, the sunny side of a potential deal. Even at the end of the meal, the biggies approach business gently. Anything that creates tension gets immediately relocated to a proper business setting.'},
+      {num:85,name:'Chance Encounters Are for Chitchat',
+       key:'If you\'re in a sensitive negotiation and run into the other party unexpectedly, keep it warm and brief. Never use the accidental meeting to press your case.',
+       desc:'Using the supermarket checkout or elevator to ambush someone with business feels like an entrapment — and they\'ll punish the offense by avoiding you. The person who simply smiles and says "great to see you" gets a callback the next morning, out of relief and goodwill.'},
+      {num:86,name:'Empty Their Tanks',
+       key:'Before presenting your ideas to someone upset, frustrated, or distracted, let them vent completely first. Only an empty tank can receive new input.',
+       desc:'Ask and listen until there\'s nothing left to say. The person who tries to pour information into a full tank gets inaccurate reception — the listener is too occupied with their own noise to absorb anything new. Drain first, then fill.'},
+      {num:87,name:'Echo the Emo',
+       key:'When someone is emotionally charged, track and name every feeling they express before offering facts or solutions. They can\'t hear information until they feel heard.',
+       desc:'"You must have been furious… and then mortified… and then probably felt completely let down." Track every emotional beat. By the end, they\'re calmer, more rational, and often defending the person or thing they were just complaining about. Facts speak. Emotions shout. Address the shout first.'},
+      {num:88,name:'My Goof, Your Gain',
+       key:'When you make a mistake that affects someone, don\'t just correct it — overcorrect in their favor. Ask: "How can I make this person glad the mistake happened?"',
+       desc:'A correction is the minimum. A generous overcorrection — something they never expected and didn\'t ask for — turns a negative memory into a positive one. Every time they look at the replacement, they think of you with warmth instead of resentment.'},
+      {num:89,name:'Leave an Escape Hatch',
+       key:'When you catch someone in a deception or wrongdoing, don\'t corner them. Give them a way to retreat with their face intact — unless you\'re obligated to expose them.',
+       desc:'"I wonder if there was a misunderstanding about…" Cornering someone publicly removes all their allies and makes enemies of the witnesses. Giving an escape hatch makes witnesses respect you. Resolve privately never to engage with that person again.'},
+      {num:90,name:'Buttercups for Their Boss',
+       key:'When a service person goes above and beyond, immediately send a written compliment to their supervisor. It\'s insurance they\'ll spend the rest of their career repaying.',
+       desc:'"I wanted to let you know that [name] handled [situation] exceptionally." The assistant manager, the mechanic, the clerk — whoever receives that letter will roll out the red carpet every time they see you from that point forward. It\'s a favor they can never fully repay.'},
+      {num:91,name:'Lead the Listeners',
+       key:'Be the first to applaud or publicly praise a speaker you agree with. Don\'t wait to see if others are clapping first.',
+       desc:'The person behind the podium — however senior — is watching to see who leads the response. First responders signal confidence and the power to move others. Decision-makers notice who started the applause. Crouched inside every presenter is someone anxious about the crowd\'s acceptance.'},
+      {num:92,name:'The Great Scorecard in the Sky',
+       key:'Every relationship has an invisible score. The player with the lower score pays deference to the player with the higher. Ignoring the score gets you ejected.',
+       desc:'Big players always know who\'s up, who\'s down, and by how many points today. Asking someone who\'s already said yes which shipping service to use — instead of just handling it — signals you don\'t understand the score. Every communication blunder is visible on the invisible x-ray.'}
+    ]
+  }
+];
+
+// ─────────────────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────────────────
+const mastered = new Set(JSON.parse(localStorage.getItem('mastered')||'[]'));
+
+function colorRGB(hex){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function renderAll(){
+  const content = document.getElementById('content');
+  const navParts = document.getElementById('navParts');
+  const dots = document.getElementById('dots');
+
+  PARTS.forEach(part=>{
+    // Nav button
+    const nb = document.createElement('button');
+    nb.className='nbtn'; nb.id='nb'+part.id;
+    nb.textContent=`${part.num} · ${part.title.split(' ').slice(0,3).join(' ')}…`;
+    nb.onclick=()=>scrollToPart(part.id);
+    navParts.appendChild(nb);
+
+    // Dot
+    const dot = document.createElement('div');
+    dot.className='dot'; dot.id='dot'+part.id;
+    dot.style.background=part.color;
+    dot.onclick=()=>scrollToPart(part.id);
+    dot.innerHTML=`<div class="dot-tip">Part ${part.num}</div>`;
+    dots.appendChild(dot);
+
+    // Section
+    const sec = document.createElement('div');
+    sec.className='psec'; sec.id=part.id;
+    sec.style.setProperty('--pcolor', part.color);
+    sec.style.setProperty('--pcolor-rgb', colorRGB(part.color));
+
+    sec.innerHTML=`
+      <div class="phdr">
+        <div class="pnum" style="color:${part.color};">${part.num}</div>
+        <div class="pinfo">
+          <div class="plabel">Part ${part.num}</div>
+          <div class="ptitle" style="color:${part.color};">${part.title}</div>
+          <div class="pdesc">${part.desc}</div>
+        </div>
+        <div class="pcnt">${part.techs.length} technique${part.techs.length>1?'s':''}</div>
+      </div>
+      <div class="grid" id="grid${part.id}"></div>
+    `;
+    content.appendChild(sec);
+
+    const grid = sec.querySelector('#grid'+part.id);
+    part.techs.forEach(t=>{
+      const card = document.createElement('div');
+      card.className='card'+(mastered.has(t.num)?' done':'');
+      card.id='t'+t.num;
+      card.style.setProperty('--pcolor', part.color);
+      card.style.setProperty('--pcolor-rgb', colorRGB(part.color));
+
+      card.innerHTML=`
+        <div class="ctop">
+          <div class="cnum">${t.num}</div>
+          <div class="cname">${t.name}</div>
+        </div>
+        <div class="ckey">${t.key}</div>
+        <div class="cdesc">${t.desc}</div>
+        <div class="cfoot">
+          <button class="mbtn" onclick="toggleMaster(${t.num},this)">
+            ${mastered.has(t.num)?'✓ Mastered':'Mark mastered'}
+          </button>
+          <span class="ptag" style="color:${part.color};border-color:${part.color}33;background:${part.color}18;">Part ${part.num}</span>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  });
+
+  updateCount();
+}
+
+// ─────────────────────────────────────────────────────────
+//  INTERACTIONS
+// ─────────────────────────────────────────────────────────
+function toggleMaster(num, btn){
+  const card = document.getElementById('t'+num);
+  if(mastered.has(num)){
+    mastered.delete(num);
+    card.classList.remove('done');
+    btn.textContent='Mark mastered';
+  } else {
+    mastered.add(num);
+    card.classList.add('done');
+    btn.textContent='✓ Mastered';
+  }
+  localStorage.setItem('mastered', JSON.stringify([...mastered]));
+  updateCount();
+}
+
+function updateCount(){
+  document.getElementById('mc').textContent=mastered.size;
+}
+
+function scrollToPart(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ─────────────────────────────────────────────────────────
+//  SCROLL EFFECTS
+// ─────────────────────────────────────────────────────────
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('vis');
+  });
+},{threshold:0.05,rootMargin:'0px 0px -60px 0px'});
+
+function onScroll(){
+  const scrolled=(document.documentElement.scrollTop||document.body.scrollTop);
+  const total=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('pgfill').style.width=(scrolled/total*100)+'%';
+
+  PARTS.forEach(part=>{
+    const el=document.getElementById(part.id);
+    if(!el) return;
+    const rect=el.getBoundingClientRect();
+    const on = rect.top < 160 && rect.bottom > 100;
+    document.getElementById('dot'+part.id)?.classList.toggle('on',on);
+    document.getElementById('nb'+part.id)?.classList.toggle('on',on);
+  });
+}
+
+// ─────────────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────────────
+renderAll();
+document.querySelectorAll('.psec').forEach(el=>io.observe(el));
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+</script>
+</body>
+</html>

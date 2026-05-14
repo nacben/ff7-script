@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>She Always Said Yes — A Tribute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Dancing+Script:wght@500;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & TOKENS ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #FAF6EF;
+      --off-white:  #FEFCF8;
+      --gold:       #C49A28;
+      --gold-lt:    #E8C472;
+      --gold-pale:  #F5E6C0;
+      --navy:       #1C2B3A;
+      --charcoal:   #2A2A2A;
+      --smoke:      #6B6560;
+      --mauve:      #8B7B8B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVIGATION ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 200;
+      padding: .85rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250,246,239,.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(196,154,40,.18);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,.07); }
+    .nav-brand {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2rem; }
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      text-decoration: none;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--charcoal); margin: 5px 0;
+      transition: all .3s;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: linear-gradient(155deg, var(--off-white) 0%, var(--cream) 55%, #EDE0C8 100%);
+    }
+    .hero-rings {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(196,154,40,.12);
+      animation: breathe 7s ease-in-out infinite;
+    }
+    .ring:nth-child(1){ width: 700px; height: 700px; animation-delay: 0s; }
+    .ring:nth-child(2){ width: 500px; height: 500px; animation-delay: -.9s; }
+    .ring:nth-child(3){ width: 320px; height: 320px; animation-delay: -1.8s; }
+    .ring-glow {
+      position: absolute;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,154,40,.06) 0%, transparent 70%);
+    }
+    @keyframes breathe {
+      0%,100% { transform: scale(1); opacity: .5; }
+      50%      { transform: scale(1.06); opacity: 1; }
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center;
+      max-width: 720px; padding: 2rem;
+      animation: riseUp 1.3s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes riseUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.8rem;
+    }
+    .hero-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      color: var(--charcoal); line-height: 1.15; margin-bottom: .6rem;
+    }
+    .hero-rule {
+      width: 90px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.6rem auto;
+    }
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      font-style: italic; color: var(--smoke);
+      line-height: 1.65; margin-bottom: 2.5rem;
+    }
+    .hero-card {
+      display: inline-block;
+      border: 1px solid rgba(196,154,40,.3);
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(6px);
+      padding: 2rem 3rem; border-radius: 2px;
+      font-size: 1.1rem; line-height: 2.1;
+    }
+    .hero-card em { color: var(--smoke); }
+    .hero-card strong {
+      font-weight: 500; font-style: normal;
+      font-family: 'Playfair Display', serif;
+      color: var(--charcoal);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      font-family: 'Lato', sans-serif;
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold);
+      animation: bounce 2.6s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); opacity: .5; }
+      50%      { transform: translateX(-50%) translateY(8px); opacity: 1; }
+    }
+    .hero-scroll svg { width: 18px; height: 18px; }
+
+    /* ─── SHARED SECTION SCAFFOLDING ─────────────────────────────── */
+    .section {
+      padding: 110px 2rem;
+    }
+    .section-inner {
+      max-width: 820px; margin: 0 auto;
+    }
+    .section-inner.wide { max-width: 1080px; }
+
+    .label {
+      display: flex; align-items: center; gap: 1rem;
+      font-family: 'Lato', sans-serif;
+      font-size: .7rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .label::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(196,154,40,.35), transparent);
+      max-width: 100px;
+    }
+    .heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      line-height: 1.2; color: var(--charcoal); margin-bottom: 1.6rem;
+    }
+    .heading em { color: var(--gold); }
+    .prose { font-size: 1.13rem; line-height: 1.92; color: #444; }
+    .prose p + p { margin-top: 1.25rem; }
+
+    /* ─── MEMORIAL (dark) ────────────────────────────────────────── */
+    .memorial {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .memorial::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 60%, rgba(196,154,40,.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(196,154,40,.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .memorial .label  { color: rgba(196,154,40,.65); }
+    .memorial .heading{ color: var(--gold-lt); }
+    .memorial .prose  { color: rgba(250,246,239,.78); }
+
+    .mem-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      color: var(--gold-lt); display: block; margin-bottom: .2rem;
+    }
+    .mem-dates {
+      font-family: 'Playfair Display', serif;
+      font-size: .95rem; letter-spacing: .12em;
+      color: rgba(196,154,40,.6); margin-bottom: 2.8rem;
+    }
+    .mem-pull {
+      position: relative;
+      border: 1px solid rgba(196,154,40,.22);
+      padding: 2.8rem 3rem;
+      margin: 3.5rem 0; text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-style: italic; color: var(--gold-lt); line-height: 1.5;
+    }
+    .mem-pull::before {
+      content: '\201C';
+      position: absolute; top: -.9rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: Georgia, serif;
+      font-size: 4.5rem; color: var(--gold); opacity: .35; line-height: 1;
+    }
+
+    /* ─── TIMELINE ───────────────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      margin: 4rem 0; padding-left: 3rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: .4rem; bottom: .4rem; width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(196,154,40,.45) 8%, rgba(196,154,40,.45) 92%, transparent);
+    }
+    .tl-item {
+      position: relative; margin-bottom: 2.8rem;
+      opacity: 0; transform: translateX(-18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .tl-item.vis { opacity: 1; transform: translateX(0); }
+    .tl-item::before {
+      content: '';
+      position: absolute; left: -3.3rem; top: .55rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(196,154,40,.18), 0 0 0 6px rgba(196,154,40,.07);
+    }
+    .tl-year {
+      font-family: 'Lato', sans-serif;
+      font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .3rem;
+    }
+    .tl-text { font-size: 1rem; color: rgba(250,246,239,.72); line-height: 1.65; }
+
+    /* ─── PARTNERSHIP ─────────────────────────────────────────────── */
+    .partnership { background: var(--off-white); }
+
+    .blockquote-card {
+      border-left: 3px solid var(--gold);
+      background: var(--gold-pale);
+      padding: 1.8rem 2.2rem;
+      margin: 3rem 0; border-radius: 0 3px 3px 0;
+    }
+    .blockquote-card blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-style: italic;
+      color: var(--charcoal); line-height: 1.75;
+    }
+
+    /* ─── YES SECTION (dark) ─────────────────────────────────────── */
+    .yes-section {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .yes-bg-word {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(12rem, 30vw, 26rem);
+      color: rgba(196,154,40,.055);
+      pointer-events: none; user-select: none;
+      white-space: nowrap; line-height: 1;
+    }
+    .yes-section .label   { color: rgba(196,154,40,.6); justify-content: center; }
+    .yes-section .label::after { display: none; }
+    .yes-section .heading { color: var(--gold-lt); }
+    .yes-section .prose   { color: rgba(250,246,239,.8); }
+
+    .yes-pillars {
+      display: flex; margin: 3.5rem 0;
+      border: 1px solid rgba(196,154,40,.2);
+    }
+    .yes-pillar {
+      flex: 1; padding: 2.2rem 1.4rem; text-align: center;
+      border-right: 1px solid rgba(196,154,40,.2);
+      transition: background .3s;
+    }
+    .yes-pillar:last-child { border-right: none; }
+    .yes-pillar:hover { background: rgba(196,154,40,.07); }
+    .pillar-word {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem; font-style: italic;
+      color: var(--gold-lt); margin-bottom: .75rem;
+    }
+    .pillar-desc { font-size: .95rem; color: rgba(250,246,239,.62); line-height: 1.65; }
+
+    /* ─── PRINCIPLES GRID ────────────────────────────────────────── */
+    .principles { background: var(--cream); }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.6rem; margin-top: 3rem;
+    }
+    .card {
+      background: var(--off-white);
+      border: 1px solid rgba(196,154,40,.18);
+      padding: 2rem 1.8rem; border-radius: 3px;
+      position: relative; overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 14px 48px rgba(0,0,0,.08); }
+    .card:hover::before { transform: scaleX(1); }
+    .card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 700;
+      color: rgba(196,154,40,.14); line-height: 1; margin-bottom: .5rem;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--charcoal); margin-bottom: .7rem;
+    }
+    .card-body { font-size: .98rem; color: var(--smoke); line-height: 1.7; }
+
+    /* ─── TEACHING ───────────────────────────────────────────────── */
+    .teaching {
+      background: linear-gradient(180deg, #EDE5D5 0%, var(--cream) 100%);
+    }
+    .big-counter {
+      display: flex; align-items: baseline; gap: .6rem; margin: 1.5rem 0 2.5rem;
+    }
+    .big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(6rem, 14vw, 9rem);
+      font-weight: 700; color: var(--gold); opacity: .22; line-height: 1;
+    }
+    .big-label {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-style: italic; color: var(--charcoal);
+      line-height: 1.3;
+    }
+
+    /* Student mosaic */
+    .mosaic-wrap { margin: 3rem 0; }
+    .mosaic-caption {
+      font-family: 'Lato', sans-serif;
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 5px;
+    }
+    .dot {
+      aspect-ratio: 1; border-radius: 50%;
+      background: var(--gold);
+      opacity: .15;
+      transition: opacity .3s, transform .3s;
+      cursor: default;
+    }
+    .dot.lit  { opacity: .55; }
+    .dot:hover { opacity: 1; transform: scale(1.35); }
+
+    /* ─── GRATITUDE ───────────────────────────────────────────────── */
+    .gratitude { background: var(--off-white); }
+    .gratitude-pull {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.35rem, 2.8vw, 2rem);
+      font-style: italic; line-height: 1.75;
+      text-align: center;
+      max-width: 700px; margin: 2.5rem auto 3.5rem;
+      color: var(--charcoal);
+    }
+    .gratitude-pull .hl { color: var(--gold); font-style: normal; }
+
+    /* ─── CLOSING MEDITATION (dark) ──────────────────────────────── */
+    .closing {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .closing::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%,   rgba(196,154,40,.09) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%,  rgba(196,154,40,.06) 0%, transparent 60%);
+    }
+    .closing .heading { color: var(--gold-lt); }
+    .closing .prose   { color: rgba(250,246,239,.8); max-width: 640px; margin: 0 auto; }
+
+    .manifesto {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.4rem; margin: 4rem 0;
+    }
+    .m-item {
+      border: 1px solid rgba(196,154,40,.2);
+      padding: 1.8rem 1.4rem; text-align: center;
+      transition: background .3s;
+    }
+    .m-item:hover { background: rgba(196,154,40,.07); }
+    .m-word {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem; color: var(--gold-lt);
+      margin-bottom: .5rem; display: block;
+    }
+    .m-def { font-size: .9rem; color: rgba(250,246,239,.6); line-height: 1.6; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: #1a1a1a;
+      padding: 5rem 2rem;
+      text-align: center;
+      color: rgba(250,246,239,.55);
+    }
+    .footer-inner { max-width: 600px; margin: 0 auto; }
+    .footer-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem; color: var(--gold-lt);
+      margin-bottom: 1rem; display: block;
+    }
+    .footer-rule { width: 60px; height: 1px; background: rgba(196,154,40,.35); margin: 2rem auto; }
+    footer p { font-size: .95rem; line-height: 1.8; }
+    footer small { font-size: .8rem; opacity: .45; display: block; margin-top: 1.5rem; }
+
+    /* ─── REVEAL UTILITY ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .12s; }
+    .reveal-delay-2 { transition-delay: .24s; }
+    .reveal-delay-3 { transition-delay: .36s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 1rem;
+        position: fixed; inset: 60px 0 0 0;
+        background: var(--cream); padding: 2rem;
+        z-index: 150;
+      }
+      .hero-card { padding: 1.5rem 1.8rem; }
+      .yes-pillars { flex-direction: column; }
+      .yes-pillar { border-right: none; border-bottom: 1px solid rgba(196,154,40,.2); }
+      .yes-pillar:last-child { border-bottom: none; }
+      .mosaic { grid-template-columns: repeat(8, 1fr); }
+      .mem-pull { padding: 2rem 1.5rem; }
+      .section { padding: 80px 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .mosaic { grid-template-columns: repeat(6, 1fr); }
+      .timeline { padding-left: 2rem; }
+      .tl-item::before { left: -2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ──────────────────────────────────────────────────── -->
+<nav id="nav">
+  <a class="nav-brand" href="#hero">She Always Said Yes</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#memorial">For Mama</a></li>
+    <li><a href="#partnership">Partnership</a></li>
+    <li><a href="#philosophy">The Yes</a></li>
+    <li><a href="#principles">Improv</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#gratitude">Gratitude</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero-rings">
+    <div class="ring-glow"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">A Dedication &amp; Celebration</div>
+    <h1 class="hero-title">She Always Said Yes</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-subtitle">On love, partnership, improvisation,<br>and the art of being a teacher</p>
+    <div class="hero-card">
+      <em>For Mama,</em><br>
+      <strong>Virginia Louise Pittman Ryan</strong><br>
+      <em>1920 — 1998</em><br><br>
+      <em>and for</em><br>
+      <strong>Ronald Whitney Madson</strong><br>
+      <em>My improv partner in life</em>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Explore</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── FOR MAMA ─── memorial ──────────────────────────────────────── -->
+<section class="section memorial" id="memorial">
+  <div class="section-inner">
+    <div class="label reveal">In Memoriam</div>
+    <span class="mem-name reveal reveal-delay-1">Virginia Louise Pittman Ryan</span>
+    <div class="mem-dates reveal reveal-delay-2">1920 — 1998</div>
+
+    <div class="mem-pull reveal">
+      She always said yes.
+    </div>
+
+    <div class="prose reveal">
+      <p>To say yes is to meet life at the door rather than from behind it. It is an act of courage that looks, on the surface, like simple agreement — but practiced over a lifetime, it becomes a philosophy, a way of inhabiting the world, a gift extended freely to everyone who enters your orbit.</p>
+      <p>Virginia Louise Pittman Ryan was born into a century still finding its shape. She lived through the Depression years, through a World War, through the deep changes of mid-century American life — decades that required daily negotiations between what was possible and what was hoped for. And yet the word her family and the daughter she raised remember most clearly is the simplest one in the language: <em>yes</em>.</p>
+      <p>This is not naivety. It is not the absence of discernment. It is something rarer and more deliberate — the practiced, generous opening of the self toward the world. To say yes is to trust that the next moment holds something worth showing up for. It is the first word of every good story.</p>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1920</div>
+        <div class="tl-text">Born into a century two years removed from the Great War and two years from the first commercial radio broadcast — a world just beginning to hear its own voice at scale.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1929 — 1939</div>
+        <div class="tl-text">The Depression years. An entire generation learned to make more from less, and in doing so discovered the particular resilience that only the habit of <em>yes</em> makes possible.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1940s</div>
+        <div class="tl-text">Through the Second World War, American women answered <em>yes</em> in ways both quiet and foundational — to industry, to family, to community, to an uncertain future that needed their full presence.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Mid-Century</div>
+        <div class="tl-text">A mother, a homemaker, an anchor. Said yes to every need that came through her door, every creative impulse her children brought her, every strange and wonderful idea that deserved a chance.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1998</div>
+        <div class="tl-text">Passed from this world, leaving behind not a record of refusals but a legacy of openings — all the doors she held wide so others could walk through.</div>
+      </div>
+    </div>
+
+    <div class="prose reveal">
+      <p>The teacher who dedicated her book to this woman learned the most important lesson not in a classroom but at home: that radical welcome — the open hand, the easy <em>yes</em> — is a form of love so fundamental that it becomes invisible, like air, like gravity. You notice it most completely only once it is gone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PARTNERSHIP ────────────────────────────────────────────────── -->
+<section class="section partnership" id="partnership">
+  <div class="section-inner">
+    <div class="label reveal">A Life Together</div>
+    <h2 class="heading reveal">For Ronald Whitney Madson:<br><em>My Improv Partner in Life</em></h2>
+
+    <div class="prose reveal">
+      <p>There is a particular kind of partnership that only improvisers fully understand — the kind where neither person knows what comes next, where the scene unfolds in real time, where the only rule is to say yes to whatever your partner offers and build from there.</p>
+      <p>To name someone your improv partner in life is to say something profound: that you have chosen to face the unknown together. That when one of you makes an offer — a move, a feeling, a proposal, an idea — the other's first instinct is not to evaluate or refuse, but to receive and extend. It is a commitment to the scene over the script.</p>
+    </div>
+
+    <div class="blockquote-card reveal">
+      <blockquote>"In improv, the cardinal sin is blocking — refusing what your partner offers, denying the reality they've created. The gift is the opposite: taking what's given, accepting it fully, and adding something of your own. A great partnership is a decades-long <em>yes, and.</em>"</blockquote>
+    </div>
+
+    <div class="prose reveal">
+      <p>It means you've built something together that neither could have planned alone. That's the nature of improvisation: it doesn't follow a script, which means it also cannot be predicted, and therefore cannot be fully imagined in advance. The scene you end up in is always more surprising, more textured, more <em>true</em> than anything you could have written at a desk.</p>
+      <p>This is also the best available description of a good marriage. Of a good friendship. Of a good life. The unexpected scene you'd never have written — and wouldn't trade for any of the scripted versions you might have chosen instead.</p>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-title">Accept the Offer</div>
+        <div class="card-body">Whatever your partner brings — an emotion, a direction, an unexpected turn — receive it as a gift. Your job is not to judge the offer but to work with it.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-title">Build Together</div>
+        <div class="card-body">Neither partner drives; neither follows. The scene emerges from the space between two people willing to discover it jointly, in real time.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-title">Trust the Process</div>
+        <div class="card-body">The best moments rarely come from planning. They come from presence — full availability to what is actually happening, right now, between you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE YES PHILOSOPHY ─── dark ──────────────────────────────── -->
+<section class="section yes-section" id="philosophy">
+  <div class="yes-bg-word">Yes</div>
+  <div class="section-inner">
+    <div class="label reveal">The Foundation</div>
+    <h2 class="heading reveal" style="text-align:center;">The Philosophy of <em>Yes</em></h2>
+
+    <div class="prose reveal" style="text-align:center; max-width:640px; margin:0 auto 3.5rem;">
+      <p>Improvisation is sometimes mistaken for chaos — for doing whatever you feel like. But genuine improvisation is something far more disciplined and demanding: it is the cultivation of radical availability, the willingness to meet what arrives with your full attention and your full self. The word <em>yes</em> is its threshold.</p>
+    </div>
+
+    <div class="yes-pillars reveal">
+      <div class="yes-pillar">
+        <div class="pillar-word">Accept</div>
+        <div class="pillar-desc">Receive what is offered without judgment. Say yes to the reality your partner — or life itself — presents to you.</div>
+      </div>
+      <div class="yes-pillar">
+        <div class="pillar-word">And…</div>
+        <div class="pillar-desc">The "and" is as essential as the "yes." You don't merely receive; you add to it. You contribute. You advance the scene.</div>
+      </div>
+      <div class="yes-pillar">
+        <div class="pillar-word">Listen</div>
+        <div class="pillar-desc">Deep listening is the precondition for genuine response. You cannot say yes to something you have not truly heard.</div>
+      </div>
+      <div class="yes-pillar">
+        <div class="pillar-word">Trust</div>
+        <div class="pillar-desc">Trust your partner, the process, yourself. Improvisation requires faith — not in outcomes, but in what can emerge between two willing people.</div>
+      </div>
+    </div>
+
+    <div class="prose reveal" style="text-align:center; max-width:650px; margin:0 auto;">
+      <p>The word <em>yes</em> is a form of hospitality. When you say yes to an idea, to a person, to a moment, you are opening your home to them — making room inside yourself for something that did not exist there before. This is what Virginia Ryan modeled. This is what students discovered, sometimes slowly and sometimes all at once, in the middle of an exercise they were sure was going wrong.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── IMPROV PRINCIPLES ───────────────────────────────────────── -->
+<section class="section principles" id="principles">
+  <div class="section-inner wide">
+    <div class="label reveal">The Art &amp; Craft</div>
+    <h2 class="heading reveal">Core Principles of <em>Improvisation</em></h2>
+
+    <div class="prose reveal" style="max-width:700px;">
+      <p>These are the principles that have filled forty years of classrooms — the ideas students were invited to try, the "crazy things" that turned out, more often than not, to change something in them permanently. They are as applicable to a conversation, a relationship, or a career as to a stage.</p>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-num">I</div>
+        <div class="card-title">Yes, And</div>
+        <div class="card-body">Accept what is offered and build upon it. Never deny the reality your partner has created. This is the golden rule of improvisation — and of generous human encounter.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">II</div>
+        <div class="card-title">Make Your Partner Look Good</div>
+        <div class="card-body">Your primary obligation is to support the person across from you. When everyone does this, everyone succeeds. It is a model for collaboration that extends far beyond the stage.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">III</div>
+        <div class="card-title">Be Present</div>
+        <div class="card-body">The scene happening right now is the only scene there is. Full attention — not performance, not planning ahead — is the wellspring of authentic response.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">IV</div>
+        <div class="card-title">Embrace Failure</div>
+        <div class="card-body">Mistakes in improv are not catastrophes — they are offers. The performer who receives failure gracefully and continues is more skilled than one who never stumbles.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">V</div>
+        <div class="card-title">Commit Fully</div>
+        <div class="card-body">Half-commitment produces half-scenes. Whatever you enter, enter completely. Your partner — and the audience — can feel hesitation from across the room.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">VI</div>
+        <div class="card-title">Give Gifts</div>
+        <div class="card-body">Every offer you make to your partner is a gift. Load your offers with detail and generosity. The more you give, the richer the scene becomes for everyone in it.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">VII</div>
+        <div class="card-title">Serve the Story</div>
+        <div class="card-body">No single performer is more important than the scene. Individual ego dissolves in service of something shared — a more interesting and surprising thing than any one person could make alone.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">VIII</div>
+        <div class="card-title">Trust Emergence</div>
+        <div class="card-body">The best scenes cannot be planned — they can only be allowed. Stay open to what the scene wants to become, rather than steering it toward what you thought it should be.</div>
+      </div>
+      <div class="card">
+        <div class="card-num">IX</div>
+        <div class="card-title">Specificity Over Generality</div>
+        <div class="card-body">Vague offers produce vague scenes. A specific detail — a name, a place, a concrete action — anchors the fiction and makes it vivid and credible for everyone present.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEACHING ────────────────────────────────────────────────── -->
+<section class="section teaching" id="teaching">
+  <div class="section-inner">
+    <div class="label reveal">A Vocation</div>
+    <h2 class="heading reveal"><em>Four Decades</em> of Students Showing Up</h2>
+
+    <div class="big-counter reveal">
+      <div class="big-num">40</div>
+      <div class="big-label">years of<br>teaching</div>
+    </div>
+
+    <div class="prose reveal">
+      <p>They showed up. That is what students do — they appear, uncertain and curious, carrying whatever they've been told about themselves before they walked through the door. A great teacher's first task is always the same: to dissolve those prior verdicts. To create a space where trying is not only permitted but required. Where the "crazy things" on offer are understood to be invitations into something genuinely new.</p>
+      <p>Four decades of students means dozens of semesters, thousands of classes, tens of thousands of moments in which a teacher and a learner faced each other across the slight gap that separates knowing from not-yet-knowing. It means uncountable failed exercises and redeemed ones, groans of resistance and gasps of discovery.</p>
+    </div>
+
+    <div class="mosaic-wrap reveal">
+      <div class="mosaic-caption">Each dot: a student. Each student: a world.</div>
+      <div class="mosaic" id="mosaic"></div>
+    </div>
+
+    <div class="prose reveal">
+      <p>Some arrived eager. Many arrived reluctant. Some were certain they had nothing to offer; others were so certain they had everything that they'd stopped being able to receive. Teaching improvisation meant working with all of it — meeting each person where they were and inviting them, gently or firmly as the moment required, into the experiment of actually trying.</p>
+      <p>This is what it means to call teaching "the greatest job in the world." Not because it is without difficulty, but because it is, uniquely and repeatedly, the work of witnessing transformation. You watch a person step through a fear they've carried for years. You watch a group that twenty minutes ago couldn't listen to each other suddenly hear something true. You watch a student say yes to something they'd always refused — and then watch their face change as they discover what was waiting on the other side.</p>
+    </div>
+
+    <div class="blockquote-card reveal">
+      <blockquote>"It is thanks to each of you that I have had the greatest job in the world — being a teacher."</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GRATITUDE ──────────────────────────────────────────────── -->
+<section class="section gratitude" id="gratitude">
+  <div class="section-inner">
+    <div class="label reveal">Acknowledgment</div>
+    <h2 class="heading reveal" style="text-align:center;">Deep Gratitude</h2>
+
+    <div class="gratitude-pull reveal">
+      "It <span class="hl">delights me</span> to acknowledge my <span class="hl">deep gratitude</span> to the four decades of students who have shown up for my classes, and who tried all the <span class="hl">crazy things</span> I recommended."
+    </div>
+
+    <div class="prose reveal" style="text-align:center; max-width:650px; margin:0 auto 4rem;">
+      <p>Gratitude, in improvisation, is not merely a sentiment. It is a professional posture. The recognition that every performance, every breakthrough, every discovery happened because someone else was in the room — because a student dared to look foolish, because a partner trusted the scene.</p>
+      <p>To be <em>delighted</em> by gratitude is the mark of a teacher who has never mistaken their role. The "crazy things recommended" were only valuable because someone agreed to try them. In this sense, the teacher is always a student of the students — and both are debtors to the willingness to show up.</p>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-title">For the ones who tried</div>
+        <div class="card-body">Every student who attempted the exercise they were sure they couldn't do — who stood up when they wanted to sit — contributed something irreplaceable to the knowledge gathered in forty years.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">For the ones who pushed back</div>
+        <div class="card-body">Resistance is not the opposite of learning — it is often its engine. The students who questioned, doubted, and challenged made the teaching sharper, truer, more honest.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">For the ones who returned</div>
+        <div class="card-body">Some lessons only arrive on the second or third pass. Those who came back — who gave the work another chance — demonstrated the most fundamental improvisational skill: willingness to continue.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLOSING MEDITATION ─── dark ──────────────────────────────── -->
+<section class="section closing" id="closing">
+  <div class="section-inner">
+    <h2 class="heading reveal" style="text-align:center; margin-bottom:1.5rem;">What the Word <em>Yes</em> Holds</h2>
+
+    <div class="prose reveal" style="text-align:center;">
+      <p>A single syllable. One breath of air. And yet within it: a mother's generosity that shaped a teacher; a marriage conducted as an ongoing improvisation; four decades of classrooms; thousands of students discovering that the thing they most feared doing was, once done, the thing that changed them.</p>
+      <p>Yes is not agreement. It is not submission. It is <em>availability</em> — the practiced art of showing up fully for whatever arrives, and finding in it something worth building upon.</p>
+    </div>
+
+    <div class="manifesto reveal">
+      <div class="m-item">
+        <span class="m-word">Receive</span>
+        <div class="m-def">Take in what is offered without flinching. The offer is a gift, even when it doesn't look like one.</div>
+      </div>
+      <div class="m-item">
+        <span class="m-word">Extend</span>
+        <div class="m-def">Add to what you've been given. Your contribution completes the gift and passes it forward.</div>
+      </div>
+      <div class="m-item">
+        <span class="m-word">Risk</span>
+        <div class="m-def">Every yes is a small act of courage. You don't know what comes next. Neither does anyone else. Go anyway.</div>
+      </div>
+      <div class="m-item">
+        <span class="m-word">Stay</span>
+        <div class="m-def">Don't abandon the scene when it gets difficult. Presence is the instrument. Stay in the room.</div>
+      </div>
+      <div class="m-item">
+        <span class="m-word">Play</span>
+        <div class="m-def">Seriousness and play are not opposites. The deepest work is often done in the register of delight.</div>
+      </div>
+      <div class="m-item">
+        <span class="m-word">Love</span>
+        <div class="m-def">At the bottom of every yes, if you trace it far enough, you find love. Virginia knew this. Ronald knows this. Every good teacher knows this.</div>
+      </div>
+    </div>
+
+    <div class="prose reveal" style="text-align:center;">
+      <p>A mother who always said yes. A husband who is an improv partner in life. Four decades of students who tried the crazy things. These are not separate stories — they are the same story, told at different scales. The story of a life spent in radical, generous, joyful availability to what arrives. The story of what happens when you learn, and keep learning, to say <em>yes.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">She Always Said Yes</span>
+    <p>For <em>Virginia Louise Pittman Ryan</em> &nbsp;·&nbsp; 1920 — 1998</p>
+    <p>For <em>Ronald Whitney Madson</em> &nbsp;·&nbsp; improv partner in life</p>
+    <div class="footer-rule"></div>
+    <p>In gratitude to four decades of students<br>who showed up and tried the crazy things.</p>
+    <small>The greatest job in the world — being a teacher.</small>
+  </div>
+</footer>
+
+<!-- ─── JAVASCRIPT ──────────────────────────────────────────────── -->
+<script>
+  // Nav scroll shadow
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Hamburger menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () =>
+      document.getElementById('navLinks').classList.remove('open')
+    )
+  );
+
+  // Intersection observer — reveal
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // Timeline items — staggered
+  const tlObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const siblings = [...e.target.parentElement.querySelectorAll('.tl-item')];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('vis'), idx * 160);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
+
+  // Build student mosaic
+  (function buildMosaic() {
+    const container = document.getElementById('mosaic');
+    if (!container) return;
+    const cols = window.innerWidth < 480 ? 6 : window.innerWidth < 768 ? 8 : 12;
+    const rows = 10;
+    container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    for (let i = 0; i < cols * rows; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (Math.random() > 0.4 ? ' lit' : '');
+      container.appendChild(dot);
+    }
+    // Animate dots in on scroll
+    const mosaicObs = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      const dots = container.querySelectorAll('.dot');
+      dots.forEach((d, i) => {
+        setTimeout(() => { d.style.transition = `opacity .4s ease ${(i*8)}ms, transform .3s`; d.style.opacity = d.classList.contains('lit') ? '.55' : '.15'; }, 0);
+      });
+      mosaicObs.disconnect();
+    }, { threshold: 0.1 });
+    mosaicObs.observe(container);
+  })();
+
+  // Smooth hover ripple on cards
+  document.querySelectorAll('.card, .m-item, .yes-pillar').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
+      const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+      card.style.setProperty('--mx', x + '%');
+      card.style.setProperty('--my', y + '%');
+    });
+  });
+</script>
+</body>
+</html>

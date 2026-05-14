@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Comic Toolbox — How to Be Funny Even If You're Not</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f0e17;
+    --navy-mid: #1a1929;
+    --navy-light: #252440;
+    --coral: #e8553e;
+    --coral-light: #f07059;
+    --gold: #f5a623;
+    --gold-light: #f8bc55;
+    --white: #fffffe;
+    --white-dim: #e8e8f0;
+    --muted: #9a99b2;
+    --card-bg: #1e1d30;
+    --card-border: #2e2d48;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--navy);
+    color: var(--white-dim);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--white); }
+
+  /* ── NAV ── */
+  #nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(15,14,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    transition: box-shadow 0.3s;
+  }
+  #nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 0.25rem; list-style: none; flex-wrap: wrap;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; padding: 0.4rem 0.6rem; border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--white); background: var(--navy-light);
+  }
+  .nav-links a.active { color: var(--gold); }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white-dim); border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 60% 40%, #1e1040 0%, var(--navy) 70%);
+  }
+  .hero-bg-shapes {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .hero-bg-shapes span {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.15;
+  }
+  .hero-bg-shapes span:nth-child(1) {
+    width: 600px; height: 600px;
+    background: var(--coral); top: -200px; right: -200px;
+  }
+  .hero-bg-shapes span:nth-child(2) {
+    width: 400px; height: 400px;
+    background: var(--gold); bottom: -100px; left: -100px;
+  }
+  .hero-bg-shapes span:nth-child(3) {
+    width: 300px; height: 300px;
+    background: #6244c5; top: 50%; left: 30%;
+  }
+  .hero-content { position: relative; z-index: 1; padding: 2rem; max-width: 900px; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--coral);
+    border: 1px solid var(--coral); border-radius: 20px;
+    padding: 0.3rem 1rem; margin-bottom: 1.5rem;
+    animation: fadeDown 0.8s ease both;
+  }
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--white);
+    animation: fadeDown 0.8s 0.15s ease both;
+  }
+  .hero-title em { color: var(--gold); font-style: italic; }
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--white-dim); margin: 1.2rem 0 0.5rem;
+    font-family: 'Playfair Display', serif; font-style: italic;
+    animation: fadeDown 0.8s 0.3s ease both;
+  }
+  .hero-author {
+    font-size: 0.9rem; color: var(--muted); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 2.5rem;
+    animation: fadeDown 0.8s 0.45s ease both;
+  }
+  .hero-formula {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--coral), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 900; letter-spacing: 0.05em;
+    animation: fadeDown 0.8s 0.6s ease both;
+  }
+  .hero-cta {
+    display: inline-block; margin-top: 2.5rem;
+    background: var(--coral); color: var(--white);
+    text-decoration: none; font-weight: 600;
+    padding: 0.9rem 2.2rem; border-radius: 50px;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    animation: fadeDown 0.8s 0.75s ease both;
+    font-size: 0.95rem; letter-spacing: 0.03em;
+  }
+  .hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(232,85,62,0.4);
+    background: var(--coral-light);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: var(--muted); font-size: 0.7rem; letter-spacing: 0.15em;
+    text-transform: uppercase; animation: bob 2s ease-in-out infinite;
+  }
+  .hero-scroll::after {
+    content: ''; display: block;
+    width: 1px; height: 40px; background: var(--muted);
+    animation: grow 2s ease-in-out infinite;
+  }
+
+  /* ── SECTION FRAMEWORK ── */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--coral);
+    margin-bottom: 0.75rem; display: block;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .section-title span { color: var(--gold); }
+  .section-lead {
+    font-size: 1.1rem; color: var(--white-dim);
+    max-width: 700px; margin-bottom: 3rem;
+  }
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--coral), var(--gold));
+    border-radius: 2px; margin: 1.5rem 0 2.5rem;
+  }
+
+  /* ── FORMULA DISPLAY ── */
+  .formula-box {
+    background: linear-gradient(135deg, #1a1040, #2a1530);
+    border: 1px solid rgba(232,85,62,0.3);
+    border-radius: 20px;
+    padding: 3rem 2rem; text-align: center;
+    margin: 2rem 0;
+    position: relative; overflow: hidden;
+  }
+  .formula-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(232,85,62,0.07) 0%, transparent 70%);
+  }
+  .formula-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--coral), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.05em;
+    position: relative; z-index: 1;
+  }
+  .formula-sub {
+    font-size: 0.9rem; color: var(--muted);
+    margin-top: 1rem; position: relative; z-index: 1;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── QUOTE CALLOUT ── */
+  .quote-callout {
+    border-left: 4px solid var(--gold);
+    background: var(--card-bg);
+    border-radius: 0 12px 12px 0;
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    position: relative;
+  }
+  .quote-callout::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; color: var(--gold);
+    opacity: 0.2; position: absolute;
+    top: -1rem; left: 1rem; line-height: 1;
+  }
+  .quote-callout p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-style: italic;
+    color: var(--white); line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+  .quote-callout cite {
+    display: block; font-size: 0.8rem;
+    color: var(--muted); margin-top: 0.75rem;
+    font-style: normal; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── EXERCISE BOX ── */
+  .exercise-box {
+    background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(245,166,35,0.03));
+    border: 1px dashed rgba(245,166,35,0.4);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    position: relative;
+  }
+  .exercise-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: var(--navy);
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.25rem 0.75rem; border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .exercise-box h4 {
+    font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--gold);
+  }
+  .exercise-box p { font-size: 0.95rem; color: var(--white-dim); }
+
+  /* ── TWO COLUMN GRID ── */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin: 2rem 0;
+  }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── INFO CARDS ── */
+  .info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .info-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(232,85,62,0.4);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .info-card .card-icon {
+    font-size: 2rem; margin-bottom: 0.75rem;
+    display: block;
+  }
+  .info-card h3 {
+    font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--gold);
+  }
+  .info-card p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.6; }
+
+  /* ── SECTION 2 CORE PRINCIPLE ── */
+  #core { background: var(--navy); }
+  .truth-pain-grid {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 1rem; align-items: center; margin: 2.5rem 0;
+  }
+  @media (max-width: 600px) {
+    .truth-pain-grid { grid-template-columns: 1fr; text-align: center; }
+  }
+  .tp-card {
+    background: var(--card-bg);
+    border-radius: 16px; padding: 2rem;
+    text-align: center;
+  }
+  .tp-card.truth { border-top: 3px solid var(--coral); }
+  .tp-card.pain { border-top: 3px solid var(--gold); }
+  .tp-card .tp-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .tp-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .tp-card.truth h3 { color: var(--coral); }
+  .tp-card.pain h3 { color: var(--gold); }
+  .tp-card p { font-size: 0.9rem; color: var(--muted); }
+  .tp-plus {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: var(--white-dim); text-align: center;
+  }
+
+  /* ── SECTION 3 RISK ── */
+  #risk { background: var(--navy-mid); }
+  .risk-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin: 2rem 0;
+  }
+  @media (max-width: 800px) { .risk-cards { grid-template-columns: 1fr; } }
+  .risk-card {
+    background: var(--card-bg);
+    border-radius: 16px; padding: 2rem;
+    border-top: 3px solid var(--coral);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .risk-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+  .risk-number {
+    font-size: 3rem; font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    color: rgba(232,85,62,0.2); line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .risk-card h3 { font-size: 1rem; color: var(--coral); letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+  .risk-card p { font-size: 0.9rem; color: var(--white-dim); }
+
+  /* ── RULE OF NINE COUNTER ── */
+  .nine-counter {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 2.5rem;
+    text-align: center; margin: 2.5rem 0;
+  }
+  .nine-counter h3 {
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .joke-dots {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    justify-content: center; margin-bottom: 2rem;
+  }
+  .joke-dot {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+  }
+  .joke-dot.trash {
+    background: rgba(232,85,62,0.15); border-color: rgba(232,85,62,0.4);
+  }
+  .joke-dot.gold {
+    background: rgba(245,166,35,0.2); border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(245,166,35,0.3);
+  }
+  .joke-dot:hover { transform: scale(1.15); }
+  .nine-counter p { font-size: 0.9rem; color: var(--muted); max-width: 500px; margin: 0 auto; }
+  #nine-btn {
+    background: var(--coral); color: var(--white);
+    border: none; border-radius: 50px;
+    padding: 0.75rem 2rem; font-size: 0.9rem;
+    font-weight: 600; cursor: pointer; margin-bottom: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #nine-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,85,62,0.4); }
+
+  /* ── SECTION 4 PREMISE ── */
+  #premise { background: var(--navy); }
+  .gap-visual {
+    display: flex; align-items: center; gap: 0; margin: 2.5rem 0;
+    border-radius: 16px; overflow: hidden;
+  }
+  .gap-box {
+    flex: 1; padding: 2rem 1.5rem; text-align: center;
+  }
+  .gap-box.real { background: rgba(30,29,48,0.8); }
+  .gap-box.comic { background: rgba(232,85,62,0.15); }
+  .gap-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+  .gap-box h3 { font-size: 1.3rem; color: var(--white); }
+  .gap-arrow {
+    padding: 1rem; text-align: center;
+    background: rgba(245,166,35,0.1);
+    display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+  }
+  .gap-arrow .arrow-text {
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); white-space: nowrap;
+  }
+  .gap-arrow .arrow-icon { font-size: 1.5rem; color: var(--gold); }
+  .conflict-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin: 2rem 0;
+  }
+  @media (max-width: 800px) { .conflict-grid { grid-template-columns: 1fr; } }
+  .conflict-card {
+    background: var(--card-bg); border-radius: 16px; padding: 1.75rem;
+    border-left: 4px solid transparent;
+    transition: transform 0.25s;
+  }
+  .conflict-card:nth-child(1) { border-color: var(--coral); }
+  .conflict-card:nth-child(2) { border-color: var(--gold); }
+  .conflict-card:nth-child(3) { border-color: #a78bfa; }
+  .conflict-card:hover { transform: translateY(-4px); }
+  .conflict-type {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .conflict-card:nth-child(1) .conflict-type { color: var(--coral); }
+  .conflict-card:nth-child(2) .conflict-type { color: var(--gold); }
+  .conflict-card:nth-child(3) .conflict-type { color: #a78bfa; }
+  .conflict-card h3 { font-size: 1.1rem; margin-bottom: 0.6rem; }
+  .conflict-card p { font-size: 0.88rem; color: var(--muted); }
+
+  /* ── SECTION 5 CHARACTERS ── */
+  #characters { background: var(--navy-mid); }
+  .char-framework {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin: 2rem 0;
+  }
+  @media (max-width: 700px) { .char-framework { grid-template-columns: 1fr; } }
+  .char-element {
+    background: var(--card-bg); border-radius: 16px; padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .char-element:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+  .char-element .elem-number {
+    position: absolute; top: 1rem; right: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; font-weight: 900;
+    color: rgba(255,255,255,0.04); line-height: 1;
+  }
+  .char-element .elem-tag {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-bottom: 0.5rem;
+  }
+  .char-element h3 { font-size: 1.2rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .char-element p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.6; }
+  .char-formula-box {
+    background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(232,85,62,0.1));
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 16px; padding: 2rem; text-align: center;
+    margin: 2.5rem 0;
+  }
+  .char-formula-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    color: var(--white); font-weight: 700;
+  }
+  .char-formula-text .highlight { color: var(--gold); }
+  .char-formula-text .times { color: var(--coral); }
+
+  /* ── CHARACTER BUILDER ── */
+  .char-builder {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 2.5rem;
+    margin: 2.5rem 0;
+  }
+  .char-builder h3 { font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .char-builder > p { font-size: 0.9rem; color: var(--muted); margin-bottom: 2rem; }
+  .builder-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.25rem; margin-bottom: 1.5rem;
+  }
+  @media (max-width: 600px) { .builder-grid { grid-template-columns: 1fr; } }
+  .builder-field label {
+    display: block; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .builder-field input, .builder-field textarea {
+    width: 100%; background: var(--navy-light);
+    border: 1px solid var(--card-border); border-radius: 10px;
+    padding: 0.75rem 1rem; color: var(--white);
+    font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .builder-field input:focus, .builder-field textarea:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .builder-field input::placeholder, .builder-field textarea::placeholder {
+    color: var(--muted);
+  }
+  .builder-btn {
+    background: var(--coral); color: var(--white);
+    border: none; border-radius: 50px;
+    padding: 0.8rem 2rem; font-size: 0.9rem;
+    font-weight: 600; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .builder-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,85,62,0.4);
+  }
+  .char-output {
+    background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(245,166,35,0.03));
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 12px; padding: 1.5rem;
+    margin-top: 1.5rem; display: none;
+  }
+  .char-output.visible { display: block; }
+  .char-output h4 { color: var(--gold); margin-bottom: 0.75rem; }
+  .char-output p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.8; }
+  .char-output span { color: var(--coral); font-weight: 600; }
+
+  /* ── SECTION 6 TOOLBOX ── */
+  #toolbox { background: var(--navy); }
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem; margin: 2rem 0;
+  }
+  .tool-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .tool-card:hover {
+    border-color: rgba(232,85,62,0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .tool-header {
+    padding: 1.5rem 1.75rem 1rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .tool-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: rgba(232,85,62,0.25); line-height: 1;
+    flex-shrink: 0; min-width: 2.5rem;
+  }
+  .tool-header-text { flex: 1; }
+  .tool-header-text h3 {
+    font-size: 1rem; color: var(--coral);
+    letter-spacing: 0.03em; margin-bottom: 0.2rem;
+  }
+  .tool-tagline {
+    font-size: 0.82rem; color: var(--muted);
+    font-style: italic;
+  }
+  .tool-expand-icon {
+    color: var(--muted); font-size: 1.2rem;
+    transition: transform 0.3s;
+    flex-shrink: 0; line-height: 1; margin-top: 0.2rem;
+  }
+  .tool-card.open .tool-expand-icon { transform: rotate(180deg); }
+  .tool-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .tool-card.open .tool-body { max-height: 400px; }
+  .tool-body-inner {
+    padding: 0 1.75rem 1.75rem;
+    border-top: 1px solid var(--card-border);
+    padding-top: 1.25rem;
+  }
+  .tool-body-inner p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.7; }
+  .tool-body-inner .tool-example {
+    margin-top: 0.75rem;
+    background: var(--navy-light); border-radius: 8px;
+    padding: 0.75rem 1rem; font-size: 0.82rem;
+    color: var(--muted); font-style: italic;
+  }
+  .tool-body-inner .tool-example strong { color: var(--gold); font-style: normal; }
+
+  /* ── SECTION 7 STORY TYPES ── */
+  #stories { background: var(--navy-mid); }
+  .story-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;
+  }
+  .story-tab {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 50px; padding: 0.5rem 1.1rem;
+    font-size: 0.8rem; font-weight: 600; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .story-tab.active {
+    background: var(--coral); border-color: var(--coral);
+    color: var(--white);
+  }
+  .story-panel { display: none; }
+  .story-panel.active { display: block; animation: fadeIn 0.4s ease; }
+  .story-panel-inner {
+    background: var(--card-bg); border-radius: 20px; padding: 2.5rem;
+    border: 1px solid var(--card-border);
+  }
+  .story-panel-inner .story-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+  .story-panel-inner h3 { font-size: 1.5rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .story-panel-inner p { font-size: 0.95rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 1rem; }
+  .story-examples {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+  }
+  .story-example-tag {
+    background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.3);
+    color: var(--gold); border-radius: 50px;
+    padding: 0.3rem 0.9rem; font-size: 0.78rem;
+  }
+
+  /* ── SECTION 8 THROUGHLINE ── */
+  #throughline { background: var(--navy); }
+  .throughline-steps { position: relative; margin: 2.5rem 0; }
+  .throughline-steps::before {
+    content: '';
+    position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--coral), var(--gold), var(--coral));
+  }
+  .tl-step {
+    display: flex; gap: 1.5rem; margin-bottom: 2rem;
+    position: relative;
+    opacity: 1;
+    transition: transform 0.3s;
+  }
+  .tl-step:hover { transform: translateX(4px); }
+  .tl-step-num {
+    width: 56px; height: 56px; flex-shrink: 0;
+    background: var(--navy); border: 2px solid var(--coral);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--coral);
+    position: relative; z-index: 1;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tl-step:hover .tl-step-num {
+    background: var(--coral); color: var(--white);
+  }
+  .tl-step-content { padding-top: 0.75rem; }
+  .tl-step-content h3 { font-size: 1.05rem; color: var(--gold); margin-bottom: 0.3rem; }
+  .tl-step-content p { font-size: 0.88rem; color: var(--muted); }
+
+  /* ── THROUGHLINE TEMPLATE ── */
+  .throughline-template {
+    background: var(--card-bg); border-radius: 20px; padding: 2.5rem;
+    border: 1px solid var(--card-border); margin: 2.5rem 0;
+  }
+  .throughline-template h3 { font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .throughline-template > p { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .tl-field { margin-bottom: 1.25rem; }
+  .tl-field label {
+    display: block; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .tl-field input {
+    width: 100%; background: var(--navy-light);
+    border: 1px solid var(--card-border); border-radius: 10px;
+    padding: 0.75rem 1rem; color: var(--white);
+    font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .tl-field input:focus { outline: none; border-color: var(--coral); }
+  .tl-field input::placeholder { color: var(--muted); }
+  .tl-output {
+    background: linear-gradient(135deg, rgba(232,85,62,0.08), rgba(232,85,62,0.03));
+    border: 1px solid rgba(232,85,62,0.3);
+    border-radius: 12px; padding: 1.5rem;
+    margin-top: 1.5rem; display: none;
+    font-size: 0.9rem; line-height: 2;
+    color: var(--white-dim);
+  }
+  .tl-output.visible { display: block; }
+  .tl-output .tl-slot { color: var(--coral); font-weight: 600; }
+
+  /* ── SECTION 9 SITCOM ── */
+  #sitcom { background: var(--navy-mid); }
+  .arc-visual {
+    display: flex; align-items: center; gap: 0;
+    margin: 2.5rem 0; border-radius: 16px; overflow: hidden;
+  }
+  .arc-box {
+    flex: 1; padding: 1.75rem 1.25rem; text-align: center;
+    transition: flex 0.3s;
+  }
+  .arc-box:hover { flex: 1.5; }
+  .arc-box:nth-child(1) { background: rgba(232,85,62,0.15); }
+  .arc-box:nth-child(2) { background: rgba(100,100,150,0.2); }
+  .arc-box:nth-child(3) { background: rgba(245,166,35,0.15); }
+  .arc-box .arc-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .arc-box h3 { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .arc-box:nth-child(1) h3 { color: var(--coral); }
+  .arc-box:nth-child(2) h3 { color: var(--muted); }
+  .arc-box:nth-child(3) h3 { color: var(--gold); }
+  .arc-box p { font-size: 0.8rem; color: var(--muted); }
+  .arc-arrow { font-size: 1.5rem; color: var(--muted); padding: 0 0.5rem; flex-shrink: 0; }
+
+  /* ── SECTION 10 POLISH ── */
+  #polish { background: var(--navy); }
+  .polish-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem; margin: 2rem 0;
+  }
+  .polish-card {
+    background: var(--card-bg); border-radius: 16px; padding: 2rem;
+    border-bottom: 3px solid transparent;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .polish-card:nth-child(odd) { border-color: var(--coral); }
+  .polish-card:nth-child(even) { border-color: var(--gold); }
+  .polish-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+  .polish-card .p-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .polish-card h3 { font-size: 1rem; color: var(--white); margin-bottom: 0.6rem; }
+  .polish-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── SECTION 11 FINAL FORMULA ── */
+  #formula-final { background: linear-gradient(135deg, #0f0e17, #1a0f30, #0f0e17); }
+  .final-formula-box {
+    text-align: center; max-width: 700px; margin: 0 auto; padding: 2rem 0;
+  }
+  .final-formula-box .formula-text {
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+  }
+  .final-items {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; margin: 3rem 0;
+  }
+  @media (max-width: 600px) { .final-items { grid-template-columns: 1fr; } }
+  .final-item { text-align: center; }
+  .final-item .fi-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .final-item h3 { font-size: 1.2rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .final-item p { font-size: 0.85rem; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--card-border);
+    padding: 3rem 2rem; text-align: center;
+  }
+  .footer-inner { max-width: 700px; margin: 0 auto; }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .footer-tagline {
+    font-size: 1rem; font-style: italic;
+    color: var(--white-dim); margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+  }
+  .footer-credit { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+  .footer-credit a { color: var(--coral); text-decoration: none; }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0; transform: translateX(-30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right {
+    opacity: 0; transform: translateX(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── KEYFRAMES ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  @keyframes grow {
+    0%, 100% { transform: scaleY(1); opacity: 0.4; }
+    50% { transform: scaleY(1.4); opacity: 1; }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245,166,35,0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(245,166,35,0); }
+  }
+
+  /* ── UTILITY ── */
+  .text-coral { color: var(--coral); }
+  .text-gold { color: var(--gold); }
+  .text-muted { color: var(--muted); }
+  .mt-1 { margin-top: 1rem; }
+  .mt-2 { margin-top: 2rem; }
+  ul.styled { padding-left: 1.5rem; }
+  ul.styled li { margin-bottom: 0.5rem; font-size: 0.92rem; color: var(--white-dim); }
+  ul.styled li::marker { color: var(--coral); }
+  .tag {
+    display: inline-block;
+    background: rgba(232,85,62,0.12); border: 1px solid rgba(232,85,62,0.3);
+    color: var(--coral); border-radius: 4px;
+    padding: 0.15rem 0.5rem; font-size: 0.78rem;
+    font-weight: 600; letter-spacing: 0.04em;
+  }
+  .bogus-thought {
+    background: rgba(155,99,255,0.08); border: 1px solid rgba(155,99,255,0.25);
+    border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1rem 0;
+  }
+  .bogus-thought .bt-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #a78bfa; margin-bottom: 0.4rem;
+  }
+  .bogus-thought p { font-size: 0.9rem; color: var(--white-dim); }
+  .bogus-thought .correction { color: var(--gold); font-size: 0.85rem; margin-top: 0.4rem; font-style: italic; }
+
+  /* ── RESPONSIVE NAV ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--navy-mid); border-bottom: 1px solid var(--card-border); padding: 1rem; }
+    .nav-links.open { display: flex; }
+    .nav-hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ NAV ═══════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Comic Toolbox</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#core">Core</a></li>
+      <li><a href="#risk">Risk</a></li>
+      <li><a href="#premise">Premise</a></li>
+      <li><a href="#characters">Characters</a></li>
+      <li><a href="#toolbox">Tools</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#throughline">Throughline</a></li>
+      <li><a href="#sitcom">Sitcom</a></li>
+      <li><a href="#polish">Polish</a></li>
+      <li><a href="#formula-final">Formula</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-shapes">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">A Complete Guide</div>
+    <h1 class="hero-title">The <em>Comic</em><br>Toolbox</h1>
+    <p class="hero-subtitle">"How to Be Funny Even If You're Not"</p>
+    <p class="hero-author">by John Vorhaus &nbsp;&bull;&nbsp; 1994</p>
+    <div class="hero-formula">COMEDY = TRUTH + PAIN</div>
+    <br>
+    <a href="#core" class="hero-cta">Explore the Tools &darr;</a>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 2: CORE ═══════════════════════════════════════ -->
+<section id="core">
+  <div class="section-inner">
+    <span class="section-label reveal">Section One</span>
+    <h2 class="section-title reveal">The Core <span>Principle</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">Every joke that has ever made anyone laugh anywhere in the world can be reduced to a single, elegant equation. This is the foundation of everything.</p>
+
+    <div class="formula-box reveal">
+      <div class="formula-text">COMEDY = TRUTH + PAIN</div>
+      <p class="formula-sub">The funnier the truth and the more universal the pain, the wider the comedy works.</p>
+    </div>
+
+    <div class="truth-pain-grid reveal">
+      <div class="tp-card truth">
+        <div class="tp-icon">🔍</div>
+        <h3>TRUTH</h3>
+        <p>Universal human experience — the things we all know and recognize, whether we admit them or not. The wider the truth, the more people the joke reaches.</p>
+      </div>
+      <div class="tp-plus">+</div>
+      <div class="tp-card pain">
+        <div class="tp-icon">⚡</div>
+        <h3>PAIN</h3>
+        <p>The cost of that truth — embarrassment, loss, failure, frustration. Not necessarily physical. The gap between what we want and what we get.</p>
+      </div>
+    </div>
+
+    <div class="quote-callout reveal">
+      <p>If you can find the truth in any situation, and if you can find the pain in that truth, then you can find the comedy — every single time.</p>
+      <cite>— John Vorhaus, The Comic Toolbox</cite>
+    </div>
+
+    <h3 class="mt-2 reveal" style="font-size:1.3rem; color:var(--gold); margin-bottom:1rem;">Examples in Action</h3>
+    <div class="two-col">
+      <div class="info-card reveal">
+        <span class="card-icon">🥧</span>
+        <h3>The Pie in the Face</h3>
+        <p><strong style="color:var(--coral)">Truth:</strong> Dignity is fragile. <strong style="color:var(--gold)">Pain:</strong> Having your dignity demolished in public — and there's nothing you can do about it. The bigger the dignity, the bigger the laugh.</p>
+      </div>
+      <div class="info-card reveal">
+        <span class="card-icon">💍</span>
+        <h3>The Henpecked Husband</h3>
+        <p><strong style="color:var(--coral)">Truth:</strong> We all sometimes feel powerless against the people we love. <strong style="color:var(--gold)">Pain:</strong> Being dominated by the one person who should be your equal partner. It's painfully universal.</p>
+      </div>
+      <div class="info-card reveal">
+        <span class="card-icon">👩</span>
+        <h3>Leslie Parker's Story</h3>
+        <p>The woman who told a joke about a bad hair day — and the room went silent. Then she realized: <em>not everyone has hair</em>. The truth wasn't universal enough. Know your audience.</p>
+      </div>
+      <div class="info-card reveal">
+        <span class="card-icon">🌍</span>
+        <h3>The Universality Test</h3>
+        <p>Ask: "Does everyone feel this?" If yes, it's comedy gold. "I hate traffic" works everywhere. "I hate the 405 Freeway" doesn't. Widen the truth, widen the laughs.</p>
+      </div>
+    </div>
+
+    <div class="exercise-box reveal">
+      <div class="exercise-label">✏ Exercise</div>
+      <h4>Find the Formula</h4>
+      <p>Take any joke you know — a favorite from a stand-up special, a sitcom moment, a story from your life. Break it down: <strong>What's the universal truth?</strong> What does everyone secretly recognize in this situation? Then: <strong>What's the pain?</strong> What does it cost to live in that truth? Map it to the formula. Once you see it, you can't unsee it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 3: RISK ═══════════════════════════════════════ -->
+<section id="risk">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Two</span>
+    <h2 class="section-title reveal">The Will <span>to Risk</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">The biggest barrier to comedy is not lack of talent. It's fear. The blank page of comedy is the moment before the joke, when you decide whether to risk the attempt.</p>
+
+    <div class="quote-callout reveal">
+      <p>Most people, when they try to be funny and fail, don't conclude that the joke didn't work. They conclude that <em>they</em> don't work.</p>
+      <cite>— John Vorhaus</cite>
+    </div>
+
+    <h3 class="reveal" style="font-size:1.2rem; color:var(--coral); margin-bottom:1.25rem;">The Two Bogus Thoughts</h3>
+    <div class="bogus-thought reveal">
+      <div class="bt-label">Bogus Thought #1</div>
+      <p>"It won't work" — the false assumption that a joke will fail before it's even tried.</p>
+      <p class="correction">Truth: You have no evidence for this. The joke hasn't been told yet. The assumption is a lie your fear tells you.</p>
+    </div>
+    <div class="bogus-thought reveal">
+      <div class="bt-label">Bogus Thought #2</div>
+      <p>"If they don't like my joke, they won't like me" — the faulty association between the comedy and the comedian.</p>
+      <p class="correction">Truth: A joke that doesn't land is just information. It tells you about the joke, not about you as a human being.</p>
+    </div>
+
+    <div class="quote-callout reveal" style="border-color:var(--coral); margin-top:2rem;">
+      <p>The Ferocious Editor — that inner critic who kills jokes before they're born, who censors the punch line before it leaves your mouth. Every comedian has one. The goal isn't to silence it. The goal is to fire it until the first draft is done.</p>
+      <cite>— John Vorhaus</cite>
+    </div>
+
+    <h3 class="reveal" style="font-size:1.2rem; color:var(--gold); margin:2rem 0 1.25rem;">Three Tools to Fight Fear</h3>
+    <div class="risk-cards">
+      <div class="risk-card reveal">
+        <div class="risk-number">1</div>
+        <h3>THE RULE OF NINE</h3>
+        <p>For every 10 jokes you tell, 9 will be trash. That is a feature, not a bug. When you remove the expectation of success from 90% of your attempts, you free yourself to make all 10 attempts. One gold joke in ten is a phenomenal batting average.</p>
+      </div>
+      <div class="risk-card reveal">
+        <div class="risk-number">2</div>
+        <h3>LOWER YOUR SIGHTS</h3>
+        <p>Concentrate on the task at hand, not the end result. Don't write a screenplay — write a scene. Don't write a scene — write a line. Don't think "this has to be brilliant." Think "this has to be a sentence that exists."</p>
+      </div>
+      <div class="risk-card reveal">
+        <div class="risk-number">3</div>
+        <h3>POSITIVE REINFORCEMENT</h3>
+        <p>Applaud every small victory. Finished a draft? Victory. Got one laugh? Victory. Showed up and tried? Victory. The goal is to build a relationship with your creative self — one that rewards process, not product.</p>
+      </div>
+    </div>
+
+    <div class="nine-counter reveal">
+      <h3>The Rule of Nine — Visualized</h3>
+      <button id="nine-btn" onclick="runNineDemo()">Run the Demo</button>
+      <div class="joke-dots" id="joke-dots"></div>
+      <p id="nine-desc">Click the button above to see your 10 jokes. Only one needs to be gold.</p>
+    </div>
+
+    <div class="exercise-box reveal">
+      <div class="exercise-label">✏ Exercise</div>
+      <h4>Name Your Ferocious Editor</h4>
+      <p>Give your inner critic a name and a face. Make them specific and slightly ridiculous. When you hear their voice, say aloud: "Thanks, [name]. I'll check with you in the second draft." Then keep writing. The act of naming the fear reduces its power over you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 4: PREMISE ═══════════════════════════════════════ -->
+<section id="premise">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Three</span>
+    <h2 class="section-title reveal">The Comic <span>Premise</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">Every piece of comedy — from a one-liner to a feature film — is built on a comic premise. The premise is the engine that drives all the laughs.</p>
+
+    <div class="quote-callout reveal">
+      <p>A comic premise is the gap between comic reality and real reality. Comedy lives in that gap.</p>
+      <cite>— John Vorhaus</cite>
+    </div>
+
+    <div class="gap-visual reveal">
+      <div class="gap-box real">
+        <div class="gap-label">Ordinary World</div>
+        <h3>Real Reality</h3>
+      </div>
+      <div class="gap-arrow">
+        <span class="arrow-text">THE GAP</span>
+        <span class="arrow-icon">&#8596;</span>
+        <span class="arrow-text">COMEDY LIVES HERE</span>
+      </div>
+      <div class="gap-box comic">
+        <div class="gap-label">Comic World</div>
+        <h3>Comic Reality</h3>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="info-card">
+        <span class="card-icon">🚗</span>
+        <h3>Back to the Future</h3>
+        <p>The gap: a 1980s teenager dropped into 1955. Everything he takes for granted is either unavailable or shocking. Everything 1955 takes for granted baffles him. The gap creates endless comedy.</p>
+      </div>
+      <div class="info-card">
+        <span class="card-icon">✈️</span>
+        <h3>Snoopy as WWI Flying Ace</h3>
+        <p>The gap: a beagle who believes he's a dashing World War One hero. His comic reality is vivid and total. Our real reality knows he's lying on a doghouse. The gap is the joke.</p>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="font-size:1.3rem; color:var(--gold); margin:2.5rem 0 1.25rem;">Three Types of Comic Conflict</h3>
+    <div class="conflict-grid">
+      <div class="conflict-card reveal">
+        <div class="conflict-type">Type One</div>
+        <h3>GLOBAL CONFLICT</h3>
+        <p><strong>Character vs. World.</strong> A normal character dropped into a comic world, or a comic character dropped into a normal world. The world itself is the antagonist.</p>
+        <p class="mt-1" style="font-size:0.82rem; color:var(--muted)"><em>Example: Northern Exposure — a New York doctor in rural Alaska.</em></p>
+      </div>
+      <div class="conflict-card reveal">
+        <div class="conflict-type">Type Two</div>
+        <h3>LOCAL CONFLICT</h3>
+        <p><strong>Character vs. Character.</strong> Emotional investment between people who care about each other. The higher the stakes of the relationship, the richer the comedy.</p>
+        <p class="mt-1" style="font-size:0.82rem; color:var(--muted)"><em>Example: The Odd Couple — Felix and Oscar can't stand each other and can't leave each other.</em></p>
+      </div>
+      <div class="conflict-card reveal">
+        <div class="conflict-type">Type Three</div>
+        <h3>INNER CONFLICT</h3>
+        <p><strong>Character vs. Self.</strong> The richest conflict of all — a character at war with themselves. They want two things that are mutually exclusive. Their greatest obstacle is themselves.</p>
+        <p class="mt-1" style="font-size:0.82rem; color:var(--muted)"><em>Example: Hamlet played for laughs. Or any character who wants love but fears intimacy.</em></p>
+      </div>
+    </div>
+
+    <div class="quote-callout reveal" style="border-color:var(--coral);">
+      <p>The best comedy works on all three levels simultaneously — the character fights the world, fights another character, and fights themselves, all at once.</p>
+    </div>
+
+    <div class="exercise-box reveal">
+      <div class="exercise-label">✏ Exercise</div>
+      <h4>Build a Three-Level Comic Premise</h4>
+      <p>Choose a character. Define their world (Global conflict: what is strange or hostile about their environment?). Define their relationship (Local conflict: who do they love and clash with?). Define their inner war (Inner conflict: what do they want that contradicts what they need?). Stack all three. That's your premise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 5: CHARACTERS ═══════════════════════════════════════ -->
+<section id="characters">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Four</span>
+    <h2 class="section-title reveal">Comic <span>Characters</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">A great comic character is built from four interlocking elements. Miss one and the character falls flat. Get all four right and you have someone audiences will follow anywhere.</p>
+
+    <div class="char-framework">
+      <div class="char-element reveal-left">
+        <div class="elem-number">1</div>
+        <div class="elem-tag">Element One</div>
+        <h3>COMIC PERSPECTIVE</h3>
+        <p>The character's unique, distorted way of seeing the world. Every great comic character has a consistent lens through which they interpret everything — and it's always slightly (or wildly) wrong.</p>
+        <p class="mt-1" style="color:var(--muted); font-size:0.85rem"><strong style="color:var(--white-dim)">Gracie Allen:</strong> pure, unassailable innocence. <strong style="color:var(--white-dim)">Groucho Marx:</strong> leering, gleeful cynicism. <strong style="color:var(--white-dim)">Jack Benny:</strong> pathological tightfistedness. Show me a comic character without a comic perspective and I'll show you a straight man.</p>
+      </div>
+      <div class="char-element reveal-right">
+        <div class="elem-number">2</div>
+        <div class="elem-tag">Element Two</div>
+        <h3>FLAWS</h3>
+        <p>What separates comic characters from real people. Flaws create emotional distance — they give us permission to laugh. We can find Sam Malone's egomania hilarious because it's not our egomania.</p>
+        <p class="mt-1" style="color:var(--muted); font-size:0.85rem"><strong style="color:var(--white-dim)">Sam Malone:</strong> egomania. <strong style="color:var(--white-dim)">Diane Chambers:</strong> spectacular snobbishness. <strong style="color:var(--white-dim)">Charlie Brown:</strong> trusting everyone who repeatedly lets him down. The flaw must be consistent, specific, and visible.</p>
+      </div>
+      <div class="char-element reveal-left">
+        <div class="elem-number">3</div>
+        <div class="elem-tag">Element Three</div>
+        <h3>HUMANITY</h3>
+        <p>What bridges character and audience. The humanity makes us <em>care</em>, even while we laugh. Without it, a comedy character is just a cartoon — amusing but not memorable.</p>
+        <p class="mt-1" style="color:var(--muted); font-size:0.85rem">"People aren't thinking about how you look to them — they're far too busy worrying about how they look to you." That anxiety is humanity. That's what makes us root for even the most ridiculous characters.</p>
+      </div>
+      <div class="char-element reveal-right">
+        <div class="elem-number">4</div>
+        <div class="elem-tag">Element Four</div>
+        <h3>EXAGGERATION</h3>
+        <p>The force that pushes the other three elements to comic extremes. Take your character's perspective and follow it to the end of the line — past the point any real person would actually go.</p>
+        <p class="mt-1" style="color:var(--muted); font-size:0.85rem">Jack Benny doesn't just dislike spending money. He would rather endure humiliation, embarrassment, and social ruin than part with a nickel. <em>That's</em> exaggeration. That's where the comedy lives.</p>
+      </div>
+    </div>
+
+    <div class="char-formula-box reveal">
+      <p class="char-formula-text">
+        (<span class="highlight">Comic Perspective</span> + <span class="highlight">Flaws</span> + <span class="highlight">Humanity</span>)
+        <span class="times"> &times; </span>
+        <span class="highlight">Exaggeration</span>
+        = <span class="highlight">Comic Character</span>
+      </p>
+    </div>
+
+    <div class="quote-callout reveal">
+      <p>For every flaw, there is an equal and opposite humanity.</p>
+      <cite>— John Vorhaus</cite>
+    </div>
+
+    <div class="char-builder reveal">
+      <h3>Character Builder</h3>
+      <p>Use the four elements to construct your own comic character. Fill in all fields, then generate your character summary.</p>
+      <div class="builder-grid">
+        <div class="builder-field">
+          <label>Character Name</label>
+          <input type="text" id="cb-name" placeholder="e.g., Millicent Grabb">
+        </div>
+        <div class="builder-field">
+          <label>Comic Perspective</label>
+          <input type="text" id="cb-perspective" placeholder="e.g., believes everyone is jealous of her">
+        </div>
+        <div class="builder-field">
+          <label>Main Flaw</label>
+          <input type="text" id="cb-flaw" placeholder="e.g., catastrophic self-delusion">
+        </div>
+        <div class="builder-field">
+          <label>Their Humanity</label>
+          <input type="text" id="cb-humanity" placeholder="e.g., desperately wants to belong">
+        </div>
+        <div class="builder-field" style="grid-column: 1 / -1;">
+          <label>Exaggerated Quality (take it to the extreme)</label>
+          <input type="text" id="cb-exaggeration" placeholder="e.g., she will literally stage elaborate crises to stay relevant">
+        </div>
+      </div>
+      <button class="builder-btn" onclick="buildCharacter()">Generate Character</button>
+      <div class="char-output" id="char-output">
+        <h4>Your Comic Character</h4>
+        <p id="char-output-text"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 6: TOOLBOX ═══════════════════════════════════════ -->
+<section id="toolbox">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Five</span>
+    <h2 class="section-title reveal">The <span>Toolbox</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">Fourteen specific techniques — each one a different way to generate laughs. Click any tool to expand it and read the full description, explanation, and examples.</p>
+
+    <div class="tools-grid" id="tools-grid">
+      <!-- Tools injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 7: STORY TYPES ═══════════════════════════════════════ -->
+<section id="stories">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Six</span>
+    <h2 class="section-title reveal">Types of <span>Comic Stories</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">Every comedy you've ever loved fits into one (or more) of these seven structural types. Knowing the type tells you what rules to follow — and what rules you can break.</p>
+
+    <div class="story-tabs reveal" id="story-tabs"></div>
+    <div id="story-panels"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 8: THROUGHLINE ═══════════════════════════════════════ -->
+<section id="throughline">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Seven</span>
+    <h2 class="section-title reveal">The Comic <span>Throughline</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">Every comic story — from a five-minute sketch to a two-hour film — follows the same nine-step arc. This is the skeleton under every comedy that works.</p>
+
+    <div class="throughline-steps" id="tl-steps">
+      <!-- Injected by JS -->
+    </div>
+
+    <div class="throughline-template reveal">
+      <h3>Throughline Template</h3>
+      <p>Fill in your story's answers to each throughline question. When you're done, your story structure appears below.</p>
+      <div id="tl-fields"></div>
+      <button class="builder-btn" onclick="generateThroughline()">Generate My Story Structure</button>
+      <div class="tl-output" id="tl-output"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 9: SITCOM ═══════════════════════════════════════ -->
+<section id="sitcom">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Eight</span>
+    <h2 class="section-title reveal">Situation <span>Comedy</span> Notes</h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">The sitcom is the most constrained and arguably most demanding form of comedy writing. These are the structural rules every sitcom writer must internalize.</p>
+
+    <h3 class="reveal" style="font-size:1.2rem; color:var(--gold); margin-bottom:1.25rem;">The Arc of Stability</h3>
+    <div class="arc-visual reveal">
+      <div class="arc-box">
+        <div class="arc-icon">⚖️</div>
+        <h3>OLD STABILITY</h3>
+        <p>The world as it was — familiar, settled, the status quo before the episode's problem arrives.</p>
+      </div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-box">
+        <div class="arc-icon">🌀</div>
+        <h3>INSTABILITY</h3>
+        <p>The disruption — a problem, a lie, a guest, a secret — that throws the stable world into comic chaos.</p>
+      </div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-box">
+        <div class="arc-icon">✨</div>
+        <h3>NEW STABILITY</h3>
+        <p>Resolution — usually very close to the old stability. The characters learn, but the show resets. That's the sitcom contract.</p>
+      </div>
+    </div>
+
+    <div class="two-col reveal">
+      <div class="info-card">
+        <span class="card-icon">🎭</span>
+        <h3>A-Story &amp; B-Story</h3>
+        <p>The A-Story carries the main, heavier, thematic weight of the episode. The B-Story is lighter, secondary — but it must be <em>thematically linked</em> to the A-Story, like harmony to a melody. They illuminate each other.</p>
+      </div>
+      <div class="info-card">
+        <span class="card-icon">📺</span>
+        <h3>Act Breaks</h3>
+        <p>In broadcast TV, act breaks exist to hold viewers across commercials. A great act break creates <em>maximum dread</em> — the worst possible situation, with no visible escape. The audience must stay to see the resolution.</p>
+      </div>
+      <div class="info-card">
+        <span class="card-icon">🔄</span>
+        <h3>The Circular Nature</h3>
+        <p>Sitcoms are circular by design. Characters return to very nearly where they started. Sam Malone will always be a recovering alcoholic. Frasier will always be pompous. The flaw is the show. Never permanently fix the flaw.</p>
+      </div>
+      <div class="info-card">
+        <span class="card-icon">📋</span>
+        <h3>Rules of the Show</h3>
+        <p>Every show has unwritten laws. In a spec script, you must follow them exactly. Never give a character a trait the show hasn't established. Never resolve a conflict the show needs to keep running. Learn the rules before you break them.</p>
+      </div>
+    </div>
+
+    <div class="quote-callout reveal">
+      <p>In a sitcom, the characters never really change — and that is precisely the point. The comedy comes from watching the same magnificent flaws collide with an endless variety of situations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 10: POLISH ═══════════════════════════════════════ -->
+<section id="polish">
+  <div class="section-inner">
+    <span class="section-label reveal">Section Nine</span>
+    <h2 class="section-title reveal">Polish <span>&amp; Practice</span></h2>
+    <div class="divider reveal"></div>
+    <p class="section-lead reveal">Getting the words down is only the first half of the job. Here is how to take raw material and turn it into something that actually works.</p>
+
+    <div class="polish-grid">
+      <div class="polish-card reveal">
+        <div class="p-icon">⛏️</div>
+        <h3>MINING vs. REFINING</h3>
+        <p>Pour it all out first — that's mining. Separate the functions completely. Don't evaluate while you generate. Get everything on the page, no matter how bad. Then, and only then, do you refine — reshape, cut, polish. Mixing the two functions kills both.</p>
+      </div>
+      <div class="polish-card reveal">
+        <div class="p-icon">🏃</div>
+        <h3>WRITE FAST, WRITE LONG</h3>
+        <p>It's always easier to cut than to add. If you need 120 pages, write 160. Write fast so the Ferocious Editor can't keep up. Length and speed are your allies in the mining phase. The ruthless editor comes later.</p>
+      </div>
+      <div class="polish-card reveal">
+        <div class="p-icon">🏔️</div>
+        <h3>GOOD IS THE ENEMY OF THE GREAT</h3>
+        <p>The hill-climbing problem: if you optimize locally, you miss the mountain. Sometimes you must go <em>down</em> the good hill to climb the great mountain. A good draft can prevent a great one if you stop refining too soon.</p>
+      </div>
+      <div class="polish-card reveal">
+        <div class="p-icon">😬</div>
+        <h3>THE WINCE FACTOR</h3>
+        <p>Read your work aloud and listen for what makes you wince. That involuntary physical response is your most honest editor. If you wince, cut it or fix it. The wince is always right. Police your prose ruthlessly.</p>
+      </div>
+      <div class="polish-card reveal">
+        <div class="p-icon">🧪</div>
+        <h3>BETA TESTERS</h3>
+        <p>People outside your head who test your material. Train them: you don't want "I liked it." You want detailed, specific notes. Ask: "What confused you? Where did you stop caring? What felt forced?" Find readers who will be honest, not kind.</p>
+      </div>
+      <div class="polish-card reveal">
+        <div class="p-icon">🚔</div>
+        <h3>THE FRAUD POLICE</h3>
+        <p>The fear that someone will discover you have no business doing this — that you're a fake, an imposter, a fraud. The antidote: <strong>name the fear out loud</strong>. "I expect the Fraud Police to bust down the door any minute." Naming it shrinks it. Every writer has them. Every single one.</p>
+      </div>
+    </div>
+
+    <div class="exercise-box reveal">
+      <div class="exercise-label">✏ Exercise</div>
+      <h4>The Wince Pass</h4>
+      <p>Take a page of something you've written. Read it aloud — not in your head, but aloud, with your voice. Mark every moment you feel any physical discomfort: a wince, a small cringe, a wish to skip ahead. Those marks are your revision map. Don't rationalize them. Cut or rewrite every marked passage. Do this pass last, when you're no longer in love with the words.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECTION 11: FINAL FORMULA ═══════════════════════════════════════ -->
+<section id="formula-final">
+  <div class="section-inner">
+    <span class="section-label reveal" style="text-align:center; display:block;">The Final Principle</span>
+    <h2 class="section-title reveal" style="text-align:center;">The Ultimate <span>Formula</span></h2>
+    <div class="divider reveal" style="margin:1.5rem auto 2.5rem;"></div>
+
+    <div class="final-formula-box">
+      <div class="formula-box reveal">
+        <div class="formula-text">TALENT + DRIVE + TIME = SUCCESS</div>
+        <p class="formula-sub">The only equation that matters in the long run.</p>
+      </div>
+    </div>
+
+    <div class="final-items reveal">
+      <div class="final-item">
+        <div class="fi-label">Factor One</div>
+        <h3>TALENT</h3>
+        <p>Everyone has it. It's genetic — like a pancreas. You don't earn it and you can't lose it. Talent is never the limiting factor. Stop hiding behind "I'm not talented enough." You are. The question is what you do with it.</p>
+      </div>
+      <div class="final-item">
+        <div class="fi-label">Factor Two</div>
+        <h3>DRIVE</h3>
+        <p>The hard work, the practice, the patience, the perseverance. This is the variable you control entirely. Drive is what separates the writer who finishes from the writer who doesn't. Drive is a choice made every single day.</p>
+      </div>
+      <div class="final-item">
+        <div class="fi-label">Factor Three</div>
+        <h3>TIME</h3>
+        <p>Your one non-renewable resource. You can earn more money. You can find more talent. You cannot get back a day you didn't use. The question is not whether you have time — it's how you spend the time you have.</p>
+      </div>
+    </div>
+
+    <div class="quote-callout reveal" style="max-width:700px; margin:2rem auto;">
+      <p>The Wade Boggs Paradigm: The best pure hitter in baseball — a man who could hit .300 in his sleep — still took batting practice every single day. That's the model. Process, not product. Journey, not destination.</p>
+      <cite>— John Vorhaus</cite>
+    </div>
+
+    <div class="formula-box reveal" style="max-width:700px; margin:2rem auto;">
+      <div class="formula-text" style="font-size:clamp(1.5rem, 3vw, 2.5rem);">COMEDY = TRUTH + PAIN</div>
+      <p class="formula-sub">Start here. Come back here. Everything else flows from this.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">The Comic Toolbox</div>
+    <p class="footer-tagline">"Comedy is truth and pain — and now you have the tools."</p>
+    <p class="footer-credit">
+      Based on <em>The Comic Toolbox: How to Be Funny Even If You're Not</em><br>
+      by <a href="#hero">John Vorhaus</a> &nbsp;&bull;&nbsp; Silman-James Press, 1994<br><br>
+      This educational resource summarizes key concepts from the book for study and reference.
+    </p>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════ DATA ═══════════════════════
+
+const TOOLS = [
+  {
+    num: "01", name: "CLASH OF CONTEXT",
+    tagline: "The forced union of incompatibles.",
+    body: "Take something from its usual place and stick it where it doesn't fit. The clash between the object/person/idea and its new context generates the comedy. The greater the incompatibility, the bigger the laugh.",
+    example: "Joel Fleischman (big-city doctor) in Cicely, Alaska. Crocodile Dundee in New York City. The Beverly Hillbillies in Beverly Hills. In each case, the character is consistent — the context is wrong, and that wrongness is the premise."
+  },
+  {
+    num: "02", name: "WILDLY INAPPROPRIATE RESPONSE",
+    tagline: "An attitude that has no business being in this situation.",
+    body: "Play an attitude against a circumstance that aren't naturally compatible. The more incompatible they are, the funnier the result. Find the logical emotional response to a situation — then find its diametric opposite. That opposite is your wildly inappropriate response.",
+    example: "The gourd shop in Life of Brian: perfectly reasonable salesmanship in the middle of a life-or-death religious crisis. Indifference to genuine tragedy. Hysteria over a triviality. The mismatch IS the joke."
+  },
+  {
+    num: "03", name: "LAW OF COMIC OPPOSITES",
+    tagline: "Lock opposites together and watch them collide.",
+    body: "Create a character. Identify their core perspective. Find the diametric opposite — someone whose worldview is the polar reverse. Now lock them together in a situation neither can escape. The friction generates heat, and heat generates laughs.",
+    example: "Felix Unger (fastidious, neurotic, neat) vs. Oscar Madison (slovenly, relaxed, messy). Gracie Allen (innocent logic) vs. George Burns (weary realism). Humphrey Bogart vs. Katharine Hepburn in The African Queen."
+  },
+  {
+    num: "04", name: "TENSION AND RELEASE",
+    tagline: "Create the question. Delay the answer. Pay it off.",
+    body: "Every joke creates tension — a question in the audience's mind: 'Where is this going?' The punchline releases that tension. The bigger the tension, the bigger the release, the bigger the laugh. You can increase tension by delaying the payoff. And always position the funny word LAST in the sentence.",
+    example: "\"I've had a perfectly wonderful evening...\" [tension: where is this going?] \"...but this wasn't it.\" [release]. The release defeats the expectation that was set up. Position 'it' last, not 'evening.' The funny word always closes the sentence."
+  },
+  {
+    num: "05", name: "RULE OF THREE",
+    tagline: "Setup, Setup, Payoff.",
+    body: "Two data points define a line — they establish an expectation, a pattern. The third data point either confirms or violates that pattern. In comedy, it violates it. Introduction (here's a thing), Validation (here it is again — you can rely on it), VIOLATION (here's the thing being spectacularly wrong).",
+    example: "\"I like long walks on the beach, candlelit dinners, and destroying my enemies.\" The first two establish the romantic expectation. The third detonates it. Two items build the pattern; three items break it."
+  },
+  {
+    num: "06", name: "TELLING TRUTH / TELLING A LIE",
+    tagline: "State the obvious — or its opposite.",
+    body: "Two versions: (1) Simply state the obvious truth of a situation that everyone secretly knows but nobody says. The shock of recognition IS the laugh. (2) Find the truth and say its exact opposite — the lie so obvious it becomes funny by contrast.",
+    example: "\"I'm bald. I haven't had a bad hair day in seven years.\" (Truth stated plainly — the obvious reality of being bald, reframed.) Or: \"Marriage is a beautiful partnership based on mutual trust and respect\" — said by a character whose marriage is clearly neither."
+  },
+  {
+    num: "07", name: "THE DOORBELL EFFECT",
+    tagline: "Promise something. Defeat it as rudely as possible.",
+    body: "Give a character a strong expectation of a specific outcome. Make the audience believe it too. Then defeat that expectation as suddenly and completely as possible. The doorbell ALWAYS rings — until the moment you need it not to. The audience's shared expectation is your setup. Destroying it is your punchline.",
+    example: "A character rehearses the perfect thing to say. They are fully prepared. They open their mouth — and say something completely different, or the situation has already changed. The setup was the preparation; the payoff is the defeat."
+  },
+  {
+    num: "08", name: "RUNNING GAG & CALLBACK",
+    tagline: "Revisit. Vary. Return.",
+    body: "Running gags must CHANGE each time or they die. Change the detail, change the circumstances, change who delivers it, change the context. A callback refers back to an earlier joke — often at the end — creating a sense of closure and surprise when the audience recognizes the reference.",
+    example: "Hannibal Lecter having 'an old friend for dinner' at the end of Silence of the Lambs — a callback to his earlier line. The running gag of the same word or phrase returning in escalating contexts. Each repetition must earn its laugh anew."
+  },
+  {
+    num: "09", name: "AVOID CLICHÉS LIKE THE PLAGUE",
+    tagline: "Clichés are both pitfall and opportunity.",
+    body: "A cliché is a dead metaphor — once vivid, now invisible. Used straight, it's boring. But clichés are also opportunities: the audience knows the expected ending, so defeating it is instantly funny because the expectation is built in for free. You get the setup without doing the setup work.",
+    example: "\"Marry in haste, repent in Reno.\" The cliché is 'repent at leisure' — everyone knows it. The substitution of 'Reno' defeats the expectation and makes a joke about divorce without explaining anything. The cliché did all the setup work."
+  },
+  {
+    num: "10", name: "MICROCONFLICT vs. MACROCONFLICT",
+    tagline: "Big story. Small moments. They mirror each other.",
+    body: "The macroconflict is the big dramatic engine driving the entire story. The microconflict is the small friction that happens in every individual scene and moment. Good comedy keeps both running simultaneously — the small conflicts reflect and amplify the big one.",
+    example: "\"When a man loses his job, his wife, his home — he also steps in dog poo.\" The macro is catastrophic; the micro is petty. But the micro reinforces the macro. The small humiliation comments on the large one. Every scene should have both a macro and a micro engine."
+  },
+  {
+    num: "11", name: "DETAILS",
+    tagline: "The dyspeptic rottweiler vs. 'a dog.'",
+    body: "\"Why refer to a dog when you can identify a dyspeptic rottweiler with 'Born to sniff crotch' branded on his haunch?\" Specific detail creates vividness. Vividness creates emotional investment. Emotional investment creates tension. And tension — as we know — can be released as humor. Vague is the enemy of funny.",
+    example: "\"He drove a car\" vs. \"He drove a 1987 Buick LeSabre that smelled of cigarettes and broken promises.\" The second line sets up a joke. The first sets up nothing. Specificity is not just style — it's a structural comedy tool."
+  },
+  {
+    num: "12", name: "THE EYEBROW EFFECT",
+    tagline: "Solving one problem creates a slightly larger one.",
+    body: "The solution to a problem creates a new, slightly larger problem, which requires a solution that creates an even larger problem, spiraling outward. Red Skelton raised his eyebrows — and couldn't get them down. The escalation continues until the situation collapses entirely.",
+    example: "The bumbling murderer tries to cover his tracks — leaving fingerprints. He tries to wipe the fingerprints — knocking over a lamp. He tries to fix the lamp — starting a small fire. Each solution is worse than the problem it solves. The spiral is the comedy."
+  },
+  {
+    num: "13", name: "VIRTUAL HUMOR / 3D JOKES",
+    tagline: "Tell the story AND the truth AND the joke.",
+    body: "The best comic lines do three things at once: tell the story (advance the plot), tell the truth (reveal character or theme), and tell a joke (generate a laugh). To find the intersection, abstract your scene: What is the story? What is the truth? What is the joke? Then find the single line that does all three.",
+    example: "A line that reveals the character is self-deluding (truth), moves them toward a catastrophic decision (story), and makes us laugh at the gap between their confidence and their incompetence (joke). One sentence, three functions. That's virtual humor."
+  },
+  {
+    num: "14", name: "JEOPARDY",
+    tagline: "The greater the jeopardy, the better the comedy.",
+    body: "Raise stakes in two directions simultaneously: increase the PRICE OF FAILURE (what does losing cost?) and increase the PRIZE FOR SUCCESS (what does winning give?). Always make the bad situation worse. Comedy without jeopardy is safe. Safe is the enemy of funny.",
+    example: "It's not just that someone might lose their job — they might lose their job AND their wife AND their home AND their dignity on the same afternoon. Stack the jeopardy. The more they have to lose, the more we care, the funnier it becomes when things go wrong."
+  }
+];
+
+const STORIES = [
+  {
+    tab: "Center & Eccentrics",
+    icon: "🎯",
+    title: "CENTER & ECCENTRICS",
+    body: "An everyman at the center — sane, grounded, relatable — surrounded by a rotating cast of increasingly comic supporting characters. The center character is the audience's surrogate. The eccentrics provide the entertainment. The comedy comes from watching normalcy collide with the bizarre.",
+    note: "The key: the central character must be genuinely normal, not quirky. If the center is funny, there's no ground for the eccentrics to stand against.",
+    examples: ["Bob Newhart Show", "Mary Tyler Moore", "Barney Miller", "Frasier (as Roz and Niles collide around him)"]
+  },
+  {
+    tab: "Fish Out of Water",
+    icon: "🐟",
+    title: "FISH OUT OF WATER",
+    body: "Clash of context played at story-wide scale. Either a normal character dropped into a comic world, or a comic character dropped into a normal world. The gap between who the character is and where they are generates every joke in the story.",
+    note: "The fish must stay a fish. If they adapt too quickly, the premise evaporates. The comedy requires sustained incompatibility between character and world.",
+    examples: ["Back to the Future", "Crocodile Dundee", "Northern Exposure", "Beverly Hillbillies", "Enchanted"]
+  },
+  {
+    tab: "Character Comedy",
+    icon: "⚔️",
+    title: "CHARACTER COMEDY",
+    body: "Direct emotional war between strong comic opposites who are locked together. The comedy lives in the gap between the forces driving them apart and the forces holding them together. Without both forces in play, the story either explodes or goes numb.",
+    note: "Forces apart: incompatible perspectives, habits, needs. Forces together: love, circumstance, mutual dependency, history. Both must be equally strong.",
+    examples: ["The Odd Couple", "Cheers (Sam & Diane)", "All in the Family (Archie & Meathead)", "When Harry Met Sally"]
+  },
+  {
+    tab: "Powers",
+    icon: "✨",
+    title: "POWERS",
+    body: "The comic premise IS the magical, fantastical, or science-fictional element. The 'power' (magic, alien, technology, wish) creates the gap between comic reality and real reality. The most important rule: establish the rules of your magic precisely, then be absolutely consistent.",
+    note: "If the magic can do anything, it does nothing — there's no tension. Define the limits of the power as carefully as you define the power itself.",
+    examples: ["Bewitched", "E.T.", "Honey I Shrunk the Kids", "Big", "Liar Liar", "Bruce Almighty"]
+  },
+  {
+    tab: "Ensemble",
+    icon: "👥",
+    title: "ENSEMBLE",
+    body: "A group of people in conflict with each other AND in conflict with the world. The hardest type to write because every character must be the hero of their own story. The audience must understand and care about each character's individual goal, flaw, and humanity — not just the group's.",
+    note: "The ensemble works when subgroups form and reform — alliances shift, loyalties conflict, individual stories bump against the collective. The group is the premise; the individuals are the comedy.",
+    examples: ["M*A*S*H", "Cheers", "The Big Chill", "Parks and Recreation", "Brooklyn Nine-Nine"]
+  },
+  {
+    tab: "Slapstick",
+    icon: "💥",
+    title: "SLAPSTICK",
+    body: "Physical comedy driven by one crucial character trait: the slapstick character has absolutely NO self-doubt. The comedy comes from the gap between their magnificent, unshakeable self-confidence and their spectacular, manifest incompetence. They never learn. They never doubt. They always try again.",
+    note: "Self-awareness kills slapstick. The moment the character knows they're failing is the moment the comedy dies. Lucy never truly believes she won't get away with it.",
+    examples: ["I Love Lucy", "Inspector Clouseau", "Gilligan's Island", "Mr. Bean", "Johnny English"]
+  },
+  {
+    tab: "Satire & Parody",
+    icon: "🎭",
+    title: "SATIRE & PARODY",
+    body: "Two distinct but related modes. Satire attacks the SUBSTANCE of social and cultural institutions — it is content-focused, political, moral. Parody attacks the STYLE of an art form or genre — it is form-focused, structural. Both require the audience to step outside the story to get the joke, making them the most demanding modes of comedy.",
+    note: "Satire without target is just grumpiness. Parody without love for the original is just mockery. The best satire and parody come from deep understanding of — and genuine affection for — the thing being attacked.",
+    examples: ["Dr. Strangelove (satire)", "Spaceballs (parody)", "MASH (satire)", "Scary Movie (parody)", "Network (satire)"]
+  }
+];
+
+const TL_STEPS = [
+  { n:"1", q:"WHO IS THE HERO?", desc:"Every story is about someone. Identify your protagonist completely — their perspective, their flaw, their humanity, their exaggeration." },
+  { n:"2", q:"WHAT DOES THE HERO WANT?", desc:"Two layers: outer need (what they think they want — the surface goal) and inner need (what they really need — the deeper truth they don't yet know)." },
+  { n:"3", q:"THE DOOR OPENS", desc:"The hero enters a new, challenging world. Something offers them an opportunity they can't (or feel they can't) refuse. This is the inciting incident." },
+  { n:"4", q:"THE HERO TAKES CONTROL", desc:"Early success. Surface triumph. Things look good. The hero's strategy seems to be working. The audience thinks maybe it'll work out fine — and worries it won't." },
+  { n:"5", q:"A MONKEY WRENCH IS THROWN", desc:"The hero falls in love, develops a new loyalty, or discovers something that displaces their original goal. Now they're caught between two things they want." },
+  { n:"6", q:"THINGS FALL APART", desc:"A series of bad events. The hero is caught in a trap of their own making — their choices, their flaws, their avoidances all conspiring to close in on them." },
+  { n:"7", q:"THE HERO HITS BOTTOM", desc:"The moment of truth. Forced to choose between original loyalty and the displaced loyalty. They can't have both. The choice defines their character." },
+  { n:"8", q:"THE HERO RISKS ALL", desc:"With no certain hope of success, the hero does the right thing — usually 'comes clean,' admits the truth, or acts with integrity for the first time in the story." },
+  { n:"9", q:"WHAT DOES THE HERO GET?", desc:"The double win — both goals, or the better goal, or the unexpected gift. The happy ending that feels earned because the hero finally acted with courage." }
+];
+
+const TL_PROMPTS = [
+  { label:"Hero's Name & Who They Are", ph:"e.g., Marco, a failed magician who tells everyone he's retired by choice" },
+  { label:"Hero's Outer Want (what they think they want)", ph:"e.g., to win back his old Vegas slot" },
+  { label:"Hero's Inner Need (what they really need)", ph:"e.g., to stop pretending and be honest about his failures" },
+  { label:"The Door That Opens (the offer they can't refuse)", ph:"e.g., offered a gig at a tiny birthday party — his last chance" },
+  { label:"The Monkey Wrench (what disrupts the original plan)", ph:"e.g., falls for the client, who thinks he's a famous performer" },
+  { label:"The Bottom (the worst moment)", ph:"e.g., exposed as a fraud in front of everyone he's been trying to impress" },
+  { label:"The Risk (what they risk to do the right thing)", ph:"e.g., admits everything, knowing she'll leave and the gig is gone" },
+  { label:"The Double Win (what they actually get)", ph:"e.g., she respects his honesty, books him anyway — as himself, not a persona" }
+];
+
+// ═══════════════════════ NAV ═══════════════════════
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+
+  // Section highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const scrollY = window.scrollY + 100;
+  let current = '';
+  sections.forEach(s => { if (s.offsetTop <= scrollY) current = s.id; });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ═══════════════════════ SCROLL REVEAL ═══════════════════════
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+
+function setupReveal() {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+}
+
+// ═══════════════════════ RULE OF NINE ═══════════════════════
+function runNineDemo() {
+  const container = document.getElementById('joke-dots');
+  const desc = document.getElementById('nine-desc');
+  container.innerHTML = '';
+  const goldIndex = Math.floor(Math.random() * 10);
+  const emojis = ['💀','🗑️','❌','😐','🤦','😑','🙄','💤','😬','😶'];
+  for (let i = 0; i < 10; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'joke-dot ' + (i === goldIndex ? 'gold' : 'trash');
+    dot.textContent = i === goldIndex ? '⭐' : emojis[i % emojis.length];
+    dot.title = i === goldIndex ? 'This is your gold joke!' : 'Trash. That\'s okay.';
+    dot.style.animationDelay = (i * 0.05) + 's';
+    dot.style.animation = 'fadeDown 0.4s ' + (i * 0.06) + 's ease both';
+    container.appendChild(dot);
+  }
+  desc.textContent = `Joke #${goldIndex + 1} is gold. The other 9 are trash. That's a 10% hit rate — and that's enough. Make all 10 jokes. Don't pre-select which ones to skip.`;
+}
+
+// ═══════════════════════ TOOLS ═══════════════════════
+function buildTools() {
+  const grid = document.getElementById('tools-grid');
+  grid.innerHTML = TOOLS.map((t, i) => `
+    <div class="tool-card reveal" onclick="toggleTool(this)">
+      <div class="tool-header">
+        <div class="tool-num">${t.num}</div>
+        <div class="tool-header-text">
+          <h3>${t.name}</h3>
+          <p class="tool-tagline">${t.tagline}</p>
+        </div>
+        <div class="tool-expand-icon">&#8964;</div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-body-inner">
+          <p>${t.body}</p>
+          <div class="tool-example"><strong>Example:</strong> ${t.example}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleTool(card) {
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.tool-card.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) card.classList.add('open');
+}
+
+// ═══════════════════════ STORIES ═══════════════════════
+function buildStories() {
+  const tabsEl = document.getElementById('story-tabs');
+  const panelsEl = document.getElementById('story-panels');
+  tabsEl.innerHTML = STORIES.map((s, i) => `
+    <button class="story-tab ${i===0?'active':''}" onclick="switchStory(${i})">${s.tab}</button>
+  `).join('');
+  panelsEl.innerHTML = STORIES.map((s, i) => `
+    <div class="story-panel ${i===0?'active':''}">
+      <div class="story-panel-inner">
+        <span class="story-icon">${s.icon}</span>
+        <h3>${s.title}</h3>
+        <p>${s.body}</p>
+        ${s.note ? `<p style="color:var(--muted); font-style:italic; font-size:0.88rem; border-left:3px solid var(--gold); padding-left:1rem;">${s.note}</p>` : ''}
+        <div class="story-examples">
+          ${s.examples.map(e => `<span class="story-example-tag">${e}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function switchStory(idx) {
+  document.querySelectorAll('.story-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.story-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+
+// ═══════════════════════ THROUGHLINE ═══════════════════════
+function buildThroughline() {
+  // Steps
+  const stepsEl = document.getElementById('tl-steps');
+  stepsEl.innerHTML = TL_STEPS.map(s => `
+    <div class="tl-step reveal">
+      <div class="tl-step-num">${s.n}</div>
+      <div class="tl-step-content">
+        <h3>${s.q}</h3>
+        <p>${s.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // Template fields
+  const fieldsEl = document.getElementById('tl-fields');
+  fieldsEl.innerHTML = TL_PROMPTS.map((p,i) => `
+    <div class="tl-field">
+      <label>${p.label}</label>
+      <input type="text" id="tl-${i}" placeholder="${p.ph}">
+    </div>
+  `).join('');
+}
+
+function generateThroughline() {
+  const vals = TL_PROMPTS.map((_, i) => {
+    const el = document.getElementById('tl-'+i);
+    return el ? el.value.trim() : '';
+  });
+  const hero = vals[0] || 'our hero';
+  const want = vals[1] || '[their outer want]';
+  const need = vals[2] || '[their inner need]';
+  const door = vals[3] || '[the inciting incident]';
+  const wrench = vals[4] || '[the complication]';
+  const bottom = vals[5] || '[the worst moment]';
+  const risk = vals[6] || '[the act of courage]';
+  const win = vals[7] || '[the double win]';
+
+  const out = document.getElementById('tl-output');
+  out.innerHTML = `
+    <p><strong style="color:var(--coral)">The Setup:</strong> <span class="tl-slot">${hero}</span> wants <span class="tl-slot">${want}</span> — but what they really need is <span class="tl-slot">${need}</span>.</p>
+    <p><strong style="color:var(--coral)">The Door Opens:</strong> <span class="tl-slot">${door}</span></p>
+    <p><strong style="color:var(--coral)">The Complication:</strong> Things are going well — until <span class="tl-slot">${wrench}</span>, which sets them on a collision course with their own worst self.</p>
+    <p><strong style="color:var(--coral)">Rock Bottom:</strong> <span class="tl-slot">${bottom}</span> — the moment where the trap of their own making finally closes.</p>
+    <p><strong style="color:var(--coral)">The Risk:</strong> With everything on the line, <span class="tl-slot">${hero}</span> chooses integrity: <span class="tl-slot">${risk}</span>.</p>
+    <p><strong style="color:var(--coral)">The Win:</strong> And what they get is more than they hoped for: <span class="tl-slot">${win}</span>.</p>
+  `;
+  out.classList.add('visible');
+}
+
+// ═══════════════════════ CHARACTER BUILDER ═══════════════════════
+function buildCharacter() {
+  const name = document.getElementById('cb-name').value.trim() || 'Your Character';
+  const persp = document.getElementById('cb-perspective').value.trim() || '[no perspective defined]';
+  const flaw = document.getElementById('cb-flaw').value.trim() || '[no flaw defined]';
+  const humanity = document.getElementById('cb-humanity').value.trim() || '[no humanity defined]';
+  const exag = document.getElementById('cb-exaggeration').value.trim() || '[no exaggeration defined]';
+
+  const out = document.getElementById('char-output');
+  document.getElementById('char-output-text').innerHTML = `
+    <strong style="color:var(--gold)">${name}</strong> sees the world through the lens of <span>${persp}</span>. This perspective is not merely a quirk — it is the lens through which they interpret everything. Their defining flaw is <span>${flaw}</span>, which creates the emotional distance that lets an audience laugh at them rather than with them. But beneath that flaw lives a genuine humanity: they <span>${humanity}</span> — and it is this that makes us root for them even as we laugh. Taken to its extreme, the exaggeration of their character means that <span>${exag}</span>. That's where the comedy lives.
+    <br><br>
+    <em style="color:var(--muted)">Formula check: (${persp} + ${flaw} + ${humanity}) × ${exag} = ${name}</em>
+  `;
+  out.classList.add('visible');
+}
+
+// ═══════════════════════ INIT ═══════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  buildTools();
+  buildStories();
+  buildThroughline();
+  setTimeout(setupReveal, 100);
+  // Open first tool by default
+  setTimeout(() => {
+    const first = document.querySelector('.tool-card');
+    if (first) first.classList.add('open');
+  }, 300);
+});
+</script>
+</body>
+</html>

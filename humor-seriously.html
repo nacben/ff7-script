@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Humor, Seriously — A Companion Site</title>
+<meta name="description" content="An educational companion site exploring the concepts of Humor, Seriously by Jennifer Aaker & Naomi Bagdonas." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* ==========================================================
+   DESIGN TOKENS
+   ========================================================== */
+:root {
+  --dark: #1E2235;
+  --primary: #E8634A;
+  --secondary: #F7C948;
+  --teal: #4ECDC4;
+  --purple: #7C5CBF;
+  --light: #F8F9FA;
+  --text: #2D3748;
+  --muted: #6B7280;
+  --line: rgba(45, 55, 72, 0.12);
+  --shadow-sm: 0 4px 16px rgba(30, 34, 53, 0.08);
+  --shadow-md: 0 10px 32px rgba(30, 34, 53, 0.12);
+  --shadow-lg: 0 24px 60px rgba(30, 34, 53, 0.18);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================
+   RESET & BASE
+   ========================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: var(--light);
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); font-weight: 900; }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+p  { margin: 0 0 1em; }
+a  { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--purple); }
+img, svg { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: 0; background: none; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section { padding: 120px 0; position: relative; }
+@media (max-width: 768px) { section { padding: 80px 0; } }
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  padding: 6px 14px;
+  background: rgba(232, 99, 74, 0.1);
+  border-radius: 999px;
+}
+.section-title { text-align: center; max-width: 760px; margin: 0 auto 60px; }
+.section-title h2 { margin-bottom: 16px; }
+.section-title p { color: var(--muted); font-size: 1.1rem; }
+
+/* ==========================================================
+   PROGRESS BAR & NAV
+   ========================================================== */
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--teal));
+  z-index: 1000;
+  transition: width 0.1s linear;
+}
+nav.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(248, 249, 250, 0.85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition), background var(--transition);
+}
+nav.nav.scrolled { border-bottom-color: var(--line); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.35rem;
+  color: var(--dark);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); display: inline-block; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text); font-weight: 500; font-size: 0.92rem;
+  position: relative; padding: 6px 0;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--primary);
+  transition: width var(--transition);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-toggle { display: none; font-size: 1.6rem; color: var(--dark); }
+@media (max-width: 900px) {
+  .nav-links {
+    position: fixed; top: 64px; right: 0; bottom: 0;
+    background: var(--light); flex-direction: column; gap: 0;
+    padding: 24px; width: 280px; transform: translateX(100%);
+    transition: transform var(--transition); border-left: 1px solid var(--line);
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links a { padding: 14px 0; border-bottom: 1px solid var(--line); width: 100%; }
+  .nav-toggle { display: block; }
+}
+
+/* ==========================================================
+   HERO
+   ========================================================== */
+.hero {
+  padding-top: 180px;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(247, 201, 72, 0.18), transparent 50%),
+    radial-gradient(circle at 10% 85%, rgba(78, 205, 196, 0.15), transparent 55%),
+    linear-gradient(180deg, #FFF8F2 0%, var(--light) 100%);
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: ''; position: absolute; top: 20%; right: -100px;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 99, 74, 0.18), transparent 70%);
+  filter: blur(20px); animation: float 9s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+.hero-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
+}
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+.hero h1 span.accent {
+  background: linear-gradient(120deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: inline-block;
+}
+.hero p.lead {
+  font-size: 1.2rem; color: var(--muted); max-width: 520px; margin-bottom: 32px;
+}
+.hero-authors {
+  display: flex; align-items: center; gap: 16px; margin-top: 32px;
+  font-size: 0.95rem; color: var(--text);
+}
+.hero-authors .avatars { display: flex; }
+.hero-authors .av {
+  width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--light);
+  margin-left: -10px; display: grid; place-items: center; color: white;
+  font-weight: 700; font-size: 0.95rem;
+}
+.av:first-child { margin-left: 0; background: var(--primary); }
+.av:nth-child(2) { background: var(--purple); }
+.hero-stats {
+  display: grid; grid-template-columns: 1fr; gap: 20px; padding: 32px;
+  background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  position: relative; overflow: hidden;
+}
+.hero-stats::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--teal));
+}
+.stat {
+  display: flex; align-items: baseline; gap: 14px; padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.stat:last-child { border-bottom: 0; padding-bottom: 0; }
+.stat-num {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1; color: var(--primary);
+}
+.stat-num.alt { color: var(--purple); }
+.stat-label { font-size: 0.95rem; color: var(--text); font-weight: 500; max-width: 280px; }
+.btn {
+  display: inline-block; padding: 14px 28px; border-radius: 999px;
+  font-weight: 600; font-size: 0.95rem; transition: all var(--transition);
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--dark); color: white; }
+.btn-primary:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-ghost { color: var(--dark); border-color: var(--dark); }
+.btn-ghost:hover { background: var(--dark); color: white; }
+.btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-stagger.in > * { opacity: 1; transform: none; }
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: 0.55s; }
+
+/* ==========================================================
+   HUMOR CLIFF
+   ========================================================== */
+.cliff { background: linear-gradient(180deg, var(--light), #FFF8F2); }
+.cliff-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center;
+}
+@media (max-width: 900px) { .cliff-grid { grid-template-columns: 1fr; } }
+.chart-card {
+  background: white; padding: 36px; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.chart-card h3 { margin-bottom: 4px; }
+.chart-card p.sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+#cliffChart { width: 100%; height: 320px; }
+.cliff-card {
+  background: white; padding: 28px; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm); margin-bottom: 16px;
+  border-left: 5px solid var(--primary);
+}
+.cliff-card.alt { border-left-color: var(--purple); }
+.cliff-card .big {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 1.75rem; color: var(--primary); display: block;
+}
+.cliff-card.alt .big { color: var(--purple); }
+.cliff-explainer { margin-top: 28px; color: var(--muted); }
+
+/* ==========================================================
+   MYTHS — FLIP CARDS
+   ========================================================== */
+.myths { background: var(--dark); color: white; }
+.myths .section-title h2,
+.myths .section-title p { color: white; }
+.myths .section-title p { opacity: 0.7; }
+.myths .eyebrow { background: rgba(247, 201, 72, 0.2); color: var(--secondary); }
+.myth-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.flip-card {
+  perspective: 1200px; min-height: 340px;
+}
+.flip-inner {
+  position: relative; width: 100%; height: 100%; min-height: 340px;
+  transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); transform-style: preserve-3d;
+  cursor: pointer;
+}
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-md); padding: 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.flip-front {
+  background: linear-gradient(160deg, #2A2F4A, #1E2235);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.flip-back {
+  background: linear-gradient(160deg, var(--primary), #C84E37);
+  transform: rotateY(180deg); color: white;
+}
+.flip-card:nth-child(2) .flip-back { background: linear-gradient(160deg, var(--secondary), #D4A833); color: var(--dark); }
+.flip-card:nth-child(3) .flip-back { background: linear-gradient(160deg, var(--teal), #38A89F); }
+.flip-card:nth-child(4) .flip-back { background: linear-gradient(160deg, var(--purple), #5E45A0); }
+.myth-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 3rem; opacity: 0.5;
+  color: var(--secondary); line-height: 1;
+}
+.myth-title { font-size: 1.3rem; font-family: 'Playfair Display', serif; font-weight: 700; margin: 16px 0 12px; }
+.myth-quote { font-style: italic; opacity: 0.85; }
+.flip-hint { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; margin-top: 14px; }
+.flip-back h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 12px; color: inherit; }
+.flip-back p { font-size: 0.95rem; opacity: 0.95; }
+
+/* 4-quadrant chart inside Failure myth */
+.quadrant-mini {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  font-size: 0.75rem; margin-top: 12px; font-weight: 700;
+}
+.quadrant-mini div {
+  padding: 8px; border-radius: 6px; text-align: center;
+  background: rgba(0,0,0,0.15);
+}
+
+/* ==========================================================
+   BRAIN ON HUMOR
+   ========================================================== */
+.brain { background: linear-gradient(180deg, var(--light), #FBFBFD); }
+.brain-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.benefit {
+  background: white; padding: 32px; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm); transition: all var(--transition);
+  position: relative; overflow: hidden; border-top: 5px solid var(--primary);
+}
+.benefit:nth-child(2) { border-top-color: var(--purple); }
+.benefit:nth-child(3) { border-top-color: var(--teal); }
+.benefit:nth-child(4) { border-top-color: var(--secondary); }
+.benefit:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.benefit .icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: grid; place-items: center; font-size: 1.6rem;
+  background: rgba(232, 99, 74, 0.12); margin-bottom: 18px;
+}
+.benefit:nth-child(2) .icon { background: rgba(124, 92, 191, 0.12); }
+.benefit:nth-child(3) .icon { background: rgba(78, 205, 196, 0.14); }
+.benefit:nth-child(4) .icon { background: rgba(247, 201, 72, 0.18); }
+.benefit h3 { font-size: 1.25rem; margin-bottom: 8px; }
+.benefit ul { padding: 0; list-style: none; margin: 12px 0 0; }
+.benefit li {
+  padding: 8px 0; border-top: 1px solid var(--line); font-size: 0.92rem;
+  color: var(--text);
+}
+.benefit li:first-child { border-top: 0; }
+.benefit li strong { color: var(--primary); font-weight: 700; }
+.benefit:nth-child(2) li strong { color: var(--purple); }
+.benefit:nth-child(3) li strong { color: var(--teal); }
+.benefit:nth-child(4) li strong { color: #B7891F; }
+
+/* ==========================================================
+   HUMOR STYLES (QUADRANT + QUIZ)
+   ========================================================== */
+.styles { background: #FBF6EE; }
+.styles-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+}
+@media (max-width: 900px) { .styles-grid { grid-template-columns: 1fr; gap: 40px; } }
+.quadrant {
+  position: relative; width: 100%; aspect-ratio: 1 / 1;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+  background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  padding: 30px; gap: 6px;
+}
+.quad {
+  border-radius: var(--radius-sm); padding: 18px; color: white;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform var(--transition);
+}
+.quad:hover { transform: scale(1.03); z-index: 2; }
+.quad-magnet { background: linear-gradient(135deg, var(--primary), #D14D33); }
+.quad-sweetheart { background: linear-gradient(135deg, var(--secondary), #D4A833); color: var(--dark); }
+.quad-standup { background: linear-gradient(135deg, var(--purple), #5E45A0); }
+.quad-sniper { background: linear-gradient(135deg, var(--teal), #38A89F); }
+.quad h4 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin: 0 0 4px; color: inherit; }
+.quad small { font-size: 0.78rem; opacity: 0.9; line-height: 1.4; }
+.quad-axis-y, .quad-axis-x {
+  position: absolute; font-size: 0.7rem; font-weight: 700;
+  color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.quad-axis-y.top { top: 8px; left: 50%; transform: translateX(-50%); }
+.quad-axis-y.bot { bottom: 8px; left: 50%; transform: translateX(-50%); }
+.quad-axis-x.left { left: 6px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center; white-space: nowrap; }
+.quad-axis-x.right { right: 6px; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: center; white-space: nowrap; }
+
+.quiz {
+  background: white; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-md);
+}
+.quiz h3 { margin-bottom: 4px; }
+.quiz .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 18px; }
+.q { margin: 18px 0; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.q:last-of-type { border-bottom: 0; }
+.q-text { font-size: 0.95rem; margin-bottom: 10px; font-weight: 500; }
+.scale {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.scale label {
+  flex: 1; min-width: 38px; text-align: center; padding: 8px 0;
+  border: 2px solid var(--line); border-radius: 10px; cursor: pointer;
+  font-size: 0.85rem; font-weight: 600; color: var(--muted);
+  transition: all 0.2s ease;
+}
+.scale label:hover { border-color: var(--primary); color: var(--primary); }
+.scale input { display: none; }
+.scale input:checked + span,
+.scale label.checked { color: white !important; border-color: var(--primary) !important; background: var(--primary) !important; }
+.scale-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.05em; }
+#quizResult {
+  display: none; margin-top: 24px; padding: 24px;
+  background: linear-gradient(135deg, var(--dark), #2D324E);
+  color: white; border-radius: var(--radius-md);
+}
+#quizResult.show { display: block; animation: pop 0.5s ease; }
+@keyframes pop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+#quizResult h4 { color: var(--secondary); font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+#quizResult .result-style { font-size: 0.9rem; opacity: 0.85; }
+
+/* ==========================================================
+   ANATOMY OF FUNNY
+   ========================================================== */
+.anatomy { background: white; }
+.principles {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px;
+}
+@media (max-width: 700px) { .principles { grid-template-columns: 1fr; } }
+.principle {
+  background: linear-gradient(135deg, #FFF8F2, #FBF6EE);
+  padding: 32px; border-radius: var(--radius-md);
+  border-left: 5px solid var(--primary); position: relative;
+}
+.principle:nth-child(2) { border-left-color: var(--teal); background: linear-gradient(135deg, #F0FBFA, #EAF7F5); }
+.principle .num {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 1.2rem; color: var(--primary); margin-bottom: 8px;
+}
+.principle:nth-child(2) .num { color: var(--teal); }
+.principle h3 { font-size: 1.4rem; }
+.principle p { color: var(--text); margin: 0; }
+
+.subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+@media (max-width: 900px) { .subgrid { grid-template-columns: 1fr; } }
+.sub-block h3 {
+  font-size: 1.6rem; margin-bottom: 18px;
+  padding-bottom: 12px; border-bottom: 3px solid var(--secondary);
+  display: inline-block;
+}
+.entry, .technique {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.entry:last-of-type, .technique:last-of-type { border-bottom: 0; }
+.entry .ic, .technique .ic {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  display: grid; place-items: center; font-size: 1.3rem;
+  background: rgba(232, 99, 74, 0.1);
+}
+.entry h4, .technique h4 { font-family: 'Inter', sans-serif; font-size: 1rem; margin: 0 0 4px; font-weight: 700; color: var(--dark); }
+.entry p, .technique p { font-size: 0.92rem; color: var(--muted); margin: 0; }
+
+/* ==========================================================
+   HUMOR AT WORK
+   ========================================================== */
+.work { background: var(--light); }
+.work-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+@media (max-width: 900px) { .work-grid { grid-template-columns: 1fr; } }
+.work-card {
+  background: white; border-radius: var(--radius-md); padding: 32px;
+  box-shadow: var(--shadow-sm); transition: transform var(--transition), box-shadow var(--transition);
+  position: relative; overflow: hidden;
+}
+.work-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.work-card::after {
+  content: ''; position: absolute; bottom: -40px; right: -40px;
+  width: 140px; height: 140px; border-radius: 50%; opacity: 0.08;
+  background: var(--primary);
+}
+.work-card:nth-child(2)::after { background: var(--teal); }
+.work-card:nth-child(3)::after { background: var(--purple); }
+.work-card .label {
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--primary); font-weight: 700; margin-bottom: 8px;
+}
+.work-card:nth-child(2) .label { color: var(--teal); }
+.work-card:nth-child(3) .label { color: var(--purple); }
+.work-card h3 { font-size: 1.25rem; margin-bottom: 14px; }
+.work-card ul { padding: 0; list-style: none; margin: 0; position: relative; z-index: 1; }
+.work-card li {
+  padding: 10px 0 10px 26px; border-top: 1px solid var(--line);
+  font-size: 0.93rem; position: relative;
+}
+.work-card li::before {
+  content: '✓'; position: absolute; left: 0; top: 10px;
+  color: var(--primary); font-weight: 700;
+}
+.work-card:nth-child(2) li::before { color: var(--teal); }
+.work-card:nth-child(3) li::before { color: var(--purple); }
+.work-card li:first-child { border-top: 0; }
+
+/* ==========================================================
+   LEADING WITH HUMOR
+   ========================================================== */
+.leading {
+  background: linear-gradient(135deg, var(--dark) 0%, #2A2F4A 100%);
+  color: white;
+}
+.leading h2, .leading .section-title p { color: white; }
+.leading .section-title p { opacity: 0.75; }
+.leading .eyebrow { background: rgba(78, 205, 196, 0.2); color: var(--teal); }
+.lead-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: start; }
+@media (max-width: 900px) { .lead-grid { grid-template-columns: 1fr; } }
+.crisis-stat {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+  padding: 32px; border-radius: var(--radius-md); margin-bottom: 24px;
+}
+.crisis-stat .big {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(3rem, 6vw, 5rem); line-height: 1;
+  background: linear-gradient(120deg, var(--secondary), var(--primary));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.crisis-stat p { opacity: 0.8; margin: 8px 0 0; }
+.trust-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.trust-stat {
+  background: rgba(255,255,255,0.05); padding: 20px; border-radius: var(--radius-sm);
+  text-align: center;
+}
+.trust-stat .n { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2rem; color: var(--teal); display: block; }
+.trust-stat span:last-child { font-size: 0.85rem; opacity: 0.8; }
+
+.principles-list li {
+  padding: 16px 0 16px 36px; border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative; list-style: none;
+}
+.principles-list { padding: 0; margin: 0 0 32px; }
+.principles-list li::before {
+  content: ''; position: absolute; left: 0; top: 24px;
+  width: 22px; height: 2px; background: var(--secondary);
+}
+.principles-list li:first-child { border-top: 0; }
+.principles-list strong { color: var(--secondary); display: block; margin-bottom: 4px; }
+
+/* Corporate Ladder Visual */
+.ladder {
+  background: rgba(255,255,255,0.04); border-radius: var(--radius-md);
+  padding: 28px; margin-top: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.ladder h4 { color: var(--secondary); font-family: 'Playfair Display', serif; margin-bottom: 18px; font-size: 1.1rem; }
+.rung {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px; margin: 8px 0;
+  background: rgba(255,255,255,0.05); border-radius: 10px;
+}
+.rung .level {
+  font-weight: 700; font-size: 0.85rem; min-width: 80px;
+  color: var(--teal);
+}
+.rung .bar {
+  flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 999px;
+  overflow: hidden; position: relative;
+}
+.rung .bar-fill {
+  height: 100%; background: linear-gradient(90deg, var(--secondary), var(--primary));
+  width: 0; transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+.rung .pct { font-weight: 700; min-width: 40px; text-align: right; font-size: 0.85rem; }
+
+/* ==========================================================
+   CULTURE OF LEVITY
+   ========================================================== */
+.culture { background: #FFF8F2; }
+.archetypes {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 60px;
+}
+@media (max-width: 900px) { .archetypes { grid-template-columns: 1fr; } }
+.arche {
+  background: white; padding: 32px; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm); text-align: center;
+  transition: transform var(--transition);
+}
+.arche:hover { transform: translateY(-6px); }
+.arche .emoji { font-size: 3rem; margin-bottom: 12px; display: block; }
+.arche h3 { font-size: 1.3rem; }
+.arche p { color: var(--muted); font-size: 0.95rem; margin: 8px 0 0; }
+
+.institutional {
+  background: white; padding: 40px; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.institutional h3 { margin-bottom: 24px; text-align: center; }
+.inst-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.inst {
+  padding: 20px; border-left: 4px solid var(--primary); background: #FBF6EE;
+  border-radius: 8px;
+}
+.inst:nth-child(2) { border-color: var(--teal); background: #F0FBFA; }
+.inst:nth-child(3) { border-color: var(--purple); background: #F4F0FB; }
+.inst:nth-child(4) { border-color: var(--secondary); background: #FDF7E2; }
+.inst h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; margin: 0 0 8px; color: var(--dark); }
+.inst p { font-size: 0.9rem; color: var(--text); margin: 0; }
+
+.pull-quote {
+  text-align: center; max-width: 760px; margin: 60px auto 0;
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2rem); color: var(--dark); line-height: 1.4;
+  position: relative; padding: 0 40px;
+}
+.pull-quote::before, .pull-quote::after {
+  content: '"'; font-size: 4rem; color: var(--primary); opacity: 0.3;
+  position: absolute; line-height: 1;
+}
+.pull-quote::before { top: -20px; left: 0; }
+.pull-quote::after { bottom: -40px; right: 0; }
+.pull-quote .who { display: block; font-size: 0.95rem; font-style: normal; color: var(--muted); margin-top: 16px; font-family: 'Inter', sans-serif; font-weight: 600; }
+
+/* ==========================================================
+   GRAY AREAS
+   ========================================================== */
+.gray { background: var(--light); }
+.tpd {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px;
+}
+@media (max-width: 700px) { .tpd { grid-template-columns: 1fr; } }
+.tpd-card {
+  text-align: center; padding: 32px; background: white;
+  border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+  position: relative; overflow: hidden;
+}
+.tpd-card .letter {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 4rem; line-height: 1; color: var(--primary); margin-bottom: 8px;
+}
+.tpd-card:nth-child(2) .letter { color: var(--purple); }
+.tpd-card:nth-child(3) .letter { color: var(--teal); }
+.tpd-card h4 { font-size: 1.2rem; margin-bottom: 6px; }
+.tpd-card p { color: var(--muted); font-size: 0.93rem; margin: 0; }
+
+.lifecycle {
+  background: white; border-radius: var(--radius-lg); padding: 40px;
+  box-shadow: var(--shadow-md); margin-bottom: 40px;
+}
+.lifecycle h3 { text-align: center; margin-bottom: 32px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
+@media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
+.step {
+  background: linear-gradient(135deg, #FFF8F2, white);
+  border: 2px solid var(--line); border-radius: var(--radius-md);
+  padding: 24px; position: relative;
+}
+.step .step-n {
+  position: absolute; top: -16px; left: 24px;
+  background: var(--primary); color: white; font-weight: 700;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 0.9rem;
+}
+.step:nth-child(2) .step-n { background: var(--purple); }
+.step:nth-child(3) .step-n { background: var(--teal); }
+.step h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; margin: 12px 0 8px; color: var(--dark); }
+.step p { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+.warning {
+  background: linear-gradient(135deg, var(--dark), #2A2F4A);
+  color: white; padding: 32px; border-radius: var(--radius-md);
+  display: flex; align-items: center; gap: 24px;
+}
+@media (max-width: 700px) { .warning { flex-direction: column; text-align: center; } }
+.warning .icon { font-size: 3rem; flex-shrink: 0; }
+.warning h4 { color: var(--secondary); font-family: 'Playfair Display', serif; margin: 0 0 6px; }
+.warning p { margin: 0; opacity: 0.85; font-size: 0.95rem; }
+
+/* ==========================================================
+   SECRET WEAPON / REGRETS
+   ========================================================== */
+.secret {
+  background: linear-gradient(180deg, var(--light), #FFF8F2);
+}
+.regrets {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; margin-bottom: 60px;
+}
+.regret {
+  background: white; padding: 32px 28px; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm); text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+  border-bottom: 4px solid var(--primary);
+}
+.regret:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.regret:nth-child(2) { border-color: var(--teal); }
+.regret:nth-child(3) { border-color: var(--secondary); }
+.regret:nth-child(4) { border-color: var(--purple); }
+.regret:nth-child(5) { border-color: #E8634A; }
+.regret .emoji { font-size: 2.4rem; margin-bottom: 8px; display: block; }
+.regret h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 8px; letter-spacing: 0.05em; }
+.regret .wish { font-style: italic; color: var(--muted); font-size: 0.88rem; margin-bottom: 12px; }
+.regret .hum { font-size: 0.9rem; color: var(--text); margin: 0; font-weight: 500; }
+.regret .quote { display: block; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+.closing {
+  text-align: center; max-width: 720px; margin: 0 auto;
+  font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1.5; color: var(--dark);
+}
+.closing::before { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 0 auto 28px; border-radius: 2px; }
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+footer {
+  background: var(--dark); color: white; padding: 80px 0 40px;
+}
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) { .foot-grid { grid-template-columns: 1fr; text-align: center; } }
+footer h3 { color: white; font-size: 2rem; margin-bottom: 4px; }
+footer p { opacity: 0.7; margin: 0; font-size: 0.95rem; }
+footer .stamp {
+  display: inline-block; padding: 6px 14px; margin-top: 12px;
+  background: rgba(247, 201, 72, 0.15); color: var(--secondary);
+  border-radius: 999px; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+}
+.balance {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  padding: 28px; background: rgba(255,255,255,0.05); border-radius: var(--radius-md);
+}
+.balance .b {
+  text-align: center; flex: 1;
+}
+.balance .b .lbl { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; }
+.balance .b .lbl.lev { color: var(--secondary); }
+.balance .b .lbl.gra { color: var(--teal); }
+.balance .b .desc { font-size: 0.78rem; opacity: 0.6; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+.balance .eq { font-size: 1.6rem; opacity: 0.4; }
+.foot-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+  text-align: center; font-size: 0.85rem; opacity: 0.6;
+}
+
+/* ==========================================================
+   UTILITIES
+   ========================================================== */
+.mb-2 { margin-bottom: 16px; }
+.muted { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- =================== PROGRESS BAR =================== -->
+<div id="progress" aria-hidden="true"></div>
+
+<!-- =================== NAV =================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo"><span class="dot"></span> Humor, Seriously</a>
+    <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#cliff">The Cliff</a>
+      <a href="#myths">Myths</a>
+      <a href="#brain">Benefits</a>
+      <a href="#styles">Your Style</a>
+      <a href="#anatomy">Anatomy</a>
+      <a href="#work">At Work</a>
+      <a href="#leading">Leading</a>
+      <a href="#secret">In Life</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HERO =================== -->
+<header class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">A companion to the book</span>
+      <h1>Humor Is <span class="accent">Serious Business</span></h1>
+      <p class="lead">An exploration of how laughter and levity — long dismissed as trivial — are among the most underused, undervalued tools at your disposal for building bonds, trust, creativity, resilience, and a life well lived.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#cliff">Start the Journey</a>
+        <a class="btn btn-ghost" href="#styles">Find Your Humor Style</a>
+      </div>
+      <div class="hero-authors">
+        <div class="avatars">
+          <div class="av">JA</div>
+          <div class="av">NB</div>
+        </div>
+        <div>
+          <strong>Jennifer Aaker &amp; Naomi Bagdonas</strong><br />
+          <span class="muted">Stanford Graduate School of Business</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat">
+        <span class="stat-num" data-count="98">0</span>
+        <span class="stat-label"><strong>%</strong> of executives prefer employees with a sense of humor.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num alt" data-count="84">0</span>
+        <span class="stat-label"><strong>%</strong> believe employees with humor do better work.</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="2" data-suffix="x">0</span>
+        <span class="stat-label">More memorable content. More creative problem-solving. More resilient teams.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =================== HUMOR CLIFF =================== -->
+<section class="cliff" id="cliff">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 01</span>
+      <h2>The Humor Cliff</h2>
+      <p>Why, somewhere between kindergarten and the corner office, we lose our laughter — and what that costs us.</p>
+    </div>
+    <div class="cliff-grid">
+      <div class="chart-card reveal">
+        <h3>Frequency of Laughter Across a Lifetime</h3>
+        <p class="sub">Self-reported daily laughter / smiling, by age. Notice the cliff right around age 23.</p>
+        <svg id="cliffChart" viewBox="0 0 600 320" preserveAspectRatio="none" aria-label="Line chart showing decline of laughter from age 15 to 75"></svg>
+      </div>
+      <div class="reveal-stagger reveal">
+        <div class="cliff-card">
+          <span class="big">~300</span>
+          <strong>laughs per day</strong> for the average 4-year-old. They find the world inherently absurd, surprising, and delightful.
+        </div>
+        <div class="cliff-card alt">
+          <span class="big">~300 / 2.5 mo</span>
+          <strong>for the average 40-year-old.</strong> By midlife, that magical-thinking laughter has slowed to a trickle.
+        </div>
+        <p class="cliff-explainer">When we enter the workforce, we're often handed an unspoken rule: <em>professional means serious</em>. We mute the goofy parts of ourselves the moment we step into the office — and pay for it in trust, creativity, and joy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MYTHS =================== -->
+<section class="myths" id="myths">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 02</span>
+      <h2>Four Deadly Myths About Humor</h2>
+      <p>Tap each card to flip and debunk.</p>
+    </div>
+    <div class="myth-grid reveal-stagger reveal">
+      <div class="flip-card" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div>
+              <div class="myth-num">01</div>
+              <div class="myth-title">The Serious Business Myth</div>
+            </div>
+            <div>
+              <p class="myth-quote">"Humor has no place in serious work."</p>
+              <p class="flip-hint">Tap to debunk &rarr;</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h4>Wrong: humor IS the work.</h4>
+            <p>Leaders who use humor are seen as <strong>27% more motivating</strong> and <strong>23% more admired</strong>. Their teams are more bonded and report higher job satisfaction. Seriousness about the work and lightness in delivery are not opposites.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div>
+              <div class="myth-num">02</div>
+              <div class="myth-title">The Failure Myth</div>
+            </div>
+            <div>
+              <p class="myth-quote">"If nobody laughs, I've failed."</p>
+              <p class="flip-hint">Tap to debunk &rarr;</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h4>Appropriate &gt; Funny.</h4>
+            <p>The goal isn't laughs — it's signaling humanity. Aim for the safe quadrants:</p>
+            <div class="quadrant-mini">
+              <div>JACKPOT<br /><small>funny + appropriate</small></div>
+              <div>STILL GOOD<br /><small>not funny + appropriate</small></div>
+              <div>VILLAIN<br /><small>not funny + inappropriate</small></div>
+              <div>JERK<br /><small>funny + inappropriate</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div>
+              <div class="myth-num">03</div>
+              <div class="myth-title">The Being Funny Myth</div>
+            </div>
+            <div>
+              <p class="myth-quote">"You have to be funny."</p>
+              <p class="flip-hint">Tap to debunk &rarr;</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h4>You don't. You just have to <em>signal</em>.</h4>
+            <p>You don't need to land a punchline. You just need to communicate that you have a sense of humor — by laughing generously, calling out absurdity, or simply not taking yourself too seriously. The bar is much, much lower than you think.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" tabindex="0">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div>
+              <div class="myth-num">04</div>
+              <div class="myth-title">The Born With It Myth</div>
+            </div>
+            <div>
+              <p class="myth-quote">"Humor is innate, not learned."</p>
+              <p class="flip-hint">Tap to debunk &rarr;</p>
+            </div>
+          </div>
+          <div class="flip-back">
+            <h4>Funny is a muscle.</h4>
+            <p>Comedians train. Improvisers practice. So can you. Humor is a skill built through observation, structure, and a growth mindset. The more you exercise it — noticing the absurd, riffing safely, embracing failure — the stronger it gets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== BRAIN ON HUMOR =================== -->
+<section class="brain" id="brain">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 03</span>
+      <h2>Your Brain on Humor</h2>
+      <p>Four scientifically-grounded reasons levity is your most underrated leadership skill.</p>
+    </div>
+    <div class="brain-grid reveal-stagger reveal">
+      <div class="benefit">
+        <div class="icon">⚡</div>
+        <h3>Power</h3>
+        <p class="muted">Humor signals confidence, status, and competence — fast.</p>
+        <ul>
+          <li>Speakers who used humor were perceived as <strong>37% higher</strong> in status.</li>
+          <li>In negotiation, a small joke at offer time produced <strong>18% higher</strong> closing prices.</li>
+          <li>Material delivered with humor is up to <strong>2× more memorable</strong>.</li>
+        </ul>
+      </div>
+      <div class="benefit">
+        <div class="icon">🤝</div>
+        <h3>Bonds</h3>
+        <p class="muted">Shared laughter is the fastest accelerator of trust.</p>
+        <ul>
+          <li>Laughter triggers a release of <strong>oxytocin</strong>, the "trust hormone."</li>
+          <li>Pairs who laughed together reported <strong>30% more intimate</strong> connection.</li>
+          <li>Couples sharing laughter report <strong>23% more</strong> relationship satisfaction.</li>
+        </ul>
+      </div>
+      <div class="benefit">
+        <div class="icon">💡</div>
+        <h3>Creativity</h3>
+        <p class="muted">Humor unlocks the cognitive flexibility creativity requires.</p>
+        <ul>
+          <li>Subjects primed with humor solved the candle problem at <strong>2× the rate</strong>.</li>
+          <li>Trained comedians produced <strong>20% more</strong> ideas, rated <strong>25% more</strong> creative.</li>
+          <li>Laughter slashes cortisol by <strong>~39%</strong>, freeing the brain to wander.</li>
+        </ul>
+      </div>
+      <div class="benefit">
+        <div class="icon">🛡️</div>
+        <h3>Resilience</h3>
+        <p class="muted">Humor is a sword <em>and</em> a shield against adversity.</p>
+        <ul>
+          <li>Cortisol down <strong>~39%</strong>; epinephrine down <strong>~70%</strong>.</li>
+          <li>One longevity study: <strong>48% lower</strong> all-cause mortality risk for women with high humor.</li>
+          <li>Humor reframes pain — and reframes are how we recover.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== HUMOR STYLES + QUIZ =================== -->
+<section class="styles" id="styles">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 04</span>
+      <h2>Discover Your Humor Style</h2>
+      <p>Four styles defined by two axes: how <em>you</em> deliver, and how you <em>relate</em> to others.</p>
+    </div>
+    <div class="styles-grid">
+      <div class="reveal">
+        <div class="quadrant" aria-label="Humor styles quadrant">
+          <span class="quad-axis-y top">Expressive</span>
+          <span class="quad-axis-y bot">Subtle</span>
+          <span class="quad-axis-x left">Affiliative</span>
+          <span class="quad-axis-x right">Aggressive</span>
+          <div class="quad quad-magnet">
+            <div><h4>The Magnet</h4><small>Affiliative · Expressive</small></div>
+            <small>Warm, animated, easy laugh. Slapstick, impressions, generous energy.</small>
+          </div>
+          <div class="quad quad-standup">
+            <div><h4>The Stand-Up</h4><small>Aggressive · Expressive</small></div>
+            <small>Bold, irreverent, riffs on the spot. Comfortable with edge.</small>
+          </div>
+          <div class="quad quad-sweetheart">
+            <div><h4>The Sweetheart</h4><small>Affiliative · Subtle</small></div>
+            <small>Earnest, understated, considered. Plans humor; sensitive to landing.</small>
+          </div>
+          <div class="quad quad-sniper">
+            <div><h4>The Sniper</h4><small>Aggressive · Subtle</small></div>
+            <small>Dry, deadpan, sarcastic. One-liners that hit and leave.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz reveal" id="quiz">
+        <h3>Mini Quiz: 12 Questions</h3>
+        <p class="sub">Rate each statement from 1 (not me at all) to 5 (very much me).</p>
+        <form id="quizForm"></form>
+        <button class="btn btn-primary" id="quizSubmit" type="button" style="margin-top: 18px; width: 100%;">Reveal My Humor Style</button>
+        <div id="quizResult" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ANATOMY OF FUNNY =================== -->
+<section class="anatomy" id="anatomy">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 05</span>
+      <h2>The Anatomy of Funny</h2>
+      <p>Two principles, two crafts: how to find the funny, and how to form it.</p>
+    </div>
+
+    <div class="principles reveal-stagger reveal">
+      <div class="principle">
+        <div class="num">Principle 01</div>
+        <h3>Truth is at the heart of humor.</h3>
+        <p>The best humor isn't invented — it's noticed. It's the recognition of a truth, articulated in a way the audience hadn't yet put into words. If it doesn't ring true, it doesn't land.</p>
+      </div>
+      <div class="principle">
+        <div class="num">Principle 02</div>
+        <h3>Humor requires surprise &amp; misdirection.</h3>
+        <p>Set the audience down a path, then pivot. The laugh lives in the gap between the expected and the actual. No surprise, no spark.</p>
+      </div>
+    </div>
+
+    <div class="subgrid reveal">
+      <div class="sub-block">
+        <h3>Finding the Funny</h3>
+        <p class="muted mb-2">Five entry points for spotting humor in everyday life.</p>
+        <div class="entry"><div class="ic">🔍</div><div><h4>Incongruity</h4><p>Notice the contradictions, mismatches, and "wait, what?" moments around you.</p></div></div>
+        <div class="entry"><div class="ic">❤️</div><div><h4>Emotion</h4><p>What do you love? What do you hate? Strong feelings are comedy goldmines.</p></div></div>
+        <div class="entry"><div class="ic">💭</div><div><h4>Opinion</h4><p>Strongly-held views — even silly ones — give your humor a point of view.</p></div></div>
+        <div class="entry"><div class="ic">😬</div><div><h4>Pain</h4><p>The mundane indignities. The cringe. The shared suffering. (Comedy = tragedy + time.)</p></div></div>
+        <div class="entry"><div class="ic">😊</div><div><h4>Delight</h4><p>What makes you smile? Wonder, beauty, weird coincidences — all entry points.</p></div></div>
+      </div>
+      <div class="sub-block">
+        <h3>Forming the Funny</h3>
+        <p class="muted mb-2">Six time-tested techniques used by the pros.</p>
+        <div class="technique"><div class="ic">📈</div><div><h4>Exaggerate</h4><p>Push the truth past plausible. "I have a thousand emails. Literally a thousand."</p></div></div>
+        <div class="technique"><div class="ic">⚖️</div><div><h4>Create Contrast</h4><p>Pair the high and low. The grand and the petty. Tuxedo with sneakers.</p></div></div>
+        <div class="technique"><div class="ic">🎯</div><div><h4>Use Specifics</h4><p>"A snack" isn't funny. "A single, soft Werther's Original" is. Specifics paint pictures.</p></div></div>
+        <div class="technique"><div class="ic">🔗</div><div><h4>Make Analogies</h4><p>"Our roadmap is a Jenga tower someone's about to sneeze on." Comparison + collision.</p></div></div>
+        <div class="technique"><div class="ic">3️⃣</div><div><h4>The Rule of Three</h4><p>Two to set the pattern, one to break it. "Liberty, equality, snacks."</p></div></div>
+        <div class="technique"><div class="ic">🌍</div><div><h4>Build Out the World</h4><p>Sustain a premise. Add detail. Let the audience live there with you for a beat.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== HUMOR AT WORK =================== -->
+<section class="work" id="work">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 06</span>
+      <h2>Humor at Work</h2>
+      <p>Practical, low-risk ways to inject levity into the daily mechanics of professional life.</p>
+    </div>
+    <div class="work-grid reveal-stagger reveal">
+      <div class="work-card">
+        <div class="label">Communication</div>
+        <h3>Write Like a Human</h3>
+        <ul>
+          <li>Drop callbacks into emails (reference an in-joke from earlier)</li>
+          <li>Spice up your sign-offs ("Stay caffeinated," "With moderate enthusiasm,")</li>
+          <li>Add a P.S. — humans love a P.S.</li>
+          <li>Make your out-of-office reply a tiny piece of theater</li>
+        </ul>
+      </div>
+      <div class="work-card">
+        <div class="label">Difficult Moments</div>
+        <h3>Levity Under Pressure</h3>
+        <ul>
+          <li>Saying hard things with warmth, not flippancy</li>
+          <li>Acknowledging your own mistakes openly and with humor</li>
+          <li>Giving tough feedback wrapped in care</li>
+          <li>Persuading without pushing — humor lowers defenses</li>
+        </ul>
+      </div>
+      <div class="work-card">
+        <div class="label">Team Rituals</div>
+        <h3>Break the Ice</h3>
+        <ul>
+          <li>Icebreakers people actually want to participate in</li>
+          <li>Tone-setters at the top of meetings</li>
+          <li>Cold opens that signal "this won't be a death march"</li>
+          <li>"Bad idea" brainstorms that unlock real ones</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== LEADING WITH HUMOR =================== -->
+<section class="leading" id="leading">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 07</span>
+      <h2>Leading With Humor</h2>
+      <p>Trust is the currency of leadership. Humor is one of the fastest ways to mint it.</p>
+    </div>
+
+    <div class="lead-grid">
+      <div class="reveal">
+        <div class="crisis-stat">
+          <div class="big" data-count="58" data-suffix="%">0%</div>
+          <p>of employees report trusting a complete stranger more than their own boss. The trust gap is real.</p>
+        </div>
+        <div class="trust-stats">
+          <div class="trust-stat"><span class="n" data-count="32" data-suffix="x">0x</span><span>more likely to take beneficial risks in high-trust orgs</span></div>
+          <div class="trust-stat"><span class="n" data-count="11" data-suffix="x">0x</span><span>more innovative than low-trust counterparts</span></div>
+        </div>
+
+        <div class="ladder">
+          <h4>The Ladder of Self-Deprecation</h4>
+          <p style="opacity:0.75; font-size:0.9rem; margin-bottom: 14px;">As status rises, lean more on self-deprecation. Never punch down — only punch up or in.</p>
+          <div class="rung"><span class="level">CEO</span><div class="bar"><div class="bar-fill" data-pct="95"></div></div><span class="pct">95%</span></div>
+          <div class="rung"><span class="level">VP</span><div class="bar"><div class="bar-fill" data-pct="80"></div></div><span class="pct">80%</span></div>
+          <div class="rung"><span class="level">Manager</span><div class="bar"><div class="bar-fill" data-pct="55"></div></div><span class="pct">55%</span></div>
+          <div class="rung"><span class="level">IC</span><div class="bar"><div class="bar-fill" data-pct="30"></div></div><span class="pct">30%</span></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="color: white;">Four Leadership Principles</h3>
+        <ul class="principles-list">
+          <li><strong>Humanize Yourself</strong>Show the person behind the title — your hobbies, your weird snacks, your messy tabs.</li>
+          <li><strong>Self-Deprecate Wisely</strong>Punch up or in, never down. Mock your power, your role, your blunders — never others'.</li>
+          <li><strong>Balance Gravity &amp; Levity</strong>The strongest leaders carry both. Gravity earns respect; levity earns affection.</li>
+          <li><strong>Own Mistakes Openly</strong>"Well, I just learned that one the expensive way" beats a defensive memo every time.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CULTURE OF LEVITY =================== -->
+<section class="culture" id="culture">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 08</span>
+      <h2>Building a Culture of Levity</h2>
+      <p>Spot the people who already carry the spark — then build the systems that fan the flame.</p>
+    </div>
+
+    <div class="archetypes reveal-stagger reveal">
+      <div class="arche">
+        <span class="emoji">🌪️</span>
+        <h3>The Instigators</h3>
+        <p>Rabble-rousers who challenge a too-rigid culture. The Johnny Damon types who walk into a buttoned-up clubhouse and start a beard-growing contest. Disruptors of the staid.</p>
+      </div>
+      <div class="arche">
+        <span class="emoji">⭐</span>
+        <h3>Culture Carriers</h3>
+        <p>Rising stars whose humor is openly part of their professional brand. They model that levity and excellence are compatible — even mutually reinforcing.</p>
+      </div>
+      <div class="arche">
+        <span class="emoji">💎</span>
+        <h3>Hidden Gems</h3>
+        <p>Quiet high performers with unexpected wit. Give them a small stage — an offsite skit, a Slack channel — and watch the whole team light up.</p>
+      </div>
+    </div>
+
+    <div class="institutional reveal">
+      <h3>Four Ways to Institutionalize Levity</h3>
+      <div class="inst-grid">
+        <div class="inst">
+          <h4>Honor the Peak-End Rule</h4>
+          <p>People remember the peaks and the endings of an experience — not the average. Engineer great peaks. Engineer better endings.</p>
+        </div>
+        <div class="inst">
+          <h4>Turn Accidents Into Folklore</h4>
+          <p>The blooper from last year's all-hands? Make it a recurring callback. Mishaps become rituals. Rituals become culture.</p>
+        </div>
+        <div class="inst">
+          <h4>Let Space Speak</h4>
+          <p>Walls, mugs, signs, Slack emoji — the physical and digital environment is constantly broadcasting "what we are." Make sure it's broadcasting humanity.</p>
+        </div>
+        <div class="inst">
+          <h4>Adopt "Yes, And"</h4>
+          <p>The improv mantra: accept what's offered, build on it. It transforms meetings from tug-of-war into something generative.</p>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="pull-quote reveal">
+      Fun is not a top-down thing.
+      <span class="who">— Ed Catmull, co-founder, Pixar</span>
+    </blockquote>
+  </div>
+</section>
+
+<!-- =================== GRAY AREAS =================== -->
+<section class="gray" id="gray">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 09</span>
+      <h2>Navigating the Gray Areas</h2>
+      <p>Three ingredients live inside every joke — and the ratio is what separates a laugh from a lawsuit.</p>
+    </div>
+
+    <div class="tpd reveal-stagger reveal">
+      <div class="tpd-card">
+        <div class="letter">T</div>
+        <h4>Truth</h4>
+        <p>What the audience recognizes — the universal "yes, that."</p>
+      </div>
+      <div class="tpd-card">
+        <div class="letter">P</div>
+        <h4>Pain</h4>
+        <p>Discomfort, taboo, friction — the source of the spark.</p>
+      </div>
+      <div class="tpd-card">
+        <div class="letter">D</div>
+        <h4>Distance</h4>
+        <p>Time, geography, identity — how close the subject sits to the audience.</p>
+      </div>
+    </div>
+
+    <div class="lifecycle reveal">
+      <h3>The Humor Fail Lifecycle</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <h4>Recognize</h4>
+          <p>Real laughter rolls; polite laughter clips. Status inflates laughter — the more powerful you are, the more pity-laughs you'll get. Read past them.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <h4>Diagnose</h4>
+          <p>Was it a misread room? A punch-down? Wrong medium (Slack vs. in-person)? A context switch nobody followed? Name the specific failure.</p>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <h4>Make It Right</h4>
+          <p>A sincere apology + visible action. As Bagdonas says: "Get out the power washer." Don't sweep it under the rug — clean it up in public.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning reveal">
+      <div class="icon">⚠️</div>
+      <div>
+        <h4>The One Inviolable Rule</h4>
+        <p>Never make another person's identity the prop, the plot point, or the punch line. Punch up at power. Punch in at yourself. Never punch down.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== SECRET WEAPON IN LIFE =================== -->
+<section class="secret" id="secret">
+  <div class="container">
+    <div class="section-title reveal">
+      <span class="eyebrow">Section 10</span>
+      <h2>Humor as a Secret Weapon in Life</h2>
+      <p>Hospice nurse Bronnie Ware named the five regrets of the dying. Humor speaks to every one of them.</p>
+    </div>
+
+    <div class="regrets reveal-stagger reveal">
+      <div class="regret">
+        <span class="emoji">🦁</span>
+        <h4>Boldness</h4>
+        <p class="wish">"I wish I had lived more fearlessly."</p>
+        <p class="hum">Humor is permission to take the risk, drop the script, jump in.</p>
+        <span class="quote">"I'd rather regret the things I've done than regret the things I haven't done." — Lucille Ball</span>
+      </div>
+      <div class="regret">
+        <span class="emoji">🌿</span>
+        <h4>Authenticity</h4>
+        <p class="wish">"I wish I'd lived true to myself."</p>
+        <p class="hum">Your sense of humor is a fingerprint. Sharing it is sharing you.</p>
+        <span class="quote">"Do your thing, and don't care if they like it." — Tina Fey</span>
+      </div>
+      <div class="regret">
+        <span class="emoji">🎯</span>
+        <h4>Presence</h4>
+        <p class="wish">"I wish I'd appreciated the moment more."</p>
+        <p class="hum">Laughter only exists in the now. It pulls you back into the room.</p>
+        <span class="quote">"The more relaxed you are, the better you are at everything." — Bill Murray</span>
+      </div>
+      <div class="regret">
+        <span class="emoji">☀️</span>
+        <h4>Joy</h4>
+        <p class="wish">"I wish I had laughed more."</p>
+        <p class="hum">Joy isn't an accident that happens to you. It's a daily decision.</p>
+        <span class="quote">"Find out who you are and do it on purpose." — Ellen DeGeneres-style sentiment, attributed widely</span>
+      </div>
+      <div class="regret">
+        <span class="emoji">❤️</span>
+        <h4>Love</h4>
+        <p class="wish">"I wish I had said 'I love you' more."</p>
+        <p class="hum">Where there is laughter, love trails close behind. Both deserve to be spoken.</p>
+        <span class="quote">"Falling in love is the great delusion that makes you happy." — Stephen Colbert (paraphrased)</span>
+      </div>
+    </div>
+
+    <p class="closing reveal">
+      Look for the sparks of levity in the nooks and crannies of everyday life.<br />
+      Then fan them into flames.
+    </p>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h3>Humor, Seriously</h3>
+        <p>by Jennifer Aaker &amp; Naomi Bagdonas</p>
+        <span class="stamp">Taught at Stanford GSB</span>
+      </div>
+      <div class="balance">
+        <div class="b"><div class="lbl lev">Levity</div><div class="desc">play · warmth</div></div>
+        <div class="eq">+</div>
+        <div class="b"><div class="lbl gra">Gravity</div><div class="desc">depth · purpose</div></div>
+        <div class="eq">=</div>
+        <div class="b"><div class="lbl" style="color: var(--primary);">Balance</div><div class="desc">a life well lived</div></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      This site is an educational companion that summarizes and paraphrases concepts from <em>Humor, Seriously</em> (2021) by Jennifer Aaker &amp; Naomi Bagdonas. All credit for the underlying ideas belongs to the authors.
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   PROGRESS BAR
+   ========================================================== */
+const progress = document.getElementById('progress');
+const nav = document.getElementById('nav');
+function onScroll() {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = Math.max(0, Math.min(100, (h.scrollTop / max) * 100));
+  progress.style.width = pct + '%';
+  if (h.scrollTop > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ==========================================================
+   MOBILE NAV
+   ========================================================== */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.addEventListener('click', e => {
+  if (e.target.tagName === 'A') navLinks.classList.remove('open');
+});
+
+/* ==========================================================
+   INTERSECTION OBSERVER REVEALS
+   ========================================================== */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      // trigger counters inside
+      e.target.querySelectorAll('[data-count]').forEach(animateCounter);
+      // trigger bar fills
+      e.target.querySelectorAll('.bar-fill').forEach(b => {
+        b.style.width = b.dataset.pct + '%';
+      });
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.18 });
+reveals.forEach(r => io.observe(r));
+
+/* ==========================================================
+   ANIMATED COUNTERS
+   ========================================================== */
+function animateCounter(el) {
+  if (el.dataset.done) return;
+  el.dataset.done = '1';
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1600;
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = target * eased;
+    el.textContent = (target % 1 === 0 ? Math.round(val) : val.toFixed(1)) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ==========================================================
+   HUMOR CLIFF SVG CHART
+   ========================================================== */
+(function drawCliff() {
+  const svg = document.getElementById('cliffChart');
+  const W = 600, H = 320, P = 40;
+  const data = [
+    { age: 15, pct: 83 }, { age: 23, pct: 80 }, { age: 30, pct: 75 },
+    { age: 40, pct: 70 }, { age: 50, pct: 67 }, { age: 65, pct: 65 }, { age: 75, pct: 68 }
+  ];
+  const xMin = 15, xMax = 75;
+  const yMin = 60, yMax = 90;
+  const x = a => P + ((a - xMin) / (xMax - xMin)) * (W - 2 * P);
+  const y = p => H - P - ((p - yMin) / (yMax - yMin)) * (H - 2 * P);
+
+  // Gridlines
+  let grid = '';
+  for (let p = 60; p <= 90; p += 10) {
+    grid += `<line x1="${P}" x2="${W - P}" y1="${y(p)}" y2="${y(p)}" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3 3"/>`;
+    grid += `<text x="${P - 8}" y="${y(p) + 4}" text-anchor="end" font-size="10" fill="#9CA3AF" font-family="Inter">${p}%</text>`;
+  }
+  for (let a = 15; a <= 75; a += 10) {
+    grid += `<text x="${x(a)}" y="${H - P + 18}" text-anchor="middle" font-size="10" fill="#9CA3AF" font-family="Inter">${a}</text>`;
+  }
+  grid += `<text x="${W / 2}" y="${H - 6}" text-anchor="middle" font-size="11" fill="#6B7280" font-family="Inter" font-weight="600">AGE</text>`;
+
+  // Path
+  const pathData = data.map((d, i) => `${i === 0 ? 'M' : 'L'} ${x(d.age)} ${y(d.pct)}`).join(' ');
+  // Area
+  const areaData = pathData + ` L ${x(data[data.length - 1].age)} ${H - P} L ${x(data[0].age)} ${H - P} Z`;
+
+  // Cliff highlight at age 23
+  const cliffX = x(23);
+  const cliffShade = `<rect x="${cliffX - 30}" y="${P}" width="60" height="${H - 2 * P}" fill="#E8634A" opacity="0.06"/>`;
+  const cliffLabel = `<text x="${cliffX}" y="${P + 14}" text-anchor="middle" font-size="11" fill="#E8634A" font-weight="700" font-family="Inter">THE CLIFF</text>`;
+
+  // Points
+  let points = '';
+  data.forEach(d => {
+    points += `<circle cx="${x(d.age)}" cy="${y(d.pct)}" r="5" fill="white" stroke="#E8634A" stroke-width="2.5"/>`;
+    points += `<text x="${x(d.age)}" y="${y(d.pct) - 12}" text-anchor="middle" font-size="10" fill="#1E2235" font-weight="700" font-family="Inter">${d.pct}%</text>`;
+  });
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#E8634A" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#E8634A" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    ${grid}
+    ${cliffShade}
+    <path d="${areaData}" fill="url(#g1)"/>
+    <path d="${pathData}" fill="none" stroke="#E8634A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+      stroke-dasharray="2000" stroke-dashoffset="2000">
+      <animate attributeName="stroke-dashoffset" from="2000" to="0" dur="2s" begin="0.4s" fill="freeze"/>
+    </path>
+    ${points}
+    ${cliffLabel}
+  `;
+})();
+
+/* ==========================================================
+   FLIP CARDS
+   ========================================================== */
+document.querySelectorAll('.flip-card').forEach(card => {
+  const toggle = () => card.classList.toggle('flipped');
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  });
+});
+
+/* ==========================================================
+   QUIZ
+   ========================================================== */
+const quizQuestions = [
+  { q: 'My humor is uplifting and wholesome; I\'m generous with laughter.', style: 'magnet' },
+  { q: 'While saying something humorous, I often smile or laugh while delivering it.', style: 'magnet' },
+  { q: 'Others would describe my humor as animated, sometimes slapstick.', style: 'magnet' },
+  { q: 'My humor is dark and edgy; you have to earn my laughter.', style: 'sniper' },
+  { q: 'When saying something humorous, I often deliver it with a straight face.', style: 'sniper' },
+  { q: 'Others would describe my humor as dry and sarcastic, an acquired taste.', style: 'sniper' },
+  { q: 'I enjoy being the center of attention when joking, and am confident riffing on the spot.', style: 'standup' },
+  { q: 'My humor is bold and irreverent; I\'m not afraid to ruffle feathers for a laugh.', style: 'standup' },
+  { q: 'I have a thick skin and don\'t mind being the butt of a joke.', style: 'standup' },
+  { q: 'I prefer to plan out humor before I say it and am not interested in the spotlight.', style: 'sweetheart' },
+  { q: 'My humor is understated; I carefully consider how it will land before speaking.', style: 'sweetheart' },
+  { q: 'I think roasts and teasing usually aren\'t worth the risk of hurt feelings.', style: 'sweetheart' }
+];
+const styleProfiles = {
+  magnet: {
+    name: 'The Magnet',
+    color: 'var(--primary)',
+    desc: 'You\'re warm, expressive, and affiliative — the energy in the room rises when you walk in. Your humor makes people feel safe and seen.',
+    tip: 'Tip: Your generosity is your superpower. Be intentional about giving others the spotlight too — the magnet attracts, but it can also outshine.'
+  },
+  sniper: {
+    name: 'The Sniper',
+    color: 'var(--teal)',
+    desc: 'Dry, deadpan, surgical. You let your one-liners do the work. People earn your laughter, which makes it valuable when you give it.',
+    tip: 'Tip: Audiences who don\'t know you can mistake your edge for coldness. Soften with the occasional smile or self-deprecating beat.'
+  },
+  standup: {
+    name: 'The Stand-Up',
+    color: 'var(--purple)',
+    desc: 'Bold, irreverent, riff-ready. You\'re unafraid to go edgy and you\'re comfortable in the spotlight. Your humor moves the room.',
+    tip: 'Tip: With great power comes great proximity to the line. Read the room twice, especially across cultures and seniority levels.'
+  },
+  sweetheart: {
+    name: 'The Sweetheart',
+    color: 'var(--secondary)',
+    desc: 'Earnest, considered, understated. You think before you joke and your sensitivity to landing makes your humor land cleanly when it does.',
+    tip: 'Tip: Don\'t mistake your style for not being funny. Plan for moments. Some of the best humor is quietly perfect, not loud.'
+  }
+};
+
+const form = document.getElementById('quizForm');
+quizQuestions.forEach((item, idx) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'q';
+  wrap.innerHTML = `
+    <div class="q-text">${idx + 1}. ${item.q}</div>
+    <div class="scale" data-idx="${idx}">
+      ${[1,2,3,4,5].map(n =>
+        `<label data-val="${n}"><input type="radio" name="q${idx}" value="${n}"><span>${n}</span></label>`
+      ).join('')}
+    </div>
+    <div class="scale-meta"><span>Not me</span><span>Very me</span></div>
+  `;
+  form.appendChild(wrap);
+});
+// Click handling for the custom labels
+form.addEventListener('click', e => {
+  const label = e.target.closest('label');
+  if (!label) return;
+  const scale = label.parentElement;
+  scale.querySelectorAll('label').forEach(l => l.classList.remove('checked'));
+  label.classList.add('checked');
+  const input = label.querySelector('input');
+  if (input) input.checked = true;
+});
+
+document.getElementById('quizSubmit').addEventListener('click', () => {
+  const scores = { magnet: 0, sniper: 0, standup: 0, sweetheart: 0 };
+  let answered = 0;
+  quizQuestions.forEach((item, idx) => {
+    const sel = form.querySelector(`input[name="q${idx}"]:checked`);
+    if (sel) { scores[item.style] += parseInt(sel.value, 10); answered++; }
+  });
+  const result = document.getElementById('quizResult');
+  if (answered < 8) {
+    result.innerHTML = `<h4>Almost there!</h4><p>Please answer at least 8 questions for a meaningful result. (You answered ${answered}.)</p>`;
+    result.classList.add('show');
+    return;
+  }
+  // Pick top style
+  const top = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const [primary, primaryScore] = top[0];
+  const [secondary, secondaryScore] = top[1];
+  const p = styleProfiles[primary];
+  const s = styleProfiles[secondary];
+  result.innerHTML = `
+    <div style="font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.6;">Your Primary Style</div>
+    <h4 style="color: ${p.color};">${p.name}</h4>
+    <p>${p.desc}</p>
+    <p class="result-style"><strong style="color: var(--secondary);">${p.tip}</strong></p>
+    <div style="margin-top:18px; padding-top:18px; border-top: 1px solid rgba(255,255,255,0.15); font-size:0.9rem; opacity:0.8;">
+      Your secondary style is <strong style="color: ${s.color}">${s.name}</strong> — most of us are blends. Lean into your primary, borrow from your secondary, and stretch into the others when the moment calls for it.
+    </div>
+  `;
+  result.classList.add('show');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Psychology Book — Big Ideas, Simply Explained</title>
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5efe4;
+    --paper-2: #ebe2d1;
+    --accent: #b8341b;
+    --accent-2: #c47a2c;
+    --muted: #6b5d4f;
+    --line: #2a201a;
+    --shadow: rgba(26, 20, 16, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAVIGATION ---------- */
+  nav.topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(245, 239, 228, 0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 1000;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav.topbar .brand {
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+  nav.topbar ul {
+    display: flex;
+    gap: 1.4rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  nav.topbar a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  nav.topbar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(196, 122, 44, 0.18) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(184, 52, 27, 0.15) 0%, transparent 40%),
+      linear-gradient(135deg, #f5efe4 0%, #e8dec9 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(42, 32, 26, 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+  }
+  header.hero .eyebrow {
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    z-index: 1;
+  }
+  header.hero h1 {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    z-index: 1;
+  }
+  header.hero h1 .accent { color: var(--accent); display: block; }
+  header.hero .tagline {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 3rem;
+    z-index: 1;
+  }
+  header.hero .quote-strip {
+    z-index: 1;
+    max-width: 800px;
+    padding: 2rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 3rem;
+  }
+  header.hero .quote-strip p {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  header.hero .quote-strip cite {
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  header.hero .scroll-hint {
+    z-index: 1;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  section .section-intro {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+  section .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    border: 1px solid var(--accent);
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+  }
+  section h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  section .lede {
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ---------- INTRO PROSE ---------- */
+  .intro-prose {
+    background: var(--paper-2);
+    padding: 5rem 2rem;
+    margin-top: -2rem;
+  }
+  .intro-prose .inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .intro-prose p {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+  }
+  .intro-prose .first::first-letter {
+    font-size: 5rem;
+    float: left;
+    line-height: 0.9;
+    padding: 0.3rem 0.5rem 0 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .intro-prose blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* ---------- MOVEMENT CARDS ---------- */
+  .movements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .movement {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    border-left: 4px solid var(--accent);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .movement:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--shadow); }
+  .movement .num {
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    font-weight: bold;
+  }
+  .movement h3 {
+    font-size: 1.4rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .movement p { font-size: 0.95rem; color: var(--muted); }
+  .movement .year {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-wrap {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6rem 2rem;
+  }
+  .timeline-wrap .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .timeline-wrap h2 { color: var(--paper); }
+  .timeline-wrap .section-tag {
+    color: var(--accent-2);
+    border-color: var(--accent-2);
+  }
+  .timeline-wrap .lede { color: rgba(245, 239, 228, 0.7); }
+  .timeline {
+    position: relative;
+    margin-top: 4rem;
+    padding-left: 2rem;
+    border-left: 2px solid var(--accent-2);
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    padding-left: 1.5rem;
+  }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -2.7rem;
+    top: 0.4rem;
+    width: 14px;
+    height: 14px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 2px var(--accent-2);
+  }
+  .tl-item .yr {
+    font-size: 0.9rem;
+    color: var(--accent-2);
+    letter-spacing: 0.2em;
+    font-weight: bold;
+  }
+  .tl-item h4 {
+    font-size: 1.2rem;
+    margin: 0.3rem 0 0.5rem;
+  }
+  .tl-item p {
+    color: rgba(245, 239, 228, 0.7);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- THINKER CARDS ---------- */
+  .thinkers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .thinker {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    border-top: 4px solid var(--accent);
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .thinker:hover { transform: translateY(-4px); }
+  .thinker .dates {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .thinker h3 {
+    font-size: 1.5rem;
+    margin: 0.3rem 0;
+  }
+  .thinker .school {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .thinker .big-idea {
+    font-style: italic;
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+  .thinker .desc { font-size: 0.95rem; color: var(--muted); }
+
+  /* ---------- QUOTE GRID ---------- */
+  .quote-section {
+    background: linear-gradient(135deg, #e8dec9 0%, #d8c9ab 100%);
+    padding: 6rem 2rem;
+  }
+  .quote-section .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .qcard {
+    background: var(--paper);
+    padding: 2rem;
+    border-radius: 4px;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .qcard:hover { transform: scale(1.02); }
+  .qcard::before {
+    content: '"';
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    font-size: 6rem;
+    color: var(--accent);
+    font-family: Georgia, serif;
+    line-height: 1;
+    opacity: 0.3;
+  }
+  .qcard p {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .qcard cite {
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* ---------- DETAILED CONCEPT BLOCKS ---------- */
+  .concept-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin: 4rem 0;
+    align-items: start;
+  }
+  .concept-block.reverse { grid-template-columns: 1fr 1fr; }
+  .concept-block .visual {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .concept-block .visual.hierarchy {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  .concept-block .visual.hierarchy .tier {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 4px;
+    color: var(--paper);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+  .concept-block .visual.hierarchy .t1 { background: #b8341b; width: 40%; }
+  .concept-block .visual.hierarchy .t2 { background: #c47a2c; width: 55%; }
+  .concept-block .visual.hierarchy .t3 { background: #d4a04a; width: 70%; color: var(--ink); }
+  .concept-block .visual.hierarchy .t4 { background: #8a9b5e; width: 85%; }
+  .concept-block .visual.hierarchy .t5 { background: #4f7a8e; width: 100%; }
+  .concept-block h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .concept-block .attrib {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .concept-block p { margin-bottom: 1rem; }
+
+  /* ---------- EXPERIMENT BLOCKS ---------- */
+  .experiments {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .experiment {
+    background: var(--paper-2);
+    padding: 2rem;
+    border-radius: 4px;
+    border-top: 4px solid var(--ink);
+    position: relative;
+  }
+  .experiment .ticker {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .experiment h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .experiment .who {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .experiment p { font-size: 0.95rem; }
+  .experiment .finding {
+    background: var(--paper);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- CALLOUT ---------- */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 2rem;
+    text-align: center;
+    margin: 0;
+  }
+  .callout .inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .callout h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--paper);
+  }
+  .callout p { color: rgba(245, 239, 228, 0.85); font-size: 1.15rem; }
+
+  /* ---------- GLOSSARY ---------- */
+  .glossary-section {
+    background: var(--paper-2);
+    padding: 6rem 2rem;
+  }
+  .glossary-section .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .glossary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem 2rem;
+    margin-top: 3rem;
+  }
+  .term {
+    border-bottom: 1px solid rgba(42, 32, 26, 0.15);
+    padding-bottom: 1rem;
+  }
+  .term dt {
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+  .term dd {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+  }
+  footer .inner { max-width: 800px; margin: 0 auto; }
+  footer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  footer p {
+    color: rgba(245, 239, 228, 0.6);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  footer .meta {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 239, 228, 0.15);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 239, 228, 0.4);
+  }
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 768px) {
+    nav.topbar { padding: 0.7rem 1rem; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+    nav.topbar ul { gap: 0.8rem; font-size: 0.7rem; }
+    nav.topbar a { font-size: 0.7rem; }
+    section { padding: 4rem 1.25rem; }
+    .concept-block { grid-template-columns: 1fr; gap: 1.5rem; }
+    header.hero { padding-top: 8rem; }
+  }
+
+  /* ---------- ANIMATIONS ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .reveal-delay-1 { animation-delay: 0.15s; }
+  .reveal-delay-2 { animation-delay: 0.3s; }
+  .reveal-delay-3 { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">The Psychology Book</div>
+  <ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#roots">Roots</a></li>
+    <li><a href="#behaviorism">Behaviorism</a></li>
+    <li><a href="#psychotherapy">Psychotherapy</a></li>
+    <li><a href="#cognitive">Cognitive</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#developmental">Developmental</a></li>
+    <li><a href="#difference">Difference</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ul>
+</nav>
+
+<!-- ================== HERO ================== -->
+<header class="hero">
+  <div class="eyebrow reveal">Big Ideas · Simply Explained</div>
+  <h1 class="reveal reveal-delay-1">
+    The Psychology<br>
+    <span class="accent">Book</span>
+  </h1>
+  <p class="tagline reveal reveal-delay-2">
+    A journey through the minds that mapped the mind — from Galen's humors
+    to Freud's unconscious, from Pavlov's bells to Bandura's Bobo dolls.
+  </p>
+  <div class="quote-strip reveal reveal-delay-3">
+    <p>"We become ourselves through others."</p>
+    <cite>— Lev Vygotsky</cite>
+  </div>
+  <div class="scroll-hint">Scroll to begin ↓</div>
+</header>
+
+<!-- ================== INTRODUCTION ================== -->
+<section id="intro" class="intro-prose">
+  <div class="inner">
+    <span class="section-tag">Introduction</span>
+    <h2>What is psychology?</h2>
+    <p class="first">Among all the sciences, psychology is perhaps the most mysterious to the general public, and the most prone to misconceptions. For some, it conjures up images of people in white coats conducting laboratory experiments on rats. Others may imagine a man with a middle-European accent psychoanalyzing a patient on a couch.</p>
+    <p>The word comes from the ancient Greek <em>psyche</em>, meaning "soul" or "mind," and <em>logia</em>, "study" or "account." Today, it most accurately describes <strong>the science of mind and behavior</strong> — a bridge between philosophy and physiology that examines the mental processes underlying thought, speech, and action.</p>
+    <blockquote>
+      "Psychology has a long past, but only a short history." — Hermann Ebbinghaus
+    </blockquote>
+    <p>Though humans have wondered about the mind for millennia, psychology only became a scientific discipline in 1879, when Wilhelm Wundt opened the world's first experimental psychology laboratory in Leipzig. In barely 150 years, it has blossomed into one of the most diverse and influential of all sciences.</p>
+    <p>This book traces that blossoming through six great movements — each a different lens on what it means to think, feel, learn, and become.</p>
+
+    <div class="movements">
+      <div class="movement">
+        <div class="num">01</div>
+        <span class="year">pre–1879</span>
+        <h3>Philosophical Roots</h3>
+        <p>From the four humors to mind/body dualism — the centuries of wondering before psychology had a name.</p>
+      </div>
+      <div class="movement">
+        <div class="num">02</div>
+        <span class="year">1890s–1950s</span>
+        <h3>Behaviorism</h3>
+        <p>If the mind can't be seen, study what it does. Conditioning, learning, and the science of stimulus and response.</p>
+      </div>
+      <div class="movement">
+        <div class="num">03</div>
+        <span class="year">1900–present</span>
+        <h3>Psychotherapy</h3>
+        <p>Freud's unconscious, Jung's archetypes, Rogers' empathy — healing the wounds we cannot see.</p>
+      </div>
+      <div class="movement">
+        <div class="num">04</div>
+        <span class="year">1950s–present</span>
+        <h3>Cognitive Psychology</h3>
+        <p>The mind as information processor — memory, attention, perception, and the architecture of thought.</p>
+      </div>
+      <div class="movement">
+        <div class="num">05</div>
+        <span class="year">1930s–present</span>
+        <h3>Social Psychology</h3>
+        <p>How others shape us: conformity, obedience, prejudice, and the invisible pressures of being human together.</p>
+      </div>
+      <div class="movement">
+        <div class="num">06</div>
+        <span class="year">1930s–present</span>
+        <h3>Developmental Psychology</h3>
+        <p>From infant to adult — Piaget's stages, Bowlby's attachments, and the long becoming of a self.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== TIMELINE ================== -->
+<section class="timeline-wrap">
+  <div class="inner">
+    <div class="section-intro">
+      <span class="section-tag">A Brief History</span>
+      <h2>150 years of asking why</h2>
+      <p class="lede">From the first laboratory in Leipzig to the cognitive revolution of the 1960s, psychology has continually redefined what it means to be human.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="yr">c. 400 BCE</div><h4>Humorism</h4><p>Hippocrates suggests four bodily fluids determine temperament. Galen later names them: sanguine, choleric, phlegmatic, melancholic.</p></div>
+      <div class="tl-item"><div class="yr">1649</div><h4>Mind/Body Dualism</h4><p>Descartes publishes <em>The Passions of the Soul</em>, claiming that "there is a reasoning soul in this machine."</p></div>
+      <div class="tl-item"><div class="yr">1879</div><h4>The First Laboratory</h4><p>Wilhelm Wundt opens the world's first laboratory of experimental psychology at the University of Leipzig.</p></div>
+      <div class="tl-item"><div class="yr">1890</div><h4>Principles of Psychology</h4><p>William James publishes his landmark work introducing the "stream of consciousness."</p></div>
+      <div class="tl-item"><div class="yr">1900</div><h4>The Unconscious</h4><p>Sigmund Freud publishes <em>The Interpretation of Dreams</em>, founding psychoanalysis.</p></div>
+      <div class="tl-item"><div class="yr">1905</div><h4>Measuring Intelligence</h4><p>Alfred Binet and Théodore Simon develop the first intelligence test.</p></div>
+      <div class="tl-item"><div class="yr">1913</div><h4>The Behaviorist Manifesto</h4><p>John B. Watson declares psychology must abandon mental states and study only observable behavior.</p></div>
+      <div class="tl-item"><div class="yr">1927</div><h4>Classical Conditioning</h4><p>Ivan Pavlov publishes his experiments on dogs, demonstrating learned reflexes.</p></div>
+      <div class="tl-item"><div class="yr">1938</div><h4>Operant Conditioning</h4><p>B.F. Skinner demonstrates that behavior is shaped by its consequences.</p></div>
+      <div class="tl-item"><div class="yr">1943</div><h4>Hierarchy of Needs</h4><p>Abraham Maslow lays the groundwork for humanistic psychology.</p></div>
+      <div class="tl-item"><div class="yr">1956</div><h4>The Cognitive Revolution</h4><p>George Armitage Miller's "Magical Number Seven" launches modern cognitive psychology.</p></div>
+      <div class="tl-item"><div class="yr">1961</div><h4>Conformity & Obedience</h4><p>Solomon Asch and Stanley Milgram reveal the unsettling power of social pressure.</p></div>
+      <div class="tl-item"><div class="yr">1969</div><h4>Attachment Theory</h4><p>John Bowlby formalizes the science of early human bonds.</p></div>
+      <div class="tl-item"><div class="yr">1971</div><h4>Stanford Prison Experiment</h4><p>Philip Zimbardo shows how situation can override character.</p></div>
+      <div class="tl-item"><div class="yr">1990s+</div><h4>Positive Psychology</h4><p>Seligman, Csíkszentmihályi, and others ask not what makes us ill, but what makes us flourish.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== PHILOSOPHICAL ROOTS ================== -->
+<section id="roots">
+  <div class="section-intro">
+    <span class="section-tag">Part One</span>
+    <h2>Philosophical Roots</h2>
+    <p class="lede">Long before psychology had a name, philosophers wrestled with the same questions: What is the mind? Where does it live? Why do we feel what we feel?</p>
+  </div>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="dates">c. 129 — c. 201 CE</div>
+      <h3>Galen</h3>
+      <span class="school">Humorism</span>
+      <p class="big-idea">"The four temperaments of personality."</p>
+      <p class="desc">Building on Hippocrates, Galen proposed that an imbalance of bodily fluids — blood, phlegm, yellow bile, and black bile — produced the sanguine, phlegmatic, choleric, and melancholic temperaments. His doctrines dominated Western medicine for over 1,400 years.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1596 — 1650</div>
+      <h3>René Descartes</h3>
+      <span class="school">Dualism</span>
+      <p class="big-idea">"There is a reasoning soul in this machine."</p>
+      <p class="desc">Descartes split mind from body, locating the soul in the pineal gland, where it could direct "animal spirits" through the nerves. His dualism shaped centuries of thought about consciousness, free will, and the brain.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1756 — 1819</div>
+      <h3>Abbé Faria</h3>
+      <span class="school">Hypnosis</span>
+      <p class="big-idea">"Dormez!"</p>
+      <p class="desc">Where Mesmer used magnets, Faria revealed the truth: hypnosis is the power of suggestion alone. His "lucid sleep" became the foundation of modern hypnotism.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1813 — 1855</div>
+      <h3>Søren Kierkegaard</h3>
+      <span class="school">Existentialism</span>
+      <p class="big-idea">"Be that self which one truly is."</p>
+      <p class="desc">The Danish philosopher argued that despair arises when we deny our true self. His existentialism would later inspire psychologists like R.D. Laing, Rollo May, and Carl Rogers.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1822 — 1911</div>
+      <h3>Francis Galton</h3>
+      <span class="school">Bio-psychology</span>
+      <p class="big-idea">"Personality is composed of nature and nurture."</p>
+      <p class="desc">Darwin's cousin coined the famous dichotomy. He pioneered statistical methods, the first survey by questionnaire, and the controversial idea of eugenics — for which his legacy remains deeply contested.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1832 — 1920</div>
+      <h3>Wilhelm Wundt</h3>
+      <span class="school">Experimental Psychology</span>
+      <p class="big-idea">"The beginnings of the mental life date from the beginnings of life."</p>
+      <p class="desc">Founder of the first experimental psychology lab (Leipzig, 1879), Wundt insisted that consciousness — inner experience — was a proper object of scientific study, measurable through introspection and reaction time.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1842 — 1910</div>
+      <h3>William James</h3>
+      <span class="school">Functionalism</span>
+      <p class="big-idea">"We know the meaning of 'consciousness' so long as no one asks us to define it."</p>
+      <p class="desc">America's father of psychology described the mind as a "stream of consciousness" — fluid, personal, ever-changing. His pragmatic philosophy redirected the field from speculation to function.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1850 — 1909</div>
+      <h3>Hermann Ebbinghaus</h3>
+      <span class="school">Memory Studies</span>
+      <p class="big-idea">"24 hours after learning something, we forget two-thirds of it."</p>
+      <p class="desc">Using nonsense syllables and brutal self-experimentation, Ebbinghaus discovered the "forgetting curve" — and proved memory could be studied with the rigor of any natural science.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1857 — 1911</div>
+      <h3>Alfred Binet</h3>
+      <span class="school">Intelligence Theory</span>
+      <p class="big-idea">"The intelligence of an individual is not a fixed quantity."</p>
+      <p class="desc">Commissioned to identify children needing extra help in school, Binet built the first practical intelligence test — while warning that no single number could capture a person's mind.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== BEHAVIORISM ================== -->
+<section id="behaviorism" style="background: var(--paper-2);">
+  <div class="section-intro">
+    <span class="section-tag">Part Two</span>
+    <h2>Behaviorism</h2>
+    <p class="lede">If the mind cannot be observed, then psychology — the behaviorists declared — must study only what can be measured: behavior itself.</p>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Ivan Pavlov · 1849–1936</span>
+      <h3>The sight of tasty food makes a hungry man's mouth water.</h3>
+      <p>While studying digestion in dogs, the Russian physiologist Ivan Pavlov noticed something stranger than salivation: his dogs began drooling at the mere sound of their keeper's footsteps. He had stumbled onto <strong>classical conditioning</strong> — the ability to forge an automatic, learned response by pairing a neutral stimulus with a meaningful one.</p>
+      <p>Pavlov never thought of himself as a psychologist. But his bells, metronomes, and salivating dogs would launch the dominant school of American psychology for the next half century.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:3rem;margin-bottom:1rem;">🔔 + 🍖 → 💧</div>
+        <div style="font-style:italic;color:var(--muted);">Unconditioned stimulus + neutral stimulus<br>= conditioned response</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.2rem;font-weight:bold;margin-bottom:1rem;color:var(--accent);">THE PUZZLE BOX</div>
+        <div style="font-size:0.95rem;line-height:1.8;color:var(--muted);">A hungry cat trapped inside<br>→ flails, paws, scrambles<br>→ accidentally trips the latch<br>→ escapes & eats<br><br><strong style="color:var(--ink);">Each attempt: faster.</strong><br>Profitless acts stamped out.<br>Rewarded acts stamped in.</div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">Edward Thorndike · 1874–1949</span>
+      <h3>Profitless acts are stamped out.</h3>
+      <p>Working in a basement at Harvard with cats and "puzzle boxes," Thorndike formulated his <strong>Law of Effect</strong>: behaviors followed by satisfying outcomes are repeated; those followed by frustration die away. It was the first formal statement of an idea that would dominate learning theory for a century.</p>
+      <p>Thorndike's connectionism foreshadowed Skinner, his CAVD tests shaped intelligence measurement, and his rigorous experimental method helped pull psychology out of the armchair and into the laboratory.</p>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">John B. Watson · 1878–1958</span>
+      <h3>Anyone, regardless of their nature, can be trained to be anything.</h3>
+      <p>In 1913, Watson issued the "behaviorist manifesto," declaring that psychology must abandon the unobservable mind and concentrate solely on behavior. Seven years later, his ethically dubious "Little Albert" experiment conditioned an 11-month-old baby to fear a white rat — and, by extension, all furry things.</p>
+      <p>Watson's boast that he could train any healthy infant to become "doctor, lawyer, artist, merchant-chief, and yes, even beggar-man and thief" remains one of the most extreme statements of environmental determinism ever made.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;font-style:italic;color:var(--muted);">
+        "Give me a dozen healthy infants…<br>and I'll guarantee to take any one<br>at random and train him to become<br>any type of specialist I might select."
+        <div style="margin-top:1.5rem;font-style:normal;color:var(--ink);font-weight:bold;">— Watson, <em>Behaviorism</em> (1924)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.1rem;font-weight:bold;color:var(--accent);margin-bottom:1rem;">THE SKINNER BOX</div>
+        <div style="font-size:0.95rem;line-height:1.9;color:var(--muted);">Rat presses lever<br>→ food pellet drops<br>→ rat presses again<br><br>Positive reinforcement<br>shapes behavior over time —<br><strong style="color:var(--ink);">no preceding stimulus required.</strong></div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">B.F. Skinner · 1904–1990</span>
+      <h3>Behavior is shaped by positive and negative reinforcement.</h3>
+      <p>Where Pavlov saw stimulus → response, Skinner saw action → consequence. His <strong>operant conditioning</strong> argued that we learn not because something precedes our behavior, but because something follows it. Reward what you want repeated. Withhold reward for what you don't.</p>
+      <p>An inveterate "gadget man," Skinner invented teaching machines, pigeon-guided missiles, and even a temperature-controlled crib for his daughter — sparking decades of rumors. His "radical behaviorism" dismissed free will as illusion, declaring that all behavior is shaped by genetic and environmental history.</p>
+    </div>
+  </div>
+
+  <div class="experiments">
+    <div class="experiment">
+      <div class="ticker">Imprinting</div>
+      <h3>Konrad Lorenz & the Goslings</h3>
+      <div class="who">1903–1989 · Ethology</div>
+      <p>Lorenz discovered that newly hatched birds bond with the first moving object they see — even, famously, his own Wellington boots. Imprinting, he showed, happens only during a "critical period" and cannot be undone.</p>
+      <div class="finding">"Imprinting cannot be forgotten."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Latent Learning</div>
+      <h3>Edward Tolman & the Maze</h3>
+      <div class="who">1886–1959 · Cognitive Behaviorism</div>
+      <p>Tolman's rats learned the layout of mazes <em>before</em> any reward appeared, building "cognitive maps" they could deploy once food was on offer. Conditioning, he argued, was not the whole story.</p>
+      <div class="finding">"That great God-given maze which is our human world."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Desensitization</div>
+      <h3>Joseph Wolpe & War Neurosis</h3>
+      <div class="who">1915–1997 · Behavior Therapy</div>
+      <p>Treating WWII veterans, Wolpe found that talking through trauma wasn't working. He devised <strong>reciprocal inhibition</strong>: pair the feared image with deep relaxation, and the fear dissolves.</p>
+      <div class="finding">"Stop imagining the scene and relax."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== PSYCHOTHERAPY ================== -->
+<section id="psychotherapy">
+  <div class="section-intro">
+    <span class="section-tag">Part Three</span>
+    <h2>Psychotherapy</h2>
+    <p class="lede">If behaviorism studied the surface, psychotherapy plumbed the depths — the unconscious, the soul, the buried wound. From Freud's couch to Rogers' empathy, this is the long conversation between healer and human.</p>
+  </div>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="dates">1856 — 1939</div>
+      <h3>Sigmund Freud</h3>
+      <span class="school">Psychoanalysis</span>
+      <p class="big-idea">"The unconscious is the true psychical reality."</p>
+      <p class="desc">The Viennese neurologist gave us the unconscious, the id–ego–superego, dream analysis, repression, the talking cure, and a vocabulary the entire 20th century would speak. Whether you accept his theories or reject them, you cannot escape them.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1870 — 1937</div>
+      <h3>Alfred Adler</h3>
+      <span class="school">Individual Psychology</span>
+      <p class="big-idea">"The neurotic carries a feeling of inferiority with him constantly."</p>
+      <p class="desc">A founding member of Freud's circle who broke away, Adler argued that we are driven not by sex but by the universal childhood experience of feeling small — and the lifelong striving to overcome it.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1875 — 1961</div>
+      <h3>Carl Jung</h3>
+      <span class="school">Analytical Psychology</span>
+      <p class="big-idea">"The collective unconscious is made up of archetypes."</p>
+      <p class="desc">Jung saw beneath the personal unconscious a deeper layer — a shared inheritance of symbols, the Shadow, the Anima, the Wise Old Man — drawn from myths recurring across every culture.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1882 — 1960</div>
+      <h3>Melanie Klein</h3>
+      <span class="school">Object Relations</span>
+      <p class="big-idea">"The struggle between the life and death instincts persists throughout life."</p>
+      <p class="desc">A pioneer of child psychoanalysis, Klein revealed the dramatic emotional life of infants — already torn, she argued, between love and hate from the earliest months.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1885 — 1952</div>
+      <h3>Karen Horney</h3>
+      <span class="school">Neo-Freudian</span>
+      <p class="big-idea">"The tyranny of the shoulds."</p>
+      <p class="desc">Horney named the internalized voice that drives neurosis: <em>I should be perfect. I should be loved. I should never fail.</em> Therapy, she argued, must liberate us from these impossible demands.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1893 — 1970</div>
+      <h3>Fritz Perls</h3>
+      <span class="school">Gestalt Therapy</span>
+      <p class="big-idea">"Truth can be tolerated only if you discover it yourself."</p>
+      <p class="desc">Co-founder of Gestalt therapy, Perls emphasized present awareness, personal responsibility, and the dethroning of "shoulds." Reality, he insisted, is built moment by moment from our own perceptions.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1900 — 1980</div>
+      <h3>Erich Fromm</h3>
+      <span class="school">Humanistic Psychoanalysis</span>
+      <p class="big-idea">"Man's main task is to give birth to himself."</p>
+      <p class="desc">Drawing from Marx, Freud, and Zen alike, Fromm asked why humans fear freedom. His answer reshaped how we think about love, work, and the courage it takes to become oneself.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1902 — 1987</div>
+      <h3>Carl Rogers</h3>
+      <span class="school">Humanistic / Person-Centered</span>
+      <p class="big-idea">"The good life is a process, not a state of being."</p>
+      <p class="desc">Rogers replaced the all-knowing analyst with the empathic companion. His radical idea — that people, given <strong>unconditional positive regard</strong>, will heal themselves — transformed counseling forever.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1908 — 1970</div>
+      <h3>Abraham Maslow</h3>
+      <span class="school">Humanistic</span>
+      <p class="big-idea">"What a man can be, he must be."</p>
+      <p class="desc">Maslow's hierarchy of needs — from food and safety up to self-actualization and transcendence — refocused psychology on flourishing rather than illness, and inspired the entire humanistic movement.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1905 — 1997</div>
+      <h3>Viktor Frankl</h3>
+      <span class="school">Logotherapy</span>
+      <p class="big-idea">"Suffering ceases to be suffering at the moment it finds a meaning."</p>
+      <p class="desc">Survivor of Auschwitz, Frankl founded a therapy built on the unconquerable human freedom to choose meaning — even in the worst circumstances imaginable.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1913 — 2007</div>
+      <h3>Albert Ellis</h3>
+      <span class="school">REBT</span>
+      <p class="big-idea">"Rational beliefs create healthy emotional consequences."</p>
+      <p class="desc">Long before cognitive therapy had a name, Ellis was teaching patients to dispute their irrational beliefs. Events do not disturb us; our <em>interpretations</em> of them do.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1927 — 1989</div>
+      <h3>R.D. Laing</h3>
+      <span class="school">Anti-Psychiatry</span>
+      <p class="big-idea">"Madness need not be all breakdown. It may also be break-through."</p>
+      <p class="desc">Laing dared to listen to schizophrenic patients — and heard not nonsense but coded distress, a desperate communication from an impossible situation. His radical empathy transformed psychiatric care.</p>
+    </div>
+  </div>
+
+  <!-- Maslow Pyramid -->
+  <div class="concept-block" style="margin-top:5rem;">
+    <div>
+      <span class="attrib">Abraham Maslow · 1943</span>
+      <h3>The Hierarchy of Needs</h3>
+      <p>Maslow proposed that human motivation climbs a ladder. The bottom rungs — food, water, safety — must be secured before we can attend to belonging, esteem, or growth. At the summit lies <strong>self-actualization</strong>: becoming what one is uniquely meant to be.</p>
+      <p>Later in life, Maslow added a higher tier still: <strong>self-transcendence</strong> — devoting oneself to something beyond the self, whether other people, an ideal, or the universe entire.</p>
+      <p>Though contested by modern researchers, the pyramid endures because it captures something true: that human flourishing has structure, and that we cannot ask people to seek meaning before we have helped them eat.</p>
+    </div>
+    <div class="visual hierarchy">
+      <div class="tier t1">Self-Transcendence</div>
+      <div class="tier t2">Self-Actualization</div>
+      <div class="tier t3">Esteem & Recognition</div>
+      <div class="tier t4">Love & Belonging</div>
+      <div class="tier t5">Safety · Physiological</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CALLOUT QUOTES ================== -->
+<section class="quote-section">
+  <div class="inner">
+    <div class="section-intro">
+      <span class="section-tag">In Their Own Words</span>
+      <h2>Voices from the field</h2>
+    </div>
+    <div class="quotes">
+      <div class="qcard"><p>What we believe with all our hearts is not necessarily the truth.</p><cite>Elizabeth Loftus</cite></div>
+      <div class="qcard"><p>Insight may cause blindness.</p><cite>Paul Watzlawick</cite></div>
+      <div class="qcard"><p>Only good people get depressed.</p><cite>Dorothy Rowe</cite></div>
+      <div class="qcard"><p>People do what they are told to do.</p><cite>Stanley Milgram</cite></div>
+      <div class="qcard"><p>Turn on, tune in, drop out.</p><cite>Timothy Leary</cite></div>
+      <div class="qcard"><p>The unconscious is the discourse of the Other.</p><cite>Jacques Lacan</cite></div>
+      <div class="qcard"><p>Instinct is a dynamic pattern.</p><cite>Wolfgang Köhler</cite></div>
+      <div class="qcard"><p>A man with conviction is a hard man to change.</p><cite>Leon Festinger</cite></div>
+      <div class="qcard"><p>We can listen to only one voice at once.</p><cite>Donald Broadbent</cite></div>
+      <div class="qcard"><p>Time's arrow is bent into a loop.</p><cite>Endel Tulving</cite></div>
+      <div class="qcard"><p>You cannot understand a system until you try to change it.</p><cite>Kurt Lewin</cite></div>
+      <div class="qcard"><p>Our history does not determine our destiny.</p><cite>Boris Cyrulnik</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== COGNITIVE PSYCHOLOGY ================== -->
+<section id="cognitive">
+  <div class="section-intro">
+    <span class="section-tag">Part Four</span>
+    <h2>Cognitive Psychology</h2>
+    <p class="lede">The Calculating Brain. By the 1950s, computers gave psychologists a new metaphor: the mind as information processor. The "cognitive revolution" reopened doors behaviorism had nailed shut.</p>
+  </div>
+
+  <div class="experiments">
+    <div class="experiment">
+      <div class="ticker">Insight Learning</div>
+      <h3>Wolfgang Köhler & the Chimpanzees</h3>
+      <div class="who">1887–1967 · Gestalt</div>
+      <p>Watching apes solve problems on Tenerife, Köhler saw something behaviorism couldn't explain: the moment of <em>aha!</em> Pause. Survey. Insight. Then action. Animals could think — not just react.</p>
+      <div class="finding">"Instinct is a dynamic pattern."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Memory</div>
+      <h3>Bluma Zeigarnik & the Waiters</h3>
+      <div class="who">1901–1988 · Gestalt / Memory</div>
+      <p>Waiters could recall unpaid orders perfectly — and forgot them the moment the bill was settled. The <strong>Zeigarnik effect</strong>: interrupted tasks linger in memory; completed ones fade.</p>
+      <div class="finding">"Interruption greatly improves a task's chances of being remembered."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Cognitive Dissonance</div>
+      <h3>Leon Festinger & the Doomsday Cult</h3>
+      <div class="who">1919–1989 · Social Cognition</div>
+      <p>When prophecies failed and the world refused to end, true believers didn't abandon faith — they doubled down. Festinger showed how we twist reality to protect our convictions.</p>
+      <div class="finding">"A man with conviction is a hard man to change."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Working Memory</div>
+      <h3>George Armitage Miller & the Magical Seven</h3>
+      <div class="who">1920–2012 · Cognitive Psychology</div>
+      <p>The mind, Miller showed, can juggle about seven items at once — give or take two. To remember more, we must "chunk": group raw bits into meaningful units.</p>
+      <div class="finding">"The magical number 7, plus or minus 2."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Cognitive Therapy</div>
+      <h3>Aaron Beck & the Surface of Thought</h3>
+      <div class="who">1921–2021 · CBT</div>
+      <p>Where Freud probed the deep unconscious, Beck listened to the automatic, surface-level thoughts depressed patients reported — and showed that changing those thoughts could change everything.</p>
+      <div class="finding">"There's more to the surface than meets the eye."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Selective Attention</div>
+      <h3>Donald Broadbent & the Air Traffic Controllers</h3>
+      <div class="who">1926–1993 · Attention</div>
+      <p>Why can pilots only handle one radio voice at a time? Broadbent's filter model gave us the first scientific theory of attention — and helped redesign cockpits, control rooms, and modern life.</p>
+      <div class="finding">"We can listen to only one voice at once."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Memory Reliability</div>
+      <h3>Elizabeth Loftus & the Lost in the Mall</h3>
+      <div class="who">1944– · Memory</div>
+      <p>Loftus implanted entirely false childhood memories — of being lost in a shopping mall — in adult participants. Her work overturned decades of legal and therapeutic assumptions about "recovered memory."</p>
+      <div class="finding">"What we believe with all our hearts is not necessarily the truth."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Positive Psychology</div>
+      <h3>Mihály Csíkszentmihályi & Flow</h3>
+      <div class="who">1934–2021 · Positive Psychology</div>
+      <p>When skill meets challenge, time disappears and self dissolves. Csíkszentmihályi called this state <strong>flow</strong> — the closest most of us come to everyday ecstasy.</p>
+      <div class="finding">"Ecstasy is a step into an alternative reality."</div>
+    </div>
+    <div class="experiment">
+      <div class="ticker">Memory's Failings</div>
+      <h3>Daniel Schacter & the Seven Sins</h3>
+      <div class="who">1952– · Cognitive Neuroscience</div>
+      <p>Transience. Absent-mindedness. Blocking. Misattribution. Suggestibility. Bias. Persistence. Schacter's seven "sins" aren't flaws — they're the necessary costs of a memory system that mostly works brilliantly.</p>
+      <div class="finding">"The seven sins of memory."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== SOCIAL PSYCHOLOGY ================== -->
+<section id="social" style="background:var(--paper-2);">
+  <div class="section-intro">
+    <span class="section-tag">Part Five</span>
+    <h2>Social Psychology</h2>
+    <p class="lede">Being in a world of others. The most disturbing — and important — findings in psychology have come from studying not what individuals do alone, but what they do together.</p>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Solomon Asch · 1951</span>
+      <h3>How strong is the urge toward social conformity?</h3>
+      <p>Asch showed simple line-matching tasks to groups in which everyone but one person was a confederate giving deliberately wrong answers. Despite the obvious correct response, <strong>75% of participants conformed to the group at least once</strong>, and 32% conformed consistently.</p>
+      <p>Most knew they were wrong. They went along anyway — to fit in, to not stand out, to not be foolish. The line experiment revealed the quiet, daily, near-universal capitulation of perception to peer pressure.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="display:flex;gap:1.5rem;justify-content:center;align-items:flex-end;margin-bottom:1.5rem;">
+          <div style="width:6px;height:120px;background:var(--ink);"></div>
+          <div style="display:flex;gap:1rem;align-items:flex-end;">
+            <div style="width:6px;height:80px;background:var(--ink);"></div>
+            <div style="width:6px;height:120px;background:var(--ink);"></div>
+            <div style="width:6px;height:100px;background:var(--ink);"></div>
+          </div>
+        </div>
+        <div style="font-style:italic;color:var(--muted);font-size:0.9rem;">Which matches the reference line?<br>Everyone in the room says the wrong one.<br>What do you say?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:3rem;color:var(--accent);margin-bottom:0.5rem;">65%</div>
+        <div style="font-size:1rem;color:var(--ink);font-weight:bold;margin-bottom:1rem;">of participants administered<br>the maximum 450-volt shock</div>
+        <div style="font-size:0.9rem;color:var(--muted);font-style:italic;">Psychiatrists predicted fewer than 0.1%.</div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">Stanley Milgram · 1961</span>
+      <h3>People do what they are told to do.</h3>
+      <p>In a Yale basement, ordinary people — postal workers, salesmen, teachers — pressed switches they believed were delivering excruciating, perhaps lethal shocks to a stranger, because a man in a lab coat told them to continue.</p>
+      <p>Milgram had set out to test whether something about <em>Germans</em> had enabled the Holocaust. What he found was something more terrifying: it wasn't about Germans. The capacity to obey unspeakable orders is in nearly all of us, waiting for the right authority.</p>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Philip Zimbardo · 1971</span>
+      <h3>What happens when you put good people in an evil place?</h3>
+      <p>Zimbardo recruited 24 healthy, mentally-screened college students, flipped a coin to make half "guards" and half "prisoners," and locked them in a mock prison in the Stanford psychology basement.</p>
+      <p>The experiment was scheduled to run two weeks. It was shut down after six days. Guards were systematically degrading prisoners. Prisoners were breaking down. Even Zimbardo — playing the "warden" — had lost moral perspective.</p>
+      <p>The lesson: it isn't the individual disposition that produces cruelty. It is the situation. And we are all far more susceptible to situations than we like to believe.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.1rem;font-weight:bold;color:var(--accent);margin-bottom:1rem;">STANFORD, AUGUST 1971</div>
+        <div style="font-size:0.95rem;color:var(--muted);line-height:1.9;">
+          <div>Day 1 · Awkward role-play</div>
+          <div>Day 2 · Prisoner rebellion</div>
+          <div>Day 3 · Guards retaliate</div>
+          <div>Day 4 · First breakdown</div>
+          <div>Day 5 · Hooded prisoners</div>
+          <div style="color:var(--accent);font-weight:bold;margin-top:0.5rem;">Day 6 · Experiment terminated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="thinkers" style="margin-top:4rem;">
+    <div class="thinker">
+      <div class="dates">1890 — 1947</div>
+      <h3>Kurt Lewin</h3>
+      <span class="school">Field Theory</span>
+      <p class="big-idea">"You cannot understand a system until you try to change it."</p>
+      <p class="desc">The father of social psychology mapped behavior as the product of an entire "life space" — a force field of person and environment in dynamic interaction.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1922 — 1982</div>
+      <h3>Erving Goffman</h3>
+      <span class="school">Dramaturgy</span>
+      <p class="big-idea">"Life is a dramatically enacted thing."</p>
+      <p class="desc">Goffman saw all of social life as theater: front stage and back stage, costumes and scripts, the careful management of impression.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1923 — 2008</div>
+      <h3>Robert Zajonc</h3>
+      <span class="school">Familiarity</span>
+      <p class="big-idea">"The more you see it, the more you like it."</p>
+      <p class="desc">The "mere exposure effect": we develop preference for things we've simply encountered before — even when we don't consciously remember encountering them.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1929 — </div>
+      <h3>Melvin Lerner</h3>
+      <span class="school">Just-World Hypothesis</span>
+      <p class="big-idea">"We believe people get what they deserve."</p>
+      <p class="desc">The terrifying corollary: we blame victims, not because they deserve it, but because we cannot bear the thought that misfortune might be random — and might come for us.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1932 — </div>
+      <h3>Elliot Aronson</h3>
+      <span class="school">Social Cognition</span>
+      <p class="big-idea">"People who do crazy things are not necessarily crazy."</p>
+      <p class="desc">Ordinary people can be moved by situational pressures to commit extraordinarily cruel acts — and afterward, will reshape their beliefs to justify what they have done.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1942 — 1989</div>
+      <h3>Ignacio Martín-Baró</h3>
+      <span class="school">Liberation Psychology</span>
+      <p class="big-idea">"Trauma must be understood in terms of the relationship between the individual and society."</p>
+      <p class="desc">Murdered by a Salvadoran death squad for his work, Martín-Baró insisted that psychology must address the suffering caused by injustice and oppression — not just heal individuals, but help liberate societies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== DEVELOPMENTAL ================== -->
+<section id="developmental">
+  <div class="section-intro">
+    <span class="section-tag">Part Six</span>
+    <h2>Developmental Psychology</h2>
+    <p class="lede">From infant to adult. How does a person come to be? Through stages, through attachments, through language, through play — through countless invisible negotiations with the world.</p>
+  </div>
+
+  <div class="concept-block">
+    <div>
+      <span class="attrib">Jean Piaget · 1896–1980</span>
+      <h3>The goal of education is to create men and women who are capable of doing new things.</h3>
+      <p>Piaget overturned the prevailing assumption that children were just small adults with less knowledge. They are, he argued, <em>qualitatively different thinkers</em>, progressing through distinct stages — sensorimotor, pre-operational, concrete operational, formal operational — each with its own logic.</p>
+      <p>Children build knowledge by acting on the world. They are not empty vessels to be filled but active scientists, constantly testing hypotheses. The role of the educator is not to lecture, but to set the stage.</p>
+    </div>
+    <div class="visual">
+      <div style="text-align:center;width:100%;">
+        <div style="font-weight:bold;color:var(--accent);font-size:0.9rem;letter-spacing:0.2em;margin-bottom:1.5rem;">PIAGET'S STAGES</div>
+        <div style="text-align:left;font-size:0.92rem;line-height:1.9;color:var(--muted);">
+          <div><strong style="color:var(--ink);">0–2 yrs</strong> · Sensorimotor — learn through senses</div>
+          <div><strong style="color:var(--ink);">2–7 yrs</strong> · Pre-operational — symbols & language</div>
+          <div><strong style="color:var(--ink);">7–11 yrs</strong> · Concrete operational — logic with objects</div>
+          <div><strong style="color:var(--ink);">11+ yrs</strong> · Formal operational — abstract reasoning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="visual">
+      <div style="text-align:center;">
+        <div style="font-size:1.05rem;font-weight:bold;color:var(--accent);margin-bottom:1rem;">HARLOW'S MONKEYS, 1959</div>
+        <div style="font-size:0.95rem;line-height:1.9;color:var(--muted);">
+          Wire mother with milk · or ·<br>cloth mother with no food?<br><br>
+          <strong style="color:var(--ink);">The infants chose comfort.</strong><br>
+          Attachment, Harlow proved,<br>
+          is more than food.
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="attrib">John Bowlby, Harry Harlow & Mary Ainsworth</span>
+      <h3>Early emotional bonds are an integral part of human nature.</h3>
+      <p>Bowlby argued that infants are biologically programmed to form an attachment to a caregiver — a survival imperative as basic as feeding. Disrupted attachment in the first years, he warned, leaves wounds that may never fully heal.</p>
+      <p>Harlow's monkeys proved the point in stark terms: given a choice between a cold wire mother who provided milk and a soft cloth mother who did not, infants clung to comfort. Mary Ainsworth's "Strange Situation" studies later identified secure, avoidant, and resistant patterns of attachment that shape relationships across the lifespan.</p>
+    </div>
+  </div>
+
+  <div class="thinkers" style="margin-top:4rem;">
+    <div class="thinker">
+      <div class="dates">1896 — 1934</div>
+      <h3>Lev Vygotsky</h3>
+      <span class="school">Sociocultural Theory</span>
+      <p class="big-idea">"We become ourselves through others."</p>
+      <p class="desc">Where Piaget saw the lone child explorer, Vygotsky saw a child embedded in a culture, learning through interaction with parents, teachers, and peers. The "zone of proximal development" defines what a learner can do with help — and will soon do alone.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1902 — 1994</div>
+      <h3>Erik Erikson</h3>
+      <span class="school">Psychosocial Development</span>
+      <p class="big-idea">"Anything that grows has a ground plan."</p>
+      <p class="desc">Erikson mapped life as eight psychosocial stages, each with its own central conflict: trust vs. mistrust, intimacy vs. isolation, ego-integrity vs. despair. He coined the phrase "identity crisis."</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1925 — 2021</div>
+      <h3>Albert Bandura</h3>
+      <span class="school">Social Learning Theory</span>
+      <p class="big-idea">"Most human behavior is learned through modeling."</p>
+      <p class="desc">In the famous Bobo doll experiments, children who watched adults beat an inflatable clown went on to imitate the violence — and invent new forms of it. We learn, Bandura showed, by watching.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1927 — 1987</div>
+      <h3>Lawrence Kohlberg</h3>
+      <span class="school">Moral Development</span>
+      <p class="big-idea">"Morality develops in six stages."</p>
+      <p class="desc">From obeying to avoid punishment, through obeying for social approval, to acting on universal principles of justice — Kohlberg charted the long path from "won't get caught" to conscience.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1928 — </div>
+      <h3>Noam Chomsky</h3>
+      <span class="school">Nativism</span>
+      <p class="big-idea">"The language organ grows like any other body organ."</p>
+      <p class="desc">Chomsky's review of Skinner's <em>Verbal Behavior</em> helped end behaviorism's reign. Language, he argued, cannot be learned by reinforcement alone — children must come pre-wired with the grammar of all possible human languages.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1958 — </div>
+      <h3>Simon Baron-Cohen</h3>
+      <span class="school">Theory of Mind</span>
+      <p class="big-idea">"Autism is an extreme form of the male brain."</p>
+      <p class="desc">Baron-Cohen distinguishes "empathizing" brains, attuned to others' feelings, from "systematizing" brains, attuned to how things work. Autism, he proposes, sits at the far systematizing end of the spectrum.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== DIFFERENCE ================== -->
+<section id="difference" style="background:var(--paper-2);">
+  <div class="section-intro">
+    <span class="section-tag">Part Seven</span>
+    <h2>Psychology of Difference</h2>
+    <p class="lede">Personality and Intelligence. What makes us individuals? Why are no two minds the same? And how — carefully, with humility — might we begin to measure such things?</p>
+  </div>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="dates">1897 — 1967</div>
+      <h3>Gordon Allport</h3>
+      <span class="school">Trait Theory</span>
+      <p class="big-idea">"Did Robinson Crusoe lack personality traits before the advent of Friday?"</p>
+      <p class="desc">Allport pioneered the systematic study of personality, identifying cardinal, central, and secondary traits. Personality, he argued, isn't a costume we wear — it is shaped in and revealed through relationships.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1897 — 1987</div>
+      <h3>J.P. Guilford</h3>
+      <span class="school">Creativity</span>
+      <p class="big-idea">"Name as many uses as you can think of for a toothpick."</p>
+      <p class="desc">Guilford distinguished <strong>convergent thinking</strong> (one right answer) from <strong>divergent thinking</strong> (many possibilities). Standard IQ tests, he argued, captured only the first — and missed the wellspring of creativity entirely.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1905 — 1998</div>
+      <h3>Raymond Cattell</h3>
+      <span class="school">Intelligence Theory</span>
+      <p class="big-idea">"General intelligence consists of both fluid and crystallized intelligence."</p>
+      <p class="desc">Fluid intelligence — raw reasoning — peaks in young adulthood and declines. Crystallized intelligence — accumulated knowledge — keeps growing for a lifetime. Cattell helped psychology measure them apart.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1916 — 1997</div>
+      <h3>Hans J. Eysenck</h3>
+      <span class="school">Personality</span>
+      <p class="big-idea">"There is an association between insanity and genius."</p>
+      <p class="desc">Eysenck mapped personality along three superfactors — Psychoticism, Extraversion, Neuroticism — and proposed that creative genius shares a key cognitive feature with psychosis: over-inclusive thinking.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1917 — 1998</div>
+      <h3>David C. McClelland</h3>
+      <span class="school">Need Theory</span>
+      <p class="big-idea">"Three key motivations drive performance."</p>
+      <p class="desc">Achievement. Power. Affiliation. McClelland argued these three unconscious drives — not IQ, not credentials — best predict whether a person will thrive in a given role.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1927 — </div>
+      <h3>Nico Frijda</h3>
+      <span class="school">Emotion Theory</span>
+      <p class="big-idea">"Emotion is an essentially unconscious process."</p>
+      <p class="desc">Emotions, Frijda showed, arise before we know it — preparing the body for action. Feelings come second: our conscious interpretation of what emotion has already done to us.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1930 — </div>
+      <h3>Walter Mischel</h3>
+      <span class="school">Person × Situation</span>
+      <p class="big-idea">"Behavior without environmental cues would be absurdly chaotic."</p>
+      <p class="desc">Mischel's "marshmallow test" — could a four-year-old resist one treat now for two later? — predicted achievement decades on. But he also showed that trait scores alone barely predict behavior. Context is everything.</p>
+    </div>
+    <div class="thinker">
+      <div class="dates">1932 — </div>
+      <h3>David Rosenhan</h3>
+      <span class="school">Antipsychiatry</span>
+      <p class="big-idea">"We cannot distinguish the sane from the insane in psychiatric hospitals."</p>
+      <p class="desc">Eight sane volunteers feigned a single symptom to gain admission to psychiatric hospitals. All were diagnosed; all stayed an average of 19 days; the diagnoses followed them out the door. Rosenhan exposed psychiatric labels as institutional artifacts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CALLOUT ================== -->
+<section class="callout">
+  <div class="inner">
+    <h2>Psychology has questioned deeply held beliefs, unearthed unsettling truths, and provided startling insights into the mysterious world of the human mind.</h2>
+    <p>— Adapted from the Introduction</p>
+  </div>
+</section>
+
+<!-- ================== GLOSSARY ================== -->
+<section id="glossary" class="glossary-section">
+  <div class="inner">
+    <div class="section-intro">
+      <span class="section-tag">Reference</span>
+      <h2>A short glossary</h2>
+      <p class="lede">Key terms drawn from across the book — the vocabulary of mind.</p>
+    </div>
+    <dl class="glossary">
+      <div class="term"><dt>Archetypes</dt><dd>Jung's universal symbolic patterns within the collective unconscious — the Mother, the Shadow, the Wise Old Man — that organize experience across cultures.</dd></div>
+      <div class="term"><dt>Attachment</dt><dd>The emotionally significant bond, especially between infant and caregiver, from which security and exploration both flow.</dd></div>
+      <div class="term"><dt>Behaviorism</dt><dd>The psychological approach that takes observable behavior — not the inner mind — as its only legitimate subject of study.</dd></div>
+      <div class="term"><dt>Classical Conditioning</dt><dd>Pavlovian learning: a neutral stimulus, paired with a meaningful one, comes to trigger the same response.</dd></div>
+      <div class="term"><dt>Cognitive Dissonance</dt><dd>The mental discomfort of holding inconsistent beliefs — and the lengths we go to resolve it.</dd></div>
+      <div class="term"><dt>Collective Unconscious</dt><dd>Jung's deepest layer of mind: shared, inherited symbols and patterns common to all humans.</dd></div>
+      <div class="term"><dt>Cognitive Therapy</dt><dd>Beck's evidence-based approach: change the thoughts, and the feelings often follow.</dd></div>
+      <div class="term"><dt>Ego / Id / Superego</dt><dd>Freud's three parts of the psyche: the rational mediator, the primal desires, and the moral judge.</dd></div>
+      <div class="term"><dt>Flow</dt><dd>Csíkszentmihályi's state of total absorption in an activity that perfectly balances skill and challenge.</dd></div>
+      <div class="term"><dt>Free Association</dt><dd>The psychoanalytic technique of speaking whatever comes to mind, in hopes of bypassing conscious censorship.</dd></div>
+      <div class="term"><dt>Gestalt</dt><dd>"The whole is greater than the sum of its parts." A school emphasizing organized perception and meaning.</dd></div>
+      <div class="term"><dt>Imprinting</dt><dd>Lorenz's term for the rapid, irreversible attachment formed by young animals to a parent figure during a critical period.</dd></div>
+      <div class="term"><dt>Intelligence Quotient (IQ)</dt><dd>A numeric measure of intelligence, originally derived by dividing mental age by chronological age.</dd></div>
+      <div class="term"><dt>Operant Conditioning</dt><dd>Skinner's principle: behavior is shaped by its consequences. Reward what you want; ignore what you don't.</dd></div>
+      <div class="term"><dt>Personality Trait</dt><dd>A stable disposition to think, feel, and act in characteristic ways across situations.</dd></div>
+      <div class="term"><dt>Psychoanalysis</dt><dd>Freud's set of theories and clinical methods for exploring unconscious processes through dialogue.</dd></div>
+      <div class="term"><dt>Repression</dt><dd>The unconscious banishment of unbearable thoughts or memories from awareness — a Freudian defense mechanism.</dd></div>
+      <div class="term"><dt>Schema</dt><dd>A mental framework that organizes knowledge and guides expectation, central to Piaget's theory of cognitive development.</dd></div>
+      <div class="term"><dt>Self-Actualization</dt><dd>Maslow's summit: the realization of one's fullest unique potential as a human being.</dd></div>
+      <div class="term"><dt>Stream of Consciousness</dt><dd>William James's image of the mind as a flowing, ever-changing river of thought, sensation, and memory.</dd></div>
+      <div class="term"><dt>Unconditional Positive Regard</dt><dd>Rogers's therapeutic stance: accept the person fully, without conditions, simply because they are human.</dd></div>
+      <div class="term"><dt>Unconscious</dt><dd>The vast part of the psyche operating beneath awareness — repository, in Freud's view, of repressed wishes; in Jung's, of inherited archetypes.</dd></div>
+      <div class="term"><dt>Zeigarnik Effect</dt><dd>The tendency to remember interrupted tasks better than completed ones.</dd></div>
+      <div class="term"><dt>Zone of Proximal Development</dt><dd>Vygotsky's space between what a learner can do alone and what they can do with help — where teaching matters most.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
+<footer>
+  <div class="inner">
+    <h3>To examine ourselves is to begin to understand</h3>
+    <p>"Among all the sciences, psychology is perhaps the most mysterious to the general public…</p>
+    <p>and yet it informs every decision we make, every relationship we form, every word we speak."</p>
+    <div class="meta">
+      An educational tribute to <em>The Psychology Book</em> · Big Ideas, Simply Explained<br>
+      Featuring the work of more than fifty thinkers from Galen to Baron-Cohen.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll active-nav highlighting
+  const navLinks = document.querySelectorAll('nav.topbar a');
+  const sections = document.querySelectorAll('section[id], header.hero');
+
+  function onScroll() {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 120;
+      if (window.scrollY >= top) current = sec.id || '';
+    });
+    navLinks.forEach(link => {
+      link.style.color = '';
+      link.style.borderBottomColor = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--accent)';
+        link.style.borderBottomColor = 'var(--accent)';
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Reveal on intersection
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.thinker, .experiment, .qcard, .movement, .tl-item, .concept-block, .term').forEach(el => {
+    el.style.opacity = '0';
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>

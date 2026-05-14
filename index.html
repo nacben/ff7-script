@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Think Faster, Talk Smarter — A Visual Guide to Spontaneous Communication</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #0a1628;
+      --blue:      #1565c0;
+      --gold:      #f59e0b;
+      --light:     #f8fafc;
+      --text:      #1e293b;
+      --muted:     #64748b;
+      --calm:      #0891b2;
+      --unlock:    #ea580c;
+      --redefine:  #7c3aed;
+      --listen:    #059669;
+      --structure: #1d4ed8;
+      --focus:     #dc2626;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; color:var(--text); background:var(--light); overflow-x:hidden; }
+
+    /* ── NAV ─────────────────────────────── */
+    nav {
+      position:fixed; top:0; width:100%;
+      background:rgba(10,22,40,.96);
+      backdrop-filter:blur(14px);
+      z-index:1000; padding:.85rem 2rem;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { color:var(--gold); font-family:'Playfair Display',serif; font-weight:700; font-size:1rem; text-decoration:none; letter-spacing:.01em; }
+    .nav-links { display:flex; gap:1.8rem; list-style:none; }
+    .nav-links a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.82rem; font-weight:500; transition:color .2s; letter-spacing:.03em; }
+    .nav-links a:hover { color:var(--gold); }
+    .nav-menu-btn { display:none; background:none; border:none; color:white; font-size:1.4rem; cursor:pointer; }
+
+    /* ── HERO ────────────────────────────── */
+    .hero {
+      min-height:100vh;
+      background:linear-gradient(150deg,#060f1f 0%,#0d1f42 45%,#0a3470 100%);
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; padding:8rem 2rem 5rem;
+      position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 70% 60% at 65% 35%, rgba(245,158,11,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 20% 75%, rgba(29,78,216,.1) 0%, transparent 60%);
+    }
+    .hero-inner { position:relative; z-index:1; max-width:920px; }
+    .hero-chip {
+      display:inline-block;
+      background:rgba(245,158,11,.14);
+      border:1px solid rgba(245,158,11,.3);
+      color:var(--gold);
+      font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+      padding:.38rem 1rem; border-radius:100px; margin-bottom:1.6rem;
+    }
+    .hero h1 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.8rem,7.5vw,6rem);
+      font-weight:900; color:#fff; line-height:1.04; margin-bottom:.4rem;
+    }
+    .hero h1 em { color:var(--gold); font-style:normal; }
+    .hero-sub { font-size:1.15rem; color:rgba(255,255,255,.6); margin-bottom:2.8rem; font-weight:300; font-style:italic; }
+    .quotes-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:740px; margin:0 auto 2.5rem; }
+    .hero-quote {
+      background:rgba(255,255,255,.05);
+      border-left:3px solid var(--gold);
+      padding:1.2rem 1.5rem; border-radius:0 8px 8px 0; text-align:left;
+    }
+    .hero-quote p { color:rgba(255,255,255,.85); font-style:italic; font-size:.92rem; line-height:1.6; margin-bottom:.4rem; }
+    .hero-quote cite { color:var(--gold); font-size:.78rem; font-weight:600; }
+    .hero-steps {
+      display:grid; grid-template-columns:repeat(6,1fr);
+      gap:.5rem; max-width:560px; margin:0 auto 2.8rem;
+    }
+    .hero-step { display:flex; flex-direction:column; align-items:center; gap:.45rem; }
+    .hero-step-dot {
+      width:46px; height:46px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:.78rem; color:#fff;
+    }
+    .hero-step-name { font-size:.65rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.55); }
+    .hero-cta { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-gold { background:var(--gold); color:var(--navy); padding:.85rem 1.9rem; border-radius:8px; font-weight:700; text-decoration:none; font-size:.92rem; transition:all .2s; }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(245,158,11,.4); }
+    .btn-outline { background:transparent; color:#fff; padding:.85rem 1.9rem; border:2px solid rgba(255,255,255,.28); border-radius:8px; font-weight:600; text-decoration:none; font-size:.92rem; transition:all .2s; }
+    .btn-outline:hover { border-color:rgba(255,255,255,.65); background:rgba(255,255,255,.05); }
+    .scroll-hint {
+      position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+      color:rgba(255,255,255,.35); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+      display:flex; flex-direction:column; align-items:center; gap:.4rem;
+      animation:bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(7px)} }
+
+    /* ── SHARED SECTION LAYOUT ───────────── */
+    .section { padding:5.5rem 2rem; }
+    .container { max-width:1200px; margin:0 auto; }
+    .section-head { text-align:center; margin-bottom:3.5rem; }
+    .sec-chip {
+      display:inline-block; padding:.28rem .75rem; border-radius:4px;
+      font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+      margin-bottom:.85rem;
+    }
+    .section-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,4vw,2.8rem);
+      font-weight:700; color:var(--navy); line-height:1.2; margin-bottom:.85rem;
+    }
+    .section-sub { color:var(--muted); font-size:1.05rem; max-width:580px; margin:0 auto; line-height:1.6; }
+
+    /* ── INTRO ───────────────────────────── */
+    .intro-section { background:#fff; }
+    .intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .intro-text h2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; color:var(--navy); margin-bottom:1.2rem; line-height:1.25; }
+    .intro-text p { color:var(--muted); line-height:1.75; margin-bottom:.85rem; font-size:.95rem; }
+    .intro-text strong { color:var(--text); }
+    .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .stat-card { background:var(--light); border-radius:12px; padding:1.4rem; border:1px solid rgba(0,0,0,.06); }
+    .stat-num { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; color:var(--navy); }
+    .stat-lbl { font-size:.82rem; color:var(--muted); margin-top:.2rem; line-height:1.5; }
+
+    /* ── PULL QUOTE ──────────────────────── */
+    .pull-quote {
+      background:var(--navy); color:#fff;
+      border-radius:12px; padding:2rem; margin:2rem 0; position:relative; overflow:hidden;
+    }
+    .pull-quote::before {
+      content:'"';
+      font-size:6rem; font-family:'Playfair Display',serif;
+      color:rgba(245,158,11,.2);
+      position:absolute; top:-1.2rem; left:1.2rem; line-height:1;
+    }
+    .pull-quote p { font-style:italic; font-size:1.02rem; line-height:1.7; position:relative; z-index:1; margin-bottom:.65rem; }
+    .pull-quote cite { color:var(--gold); font-size:.82rem; font-weight:600; }
+
+    /* ── STEPS SECTION ───────────────────── */
+    .steps-section { background:var(--light); }
+    .step-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.06); margin-bottom:1.5rem; border:1px solid rgba(0,0,0,.05); }
+    .step-card-hdr {
+      padding:1.8rem 2rem; cursor:pointer;
+      display:flex; align-items:center; gap:1.5rem;
+      transition:background .2s; user-select:none;
+    }
+    .step-card-hdr:hover { background:rgba(0,0,0,.015); }
+    .step-num { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; color:#fff; flex-shrink:0; }
+    .step-info h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:.2rem; }
+    .step-tagline { color:var(--muted); font-size:.87rem; line-height:1.5; }
+    .step-toggle { margin-left:auto; width:30px; height:30px; border-radius:50%; background:var(--light); display:flex; align-items:center; justify-content:center; font-size:1rem; transition:transform .3s; flex-shrink:0; color:var(--muted); }
+    .step-card.open .step-toggle { transform:rotate(180deg); }
+    .step-body { max-height:0; overflow:hidden; transition:max-height .45s ease; }
+    .step-body-inner { padding:0 2rem 2rem; }
+    .step-card.open .step-body { max-height:4000px; }
+
+    /* ── CONTENT ELEMENTS ────────────────── */
+    p.lead { font-size:.97rem; line-height:1.75; color:var(--text); margin-bottom:1rem; }
+    p.body-txt { font-size:.88rem; line-height:1.7; color:var(--muted); margin-bottom:.75rem; }
+    h4.sub { font-weight:700; font-size:1.02rem; color:var(--navy); margin:1.5rem 0 .75rem; }
+
+    .concept-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; margin:1.25rem 0; }
+    .concept-card { background:var(--light); border-radius:10px; padding:1.2rem; border:1px solid rgba(0,0,0,.06); }
+    .concept-card h4 { font-weight:700; font-size:.88rem; margin-bottom:.4rem; color:var(--navy); }
+    .concept-card p { font-size:.82rem; color:var(--muted); line-height:1.5; }
+
+    .try-it { background:linear-gradient(135deg,#fef9ec,#fef3c7); border-radius:12px; padding:1.4rem; margin:1.5rem 0; border-left:4px solid var(--gold); }
+    .try-it-hdr { display:flex; align-items:center; gap:.5rem; font-weight:700; font-size:.76rem; letter-spacing:.1em; text-transform:uppercase; color:#92400e; margin-bottom:.65rem; }
+    .try-it p { font-size:.87rem; color:#78350f; line-height:1.65; }
+
+    .data-table { width:100%; border-collapse:collapse; margin:1.25rem 0; font-size:.84rem; }
+    .data-table th { background:var(--navy); color:#fff; padding:.7rem 1rem; text-align:left; font-weight:600; font-size:.78rem; letter-spacing:.04em; }
+    .data-table td { padding:.7rem 1rem; border-bottom:1px solid rgba(0,0,0,.06); vertical-align:top; }
+    .data-table tr:nth-child(even) td { background:var(--light); }
+
+    .flow { display:flex; gap:.5rem; margin:1.25rem 0; flex-wrap:wrap; align-items:stretch; }
+    .flow-step { flex:1; min-width:110px; }
+    .flow-box { border-radius:9px; padding:.9rem; text-align:center; color:#fff; font-weight:700; font-size:.85rem; margin-bottom:.4rem; }
+    .flow-desc { font-size:.75rem; color:var(--muted); line-height:1.4; text-align:center; }
+    .flow-arrow { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.2rem; padding-top:1.5rem; flex-shrink:0; }
+
+    .mindset-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.25rem 0; }
+    .mindset-card { border-radius:12px; padding:1.4rem; border:1px solid rgba(124,58,237,.18); background:rgba(124,58,237,.03); }
+    .shift-row { display:flex; align-items:center; gap:.6rem; margin-bottom:.75rem; flex-wrap:wrap; }
+    .from-tag { background:#fee2e2; color:#b91c1c; padding:.25rem .7rem; border-radius:20px; font-size:.76rem; font-weight:600; }
+    .to-tag { background:#dcfce7; color:#15803d; padding:.25rem .7rem; border-radius:20px; font-size:.76rem; font-weight:600; }
+    .shift-arrow { color:var(--muted); font-size:1rem; }
+    .mindset-card h4 { font-weight:700; font-size:.92rem; color:var(--navy); margin-bottom:.35rem; }
+    .mindset-card p { font-size:.82rem; color:var(--muted); line-height:1.55; }
+
+    .psg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1.25rem 0; }
+    .psg-card { border-radius:12px; padding:1.4rem; text-align:center; background:rgba(5,150,105,.05); border:1px solid rgba(5,150,105,.14); }
+    .psg-icon { font-size:1.8rem; margin-bottom:.7rem; }
+    .psg-card h4 { font-weight:700; font-size:1rem; color:var(--navy); margin-bottom:.4rem; }
+    .psg-card p { font-size:.82rem; color:var(--muted); line-height:1.55; }
+
+    .amp-dark { background:linear-gradient(135deg,#060f1f,#0d2147); border-radius:14px; padding:1.8rem; color:#fff; margin:1.5rem 0; }
+    .amp-dark h4 { color:var(--gold); font-weight:700; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:1rem; }
+    .amp-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .amp-box { background:rgba(255,255,255,.07); border-radius:8px; padding:1rem; }
+    .amp-box h5 { color:var(--gold); font-size:.82rem; font-weight:700; margin-bottom:.4rem; }
+    .amp-box p { color:rgba(255,255,255,.7); font-size:.78rem; line-height:1.5; }
+
+    .focus-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.25rem 0; }
+    .focus-card { background:var(--light); border-radius:12px; padding:1.4rem; border:1px solid rgba(0,0,0,.06); border-left:4px solid var(--focus); }
+    .focus-card h4 { font-weight:700; color:var(--focus); font-size:.98rem; margin-bottom:.18rem; }
+    .focus-bl { font-size:.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.65rem; }
+    .focus-card p { font-size:.86rem; color:var(--text); line-height:1.55; }
+
+    .tips-list { list-style:none; margin:1rem 0; }
+    .tips-list li { display:flex; gap:.75rem; align-items:flex-start; margin-bottom:.65rem; padding:.75rem; background:var(--light); border-radius:8px; }
+    .tip-dot { width:24px; height:24px; border-radius:50%; background:var(--navy); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:800; flex-shrink:0; }
+    .tips-list li span { font-size:.86rem; color:var(--text); line-height:1.55; padding-top:.15rem; }
+
+    /* ── APPLICATIONS ────────────────────── */
+    .apps-section { background:#fff; }
+    .app-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
+    .app-card { background:var(--light); border-radius:16px; overflow:hidden; border:1px solid rgba(0,0,0,.06); transition:transform .2s,box-shadow .2s; }
+    .app-card:hover { transform:translateY(-4px); box-shadow:0 14px 32px rgba(0,0,0,.1); }
+    .app-head { padding:1.65rem; color:#fff; }
+    .app-num { font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; opacity:.8; margin-bottom:.45rem; }
+    .app-head h3 { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; margin-bottom:.7rem; line-height:1.3; }
+    .app-badge { display:inline-block; background:rgba(255,255,255,.2); border-radius:20px; padding:.3rem .8rem; font-size:.76rem; font-weight:600; }
+    .app-body { padding:1.65rem; }
+    .app-body p { color:var(--muted); font-size:.88rem; line-height:1.65; margin-bottom:1.1rem; }
+    .app-steps-list { list-style:none; }
+    .app-step { display:flex; gap:.7rem; align-items:flex-start; margin-bottom:.65rem; }
+    .app-step-ltr { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.76rem; color:#fff; flex-shrink:0; margin-top:.05rem; }
+    .app-step span { font-size:.86rem; color:var(--text); line-height:1.55; }
+    .app-tips { margin-top:1rem; font-size:.8rem; color:var(--muted); line-height:1.6; background:rgba(0,0,0,.03); border-radius:8px; padding:.85rem 1rem; }
+
+    /* App header gradients */
+    .ah-1 { background:linear-gradient(135deg,#0891b2,#0e7490); }
+    .ah-2 { background:linear-gradient(135deg,#7c3aed,#6d28d9); }
+    .ah-3 { background:linear-gradient(135deg,#059669,#047857); }
+    .ah-4 { background:linear-gradient(135deg,#d97706,#b45309); }
+    .ah-5 { background:linear-gradient(135deg,#dc2626,#b91c1c); }
+    .ah-6 { background:linear-gradient(135deg,#db2777,#be185d); }
+    .as-1 { background:#0891b2; }
+    .as-2 { background:#7c3aed; }
+    .as-3 { background:#059669; }
+    .as-4 { background:#d97706; }
+    .as-5 { background:#dc2626; }
+    .as-6 { background:#db2777; }
+
+    /* ── QUICK REFERENCE ─────────────────── */
+    .ref-section { background:var(--navy); }
+    .ref-section .section-title { color:#fff; }
+    .ref-section .section-sub { color:rgba(255,255,255,.65); }
+    .ref-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.25rem; }
+    .ref-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:1.4rem; }
+    .ref-card h3 { font-weight:700; font-size:.97rem; color:var(--gold); margin-bottom:.3rem; }
+    .ref-situation { font-size:.7rem; color:rgba(255,255,255,.45); font-weight:500; letter-spacing:.06em; text-transform:uppercase; margin-bottom:.9rem; }
+    .ref-steps-list { list-style:none; }
+    .ref-steps-list li { display:flex; gap:.5rem; align-items:flex-start; margin-bottom:.45rem; }
+    .ref-marker { color:var(--gold); font-weight:700; flex-shrink:0; width:18px; font-size:.84rem; }
+    .ref-steps-list li span { font-size:.82rem; color:rgba(255,255,255,.78); line-height:1.45; }
+
+    /* ── ABOUT / CLOSE ───────────────────── */
+    .about-section { background:#fff; }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .about-grid .section-title { text-align:left; font-size:1.9rem; }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer { background:var(--navy); color:rgba(255,255,255,.6); text-align:center; padding:3.5rem 2rem; }
+    footer .foot-title { font-family:'Playfair Display',serif; font-size:1.6rem; color:#fff; font-weight:700; margin-bottom:.4rem; }
+    footer p { margin-bottom:.4rem; font-size:.85rem; line-height:1.6; }
+    footer a { color:var(--gold); text-decoration:none; }
+    footer .foot-divider { width:60px; height:2px; background:rgba(245,158,11,.4); margin:1.2rem auto; }
+    footer .foot-note { font-size:.76rem; opacity:.45; margin-top:1rem; }
+
+    /* ── FADE-IN ─────────────────────────── */
+    .fade-in { opacity:0; transform:translateY(22px); transition:opacity .6s ease,transform .6s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* ── RESPONSIVE ──────────────────────── */
+    @media(max-width:900px) {
+      .nav-links { display:none; }
+      .nav-menu-btn { display:block; }
+      .intro-grid, .about-grid { grid-template-columns:1fr; }
+      .quotes-row { grid-template-columns:1fr; }
+      .hero-steps { grid-template-columns:repeat(3,1fr); }
+      .mindset-grid, .focus-grid { grid-template-columns:1fr; }
+      .psg-grid, .amp-row { grid-template-columns:1fr; }
+      .flow-arrow { display:none; }
+    }
+    @media(max-width:600px) {
+      .app-grid { grid-template-columns:1fr; }
+      .ref-grid { grid-template-columns:1fr; }
+      .stat-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ══════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Think Faster, Talk Smarter</a>
+    <ul class="nav-links">
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#methodology">6 Steps</a></li>
+      <li><a href="#applications">Applications</a></li>
+      <li><a href="#frameworks">Frameworks</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <button class="nav-menu-btn" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">☰</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═════════════════ -->
+<section id="hero" class="hero">
+  <div class="hero-inner">
+    <div class="hero-chip">Matt Abrahams · Stanford GSB · Simon Element, 2023</div>
+    <h1>Think <em>Faster,</em><br>Talk Smarter</h1>
+    <p class="hero-sub">A Complete Guide to Spontaneous Communication</p>
+
+    <div class="quotes-row">
+      <div class="hero-quote">
+        <p>There is no greater agony than bearing an untold story inside you.</p>
+        <cite>— Maya Angelou</cite>
+      </div>
+      <div class="hero-quote">
+        <p>It usually takes me more than three weeks to prepare a good impromptu speech.</p>
+        <cite>— Mark Twain</cite>
+      </div>
+    </div>
+
+    <div class="hero-steps">
+      <div class="hero-step"><div class="hero-step-dot" style="background:var(--calm)">1</div><span class="hero-step-name">Calm</span></div>
+      <div class="hero-step"><div class="hero-step-dot" style="background:var(--unlock)">2</div><span class="hero-step-name">Unlock</span></div>
+      <div class="hero-step"><div class="hero-step-dot" style="background:var(--redefine)">3</div><span class="hero-step-name">Redefine</span></div>
+      <div class="hero-step"><div class="hero-step-dot" style="background:var(--listen)">4</div><span class="hero-step-name">Listen</span></div>
+      <div class="hero-step"><div class="hero-step-dot" style="background:var(--structure)">5</div><span class="hero-step-name">Structure</span></div>
+      <div class="hero-step"><div class="hero-step-dot" style="background:var(--focus)">6</div><span class="hero-step-name">Focus</span></div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#methodology" class="btn-gold">Explore the Methodology</a>
+      <a href="#frameworks" class="btn-outline">Quick Reference</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll to explore</span><span>↓</span></div>
+</section>
+
+<!-- ═══════════════ INTRO ════════════════ -->
+<section id="intro" class="section intro-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-chip" style="background:rgba(29,78,216,.1);color:var(--structure);">Why This Matters</div>
+      <h2 class="section-title">The Problem with Being Put on the Spot</h2>
+      <p class="section-sub">Spontaneous communication happens constantly — and most of us are underprepared for it. But we don't have to be.</p>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-text">
+        <h2>"What do you think?"</h2>
+        <p>Four small words. Enormous power to terrify. Whether lobbed at you by your boss in a crowded Zoom, a colleague in an elevator after a presentation that went badly, or a senior executive interviewing you over dinner, the need to speak spontaneously arises dozens of times every single day.</p>
+        <p>Research shows Americans fear public speaking more than bugs, heights, needles, zombies, ghosts, and clowns. And <em>impromptu</em> speaking? That's even more frightening — there's no script, no notes, no runway for preparation.</p>
+        <p>Many of us conclude that quick-wittedness is an innate talent some people simply have and others don't. That's wrong. <strong>What most shapes how we communicate on the fly isn't something innate — it's how we approach the task.</strong></p>
+        <p>Matt Abrahams, lecturer at Stanford's Graduate School of Business and host of the award-winning <em>Think Fast, Talk Smart</em> podcast, has spent decades studying and teaching what actually works. His six-step methodology has helped thousands of people — from Stanford MBAs to Fortune 500 executives — transform how they communicate in the moment.</p>
+        <p>The paradox at the heart of it all: <strong>to do well in spontaneous situations, you must prepare in advance.</strong> Not by scripting what you'll say, but by developing skills that free you to be fully present and authentic when the spotlight lands on you.</p>
+      </div>
+
+      <div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num">#1</div>
+            <div class="stat-lbl">Americans' greatest fear — public speaking, ahead of zombies, heights, and clowns</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">19%</div>
+            <div class="stat-lbl">Less confident speakers feel in impromptu versus prepared speaking settings</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">63%</div>
+            <div class="stat-lbl">Of students remember stories; only 5% remember data points from the same talk</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">6</div>
+            <div class="stat-lbl">Core steps to transforming your spontaneous communication, starting today</div>
+          </div>
+        </div>
+
+        <div class="pull-quote" style="margin-top:1.5rem;">
+          <p>Speaking extemporaneously is more like jazz than classical music. It's about improvising, staying in the groove with others. Life isn't a TED Talk. TED Talks are heavily scripted. What we face every day is different — and requires different skills.</p>
+          <cite>— Matt Abrahams</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ METHODOLOGY ══════════ -->
+<section id="methodology" class="section steps-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-chip" style="background:rgba(10,22,40,.08);color:var(--navy);">Part I · The Methodology</div>
+      <h2 class="section-title">Six Steps to Better Spontaneous Speaking</h2>
+      <p class="section-sub">Click any step to expand it — explore techniques, exercises, and key insights from each chapter.</p>
+    </div>
+
+    <!-- ── STEP 1: CALM ─────────────────── -->
+    <div class="step-card fade-in" id="sc-calm">
+      <div class="step-card-hdr" onclick="toggleStep('sc-calm')">
+        <div class="step-num" style="background:var(--calm)">1</div>
+        <div class="step-info">
+          <h3 style="color:var(--calm)">Calm</h3>
+          <p class="step-tagline">Tame the Anxiety Beast — With a bit of effort, we can manage our speaking anxiety so that it doesn't manage us.</p>
+        </div>
+        <div class="step-toggle">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="step-body-inner">
+          <p class="lead">To improve at spontaneous communication, we must first manage the intense anxiety that can arise. The goal isn't to eradicate anxiety — a bit of it actually helps, sharpening focus and energizing action. The goal is to tame the beast so it works <em>for</em> you.</p>
+
+          <h4 class="sub">The ABCs of Speaking Anxiety</h4>
+          <div class="concept-grid">
+            <div class="concept-card" style="border-top:3px solid var(--calm)">
+              <h4>A — Affective</h4>
+              <p>Mood-based feelings: stress, pressure, vulnerability, overwhelm — the sense of being under siege.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--calm)">
+              <h4>B — Behavioral / Physiological</h4>
+              <p>Physical symptoms: sweating, trembling, racing heart, dry mouth, flushed face, shaky voice, "plumbing reversal."</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--calm)">
+              <h4>C — Cognitive</h4>
+              <p>Mental symptoms: blanking out, fixating on others' judgment, negative self-talk, inability to focus on the audience.</p>
+            </div>
+          </div>
+
+          <h4 class="sub">9 Techniques to Manage Anxiety in the Moment</h4>
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Technique</th><th>How It Works</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>Mindfulness</strong></td><td>Acknowledge feelings without judgment: "I'm nervous, and that's normal." Creates psychological distance so emotion doesn't sweep you away.</td></tr>
+              <tr><td>2</td><td><strong>Deep Breathing</strong></td><td>Exhale <em>twice</em> as long as you inhale (3 counts in, 6 counts out). Calms the nervous system in seconds by reducing CO₂.</td></tr>
+              <tr><td>3</td><td><strong>Slow Your Movements</strong></td><td>Speech pace syncs with movement pace. Slow gestures → slow speech → slower heart rate.</td></tr>
+              <tr><td>4</td><td><strong>Cool Your Body</strong></td><td>Hold something cold (a water bottle). Your hands regulate body temperature; cooling them reduces blushing and sweating.</td></tr>
+              <tr><td>5</td><td><strong>Salivate</strong></td><td>Chew gum or use a lozenge <em>before</em> speaking to reactivate salivary glands and prevent dry mouth.</td></tr>
+              <tr><td>6</td><td><strong>Positive Mantras</strong></td><td>Repeat: "I have value to add." "I've improvised my way out of tough spots before." Quiets the inner critic and redirects focus.</td></tr>
+              <tr><td>7</td><td><strong>Rewind &amp; Question</strong></td><td>If you blank, repeat your last point or ask a generic audience question: "How might you apply this to your work?" Buys 20–30 seconds.</td></tr>
+              <tr><td>8</td><td><strong>Rationalize the Risk</strong></td><td>Ask: "What's the WORST that could happen?" (Usually not that bad.) Remember: <em>spotlight effect</em> — people are mostly focused on themselves, not you.</td></tr>
+              <tr><td>9</td><td><strong>Inhale to Kill Fillers</strong></td><td>End each phrase when you're out of breath so you <em>must</em> inhale before the next. Inhaling makes "um" and "uh" physically impossible.</td></tr>
+            </tbody>
+          </table>
+
+          <h4 class="sub">Build Your Personal Anxiety Management Plan (AMP)</h4>
+          <p class="body-txt">Choose 3–5 techniques that address <em>your</em> specific symptoms and form them into a memorable acronym. Rehearse it before anticipated speaking situations. Test it. Refine it.</p>
+          <div class="amp-dark">
+            <h4>Sample AMPs</h4>
+            <div class="amp-row">
+              <div class="amp-box">
+                <h5>BOOM</h5>
+                <p><strong>B</strong>e present-oriented<br><strong>O</strong>bserve your movements<br><strong>O</strong>xygenate (exhale 2× inhale)<br><strong>M</strong>antra</p>
+              </div>
+              <div class="amp-box">
+                <h5>ARC</h5>
+                <p><strong>A</strong>cknowledge anxiety is normal<br><strong>R</strong>ationalize (it won't be catastrophic)<br><strong>C</strong>ool yourself down</p>
+              </div>
+              <div class="amp-box">
+                <h5>HSM</h5>
+                <p><strong>H</strong>eart: focus on serving the audience<br><strong>S</strong>peech: slow gestures, use pauses<br><strong>M</strong>ind: the odds of blanking are low</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="try-it">
+            <div class="try-it-hdr">✦ Try It — Create Your AMP</div>
+            <p>Pick 3–5 techniques from the table that target your specific anxiety symptoms. Create a memorable acronym. Then rehearse it before your next meeting or social event where you might be called upon to speak. After: what worked? What needs adjusting?</p>
+          </div>
+
+          <div class="pull-quote" style="background:linear-gradient(135deg,#0c4a6e,#075985);margin-top:1.5rem;">
+            <p>Reframe anxiety as excitement. Both create nearly identical physiological arousal. Telling yourself "I am excited" out loud before speaking measurably improves performance — and shifts your perception of the opportunity.</p>
+            <cite>— Research by Prof. Alison Wood Brooks, Harvard Business School</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: UNLOCK ───────────────── -->
+    <div class="step-card fade-in" id="sc-unlock">
+      <div class="step-card-hdr" onclick="toggleStep('sc-unlock')">
+        <div class="step-num" style="background:var(--unlock)">2</div>
+        <div class="step-info">
+          <h3 style="color:var(--unlock)">Unlock</h3>
+          <p class="step-tagline">Maximize Mediocrity — When it comes to spontaneous speaking, good enough is great.</p>
+        </div>
+        <div class="step-toggle">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="step-body-inner">
+          <p class="lead">The biggest obstacle to better spontaneous communication isn't lack of talent — it's the relentless drive to "get it right." Perfectionism and the mental shortcuts we rely on box us in, prevent authentic responses, and exhaust our cognitive resources before we've said a word.</p>
+
+          <h4 class="sub">The Two Mental Traps</h4>
+          <div class="concept-grid">
+            <div class="concept-card" style="border-top:3px solid var(--unlock)">
+              <h4>Heuristics (Mental Shortcuts)</h4>
+              <p>Under pressure, our brains deploy autopilot responses. These are efficient but stifle creativity, spontaneity, and genuine listening. When you hear "because," you comply without thinking. When a colleague asks what you think of a meeting, you give a standard reply instead of what they actually need.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--unlock)">
+              <h4>Perfectionism (Self-Judgment)</h4>
+              <p>We evaluate every potential response against an imagined ideal standard. This cognitive load prevents presence, creativity, and authenticity. Like a student who stands frozen, unable to find "the right wrong name" — evaluating every option against a self-imposed rulebook.</p>
+            </div>
+          </div>
+
+          <h4 class="sub">Getting Out of Your Own Way</h4>
+          <table class="data-table">
+            <thead><tr><th>Advice</th><th>What It Means</th><th>Why It Works</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Be Alert to Heuristics</strong></td><td>Notice when you're tired, stressed, or hangry — that's when autopilot kicks in</td><td>More original, more present, more connected responses</td></tr>
+              <tr><td><strong>Dare to Be Dull</strong></td><td>"Good enough is great." Stop monitoring or pre-judging your performance. Just do it.</td><td>You free up cognitive resources for being genuinely present</td></tr>
+              <tr><td><strong>Embrace Missed-Takes</strong></td><td>Reframe mistakes as film "takes" — each one illuminates better options</td><td>Mistakes become data, not verdicts. You learn and grow.</td></tr>
+              <tr><td><strong>Converse, Don't Perform</strong></td><td>People aren't scrutinizing you as closely as you think. It's a conversation, not a TED Talk.</td><td>Communication flows more naturally; less self-consciousness</td></tr>
+              <tr><td><strong>Use Outlines, Not Scripts</strong></td><td>Write down what you want to say, then condense to bullet points. Never memorize verbatim.</td><td>Less cognitive burden, more adaptability, more authenticity</td></tr>
+              <tr><td><strong>Choose Informality</strong></td><td>Say "we must solve this" not "it is imperative that we address this issue"</td><td>More inclusive, more direct, more warm</td></tr>
+              <tr><td><strong>Dialogue Over Monologue</strong></td><td>Ask questions. Interact. Invite co-creation.</td><td>Better outcomes and more fun for everyone involved</td></tr>
+            </tbody>
+          </table>
+
+          <div class="pull-quote" style="background:linear-gradient(135deg,#7c2d12,#9a3412);">
+            <p>"Be obvious" is the most powerful, creative mantra there is. When you're trying to be original, you sound like everyone else trying to be original. But when you're obvious, you're yourself — and that's what's genuine.</p>
+            <cite>— Dan Klein, Stanford improvisation expert &amp; lecturer</cite>
+          </div>
+
+          <div class="try-it">
+            <div class="try-it-hdr">✦ Try It — "Hack My Heuristic" 7-Day Challenge</div>
+            <p>For 7 days, identify one communication heuristic you rely on each day (e.g., opening emails with "I hope you're well," saying "good question" to buy time, prefacing every statement with "So..."). On each day, consciously try a different approach. Keep a short note about what happened.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: REDEFINE ─────────────── -->
+    <div class="step-card fade-in" id="sc-redefine">
+      <div class="step-card-hdr" onclick="toggleStep('sc-redefine')">
+        <div class="step-num" style="background:var(--redefine)">3</div>
+        <div class="step-info">
+          <h3 style="color:var(--redefine)">Redefine</h3>
+          <p class="step-tagline">Mind Your Mindset — You can take back control when put on the spot. It's all about how you see it.</p>
+        </div>
+        <div class="step-toggle">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="step-body-inner">
+          <p class="lead">The stress of spontaneous communication often makes us see it as a threat — a crucible where we must defend ourselves. By cultivating four key mindset shifts, we can train ourselves to greet impromptu moments as opportunities for learning, collaboration, and genuine connection.</p>
+
+          <h4 class="sub">Four Key Mindset Shifts</h4>
+          <div class="mindset-grid">
+            <div class="mindset-card">
+              <div class="shift-row">
+                <span class="from-tag">Fixed Mindset</span>
+                <span class="shift-arrow">→</span>
+                <span class="to-tag">Growth Mindset</span>
+              </div>
+              <h4>Shift #1: Fixed → Growth</h4>
+              <p>A fixed mindset treats ability as unchangeable ("I'm just not a good speaker"). A growth mindset sees skills as learnable. Research shows people with growth mindsets experience less speaking anxiety, perceive themselves as more capable, and actually improve more.</p>
+            </div>
+            <div class="mindset-card">
+              <div class="shift-row">
+                <span class="from-tag">Focus on Self</span>
+                <span class="shift-arrow">→</span>
+                <span class="to-tag">Focus on Audience</span>
+              </div>
+              <h4>Shift #2: You → Audience</h4>
+              <p>When we perceive communication as threatening, we focus inward on ourselves. Shift the question to: Who are they? What do they need? How can I serve them? This removes pressure and opens up possibility. Most audiences want you to succeed — they're rooting for you.</p>
+            </div>
+            <div class="mindset-card">
+              <div class="shift-row">
+                <span class="from-tag">Yes, but...</span>
+                <span class="shift-arrow">→</span>
+                <span class="to-tag">Yes, and...</span>
+              </div>
+              <h4>Shift #3: "Yes, But" → "Yes, And"</h4>
+              <p>The central tenet of improvisation: affirm what someone has said, then build upon it. There are no wrong answers — only new and next answers. "Yes, and" forces you to listen, relinquish control, and co-create. Seek areas of alignment even in conflict.</p>
+            </div>
+            <div class="mindset-card">
+              <div class="shift-row">
+                <span class="from-tag">Ruminate on Past</span>
+                <span class="shift-arrow">→</span>
+                <span class="to-tag">"Next Play"</span>
+              </div>
+              <h4>Shift #4: Ruminate → "Next Play"</h4>
+              <p>Coach K's famous dictum: after a mistake — or a win — reset immediately and move on. "Whatever you have just done is not nearly as important as what you are doing right now." Don't dwell. Allow yourself a brief moment to feel, then refocus.</p>
+            </div>
+          </div>
+
+          <div class="pull-quote" style="background:linear-gradient(135deg,#4c1d95,#5b21b6);">
+            <p>When we suspend our usual expectations and greet the world with openness, curiosity, and adventure, we can benefit in unforeseen ways. Getting a little lost is how we find something wonderful we never would have found otherwise.</p>
+            <cite>— Dan Klein, on the opportunity mindset</cite>
+          </div>
+
+          <div class="try-it">
+            <div class="try-it-hdr">✦ Try It — The "Maybe" Practice</div>
+            <p>Write the word "maybe" on a card and carry it with you before your next high-stakes spontaneous situation. The Zen farmer's wisdom: respond to every outcome — good or bad — with "maybe." This suspends premature judgment and keeps you focused on the present moment and next opportunity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: LISTEN ──────────────── -->
+    <div class="step-card fade-in" id="sc-listen">
+      <div class="step-card-hdr" onclick="toggleStep('sc-listen')">
+        <div class="step-num" style="background:var(--listen)">4</div>
+        <div class="step-info">
+          <h3 style="color:var(--listen)">Listen</h3>
+          <p class="step-tagline">Don't Just Do Something… Stand There! — Sometimes the best way to communicate is to say nothing at all.</p>
+        </div>
+        <div class="step-toggle">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="step-body-inner">
+          <p class="lead">We so often focus on what to <em>say</em> that we forget to truly <em>listen</em>. Great spontaneous communicators pick up on what others are really communicating — verbally and nonverbally — and use that intelligence to craft a more resonant response. Listening isn't passive. It's the most active skill in communication.</p>
+
+          <h4 class="sub">The 3 Ps That Block Listening</h4>
+          <div class="concept-grid">
+            <div class="concept-card" style="border-top:3px solid var(--listen)">
+              <h4>Physical Noise</h4>
+              <p>Loud environments, devices, distractions — anything in the external world pulling your attention away from the speaker in front of you.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--listen)">
+              <h4>Physiological Noise</h4>
+              <p>Fatigue, hunger, anxiety — your own body's state making it harder to be fully present and absorb what's being said.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--listen)">
+              <h4>Psychological Noise</h4>
+              <p>Biases, judging what you hear, rehearsing your next reply in your head — missing the actual message while planning your response to it.</p>
+            </div>
+          </div>
+
+          <h4 class="sub">The Pace, Space &amp; Grace Framework</h4>
+          <div class="psg-grid">
+            <div class="psg-card">
+              <div class="psg-icon">🐢</div>
+              <h4>Pace</h4>
+              <p>Slow down. Put your phone away. Take deep breaths. Maintain eye contact. Listen to understand, not just to respond. Active listening is a muscle — it requires deliberate training.</p>
+            </div>
+            <div class="psg-card">
+              <div class="psg-icon">🌿</div>
+              <h4>Space</h4>
+              <p>Create room to reflect. Ask clarifying questions. Paraphrase what you heard. Comment on what wasn't said. Ask the "killer last question" — then wait. The silence is powerful.</p>
+            </div>
+            <div class="psg-card">
+              <div class="psg-icon">✨</div>
+              <h4>Grace</h4>
+              <p>Honor your inner voice too. You don't have to cancel your own feelings and judgments. Two dialogues run in parallel — the one with others and the one inside you. Both matter.</p>
+            </div>
+          </div>
+
+          <h4 class="sub">Three Ways to Create Space While Listening</h4>
+          <ul class="tips-list">
+            <li><div class="tip-dot">1</div><span><strong>Ask clarifying questions.</strong> "What makes you believe this?" "Can you tell me more?" Buys time, signals genuine interest, and often surfaces the <em>real</em> need beneath the surface question.</span></li>
+            <li><div class="tip-dot">2</div><span><strong>Paraphrase what you've heard.</strong> Distill the <em>essence</em> of what someone said (not word-for-word). Confirms understanding, shows attentiveness, and extends the present moment for reflection.</span></li>
+            <li><div class="tip-dot">3</div><span><strong>Comment on what wasn't said.</strong> "I hear you mentioning X — what about Y?" Surfaces unspoken concerns and signals the depth of your listening.</span></li>
+          </ul>
+
+          <div class="try-it">
+            <div class="try-it-hdr">✦ Try It — The Killer Last Question</div>
+            <p>In your next interview or important conversation, after you think everything important has been covered, ask: "Is there anything important I haven't asked you about?" Then wait. Count silently to five. Don't fill the silence. The most revealing, most interesting thing said in the entire conversation often emerges in that pause.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 5: STRUCTURE ────────────── -->
+    <div class="step-card fade-in" id="sc-structure">
+      <div class="step-card-hdr" onclick="toggleStep('sc-structure')">
+        <div class="step-num" style="background:var(--structure)">5</div>
+        <div class="step-info">
+          <h3 style="color:var(--structure)">Structure</h3>
+          <p class="step-tagline">Structure Your Spontaneity — A road map doesn't bog you down. It frees you up.</p>
+        </div>
+        <div class="step-toggle">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="step-body-inner">
+          <p class="lead">Structure doesn't impede spontaneous communication — it enables it. Like a jazz musician who improvises within the bounds of a known song's chord structure, we think and speak more freely when we're not <em>also</em> worrying about how to organize our thoughts. Structure solves the "how to say it" problem in advance.</p>
+
+          <h4 class="sub">Why Structure Matters: 4 Benefits</h4>
+          <div class="concept-grid">
+            <div class="concept-card" style="border-top:3px solid var(--structure)">
+              <h4>1. Keeps Audiences Engaged</h4>
+              <p>A clear narrative flow creates bridges between ideas, preventing audiences from getting lost, distracted, or reaching for their phones.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--structure)">
+              <h4>2. Enhances Memory (Stickiness)</h4>
+              <p>Our brains evolved to remember stories. 63% of students recall stories from a presentation; only 5% recall data points from the same talk.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--structure)">
+              <h4>3. Easier for Your Audience</h4>
+              <p>Structure increases "processing fluency." The brain works less hard to organize random information — allowing deeper engagement and better retention.</p>
+            </div>
+            <div class="concept-card" style="border-top:3px solid var(--structure)">
+              <h4>4. Easier for You</h4>
+              <p>Structure frees mental energy from "how to say it" so you can concentrate on <em>what to say</em>. You always know where you are and where you're going — no blanking out.</p>
+            </div>
+          </div>
+
+          <h4 class="sub">What–So What–Now What: The Swiss Army Knife</h4>
+          <p class="body-txt">The most versatile structure for virtually any spontaneous situation. Use it for presentations, Q&amp;A, small talk, feedback, and more.</p>
+
+          <div class="flow">
+            <div class="flow-step">
+              <div class="flow-box" style="background:var(--structure)">WHAT</div>
+              <div class="flow-desc">Describe the topic, idea, argument, or situation</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-box" style="background:#1e40af">SO WHAT</div>
+              <div class="flow-desc">Explain why it matters — its significance, stakes, or relevance</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div class="flow-box" style="background:#1e3a8a">NOW WHAT</div>
+              <div class="flow-desc">Suggest what the audience should think, feel, or do next</div>
+            </div>
+          </div>
+
+          <h4 class="sub">Five Classic All-Purpose Structures</h4>
+          <table class="data-table">
+            <thead><tr><th>Structure</th><th>Format</th><th>Best Used For</th></tr></thead>
+            <tbody>
+              <tr><td><strong>What–So What–Now What</strong></td><td>Topic → Significance → Action</td><td>Almost anything: updates, Q&amp;A, small talk, feedback</td></tr>
+              <tr><td><strong>PREP</strong></td><td>Point → Reason → Example → Point</td><td>Answering direct questions; building a clear argument</td></tr>
+              <tr><td><strong>Problem–Solution–Benefit</strong></td><td>Problem → Solution → Benefit</td><td>Pitching ideas, persuasion, proposals</td></tr>
+              <tr><td><strong>Comparison–Contrast–Conclusion</strong></td><td>Similarities → Differences → Takeaway</td><td>Evaluating options; making recommendations</td></tr>
+              <tr><td><strong>STAR</strong></td><td>Situation → Task → Action → Result</td><td>Behavioral interview questions; case studies</td></tr>
+            </tbody>
+          </table>
+
+          <div class="pull-quote" style="background:linear-gradient(135deg,#1e3a8a,#1e40af);">
+            <p>There are many exits to explore on any improvisational highway — but none are the destination. Take a stroll around the small towns on your long drive, but remember to get back on the highway. Structure is your highway. Don't set up house in the exit ramp.</p>
+            <cite>— James Whittington, improvisation instructor</cite>
+          </div>
+
+          <div class="try-it">
+            <div class="try-it-hdr">✦ Try It — Story Spine</div>
+            <p>Practice structuring information as a story with this classic improv exercise. Fill in each line spontaneously:<br><br>
+            "Once upon a time… [character and place]. Every day… [normal life]. But one day… [an event happened]. Because of that… [another event]. Until finally… [final action]. And ever since then… [what changed]."<br><br>
+            Create 2–3 narratives. The more you practice, the more naturally story structure will appear in your spontaneous communication.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 6: FOCUS ───────────────── -->
+    <div class="step-card fade-in" id="sc-focus">
+      <div class="step-card-hdr" onclick="toggleStep('sc-focus')">
+        <div class="step-num" style="background:var(--focus)">6</div>
+        <div class="step-info">
+          <h3 style="color:var(--focus)">Focus</h3>
+          <p class="step-tagline">The F-Word of Spontaneous Speaking — Don't make it hard for your audiences to "get" your point.</p>
+        </div>
+        <div class="step-toggle">▼</div>
+      </div>
+      <div class="step-body">
+        <div class="step-body-inner">
+          <p class="lead">The best communication conveys everything an audience needs — and only that. It doesn't distract, bore, or waste time with fuzzy, irrelevant, jargon-laden, or long-winded language. Steve Jobs introduced the iPod with five words: <em>"1,000 songs in your pocket."</em> That's focused communication.</p>
+
+          <h4 class="sub">The 4 Dimensions of Focused Communication</h4>
+          <div class="focus-grid">
+            <div class="focus-card">
+              <h4>1. Precision</h4>
+              <div class="focus-bl">Bottom Line: Know · Feel · Do</div>
+              <p>Have a clear goal with three dimensions: What do you want people to <strong>Know</strong>? What do you want them to <strong>Feel</strong>? What do you want them to <strong>Do</strong>? Most speakers only think about "know" — and miss the other two entirely. Clarity across all three transforms messages from informative to transformative.</p>
+            </div>
+            <div class="focus-card">
+              <h4>2. Relevance</h4>
+              <div class="focus-bl">Bottom Line: "Why should I care?"</div>
+              <p>Your message must speak directly to your audience's world. Ask: How does this apply to <em>them</em>? What problem does it solve for <em>them</em>? Create moments of curiosity or tension that make your topic feel urgent. Research your audience and address the "why should I care?" question before they can ask it.</p>
+            </div>
+            <div class="focus-card">
+              <h4>3. Accessibility</h4>
+              <div class="focus-bl">Bottom Line: Make it understandable</div>
+              <p>Avoid the "curse of knowledge" — knowing too much for your audience to follow. Apply the "grandmother test." Use analogies and chunking. Put the most important information first (BLUF: Bottom Line Up Front). Think of yourself as a translator, not an expert broadcasting expertise.</p>
+            </div>
+            <div class="focus-card">
+              <h4>4. Concision</h4>
+              <div class="focus-bl">Bottom Line: Be crisp</div>
+              <p>Every word should earn its place. Use fewer words to connect better. Leverage context — don't state the obvious. Google's entire mission: 12 words. Challenge yourself: Can you convey your message in a tweet? A haiku? The constraint forces you to identify what actually matters.</p>
+            </div>
+          </div>
+
+          <div class="pull-quote" style="background:linear-gradient(135deg,#7f1d1d,#991b1b);">
+            <p>"To organize the world's information and make it universally accessible and useful." Twelve words for a $1.5 trillion company. Raymond Nasr and his team spent months in revision to arrive at it. Focus is never accidental — and always worth the effort.</p>
+            <cite>— On Google's mission statement, crafted by Raymond Nasr</cite>
+          </div>
+
+          <div class="try-it">
+            <div class="try-it-hdr">✦ Try It — Brevity Challenges</div>
+            <p>① Summarize the last meeting you attended in exactly 25 words.<br>② Describe your job to a 10-year-old in 2 sentences.<br>③ Write the pitch for your best idea as a single tweet (140 characters).<br><br>These constraints force you to identify what actually matters — which is the entire point of Focus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ APPLICATIONS ═════════ -->
+<section id="applications" class="section apps-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-chip" style="background:rgba(10,22,40,.08);color:var(--navy);">Part II · Specific Situations</div>
+      <h2 class="section-title">Talking Smarter in Six Common Scenarios</h2>
+      <p class="section-sub">Each situation has a proven structure, practical tips, and real example scenarios. Pick the one you need most — right now.</p>
+    </div>
+
+    <div class="app-grid">
+
+      <!-- App 1 -->
+      <div class="app-card fade-in">
+        <div class="app-head ah-1">
+          <div class="app-num">Application #1</div>
+          <h3>Going Big on Small Talk</h3>
+          <span class="app-badge">What–So What–Now What</span>
+        </div>
+        <div class="app-body">
+          <p>Small talk is the epitome of spontaneous speaking — and most of us dread it. With the right structure and mindset, you can not only survive it but forge real connections.</p>
+          <p><strong>First Commandment:</strong> Make it about THEM, not you. Deliver support responses (inviting others to share more) rather than shift responses (redirecting to yourself).</p>
+          <ul class="app-steps-list">
+            <li class="app-step"><div class="app-step-ltr as-1">W</div><span><strong>What:</strong> Share an observation, fact, or opinion to initiate the exchange</span></li>
+            <li class="app-step"><div class="app-step-ltr as-1">S</div><span><strong>So What:</strong> Explain why it's relevant or interesting to you</span></li>
+            <li class="app-step"><div class="app-step-ltr as-1">N</div><span><strong>Now What:</strong> Pose a question that invites them to contribute and share</span></li>
+          </ul>
+          <div class="app-tips"><strong>5 Key Tips:</strong> ① Seek balanced self-disclosure ② Ask open-ended questions, not interrogations ③ Be a team player — it's hacky-sack, not tennis ④ Don't swipe left too soon — resist FOMO ⑤ Reflect, question, and paraphrase before weighing in on contested topics</div>
+        </div>
+      </div>
+
+      <!-- App 2 -->
+      <div class="app-card fade-in">
+        <div class="app-head ah-2">
+          <div class="app-num">Application #2</div>
+          <h3>Toasts, Tributes &amp; Introductions</h3>
+          <span class="app-badge">WHAT Framework</span>
+        </div>
+        <div class="app-body">
+          <p>Think of celebratory remarks as <em>gifts</em> you bestow. Your focus on the recipient — not yourself — is what makes them memorable and meaningful.</p>
+          <ul class="app-steps-list">
+            <li class="app-step"><div class="app-step-ltr as-2">W</div><span><strong>Why are we here:</strong> Identify the purpose and context of the gathering</span></li>
+            <li class="app-step"><div class="app-step-ltr as-2">H</div><span><strong>How are you connected:</strong> Share your relationship to the person or group</span></li>
+            <li class="app-step"><div class="app-step-ltr as-2">A</div><span><strong>Anecdotes or learnings:</strong> Brief, relatable stories — appropriate, structured, concise</span></li>
+            <li class="app-step"><div class="app-step-ltr as-2">T</div><span><strong>Thank:</strong> Express genuine gratitude and offer warm well-wishes</span></li>
+          </ul>
+          <div class="app-tips"><strong>6 Tips:</strong> ① Long tributes are always bad tributes ② Prepare emotionally — have a backup plan ③ Spotlight stays on them, not you ④ Make anecdotes accessible to everyone in the room ⑤ Seek common ground over division ⑥ "Clear the runway" for whoever speaks next</div>
+        </div>
+      </div>
+
+      <!-- App 3 -->
+      <div class="app-card fade-in">
+        <div class="app-head ah-3">
+          <div class="app-num">Application #3</div>
+          <h3>Make That (Im)perfect Pitch</h3>
+          <span class="app-badge">Problem–Solution–Benefit</span>
+        </div>
+        <div class="app-body">
+          <p>Persuasion in the moment requires listening to what your audience truly needs and adapting your pitch in real time. Structure frees you to do that adaptation.</p>
+          <ul class="app-steps-list">
+            <li class="app-step"><div class="app-step-ltr as-3">P</div><span><strong>Problem:</strong> Define the challenge or pain point your audience shares — concretely</span></li>
+            <li class="app-step"><div class="app-step-ltr as-3">S</div><span><strong>Solution:</strong> Present your fix — specific steps, product, or method</span></li>
+            <li class="app-step"><div class="app-step-ltr as-3">B</div><span><strong>Benefit:</strong> Describe the tangible advantages, ranked by importance</span></li>
+          </ul>
+          <div class="app-tips"><strong>5 Tips:</strong> ① Use analogies to make solutions concrete ② Show consistency with past actions ("foot in the door") ③ Frame benefits positively (75% success rate, not 25% failure rate) ④ Address real obstacles your audience faces ⑤ A little imperfection is strategic — it invites collaboration and buy-in</div>
+        </div>
+      </div>
+
+      <!-- App 4 -->
+      <div class="app-card fade-in">
+        <div class="app-head ah-4">
+          <div class="app-num">Application #4</div>
+          <h3>Rocking the Q&amp;A</h3>
+          <span class="app-badge">ADD Framework</span>
+        </div>
+        <div class="app-body">
+          <p>Q&amp;A isn't a gauntlet — it's an opportunity. Reframe it as dialogue, not dodgeball, and you can deepen audience trust, expand your content, and enhance credibility.</p>
+          <ul class="app-steps-list">
+            <li class="app-step"><div class="app-step-ltr as-4">A</div><span><strong>Answer:</strong> Answer the question in one clear, direct, declarative sentence — no preamble</span></li>
+            <li class="app-step"><div class="app-step-ltr as-4">D</div><span><strong>Detail:</strong> Provide a specific, concrete example or piece of evidence that supports your answer</span></li>
+            <li class="app-step"><div class="app-step-ltr as-4">D</div><span><strong>Describe:</strong> Explain the benefits and why your answer is relevant to the person who asked</span></li>
+          </ul>
+          <div class="app-tips"><strong>6 Tips:</strong> ① Prepare "back-pocket" questions if none come in — wait a full 5 seconds first ② Set time and topic boundaries clearly upfront ③ End Q&amp;A with your key message, not just "thanks" ④ Use the "orchestra conductor" method for panels ⑤ Pause before the session if you're nervous — your confidence often builds mid-talk ⑥ Think of difficult questions as invitations to clarify and expand</div>
+        </div>
+      </div>
+
+      <!-- App 5 -->
+      <div class="app-card fade-in">
+        <div class="app-head ah-5">
+          <div class="app-num">Application #5</div>
+          <h3>Feedback That Doesn't Flop</h3>
+          <span class="app-badge">The 4 I's</span>
+        </div>
+        <div class="app-body">
+          <p>Frame feedback as an invitation to solve problems <em>together</em>, not a judgment from above. This shift transforms dynamics and dramatically increases the odds that feedback leads to real change.</p>
+          <ul class="app-steps-list">
+            <li class="app-step"><div class="app-step-ltr as-5">I</div><span><strong>Information:</strong> Share concrete, observable facts — no emotion, no interpretation</span></li>
+            <li class="app-step"><div class="app-step-ltr as-5">I</div><span><strong>Impact:</strong> Explain the effect on you, using "I feel / I think" — own your reaction</span></li>
+            <li class="app-step"><div class="app-step-ltr as-5">I</div><span><strong>Invitation:</strong> Pose a collaborative request — "How might we…?" establishes shared ownership</span></li>
+            <li class="app-step"><div class="app-step-ltr as-5">I</div><span><strong>Implications:</strong> Detail positive and/or negative consequences of adopting or rejecting the change</span></li>
+          </ul>
+          <div class="app-tips"><strong>7 Tips:</strong> ① Ask what type of feedback they want first ② Be timely — but let strong emotions settle ③ Choose the right setting (private is usually better) ④ Tone matters: "How might we?" vs. a sharp declaration ⑤ Lead with something genuine and positive ⑥ Monitor emotions and adjust if things escalate ⑦ Less is more — focus on 1–2 key changes</div>
+        </div>
+      </div>
+
+      <!-- App 6 -->
+      <div class="app-card fade-in">
+        <div class="app-head ah-6">
+          <div class="app-num">Application #6</div>
+          <h3>The Secrets to Saying We're Sorry</h3>
+          <span class="app-badge">AAA Framework</span>
+        </div>
+        <div class="app-body">
+          <p>Apologizing is not weakness — it's an act of courage and strength. A well-crafted apology reduces anger, restores trust, and deepens relationships. AAA is your structure.</p>
+          <ul class="app-steps-list">
+            <li class="app-step"><div class="app-step-ltr as-6">A</div><span><strong>Acknowledge:</strong> Name the specific offending action and own it fully — no "if you were offended by..." non-apologies</span></li>
+            <li class="app-step"><div class="app-step-ltr as-6">A</div><span><strong>Appreciate:</strong> Show you understand the full impact — emotional and practical — on the person you wronged</span></li>
+            <li class="app-step"><div class="app-step-ltr as-6">A</div><span><strong>Amends:</strong> Detail specific, concrete actions you will take to prevent recurrence — make yourself accountable</span></li>
+          </ul>
+          <div class="app-tips"><strong>5 Tips:</strong> ① Don't pre-apologize — it signals that you know better but chose not to ② Don't wait too long — apologize while the memory is fresh and wounds are still open ③ Be specific, clear, and brief — one complete apology is enough ④ Never minimize the impact, even if it seems small to you ⑤ Not every tiny misstep warrants the full AAA structure — use judgment</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ QUICK REFERENCE ══════ -->
+<section id="frameworks" class="section ref-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-chip" style="background:rgba(245,158,11,.18);color:var(--gold);">Quick Reference</div>
+      <h2 class="section-title">All Frameworks at a Glance</h2>
+      <p class="section-sub">Your cheat sheet for spontaneous communication. Bookmark this section and return to it often.</p>
+    </div>
+
+    <div class="ref-grid">
+
+      <div class="ref-card">
+        <h3>What–So What–Now What</h3>
+        <div class="ref-situation">Universal · Small Talk · Updates · Q&amp;A</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">W</span><span>Describe the topic, idea, or argument</span></li>
+          <li><span class="ref-marker">S</span><span>Explain why it matters and is significant</span></li>
+          <li><span class="ref-marker">N</span><span>Suggest what the audience should do next</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>PREP</h3>
+        <div class="ref-situation">Answering Direct Questions</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">P</span><span>Make your Point clearly</span></li>
+          <li><span class="ref-marker">R</span><span>Give the Reason behind it</span></li>
+          <li><span class="ref-marker">E</span><span>Offer a concrete Example</span></li>
+          <li><span class="ref-marker">P</span><span>Return to the Point to close</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>Problem–Solution–Benefit</h3>
+        <div class="ref-situation">Pitching · Persuasion · Proposals</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">P</span><span>Define the problem or pain point</span></li>
+          <li><span class="ref-marker">S</span><span>Introduce your specific solution</span></li>
+          <li><span class="ref-marker">B</span><span>Describe the tangible benefits gained</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>ADD</h3>
+        <div class="ref-situation">Q&amp;A Sessions · Interviews · Meetings</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">A</span><span>Answer in one clear declarative sentence</span></li>
+          <li><span class="ref-marker">D</span><span>Detail a specific, concrete example</span></li>
+          <li><span class="ref-marker">D</span><span>Describe the value and relevance to the asker</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>WHAT</h3>
+        <div class="ref-situation">Toasts · Tributes · Introductions</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">W</span><span>Why are we here — the occasion</span></li>
+          <li><span class="ref-marker">H</span><span>How you are connected to the honoree</span></li>
+          <li><span class="ref-marker">A</span><span>Anecdotes or learnings (brief, relatable)</span></li>
+          <li><span class="ref-marker">T</span><span>Thank and offer well-wishes</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>The 4 I's</h3>
+        <div class="ref-situation">Giving Feedback</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">I</span><span>Information: observable facts only</span></li>
+          <li><span class="ref-marker">I</span><span>Impact: "I feel / I think…" — own it</span></li>
+          <li><span class="ref-marker">I</span><span>Invitation: collaborative request to change</span></li>
+          <li><span class="ref-marker">I</span><span>Implications: what happens either way</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>AAA</h3>
+        <div class="ref-situation">Apologies</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">A</span><span>Acknowledge: name the action, own it</span></li>
+          <li><span class="ref-marker">A</span><span>Appreciate: show you understand the impact</span></li>
+          <li><span class="ref-marker">A</span><span>Amends: specific, concrete steps to fix it</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>Comparison–Contrast–Conclusion</h3>
+        <div class="ref-situation">Evaluating Options · Recommendations</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">C</span><span>Comparison: how the options are similar</span></li>
+          <li><span class="ref-marker">C</span><span>Contrast: how the options differ</span></li>
+          <li><span class="ref-marker">C</span><span>Conclusion: your recommendation</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>STAR</h3>
+        <div class="ref-situation">Behavioral Interview Questions</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">S</span><span>Situation: the context and background</span></li>
+          <li><span class="ref-marker">T</span><span>Task: the challenge you faced</span></li>
+          <li><span class="ref-marker">A</span><span>Action: what you specifically did</span></li>
+          <li><span class="ref-marker">R</span><span>Result: outcome and what you learned</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>AMP — Anxiety Management Plan</h3>
+        <div class="ref-situation">Managing Speaking Anxiety</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">1</span><span>Choose 3–5 techniques for your specific symptoms</span></li>
+          <li><span class="ref-marker">2</span><span>Create a memorable acronym (BOOM, ARC, HSM…)</span></li>
+          <li><span class="ref-marker">3</span><span>Rehearse it before anticipated speaking events</span></li>
+          <li><span class="ref-marker">4</span><span>Test, iterate, and refine after each use</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>Pace, Space &amp; Grace</h3>
+        <div class="ref-situation">Active Listening</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">P</span><span>Pace: slow down, be fully present</span></li>
+          <li><span class="ref-marker">S</span><span>Space: clarify, paraphrase, reflect</span></li>
+          <li><span class="ref-marker">G</span><span>Grace: honor your inner voice too</span></li>
+        </ul>
+      </div>
+
+      <div class="ref-card">
+        <h3>Know · Feel · Do</h3>
+        <div class="ref-situation">Setting Precise Communication Goals</div>
+        <ul class="ref-steps-list">
+          <li><span class="ref-marker">K</span><span>Know: what information do you want them to have?</span></li>
+          <li><span class="ref-marker">F</span><span>Feel: what emotion do you want them to experience?</span></li>
+          <li><span class="ref-marker">D</span><span>Do: what action do you want them to take?</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ABOUT ═════════════════ -->
+<section id="about" class="section about-section">
+  <div class="container">
+    <div class="about-grid">
+
+      <div>
+        <div class="sec-chip" style="background:rgba(29,78,216,.1);color:var(--structure);display:inline-block;padding:.28rem .75rem;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;">About the Book</div>
+        <h2 class="section-title">From Stanford with Love</h2>
+        <p class="lead">Matt Abrahams is a leading expert in communication with decades of experience as an educator, author, podcast host, and coach. As a lecturer at Stanford University's Graduate School of Business, he teaches popular classes in strategic communication and has helped prepare presenters for Nobel Prize lectures, TED Talks, and World Economic Forum addresses.</p>
+        <p style="font-size:.95rem;line-height:1.75;color:var(--muted);margin-bottom:.85rem;">The workshop behind this book began when Stanford professors noticed brilliant MBA students were freezing up during in-class cold calls. Abrahams set to work, consulting academic journals in communication, psychology, evolutionary biology, sociology, and education — integrating insights from improvisational comedy, politics, business, and medicine.</p>
+        <p style="font-size:.95rem;line-height:1.75;color:var(--muted);margin-bottom:.85rem;">The result has helped people ace interviews, secure funding, pass oral exams, win new customers, impress bosses — and show up more fully for the moments that matter most in their lives.</p>
+
+        <div class="pull-quote" style="margin-top:1.8rem;">
+          <p>We humans are ill-equipped to show up for some of the most meaningful moments in our lives. These moments catch us by surprise, short-circuiting our intelligence. We can do something about this. We can train ourselves to think and speak on our feet — reacting in ways that are coherent, compelling, and unmistakably genuine.</p>
+          <cite>— Matt Abrahams, Introduction</cite>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-chip" style="background:rgba(245,158,11,.15);color:#92400e;display:inline-block;padding:.28rem .75rem;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;">What You'll Be Able to Do</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--navy);margin-bottom:1.4rem;">Skills Developed</h3>
+
+        <ul class="tips-list">
+          <li><div class="tip-dot">✓</div><span>Manage anxiety in the moment so it works <em>for</em> you rather than against you</span></li>
+          <li><div class="tip-dot">✓</div><span>Break free from mental shortcuts that prevent authentic, creative responses</span></li>
+          <li><div class="tip-dot">✓</div><span>Adopt mindsets that transform threatening moments into genuine opportunities</span></li>
+          <li><div class="tip-dot">✓</div><span>Listen at a deeper level — to others and to your own inner voice simultaneously</span></li>
+          <li><div class="tip-dot">✓</div><span>Structure ideas on the fly so they're clear, compelling, and memorable</span></li>
+          <li><div class="tip-dot">✓</div><span>Focus messages with precision, relevance, accessibility, and concision</span></li>
+          <li><div class="tip-dot">✓</div><span>Excel in small talk, toasts, pitches, Q&amp;A, feedback, and apologies</span></li>
+          <li><div class="tip-dot">✓</div><span>Show up fully — as your authentic self — even under the spotlight's glare</span></li>
+        </ul>
+
+        <div class="try-it" style="margin-top:1.5rem;">
+          <div class="try-it-hdr">✦ A Closing Thought</div>
+          <p>When Matt Abrahams received his first black belt, his sensei shook his hand and said: "Congratulations, you did very well. Now, let's get started." Spontaneous communication mastery is a journey, not a destination. You've begun — keep going. Practice multiple times a week, seek feedback, take improv classes, join Toastmasters, and return to these frameworks whenever you need them.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ════════════════ -->
+<footer>
+  <div class="foot-title">Think Faster, Talk Smarter</div>
+  <p>By <strong>Matt Abrahams</strong> · Lecturer, Stanford Graduate School of Business</p>
+  <p>Host of the <a href="https://www.gsb.stanford.edu/insights/think-fast-talk-smart-podcast" target="_blank" rel="noopener">Think Fast, Talk Smart Podcast</a></p>
+  <div class="foot-divider"></div>
+  <p>Published by Simon Element (Simon &amp; Schuster), 2023</p>
+  <p class="foot-note">This educational tribute website summarizes and presents key concepts from <em>Think Faster, Talk Smarter</em>. All intellectual content belongs to Matt Abrahams and the publisher. Created for educational and non-commercial purposes.</p>
+</footer>
+
+<script>
+  // ── Accordion toggle ──
+  function toggleStep(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  // Open the first step by default
+  document.getElementById('sc-calm').classList.add('open');
+
+  // ── Fade-in on scroll ──
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  // ── Active nav highlight ──
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) cur = s.id; });
+    navLinks.forEach(l => {
+      l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--gold)' : '';
+    });
+  }, { passive: true });
+
+  // ── Mobile nav close on link click ──
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.querySelector('.nav-links').style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>

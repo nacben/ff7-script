@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sapiens — A Brief History of Humankind</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-soft: #2a2520;
+  --parchment: #f4ede0;
+  --parchment-warm: #e8dcc4;
+  --ochre: #b8742a;
+  --ochre-deep: #8b5018;
+  --rust: #a0432a;
+  --bone: #d4c4a0;
+  --gold: #c8a655;
+  --moss: #5a6b3d;
+  --shadow: rgba(26, 22, 18, 0.15);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --display: 'Cinzel', serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--serif);
+  background: var(--parchment);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+  font-size: 18px;
+}
+
+/* Texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(184, 116, 42, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(90, 107, 61, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Navigation */
+nav.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  background: rgba(244, 237, 224, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+nav.topnav .brand {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+nav.topnav .links {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+nav.topnav .links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-weight: 500;
+}
+
+nav.topnav .links a:hover {
+  color: var(--ochre-deep);
+}
+
+@media (max-width: 768px) {
+  nav.topnav .links { display: none; }
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  background:
+    radial-gradient(ellipse at center top, rgba(200, 166, 85, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, var(--parchment) 0%, var(--parchment-warm) 100%);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  border: 1px solid rgba(184, 116, 42, 0.15);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border: 1px solid rgba(184, 116, 42, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.hero-handprint {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: var(--ink);
+  position: relative;
+  z-index: 1;
+}
+
+.hero .subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--ochre-deep);
+  margin-bottom: 3rem;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .lede {
+  max-width: 640px;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 3rem;
+}
+
+.hero .author {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  position: relative;
+  z-index: 1;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.6;
+  animation: bounce 2s infinite ease-in-out;
+  z-index: 1;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* SECTION STRUCTURE */
+section {
+  position: relative;
+  padding: 8rem 2rem;
+  z-index: 2;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.narrow {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* PART OPENER */
+.part-opener {
+  padding: 10rem 2rem 6rem;
+  text-align: center;
+  position: relative;
+}
+
+.part-opener .part-number {
+  font-family: var(--display);
+  font-size: 0.9rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ochre);
+}
+
+.part-opener h2 {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.part-opener .era {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ochre-deep);
+  margin-bottom: 2.5rem;
+}
+
+.part-opener .description {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  line-height: 1.8;
+}
+
+/* CHAPTER */
+.chapter {
+  margin-bottom: 6rem;
+}
+
+.chapter-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.chapter-num {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.chapter h3 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.chapter-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--ochre);
+  margin: 0 auto 2rem;
+}
+
+.chapter p {
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  line-height: 1.8;
+}
+
+.chapter p strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.chapter p em {
+  font-style: italic;
+  color: var(--ochre-deep);
+}
+
+/* DROP CAP */
+.drop-cap::first-letter {
+  font-family: var(--display);
+  font-size: 4.5rem;
+  float: left;
+  line-height: 0.85;
+  padding: 0.2rem 0.6rem 0 0;
+  color: var(--ochre-deep);
+  font-weight: 600;
+}
+
+/* PULL QUOTES */
+.pullquote {
+  margin: 4rem 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(184, 116, 42, 0.3);
+  border-bottom: 1px solid rgba(184, 116, 42, 0.3);
+  text-align: center;
+}
+
+.pullquote-text {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.4;
+  color: var(--ochre-deep);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pullquote-text::before {
+  content: '"';
+  font-family: var(--display);
+  font-size: 3rem;
+  color: var(--ochre);
+  display: block;
+  line-height: 0.5;
+  margin-bottom: 1rem;
+}
+
+/* TIMELINE */
+.timeline-section {
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 8rem 2rem;
+}
+
+.timeline-section h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  color: var(--parchment);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.timeline-section .subtitle {
+  text-align: center;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 5rem;
+  font-size: 1.2rem;
+}
+
+.timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg,
+    transparent,
+    var(--ochre) 5%,
+    var(--ochre) 95%,
+    transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1.5rem 3rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-item:nth-child(odd) {
+  margin-left: 0;
+  text-align: right;
+  padding-right: 3rem;
+  padding-left: 0;
+}
+
+.timeline-item:nth-child(even) {
+  margin-left: 50%;
+  text-align: left;
+  padding-left: 3rem;
+  padding-right: 0;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.timeline-item:nth-child(odd)::before {
+  right: -8px;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: -8px;
+}
+
+.timeline-date {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.timeline-event {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--parchment);
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .timeline::before { left: 20px; }
+  .timeline-item,
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    width: 100%;
+    margin-left: 0;
+    text-align: left;
+    padding-left: 3rem;
+    padding-right: 0;
+  }
+  .timeline-item::before,
+  .timeline-item:nth-child(odd)::before,
+  .timeline-item:nth-child(even)::before {
+    left: 12px;
+    right: auto;
+  }
+}
+
+/* THE THREE REVOLUTIONS GRID */
+.revolutions {
+  background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-warm) 100%);
+}
+
+.revolutions h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.revolutions .intro {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  margin-bottom: 5rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+}
+
+.revolutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.revolution-card {
+  background: var(--parchment);
+  padding: 3rem 2rem;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  border-top: 4px solid var(--ochre);
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.revolution-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(26, 22, 18, 0.12);
+}
+
+.revolution-card .number {
+  font-family: var(--display);
+  font-size: 3.5rem;
+  color: var(--ochre);
+  opacity: 0.3;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-weight: 600;
+}
+
+.revolution-card h3 {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.revolution-card .when {
+  font-style: italic;
+  color: var(--ochre-deep);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.revolution-card p {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* HUMAN SPECIES CARDS */
+.species-section {
+  background: var(--parchment-warm);
+}
+
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.species-card {
+  background: rgba(244, 237, 224, 0.6);
+  padding: 2rem;
+  border-left: 3px solid var(--ochre);
+  transition: all 0.4s ease;
+}
+
+.species-card:hover {
+  background: rgba(244, 237, 224, 0.95);
+  transform: translateX(4px);
+}
+
+.species-card h4 {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  font-style: italic;
+}
+
+.species-card .meaning {
+  font-size: 0.85rem;
+  color: var(--ochre-deep);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.species-card .location {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.species-card p {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* STATS / NUMBERS */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+  padding: 3rem 2rem;
+  background: rgba(184, 116, 42, 0.06);
+  border-radius: 2px;
+  border-left: 4px solid var(--ochre);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .figure {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--ochre-deep);
+  font-weight: 600;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat .label {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+/* COMPARISON TABLE */
+.comparison {
+  background: var(--parchment);
+  padding: 2.5rem;
+  margin: 3rem 0;
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  overflow-x: auto;
+}
+
+.comparison h4 {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--ink);
+}
+
+.comparison table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison th,
+.comparison td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  font-size: 0.95rem;
+}
+
+.comparison th {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ochre-deep);
+  font-weight: 600;
+}
+
+.comparison td:first-child {
+  font-weight: 500;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 1.05rem;
+}
+
+/* CONCEPT CARDS */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.concept-card {
+  padding: 2rem;
+  background: var(--parchment);
+  border: 1px solid rgba(26, 22, 18, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.concept-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--ochre);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s ease;
+}
+
+.concept-card:hover::before {
+  transform: scaleY(1);
+}
+
+.concept-card:hover {
+  background: rgba(244, 237, 224, 1);
+  transform: translateX(4px);
+}
+
+.concept-card h4 {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+}
+
+.concept-card p {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* IMAGINED ORDERS SECTION */
+.dark-section {
+  background: var(--ink);
+  color: var(--parchment);
+}
+
+.dark-section h2,
+.dark-section h3,
+.dark-section h4 {
+  color: var(--parchment);
+}
+
+.dark-section .chapter p {
+  color: rgba(244, 237, 224, 0.85);
+}
+
+.dark-section .chapter p strong {
+  color: var(--gold);
+}
+
+.dark-section .pullquote {
+  border-top-color: rgba(200, 166, 85, 0.3);
+  border-bottom-color: rgba(200, 166, 85, 0.3);
+}
+
+.dark-section .pullquote-text {
+  color: var(--gold);
+}
+
+.dark-section .pullquote-text::before {
+  color: var(--gold);
+}
+
+/* MONEY / EMPIRE / RELIGION ICONS */
+.unifier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.unifier {
+  background: rgba(244, 237, 224, 0.05);
+  border: 1px solid rgba(200, 166, 85, 0.2);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.unifier:hover {
+  background: rgba(200, 166, 85, 0.08);
+  border-color: rgba(200, 166, 85, 0.4);
+}
+
+.unifier-symbol {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 1.8rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.unifier h4 {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.unifier p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(244, 237, 224, 0.8);
+}
+
+/* BIG NUMBERS DISPLAY */
+.big-number {
+  text-align: center;
+  margin: 4rem 0;
+  padding: 3rem 1rem;
+}
+
+.big-number .figure {
+  font-family: var(--display);
+  font-size: clamp(3rem, 10vw, 7rem);
+  color: var(--ochre);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.big-number .context {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--ink-soft);
+  margin-top: 1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark-section .big-number .figure {
+  color: var(--gold);
+}
+
+.dark-section .big-number .context {
+  color: rgba(244, 237, 224, 0.8);
+}
+
+/* SECTION HEADERS */
+.section-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+/* CONCLUSION / GODS */
+.conclusion {
+  background: linear-gradient(180deg, var(--ink) 0%, #0d0a08 100%);
+  color: var(--parchment);
+  text-align: center;
+  padding: 10rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.conclusion::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at center, rgba(200, 166, 85, 0.1) 0%, transparent 50%);
+}
+
+.conclusion-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.conclusion h2 {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--gold);
+  margin-bottom: 2rem;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.conclusion p {
+  font-size: 1.3rem;
+  color: rgba(244, 237, 224, 0.85);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-family: var(--serif);
+}
+
+.conclusion .final-question {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--gold);
+  margin-top: 4rem;
+  line-height: 1.4;
+}
+
+/* FOOTER */
+footer {
+  background: #0d0a08;
+  color: rgba(244, 237, 224, 0.5);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(200, 166, 85, 0.15);
+}
+
+footer .footer-brand {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+footer .footer-tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+footer .footer-credit {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* SCROLL ANIMATIONS */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--ochre);
+  z-index: 200;
+  transition: width 0.1s ease;
+  width: 0;
+}
+
+/* SVG STYLES */
+.svg-art {
+  display: block;
+  margin: 3rem auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* SECTION DIVIDER ORNAMENT */
+.ornament {
+  text-align: center;
+  margin: 3rem 0;
+  color: var(--ochre);
+  font-family: var(--display);
+  font-size: 1.5rem;
+  letter-spacing: 1em;
+  opacity: 0.4;
+}
+
+/* HIGHLIGHT BOX */
+.highlight {
+  background: rgba(184, 116, 42, 0.08);
+  border-left: 4px solid var(--ochre);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.dark-section .highlight {
+  background: rgba(200, 166, 85, 0.08);
+  border-left-color: var(--gold);
+  color: rgba(244, 237, 224, 0.9);
+}
+
+/* SCIENCE / FUTURE SECTION */
+.future-section {
+  background: linear-gradient(180deg, var(--parchment) 0%, #ebe0c8 100%);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  section { padding: 5rem 1.5rem; }
+  .part-opener { padding: 6rem 1.5rem 4rem; }
+  .chapter p { font-size: 1.05rem; }
+  .hero { padding: 5rem 1.5rem 3rem; }
+  .stats-row { padding: 2rem 1.5rem; gap: 1.5rem; }
+  .comparison { padding: 1.5rem; }
+  .comparison table { font-size: 0.85rem; }
+  .comparison th, .comparison td { padding: 0.6rem 0.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav class="topnav">
+  <div class="brand">SAPIENS</div>
+  <div class="links">
+    <a href="#timeline">Timeline</a>
+    <a href="#cognitive">Cognitive</a>
+    <a href="#agricultural">Agricultural</a>
+    <a href="#unification">Unification</a>
+    <a href="#scientific">Scientific</a>
+    <a href="#future">Future</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <svg class="hero-handprint" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--ochre-deep);">
+    <path d="M50 90 C 50 90, 25 80, 22 60 C 20 45, 25 40, 30 38 L 30 25 C 30 18, 38 18, 38 25 L 38 38 L 42 38 L 42 18 C 42 11, 50 11, 50 18 L 50 38 L 54 38 L 54 20 C 54 13, 62 13, 62 20 L 62 40 L 66 40 L 66 28 C 66 22, 73 22, 73 28 L 73 50 C 78 52, 80 58, 78 65 C 75 80, 50 90, 50 90 Z" fill="rgba(184, 116, 42, 0.15)" />
+  </svg>
+  <h1>SAPIENS</h1>
+  <div class="subtitle">A Brief History of Humankind</div>
+  <p class="lede">
+    Once upon a time, in a corner of East Africa, an obscure ape rose from the savannah and remade the world. This is the story of how that animal of no significance became the master of the planet — and what it cost.
+  </p>
+  <div class="author">Inspired by the work of Yuval Noah Harari</div>
+  <div class="scroll-hint">Begin the journey ↓</div>
+</header>
+
+<!-- THE THREE REVOLUTIONS -->
+<section class="revolutions">
+  <div class="container">
+    <div class="section-eyebrow">The Architecture of Our Story</div>
+    <h2 class="section-title">Three Revolutions That Made Us</h2>
+    <p class="intro">Across the long arc of human existence, three great upheavals transformed what it means to be human. Each one rewrote the rules — and none of them was inevitable.</p>
+
+    <div class="revolutions-grid">
+      <div class="revolution-card">
+        <div class="number">I</div>
+        <h3>The Cognitive Revolution</h3>
+        <div class="when">~70,000 years ago</div>
+        <p>An invisible mutation in the Sapiens mind unlocked language, story, and shared imagination. Suddenly, strangers could cooperate by the thousands.</p>
+      </div>
+      <div class="revolution-card">
+        <div class="number">II</div>
+        <h3>The Agricultural Revolution</h3>
+        <div class="when">~12,000 years ago</div>
+        <p>We bent the earth to wheat and rice — or wheat and rice bent us. Settled life brought surplus, inequality, and a heavier human footprint.</p>
+      </div>
+      <div class="revolution-card">
+        <div class="number">III</div>
+        <h3>The Scientific Revolution</h3>
+        <div class="when">~500 years ago</div>
+        <p>By admitting our ignorance, we set out to acquire knowledge — and with it, the power to reshape the world, our bodies, and life itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="container">
+    <h2>The Long Arc</h2>
+    <p class="subtitle">A timeline from the birth of matter to the edge of tomorrow</p>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-date">13.8 billion years ago</div>
+        <div class="timeline-event">Matter and energy emerge. Physics begins. Atoms form. Chemistry follows.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">4.5 billion years ago</div>
+        <div class="timeline-event">Earth coalesces from cosmic dust.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">3.8 billion years ago</div>
+        <div class="timeline-event">The first organisms appear. Biology begins its long experiment.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">6 million years ago</div>
+        <div class="timeline-event">The last common ancestor of humans and chimpanzees.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2.5 million years ago</div>
+        <div class="timeline-event">Genus Homo evolves in Africa. The first stone tools.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">300,000 years ago</div>
+        <div class="timeline-event">Daily use of fire — light, warmth, and cooked meals.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">200,000 years ago</div>
+        <div class="timeline-event">Homo sapiens emerges in East Africa.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">70,000 years ago</div>
+        <div class="timeline-event">The Cognitive Revolution. Fictive language is born. History begins.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">45,000 years ago</div>
+        <div class="timeline-event">Sapiens cross the sea to Australia. The first wave of extinctions follows.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">30,000 years ago</div>
+        <div class="timeline-event">The Neanderthals vanish.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">13,000 years ago</div>
+        <div class="timeline-event">Homo sapiens becomes the only surviving human species.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">12,000 years ago</div>
+        <div class="timeline-event">The Agricultural Revolution. Plants and animals are domesticated.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">5,000 years ago</div>
+        <div class="timeline-event">The first kingdoms, scripts, money, and polytheistic religions.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">4,250 years ago</div>
+        <div class="timeline-event">Sargon of Akkad forges history's first empire.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2,500 years ago</div>
+        <div class="timeline-event">Coinage. Universal empires. Buddhism. The dream of one humanity.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2,000 years ago</div>
+        <div class="timeline-event">Han China. Imperial Rome. The birth of Christianity.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">500 years ago</div>
+        <div class="timeline-event">The Scientific Revolution. Europeans set out to conquer the oceans. Capitalism rises.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">200 years ago</div>
+        <div class="timeline-event">The Industrial Revolution. The family yields to state and market.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">The Present</div>
+        <div class="timeline-event">Humans transcend Earth. Nuclear weapons threaten survival. Intelligent design replaces natural selection.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-date">The Future?</div>
+        <div class="timeline-event">Sapiens replaced by superhumans? The first non-organic life forms?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART ONE: COGNITIVE REVOLUTION -->
+<section class="part-opener" id="cognitive">
+  <div class="part-number">Part One</div>
+  <h2>The Cognitive Revolution</h2>
+  <div class="era">70,000 years ago — the birth of imagination</div>
+  <p class="description">An ordinary ape acquires the ability to speak about things that do not exist — gods, nations, money, rights — and that strange power changes everything.</p>
+</section>
+
+<section>
+  <div class="container narrow">
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter One</div>
+        <h3>An Animal of No Significance</h3>
+        <div class="chapter-divider"></div>
+      </div>
+      <p class="drop-cap">For most of our existence, Homo sapiens was unremarkable. Two million years ago, you might have wandered into East Africa and met human beings who loved, played, formed friendships, and competed for status — but so did chimpanzees, baboons, and elephants. Nothing about these archaic hunters suggested that their descendants would split the atom, walk on the moon, or write history books.</p>
+
+      <p>We were one species of human among many. Neanderthals filled the cold woodlands of Europe. Homo erectus roamed Asia for nearly two million years — a durability our own species has not yet remotely approached. On the small Indonesian island of Flores, an entire population of humans shrank into dwarves. In a Siberian cave, geneticists recently discovered an unknown sibling, the Denisovans, from a single fossilized finger bone.</p>
+
+      <p>The fact that <strong>Homo sapiens belongs to the great ape family</strong> was, for centuries, a closely guarded secret. Our nearest living cousins are chimpanzees. Six million years ago, a single female ape had two daughters — one became the ancestor of all chimpanzees; the other became our grandmother.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">Prehistoric humans mattered no more to the ecosystem than gorillas, fireflies, or jellyfish. The crucial fact about our ancestors is how thoroughly unremarkable they were.</p>
+      </div>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">The Cost of Thinking</h4>
+      <p>Brains are expensive. The human brain accounts for 2–3% of body weight but devours 25% of the body's energy at rest. To pay for our jumbo brains, our ancestors had to spend more time foraging — and their muscles atrophied. A chimpanzee can rip a Sapiens apart like a rag doll. For two million years, our neural networks grew and grew, and yet the only thing humans had to show for it was flint knives and pointed sticks.</p>
+
+      <p>Why? We don't really know.</p>
+
+      <p>We also stood up. Walking upright freed our hands for throwing stones, signaling, and crafting tools. It came with a price: backaches, stiff necks, and a perilously narrow birth canal. Women began giving birth earlier, when infant heads were smaller. Human babies emerged dangerously underdeveloped — and dependent. <em>It takes a tribe to raise a human.</em></p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Our Lost Siblings</div>
+        <h3>The Family We Forgot</h3>
+        <div class="chapter-divider"></div>
+      </div>
+      <p>For most of human history, we were not alone. The earth was walked by at least six different species of man, all members of the genus Homo, each adapted to a different corner of the world.</p>
+
+      <div class="species-grid">
+        <div class="species-card">
+          <h4>Homo neanderthalensis</h4>
+          <div class="meaning">"Man from the Neander Valley"</div>
+          <div class="location">Europe & Western Asia</div>
+          <p>Bulkier and more muscular than us, with larger brains, perfectly adapted to Ice Age Eurasia. They cared for their sick.</p>
+        </div>
+        <div class="species-card">
+          <h4>Homo erectus</h4>
+          <div class="meaning">"Upright Man"</div>
+          <div class="location">East Asia</div>
+          <p>The most durable human species — surviving for nearly two million years. A record our own kind is unlikely to match.</p>
+        </div>
+        <div class="species-card">
+          <h4>Homo soloensis</h4>
+          <div class="meaning">"Man from the Solo Valley"</div>
+          <div class="location">Java, Indonesia</div>
+          <p>Suited to tropical life on a single Indonesian island, persisting in isolation until about 50,000 years ago.</p>
+        </div>
+        <div class="species-card">
+          <h4>Homo floresiensis</h4>
+          <div class="meaning">"Man from Flores"</div>
+          <div class="location">Flores, Indonesia</div>
+          <p>Stranded on an island poor in resources, this population shrank into dwarves no taller than 3.5 feet — hunting dwarf elephants.</p>
+        </div>
+        <div class="species-card">
+          <h4>Homo denisova</h4>
+          <div class="meaning">"Man from Denisova"</div>
+          <div class="location">Siberia</div>
+          <p>Known to us from a single fossil finger bone. Their DNA still lingers in modern Melanesians and Aboriginal Australians.</p>
+        </div>
+        <div class="species-card">
+          <h4>Homo sapiens</h4>
+          <div class="meaning">"Wise Man" (we named ourselves)</div>
+          <div class="location">East Africa</div>
+          <p>The species that wrote this story — and the only one left to tell it. The reasons for that fact may be incriminating.</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        It's a common fallacy to imagine our evolution as a straight line of ascent, with each species an older draft of ourselves. The truth is stranger: until about 10,000 years ago, multiple human species shared this planet. Our current loneliness, not the multi-species past, is the anomaly.
+      </div>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Two</div>
+        <h3>The Tree of Knowledge</h3>
+        <div class="chapter-divider"></div>
+      </div>
+      <p class="drop-cap">Around 70,000 years ago, something happened inside the Sapiens mind. We do not know what — perhaps an accidental genetic mutation, a subtle rewiring of neural circuits. Whatever it was, it gave us a power no other animal possessed.</p>
+
+      <p>We could speak about things that did not exist.</p>
+
+      <p>Every animal communicates. Bees dance the location of nectar; green monkeys cry distinct warnings for eagles and lions. But only Sapiens can say: <em>"The lion is the guardian spirit of our tribe."</em> Only Sapiens can describe entire categories of beings — souls, nations, currencies — that have no physical presence anywhere in the world.</p>
+
+      <p>This sounds trivial. It is not. <strong>Fiction allowed us to imagine things collectively.</strong> Two strangers who would never have trusted each other could pool funds to build a hospital because both believed in the same God. Two lawyers who have never met can combine efforts to defend a stranger because they both believe in the existence of laws, justice, and human rights.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">Gods, nations, money, human rights, laws, justice — none of them exist outside the shared imagination of human beings. They live in the stories we tell one another and dissolve the moment we stop believing.</p>
+      </div>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">The Legend of Peugeot</h4>
+      <p>Consider the company Peugeot. Founded as a small French metalworking shop in the 1810s, it now employs hundreds of thousands of strangers across the globe and produces millions of vehicles. In what sense does Peugeot exist? Its cars are not the company — junk them all and Peugeot remains. Fire every employee, demolish every factory — and the company can still hire new workers and build new plants.</p>
+
+      <p>Peugeot exists because we collectively imagine it exists. Lawyers call it a "legal fiction." It cannot be touched, photographed, or pointed at. It is a story we agreed to tell, and the story has consequences. The same is true of dollars, nations, gods, and human rights.</p>
+
+      <div class="highlight">
+        Telling stories is easy. Convincing millions of strangers to believe the same story is hard — but when it succeeds, it gives Sapiens immense power. It enables flexible cooperation among limitless numbers of strangers. That is why we rule the world, and chimps are locked up in zoos.
+      </div>
+
+      <p>This was the gift of the Cognitive Revolution. Behavior could now change without genes changing. A society could overturn its myths in a generation — the French could go from worshipping kings to declaring "Liberty, Equality, Fraternity" in a single year — and the structure of life would change with it. Our ape cousins remained captives of biology. We slipped onto the fast lane of culture.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Three</div>
+        <h3>A Day in the Life of Adam and Eve</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>For 95% of our existence as Sapiens, we lived as foragers. Our brains, our bodies, our anxieties and appetites were all shaped by that long apprenticeship in the wild. We are, in our deepest selves, hunters and gatherers — but we live now in cities of glass and steel.</p>
+
+      <p>The forager's life was not the Eden of romantic imagination, nor the brutish nightmare of Hobbesian myth. It was both — and neither. They had no calendars, no clocks, no offices. They knew the smell of rain before it came. They could identify every plant in their valley, the tracks of every animal. Their bodies were as fit as marathon runners. The average forager had wider, deeper, and more varied knowledge of her surroundings than most of her modern descendants.</p>
+
+      <div class="stats-row">
+        <div class="stat">
+          <span class="figure">35–45</span>
+          <span class="label">Hours of work per week in Kalahari foragers today</span>
+        </div>
+        <div class="stat">
+          <span class="figure">5–8M</span>
+          <span class="label">Foragers on Earth on the eve of agriculture</span>
+        </div>
+        <div class="stat">
+          <span class="figure">Dozens</span>
+          <span class="label">Different foods in a typical forager's diet</span>
+        </div>
+        <div class="stat">
+          <span class="figure">~150</span>
+          <span class="label">Maximum size of a band bonded by gossip</span>
+        </div>
+      </div>
+
+      <p>Some scholars call these "the original affluent societies." Their diet was varied and balanced. They worked less than modern office workers. They were spared the infectious diseases that would later sweep through dense agricultural settlements. They suffered less from famine than the farmers who replaced them, for they could move on when one food source failed.</p>
+
+      <p>And yet life could be cruel. Periods of want and accident took their toll. Child mortality was high. Among some forager societies, unwanted infants were killed. The old and the infirm could be abandoned. We must beware of demonizing them — and equally of romanticizing them. They were neither angels nor savages. They were human.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">Since the Cognitive Revolution there has been no single "natural" way for Sapiens to live. There are only cultural choices, drawn from a bewildering palette of possibilities.</p>
+      </div>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Four</div>
+        <h3>The Flood</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p class="drop-cap">When the first Sapiens stepped onto the sands of an Australian beach, no human had ever before set foot on that continent. The marsupial giants who roamed the interior — kangaroos the size of grizzly bears, marsupial lions, two-and-a-half-ton wombats — had no experience of two-legged hunters with stone-tipped spears.</p>
+
+      <p>Within a few thousand years, twenty-three of Australia's twenty-four large animal species were extinct.</p>
+
+      <p>The pattern would repeat. When Sapiens reached the Americas around 14,000 BCE, the great mammals of the New World — mammoths, mastodons, giant ground sloths, sabre-toothed cats, native horses and camels — vanished within two millennia. Wherever our species arrived, the giants died. New Zealand's giant moa: extinct within centuries of human arrival. The elephant birds of Madagascar: gone. The mammoths of Wrangel Island survived in isolation until the very moment humans arrived, around 4,000 years ago, then disappeared.</p>
+
+      <div class="big-number">
+        <div class="figure">≈ 50%</div>
+        <div class="context">of all the planet's large terrestrial mammals were driven extinct by Homo sapiens before we even invented the wheel.</div>
+      </div>
+
+      <p>The defenders of our species often blame climate change. But the climate had shifted many times before, and the giants survived. What was new was us — a slow-breeding predator they had no time to fear, equipped with fire, language, and the ability to coordinate in dozens.</p>
+
+      <div class="highlight">
+        Don't believe the comforting story that our ancestors lived in harmony with nature. Long before the smokestacks rose, Homo sapiens held the dubious distinction of being the deadliest species in the annals of biology. We were the first wave of extinction — a flood that has not yet ended.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PART TWO: AGRICULTURAL -->
+<section class="part-opener" id="agricultural" style="background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-warm) 100%);">
+  <div class="part-number">Part Two</div>
+  <h2>The Agricultural Revolution</h2>
+  <div class="era">12,000 years ago — the great bargain</div>
+  <p class="description">We thought we were domesticating wheat. Instead, wheat domesticated us. The Neolithic transition reshaped not only the land, but the very rhythms of human life — for better and for worse.</p>
+</section>
+
+<section class="species-section">
+  <div class="container narrow">
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Five</div>
+        <h3>History's Biggest Fraud</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p class="drop-cap">Imagine looking down on Earth from a great height, around 10,000 BCE. A patient observer would notice, in a few small valleys of the Middle East, a curious change. The people are spending more and more time tending a single kind of grass. They are pulling up other plants to make space for it. They are carrying water from rivers. They are building fences to keep out the rabbits. They are settling down beside their fields and never leaving.</p>
+
+      <p>From wheat's perspective, this was a triumph. Twelve thousand years ago, wheat was an obscure grass in a corner of the Middle East. Today it covers nearly a million square miles of the planet's surface — and humans labor from dawn to dusk to ensure it thrives.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">We did not domesticate wheat. It domesticated us.</p>
+      </div>
+
+      <p>From the human perspective, the deal was rather worse. The skeletons of early farmers reveal slipped discs, arthritis, hernias, and rotting teeth — the wages of bending over fields and grinding grain. Their diets were narrower and less nutritious than the forager's varied menu. Their settlements bred infectious diseases that no nomadic band could sustain. Their dependence on a single crop made them vulnerable to drought, blight, and locust.</p>
+
+      <p>So why did they do it?</p>
+
+      <div class="comparison">
+        <h4>Forager vs. Farmer</h4>
+        <table>
+          <tr>
+            <th>&nbsp;</th>
+            <th>Forager</th>
+            <th>Early Farmer</th>
+          </tr>
+          <tr>
+            <td>Diet</td>
+            <td>Varied: dozens of plants and animals</td>
+            <td>Narrow: dependent on one or two staples</td>
+          </tr>
+          <tr>
+            <td>Workload</td>
+            <td>~35–45 hours per week</td>
+            <td>Sunrise to sunset, year-round</td>
+          </tr>
+          <tr>
+            <td>Disease</td>
+            <td>Few epidemics; sparse populations</td>
+            <td>Plagues from livestock and dense settlements</td>
+          </tr>
+          <tr>
+            <td>Famine risk</td>
+            <td>Mobile — can move to other food</td>
+            <td>Catastrophic if the crop fails</td>
+          </tr>
+          <tr>
+            <td>Skeletal health</td>
+            <td>Tall, lean, athletic</td>
+            <td>Shorter, with chronic joint damage</td>
+          </tr>
+          <tr>
+            <td>Population</td>
+            <td>Small bands; slow growth</td>
+            <td>Explosive demographic boom</td>
+          </tr>
+        </table>
+      </div>
+
+      <p>The answer is the <strong>luxury trap</strong>. Each tiny step seemed to make life easier. Plant a few extra seeds for next year — sensible. Stay nearby through the harvest — practical. Build a granary to store the surplus — wise. By the time anyone realized that they had condemned themselves to lifetimes of backbreaking labor, there was no going back. A village of 110 cannot return to forage in a land that could support only 100.</p>
+
+      <div class="highlight">
+        One of history's few iron laws is that luxuries tend to become necessities and to spawn new obligations. The pursuit of an easier life produced unprecedented hardship — and not for the last time.
+      </div>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">The Animals Pay Too</h4>
+      <p>The bargain extended to other species. Sheep, goats, pigs, and chickens were rounded up, fenced in, and bred to be docile, slow, and fat. From an evolutionary perspective, this was their greatest triumph — there are billions of them today. From their individual perspective, it was a long catastrophe. Sows confined in crates that prevent them from turning around. Calves separated from their mothers within hours of birth. Chickens jammed into cages too small to spread a wing.</p>
+
+      <div class="big-number">
+        <div class="figure">~50 billion</div>
+        <div class="context">farm animals are slaughtered every year — one of the largest, and least examined, moral questions in human history.</div>
+      </div>
+
+      <p>The Agricultural Revolution taught us a lesson we would learn many times again: <em>a dramatic increase in the collective power and ostensible success of our species can go hand in hand with immense individual suffering.</em></p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Six</div>
+        <h3>Building Pyramids</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>The food surplus produced by farming did not, in the end, feed peasants. It fed pharaohs, priests, and tax collectors. It built palaces, fortresses, temples, and tombs. It funded armies and underwrote philosophies. The very few — the kings, the bureaucrats, the artists, the soldiers — could now live entirely on the labor of the very many.</p>
+
+      <p>This required a new kind of magic: the <strong>imagined order</strong>. How do you persuade a million people, most of whom will never meet, to obey the same king, pay the same taxes, and accept the same laws? You tell them a story so convincing — woven from gods and ancestors and natural law — that they forget the story is a story at all.</p>
+
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h4>Hammurabi's Code, c. 1776 BCE</h4>
+          <p>Anointed by the gods Anu, Enlil, and Marduk, the Babylonian king proclaimed a universal order. Superiors, commoners, and slaves had different values for their eyes, bones, and lives. Justice meant accepting your place.</p>
+        </div>
+        <div class="concept-card">
+          <h4>American Declaration, 1776 CE</h4>
+          <p>Three and a half millennia later, on the other side of the world, another foundational document was issued. "All men are created equal," it declared, "endowed by their Creator with certain unalienable rights."</p>
+        </div>
+      </div>
+
+      <p>Both texts claim to describe eternal, universal truth. Both rest on imagined foundations. There is no biological "equality," no objective "rights," no scientifically detectable "Creator endowing." Equality is not a fact — it is a story we agreed to tell, because it lets us build a stable society. So too was hierarchy. So too is everything we organize ourselves around.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">An imagined order is not an evil conspiracy or a useless mirage. It is the only way large numbers of humans can cooperate effectively.</p>
+      </div>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">How an Imagined Order Holds Us</h4>
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h4>It is embedded in the world</h4>
+          <p>Modern individualism shows itself in the design of houses — private bedrooms, locked doors, the room as the kingdom of the self. Medieval hierarchy lived in castles where the baron's son slept in a hall with twenty others.</p>
+        </div>
+        <div class="concept-card">
+          <h4>It shapes our desires</h4>
+          <p>"Follow your heart," we say. But the heart takes its instructions from the dominant myths of the day. The desire to take a holiday in Paris is no more "natural" than the medieval baron's desire to build a tomb.</p>
+        </div>
+        <div class="concept-card">
+          <h4>It is inter-subjective</h4>
+          <p>You alone cannot abolish the dollar, the law, or your nation. They exist in the linked imagination of millions. To change them, you must convince millions of others — and to do that, you usually need a new imagined order.</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        When we break down the prison walls of one imagined order, we usually find ourselves running into the more spacious exercise yard of a larger prison.
+      </div>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Seven</div>
+        <h3>Memory Overload</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>As empires grew, so did the floods of information they had to handle. Tax records. Inventories of grain. Lists of soldiers. Calendars of festivals. The human brain — exquisitely shaped to remember plants, animals, and the politics of a band of fifty — drowned in the data.</p>
+
+      <p>Around 3000 BCE, in southern Mesopotamia, some forgotten Sumerian genius solved the problem. They invented <strong>writing</strong>: a way to store information outside the human brain. The first written documents are not poems or prayers but tax accounts and inventories — the humble bookkeeping that would let kingdoms swell into empires.</p>
+
+      <p>And in the Andes, an entirely different solution emerged — the <em>quipu</em>, knotted cords of colored string. The Inca ran an empire of millions with no script at all, only patterns of knots that no modern scholar can fully decipher.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">The most important impact of script on human history is precisely this: it has gradually changed the way humans think and view the world.</p>
+      </div>
+
+      <p>Bureaucracy demanded a new way of thinking. Free association — the way the human brain naturally moves from a mortgage to a honeymoon to an opera — had to be replaced by drawers, files, categories. Numbers replaced narratives. Eventually, a partial script of ten Hindu-Arabic numerals would conquer the world — and a binary script of just two symbols, 0 and 1, would become the language in which our machines now speak to one another.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Eight</div>
+        <h3>There Is No Justice in History</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>Every imagined order has produced its hierarchies. Brahmins and Untouchables. Patricians and plebeians. Free and slave. White and Black. Man and woman. In every case, the people on top have insisted their elevation reflected the order of nature, the will of the gods, or the iron logic of biology. In every case, they were wrong.</p>
+
+      <p>Hierarchies, the historian discovers, almost always originate in accident — and then perpetuate themselves through vicious circles. The Hindu caste system arose from an ancient conquest. American racial hierarchy began with the geography of disease (Africans had partial immunity to malaria; Europeans did not) and the convenience of the existing African slave trade. The arrangement, born of chance, hardened into law, then into prejudice, then into the unconscious aesthetic standards of an entire civilization.</p>
+
+      <div class="highlight">
+        Unfortunately, complex human societies seem to require imagined hierarchies and unjust discrimination. No large society known to history has dispensed with it altogether. The categories shift — race, caste, religion, wealth — but the impulse to sort and rank seems permanent.
+      </div>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">He and She</h4>
+      <p>One hierarchy has shadowed nearly every society after the Agricultural Revolution: the hierarchy of gender. In almost every culture, men have got the better deal. Why?</p>
+
+      <p>The popular answers fail on close inspection.</p>
+
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h4>Muscle?</h4>
+          <p>On average, men are stronger in some ways. But social power has rarely correlated with physical strength. Aristocrats commanded slaves who could overpower them in a moment. Old men command armies of young men. The strongest are usually not in charge.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Aggression?</h4>
+          <p>Men do appear, on average, more disposed toward physical violence. But warfare is mostly run, not fought, by elites — and there is no obvious reason an army of men could not be commanded by women, just as armies of poor soldiers have always been commanded by aristocrats.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Reproductive strategy?</h4>
+          <p>Some argue that women, dependent on others during pregnancy and nursing, had to defer to men. But elephants and bonobos face the same constraints and run matriarchal societies built on female alliances. The Sapiens path is not biologically inevitable.</p>
+        </div>
+      </div>
+
+      <p>The truth is we don't know. What we do know is that the great patriarchal order is now changing more rapidly than at any other moment in human history. In a single century, women have moved from being legal property of their husbands in much of the world to holding office, leading nations, and rewriting the meaning of "man" and "woman." If the system was as ancient as the species, its dissolution should have been impossible. It is happening. Which suggests that, like every other imagined order, it was a story all along.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PART THREE: UNIFICATION -->
+<section class="part-opener dark-section" id="unification">
+  <div class="part-number">Part Three</div>
+  <h2 style="color: var(--gold);">The Unification of Humankind</h2>
+  <div class="era" style="color: var(--bone);">Three forces that wove the world into one</div>
+  <p class="description" style="color: rgba(244, 237, 224, 0.85);">For most of history, humans lived in thousands of separate worlds. Then three universal orders rose, each promising to embrace all of humankind — money, empire, and religion.</p>
+</section>
+
+<section class="dark-section">
+  <div class="container narrow">
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Nine</div>
+        <h3>The Arrow of History</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p class="drop-cap">Around 10,000 BCE, the planet held perhaps thousands of separate human worlds — tribes, valleys, islands, each spinning their own myths in their own languages, often unaware of one another's existence. By 1450 CE, that number had collapsed: 90% of all humans now lived in a single mega-world, the Afro-Asian sphere of trade and connection. By the 20th century, only one world remained.</p>
+
+      <p>Cultures are not stable. They are perpetually shifting, riven by contradictions that drive them forward. The medieval European knight was supposed to be both a humble Christian and a glorious warrior — an unresolved tension that produced the Crusades, the orders of the Temple, and the legends of King Arthur. Our own age is no different: we cherish both freedom and equality, two values that constantly collide. <em>Cognitive dissonance is not a flaw of the human mind. It is the engine of human history.</em></p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">If tensions, conflicts and irresolvable dilemmas are the spice of every culture, a human being who belongs to any particular culture must hold contradictory beliefs and be riven by incompatible values.</p>
+      </div>
+
+      <p>Three universal orders — three globalizing forces — pulled the scattered worlds together:</p>
+
+      <div class="unifier-grid">
+        <div class="unifier">
+          <div class="unifier-symbol">¥</div>
+          <h4>Money</h4>
+          <p>The most universal and efficient system of mutual trust ever devised. It speaks every language, crosses every border, and converts almost anything into almost anything else.</p>
+        </div>
+        <div class="unifier">
+          <div class="unifier-symbol">⚐</div>
+          <h4>Empire</h4>
+          <p>The most common political form in human history. Imperial visions are inclusive: ruler and subject, the empire claims, share a common humanity and benefit from a shared order.</p>
+        </div>
+        <div class="unifier">
+          <div class="unifier-symbol">☉</div>
+          <h4>Universal Religion</h4>
+          <p>Once each tribe had its own gods. Then arose the universal faiths — Buddhism, Christianity, Islam — that claimed one truth for all humans, missionary to the ends of the Earth.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ornament" style="color: var(--gold);">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Ten</div>
+        <h3>The Scent of Money</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>When Cortés arrived in the Aztec empire, the locals were astonished to learn that the strangers were obsessed with gold — a soft yellow metal that could not be eaten, drunk, or used as a tool. Asked why he wanted it so badly, Cortés replied that he and his men suffered from a disease of the heart that only gold could cure.</p>
+
+      <p>The Aztec sickness was alien only because they did not yet share it. Money is the great universal: it has bridged every culture, every faith, every era of human history once people learned to imagine it.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">Money is the only trust system created by humans that can bridge almost any cultural gap, and that does not discriminate on the basis of religion, gender, race, age, or sexual orientation.</p>
+      </div>
+
+      <p>How does it work? Through one impossible trick: <strong>convincing complete strangers to believe in the same fiction</strong>. A piece of green paper, a clay tablet inscribed with marks, a string of zeros in a database — none of these things have intrinsic value. They have value because everyone around me trusts them. And everyone around me trusts them because everyone around them does.</p>
+
+      <p>Money's power has a dark edge. Once everything can be exchanged for it, everything begins to be exchanged for it. Ancestral lands. Sacred objects. Loyalty. Time. Affection. The cold logic of supply and demand corrodes the warm laws of community, faith, and family. Money builds universal trust — but only in itself, never in the people exchanging it.</p>
+    </div>
+
+    <div class="ornament" style="color: var(--gold);">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Eleven</div>
+        <h3>Imperial Visions</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>Empire is humanity's most successful political form. For more than two millennia, most people on Earth have lived under an empire. We treat the word now as an insult — but to ignore empire's record is to disavow most of the human past, including most of what we love about our own cultures.</p>
+
+      <p>The Roman Empire crushed Numantia, leveled Carthage, and ended hundreds of small peoples. It also gave us Latin, the legal system, the calendar, and the architectural language in which modern parliaments still meet. The British Empire was responsible for famines and massacres — and also for the railways, parliaments, and lingua franca of half the modern world. To say "empires are evil" is true. To say "empires gave us most of our civilization" is also true. We have not yet learned to hold both thoughts at once.</p>
+
+      <div class="highlight">
+        Almost all of us today speak languages, follow laws, eat foods, and inhabit cultures forged by some empire or another. There is no "pure" tradition uncontaminated by the legacy of conquest — only older empires and newer ones.
+      </div>
+
+      <p>From Cyrus the Great onward, empires have sold themselves with a universal vision: "We are conquering you for your own good." The Persians believed it. The Romans believed it. The Chinese, the Muslims, the British, the Americans — each in turn has promised to bring peace, justice, and culture to the benighted. The promise was often a lie. It was sometimes, partly, true.</p>
+    </div>
+
+    <div class="ornament" style="color: var(--gold);">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Twelve</div>
+        <h3>The Law of Religion</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>Religion is the third great unifier — and the most flexible. A religion, in this telling, is any system of human norms and values founded on a belief in a superhuman order. By this definition, Buddhism is a religion. So is Communism. So, perhaps, is capitalism, and humanism, and the cult of the individual self.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">Religion can be defined as a system of human norms and values that is founded on a belief in a superhuman order.</p>
+      </div>
+
+      <p>The early religions were local. Each valley had its spirits; each rock and tree had its will. Then the gods grew larger. Then there was only one God. Then, in our era, even the one God receded — replaced by new "natural-law" creeds: liberalism, nationalism, the conviction that progress is real and good. These newer faiths rarely call themselves religions. But they answer the same questions, command the same loyalties, and demand the same sacrifices.</p>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--gold);">The Worship of Man</h4>
+      <p>Modern humanism — the conviction that human feelings, human freedom, and human dignity are the supreme sources of meaning — replaced the old religions for much of the world. It is the unspoken creed of our schools, parliaments, courtrooms, hospitals, and stock exchanges. "Follow your heart." "The customer is always right." "The voter knows best." These are the commandments of a faith we no longer recognize as a faith.</p>
+
+      <p>Yet science is now eroding humanism's foundations. If our feelings and choices are products of hormones, genes, and synapses, in what sense are they sacred? In what sense are they ours? The wall between biology and politics, so carefully maintained, is beginning to crack.</p>
+    </div>
+
+    <div class="ornament" style="color: var(--gold);">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Thirteen</div>
+        <h3>The Secret of Success</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>Why did Christianity prevail over Manichaeism? Why did Islam burst out of Arabia and conquer half the world? Why did capitalism arise in Europe rather than India? Why did the Scientific Revolution begin in a damp corner of the Atlantic rather than in Beijing or Baghdad?</p>
+
+      <p>We do not know.</p>
+
+      <p>History is what physicists call a "second-order chaotic system." Predictions about it change what it predicts. The moment we forecast a revolution, the rulers act to prevent it. The moment we forecast a stock crash, traders sell. History will not stand still long enough to be modeled.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">We study history not to know the future but to widen our horizons — to understand that our present situation is neither natural nor inevitable, and that we consequently have many more possibilities before us than we imagine.</p>
+      </div>
+
+      <p>Worse, history does not seem to be moving toward anything in particular. It is not selecting for human happiness, or human freedom, or human wisdom. It moves — but the direction is set not by us but by ideas that propagate the way viruses do, indifferent to the welfare of the hosts they ride.</p>
+
+      <p>And yet here we are, the inheritors of one particular branch of that wild and contingent tree. The cards we have been dealt are the cards we must play. We turn now to the strangest hand in the entire game: the Scientific Revolution.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PART FOUR: SCIENTIFIC -->
+<section class="part-opener" id="scientific" style="background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-warm) 100%);">
+  <div class="part-number">Part Four</div>
+  <h2>The Scientific Revolution</h2>
+  <div class="era">500 years ago — and the door of the future swings open</div>
+  <p class="description">In five centuries, our species has multiplied sixteen-fold, expanded its economy two-hundred-fold, and stepped off its home planet. The acceleration that began with a confession of ignorance shows no sign of slowing.</p>
+</section>
+
+<section>
+  <div class="container narrow">
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Fourteen</div>
+        <h3>The Discovery of Ignorance</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p class="drop-cap">If a 16th-century Spanish peasant had fallen asleep and woken in the year 2024, his world would be unrecognizable. The cities, the speed, the light, the sound, the medicines, the rights, the food, the wars, the entertainment, the inner life — all of it transformed beyond recognition.</p>
+
+      <p>The Spanish peasant's grandparents, by contrast, would have found his own world rather familiar.</p>
+
+      <div class="stats-row">
+        <div class="stat">
+          <span class="figure">16×</span>
+          <span class="label">Human population increase since 1500</span>
+        </div>
+        <div class="stat">
+          <span class="figure">200×</span>
+          <span class="label">Increase in global economic production</span>
+        </div>
+        <div class="stat">
+          <span class="figure">86×</span>
+          <span class="label">Increase in daily energy consumption</span>
+        </div>
+        <div class="stat">
+          <span class="figure">+45 yrs</span>
+          <span class="label">Increase in average life expectancy</span>
+        </div>
+      </div>
+
+      <p>What set off this avalanche? Not new technology — at first, there was none. Not new resources — the world was already full of them. Not even, at the start, more intelligent people. The Scientific Revolution began with a single, modest, devastating admission:</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">We do not know.</p>
+      </div>
+
+      <p>For most of history, every culture believed that everything important was already known. The truth was in the scriptures, in the words of the wise ancestors, in the songs of the elders. Questions for which the tradition had no answer were not worth asking. If God had wanted you to understand how spiders spin webs, He would have put it in the Bible.</p>
+
+      <p>The Scientific Revolution turned this upside down. <em>Maybe we are missing something. Maybe the answers are not in the old books. Maybe we should look.</em> This was not just a new method — it was a new humility. And from that humility came an unprecedented engine of power: observation, mathematics, and the relentless conversion of new knowledge into new capabilities.</p>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">Knowledge Is Power</h4>
+      <p>Francis Bacon, writing in 1620, made the alliance explicit. The point of knowledge is power. The test of a theory is not whether it is beautiful, comforting, or pious — but whether it lets us do something we could not do before. Defeat scurvy. Vaccinate a child. Split an atom. Reach the moon.</p>
+
+      <p>For three centuries, the scientists, the kings, and the merchants forged ever-tighter bonds. The merchants paid for the research; the kings protected the merchants; the scientists rewarded both with new powers that bought more research. Money flowed into laboratories. Discoveries flowed back. Today, this circuit hums so loudly we hear nothing else.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Fifteen</div>
+        <h3>The Marriage of Science and Empire</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>When Captain James Cook sailed into the Pacific in 1768, he carried astronomers, botanists, artists, and a crate of sauerkraut. His mission was, on paper, scientific: to observe the transit of Venus, gather specimens, map unknown coasts. It was also a mission of conquest. The two were the same mission.</p>
+
+      <p>European imperialism differed from every prior expansion in history. Where earlier conquerors set out believing they already understood the world, the Europeans went out admitting they did not. They drew maps with blank spaces, and the blank spaces drew them. <em>I do not know what is out there. I had better go and see — and seize it.</em></p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">The plant-seeking botanist and the colony-seeking naval officer shared a similar mindset. Both began by admitting ignorance — and both hoped that the knowledge they gained would make them masters of the world.</p>
+      </div>
+
+      <p>The two enterprises fed each other. Conquest provided the data; data provided the means of further conquest. Linguists deciphered cuneiform so emperors could rule Iraq. Botanists cataloged Indian flora to extract maximum revenue from the soil. Archaeologists unearthed civilizations the locals had forgotten — and in the same gesture, claimed those civilizations as the new empire's heritage.</p>
+
+      <p>By 1900, Europeans controlled most of the planet's territory and most of its wealth. The continent that had once been an unremarkable peninsula on the western edge of Asia now ruled an entire world it had largely refashioned in its own image. Even today — long after the empires have fallen — almost everyone on Earth thinks in European-inflected categories about science, economics, rights, and progress.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Sixteen</div>
+        <h3>The Capitalist Creed</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>The economy is a story about the future.</p>
+
+      <p>Before modernity, almost everyone assumed the global economic pie was fixed. If I prosper, you must suffer. If Venice grows rich, Genoa must grow poor. Lending money at interest was sinful in many cultures — and economically irrational in nearly all of them, since why would you trust a future that promised to be no larger than the present?</p>
+
+      <p>The Scientific Revolution introduced a radical idea: <strong>the pie is growing</strong>. New discoveries, new lands, new technologies will produce wealth that did not exist before. Investing in the future is not foolish; it is wise. Lending is not a sin; it is the engine of prosperity. <em>Credit</em> — that magic substance that allows us to spend tomorrow's wealth today — became possible only when enough people believed that tomorrow would, in fact, be richer.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">In the new capitalist creed, the first and most sacred commandment is: the profits of production must be reinvested in increasing production.</p>
+      </div>
+
+      <p>Adam Smith's revolutionary insight was that the greedy baker, hiring more assistants to produce more bread, creates wealth for everyone. Selfishness — usually a sin — becomes a virtue. The collective pie grows. Everyone, eventually, eats more.</p>
+
+      <p>The promise has not always held. The same growth that lifted millions out of poverty depended on slave plantations in the Caribbean, the opium trade with China, the destruction of indigenous economies on three continents, and a working class whose labor was bought as cheaply as the laws of supply and demand would allow.</p>
+
+      <div class="highlight">
+        Capitalism has killed millions not out of hatred but out of cold indifference. The Atlantic slave trade was not driven by racial loathing — it was a business arrangement, a portfolio investment in a stock market, paying steady dividends of around 6% a year.
+      </div>
+
+      <p>And the growth must continue. A capitalist economy that does not grow contracts; an economy that contracts collapses. We are committed, by the logic of the system we have built, to producing more and more, forever — a strange demand to make of a finite planet.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Seventeen</div>
+        <h3>The Wheels of Industry</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>The Industrial Revolution was, at heart, a revolution in energy. For nearly all of history, almost every joule of human work came, in the end, from plants. Plants captured sunlight; humans and oxen ate the plants; their muscles did the work. When you wanted a wagon built, you fed a carpenter porridge.</p>
+
+      <p>Then we learned to convert heat into motion. A kettle's jumping lid had been an annoyance for thousands of years. Suddenly it became the steam engine, then the locomotive, then the factory, then the airplane, then the bomb.</p>
+
+      <div class="big-number">
+        <div class="figure">3,766,800</div>
+        <div class="context">exajoules of solar energy reach Earth each year. Humanity's total annual energy use is about 500 exajoules — the amount the sun delivers in ninety minutes.</div>
+      </div>
+
+      <p>The world is not running out of energy. It is bathed in energy. The constraint has always been our ignorance of how to capture and convert it. Every previous "energy crisis" has yielded to a new technology: the steam engine, the internal combustion engine, electricity, nuclear power, solar panels.</p>
+
+      <p>Industry transformed everything it touched — including, profoundly, the way we relate to other living beings. Cattle, pigs, and chickens became, in industrial agriculture, less like animals than like factory components. A modern dairy cow has been bred and managed to produce more milk than any cow could have made a century ago. Her life is short, indoor, and grim. Her productivity is unprecedented. The two facts are inseparable.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Eighteen</div>
+        <h3>A Permanent Revolution</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>The Industrial Revolution shattered the most ancient unit of human life: the family and the local community. For tens of thousands of years, these had been the welfare system, the police force, the school, the bank, the doctor, and the matchmaker. A person torn from her family in 1750 was, for practical purposes, dead.</p>
+
+      <p>The state and the market made a bargain with the individual: <em>leave your family and community, and we will protect you. We will educate your children. We will pay your pension. We will heal your wounds and resolve your disputes. You need only one thing of us: trust us.</em></p>
+
+      <div class="highlight">
+        Romantic literature presents the individual as struggling against the state and the market. Nothing could be further from the truth. The state and the market are the mother and father of the modern individual. We can survive only thanks to them.
+      </div>
+
+      <p>Where family and community once gave us belonging, we now construct identities from <strong>imagined communities</strong>: nations of millions who feel themselves brothers and sisters, consumer tribes of fans and followers, the global Instagram of strangers we know intimately and have never met.</p>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">Peace in Our Time</h4>
+      <p>Here is one of the great surprises of the modern era. Despite the world wars, despite the genocides, despite the nuclear arsenals — the period since 1945 has been the most peaceful in human history. Real peace is not the absence of war but the implausibility of war. For most pairs of nations, full-scale conflict has become almost unthinkable. War between France and Germany? Between Brazil and Argentina? It is hard to construct the scenario.</p>
+
+      <p>Four forces have transformed the calculus:</p>
+
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h4>The price of war has soared</h4>
+          <p>Nuclear weapons turned great-power conflict into collective suicide. Even conventional war between developed nations is now ruinously expensive.</p>
+        </div>
+        <div class="concept-card">
+          <h4>The profits of war have shrunk</h4>
+          <p>Wealth today consists of human capital and know-how — assets that flee occupying armies rather than fall into their hands. Silicon Valley's wealth cannot be seized; the engineers will simply leave.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Peace has grown lucrative</h4>
+          <p>Modern economies depend on global trade and foreign investment. Peace yields profits in a way it never did before.</p>
+        </div>
+        <div class="concept-card">
+          <h4>A new global elite</h4>
+          <p>For the first time, the people who rule the world are largely peace-loving — politicians, business leaders, intellectuals who genuinely see war as evil and avoidable.</p>
+        </div>
+      </div>
+
+      <p>This peace is real. It is also fragile. The decade since this story was first told has brought reminders that the comfortable assumptions of the post-1945 world cannot be taken for granted. Old wars have returned. New tensions have risen. We move, as the historian Yuval Noah Harari has written, "nervously between the gateway of one and the anteroom of the other."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- HAPPINESS -->
+<section class="future-section">
+  <div class="container narrow">
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Nineteen</div>
+        <h3>And They Lived Happily Ever After?</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p class="drop-cap">Here is the question historians almost never ask: <em>was it all worth it?</em> Are we happier than our ancestors? Did the wealth, the freedom, the medicines, the political revolutions, the moonshots — did any of it make us, deep in our hearts, more content?</p>
+
+      <p>The intuitive answer is yes. Of course we are happier. Our children survive. Our toothaches are fixed. We are not enslaved or beaten. We can love whom we choose and travel where we wish. Surely a contemporary office worker is happier than a Mesopotamian peasant or a medieval serf.</p>
+
+      <p>But the science of happiness suggests something stranger.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">Happiness does not really depend on objective conditions of either wealth, health, or even community. Rather, it depends on the correlation between objective conditions and subjective expectations.</p>
+      </div>
+
+      <p>Studies of subjective well-being have produced several uncomfortable findings:</p>
+
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h4>Money helps — to a point</h4>
+          <p>Rising from poverty to comfort dramatically improves happiness. Rising from comfort to wealth has almost no effect. Lottery winners return, within months, to roughly their previous emotional baseline.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Family matters most</h4>
+          <p>The single largest correlate of subjective well-being is the quality of one's marriage, family, and community ties — the very things the modern world has dismantled most rigorously.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Expectations defeat reality</h4>
+          <p>When things improve, expectations balloon faster. A medieval peasant who got enough to eat felt blessed. A modern citizen with running water, antibiotics, and the internet often feels deprived.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Biochemistry is sovereign</h4>
+          <p>Mood is regulated by serotonin, dopamine, oxytocin. The same biochemical thermostat resets after almost any external change — winning the lottery, falling in love, losing a leg. We return to baseline.</p>
+        </div>
+      </div>
+
+      <h4 style="font-family: var(--display); font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--ink);">The Meaning of It All</h4>
+      <p>Perhaps happiness is not about feelings at all. Perhaps it is about meaning — the sense that one's life is part of a larger story worth living. A medieval pilgrim suffering on the road to Jerusalem may have been more content than a modern tourist on a luxury cruise, because the pilgrim was sure his suffering counted for something.</p>
+
+      <p>The Buddha offered a more radical answer: happiness is not the satisfaction of cravings, but their cessation. We spend our lives chasing pleasant feelings and fleeing unpleasant ones — and the chase itself is the suffering. To be free, watch the feelings rise and fall without grasping. The ocean does not need to hold any particular wave.</p>
+
+      <p>The historian's verdict is uncertain. The Stone Age forager, the medieval peasant, the Victorian factory worker, the modern executive — each lived in a different web of expectations and meanings. Whether any of them was "happier" than the others may be a question that admits no answer at all.</p>
+    </div>
+
+    <div class="ornament">· · ·</div>
+
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">Chapter Twenty</div>
+        <h3>The End of Homo Sapiens</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p>For four billion years, every organism on Earth obeyed the same set of rules. Variation, selection, descent with modification — the slow, blind, beautiful logic of natural selection. No giraffe ever decided to grow a longer neck. No bird ever chose its wings.</p>
+
+      <p>That regime is now ending.</p>
+
+      <p>We have begun to redesign life itself. We have inserted jellyfish genes into rabbits to make them glow. We have engineered mice with vastly improved memory. We have mapped the genomes of our extinct relatives — the Neanderthals, the Denisovans — and are seriously discussing whether to bring them back. We have grown human ears on the backs of laboratory mice. We have connected human brains to robotic limbs that move at the speed of thought.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">For close to four billion years, every single organism on the planet evolved subject to natural selection. Not one was designed by an intelligent creator. We are about to change that.</p>
+      </div>
+
+      <p>Three roads lead away from natural selection:</p>
+
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h4>Biological Engineering</h4>
+          <p>Direct intervention at the genetic level — to extend life, cure disease, perhaps to upgrade memory, focus, mood, and intelligence. Cells we can edit. Genes we can rewrite. A human being we can redesign.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Cyborg Engineering</h4>
+          <p>The fusion of organic and inorganic. Bionic limbs that move at the speed of thought. Cochlear implants. Retinal chips. Brain-computer interfaces. The line between self and machine begins to blur.</p>
+        </div>
+        <div class="concept-card">
+          <h4>Inorganic Life</h4>
+          <p>Software that can learn, adapt, perhaps one day feel. Programs that evolve their own strategies, write their own code, possibly invent their own goals. Life made of silicon rather than carbon.</p>
+        </div>
+      </div>
+
+      <p>Sapiens, in other words, may not be the final chapter. Our successors may not be Sapiens at all. They may be biologically engineered superhumans. They may be cyborgs. They may be artificial intelligences whose values, desires, and inner lives we cannot begin to imagine — beings as different from us as we are from chimpanzees, or as chimpanzees are from snails.</p>
+
+      <div class="highlight">
+        Producing a film about the life of some future super-cyborg is akin to producing Hamlet for an audience of Neanderthals. Our descendants may well be more different from us than we are different from Australopithecus.
+      </div>
+
+      <p>This is no longer science fiction. It is the daily business of biotech firms and AI laboratories. The question is no longer whether — but when, and at whose hand, and with what intent.</p>
+
+      <p>Most public conversation about the future asks: <em>What is it forbidden to do?</em> Can we clone a sheep? Edit an embryo? Train an AI on copyrighted text? Build an autonomous weapon? These are necessary questions. They are also probably futile. The forces that drive this revolution — the quest to cure disease, extend life, enhance capability — cannot be switched off any more than the Industrial Revolution could be reversed.</p>
+
+      <p>So the better question, perhaps the only useful one, is the one with which the historian closes the book:</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">The real question facing us is not "What do we want to become?" but "What do we want to want?"</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AI / FUTURE NOTE -->
+<section class="dark-section" id="future">
+  <div class="container narrow">
+    <div class="chapter">
+      <div class="chapter-header">
+        <div class="chapter-num">An Afterword</div>
+        <h3>The Animal That Hacked Its Own Stories</h3>
+        <div class="chapter-divider"></div>
+      </div>
+
+      <p class="drop-cap">A decade after this history was first written, the future arrived faster than expected. The artificial intelligence that once seemed a century away is now in our pockets, our hospitals, our courtrooms, our newsfeeds, and our minds. It can compose music, diagnose disease, draft contracts, write poetry, generate faces of people who do not exist, and converse fluently in languages it was never explicitly taught.</p>
+
+      <p>Throughout this story, we have returned to a single thesis: <strong>Homo sapiens conquered the world because we could tell stories</strong>. Stories about gods, money, nations, corporations, human rights. Stories that bound strangers into vast networks of cooperation. Until now, only Sapiens could invent these fictions.</p>
+
+      <p>That is no longer true.</p>
+
+      <div class="pullquote">
+        <p class="pullquote-text">For the first time in history, we share the planet with a non-human intelligence that can compose its own stories. The operating system of human civilization has been hacked.</p>
+      </div>
+
+      <p>What happens when the next great religion, the next great ideology, the next great work of art is produced not by a prophet or poet but by an algorithm trained on every word our species has ever written? What happens when AI invents new corporations, new financial instruments, new moral systems? What happens when culture itself — the long human project of imagined order — passes into other hands?</p>
+
+      <p>We do not know. We have a brief window — a few decades, perhaps — in which Homo sapiens remains the protagonist of its own story. After that, the next chapters may be written in a voice not our own.</p>
+
+      <p>What we make of this window is the most important decision our species has ever faced. The technologies cannot be uninvented. The momentum cannot be halted. But they can be shaped. The values, the priorities, the regulations, the stories we tell about these new powers — all of these are still in our hands. For a little while longer.</p>
+
+      <div class="highlight">
+        Every technology can be used for many different purposes. We can yet shape the technology we are creating. The decisions of the next decade may determine the shape of the next millennium.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="conclusion">
+  <div class="conclusion-content">
+    <h2>The Animal That Became a God</h2>
+
+    <p>Seventy thousand years ago, Homo sapiens was an insignificant ape minding its own business in a corner of Africa. We have transformed ourselves, in that astonishingly short interval, into the master of the planet and the terror of its ecosystems. We stand now on the verge of becoming gods — capable not only of eternal youth, but of the divine powers of creation and destruction.</p>
+
+    <p>And yet what have we made of this dominion? We have mastered our surroundings, multiplied our food, raised cities, founded empires, woven trade across the entire globe — but did we ease the suffering in the world? Did we make the lives of our fellow creatures better? Did we even, in the deepest sense, make ourselves happier?</p>
+
+    <p>The honest answer is uncertain. Famine and plague retreat. War is the rarest it has ever been. Yet other beings on this planet suffer at a scale unprecedented in life's history, and we ourselves remain restless, anxious, never satisfied. We have built rockets and skyscrapers, but we have not yet learned what to want.</p>
+
+    <p class="final-question">
+      Is there anything more dangerous<br>than dissatisfied and irresponsible gods<br>who do not know what they want?
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">SAPIENS</div>
+  <div class="footer-tagline">A Brief History of Humankind</div>
+  <div class="footer-credit">An educational reflection on the work of Yuval Noah Harari</div>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrollPercent = (scrollTop / scrollHeight) * 100;
+  document.getElementById('progress').style.width = scrollPercent + '%';
+});
+
+// Reveal on scroll
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Apply reveal to chapters, cards, timeline items
+document.querySelectorAll('.chapter, .revolution-card, .species-card, .concept-card, .unifier, .stat, .pullquote, .highlight, .big-number, .timeline-item, .comparison').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+
+// Smooth scroll for nav
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Subtle nav background on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav.topnav');
+  if (window.scrollY > 100) {
+    nav.style.boxShadow = '0 2px 20px rgba(26, 22, 18, 0.06)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+</script>
+
+</body>
+</html>

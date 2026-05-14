@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yes, And — The Second City Guide to Business Improvisation</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a28;
+      --accent: #e8c84a;
+      --accent2: #c4a030;
+      --red: #e85555;
+      --blue: #4a8fe8;
+      --green: #55c48a;
+      --purple: #a855f7;
+      --text: #e8e4d8;
+      --muted: #9994a8;
+      --border: #2a2a40;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 40%, #1e1030 0%, var(--bg) 70%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 80px,
+        rgba(232,200,74,0.03) 80px,
+        rgba(232,200,74,0.03) 81px
+      );
+      pointer-events: none;
+    }
+
+    .hero-spotlight {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,200,74,0.07) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      color: var(--accent);
+      text-shadow: 0 0 80px rgba(232,200,74,0.3);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: var(--muted);
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    .hero-desc {
+      max-width: 700px;
+      font-size: 1.1rem;
+      color: var(--text);
+      opacity: 0.85;
+      margin-bottom: 3rem;
+    }
+
+    .hero-authors {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--accent2);
+      margin-bottom: 4rem;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(45deg);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-inner::-webkit-scrollbar { display: none; }
+
+    .nav-logo {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      padding: 1rem 1.5rem 1rem 0;
+      white-space: nowrap;
+      border-right: 1px solid var(--border);
+      margin-right: 1rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      padding: 1rem 1rem;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .container-wide {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    p {
+      color: rgba(232,228,216,0.82);
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── DEDICATION ── */
+    .dedication {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dedication-box {
+      background: linear-gradient(135deg, rgba(232,200,74,0.06) 0%, rgba(168,85,247,0.04) 100%);
+      border: 1px solid rgba(232,200,74,0.2);
+      border-radius: 4px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .dedication-box::before,
+    .dedication-box::after {
+      content: '"';
+      font-size: 6rem;
+      color: var(--accent);
+      opacity: 0.15;
+      position: absolute;
+      line-height: 1;
+    }
+
+    .dedication-box::before { top: 0.5rem; left: 1.5rem; }
+    .dedication-box::after { bottom: -1rem; right: 1.5rem; }
+
+    .dedication-text {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      opacity: 0.9;
+      line-height: 1.8;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: var(--bg);
+    }
+
+    .big-quote {
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+      background: rgba(232,200,74,0.04);
+    }
+
+    .big-quote p {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    .big-quote cite {
+      font-size: 0.8rem;
+      font-style: normal;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SEVEN ELEMENTS ── */
+    .elements {
+      background: var(--surface);
+    }
+
+    .elements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .element-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.2s;
+      cursor: default;
+    }
+
+    .element-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .element-number {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .element-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .element-card h3 {
+      color: var(--accent);
+      font-size: 1.15rem;
+    }
+
+    .element-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    /* ── YES AND DEEP ── */
+    .yes-and {
+      background: var(--bg);
+    }
+
+    .yes-and-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 2.5rem 0;
+    }
+
+    .ya-cell {
+      background: var(--surface);
+      padding: 2rem;
+    }
+
+    .ya-cell.bad { border-left: 3px solid var(--red); }
+    .ya-cell.good { border-left: 3px solid var(--green); }
+
+    .ya-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+    }
+
+    .ya-label.bad { color: var(--red); }
+    .ya-label.good { color: var(--green); }
+
+    .ya-cell p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .anti-patterns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .anti-pattern {
+      background: var(--surface);
+      border: 1px solid rgba(232,85,85,0.2);
+      border-radius: 4px;
+      padding: 1.25rem;
+    }
+
+    .anti-pattern h4 {
+      font-size: 0.85rem;
+      color: var(--red);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 0.5rem;
+    }
+
+    .anti-pattern p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── ENSEMBLE ── */
+    .ensemble {
+      background: var(--surface);
+    }
+
+    .alumni-ticker {
+      overflow: hidden;
+      margin: 2.5rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .alumni-inner {
+      display: flex;
+      gap: 2.5rem;
+      animation: scroll 40s linear infinite;
+      white-space: nowrap;
+    }
+
+    .alumni-inner:hover { animation-play-state: paused; }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .alumni-name {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .ensemble-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 2.5rem 0;
+    }
+
+    .ec-cell {
+      background: var(--bg);
+      padding: 2rem;
+    }
+
+    .ec-cell h4 {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ec-cell.team h4 { color: var(--muted); }
+    .ec-cell.ensemble h4 { color: var(--accent); }
+
+    .ec-cell ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ec-cell ul li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(42,42,64,0.5);
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .ec-cell ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    .ec-cell.ensemble ul li::before { color: var(--accent); }
+
+    .ensemble-principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .principle-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+
+    .principle-card h4 {
+      color: var(--blue);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .principle-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── CO-CREATION ── */
+    .co-creation {
+      background: var(--bg);
+    }
+
+    .co-creation-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .cc-node {
+      background: var(--surface);
+      border: 2px solid var(--purple);
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .cc-node:hover { transform: scale(1.05); }
+
+    .cc-node span:first-child { font-size: 1.8rem; margin-bottom: 0.25rem; }
+    .cc-node span:last-child {
+      font-size: 0.7rem;
+      color: var(--purple);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+    }
+
+    .cc-arrow {
+      color: var(--purple);
+      font-size: 1.5rem;
+      opacity: 0.5;
+    }
+
+    .cc-center {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(74,143,232,0.15));
+      border-color: var(--accent);
+    }
+
+    .cc-center span:last-child { color: var(--accent); }
+
+    .fear-blockers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .fear-blocker {
+      background: rgba(232,85,85,0.05);
+      border: 1px solid rgba(232,85,85,0.15);
+      border-radius: 4px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .fear-blocker .icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+    .fear-blocker h4 { color: var(--red); font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .fear-blocker p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+
+    /* ── FAILURE ── */
+    .failure-section {
+      background: var(--surface);
+    }
+
+    .failure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .failure-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+      border-top: 3px solid;
+    }
+
+    .failure-card:nth-child(1) { border-top-color: var(--red); }
+    .failure-card:nth-child(2) { border-top-color: var(--blue); }
+    .failure-card:nth-child(3) { border-top-color: var(--green); }
+    .failure-card:nth-child(4) { border-top-color: var(--purple); }
+    .failure-card:nth-child(5) { border-top-color: var(--accent); }
+    .failure-card:nth-child(6) { border-top-color: var(--red); }
+
+    .failure-card h4 {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .failure-card p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+    /* ── CHANGE ── */
+    .change-section {
+      background: var(--bg);
+    }
+
+    .comedy-elements {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 2.5rem 0;
+    }
+
+    .comedy-el {
+      background: var(--surface);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .comedy-el .num { font-size: 3rem; color: var(--accent); opacity: 0.3; font-weight: 900; line-height: 1; }
+    .comedy-el h4 { color: var(--accent); font-size: 1rem; margin: 0.25rem 0 0.75rem; }
+    .comedy-el p { font-size: 0.85rem; color: var(--muted); margin: 0; }
+
+    /* ── FOLLOW FOLLOWER ── */
+    .follow-section {
+      background: var(--surface);
+    }
+
+    .drucker-quote {
+      background: linear-gradient(135deg, rgba(74,143,232,0.08), rgba(168,85,247,0.08));
+      border: 1px solid rgba(74,143,232,0.2);
+      border-radius: 4px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+
+    .drucker-quote blockquote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .drucker-quote cite {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--blue);
+      letter-spacing: 0.2em;
+    }
+
+    .leadership-insights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .li-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+
+    .li-card .icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+    .li-card h4 { color: var(--blue); font-size: 0.9rem; margin-bottom: 0.4rem; }
+    .li-card p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+    /* ── LISTENING ── */
+    .listening-section {
+      background: var(--bg);
+    }
+
+    .listening-stat {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 2.5rem 0;
+    }
+
+    .stat-box {
+      background: var(--surface);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .listening-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .lt-cell {
+      background: var(--surface2);
+      padding: 2rem;
+    }
+
+    .lt-cell h4 {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    .lt-cell.respond h4 { color: var(--red); }
+    .lt-cell.understand h4 { color: var(--green); }
+    .lt-cell p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+    /* ── EXERCISES ── */
+    .exercises-section {
+      background: var(--surface);
+    }
+
+    .exercises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .exercise-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .exercise-card:hover { border-color: var(--accent); }
+
+    .exercise-card summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .exercise-card summary::-webkit-details-marker { display: none; }
+
+    .exercise-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: rgba(232,200,74,0.1);
+      border: 1px solid rgba(232,200,74,0.2);
+      border-radius: 2px;
+      padding: 0.25rem 0.5rem;
+      white-space: nowrap;
+      margin-top: 0.1rem;
+    }
+
+    .exercise-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .exercise-focus {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      margin-top: 0.3rem;
+    }
+
+    .exercise-body {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .exercise-setup {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── CASE STUDIES ── */
+    .cases-section {
+      background: var(--bg);
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .case-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .case-card:nth-child(1)::before { background: var(--blue); }
+    .case-card:nth-child(2)::before { background: var(--green); }
+    .case-card:nth-child(3)::before { background: var(--purple); }
+    .case-card:nth-child(4)::before { background: var(--accent); }
+
+    .case-company {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .case-card h4 { font-size: 1rem; margin-bottom: 0.75rem; }
+    .case-card p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+    /* ── FINAL LIST ── */
+    .final-section {
+      background: radial-gradient(ellipse at 50% 100%, #1a0e30 0%, var(--bg) 60%);
+    }
+
+    .manifesto {
+      max-width: 700px;
+      margin: 3rem auto 0;
+    }
+
+    .manifesto-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .manifesto-item:hover { background: rgba(232,200,74,0.03); }
+
+    .manifesto-item:last-child { border-bottom: none; }
+
+    .mi-num {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      opacity: 0.6;
+      min-width: 2rem;
+      padding-top: 0.15rem;
+    }
+
+    .mi-text {
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* ── ACKNOWLEDGMENTS ── */
+    .ack-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .ack-names {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 2;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--accent);
+      opacity: 0.6;
+      margin-bottom: 1rem;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      margin: 2.5rem 0;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--purple));
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 0.4rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(232,200,74,0.4);
+    }
+
+    .tl-year {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .tl-item p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .yes-and-visual,
+      .ensemble-comparison,
+      .listening-types,
+      .comedy-elements { grid-template-columns: 1fr; }
+      .co-creation-diagram { gap: 0.5rem; }
+      .cc-node { width: 100px; height: 100px; }
+      .cc-arrow { display: none; }
+    }
+
+    /* ── UTILITIES ── */
+    .tag {
+      display: inline-block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      background: rgba(232,200,74,0.1);
+      border: 1px solid rgba(232,200,74,0.2);
+      color: var(--accent);
+      border-radius: 2px;
+      padding: 0.2rem 0.5rem;
+      margin: 0.15rem;
+    }
+
+    .highlight { color: var(--accent); }
+    .text-red { color: var(--red); }
+    .text-green { color: var(--green); }
+    .text-blue { color: var(--blue); }
+
+    /* progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      z-index: 200;
+      transition: width 0.1s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-spotlight"></div>
+  <div class="hero-label">The Second City &nbsp;·&nbsp; Kelly Leonard &amp; Tom Yorton</div>
+  <h1>Yes, And</h1>
+  <div class="hero-subtitle">How Improvisation Reverses "No, But" Thinking</div>
+  <p class="hero-desc">
+    What started in a converted Chinese laundry in Chicago in 1959 became the world's
+    most influential comedy institution — and an unexpected guide to innovation, leadership,
+    and human connection in the modern workplace.
+  </p>
+  <div class="hero-authors">KELLY LEONARD &nbsp;·&nbsp; TOM YORTON</div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">YES, AND</div>
+    <a href="#dedication">Dedication</a>
+    <a href="#intro">Introduction</a>
+    <a href="#elements">7 Elements</a>
+    <a href="#yes-and">Yes, And</a>
+    <a href="#ensemble">Ensemble</a>
+    <a href="#co-creation">Co-Creation</a>
+    <a href="#change">Change</a>
+    <a href="#failure">Failure</a>
+    <a href="#follow">Follow</a>
+    <a href="#listening">Listening</a>
+    <a href="#exercises">Exercises</a>
+    <a href="#cases">Case Studies</a>
+    <a href="#manifesto">Manifesto</a>
+  </div>
+</nav>
+
+<!-- ── DEDICATION ── -->
+<section class="dedication" id="dedication">
+  <div class="container">
+    <div class="section-label">Dedication</div>
+    <div class="dedication-box">
+      <p class="dedication-text">
+        This book is dedicated to the founders of The Second City<br>
+        and the generations of artists who honor the past<br>
+        by staying so fiercely in the moment.
+      </p>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <div class="section-label">The Second City — A Timeline</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">DECEMBER 1959</div>
+          <p>The Second City opens in a converted Chinese laundry in Chicago's Old Town neighborhood, founded by Paul Sills, Bernie Sahlins, and Howard Alk.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1961</div>
+          <p>"Family Reunion" — one of the first scenes to blend personal truth with political comedy, breaking boundaries of American entertainment.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1976</div>
+          <p>SCTV launches in Canada — a landmark in co-created sketch comedy launching careers of John Candy, Martin Short, Eugene Levy, and Catherine O'Hara.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1989</div>
+          <p>Second City Comedy Marketing Group (later Second City Works) founded — bringing improv tools to corporate clients worldwide.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1992</div>
+          <p>Andrew Alexander launches the Second City Outreach Program following the LA riots, committing the company to radical diversity on and off stage.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">1996</div>
+          <p>Tina Fey joins the first gender-equal cast at Second City Chicago in Citizen Gates — a watershed moment for the institution.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2009</div>
+          <p><em>Rod Blagojevich Superstar</em> — a live embodiment of Yes, And in action: written in two weeks, produced on a frozen budget, sold out entirely on announcement.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2014</div>
+          <p><em>Yes, And</em> published — bringing five decades of improv wisdom to business, leadership, and life beyond the stage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTRO ── -->
+<section class="intro" id="intro">
+  <div class="container">
+    <div class="section-label">Introduction</div>
+    <h2>We Have Cool Jobs.<br>Sometimes We Hate Them.</h2>
+    <p>
+      Everyone does. But the authors of this book have come to understand a central truth:
+      they tend to hate their jobs <em>a lot less</em> than other people — and they've identified
+      exactly why.
+    </p>
+
+    <div class="big-quote">
+      <p>
+        "We are at our happiest and most successful when we are working as improvisers.
+        When we are fiercely following the elements of improvisation, we generate ideas
+        both quickly and efficiently; we're more engaged with our coworkers; our interactions
+        with clients become richer or more long-standing; we weather rough storms with
+        more aplomb, and we don't work burdened by a fear of failure."
+      </p>
+      <cite>— Kelly Leonard &amp; Tom Yorton</cite>
+    </div>
+
+    <p>
+      Practicing improvisation is like yoga for your professional development — a solid,
+      strengthening workout that improves emotional intelligence, teaches you to pivot
+      out of tight spaces, and helps you become both a more compelling leader and a
+      more collaborative follower.
+    </p>
+
+    <p>
+      Google's hiring criteria — "the ability to process on the fly," a willingness
+      "to relinquish power," ease with "creating space for others to contribute,"
+      and individuals who can "learn how to learn from failure" — are the qualities
+      of an improviser. And they can be learned.
+    </p>
+
+    <div class="big-quote">
+      <p>
+        "This work will change your life."
+      </p>
+      <cite>— Anne Libera, former Artistic Director, Second City Training Center</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ── SEVEN ELEMENTS ── -->
+<section class="elements" id="elements">
+  <div class="container-wide">
+    <div class="container">
+      <div class="section-label">The Core Framework</div>
+      <h2>Seven Elements of Improvisation</h2>
+      <p>
+        These seven elements are at the heart of The Second City's success and have
+        contributed to the careers of some of the most brilliant performers of our time —
+        and to the culture of organizations as diverse as Nissan, Motorola, Google, Nike,
+        and McDonald's.
+      </p>
+    </div>
+
+    <div class="elements-grid">
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 01</span>
+        <span class="element-icon">✦</span>
+        <h3>Yes, And</h3>
+        <p>
+          The bedrock of all improvisation. Creative breakthroughs occur in environments
+          where ideas are not just fully explored, but heightened and stretched to levels
+          that might seem absurd at first. Work cultures that embrace Yes, And are more
+          inventive, quicker to solve problems, and have more engaged employees.
+        </p>
+      </div>
+
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 02</span>
+        <span class="element-icon">◎</span>
+        <h3>Ensemble</h3>
+        <p>
+          Stars are born out of ensembles. The preeminent focus of everything — in sales
+          teams, executive boards, retail staff. The ensemble's main enemies: the need
+          to be right, the need to steal focus, and the need to appear in control
+          when the evidence says otherwise.
+        </p>
+      </div>
+
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 03</span>
+        <span class="element-icon">⟳</span>
+        <h3>Co-Creation</h3>
+        <p>
+          Dialogues push stories further than monologues. Half a century of work shows
+          the sum of co-creation is greater than its parts. In our increasingly connected
+          world, co-creation is fast becoming a fact of life — yet rarely taught
+          where it is needed most.
+        </p>
+      </div>
+
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 04</span>
+        <span class="element-icon">◈</span>
+        <h3>Authenticity</h3>
+        <p>
+          "Dare to offend." The business or organization that takes itself too seriously
+          and doesn't know how to question its own beliefs is at a strong competitive
+          disadvantage. Comedy and irreverence are lubricants that encourage people
+          to reconsider long-standing beliefs.
+        </p>
+      </div>
+
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 05</span>
+        <span class="element-icon">✕</span>
+        <h3>Failure</h3>
+        <p>
+          Counterintuitively, failure is something improvisers actually <em>practice</em>.
+          The biggest threat to creativity is fear, especially the fear of failure.
+          By deflating the negative power of failure, you erode fear and allow
+          creativity to flourish.
+        </p>
+      </div>
+
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 06</span>
+        <span class="element-icon">⇄</span>
+        <h3>Follow the Follower</h3>
+        <p>
+          A principle that gives the group flexibility to allow any member to assume
+          leadership as long as their expertise is needed, then shuffle the hierarchy
+          when needs change. Leadership is about understanding status, not maintaining it.
+        </p>
+      </div>
+
+      <div class="element-card">
+        <span class="element-number">ELEMENT · 07</span>
+        <span class="element-icon">◉</span>
+        <h3>Listening</h3>
+        <p>
+          Deep listening is essential to improvisation — and critical in selling,
+          evaluating, brainstorming, and leading. The difference between listening
+          to understand and listening while waiting to respond is the difference
+          between art and noise.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── YES AND DEEP ── -->
+<section class="yes-and" id="yes-and">
+  <div class="container">
+    <div class="section-label">Element 01 — Deep Dive</div>
+    <h2>Yes, And:<br>How to Make Something Out of Nothing</h2>
+
+    <p>
+      No matter what title is on your business card, professional success requires the
+      ability to create something out of nothing. Marketing campaigns. New products.
+      Trusted partnerships. Better processes. Thoughtful responses to customer complaints.
+      The people who do this extraordinarily well approach every challenge with Yes, And.
+    </p>
+
+    <div class="yes-and-visual">
+      <div class="ya-cell bad">
+        <div class="ya-label bad">NO / YES, BUT (Kills momentum)</div>
+        <p>"Wow, I've never seen so many stars in the sky."</p>
+        <p style="margin-top: 1rem; font-style: italic;">"I can't see a single star… it's broad daylight."</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--red);">→ Scene stops dead. Actor scrambles. Audience loses interest.</p>
+      </div>
+      <div class="ya-cell good">
+        <div class="ya-label good">YES, AND (Builds momentum)</div>
+        <p>"Wow, I've never seen so many stars in the sky."</p>
+        <p style="margin-top: 1rem; font-style: italic;">"I know. Things look so different up here on the moon."</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--green);">→ Scene explodes with possibility. Partners both have something to build on.</p>
+      </div>
+    </div>
+
+    <h3>The Anti-Patterns of Yes, And</h3>
+    <p>Enemies of Yes, And often say "yes" with their mouths while saying "no" with their actions.</p>
+
+    <div class="anti-patterns">
+      <div class="anti-pattern">
+        <h4>Getting to No by Numbers</h4>
+        <p>If team consensus isn't what you wanted, just add more and more voices until you get the no you were looking for.</p>
+      </div>
+      <div class="anti-pattern">
+        <h4>Yes, And I'm Overstepping</h4>
+        <p>Using "Yes, And" as a refuge to stick your nose into other departments when you were never invited.</p>
+      </div>
+      <div class="anti-pattern">
+        <h4">Yes, And… Go Hang Yourself</h4>
+        <p>Watching someone head toward disaster and simply Yes, And-ing their idea so you can't be blamed.</p>
+      </div>
+      <div class="anti-pattern">
+        <h4>No, But Yes, And It's Mine</h4>
+        <p>Saying no emphatically to an idea, then adopting it and collecting the credit for brilliant thinking.</p>
+      </div>
+      <div class="anti-pattern">
+        <h4>They'll Forget About It</h4>
+        <p>Saying Yes, And to shut people up, knowing they'll eventually forget they brought up the idea.</p>
+      </div>
+      <div class="anti-pattern">
+        <h4>The Power of Neither</h4>
+        <p>Maintaining power by never taking a stand. No one can say you made a bad decision when you make none at all.</p>
+      </div>
+    </div>
+
+    <div class="big-quote" style="margin-top: 2.5rem;">
+      <p>
+        "Yes, And showed me that you're not going to love every idea, but it helps to love it
+        for at least a little while."
+      </p>
+      <cite>— Senior participant, Farmers Insurance leadership workshop</cite>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Yes, And in the Wild: Technology Examples</h3>
+    <p>
+      <strong class="highlight">Wikipedia</strong> — Content is user-generated, meaning anyone can create, edit, or add
+      to what is already written. It operates on an Explore and Heighten model: something is
+      offered, then built upon, deepened, sometimes redirected. Yes, And in its purest digital form.
+    </p>
+    <p>
+      <strong class="highlight">Linux</strong> — Developers use and modify existing code and make it do cool new things.
+      Now the leading OS for servers and mainframes, with more than 90% of the world's fastest
+      supercomputers running some version. The most powerful, benevolent, and useful expression
+      of Yes, And the world has ever seen.
+    </p>
+  </div>
+</section>
+
+<!-- ── ENSEMBLE ── -->
+<section class="ensemble" id="ensemble">
+  <div class="container-wide">
+    <div class="container">
+      <div class="section-label">Element 02 — Deep Dive</div>
+      <h2>How to Build an Ensemble</h2>
+      <p>
+        The word <em>team</em> implies competition. <em>Ensemble</em> carries no such baggage —
+        it is a thing unto itself, an entity that is only its true self when its members
+        are performing as one.
+      </p>
+    </div>
+
+    <!-- Alumni ticker -->
+    <div class="alumni-ticker">
+      <div class="alumni-inner">
+        <span class="alumni-name">Mike Nichols</span>
+        <span class="alumni-name">Elaine May</span>
+        <span class="alumni-name">Alan Arkin</span>
+        <span class="alumni-name">Dan Aykroyd</span>
+        <span class="alumni-name">John Belushi</span>
+        <span class="alumni-name">Gilda Radner</span>
+        <span class="alumni-name">Bill Murray</span>
+        <span class="alumni-name">John Candy</span>
+        <span class="alumni-name">Martin Short</span>
+        <span class="alumni-name">Eugene Levy</span>
+        <span class="alumni-name">Harold Ramis</span>
+        <span class="alumni-name">Bonnie Hunt</span>
+        <span class="alumni-name">Mike Myers</span>
+        <span class="alumni-name">Julia Louis-Dreyfus</span>
+        <span class="alumni-name">Jane Lynch</span>
+        <span class="alumni-name">Bob Odenkirk</span>
+        <span class="alumni-name">Chris Farley</span>
+        <span class="alumni-name">Steve Carell</span>
+        <span class="alumni-name">Stephen Colbert</span>
+        <span class="alumni-name">Amy Sedaris</span>
+        <span class="alumni-name">Tina Fey</span>
+        <span class="alumni-name">Amy Poehler</span>
+        <span class="alumni-name">Keegan-Michael Key</span>
+        <span class="alumni-name">Cecily Strong</span>
+        <!-- duplicate for seamless loop -->
+        <span class="alumni-name">Mike Nichols</span>
+        <span class="alumni-name">Elaine May</span>
+        <span class="alumni-name">Alan Arkin</span>
+        <span class="alumni-name">Dan Aykroyd</span>
+        <span class="alumni-name">John Belushi</span>
+        <span class="alumni-name">Gilda Radner</span>
+        <span class="alumni-name">Bill Murray</span>
+        <span class="alumni-name">John Candy</span>
+        <span class="alumni-name">Martin Short</span>
+        <span class="alumni-name">Eugene Levy</span>
+        <span class="alumni-name">Harold Ramis</span>
+        <span class="alumni-name">Bonnie Hunt</span>
+        <span class="alumni-name">Mike Myers</span>
+        <span class="alumni-name">Julia Louis-Dreyfus</span>
+        <span class="alumni-name">Jane Lynch</span>
+        <span class="alumni-name">Tina Fey</span>
+        <span class="alumni-name">Amy Poehler</span>
+        <span class="alumni-name">Keegan-Michael Key</span>
+        <span class="alumni-name">Cecily Strong</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="ensemble-comparison">
+        <div class="ec-cell team">
+          <h4>TEAM</h4>
+          <ul>
+            <li>Implies competition, an external foe</li>
+            <li>Starters and bench players — clear hierarchy</li>
+            <li>Some members matter, some simply do not</li>
+            <li>Defined by role in the contest</li>
+          </ul>
+        </div>
+        <div class="ec-cell ensemble">
+          <h4>ENSEMBLE ✦</h4>
+          <ul>
+            <li>All parts considered only in relation to the whole</li>
+            <li>First, second, third chair — all on stage</li>
+            <li>Every member plays in almost every movement</li>
+            <li>Defined by how members perform as one</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>The Three Practices That Build Ensemble</h3>
+      <div class="ensemble-principles">
+        <div class="principle-card">
+          <h4>Be in the Moment</h4>
+          <p>
+            Don't dwell on previous mistakes or even previous successes.
+            There is time for reflection and time for planning — both distinct
+            from the time for creation and innovation.
+          </p>
+        </div>
+        <div class="principle-card">
+          <h4>Give and Take</h4>
+          <p>
+            Research shows: people who practice give and take enjoy greater
+            professional success. Engineers who gave far more than they received
+            had the highest productivity and fewest mistakes.
+          </p>
+        </div>
+        <div class="principle-card">
+          <h4>Surrender the Need to Be Right</h4>
+          <p>
+            The need to be right is one of the biggest barriers to creative
+            ensembles. Create environments where people agree to try Yes, And
+            for even just one day — watch what happens.
+          </p>
+        </div>
+      </div>
+
+      <div class="big-quote" style="margin-top: 2.5rem;">
+        <p>
+          "Basketball, unlike football with its prescribed routes, is an improvisational
+          game, similar to jazz. If someone drops a note, someone else must step into
+          the vacuum and drive the beat that sustains the team."
+        </p>
+        <cite>— Phil Jackson, on the Chicago Bulls dynasty</cite>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Diversity Is Not Optional</h3>
+      <p>
+        Like-minded individuals from like-minded backgrounds produce like-minded results.
+        The world demands a diversity of approaches to real-world problems. When Second City
+        committed to diverse casting in 1992, it didn't just become more ethical — it became
+        more powerful. Keegan-Michael Key's role as a Pakistani cab driver navigating
+        post-9/11 America could only have existed in a truly diverse ensemble.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CO-CREATION ── -->
+<section class="co-creation" id="co-creation">
+  <div class="container">
+    <div class="section-label">Element 03 — Deep Dive</div>
+    <h2>Co-Creation:<br>Audiences Want In on the Act</h2>
+    <p>
+      The Second City creates its shows in constant dialogue with its audience — listening
+      to their reactions, groans, and silences, then editing, changing, and honing content
+      in response. Not as a focus group, but as genuine creative partners.
+    </p>
+
+    <div class="co-creation-diagram">
+      <div class="cc-node">
+        <span>🎭</span>
+        <span>ENSEMBLE</span>
+      </div>
+      <div class="cc-arrow">⟷</div>
+      <div class="cc-node cc-center">
+        <span>✦</span>
+        <span>CO-CREATED IDEA</span>
+      </div>
+      <div class="cc-arrow">⟷</div>
+      <div class="cc-node">
+        <span>👥</span>
+        <span>AUDIENCE</span>
+      </div>
+    </div>
+
+    <h3>Three Keys to In-House Co-Creation</h3>
+    <div class="fear-blockers" style="margin: 1.5rem 0 2.5rem;">
+      <div class="fear-blocker" style="background: rgba(74,143,232,0.05); border-color: rgba(74,143,232,0.2);">
+        <span class="icon">🔍</span>
+        <h4 style="color: var(--blue);">Find the Idea</h4>
+        <p>Not <em>your</em> idea. When ensembles co-create, ideas belong to the group. The most robust creative fount comes from those willing to cede control.</p>
+      </div>
+      <div class="fear-blocker" style="background: rgba(85,196,138,0.05); border-color: rgba(85,196,138,0.2);">
+        <span class="icon">🤝</span>
+        <h4 style="color: var(--green);">Cede Control</h4>
+        <p>Gets more difficult the higher you rise. But the best creatives close their mouths and listen to all ensemble members, letting ideas grow and morph.</p>
+      </div>
+      <div class="fear-blocker" style="background: rgba(168,85,247,0.05); border-color: rgba(168,85,247,0.2);">
+        <span class="icon">🛡</span>
+        <h4 style="color: var(--purple);">Eradicate Fear</h4>
+        <p>Every blocker to good co-creation stems from fear. Fear doesn't inspire elegant thinking — it inspires knee-jerk, path-of-least-resistance ideas.</p>
+      </div>
+    </div>
+
+    <h3>The Four Faces of Fear in Co-Creation</h3>
+    <div class="fear-blockers">
+      <div class="fear-blocker">
+        <span class="icon">❓</span>
+        <h4>Asking Questions</h4>
+        <p>Questions push creative responsibility entirely onto your partner. "Why are we here?" gives nothing to build on.</p>
+      </div>
+      <div class="fear-blocker">
+        <span class="icon">💢</span>
+        <h4>Aggression</h4>
+        <p>When we're afraid, we lash out. Aggression masquerading as boldness kills every scene and every meeting.</p>
+      </div>
+      <div class="fear-blocker">
+        <span class="icon">📢</span>
+        <h4>Yelling</h4>
+        <p>Making yourself louder than anyone else, or bulldozing through interactions. Management-by-volume destroys memory, morale, and collaboration.</p>
+      </div>
+      <div class="fear-blocker">
+        <span class="icon">💬</span>
+        <h4>Waffling</h4>
+        <p>"I don't know." "Maybe." Waffling is a delaying tactic — too afraid to leap into the unknown. In business, not deciding is almost worse than deciding wrong.</p>
+      </div>
+    </div>
+
+    <div class="big-quote" style="margin-top: 2.5rem;">
+      <p>
+        "The human brain is hardwired to fill in the gaps of incomplete ideas —
+        and people respond positively when invited to contribute to something
+        not yet fully formed. The closure principle: a door opener."
+      </p>
+      <cite>— Neuroscience &amp; improvisation</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ── CHANGE ── -->
+<section class="change-section" id="change">
+  <div class="container">
+    <div class="section-label">Element 04 — Deep Dive</div>
+    <h2>Change Is Hard:<br>Comedy and Improvisation Make It Easier</h2>
+
+    <p>
+      Before you can get people to change their behavior, they have to change their attitudes.
+      Before they can change their attitudes, they have to understand there's a situation that
+      needs to be viewed differently. Comedy defuses the tension. Improvisation builds the skills.
+    </p>
+
+    <h3>The Three Essential Elements of Comedy</h3>
+
+    <div class="comedy-elements">
+      <div class="comedy-el">
+        <div class="num">1</div>
+        <h4>Recognition</h4>
+        <p>The mere mention of a shared truth — an adjoining suburb, a familiar type — elicits response. Comedy's first hook.</p>
+      </div>
+      <div class="comedy-el">
+        <div class="num">2</div>
+        <h4>Pain</h4>
+        <p>You can't have comedy without something just a little uncomfortable — tension, surprise, incongruity, cognitive dissonance.</p>
+      </div>
+      <div class="comedy-el">
+        <div class="num">3</div>
+        <h4>Distance</h4>
+        <p>Truth and pain alone make tragedy. Distance — in time, space, or shared trust — creates the safe context for laughter.</p>
+      </div>
+    </div>
+
+    <h3>The Respect / Revere Distinction</h3>
+
+    <div class="yes-and-visual">
+      <div class="ya-cell" style="border-left-color: var(--green);">
+        <div class="ya-label" style="color: var(--green);">RESPECT (Enables Change)</div>
+        <p>
+          Like the rules of the road — constantly keeping us from crashing into each other.
+          Respect demands that you consider the other. It allows for dialogue between
+          individuals who may think differently, creating a path to understanding and change.
+        </p>
+      </div>
+      <div class="ya-cell" style="border-left-color: var(--red);">
+        <div class="ya-label" style="color: var(--red);">REVERE (Blocks Change)</div>
+        <p>
+          Turns respect into something so perfect it can't be touched. Makes idols of
+          individuals and institutions. Speaks <em>at</em> us rather than <em>with</em> us.
+          Reverence is the enemy of change.
+        </p>
+      </div>
+    </div>
+
+    <p>
+      The line between respect and reverence shows up everywhere: Worker and Boss,
+      Constituent and Representative, Student and Teacher. When respect becomes reverence,
+      the person of lower status loses the ability to call out what needs calling out —
+      and change becomes impossible.
+    </p>
+
+    <div class="big-quote">
+      <p>
+        "Innovators question facts. Albert Einstein respected the fundamental laws of physics
+        but didn't revere Newton so much that he couldn't prove new relationships.
+        Steve Jobs respected what technology could do but wasn't so reverential to the status quo
+        that he couldn't improve it for everyone."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAILURE ── -->
+<section class="failure-section" id="failure">
+  <div class="container">
+    <div class="section-label">Element 05 — Deep Dive</div>
+    <h2>Using Failure</h2>
+
+    <p>
+      We fail a lot. Sometimes spectacularly. We do it on our stages, in our conference rooms,
+      on the road, when we hire and fire people, and in our training centers. We failed
+      fifty-five years ago, we fail today, and we'll certainly fail tomorrow.
+      That's what happens when you understand that staying relevant means constantly
+      challenging and reinventing yourself.
+    </p>
+
+    <h3>Famous Failures from The Second City</h3>
+    <div style="display: grid; gap: 1rem; margin: 1.5rem 0 2.5rem;">
+      <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem;">
+        <strong class="highlight">The Royster Oyster</strong>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; margin-bottom: 0;">A hamburger with an oyster on top. Dozens of customers were hospitalized with food poisoning. Menu item removed.</p>
+      </div>
+      <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem;">
+        <strong class="highlight">Second City Cleveland</strong>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; margin-bottom: 0;">Opened without advertising, group sales, or promotion. Received a cease-and-desist from Riverdance. Audiences booed the political satire. Closed after 19 months.</p>
+      </div>
+      <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem;">
+        <strong class="highlight">Invisible Rails</strong>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; margin-bottom: 0;">An evening of completely serious, non-comedic improvisation. Del Close walked out the moment he found out. Nobody laughed. Nobody came.</p>
+      </div>
+      <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem;">
+        <strong class="highlight">Second City Montreal</strong>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-top: 0.4rem; margin-bottom: 0;">Announced three times over twenty years. Zero theatres ever opened in Montreal.</p>
+      </div>
+    </div>
+
+    <h3>The Six Ways The Second City Chooses to Fail</h3>
+    <div class="failure-grid">
+      <div class="failure-card">
+        <h4>FAIL IN PUBLIC</h4>
+        <p>Where there's a chance of public failure, there's also a chance of public acclaim. Focus on that — and take the leap.</p>
+      </div>
+      <div class="failure-card">
+        <h4>FAIL TOGETHER</h4>
+        <p>"Always take care of your partner." Failure's sting is shared. Risk is distributed. The ensemble makes individual courage possible.</p>
+      </div>
+      <div class="failure-card">
+        <h4>FAIL FAST</h4>
+        <p>When a scene fails, acknowledge it with a quick joke and move on. Speed prevents failure from becoming an anchor.</p>
+      </div>
+      <div class="failure-card">
+        <h4>FAIL FREE OF JUDGMENT</h4>
+        <p>Producers need an invitation to enter rehearsals. No surprise "gotcha" visits. The creative process changes when supervisors arrive too soon.</p>
+      </div>
+      <div class="failure-card">
+        <h4>FAIL WITH CONFIDENCE</h4>
+        <p>Unshakable faith that approach, talent, and experience will carry you through. Ensemble members go into every challenge confident they'll succeed.</p>
+      </div>
+      <div class="failure-card">
+        <h4>FAIL INCREMENTALLY</h4>
+        <p>"Bring a brick, not a cathedral." No individual idea is critical because it's really only a bridge to better ideas. The only true failure is withholding contribution.</p>
+      </div>
+    </div>
+
+    <div class="big-quote" style="margin-top: 2.5rem;">
+      <p>
+        "Success is not final, failure is not fatal; it is the courage to continue that counts."
+      </p>
+      <cite>— Winston Churchill</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOLLOW THE FOLLOWER ── -->
+<section class="follow-section" id="follow">
+  <div class="container">
+    <div class="section-label">Element 06 — Deep Dive</div>
+    <h2>Follow the Follower</h2>
+
+    <p>
+      In the late 1950s, management consultant Peter Drucker introduced the concept of the
+      knowledge worker and proposed flat organizational structures. Around the same time,
+      Viola Spolin proposed "Follow the Follower" — a principle that gives any member of an
+      ensemble the ability to assume leadership for as long as their expertise is needed,
+      then shuffle the hierarchy when needs change.
+    </p>
+
+    <p>They were both right. And The Second City had known it for years already.</p>
+
+    <div class="drucker-quote">
+      <blockquote>
+        "The leaders who work most effectively never say I. And that's not because they
+        have trained themselves not to say I. They don't think I. They think we; they think team.
+        They understand their job is to make the team function. They accept responsibility
+        and don't sidestep it: We gets the credit. This is what creates trust."
+      </blockquote>
+      <cite>— PETER DRUCKER, 1974</cite>
+    </div>
+
+    <h3>What Great Leadership Actually Looks Like</h3>
+
+    <div class="leadership-insights">
+      <div class="li-card">
+        <span class="icon">🏗</span>
+        <h4>Build the Right Sandbox</h4>
+        <p>Set parameters. Hire the right people. Then get out of the way. The creative process changes when supervisors get involved too soon.</p>
+      </div>
+      <div class="li-card">
+        <span class="icon">👂</span>
+        <h4>Talk to Your Audience</h4>
+        <p>After years of declining readership, the Chicago Tribune started sending reporters to bars. More than 100 readers showed up the first night.</p>
+      </div>
+      <div class="li-card">
+        <span class="icon">🔄</span>
+        <h4>Know When to Lead, Follow, or Leave</h4>
+        <p>Leadership today is about letting go of old stereotypes. If you have to demand respect, you never had it.</p>
+      </div>
+      <div class="li-card">
+        <span class="icon">🎯</span>
+        <h4>Read the Room — Constantly</h4>
+        <p>Notice when someone sinks in their chair. Bring them back. Let everyone know they're being heard. Keep the bricks coming.</p>
+      </div>
+    </div>
+
+    <div class="big-quote">
+      <p>
+        "A fundamental principle of improv is listening and accepting any initiation that's
+        made on the stage. Similarly, I want my managers to listen and respond to their
+        employees' perceptions, not ignore them. When they deny there's an issue and
+        reflexively defend the status quo, it creates misery."
+      </p>
+      <cite>— Dick Costolo, CEO of Twitter &amp; Second City alumnus</cite>
+    </div>
+
+    <h3>Women and Collaborative Leadership</h3>
+    <p>
+      A 2011 study of 7,280 leaders found that while men hold more top positions, women were
+      rated more positively in 12 of 15 leadership effectiveness categories — including
+      Collaboration, Inspiring Others, Developing Others, Championing Change, and
+      Communicating Powerfully.
+    </p>
+    <p>
+      These are the qualities of the best improvisers. Moving from command-and-control to a
+      collaborative model plays to strengths that improvisation specifically develops — in
+      everyone, regardless of gender.
+    </p>
+  </div>
+</section>
+
+<!-- ── LISTENING ── -->
+<section class="listening-section" id="listening">
+  <div class="container">
+    <div class="section-label">Element 07 — Deep Dive</div>
+    <h2>Listening Is a Muscle</h2>
+
+    <div class="listening-stat">
+      <div class="stat-box">
+        <div class="stat-number">85%</div>
+        <div class="stat-label">of what we know<br>we learn through listening</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">45%</div>
+        <div class="stat-label">of our workday<br>is spent listening</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">25%</div>
+        <div class="stat-label">average comprehension<br>rate when listening</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">2%</div>
+        <div class="stat-label">of professionals have<br>formal listening training</div>
+      </div>
+    </div>
+
+    <div class="listening-types">
+      <div class="lt-cell respond">
+        <h4>LISTENING TO RESPOND ✕</h4>
+        <p>
+          The default mode for most of the world. While the other person talks, you're
+          already formulating your counterpoint. You hear the beginning; you miss the end.
+          You disagree when you don't actually disagree. You build things nobody asked for.
+        </p>
+      </div>
+      <div class="lt-cell understand">
+        <h4>LISTENING TO UNDERSTAND ✓</h4>
+        <p>
+          Enriches and broadens perspective. Turns off the judgment part of your brain.
+          Keeps you in the moment, not looking backward or jumping ahead. Allows you to
+          hear what someone is saying <em>and</em> what they are not saying.
+        </p>
+      </div>
+    </div>
+
+    <h3>Listening for Intent</h3>
+    <p>
+      Words are only one way we communicate. Paul Ekman identified seven universal micro
+      expressions — anger, fear, sadness, disgust, contempt, surprise, happiness — that
+      appear for only a fraction of a second and reveal the gap between what we say and
+      how we truly feel.
+    </p>
+    <p>
+      Interestingly, Ekman was at the University of Chicago in the early 1950s at the same
+      time as Mike Nichols and Elaine May — practicing Viola Spolin's improv games.
+      The connection between deep listening and emotional intelligence runs back to the
+      very roots of The Second City.
+    </p>
+
+    <div class="big-quote">
+      <p>
+        "If you listen, if you truly listen, you'll realize how easy it is to connect
+        with people you thought you disagreed with. That's the freedom you get with improv."
+      </p>
+      <cite>— Betsy Myers, COO of Barack Obama's 2008 presidential campaign</cite>
+    </div>
+
+    <h3>Products Nobody Asked For</h3>
+    <p style="color: var(--muted); font-size: 0.9rem;">The cost of not listening to your audience:</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 2rem;">
+      <span class="tag">Ben-Gay Aspirin</span>
+      <span class="tag">Cosmopolitan Yogurt</span>
+      <span class="tag">McDonald's Arch Deluxe</span>
+      <span class="tag">Harley Davidson Perfume</span>
+      <span class="tag">The XFL</span>
+      <span class="tag">New Coke</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXERCISES ── -->
+<section class="exercises-section" id="exercises">
+  <div class="container-wide">
+    <div class="container">
+      <div class="section-label">Practical Application</div>
+      <h2>The Second City Improv Exercises</h2>
+      <p>These exercises can be brought into your team to practice the seven elements of improvisation. Click any exercise to see the setup.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">01</span>
+          <div>
+            <div class="exercise-title">Exposure</div>
+            <div class="exercise-focus">Focus: Overcoming self-consciousness</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Divide your group into two lines, facing each other, about ten feet apart. Have them stand looking at each other. Once there is noticeable discomfort, have them complete a counting task (e.g., bricks on the wall). The fidgeting stops — everyone concentrates on the task. <strong>Point:</strong> Focus can rid us of fear and being in our heads.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">02</span>
+          <div>
+            <div class="exercise-title">One-Word Story</div>
+            <div class="exercise-focus">Focus: Yes, And / collective storytelling</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Gather 6–10 people in a circle and tell an original story — each person contributes only one word at a time. The most logical next word wins. Type A personalities discover what it means to bring a brick instead of a cathedral. The story will take hilarious and unexpected twists.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">03</span>
+          <div>
+            <div class="exercise-title">Talk Without I</div>
+            <div class="exercise-focus">Focus: Ensemble / other-directedness</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Pair participants and instruct them to have a conversation about anything — without using the word "I." Debriefing reveals how we filter everything through our own perspective. Teaches participants to frame things in ways more accessible to others.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">04</span>
+          <div>
+            <div class="exercise-title">Mirror</div>
+            <div class="exercise-focus">Focus: Ensemble / sustained focus</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Split into pairs facing each other. One person leads with small movements; the other mirrors every action. Switch. Then try mirroring with no assigned leader. <strong>Point:</strong> Interesting doesn't matter — sustained focus does. The foundation of ensemble awareness.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">05</span>
+          <div>
+            <div class="exercise-title">Give and Take</div>
+            <div class="exercise-focus">Focus: Ensemble / meeting dynamics</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Group spreads out. Practice giving focus to someone with a physical cue (eye contact, point, touch). Then practice taking focus. Then do both — give, take, give back. When it works seamlessly, focus flows like a jazz ensemble. When it doesn't, everyone sees why meetings fail.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">06</span>
+          <div>
+            <div class="exercise-title">Parts of a Whole</div>
+            <div class="exercise-focus">Focus: Ensemble / ceding control</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Suggest an animal or object. Participants silently organize their bodies into that shape. Progress to more complex scenarios: shoppers in a grocery store, fish in an aquarium. Teaches that individuals must be willing to play their part for the group to succeed.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">07</span>
+          <div>
+            <div class="exercise-title">Take That Back</div>
+            <div class="exercise-focus">Focus: Change / adaptability</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Two people have a conversation. When the leader claps, the person speaking must replace their last sentence with something different and continue from there. Teaches that we are more resourceful than we think — and that teammates can adapt on the fly remarkably well.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">08</span>
+          <div>
+            <div class="exercise-title">Thank You Statues</div>
+            <div class="exercise-focus">Focus: Co-creation / trust</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">One person steps into the center of a circle and strikes a pose. Another taps them out, assumes their own pose, and the first person says "thank you." Speed up. Then remove tap-outs — just keep adding poses to build a statue. Teaches the visceral feeling of support and the risk of initiating ideas.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">09</span>
+          <div>
+            <div class="exercise-title">Follow the Follower</div>
+            <div class="exercise-focus">Focus: Leadership / ensemble dynamics</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Sit in a circle. Everyone makes sounds and movements — but simultaneously mimics others. No assigned leader or follower. The result should look like a school of fish: no individual identifiable as the initiator. When it works, the group functions as one organism.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">10</span>
+          <div>
+            <div class="exercise-title">Last Word Response</div>
+            <div class="exercise-focus">Focus: Listening / full attention</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Pairs have a conversation where each response must begin with the last word spoken by the partner. Forces listening all the way to the end of a thought — not halfway. Reveals how rarely we do this in practice, and how much we miss as a result.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">11</span>
+          <div>
+            <div class="exercise-title">Gibberish Games</div>
+            <div class="exercise-focus">Focus: Listening / intent over words</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Two people speak entirely in gibberish. A third "translates" for the group — not with jokes, but genuinely listening to body language, tone, and energy. Reveals how much communication happens beyond words. Builds cognitive empathy.</p>
+        </div>
+      </details>
+
+      <details class="exercise-card">
+        <summary>
+          <span class="exercise-num">12</span>
+          <div>
+            <div class="exercise-title">String of Pearls</div>
+            <div class="exercise-focus">Focus: Leadership / storytelling as a team</div>
+          </div>
+        </summary>
+        <div class="exercise-body">
+          <p class="exercise-setup">Group stands in a line. First person gets opening sentence. Last person gets closing sentence. Everyone in between improvises a line that logically moves the story from one to the other. Forces people to consider not just their own contribution, but how it connects to what came before and after.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section class="cases-section" id="cases">
+  <div class="container-wide">
+    <div class="container">
+      <div class="section-label">Improv in the World</div>
+      <h2>Case Studies</h2>
+      <p>Real-world applications of Second City improv principles across industries.</p>
+    </div>
+
+    <div class="cases-grid">
+
+      <div class="case-card">
+        <div class="case-company">MAJOR LEAGUE BASEBALL</div>
+        <h4>Teaching Life Skills to Rookies</h4>
+        <p>
+          Every January, Second City actors travel to Lansdowne Conference Center in Virginia
+          to help ~100 MLB rookies navigate wealth, fame, media, and organized crime —
+          through custom comedy vignettes and improv workshops. Lectures don't work for
+          20-year-olds brimming with testosterone. Comedy does.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">FARMERS INSURANCE</div>
+        <h4>Empathetic Claims Reps at Scale</h4>
+        <p>
+          For years, Farmers has worked with Second City to help claims reps become more
+          effective and empathetic communicators during times of stress. Programs touch
+          10,000+ people, win industry awards, and lift customer satisfaction — because
+          they're built on ensemble brainstorming, not top-down approval.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">CLOROX</div>
+        <h4>Live Co-Creation on Twitter</h4>
+        <p>
+          The Clorox Ick Awards: a live, improvised award show on Twitter hosted by Rachel
+          Dratch, celebrating parents' messiest moments. Result: #Ickies became a trending
+          topic, generating 160M+ social media impressions from 16,800+ tweets in 4 hours.
+          Audiences respond when you let them in on the act.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">LYRIC OPERA CHICAGO</div>
+        <h4>Second City Guide to the Opera</h4>
+        <p>
+          Renée Fleming heard her own voice in a Second City show. Within weeks she was
+          brainstorming with Second City producers. A partnership that seemed impossible —
+          3,563 seats vs. 300, opera vs. improv — produced a sold-out gala with Patrick
+          Stewart, standing ovations, and national press coverage.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">NORWEGIAN CRUISE LINE</div>
+        <h4>Making Fun of Everything That Could Go Wrong</h4>
+        <p>
+          Second City discovered that the most powerful thing they could do on cruise ships
+          was satirize the cruise experience itself — tiny cabins, long buffet lines, the
+          terrifying flush. Norwegian never flinched. Today 6 ships, 450 actors/directors
+          employed. Power lives in addressing the elephant in the room.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">U.S. DEPARTMENT OF EDUCATION</div>
+        <h4>Finding Common Ground Through Comedy</h4>
+        <p>
+          School board presidents, superintendents, and teachers' union leaders — historically
+          adversarial — were brought together through live satirical sketches about Finland's
+          "perfect" education system. Shared laughter became shared truth. The conference was
+          less contentious and more productive than any previous convening.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">CHICAGO TRIBUNE</div>
+        <h4>Trib Nation: Co-Creating Journalism</h4>
+        <p>
+          After declining readership, editor Gerry Kern invited readers to a bar to talk
+          face-to-face with reporters. More than 100 showed up. Trib Nation and Chicago Live
+          (with Second City's theatrical support) gave the Tribune its first two-way dialogue
+          with readers in decades.
+        </p>
+      </div>
+
+      <div class="case-card">
+        <div class="case-company">TWITTER</div>
+        <h4>Running a Company Like an Improv Group</h4>
+        <p>
+          CEO Dick Costolo trained in improv comedy in Chicago before building Twitter.
+          He applies improvisational listening principles to how he manages: "Managers have
+          to be open to accepting any kind of initiation. When they deny there's an issue
+          and reflexively defend the status quo, it creates misery."
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MANIFESTO ── -->
+<section class="final-section" id="manifesto">
+  <div class="container">
+    <div class="section-label">One Last List</div>
+    <h2>The Improviser's Manifesto</h2>
+    <p>
+      Born of an improvisational theatre. Applicable to everyone, everywhere,
+      who wants to be better at what they do.
+    </p>
+
+    <div class="manifesto">
+      <div class="manifesto-item"><span class="mi-num">01</span><span class="mi-text">Look people in the eye when you meet them.</span></div>
+      <div class="manifesto-item"><span class="mi-num">02</span><span class="mi-text">Smile.</span></div>
+      <div class="manifesto-item"><span class="mi-num">03</span><span class="mi-text">Don't check your texts or email when someone else is talking.</span></div>
+      <div class="manifesto-item"><span class="mi-num">04</span><span class="mi-text">Be curious.</span></div>
+      <div class="manifesto-item"><span class="mi-num">05</span><span class="mi-text">Try to eliminate the word "no" from your vocabulary for just one day.</span></div>
+      <div class="manifesto-item"><span class="mi-num">06</span><span class="mi-text">When you are wrong, acknowledge it, say you're sorry, and move on.</span></div>
+      <div class="manifesto-item"><span class="mi-num">07</span><span class="mi-text">Forgive yourself and forgive others.</span></div>
+      <div class="manifesto-item"><span class="mi-num">08</span><span class="mi-text">Lead as you would want to be led.</span></div>
+      <div class="manifesto-item"><span class="mi-num">09</span><span class="mi-text">Don't be an asshole, and don't abide assholes.</span></div>
+      <div class="manifesto-item"><span class="mi-num">10</span><span class="mi-text">Be on time.</span></div>
+      <div class="manifesto-item"><span class="mi-num">11</span><span class="mi-text">Excel at preparation.</span></div>
+      <div class="manifesto-item"><span class="mi-num">12</span><span class="mi-text">Ask yourself: What is the problem you are trying to solve?</span></div>
+      <div class="manifesto-item"><span class="mi-num">13</span><span class="mi-text">Make your partner look good.</span></div>
+      <div class="manifesto-item"><span class="mi-num">14</span><span class="mi-text">Respect, don't revere.</span></div>
+      <div class="manifesto-item"><span class="mi-num">15</span><span class="mi-text">Listen to the whole person.</span></div>
+      <div class="manifesto-item"><span class="mi-num">16</span><span class="mi-text">Read the room.</span></div>
+      <div class="manifesto-item"><span class="mi-num">17</span><span class="mi-text">Share the conversation.</span></div>
+      <div class="manifesto-item"><span class="mi-num">18</span><span class="mi-text">Love your work.</span></div>
+      <div class="manifesto-item"><span class="mi-num">19</span><span class="mi-text">Applaud others.</span></div>
+      <div class="manifesto-item"><span class="mi-num">20</span><span class="mi-text">Say "we" rather than "I" whenever possible.</span></div>
+      <div class="manifesto-item"><span class="mi-num">21</span><span class="mi-text">Consider that you might not be right.</span></div>
+      <div class="manifesto-item"><span class="mi-num">22</span><span class="mi-text">Open your door.</span></div>
+      <div class="manifesto-item"><span class="mi-num">23</span><span class="mi-text">Try not to work out of fear; work from a sense of possibility.</span></div>
+      <div class="manifesto-item"><span class="mi-num">24</span><span class="mi-text">Understand the audience you're trying to win over, and give them a role.</span></div>
+      <div class="manifesto-item"><span class="mi-num">25</span><span class="mi-text"><strong class="highlight">Be an improviser.</strong></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACKNOWLEDGMENTS ── -->
+<section class="ack-section" id="acknowledgments">
+  <div class="container">
+    <div class="section-label">Acknowledgments</div>
+    <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">The People Who Made This Possible</h2>
+    <p class="ack-names">
+      Viola Spolin · Paul Sills · Bernie Sahlins · Howard Alk · Sheldon Patinkin ·
+      Martin de Maat · Joyce Sloane · Cheryl Sloane · Nate DuFort · Jenna Deja ·
+      Monica Wilson · Robin Hammond · Alison Riley · Joe Ruffner · Dionna Griffin ·
+      Jeremy Smith · Beth Kligerman · Kerry Sheehan · Abby Mager · Matt Hovde ·
+      Klaus Schuller · Steve Johnston · Brynne Humphreys · Tim Mason · Steve Waltien ·
+      Christina Anthony · Ryan Bernier · Billy Bungeroth · Mick Napier · Diane Alexander ·
+      Tina Fey · Jeff Richmond · Steve Fisher · Peter Cunningham · Hal Lewis ·
+      Renée Fleming · Alexandra Day · Anthony Freud · Jeff Garlin · Michael Lewis ·
+      Elliott Masie · Betsy Myers · Dick Costolo · Dr. Mark Pfeffer · Eric Tsytsylin ·
+      Daniel Pink · Adrienne Kerwin · Alanda Coon · Eric Spitznagel · Hope Hudson ·
+      Stephanie Land · Hollis Heimbouch
+    </p>
+    <p style="font-size: 0.85rem; color: var(--muted); margin-top: 1.5rem;">
+      Special thanks to <strong style="color: var(--text);">Andrew Alexander</strong> for telling us to write this book —
+      and for reminding us to manage and lead as improvisers.
+      And to <strong style="color: var(--text);">Len Stuart</strong> for his never-ending support and mentorship.
+    </p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Yes, And</div>
+  <p class="footer-text">
+    Kelly Leonard &amp; Tom Yorton · The Second City · HarperCollins · 2015
+  </p>
+  <p class="footer-text" style="margin-top: 0.5rem; opacity: 0.5;">
+    "Improvisation is the perfect tool kit for navigating the unknown."
+  </p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+  });
+</script>
+
+</body>
+</html>

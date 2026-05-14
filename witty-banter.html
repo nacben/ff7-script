@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art of Witty Banter — Be Clever, Quick & Magnetic</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #18181f;
+    --surface2: #1e1e28;
+    --border: #2a2a3a;
+    --accent1: #7c6aff;
+    --accent2: #ff6a9c;
+    --accent3: #6affcf;
+    --accent4: #ffb86a;
+    --accent5: #6ab4ff;
+    --text: #e8e8f0;
+    --text-muted: #8888aa;
+    --text-dim: #555570;
+    --card-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', serif;
+    line-height: 1.75;
+    font-size: 17px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, #1a1040 0%, var(--bg) 70%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(124,106,255,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(255,106,156,0.12) 0%, transparent 50%),
+      radial-gradient(circle at 60% 10%, rgba(106,255,207,0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    max-width: 800px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent1) 50%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 560px;
+    margin-bottom: 40px;
+  }
+
+  .hero-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  .badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-family: 'Arial', sans-serif;
+    color: var(--text-muted);
+  }
+
+  .badge span { color: var(--accent1); margin-right: 6px; }
+
+  .scroll-hint {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-hint svg { animation: bounce 2s infinite; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── NAV ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,15,19,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .sticky-nav ul {
+    list-style: none;
+    display: inline-flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .sticky-nav a {
+    display: inline-block;
+    padding: 14px 18px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .sticky-nav a:hover { color: var(--text); border-bottom-color: var(--accent1); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section { padding: 80px 0; }
+
+  /* ── CHAPTER HEADER ── */
+  .chapter-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 56px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chapter-number {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .ch1 .chapter-number { background: linear-gradient(135deg, #7c6aff, #4a3dcc); color: #fff; }
+  .ch2 .chapter-number { background: linear-gradient(135deg, #ff6a9c, #cc3d7c); color: #fff; }
+  .ch3 .chapter-number { background: linear-gradient(135deg, #6affcf, #3dcc9c); color: #0f0f13; }
+  .ch4 .chapter-number { background: linear-gradient(135deg, #ffb86a, #cc8a3d); color: #0f0f13; }
+  .ch5 .chapter-number { background: linear-gradient(135deg, #6ab4ff, #3d84cc); color: #fff; }
+
+  .chapter-header-text h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .chapter-header-text p {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 600px;
+  }
+
+  /* ── TECHNIQUE CARD ── */
+  .technique-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .technique-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .technique-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow);
+  }
+
+  .tc-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+
+  .technique-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+
+  .technique-card p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .ch1 .technique-card { border-top: 3px solid var(--accent1); }
+  .ch1 .technique-card:hover { border-color: var(--accent1); }
+  .ch1 .tc-label { color: var(--accent1); }
+
+  .ch2 .technique-card { border-top: 3px solid var(--accent2); }
+  .ch2 .technique-card:hover { border-color: var(--accent2); }
+  .ch2 .tc-label { color: var(--accent2); }
+
+  .ch3 .technique-card { border-top: 3px solid var(--accent3); }
+  .ch3 .technique-card:hover { border-color: var(--accent3); }
+  .ch3 .tc-label { color: var(--accent3); }
+
+  .ch4 .technique-card { border-top: 3px solid var(--accent4); }
+  .ch4 .technique-card:hover { border-color: var(--accent4); }
+  .ch4 .tc-label { color: var(--accent4); }
+
+  .ch5 .technique-card { border-top: 3px solid var(--accent5); }
+  .ch5 .technique-card:hover { border-color: var(--accent5); }
+  .ch5 .tc-label { color: var(--accent5); }
+
+  /* ── DEEP DIVE ACCORDION ── */
+  .deep-dive {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .deep-dive summary {
+    list-style: none;
+    padding: 20px 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .deep-dive summary:hover { background: var(--surface2); }
+  .deep-dive summary::-webkit-details-marker { display: none; }
+
+  .dd-arrow {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .deep-dive[open] .dd-arrow { transform: rotate(180deg); }
+
+  .deep-dive-body {
+    padding: 0 28px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .deep-dive-body p {
+    font-size: 15.5px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .deep-dive-body p:last-child { margin-bottom: 0; }
+
+  /* ── EXAMPLE BOXES ── */
+  .example-box {
+    background: var(--bg);
+    border-left: 3px solid var(--accent1);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+
+  .example-box .label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent1);
+    margin-bottom: 8px;
+  }
+
+  .example-box p { color: var(--text); margin-bottom: 6px; }
+  .example-box p:last-child { margin-bottom: 0; }
+  .example-box em { color: var(--text-muted); font-style: normal; font-size: 13px; }
+
+  .ch2 .example-box { border-left-color: var(--accent2); }
+  .ch2 .example-box .label { color: var(--accent2); }
+  .ch3 .example-box { border-left-color: var(--accent3); }
+  .ch3 .example-box .label { color: var(--accent3); }
+  .ch4 .example-box { border-left-color: var(--accent4); }
+  .ch4 .example-box .label { color: var(--accent4); }
+  .ch5 .example-box { border-left-color: var(--accent5); }
+  .ch5 .example-box .label { color: var(--accent5); }
+
+  /* ── DIALOGUE ── */
+  .dialogue {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 14.5px;
+  }
+
+  .dl { display: flex; gap: 12px; margin-bottom: 10px; }
+  .dl:last-child { margin-bottom: 0; }
+  .dl-speaker {
+    font-weight: 700;
+    min-width: 28px;
+    color: var(--accent1);
+    flex-shrink: 0;
+  }
+  .dl-text { color: var(--text); line-height: 1.6; }
+  .dl-subtext { color: var(--text-muted); font-size: 12.5px; font-style: italic; margin-top: 2px; }
+
+  /* ── RULE PILLS ── */
+  .rule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .rule-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .rule-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .ch1 .rule-num { background: var(--accent1); color: #fff; }
+  .ch2 .rule-num { background: var(--accent2); color: #fff; }
+  .ch3 .rule-num { background: var(--accent3); color: #0f0f13; }
+  .ch4 .rule-num { background: var(--accent4); color: #0f0f13; }
+  .ch5 .rule-num { background: var(--accent5); color: #fff; }
+
+  .rule-text { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
+  .rule-text strong { color: var(--text); }
+
+  /* ── KEY INSIGHT ── */
+  .key-insight {
+    display: flex;
+    gap: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    align-items: flex-start;
+  }
+
+  .ki-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .ki-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  .ki-text strong { color: var(--text); }
+
+  /* ── TYPES LIST ── */
+  .type-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 14px;
+  }
+
+  .type-block h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .type-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── STORY SPINE ── */
+  .spine-steps {
+    counter-reset: spine;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .spine-step {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+
+  .spine-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .spine-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--accent5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent5);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .spine-content {
+    padding: 8px 0 32px 20px;
+  }
+
+  .spine-content h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--accent5);
+  }
+
+  .spine-content p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ── SUMMARY SECTION ── */
+  .summary-section {
+    background: linear-gradient(135deg, #1a1040 0%, #0f0f13 100%);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 60px 48px;
+    margin: 80px 0;
+    text-align: center;
+  }
+
+  .summary-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff, var(--accent1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .summary-section p.intro {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    text-align: left;
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+
+  .summary-card .sc-num {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .sc1 .sc-num { color: var(--accent1); }
+  .sc2 .sc-num { color: var(--accent2); }
+  .sc3 .sc-num { color: var(--accent3); }
+  .sc4 .sc-num { color: var(--accent4); }
+  .sc5 .sc-num { color: var(--accent5); }
+
+  .summary-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+
+  .summary-card ul {
+    list-style: none;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .summary-card ul li::before { content: '→ '; color: var(--text-dim); }
+
+  /* ── PROGRESS BAR HEADER ── */
+  .progress-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .progress-label::before, .progress-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 60px 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--accent1); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── QUOTE BLOCK ── */
+  blockquote {
+    border-left: 3px solid var(--accent2);
+    padding: 16px 20px;
+    background: var(--bg);
+    border-radius: 0 10px 10px 0;
+    margin: 20px 0;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .technique-grid { grid-template-columns: 1fr; }
+    .chapter-header { flex-direction: column; }
+    .summary-section { padding: 40px 24px; }
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── SMOOTH SECTION TRANSITIONS ── */
+  section { border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  /* ── HIGHLIGHT SPAN ── */
+  .hl { color: var(--text); font-weight: 700; }
+  .hl-v { color: var(--accent1); }
+  .hl-p { color: var(--accent2); }
+  .hl-g { color: var(--accent3); }
+  .hl-y { color: var(--accent4); }
+  .hl-b { color: var(--accent5); }
+
+  /* ── TIPTAG ── */
+  .tiptag {
+    display: inline-block;
+    background: rgba(124,106,255,0.15);
+    border: 1px solid rgba(124,106,255,0.3);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: var(--accent1);
+    margin-right: 4px;
+  }
+
+  details { padding-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">Educational Guide · The Art of Witty Banter</div>
+  <h1>Be Clever, Quick &amp; Magnetic</h1>
+  <p class="hero-sub">A comprehensive guide to conversational wit — from keeping things flowing to landing the perfect comeback, telling captivating stories, and making every chat feel like play.</p>
+
+  <div class="hero-badge-row">
+    <div class="badge"><span>1</span>Flow Like a River</div>
+    <div class="badge"><span>2</span>Conversation Is Play</div>
+    <div class="badge"><span>3</span>Witty Banter</div>
+    <div class="badge"><span>4</span>Funny on Command</div>
+    <div class="badge"><span>5</span>Captivating Stories</div>
+  </div>
+
+  <div class="scroll-hint">
+    Explore the guide
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="sticky-nav" aria-label="Chapters">
+  <ul>
+    <li><a href="#ch1">Ch 1: Flow</a></li>
+    <li><a href="#ch2">Ch 2: Play</a></li>
+    <li><a href="#ch3">Ch 3: Banter</a></li>
+    <li><a href="#ch4">Ch 4: Funny</a></li>
+    <li><a href="#ch5">Ch 5: Stories</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════ CHAPTER 1 ═══════════════════════════════ -->
+<section id="ch1" class="ch1">
+<div class="container">
+
+  <div class="chapter-header">
+    <div class="chapter-number">1</div>
+    <div class="chapter-header-text">
+      <h2>Flow Like a River</h2>
+      <p>Before you can be witty, you need to keep conversation alive. These five techniques eliminate awkward silences and create the fertile ground where wit can bloom.</p>
+    </div>
+  </div>
+
+  <div class="technique-grid">
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 01</div>
+      <h3>Never Speak in Absolutes</h3>
+      <p>Replace questions like "What's your all-time favourite movie?" with bounded alternatives. Absolute questions demand impossible commitment; bounded questions invite easy, natural answers.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 02</div>
+      <h3>Think Before You React</h3>
+      <p>Reactions prove you're listening. Match the emotion, mirror the intensity, and wait two seconds before replying — this reads as intelligence and genuine engagement.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 03</div>
+      <h3>Practice Free Association</h3>
+      <p>When a topic leaves you blank, mentally list five things the keyword connects to. Conversation is just a chain of free associations — practising this daily unlocks instant fluency.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 04</div>
+      <h3>Use Double Explanations</h3>
+      <p>For predictable questions ("What do you do?"), lead with a pithy <em>layman's answer</em> that creates curiosity, then follow with an <em>expert answer</em> once interest is established.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 05</div>
+      <h3>More Effective Compliments</h3>
+      <p>Compliment choices and effort, not genetics. Praising a person's unusual hairstyle or work ethic validates their autonomy; complimenting eye colour does nothing meaningful.</p>
+    </div>
+
+  </div>
+
+  <!-- Deep dives -->
+  <div class="progress-label">Deep Dives</div>
+
+  <details class="deep-dive">
+    <summary>
+      The Problem with Absolute Questions
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Absolute questions force your conversational partner to mentally index their entire life experience, make a definitive decision, and commit to it publicly — all while maintaining a casual chat. That's exhausting. Most people either answer with the first thing that pops to mind (and feel vaguely dishonest) or confess they don't know (which kills momentum).</p>
+
+      <div class="example-box">
+        <div class="label">Bad → Better</div>
+        <p><strong>Absolute:</strong> "What's your all-time favourite band?"</p>
+        <p><strong>Bounded:</strong> "Any bands you've been listening to lately?" / "Top few artists you'd put on right now?"</p>
+        <em>Adding constraints like "lately" or "a few" removes the pressure of a definitive, permanent answer.</em>
+      </div>
+
+      <p>Bounded questions also protect both parties from judgment. Saying "Forrest Gump is my favourite of all time" is a binary stance — either you agree or you don't. Saying "I watched Forrest Gump recently and it held up" is a softer contribution that invites dialogue rather than debate.</p>
+
+      <div class="key-insight">
+        <div class="ki-icon">💡</div>
+        <div class="ki-text"><strong>The rule:</strong> every time you catch yourself about to use words like <em>absolute, favourite, best, worst, only, ever</em> — pause and add a qualifier: a time frame, a number, or a context. "What are a few movies you'd recommend?" is always better than "What's the best movie ever made?"</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Mastering Reactions — The Two-Second Rule
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Reactions are the invisible connective tissue of conversation. Too fast and you look dismissive (you clearly weren't listening); too slow and you seem disengaged. The sweet spot is a deliberate, calibrated pause.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Identify the primary emotion</strong> — joy, annoyance, anger, sadness, or humour. Three out of five common emotions are negative, so don't default to positivity.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>Match the intensity.</strong> "Wow, that must've been inconvenient" undersells sympathy. "I can't imagine what I'd do in your position" may oversell it. Equal measure is the goal.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Wait two seconds</strong> after they finish. Put your hand on your chin. This signals processing, not hesitation — people literally perceive two-second responders as smarter.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">4</div>
+          <div class="rule-text"><strong>Mirror body language</strong> subtly. Furrowing your brows when they describe frustration, smiling when they're excited — mirroring amplifies the sense of being understood.</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Free Association Practice Exercises
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Free association isn't about being right — it's about being fast. When someone says something you know nothing about, the topic is just a keyword. Mentally list five things that keyword connects to, then choose the best one to transition to.</p>
+
+      <div class="example-box">
+        <div class="label">Example Chain</div>
+        <p><strong>Topic:</strong> "I love cats!"</p>
+        <p><strong>Free associate:</strong> kittens → sandboxes → lions → allergies → the musical Cats → fish → dogs</p>
+        <p><strong>Conversation pivot:</strong> "Have you ever seen <em>Cats</em> the musical? I've always been curious whether cat lovers enjoy it more or hate it."</p>
+      </div>
+
+      <p><strong>How to practise:</strong> Write five random words on paper. For each word, instantly list three associations. Take the last association as your new word and repeat three times. Do this daily for a week and conversational pivots become automatic.</p>
+
+      <div class="dialogue">
+        <div class="dl"><span class="dl-speaker">Napkin</span><span class="dl-text">→ table → spoon → fine dining</span></div>
+        <div class="dl"><span class="dl-speaker">Fine dining</span><span class="dl-text">→ France → Michelin Star → butler</span></div>
+        <div class="dl"><span class="dl-speaker">Butler</span><span class="dl-text">→ Jeeves → white gloves → formality</span></div>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">🧠</div>
+        <div class="ki-text">If association fails in the moment, ask the person to elaborate — more words give you more material to work with. "Tell me more about that" is never a conversation killer.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      The Double Explanation Strategy
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>There are roughly ten questions you'll hear in every new social encounter. Preparing two-level answers for each turns a potential dead end into a conversation launch pad.</p>
+
+      <div class="type-block">
+        <h4>Level 1 — The Layman's Explanation</h4>
+        <p>Short, pithy, slightly surprising. Creates curiosity and invites follow-up. <em>"I file paperwork for a living"</em> (lawyer) or <em>"I'm paid to argue with people"</em>. Avoids jargon. Casts a wide net.</p>
+      </div>
+
+      <div class="type-block">
+        <h4>Level 2 — The Expert Explanation</h4>
+        <p>Detailed, specific, shows depth. Delivered only when the person signals genuine interest — or reveals they share your field. <em>"I'm a corporate lawyer specialising in business transactions, M&amp;A filings, and loan documents."</em></p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Skiing Example</div>
+        <p><strong>Layman's:</strong> "I went skiing and basically flattened the snow with my butt all weekend."</p>
+        <p><strong>Expert's:</strong> "Hit two Black Diamonds and a Blue Diamond — got fitted for new poles too since my old ones bent on the moguls."</p>
+        <em>The expert explanation only fires if they ask more — or reveal they ski themselves.</em>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      The Science of Effective Compliments
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>A compliment lands best when it validates a choice the person made consciously and cares about. The brain pairs positive feelings with whoever delivered them — compliment well, and people genuinely look forward to seeing you.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text"><strong>Compliment choices and effort:</strong> wardrobe, hairstyle, fitness results, their way of phrasing ideas, unusual home decor, a skill they've worked on.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✗</div>
+          <div class="rule-text"><strong>Avoid genetics:</strong> eye colour, height, natural bone structure — the person did nothing to earn these. The compliment falls flat because there's no ownership.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">★</div>
+          <div class="rule-text"><strong>Choose the least obvious thing.</strong> If she's wearing a stunning dress, shoes, and earrings — compliment the earrings. Noticing the subtle shows you're truly paying attention.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">⚡</div>
+          <div class="rule-text"><strong>Don't repeat compliments.</strong> Once is validation. Twice is okay. Three times on the same thing reads as hollow or manipulative.</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════ CHAPTER 2 ═══════════════════════════════ -->
+<section id="ch2" class="ch2">
+<div class="container">
+
+  <div class="chapter-header">
+    <div class="chapter-number">2</div>
+    <div class="chapter-header-text">
+      <h2>Conversation Is Play</h2>
+      <p>Most people treat conversation like a job interview. The secret is to treat it like recess. These four techniques inject fun, spontaneity, and genuine connection.</p>
+    </div>
+  </div>
+
+  <div class="technique-grid">
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 01</div>
+      <h3>Break the Fourth Wall</h3>
+      <p>Step outside the conversation and comment on it — like an actor addressing the audience. Positive, observational meta-comments create instant intimacy and show heightened awareness.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 02</div>
+      <h3>The "Us Against the World" Technique</h3>
+      <p>Create a two-person in-group by calling out something you both notice but others don't seem to. It forges immediate kinship and makes the other person feel uniquely understood by you.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 03</div>
+      <h3>Use Fallback Stories</h3>
+      <p>Keep 3–5 short interpersonal stories in your back pocket. They follow a four-part formula: bridging sentence → story → your opinion → series of open-ended questions.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 04</div>
+      <h3>Instant Role Play</h3>
+      <p>Assign the other person a hyperbolic role based on a compliment or tease, then ask in-character questions. It breaks interview mode and turns conversation into collaborative comedy.</p>
+    </div>
+
+  </div>
+
+  <div class="progress-label">Deep Dives</div>
+
+  <details class="deep-dive">
+    <summary>
+      Breaking the Fourth Wall — When &amp; How
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Think of your conversation as a TV show. "Breaking the fourth wall" means pausing to comment on the show itself — what's happening, what both of you are noticing, what's delightfully strange about this moment.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text"><strong>Use it positively.</strong> Comment on something funny, surprising, or mutually entertaining. "Did we just spend ten minutes discussing toilet paper brands? We're clearly soulmates."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text"><strong>Point out the unspoken.</strong> "I think we're both pretending to understand this music but neither of us has any idea."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✗</div>
+          <div class="rule-text"><strong>Never use it negatively.</strong> "Are you really directing the conversation toward yourself again?" — this reads as condescension, not wit.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✗</div>
+          <div class="rule-text"><strong>Don't overdo it.</strong> Constant meta-commentary makes people self-conscious and choose their words carefully around you.</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Good Fourth-Wall Moments</div>
+        <p>"Wow, this conversation has really taken an odd turn, hasn't it?"</p>
+        <p>"Did you just make a reference to both the Spice Girls and Greek mythology in the same sentence?"</p>
+        <p>"I apologise in advance — I'm about to talk about coffee for the next five minutes."</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Us Against the World — Creating an In-Group
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>This tactic exploits one of the most fundamental human drives: the desire to belong. By creating a micro in-group of two, you tap into the psychological feeling of tribal alliance. Research shows the number-one rule of likability is making people feel you are <em>like</em> them.</p>
+
+      <div class="example-box">
+        <div class="label">Anatomy of the Technique</div>
+        <p><strong>Notice something contextually shared:</strong> You're both at a loud party. Everyone else is dancing; you two are watching.</p>
+        <p><strong>Voice the shared observation:</strong> "Can you believe everyone is voluntarily getting their eardrums destroyed in there? We're clearly the only sane people at this party."</p>
+        <p><strong>Result:</strong> You've implied shared taste, shared sanity, and a unique bond — in one sentence.</p>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Noteworthy in the moment:</strong> "Did you see that sixty-year-old Michael Jackson impersonator walk by?"</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>Shared context contrast:</strong> "Can you believe how aggressive everyone is queuing? We're the last civilised people left."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Shared emotions:</strong> "Glad I'm not the only one who finds this unbearably awkward."</div>
+        </div>
+      </div>
+
+      <p>This works non-verbally too — a knowing glance or raised eyebrow toward something absurd establishes the bond without a word.</p>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      The Four-Part Fallback Story Formula
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>A fallback story is a pre-prepared mini-narrative with universal appeal, held in reserve for lulls. It isn't about the story itself — it's about the discussion it ignites.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Bridging sentence:</strong> "Hey, you know what I heard recently?" Creates a plausible, casual transition from anywhere. Alternatives: "Want to hear something interesting?" / "You won't believe what happened last week."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>The story:</strong> Short. One or two premises only. Focus on the primary emotion, not nitty-gritty detail. "A female friend of mine just proposed to her boyfriend — ring and everything."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Your opinion:</strong> Keep it positive or neutral so others feel safe disagreeing. "Honestly, I thought — why not? It suits them." This makes you vulnerable first, which opens the other person up.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">4</div>
+          <div class="rule-text"><strong>Series of questions:</strong> "What do you think? Would you ever do that? How would you react if your partner did it?" Multiple phrasings ensure one version resonates even if others don't.</div>
+        </div>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">📦</div>
+        <div class="ki-text">The best fallback stories are <strong>interpersonal dilemmas with universal themes</strong> — moral questions everyone has an opinion on. Would you tell your friend their partner was cheating? Would you take a $40k pay cut for your dream job? Would you go to Antarctica if you had two weeks to live?</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Instant Role Play — Step by Step
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Role play lets both parties drop their social masks and enter a creative space together. It's improv comedy — but you control the setup.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Make a relative statement.</strong> A compliment elevates them above you; a playful tease places them below. "Your sense of navigation is genuinely incredible — I get lost in car parks."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>Assign a label.</strong> "You're basically a modern-day Magellan." This is their role. Make it hyperbolic — bigger characters are more fun to play.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Ask in-character questions.</strong> "Which continent did you most enjoy discovering?" — you're treating the label as real. If they catch on, they'll play along.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">4</div>
+          <div class="rule-text"><strong>Stay consistent.</strong> Keep asking questions that fit the role. The comedy deepens the longer you both maintain it without breaking.</div>
+        </div>
+      </div>
+
+      <div class="dialogue">
+        <div class="dl">
+          <span class="dl-speaker">You</span>
+          <div>
+            <div class="dl-text">"This roast chicken is amazing. You must be the local Bobby Flay."</div>
+          </div>
+        </div>
+        <div class="dl">
+          <span class="dl-speaker">Them</span>
+          <div>
+            <div class="dl-text">"Ha — yes, I used the recipe from my new cookbook."</div>
+          </div>
+        </div>
+        <div class="dl">
+          <span class="dl-speaker">You</span>
+          <div>
+            <div class="dl-text">"Will you sign my copy? And are you appearing on Food Network this season?"</div>
+            <div class="dl-subtext">They're now fully in character — the conversation has become collaborative play.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════ CHAPTER 3 ═══════════════════════════════ -->
+<section id="ch3" class="ch3">
+<div class="container">
+
+  <div class="chapter-header">
+    <div class="chapter-number">3</div>
+    <div class="chapter-header-text">
+      <h2>A Touch of Witty Banter</h2>
+      <p>Wit is spontaneous creativity. These techniques train you to see multiple angles in any statement — and to respond from the best one rather than the most obvious one.</p>
+    </div>
+  </div>
+
+  <div class="technique-grid">
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 01</div>
+      <h3>The Witty Comeback Machine</h3>
+      <p>Three methods for instant comebacks: pick apart their word choice for an alternative meaning, agree-and-amplify to absurdity, or use an outlandish comparison. Deliver with 50% indifference.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 02</div>
+      <h3>Instigate a Banter Chain</h3>
+      <p>Misconstrue a remark to enter "joke mode." If they play along, agree-and-amplify their response. Keep escalating the absurdity — the chain builds a shared comedic arc that bonds you.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 03</div>
+      <h3>Go Beyond the Literal</h3>
+      <p>When someone makes a statement, it's an invitation — not a test question. Respond to the emotion and the subtext rather than the literal content. Initiate the joke rather than making one.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 04</div>
+      <h3>The Art of Misconstruing</h3>
+      <p>Intentionally misinterpret what someone says in a playful direction. Exaggerated Conclusion, Playful Tease, and acting shocked are three reliable variations.</p>
+    </div>
+
+  </div>
+
+  <div class="progress-label">Deep Dives</div>
+
+  <details class="deep-dive">
+    <summary>
+      Three Types of Witty Comebacks
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>A witty comeback takes an attack (playful or otherwise) and redirects it in a way that is funny, not hostile. The shorter and punchier, the better. Deliver with a wry smirk and 50% indifference.</p>
+
+      <div class="type-block">
+        <h4>Type 1 — Pick Apart Their Words</h4>
+        <p>Focus on their word choice and reinterpret it in a way that is favorable to you. If they use a simile, lean into the positive parts of the comparison.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Example</div>
+        <p><strong>Bob:</strong> "You work as slow as a glacier."</p>
+        <p><strong>You:</strong> "You mean strong and cool under pressure? Fair point."</p>
+        <p><strong>No simile version:</strong> "The tortoise always wins the race!"</p>
+      </div>
+
+      <div class="type-block">
+        <h4>Type 2 — Agree and Amplify</h4>
+        <p>Agree with the insult and then exaggerate it to a ridiculous degree. The absurdity takes the sting out and makes everyone laugh.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Example</div>
+        <p><strong>Bob:</strong> "Your cooking was pretty terrible last time."</p>
+        <p><strong>You:</strong> "You're lucky you left early — the rest of us got our stomachs pumped. Dinner at mine tonight?"</p>
+      </div>
+
+      <div class="type-block">
+        <h4>Type 3 — Outlandish Comparison</h4>
+        <p>Amplify using an analogy that's extreme but not impossible. The imagery makes both parties laugh at the absurdity.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Example</div>
+        <p><strong>Bob:</strong> "Your cooking was terrible."</p>
+        <p><strong>You:</strong> "True — I should've served the eggs as hockey pucks."</p>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">⚡</div>
+        <div class="ki-text"><strong>Delivery is everything.</strong> The same words said with aggression vs. 50% indifference land completely differently. Think James Bond responding to a failed assassination attempt — cool, not reactive.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      How to Start and Sustain a Banter Chain
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>A banter chain is collaborative comedy — improv performed in real life. It's funny not because of any single line but because of how both players build on each other.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Misconstrue something to enter.</strong> Make a non-serious statement, an exaggeration, or an assumption. "I had trouble finding a skirt to fit over my powerful thighs." (in response to a comment about your outfit)</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>See if they play ball.</strong> They'll either engage (join the joke) or return to the literal topic. If they engage, you're in.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Agree and amplify their response.</strong> Take their exaggeration as true and raise the stakes. "Closer to 350 lbs — dogs cross the street when I walk by."</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">4</div>
+          <div class="rule-text"><strong>Know when to end it.</strong> A banter chain has a natural peak. Recognise it and transition before the joke goes stale.</div>
+        </div>
+      </div>
+
+      <div class="dialogue">
+        <div class="dl"><span class="dl-speaker">A</span><span class="dl-text">"That's a heck of a pant suit."</span></div>
+        <div class="dl"><span class="dl-speaker">B</span><span class="dl-text">"Thanks — I had trouble finding a skirt to fit over my powerful thighs."</span></div>
+        <div class="dl"><span class="dl-speaker">A</span><span class="dl-text">"You're squatting 250 now, right?"</span></div>
+        <div class="dl"><span class="dl-speaker">B</span><span class="dl-text">"Closer to 350. Dogs are afraid of me."</span></div>
+        <div class="dl"><span class="dl-speaker">A</span><span class="dl-text">"You could use them as a drive-in movie screen."</span></div>
+        <div class="dl"><span class="dl-speaker">B</span><span class="dl-text">"Did that last week. The double feature paid my rent. Did you know those two skyscrapers downtown were modelled after my legs?"</span></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Beyond Literal — The Humour Mindset
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>The single biggest difference between witty people and everyone else is a mindset shift: they're not trying to answer questions — they're looking for opportunities to play.</p>
+
+      <div class="example-box">
+        <div class="label">Literal vs. Non-Literal</div>
+        <p><strong>Statement:</strong> "I spent a fortune at the Apple Store today."</p>
+        <p><strong>Literal reply:</strong> "How much?"</p>
+        <p><strong>Non-literal reply:</strong> "It's so expensive there I had to sell a kidney for my new phone."</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Another Example</div>
+        <p><strong>Statement:</strong> "He plays guitar like a deity."</p>
+        <p><strong>Literal reply:</strong> "What song did he play?"</p>
+        <p><strong>Non-literal reply:</strong> "More Buddha-style, or Ganesha-style?"</p>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">🎭</div>
+        <div class="ki-text">You're not <em>making</em> a joke — you're <em>initiating</em> one. Jokes have setup/punchline structures that create pressure. Initiating a joke is an open invitation with no pressure — both parties can join or not.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Three Misconstruing Techniques
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Misconstruing is the art of intentionally taking something in a different direction than intended. It subverts expectations and is the engine of most conversational humour.</p>
+
+      <div class="type-block">
+        <h4>1. Exaggerated Conclusion</h4>
+        <p>Take their statement and multiply it by 100. The absurdity makes it obvious you're playing. If you don't exaggerate <em>enough</em>, it reads as a real insult rather than a joke.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Examples</div>
+        <p>"That coffee was terrible!" → "My car's battery water is tastier."</p>
+        <p>"My handwriting is horrible." → "Deciphering hieroglyphs would be easier."</p>
+        <p>"I'll call when I get home." → "I didn't know you could call from Mars, but okay."</p>
+      </div>
+
+      <div class="type-block">
+        <h4>2. Playful Tease</h4>
+        <p>Misconstrue their positive statement as self-deprecating and agree with the imagined criticism. Use warm body language so the tease reads as play, not attack.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Examples</div>
+        <p>"I love this shirt!" → "Don't worry, we'll find one that actually looks good."</p>
+        <p>"She's my favourite singer." → "We'll work on your taste."</p>
+        <em>If they seem stung, immediately follow with a compliment on the same topic.</em>
+      </div>
+
+      <div class="type-block">
+        <h4>3. Shocked Reaction</h4>
+        <p>React to an ordinary statement with exaggerated, theatrical disbelief. The disconnect between your reaction and the mundane statement is where the comedy lives.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Examples</div>
+        <p>"I love watching television." → "Oh my gosh, TELEVISION?!"</p>
+        <p>"That shirt is terrible." → "Terrible?! Are you crazy?!"</p>
+      </div>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════ CHAPTER 4 ═══════════════════════════════ -->
+<section id="ch4" class="ch4">
+<div class="container">
+
+  <div class="chapter-header">
+    <div class="chapter-number">4</div>
+    <div class="chapter-header-text">
+      <h2>Funny on Command</h2>
+      <p>You don't need to tell jokes to be funny. Replacing boring vocabulary, mastering the comic triple, and wielding misdirection make humour a natural side-effect of how you speak.</p>
+    </div>
+  </div>
+
+  <div class="technique-grid">
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 01</div>
+      <h3>Vivid Imagery</h3>
+      <p>Replace generic adjectives with specific, unusual descriptions that paint a picture. "Good" becomes "better than using the bathroom after a six-hour drive." The unexpected image is inherently funny.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 02</div>
+      <h3>The Comic Triple</h3>
+      <p>List three things — two that share a sentiment, and a third that completely subverts it. The pattern builds expectation; the third element releases tension with a laugh.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 03</div>
+      <h3>Misdirection Aplenty</h3>
+      <p>Sarcasm, irony, hyperbole, ironic similes — all share the same DNA: say one thing, mean another. The contrast between literal and implied meaning is the engine of the laugh.</p>
+    </div>
+
+  </div>
+
+  <div class="progress-label">Deep Dives</div>
+
+  <details class="deep-dive">
+    <summary>
+      Vivid Imagery — Three Levels of Use
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+
+      <div class="type-block">
+        <h4>Usage 1 — Replace Tired Adjectives</h4>
+        <p>Instead of "good/bad/interesting," think for a second longer. Synonyms, analogies, and unexpected comparisons make you memorable.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Upgrade Chains</div>
+        <p><strong>Good → </strong>"splendid" → "like a big Bloody Mary" → "better than using the bathroom after a long car ride" → "almost as good as Christmas morning"</p>
+        <p><strong>I love coffee → </strong>"it's my lifeblood" → "I'm dead without it" → "I would bathe in it if I could"</p>
+      </div>
+
+      <div class="type-block">
+        <h4>Usage 2 — Unconventional Descriptions</h4>
+        <p>Describe things by what they resemble, not what they are. Disassociate from the meaning and focus on the physical elements.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Real Examples</div>
+        <p>Amy Schumer on sleep: <em>"I sleep in the shape of a swastika"</em> / <em>"as if I fell from the top of a building"</em></p>
+        <p>PJ O'Rourke on a small fierce policeman: <em>"He looked like an attack hamster."</em></p>
+        <p>Avengers: Endgame on a changed Thor: <em>"You look like melted ice cream."</em></p>
+      </div>
+
+      <div class="type-block">
+        <h4>Usage 3 — Pop Culture References</h4>
+        <p>Use a widely-known reference to replace an adjective. Assign the reference's traits to what you're describing. Works best when the reference is universal enough that everyone gets it.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Examples</div>
+        <p>"That cashier shortchanged me. Does he work for the Olympics?"  <em>(traits: corrupt, unfair)</em></p>
+        <p>"This pie is almost as addicting as Game of Thrones."  <em>(traits: compulsive, can't-stop)</em></p>
+        <p>"He assembles toys like MacGyver."  <em>(traits: resourceful, improvised)</em></p>
+        <em>Tip: match references to the age of your audience.</em>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      The Comic Triple — Step by Step
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>The human brain is conditioned by threes everywhere — fairy tales, laws of physics, act structures, comedy itself. The comic triple exploits this conditioning to produce a surprise that relieves accumulated tension as laughter.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Choose a topic.</strong> Almost anything works — coffee, relationships, holidays, your job. The topic needs at least one positive and one negative quality.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>List two aligned items.</strong> Both should share the same sentiment (positive or negative). Listeners will feel the pattern solidifying.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Subvert with the third.</strong> The third element is the opposite sentiment. Deliver it in the same casual tone — the contrast does the work.</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Canonical Examples</div>
+        <p><strong>Mark Twain:</strong> "There are lies, damned lies, and <em>statistics</em>."</p>
+        <p><strong>Chris Rock:</strong> "Women need only three things: food, water, and <em>compliments</em>."</p>
+        <p><strong>Jon Stewart:</strong> "We feasted, gave thanks, then I <em>killed them all and took their land</em>."</p>
+        <p><strong>Big Bang Theory:</strong> "Greeks gave us science, democracy, and <em>little cubes of charred meat that taste like sweat</em>."</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Build Your Own: Coffee</div>
+        <p><strong>Two positives:</strong> the energy boost, the aroma</p>
+        <p><strong>One negative:</strong> the yellowing effect on your teeth</p>
+        <p><strong>Result:</strong> "I have coffee every morning for the energy, the smell… and the dental bills."</p>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Misdirection — Sarcasm, Irony &amp; Ironic Simile
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+
+      <div class="type-block">
+        <h4>Sarcasm — The Framework</h4>
+        <p>Sarcasm says the opposite of what you mean. It's context-dependent — works between equals who share a sense of humour; backfires with insecure people or in formal settings. Use deadpan delivery, then break into a slight smile.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Sarcasm Patterns</div>
+        <p><strong>When someone says something obvious:</strong> "That road is very long." → "You are very observant."</p>
+        <p><strong>When something bad happens to them:</strong> "I dropped my coffee mug." → "You've always been so graceful."</p>
+        <p><strong>When something good happens to them:</strong> "I got an A!" → "Must be a tough grading scale."</p>
+      </div>
+
+      <div class="type-block">
+        <h4>Irony — Observational Contrast</h4>
+        <p>Irony is about situations, not people. A fire station burning down. A traffic committee stuck in traffic. A "No birds" sign used as a bird perch. You observe it; you don't create it.</p>
+      </div>
+
+      <div class="type-block">
+        <h4>Ironic Simile — The Formula</h4>
+        <p>Compare something to something completely unlike it except in one specific, ironic way. The deceptive setup + unexpected backpedal = comedy.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Ironic Simile Examples</div>
+        <p>"I'm as likely to vote for him as I am to book a proctologist with trembling hands."</p>
+        <p>"I'm as sad as a dog with a bone."  <em>(dogs with bones are delighted — so you're thrilled)</em></p>
+        <p>"She has all the social graces of a steamroller."</p>
+        <p>"Our teacher's explanation was as clear as mud."</p>
+        <p>"Being the third wheel was as enjoyable as a root canal."</p>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">🎯</div>
+        <div class="ki-text"><strong>Words vs. Tone:</strong> Say positive words in a deeply sarcastic tone. Or say negative words with an angelically sweet tone and body language. Both create irony through contrast. The mismatch is the joke.</div>
+      </div>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════ CHAPTER 5 ═══════════════════════════════ -->
+<section id="ch5" class="ch5">
+<div class="container">
+
+  <div class="chapter-header">
+    <div class="chapter-number">5</div>
+    <div class="chapter-header-text">
+      <h2>Captivating Stories</h2>
+      <p>Stories are how humans connect at depth. You don't need to be a novelist — you just need a simple structure and the habit of seeing your life as a series of mini-narratives.</p>
+    </div>
+  </div>
+
+  <div class="technique-grid">
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 01</div>
+      <h3>A Life of Stories</h3>
+      <p>Replace one-word answers with three-sentence mini-stories. Every common small-talk question is an invitation to share something interesting. Prepare mini-stories in advance for predictable questions.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 02</div>
+      <h3>The 1:1:1 Method</h3>
+      <p>One action. One emotion to evoke. One sentence. Start as close to the end as possible, then let the listener's questions guide the details. Keep it short — the discussion after is the point.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 03</div>
+      <h3>The Story Spine</h3>
+      <p>An eight-beat framework: Once upon a time / Every day / But one day / Because of that (×3) / Until finally / And ever since then. Works for everything from office disputes to movie pitches.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 04</div>
+      <h3>Inside Stories</h3>
+      <p>Identify the conversational high point, pocket it, then call back to it in a later context. The repeated reference across topics becomes an inside joke and a unique bond between just the two of you.</p>
+    </div>
+
+    <div class="technique-card">
+      <div class="tc-label">Technique 05</div>
+      <h3>Ask for Stories</h3>
+      <p>Phrase questions to require a story, not an answer. Give context, direction, and emotional prompts. "Tell me about the moment in the third quarter" beats "How'd you win?" every time.</p>
+    </div>
+
+  </div>
+
+  <div class="progress-label">Deep Dives</div>
+
+  <details class="deep-dive">
+    <summary>
+      Mini-Stories — Transforming Small Talk
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>A mini-story is three sentences that answer a question while revealing something interesting about you. It's the difference between a response and an <em>invitation</em>.</p>
+
+      <div class="dialogue">
+        <div class="dl">
+          <span class="dl-speaker">Q</span>
+          <span class="dl-text">"What do you do?"</span>
+        </div>
+        <div class="dl">
+          <span class="dl-speaker">Bad</span>
+          <span class="dl-text">"I'm a marketing executive." <span class="dl-subtext">→ "Oh cool." → silence</span></span>
+        </div>
+        <div class="dl">
+          <span class="dl-speaker">Good</span>
+          <span class="dl-text">"I'm a marketing executive. Just last week a client threatened to send bodyguards to our office. I definitely wish I spent more time on the creative side." <span class="dl-subtext">→ "Wait — BODYGUARDS? Tell me more."</span></span>
+        </div>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">★</div>
+          <div class="rule-text"><strong>Prepare mini-stories for:</strong> your job, your week, your upcoming weekend, your hometown, your hobbies. Three sentences each. Have them ready before any social event.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text"><strong>Details are the engine.</strong> Specific songs, names, places — these trigger the listener's own memories and emotions, making them feel drawn into your story involuntarily.</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      The 1:1:1 Method — Ruthless Simplicity
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Most people over-complicate stories. They add context before context is needed, details before interest is established, and lose their audience before arriving at the point. The 1:1:1 method forces you to lead with impact.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>One action:</strong> The story is about exactly one thing happening. No sub-plots, no background history. Just the event.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>One emotion:</strong> Name it before you tell the story. Are you going for shock? Humour? Envy? Sadness? This guides which details you include.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>One sentence:</strong> If you can't summarise it in one sentence, you haven't figured out what the story is actually about yet.</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="label">1:1:1 Examples</div>
+        <p>"I was attacked by a dog and was so frightened I nearly wet my pants." <em>(Action: dog attack. Emotion: fear/shock. One sentence.)</em></p>
+        <p>"My job interview went so badly the interviewer laughed at me as I walked out." <em>(Action: interview. Emotion: embarrassment. One sentence.)</em></p>
+        <p>"When I met Joshua I spilled baked beans all over his white trousers in front of the entire room." <em>(Action: spill. Emotion: mortification. One sentence.)</em></p>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">✂️</div>
+        <div class="ki-text"><strong>Start as close to the end as possible.</strong> The friend being in jail is still in jail whether you spend two sentences or ten getting there. Lead with the punchline; let them ask for the context.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      The Story Spine — Eight Beats of Any Great Story
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Created by Kevin Adams of Synergy Theater, the story spine explains why every great movie, novel, and memorable anecdote feels satisfying. It works for a two-minute story about your weekend or a two-hour blockbuster.</p>
+
+      <div class="spine-steps">
+        <div class="spine-step">
+          <div class="spine-dot">1</div>
+          <div class="spine-content">
+            <h4>Once upon a time…</h4>
+            <p>Set the world and the characters. Establish what "normal" looks like. Without this, nothing that follows will matter to the listener.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">2</div>
+          <div class="spine-content">
+            <h4>Every day…</h4>
+            <p>Deepen the routine. Build tension by showing a character growing restless, curious, or dissatisfied. Give them a personality and a motive.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">3</div>
+          <div class="spine-content">
+            <h4>But one day…</h4>
+            <p>The inciting event. Something disrupts the status quo. A stranger arrives. A secret is revealed. The world tips.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">4</div>
+          <div class="spine-content">
+            <h4>Because of that…</h4>
+            <p>First consequence. The character responds. This launches the main body of the story — what actually happened.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">5</div>
+          <div class="spine-content">
+            <h4>Because of that…</h4>
+            <p>Stakes rise. Complications compound. New characters enter. The plot thickens — we're invested now.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">6</div>
+          <div class="spine-content">
+            <h4>Because of that…</h4>
+            <p>Three dilemmas (the brain loves threes). The hero faces the third and hardest challenge. Resolution feels earned because we've watched the struggle.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">7</div>
+          <div class="spine-content">
+            <h4>Until finally…</h4>
+            <p>Resolution. Does the guy get the girl? Is the case solved? Is the world saved? Reveal everything.</p>
+          </div>
+        </div>
+        <div class="spine-step">
+          <div class="spine-dot">8</div>
+          <div class="spine-content">
+            <h4>And ever since then…</h4>
+            <p>The new normal. Close the loop. Signal you're done and invite the listener to respond. A moral, a punchline, or a callback all work here.</p>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        "In west Philadelphia born and raised / On the playground is where I spent most of my days" — Once upon a time + Every day. "I got in one little fight and my mom got scared" — But one day. "To sit on my throne as the prince of Bel-Air" — Until finally + And ever since then.
+        <cite>— The Fresh Prince of Bel-Air theme song, a near-perfect story spine in 90 seconds</cite>
+      </blockquote>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Inside Stories — Constructing Shared Jokes
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>An inside joke is simply the same topic appearing multiple times between two people in different contexts. You don't need years of friendship — you can manufacture one in a single conversation.</p>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">1</div>
+          <div class="rule-text"><strong>Identify the conversational high point.</strong> The loudest laugh, the strongest mutual reaction, the most surprising revelation. This is your asset.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">2</div>
+          <div class="rule-text"><strong>Pocket it.</strong> Don't let it drop. Keep it in mental reserve.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">3</div>
+          <div class="rule-text"><strong>Call back when a new topic connects.</strong> Even loosely. The repetition + new context = instant inside joke.</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="label">Callback Example</div>
+        <p><strong>Earlier:</strong> You both laughed comparing someone to a wiener dog.</p>
+        <p><strong>Current topic:</strong> Jackets and fashion.</p>
+        <p><strong>Callback:</strong> "Yeah, I can't wear that style anyway — I'm basically a wiener dog, remember?"</p>
+        <em>The high point has now become a permanent shared reference.</em>
+      </div>
+    </div>
+  </details>
+
+  <details class="deep-dive">
+    <summary>
+      Asking for Stories — The Reporter Technique
+      <div class="dd-arrow">▾</div>
+    </summary>
+    <div class="deep-dive-body">
+      <p>Sports broadcasters interview athletes who are breathless, adrenaline-soaked, and barely coherent — and still walk away with compelling soundbites. They do this by asking questions that can <em>only</em> be answered with a story.</p>
+
+      <div class="example-box">
+        <div class="label">Closed vs. Open Questions</div>
+        <p><strong>Closed:</strong> "How was your weekend?" → "Fine."</p>
+        <p><strong>Open:</strong> "How was your weekend? What was the best part? It was so nice out — please tell me you actually went outside."</p>
+        <p><strong>Closed:</strong> "What do you do?"</p>
+        <p><strong>Open:</strong> "What's the most exciting part of your job? What does it feel like to make that kind of difference?"</p>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text">Ask for a story, not an answer</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text">Be broad but offer specific directions or prompts</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text">Ask about feelings: "How did that feel?"</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text">Give multiple hints so one will resonate</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">✓</div>
+          <div class="rule-text">When all else fails: "Tell me the story about…"</div>
+        </div>
+      </div>
+
+      <div class="key-insight">
+        <div class="ki-icon">🐴</div>
+        <div class="ki-text"><strong>Pin the Tail on the Donkey:</strong> When someone tells a story, add a comment that amplifies the primary emotion. "Did you feel like Scrooge McDuck for a second?" (after a story about dropping cash). You're assisting their story, not stealing their thunder — and they'll love you for it.</div>
+      </div>
+    </div>
+  </details>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════ SUMMARY ═══════════════════════════════ -->
+<section id="summary">
+<div class="container">
+
+  <div class="summary-section">
+    <h2>The Complete Summary</h2>
+    <p class="intro">Every technique from all five chapters, condensed into one reference you can return to again and again.</p>
+
+    <div class="summary-grid">
+
+      <div class="summary-card sc1">
+        <div class="sc-num">Chapter 1 · Flow Like a River</div>
+        <h3>Conversational Foundations</h3>
+        <ul>
+          <li>Replace absolute questions with bounded ones</li>
+          <li>Match emotion, mirror intensity in reactions</li>
+          <li>Use the two-second rule before replying</li>
+          <li>Free-associate from any keyword to find pivots</li>
+          <li>Prepare layman's + expert explanations</li>
+          <li>Compliment choices and effort, not genetics</li>
+        </ul>
+      </div>
+
+      <div class="summary-card sc2">
+        <div class="sc-num">Chapter 2 · Conversation Is Play</div>
+        <h3>Playful Connection</h3>
+        <ul>
+          <li>Break the fourth wall positively</li>
+          <li>Create in-groups with "us vs. the world"</li>
+          <li>Use fallback stories when things go quiet</li>
+          <li>Instigate instant role play</li>
+        </ul>
+      </div>
+
+      <div class="summary-card sc3">
+        <div class="sc-num">Chapter 3 · Witty Banter</div>
+        <h3>The Banter Toolkit</h3>
+        <ul>
+          <li>Three comeback types: reframe, amplify, compare</li>
+          <li>Misconstrue to start a banter chain</li>
+          <li>Agree-and-amplify to keep it going</li>
+          <li>Go beyond the literal — initiate, don't just make jokes</li>
+          <li>Exaggerated conclusion, playful tease, shocked reaction</li>
+        </ul>
+      </div>
+
+      <div class="summary-card sc4">
+        <div class="sc-num">Chapter 4 · Funny on Command</div>
+        <h3>Natural Humour</h3>
+        <ul>
+          <li>Replace boring adjectives with vivid imagery</li>
+          <li>Use unconventional descriptions and analogies</li>
+          <li>Apply the comic triple (2 + 1 reversal)</li>
+          <li>Wield sarcasm contextually with deadpan delivery</li>
+          <li>Spot and create ironic contrasts</li>
+          <li>Build ironic similes for memorable lines</li>
+        </ul>
+      </div>
+
+      <div class="summary-card sc5">
+        <div class="sc-num">Chapter 5 · Captivating Stories</div>
+        <h3>Storytelling Mastery</h3>
+        <ul>
+          <li>Frame answers as mini-stories (3 sentences)</li>
+          <li>Use 1:1:1: one action, one emotion, one sentence</li>
+          <li>Follow the 8-beat story spine</li>
+          <li>Pocket high points; call back for inside jokes</li>
+          <li>Ask questions that require stories, not answers</li>
+          <li>Pin the tail: amplify others' stories</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Master Principle -->
+  <div class="key-insight" style="margin: 0 0 60px;">
+    <div class="ki-icon">🌊</div>
+    <div class="ki-text" style="font-size:16.5px;">
+      <strong>The Master Principle:</strong> Wit is not a talent — it's a mindset. The moment you stop trying to answer questions correctly and start trying to <em>play</em> with them, conversation transforms. People who seem effortlessly clever have simply practised seeing the game hidden inside every exchange. Now you can too.
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <p>
+    <strong style="color: var(--text);">The Art of Witty Banter</strong><br>
+    Based on the work of Patrick King · Educational Summary Guide<br>
+    <span style="font-size:12px;">Techniques, frameworks, and examples compiled for learning purposes.</span>
+  </p>
+</footer>
+
+<script>
+  // Smooth active-state highlighting for nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sticky-nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = '';
+          link.style.borderBottomColor = '';
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.style.color = 'var(--text)';
+            link.style.borderBottomColor = 'var(--accent1)';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

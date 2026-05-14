@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hidden Tools of Comedy — Steve Kaplan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-deep:    #0d1117;
+  --bg-mid:     #161b27;
+  --bg-card:    #1e2535;
+  --bg-card2:   #242c3d;
+  --gold:       #f4c430;
+  --gold-light: #ffd966;
+  --gold-dim:   #b8922a;
+  --gold-glow:  rgba(244,196,48,0.18);
+  --warm-white: #f5f0e8;
+  --muted:      #9aa3b8;
+  --accent-red: #e05a5a;
+  --accent-teal:#4ecdc4;
+  --radius:     12px;
+  --radius-lg:  20px;
+  --transition: 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--warm-white);
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light));
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px var(--gold);
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#main-nav {
+  position: fixed; top: 3px; left: 0; right: 0;
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(244,196,48,0.12);
+  z-index: 1000;
+  padding: 0 2rem;
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 58px;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex; gap: 0.2rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.35rem 0.65rem; border-radius: 6px;
+  transition: color var(--transition), background var(--transition);
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--gold); background: var(--gold-glow); }
+
+#hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 6px;
+}
+#hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #1e2a1a 0%, #0d1117 70%);
+  padding: 100px 2rem 60px;
+}
+#hero-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 860px;
+}
+.hero-pretitle {
+  font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 1.2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-weight: 900; line-height: 1.05;
+  color: var(--warm-white);
+  letter-spacing: -0.01em;
+  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+}
+.hero-title span { color: var(--gold); }
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-style: italic; color: var(--gold-light);
+  margin-top: 0.6rem;
+  letter-spacing: 0.06em;
+  opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+}
+.hero-author {
+  margin-top: 1.4rem;
+  font-size: 1rem; color: var(--muted); letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 600;
+  opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
+}
+.hero-author strong { color: var(--warm-white); }
+.hero-divider {
+  width: 80px; height: 2px; margin: 2rem auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0; animation: fadeUp 0.9s 1s forwards;
+}
+.hero-quote {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  font-style: italic; color: var(--warm-white);
+  max-width: 680px; margin: 0 auto;
+  opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
+  line-height: 1.6;
+}
+.hero-quote::before { content: '\201C'; }
+.hero-quote::after  { content: '\201D'; }
+.hero-cycling {
+  margin-top: 2rem;
+  font-size: 1.05rem; color: var(--gold);
+  font-weight: 600; letter-spacing: 0.08em;
+  height: 1.8em;
+  opacity: 0; animation: fadeUp 0.9s 1.3s forwards;
+}
+.hero-cta {
+  margin-top: 2.5rem;
+  opacity: 0; animation: fadeUp 0.9s 1.5s forwards;
+}
+.btn-gold {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  color: #0d1117; font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 2.2rem; border-radius: 50px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 24px rgba(244,196,48,0.3);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(244,196,48,0.45);
+}
+.hero-scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--muted); font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; opacity: 0;
+  animation: fadeUp 1s 2s forwards;
+}
+.scroll-arrow {
+  width: 22px; height: 22px; border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(45deg);
+  animation: bounce 1.6s infinite;
+}
+@keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0);    }
+}
+
+/* ============================================================
+   SECTIONS — SHARED
+   ============================================================ */
+section { padding: 90px 2rem; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 0.8rem;
+}
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 800; line-height: 1.15;
+  color: var(--warm-white); margin-bottom: 1.2rem;
+}
+.section-heading em { font-style: italic; color: var(--gold); }
+.section-lead {
+  font-size: 1.1rem; color: var(--muted);
+  max-width: 680px; line-height: 1.8; margin-bottom: 3rem;
+}
+
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ============================================================
+   TESTIMONIALS CAROUSEL
+   ============================================================ */
+#testimonials { background: var(--bg-mid); }
+.carousel-wrap { position: relative; overflow: hidden; }
+.carousel-track {
+  display: flex; transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+}
+.testimonial-card {
+  min-width: 100%; padding: 3rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(244,196,48,0.1);
+  border-radius: var(--radius-lg);
+}
+.t-quote {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-style: italic; color: var(--warm-white);
+  line-height: 1.75; margin-bottom: 1.5rem;
+}
+.t-quote::before { content: '\201C'; color: var(--gold); font-size: 2.5rem; line-height: 0; vertical-align: -0.5rem; margin-right: 0.15rem; }
+.t-quote::after  { content: '\201D'; color: var(--gold); font-size: 2.5rem; line-height: 0; vertical-align: -0.5rem; margin-left:  0.15rem; }
+.t-author { font-weight: 700; color: var(--gold); font-size: 1rem; }
+.t-role   { color: var(--muted); font-size: 0.875rem; margin-top: 0.2rem; }
+.carousel-controls {
+  display: flex; gap: 1rem; justify-content: center;
+  margin-top: 2rem; align-items: center;
+}
+.carousel-btn {
+  background: var(--bg-card); border: 1px solid rgba(244,196,48,0.3);
+  color: var(--gold); width: 44px; height: 44px; border-radius: 50%;
+  cursor: pointer; font-size: 1.2rem; display: flex;
+  align-items: center; justify-content: center;
+  transition: background var(--transition), transform var(--transition);
+}
+.carousel-btn:hover { background: var(--gold-glow); transform: scale(1.08); }
+.carousel-dots { display: flex; gap: 8px; }
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--muted); cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.carousel-dot.active { background: var(--gold); transform: scale(1.3); }
+
+/* ============================================================
+   MYTHS SECTION
+   ============================================================ */
+#myths { background: var(--bg-deep); }
+.myths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.myth-card {
+  perspective: 900px; height: 200px; cursor: pointer;
+}
+.myth-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(.4,0,.2,1);
+}
+.myth-card.flipped .myth-inner { transform: rotateY(180deg); }
+.myth-front, .myth-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+}
+.myth-front {
+  background: var(--bg-card);
+  border: 1px solid rgba(244,196,48,0.15);
+}
+.myth-badge {
+  display: inline-block;
+  background: rgba(224,90,90,0.15);
+  color: var(--accent-red);
+  border: 1px solid rgba(224,90,90,0.3);
+  font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; font-weight: 700;
+  padding: 0.25rem 0.65rem; border-radius: 50px;
+  width: fit-content;
+}
+.myth-front h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; color: var(--warm-white);
+  line-height: 1.4;
+}
+.myth-flip-hint {
+  font-size: 0.72rem; color: var(--muted);
+  letter-spacing: 0.1em;
+}
+.myth-back {
+  background: linear-gradient(135deg, #1a2a1a, #1e2f1e);
+  border: 1px solid rgba(78,205,196,0.25);
+  transform: rotateY(180deg);
+}
+.myth-truth-badge {
+  display: inline-block;
+  background: rgba(78,205,196,0.15);
+  color: var(--accent-teal);
+  border: 1px solid rgba(78,205,196,0.3);
+  font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; font-weight: 700;
+  padding: 0.25rem 0.65rem; border-radius: 50px;
+  width: fit-content;
+}
+.myth-back p {
+  font-size: 0.95rem; color: var(--warm-white); line-height: 1.6;
+}
+
+/* ============================================================
+   BANANA PEEL TEST
+   ============================================================ */
+#perception { background: var(--bg-mid); }
+.banana-intro {
+  font-size: 1.05rem; color: var(--muted); margin-bottom: 2.5rem;
+  max-width: 720px; line-height: 1.8;
+}
+.banana-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.2rem; margin-bottom: 2rem;
+}
+.banana-item {
+  background: var(--bg-card);
+  border: 2px solid rgba(244,196,48,0.1);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+.banana-item:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+.banana-item.selected { border-color: var(--gold); background: rgba(244,196,48,0.06); }
+.banana-letter {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--gold-glow); border: 2px solid var(--gold-dim);
+  color: var(--gold); font-weight: 800; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.8rem;
+}
+.banana-item h4 { font-size: 1rem; color: var(--warm-white); margin-bottom: 0.4rem; }
+.banana-result {
+  display: none; margin-top: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(244,196,48,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem; color: var(--gold-light);
+  line-height: 1.5;
+}
+.banana-item.selected .banana-result { display: block; }
+
+/* ============================================================
+   CORE THEORY
+   ============================================================ */
+#core-theory { background: var(--bg-deep); }
+.big-quote {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-style: italic; color: var(--warm-white);
+  text-align: center; line-height: 1.55;
+  max-width: 820px; margin: 0 auto 3.5rem;
+  position: relative; padding: 2.5rem 3rem;
+}
+.big-quote::before {
+  content: '\201C';
+  position: absolute; top: 0; left: 1rem;
+  font-size: 7rem; line-height: 1; color: var(--gold);
+  opacity: 0.3; font-family: 'Playfair Display', serif;
+  font-style: normal;
+}
+.drama-comedy-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; max-width: 820px; margin: 0 auto 3rem;
+}
+.dc-card {
+  padding: 2rem; border-radius: var(--radius-lg);
+  text-align: center;
+}
+.dc-card.drama {
+  background: linear-gradient(135deg, #1a1535, #1e1a3a);
+  border: 1px solid rgba(100,80,180,0.3);
+}
+.dc-card.comedy {
+  background: linear-gradient(135deg, #1a2610, #1e2e12);
+  border: 1px solid rgba(244,196,48,0.25);
+}
+.dc-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.dc-label {
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 0.6rem;
+}
+.dc-card.drama .dc-label { color: #a98ee8; }
+.dc-card.comedy .dc-label { color: var(--gold); }
+.dc-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: var(--warm-white); line-height: 1.45;
+}
+.human-condition {
+  max-width: 820px; margin: 0 auto;
+  padding: 2.5rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(244,196,48,0.1);
+  font-size: 1.05rem; color: var(--muted); line-height: 1.85;
+}
+.human-condition p + p { margin-top: 1rem; }
+
+/* ============================================================
+   COMIC EQUATION
+   ============================================================ */
+#equation { background: var(--bg-mid); }
+.equation-box {
+  max-width: 900px; margin: 0 auto 3.5rem;
+  padding: 3rem;
+  background: linear-gradient(135deg, #1a2010, #1e2a14);
+  border: 2px solid rgba(244,196,48,0.3);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: 0 0 60px rgba(244,196,48,0.07);
+}
+.equation-text {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.1rem, 2.4vw, 1.65rem);
+  font-style: italic; color: var(--warm-white);
+  line-height: 1.65;
+}
+.equation-text em { color: var(--gold); font-style: normal; font-weight: 600; }
+.components-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.4rem; max-width: 980px; margin: 0 auto;
+}
+.comp-card {
+  padding: 1.8rem 1.4rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border-top: 3px solid var(--gold-dim);
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.comp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(244,196,48,0.12);
+}
+.comp-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem; font-weight: 900; color: var(--gold);
+  opacity: 0.25; line-height: 1; margin-bottom: 0.3rem;
+}
+.comp-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; color: var(--gold); margin-bottom: 0.7rem;
+}
+.comp-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+/* ============================================================
+   8 TOOLS
+   ============================================================ */
+#tools { background: var(--bg-deep); }
+.tools-tabs {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+.tool-tab {
+  background: var(--bg-card);
+  border: 1px solid rgba(244,196,48,0.15);
+  color: var(--muted); font-size: 0.8rem;
+  font-weight: 700; letter-spacing: 0.08em;
+  padding: 0.5rem 1rem; border-radius: 50px;
+  cursor: pointer; transition: all var(--transition);
+}
+.tool-tab.active,
+.tool-tab:hover {
+  background: var(--gold); color: #0d1117; border-color: var(--gold);
+}
+.tool-panel { display: none; }
+.tool-panel.active { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+.tool-header {
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+.tool-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem; font-weight: 900; line-height: 1;
+  color: var(--gold); opacity: 0.2;
+  flex-shrink: 0;
+}
+.tool-title-block h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  color: var(--gold); font-weight: 800; margin-bottom: 0.5rem;
+}
+.tool-title-block .tool-icon { font-size: 2rem; margin-bottom: 0.4rem; }
+.tool-body {
+  display: grid; grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+}
+.tool-main p { font-size: 1.05rem; color: var(--warm-white); line-height: 1.85; margin-bottom: 1.2rem; }
+.tool-main p:last-child { margin-bottom: 0; }
+.tool-key-insight {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card2));
+  border-left: 4px solid var(--gold);
+  padding: 1.2rem 1.4rem; border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1.5rem 0;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--warm-white); line-height: 1.6;
+}
+.tool-sidebar {
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.example-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(244,196,48,0.12);
+  border-radius: var(--radius); padding: 1.2rem;
+}
+.example-label {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dim); font-weight: 700; margin-bottom: 0.5rem;
+}
+.example-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+.example-card strong { color: var(--warm-white); }
+.tool-formula {
+  background: rgba(244,196,48,0.06);
+  border: 1px solid rgba(244,196,48,0.2);
+  border-radius: var(--radius); padding: 1.2rem;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: var(--gold);
+  font-style: italic;
+}
+
+/* ============================================================
+   KEY INSIGHTS
+   ============================================================ */
+#insights { background: var(--bg-mid); }
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.4rem;
+}
+.insight-card {
+  padding: 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid rgba(244,196,48,0.1);
+  position: relative; overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition);
+}
+.insight-card::before {
+  content: '\201C';
+  position: absolute; top: -0.5rem; left: 1rem;
+  font-size: 5rem; color: var(--gold); opacity: 0.1;
+  font-family: 'Playfair Display', serif;
+  line-height: 1;
+}
+.insight-card:hover {
+  transform: translateY(-4px); border-color: rgba(244,196,48,0.3);
+}
+.insight-card blockquote {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--warm-white); line-height: 1.6;
+  position: relative; z-index: 1;
+}
+.insight-attribution {
+  margin-top: 0.8rem; font-size: 0.82rem;
+  color: var(--gold-dim); font-weight: 600;
+}
+
+/* ============================================================
+   FAQ ACCORDION
+   ============================================================ */
+#faq { background: var(--bg-deep); }
+.faq-list { max-width: 820px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid rgba(244,196,48,0.1);
+  margin-bottom: 0;
+}
+.faq-question {
+  width: 100%; background: none; border: none;
+  color: var(--warm-white); text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.05rem; font-weight: 600;
+  padding: 1.4rem 0;
+  cursor: pointer; display: flex;
+  align-items: center; justify-content: space-between;
+  gap: 1rem; line-height: 1.4;
+  transition: color var(--transition);
+}
+.faq-question:hover { color: var(--gold); }
+.faq-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid rgba(244,196,48,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--gold); font-size: 1.1rem;
+  transition: transform var(--transition), background var(--transition);
+}
+.faq-item.open .faq-icon {
+  transform: rotate(45deg); background: var(--gold-glow);
+}
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.faq-item.open .faq-answer { max-height: 600px; }
+.faq-answer-inner {
+  padding: 0 0 1.5rem;
+  font-size: 0.97rem; color: var(--muted); line-height: 1.8;
+}
+.faq-answer-inner p + p { margin-top: 0.8rem; }
+.faq-answer-inner strong { color: var(--warm-white); }
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+#about { background: var(--bg-mid); }
+.about-grid {
+  display: grid; grid-template-columns: 2fr 3fr;
+  gap: 3rem; align-items: start;
+}
+.about-sidebar {
+  position: sticky; top: 80px;
+}
+.about-portrait {
+  width: 100%; aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #1e2a14, #2a3a1a);
+  border: 2px solid rgba(244,196,48,0.2);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 5rem; gap: 1rem; margin-bottom: 1.5rem;
+}
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--gold); font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.about-tagline { color: var(--muted); font-size: 0.9rem; }
+.about-stats {
+  display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem;
+}
+.stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6rem 0; border-bottom: 1px solid rgba(244,196,48,0.08);
+}
+.stat-label { font-size: 0.82rem; color: var(--muted); }
+.stat-value { font-size: 0.95rem; color: var(--gold); font-weight: 700; }
+.about-body p {
+  font-size: 1.05rem; color: var(--muted); line-height: 1.85;
+  margin-bottom: 1.3rem;
+}
+.about-body p:last-child { margin-bottom: 0; }
+.alumni-list {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem;
+}
+.alumni-tag {
+  background: rgba(244,196,48,0.08);
+  border: 1px solid rgba(244,196,48,0.2);
+  color: var(--gold-light); font-size: 0.85rem;
+  padding: 0.3rem 0.8rem; border-radius: 50px;
+}
+
+/* ============================================================
+   BOOK STRUCTURE
+   ============================================================ */
+#book-structure { background: var(--bg-deep); }
+.toc-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; max-width: 1000px; margin: 0 auto;
+}
+.toc-part {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg); padding: 2rem;
+  border-top: 4px solid var(--gold-dim);
+}
+.toc-part-label {
+  font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold-dim); font-weight: 700; margin-bottom: 0.5rem;
+}
+.toc-part h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; color: var(--warm-white); margin-bottom: 1.2rem;
+  line-height: 1.35;
+}
+.toc-part ul {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.toc-part ul li {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.4;
+  padding-left: 1rem; position: relative;
+}
+.toc-part ul li::before {
+  content: '▸'; color: var(--gold-dim);
+  position: absolute; left: 0;
+}
+
+/* ============================================================
+   FOOTER / CTA
+   ============================================================ */
+#cta {
+  background: linear-gradient(180deg, var(--bg-mid) 0%, #0a0f08 100%);
+  padding: 100px 2rem;
+  text-align: center;
+}
+.cta-inner { max-width: 720px; margin: 0 auto; }
+.cta-icon { font-size: 4rem; margin-bottom: 1rem; }
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--warm-white); font-weight: 900; margin-bottom: 0.5rem;
+}
+.cta-title span { color: var(--gold); }
+.cta-author { color: var(--muted); font-size: 1rem; margin-bottom: 0.5rem; }
+.cta-publisher {
+  font-size: 0.85rem; color: var(--gold-dim); letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 700; margin-bottom: 2rem;
+}
+.cta-text {
+  font-size: 1.1rem; color: var(--muted); line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+.footer-note {
+  margin-top: 4rem; padding-top: 2rem;
+  border-top: 1px solid rgba(244,196,48,0.1);
+  font-size: 0.8rem; color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+#back-to-top {
+  position: fixed; bottom: 2rem; right: 2rem;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--gold); color: #0d1117;
+  border: none; cursor: pointer; font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  box-shadow: 0 4px 20px rgba(244,196,48,0.35);
+  z-index: 800;
+}
+#back-to-top.visible { opacity: 1; pointer-events: all; }
+#back-to-top:hover { transform: translateY(-3px); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 58px; left: 0; right: 0;
+    background: rgba(13,17,23,0.98);
+    border-bottom: 1px solid rgba(244,196,48,0.12);
+    padding: 1rem;
+  }
+  #hamburger { display: flex; }
+  .tool-body { grid-template-columns: 1fr; }
+  .drama-comedy-grid { grid-template-columns: 1fr; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-sidebar { position: static; }
+  .testimonial-card { padding: 2rem 1.5rem; }
+  section { padding: 60px 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  .myths-grid { grid-template-columns: 1fr; }
+  .banana-grid { grid-template-columns: 1fr; }
+  .components-grid { grid-template-columns: 1fr; }
+  .insights-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Navigation -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">🎭 Hidden Tools of Comedy</a>
+    <button id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#testimonials">Praise</a></li>
+      <li><a href="#myths">Myths</a></li>
+      <li><a href="#perception">Test</a></li>
+      <li><a href="#core-theory">Theory</a></li>
+      <li><a href="#equation">Equation</a></li>
+      <li><a href="#tools">8 Tools</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-pretitle">🎬 An Educational Guide to</p>
+    <h1 class="hero-title">THE <span>HIDDEN TOOLS</span><br>OF COMEDY</h1>
+    <p class="hero-subtitle">The Serious Business of Being Funny</p>
+    <p class="hero-author">by <strong>Steve Kaplan</strong></p>
+    <div class="hero-divider"></div>
+    <p class="hero-quote">Comedy is the art of telling the truth about what it's like to be human.</p>
+    <div class="hero-cycling" id="hero-cycle">For Writers</div>
+    <div class="hero-cta">
+      <a href="#core-theory" class="btn-gold">Explore the Tools ↓</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <p class="section-label reveal">🌟 Industry Praise</p>
+    <h2 class="section-heading reveal">What the Professionals Say</h2>
+    <p class="section-lead reveal">From showrunners to story consultants, Hollywood's comedy community agrees: this book changes how you see funny.</p>
+    <div class="carousel-wrap reveal">
+      <div class="carousel-track" id="carousel-track">
+
+        <div class="testimonial-card">
+          <p class="t-quote">Fresh insights with a "why didn't I think of that" on every page. Steve Kaplan has done the impossible — he has made comedy comprehensible without diminishing it. A must-read for anyone who wants to write, direct, or perform comedy at a professional level.</p>
+          <p class="t-author">Ellen Sandler</p>
+          <p class="t-role">Co-Executive Producer, <em>Everybody Loves Raymond</em> · Author, <em>The TV Showrunner's Roadmap</em></p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">I rarely think about why something I'm working on is funny—I just try to make it so. But if I were to think about it, I'd want to think about it the way Steve Kaplan does. Endlessly fascinating, continually surprising, and enormously useful.</p>
+          <p class="t-author">David Crane</p>
+          <p class="t-role">Creator and Executive Producer, <em>Friends</em> and <em>Episodes</em></p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">Steve Kaplan is a master when it comes to comedy. His keen insights break down the tools needed to make something funny and give writers and performers a clear path to understanding and executing the craft. This book is essential reading.</p>
+          <p class="t-author">Jen Grisanti</p>
+          <p class="t-role">Story/Career Consultant · Author, <em>Story Line</em> and <em>TV Writing Tool Kit</em></p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">No one on this planet understands the principles of comedy more than Steve Kaplan, and his ability to translate these principles into practical, usable techniques is nothing short of genius. A truly indispensable guide.</p>
+          <p class="t-author">Derek Christopher</p>
+          <p class="t-role">President, TV/Film Seminars</p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">Steve Kaplan has discovered, refined, and sustained more stand-up, playwriting, TV and film writing careers than any other teacher I know. Now his essential wisdom is available to everyone. Read this book. It will change the way you work.</p>
+          <p class="t-author">Will Scheffer</p>
+          <p class="t-role">Co-Creator and Executive Producer, <em>Big Love</em></p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">Whether you're a performer, director, or writer, this is the best, most entertaining and practical book about comedy I've ever read. Steve Kaplan has produced a masterwork — a deeply insightful, surprisingly moving examination of why we laugh.</p>
+          <p class="t-author">David Fury</p>
+          <p class="t-role">Writer/Producer, <em>Buffy the Vampire Slayer</em>, <em>Lost</em>, <em>Fringe</em></p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">Everything you need to be a comedy writer: structure, character, story, premise, dialogue, genre — except, of course, the searing self-doubt, crippling anxiety, and suffocating social awkwardness. Those you'll have to bring yourself.</p>
+          <p class="t-author">Chad Gervich</p>
+          <p class="t-role">Writer/Producer · Author, <em>Small Screen, Big Picture</em></p>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="t-quote">If you are a writer, an actor, a director, a stand-up comic, a public speaker, or simply someone who wants to master the art of making people laugh, you have to read <em>The Hidden Tools of Comedy</em>. Steve Kaplan has written a brilliant, immediately applicable guide to the craft.</p>
+          <p class="t-author">Michael Hauge</p>
+          <p class="t-role">Hollywood Story Expert · Author, <em>Writing Screenplays That Sell</em></p>
+        </div>
+
+      </div>
+    </div>
+    <div class="carousel-controls reveal">
+      <button class="carousel-btn" id="carousel-prev" aria-label="Previous">&#8592;</button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-btn" id="carousel-next" aria-label="Next">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- MYTHS -->
+<section id="myths">
+  <div class="section-inner">
+    <p class="section-label reveal">🚫 Common Misconceptions</p>
+    <h2 class="section-heading reveal">The <em>Myths</em> of Comedy</h2>
+    <p class="section-lead reveal">Before we can understand what comedy is, we need to dismantle what it isn't. Click each card to flip it and reveal the truth.</p>
+    <div class="myths-grid">
+
+      <div class="myth-card reveal reveal-delay-1" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"You have to be born funny."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>Comics learn through relentless trial and error. Every stand-up who appears effortless has bombed hundreds of times. Funny is a skill, not a gene.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-2" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"You can't teach comedy."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>Comedy can absolutely be taught — just as drama, music, and painting can be taught. Principles, tools, and techniques exist and can be studied, practiced, and mastered.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-3" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"If you analyze it, you'll kill it."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>Stand-ups obsessively analyze their material. They record every set, study what worked, dissect timing to the syllable. Analysis is how comedy improves, not how it dies.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"You're either funny or you're not."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>What can be taught is how to look deeply at comedy — to see its structure, its human truth, its mechanics. Anyone can learn to tell their truth in a way that resonates.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-1" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"Comedy is exaggeration."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>The greatest comedy is rooted in precise, specific truth. The best comic performances are often the most restrained. Exaggeration is a symptom, not a cause, of funny.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-2" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"Comedy is about feeling superior."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>We don't laugh <em>at</em> people — we laugh <em>with</em> them. Comedy at its best creates empathy, not contempt. The funniest characters make us see ourselves, not someone beneath us.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-3" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"The letter K is funny."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>No sound, letter, or word is inherently funny in isolation. Context, character, and truth create humor. The "K rule" is a shortcut that replaces real understanding with superstition.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="myth-card reveal reveal-delay-4" onclick="this.classList.toggle('flipped')">
+        <div class="myth-inner">
+          <div class="myth-front">
+            <span class="myth-badge">🚫 MYTH</span>
+            <h3>"Comedy comes in threes."</h3>
+            <span class="myth-flip-hint">Click to reveal the truth →</span>
+          </div>
+          <div class="myth-back">
+            <span class="myth-truth-badge">✓ TRUTH</span>
+            <p>The "rule of three" is a mnemonic device, not a law. Comedy comes from character, truth, and the gap between expectation and reality — not from counting to three.</p>
+            <span class="myth-flip-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BANANA PEEL TEST -->
+<section id="perception">
+  <div class="section-inner">
+    <p class="section-label reveal">🍌 Interactive Exercise</p>
+    <h2 class="section-heading reveal">The <em>Comedy Perception</em> Test</h2>
+    <p class="banana-intro reveal">One of the first things Steve Kaplan does in his seminars is present variations on a classic scenario. Each version produces a different reaction — and reveals something profound about how we perceive comedy. Click each scenario to explore what it reveals.</p>
+    <div class="banana-grid">
+
+      <div class="banana-item reveal reveal-delay-1" onclick="toggleBanana(this)">
+        <div class="banana-letter">A</div>
+        <h4>A man slips on a banana peel.</h4>
+        <div class="banana-result"><strong>Basic Physical Comedy.</strong> We feel a brief shock, then relief that it's not us. Classic slapstick — the unexpected stumble of ordinary life.</div>
+      </div>
+
+      <div class="banana-item reveal reveal-delay-2" onclick="toggleBanana(this)">
+        <div class="banana-letter">B</div>
+        <h4>A man in a top hat slips on a banana peel.</h4>
+        <div class="banana-result"><strong>Comedy with Satisfaction.</strong> The hat signals pretension, wealth, or status. Now we don't just laugh — we enjoy it a little more. The universe restoring balance.</div>
+      </div>
+
+      <div class="banana-item reveal reveal-delay-3" onclick="toggleBanana(this)">
+        <div class="banana-letter">C</div>
+        <h4>A man slips on a banana peel — after kicking a dog.</h4>
+        <div class="banana-result"><strong>Pure Satisfaction Comedy.</strong> He deserved it. This is the oldest form: justice delivered by the universe. We actively want him to fall. We cheer.</div>
+      </div>
+
+      <div class="banana-item reveal reveal-delay-4" onclick="toggleBanana(this)">
+        <div class="banana-letter">D</div>
+        <h4>A man slips on a banana peel — after losing his job.</h4>
+        <div class="banana-result"><strong>The Edge of Comedy and Pathos.</strong> The laugh is uneasy. We're moving from comedy toward tragedy. His misfortune accumulates beyond what feels "safe" to laugh at.</div>
+      </div>
+
+      <div class="banana-item reveal reveal-delay-1" onclick="toggleBanana(this)">
+        <div class="banana-letter">E</div>
+        <h4>A blind man slips on a banana peel.</h4>
+        <div class="banana-result"><strong>Uncomfortable Territory.</strong> Most audiences stop laughing here. The lack of agency removes the comic contract. We feel complicit rather than amused.</div>
+      </div>
+
+      <div class="banana-item reveal reveal-delay-2" onclick="toggleBanana(this)">
+        <div class="banana-letter">F</div>
+        <h4>A blind man's dog slips on a banana peel.</h4>
+        <div class="banana-result"><strong>Pure Relief Comedy.</strong> The laugh returns — fully, joyfully. The dog is fine (dogs always bounce back in our imagination), no one is truly hurt, and the absurdity is complete.</div>
+      </div>
+
+      <div class="banana-item reveal reveal-delay-3" onclick="toggleBanana(this)">
+        <div class="banana-letter">G</div>
+        <h4>A man slips on a banana peel — and dies.</h4>
+        <div class="banana-result"><strong>Beyond Comedy: Tragedy.</strong> Death ends the comic contract entirely. Comedy requires the possibility of a happy ending. Death closes that door. This is why comedy must protect hope.</div>
+      </div>
+
+    </div>
+    <div class="reveal" style="background:var(--bg-card);border-radius:var(--radius);padding:1.8rem 2rem;border-left:4px solid var(--gold);max-width:820px;margin:0 auto;">
+      <p style="font-size:1rem;color:var(--warm-white);line-height:1.75;"><strong style="color:var(--gold);">The lesson:</strong> Comedy is not about what happens — it's about <em>who</em> it happens to, <em>why</em> it happens, and whether we can believe a happy ending is still possible. These seven scenarios contain the entire grammar of comic perception.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CORE THEORY -->
+<section id="core-theory">
+  <div class="section-inner">
+    <p class="section-label reveal">🎭 The Foundation</p>
+    <h2 class="section-heading reveal">Comedy <em>Defined</em></h2>
+    <div class="big-quote reveal">Comedy is the art of telling the truth about what it's like to be human.</div>
+    <div class="drama-comedy-grid reveal">
+      <div class="dc-card drama">
+        <div class="dc-icon">🎭</div>
+        <p class="dc-label">Drama</p>
+        <h3>"Helps us dream about what we could be."</h3>
+      </div>
+      <div class="dc-card comedy">
+        <div class="dc-icon">😄</div>
+        <p class="dc-label">Comedy</p>
+        <h3>"Helps us live with who we are."</h3>
+      </div>
+    </div>
+    <div class="human-condition reveal">
+      <p>We are all, every one of us, trying to improve our lives. We want better jobs, better relationships, better health, more recognition. We wake up each morning with a plan — and the universe has a counter-plan. We are simultaneously aware of our own mortality and determined to act as if it doesn't apply to us.</p>
+      <p>That gap — between what we want to be and what we are, between our expectations and our reality, between our ambitions and our capabilities — is the territory of comedy. Comedy doesn't mock this gap. It <em>celebrates</em> it. It says: this is what it's like to be human. You are not alone.</p>
+      <p>Drama says: you could be a hero. Comedy says: you don't have to be. Drama presents the ideal. Comedy presents the real. And in that presentation of the real — fumbling, failing, trying again — lies the most profound form of human truth.</p>
+      <p>This is why comedy matters. This is why it's not "lesser" than drama, not mere entertainment, not a guilty pleasure. Comedy is, at its deepest, an act of compassion — a reminder that all of us are ordinary people struggling against insurmountable odds, and that this struggle is not shameful. It's the most human thing there is.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMIC EQUATION -->
+<section id="equation">
+  <div class="section-inner">
+    <p class="section-label reveal">⚖️ The Formula</p>
+    <h2 class="section-heading reveal">The <em>Comic Equation</em></h2>
+    <p class="section-lead reveal">At the heart of Kaplan's theory is a single, elegant formulation that encompasses all of comedy. Every great comic character, every enduring funny story, fits within it.</p>
+    <div class="equation-box reveal">
+      <p class="equation-text">
+        Comedy is about an <em>ordinary guy or gal</em> struggling against <em>insurmountable odds</em> without many of the <em>required skills and tools</em> with which to win — yet <em>never giving up hope.</em>
+      </p>
+    </div>
+    <div class="components-grid">
+      <div class="comp-card reveal reveal-delay-1">
+        <div class="comp-number">01</div>
+        <h3>Ordinary Guy or Gal</h3>
+        <p>Not a hero, not a special person — a "moke." Someone like us. The moment a character becomes extraordinary, capable, or heroic, we've crossed into drama. Comedy requires someone we recognize as ourselves.</p>
+      </div>
+      <div class="comp-card reveal reveal-delay-2">
+        <div class="comp-number">02</div>
+        <h3>Insurmountable Odds</h3>
+        <p>The problem must be genuinely, objectively bigger than the character can handle. Not merely difficult — impossible. If the odds are surmountable, the stakes drop and so does the comedy.</p>
+      </div>
+      <div class="comp-card reveal reveal-delay-3">
+        <div class="comp-number">03</div>
+        <h3>Without Required Skills</h3>
+        <p>The comic character lacks the tools, knowledge, or competence needed to succeed. They're flawed, fumbling, and unsuited to the task. The fewer skills they have, the more comic they become.</p>
+      </div>
+      <div class="comp-card reveal reveal-delay-4">
+        <div class="comp-number">04</div>
+        <h3>Never Giving Up Hope</h3>
+        <p>The essential ingredient. No matter how many times they fail, how absurd the situation, the comic character keeps trying. Hope is the engine. Without it, comedy collapses into tragedy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 TOOLS -->
+<section id="tools">
+  <div class="section-inner">
+    <p class="section-label reveal">🔧 The Core Curriculum</p>
+    <h2 class="section-heading reveal">The 8 <em>Hidden Tools</em></h2>
+    <p class="section-lead reveal">These are the tools that working comedy professionals use — often without knowing they're using them. Making them conscious transforms how you write, direct, and perform.</p>
+
+    <div class="tools-tabs reveal">
+      <button class="tool-tab active" onclick="showTool(0, this)">1 · Winning</button>
+      <button class="tool-tab" onclick="showTool(1, this)">2 · Non-Hero</button>
+      <button class="tool-tab" onclick="showTool(2, this)">3 · Metaphorical</button>
+      <button class="tool-tab" onclick="showTool(3, this)">4 · Positive Action</button>
+      <button class="tool-tab" onclick="showTool(4, this)">5 · Active Emotion</button>
+      <button class="tool-tab" onclick="showTool(5, this)">6 · Straight/Wavy</button>
+      <button class="tool-tab" onclick="showTool(6, this)">7 · Archetypes</button>
+      <button class="tool-tab" onclick="showTool(7, this)">8 · Comic Premise</button>
+    </div>
+
+    <!-- TOOL 1 -->
+    <div class="tool-panel active" id="tool-0">
+      <div class="tool-header">
+        <div class="tool-number">01</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">🏆</div>
+          <h2>Winning</h2>
+          <p style="color:var(--muted);font-size:1rem;">The permission at the heart of all comedy</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>Comedy gives your character — and by extension, you as a writer or performer — the permission to win. To do whatever the character thinks they need to do in order to win, no matter how stupid or crass or idiotic or undignified it makes them look.</p>
+          <p>This is a liberating concept. Most of us walk through life worried about how we appear to others. We self-censor, we modulate, we hold back. But a truly comic character has no such filter. They want something, and they're going to do whatever it takes to get it. Their single-minded, often-misguided pursuit of a goal IS the comedy.</p>
+          <div class="tool-key-insight">Don't try to be funny. Try to win. The comedy will take care of itself.</div>
+          <p>The practical application: when you're writing a comic scene and it's not working, ask yourself — what does this character want, and are they doing everything in their power to get it? If they're holding back, being reasonable, or acting with dignity, you've found your problem. Let them try to win. Fully, completely, without reservation.</p>
+          <p>This is also the antidote to "mugging" — the comedian's trap of performing comedy rather than living it. When you're trying to be funny, you're not trying to win. And when you're not trying to win, nothing is funny.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">Example — Annie Hall</p>
+            <p><strong>Alvy Singer</strong> is arguing about Marshall McLuhan with a pompous man in a movie line. Unable to win the argument on its merits, he literally produces Marshall McLuhan from behind a movie poster to settle the debate. He <em>wins</em> — impossibly, absurdly — and it's hilarious.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-label">Example — Liar Liar</p>
+            <p><strong>Fletcher Reede</strong> cannot lie for one day. In the bathroom, he attempts to fight himself — and loses. He's trying to win against his own body. The commitment to winning, at any cost, to dignity or logic, IS the joke.</p>
+          </div>
+          <div class="tool-formula">
+            "The character's permission to win is the writer's permission to be funny."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 2 -->
+    <div class="tool-panel" id="tool-1">
+      <div class="tool-header">
+        <div class="tool-number">02</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">🚶</div>
+          <h2>The Non-Hero</h2>
+          <p style="color:var(--muted);font-size:1rem;">The ordinary person who defines comic character</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>The Non-Hero is an ordinary person who lacks many of the required skills and tools to face their situation — yet never gives up. This is the fundamental unit of comic character. The more skills and competence a character has, the more dramatic they become. The fewer skills, the more comic.</p>
+          <p>Consider: Woody Allen in a room with twelve armed men. Now consider: Charles Bronson in the same room. Allen is comic; Bronson is dramatic. Not because of personality, but because of capability. The gap between what's required and what the character can deliver is the source of comedy.</p>
+          <div class="tool-key-insight">The more he knows, the less comic it is. The less he knows, the more comic it becomes.</div>
+          <p>This is why comedy and drama are not just tonal differences — they're structural differences. The hero of a drama earns their victory through competence. The hero of a comedy stumbles into (or is denied) their victory through incompetence, luck, or sheer persistence.</p>
+          <p>George Costanza swallows a fly during a meeting. He doesn't know what to do. He tries to pretend it didn't happen. He fails. The comedy comes entirely from his lack of a single usable skill with which to handle the situation with grace.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="tool-formula" style="margin-bottom:0.5rem;">
+            Non-Hero + Impossible Situation = Comedy<br><br>
+            Hero + Impossible Situation = Drama
+          </div>
+          <div class="example-card">
+            <p class="example-label">The Non-Hero Spectrum</p>
+            <p>The range runs from <strong>slightly bumbling</strong> (Jim Halpert) to <strong>completely inept</strong> (Michael Scott) to <strong>cosmically outmatched</strong> (Inspector Clouseau). All are Non-Heroes. All are comic. Their skill level determines the flavor of comedy.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-label">Key Distinction</p>
+            <p>The Non-Hero is not stupid. They are often quite intelligent. But they lack the <em>specific</em> skills required for their specific situation. This makes them relatable — we all face situations where we lack the right tools.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 3 -->
+    <div class="tool-panel" id="tool-2">
+      <div class="tool-header">
+        <div class="tool-number">03</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">🔗</div>
+          <h2>Metaphorical Relationships</h2>
+          <p style="color:var(--muted);font-size:1rem;">The hidden relationship beneath the surface</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>Every great comedy has not just a surface relationship between characters, but a metaphorical relationship — an essential, hidden layer that lies beneath what we see on screen. This metaphorical relationship is often what makes us feel something beyond mere amusement.</p>
+          <p>Felix and Oscar in <em>The Odd Couple</em> appear to be roommates. But their metaphorical relationship is an old married couple — complete with all the resentment, dependency, tenderness, and power struggles that entails. Every scene plays on both levels simultaneously.</p>
+          <div class="tool-key-insight">The surface relationship is what they do. The metaphorical relationship is what they mean — to each other, and to us.</div>
+          <p>Beyond the metaphorical relationship itself, Kaplan identifies two other crucial elements: <strong>World View</strong> — how each character uniquely and specifically perceives reality (Felix's world is chaos to be organized; Oscar's is order to be resisted) — and <strong>Frames & Chapters</strong>, the ability to see entire scenes through a single metaphorical lens that gives coherence and depth to comedic action.</p>
+          <p>When you understand the metaphorical relationship in a comedy, you understand why scenes work, why characters clash in the specific ways they do, and why their conflicts resonate beyond the immediate situation.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">Classic Example</p>
+            <p><strong>Felix & Oscar</strong> — Surface: two men sharing an apartment. Metaphorical: an old married couple trapped in a codependent relationship neither can leave.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-label">Three Aspects</p>
+            <p><strong>1. Metaphorical Relationship</strong> — the hidden bond<br><br><strong>2. World View</strong> — each character's unique lens on reality<br><br><strong>3. Frames & Chapters</strong> — the metaphorical structure of scenes</p>
+          </div>
+          <div class="tool-formula">
+            "Find the hidden relationship and you find the heart of the comedy."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 4 -->
+    <div class="tool-panel" id="tool-3">
+      <div class="tool-header">
+        <div class="tool-number">04</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">➕</div>
+          <h2>Positive Action</h2>
+          <p style="color:var(--muted);font-size:1rem;">Every action taken in hope of a better outcome</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>Every action a comic character takes, they do in the hope and belief that it will work and make their lives better. This sounds obvious, but its implications are profound. Positive Action does not mean action performed in a positive <em>way</em> — it means action designed to bring a positive, selfish result for the character.</p>
+          <p>Kramer's pineapple bark pickup line is ridiculous, absurd, doomed to fail. But Kramer believes, genuinely and completely, that it will work. That belief — that sincere investment in the positive outcome — is what makes it funny. The moment a character knows their action won't work, the comedy deflates.</p>
+          <div class="tool-key-insight">The character must always believe, in this moment, that what they're doing will get them what they want. Protect the possibility of a happy ending.</div>
+          <p>This connects directly to hope — the final element of the Comic Equation. As long as characters act in pursuit of a positive outcome, hope is alive. The moment a character gives up or acts nihilistically, the comedic contract breaks. This is also why irony is so often the enemy of comedy: ironic distance destroys the investment in positive action.</p>
+          <p>For writers, this means: every scene needs a character who sincerely wants something and sincerely believes their action will get it. The more misguided their method, while maintaining their sincere belief, the funnier it becomes.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">Example — Seinfeld</p>
+            <p>Kramer's pineapple bark pickup line: he genuinely, completely believes this will work. The sincerity of his investment makes it comedy. If he were being ironic, it would be nothing.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-label">Example — The Office</p>
+            <p>Michael Scott confronting a difficult HR situation with complete, sincere confidence that his approach will work — and that everyone will like him afterward. The gap between his certainty and his catastrophic method is the engine of his comedy.</p>
+          </div>
+          <div class="tool-formula">
+            Sincere Investment + Misguided Method = Comic Gold
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 5 -->
+    <div class="tool-panel" id="tool-4">
+      <div class="tool-header">
+        <div class="tool-number">05</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">❤️</div>
+          <h2>Active Emotion</h2>
+          <p style="color:var(--muted);font-size:1rem;">What you actually feel IS the correct emotional line</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>The emotion that naturally occurs to the performer in the course of genuinely trying to win IS the correct emotional line for the character. Not performed emotion. Not indicated emotion. The real thing that happens when you're actually invested in the outcome.</p>
+          <p>This is perhaps the most liberating tool for performers. You don't need to manufacture a "comic" emotion or decide in advance how the character "should" feel. You have everything you need to play comedy — you're human. If you actually try to win, actually try to get what the character wants, the emotions that arise from that genuine effort are exactly right.</p>
+          <div class="tool-key-insight">You have everything you need to play comedy. You're human. Every human feeling in pursuit of a goal is the right feeling for that moment.</div>
+          <p>The enemy of Active Emotion is performance. When actors "mug" — making faces to signal that what's happening is funny — they've stopped trying to win and started trying to be funny. The result is the opposite of funny. Similarly, "acting funny" — adopting a comic vocal quality, a broad physical style, a wink to the audience — all of these replace genuine emotion with performed emotion.</p>
+          <p>For writers: watch your parentheticals. Writing <em>(laughs hysterically)</em> or <em>(acts confused)</em> in a script tells the actor what to perform rather than what to want. Instead, write what the character wants and why. Let the actor find the emotion through active pursuit.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">For Performers</p>
+            <p>Don't decide how to feel. Decide what you want. Pursue it genuinely. The feelings that arise from that pursuit — frustration, hope, joy, confusion — are your performance. They're real, so they're funny.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-label">For Writers</p>
+            <p>Avoid parentheticals that dictate emotion. Instead of <em>(frustrated)</em>, write the situation that creates frustration. Trust the actor to feel what's real when they're truly trying to win.</p>
+          </div>
+          <div class="tool-formula">
+            Real pursuit → Real emotion → Real comedy.<br>
+            Performed emotion → Nothing.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 6 -->
+    <div class="tool-panel" id="tool-5">
+      <div class="tool-header">
+        <div class="tool-number">06</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">〰️</div>
+          <h2>Straight Line / Wavy Line</h2>
+          <p style="color:var(--muted);font-size:1rem;">The comedy isn't the funny thing — it's watching someone watch the funny thing</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>This is one of Kaplan's most brilliant and counterintuitive insights: comedy isn't watching someone do something funny — it's watching someone <em>watch</em> someone do something funny. The audience's laughter comes not from the absurd event itself, but from their identification with the character who must deal with the absurdity.</p>
+          <p>The <strong>Straight Line</strong> character is blind to the problem — often because they are the problem. They proceed with perfect confidence through the chaos they create. Abbott, in "Who's On First?", appears to have all the information; he doesn't understand why Costello is confused. He proceeds with absolute certainty.</p>
+          <div class="tool-key-insight">The Straight Line creates the problem. The Wavy Line is us on screen, struggling to cope with the problem the Straight Line creates or embodies.</div>
+          <p>The <strong>Wavy Line</strong> character sees the problem, knows there's a problem, struggles with it, can't solve it, and can't escape it. Costello, in "Who's On First?", sees perfectly clearly that something is wrong — the names don't make sense, the information doesn't compute. He's our representative. We identify with his confusion, his frustration, his inability to get a straight answer in a world that has gone mad.</p>
+          <p>The Wavy Line is always our representative on screen. When we watch a comedy, we are the Wavy Line — the person who can see the absurdity but can't stop it. This is why the Wavy Line character is typically more sympathetic and more central to our engagement with the story.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">Who's On First? — Abbott & Costello</p>
+            <p><strong>Abbott (Straight Line):</strong> Has all the "facts." Doesn't understand why Costello is confused. Proceeds with maddening certainty.<br><br><strong>Costello (Wavy Line):</strong> Sees the paradox clearly. Struggles with it. Cannot escape. Is US — our eyes in the scene.</p>
+          </div>
+          <div class="example-card">
+            <p class="example-label">Modern Examples</p>
+            <p><strong>Straight Line:</strong> Michael Scott, David Brent, Frank Drebin — characters blind to the chaos they generate.<br><br><strong>Wavy Line:</strong> Jim Halpert, Basil Fawlty's staff, anyone in a room with Kramer. They see. They suffer. We laugh with them.</p>
+          </div>
+          <div class="tool-formula">
+            Straight Line creates chaos.<br>
+            Wavy Line witnesses and endures it.<br>
+            Audience <em>is</em> the Wavy Line.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 7 -->
+    <div class="tool-panel" id="tool-6">
+      <div class="tool-header">
+        <div class="tool-number">07</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">🎪</div>
+          <h2>Archetypes — Commedia Tonight!</h2>
+          <p style="color:var(--muted);font-size:1rem;">3,000 years of character types, alive on screen today</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>Comedy archetypes are not clichés — they're the deep structural patterns of human behavior that have made audiences laugh for three millennia. From the ancient Greek theater through the <em>Commedia dell'Arte</em> of Renaissance Italy to the sitcoms of today, the same fundamental types recur because they map onto fundamental human patterns.</p>
+          <p>The <em>Commedia dell'Arte</em> gave us the definitive vocabulary of comic character. The <strong>Zannis</strong> were the servant class: <em>Arlecchino</em> (Harlequin), the clever, acrobatic trickster; <em>Scapino</em>, the cowardly schemer; <em>Brighella</em>, the cunning rogue; <em>Pierrot</em>, the lovesick innocent. Each embodies a different flavor of the comic Non-Hero.</p>
+          <div class="tool-key-insight">Character creates plot. Character creates action. Character creates movement. Know your archetypes and you know why your story moves the way it does.</div>
+          <p><strong>Pantalone</strong>, the lecherous old miser always chasing young women; <strong>Marinetta</strong>, his battle-axe wife who knows exactly what he's up to; <strong>Il Dottore</strong>, the pompous academic who speaks in elaborate nonsense; <strong>Colombine</strong>, the perky, resourceful servant who actually runs the household; <strong>Il Capitano</strong>, the braggart soldier who is secretly a coward; and <strong>The Innamorati</strong>, the young lovers who are beautiful, passionate, and completely useless.</p>
+          <p>These archetypes are alive today: Pantalone is every TV boss who thinks he runs things while actually being managed by Colombine. Il Capitano is every puffed-up character who cowers when actually challenged. The Innamorati are every romantic subplot that's really just in the way of the real comedy.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">The Commedia Family Tree</p>
+            <p><strong>Zannis</strong> (servants) → Jerry Lewis, Jim Carrey, Rowan Atkinson<br><br><strong>Pantalone</strong> → Mr. Burns, Ron Swanson, J. Jonah Jameson<br><br><strong>Il Dottore</strong> → Frasier Crane, Jeff Winger, Professor Higgins<br><br><strong>Il Capitano</strong> → Michael Scott, David Brent, Gaston<br><br><strong>Colombine</strong> → Donna Meagle, Pepper Potts, the actual competent one</p>
+          </div>
+          <div class="tool-formula">
+            3,000 years of laughter.<br>
+            The same characters.<br>
+            New masks, same truth.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 8 -->
+    <div class="tool-panel" id="tool-7">
+      <div class="tool-header">
+        <div class="tool-number">08</div>
+        <div class="tool-title-block">
+          <div class="tool-icon">🎲</div>
+          <h2>Comic Premise</h2>
+          <p style="color:var(--muted);font-size:1rem;">The lie that tells the truth</p>
+        </div>
+      </div>
+      <div class="tool-body">
+        <div class="tool-main">
+          <p>The comic premise is what Kaplan calls "the lie that tells the truth." It's an impossible or highly improbable set of circumstances — something that could never happen in the real world — which then becomes the launching pad for absolutely honest, truthful exploration of human behavior.</p>
+          <p>The premise itself is the lie: What if you relived the same day over and over? (<em>Groundhog Day</em>). What if a 12-year-old woke up in an adult's body? (<em>Big</em>). What if your whole life was a TV show and you didn't know? (<em>The Truman Show</em>). These things don't happen. They're lies.</p>
+          <div class="tool-key-insight">Tell ONE big lie. Then, from that premise, develop everything else with complete, rigorous honesty. The premise is the engine; the theme is the rudder.</div>
+          <p>The power of the premise comes from what it reveals. <em>Groundhog Day</em> isn't about time loops — it's about what it takes for a self-absorbed person to become capable of love. <em>Big</em> isn't about magic — it's about what adults have lost and what children still have. The impossible premise is just the lens through which we see a profound truth.</p>
+          <p>Rules of the comic premise: Tell only one big lie, then develop everything else honestly. All action must flow from the premise through character. Characters are brought on by Need (what the story requires) and Theme (what the story is about). The premise provides the engine of story; theme provides the direction and meaning.</p>
+        </div>
+        <div class="tool-sidebar">
+          <div class="example-card">
+            <p class="example-label">Great Comic Premises</p>
+            <p><strong>Groundhog Day:</strong> A man relives Feb. 2nd forever → truth about change, love, and becoming better<br><br><strong>Big:</strong> A boy becomes an adult → truth about what we lose growing up<br><br><strong>The Incredibles:</strong> Superheroes must hide → truth about extraordinary people in ordinary life<br><br><strong>Liar Liar:</strong> A lawyer can't lie → truth about how we deceive those we love</p>
+          </div>
+          <div class="tool-formula">
+            Impossible Premise (the Lie)<br>+<br>Honest Development (the Truth)<br>=<br>Comedy that Means Something
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KEY INSIGHTS -->
+<section id="insights">
+  <div class="section-inner">
+    <p class="section-label reveal">💡 Wisdom Distilled</p>
+    <h2 class="section-heading reveal">Key <em>Insights</em></h2>
+    <p class="section-lead reveal">The essential wisdom of comedy, distilled into quotable form.</p>
+    <div class="insights-grid">
+
+      <div class="insight-card reveal reveal-delay-1">
+        <blockquote>Comedy tells the truth. And specifically, comedy tells the truth about people.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan, The Hidden Tools of Comedy</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-2">
+        <blockquote>Drama helps us dream about what we could be; comedy helps us live with who we are.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-3">
+        <blockquote>Don't "should" all over yourself. Stop telling characters what they should do and let them do what they actually do.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-1">
+        <blockquote>The more the characters know, the less comic it is. The less they know, the more comic it becomes.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-2">
+        <blockquote>Comedy gives your character the permission to win — to do whatever it takes, no matter how undignified, to get what they want.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-3">
+        <blockquote>Comedy doesn't need conflict invented — conflict IS comedy, because people are conflicted. About everything, all the time.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-1">
+        <blockquote>Comedy is teamwork. It's not one person being funny — it's two people (or more) telling the truth together in a way that produces laughter.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-2">
+        <blockquote>Think slow, act fast.</blockquote>
+        <p class="insight-attribution">— Buster Keaton, quoted by Steve Kaplan</p>
+      </div>
+
+      <div class="insight-card reveal reveal-delay-3">
+        <blockquote>Comedy is the art of hope. As long as there's the possibility of a happy ending, there's comedy. The moment hope dies, comedy dies with it.</blockquote>
+        <p class="insight-attribution">— Steve Kaplan</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <p class="section-label reveal">❓ Common Questions</p>
+    <h2 class="section-heading reveal">The Comedy <em>FAQ</em></h2>
+    <p class="section-lead reveal">The questions writers, directors, and performers ask most often — answered through Kaplan's framework.</p>
+
+    <div class="faq-list reveal">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What's the difference between "funny" and "comic"?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>"Funny" is a moment — a joke, a pratfall, a surprising line. It produces a laugh and then it's over. "Comic" is a sustained quality of character and situation that creates a world where laughter is continuously possible. A great comic character isn't funny because they tell jokes — they're funny because of <em>who they are</em> and how they see the world.</p>
+            <p>You can write a scene full of funny moments that doesn't cohere into comedy. And you can write a scene with no individual jokes that is deeply, continuously comic. The difference is character depth, metaphorical relationship, and truth — the architecture beneath the laugh.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What makes a good joke? What are the requirements?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Kaplan identifies four requirements for a joke that works in a script or performance context: <strong>It must further the action</strong> — if you can remove the joke without affecting the scene, it doesn't belong. <strong>It must define character</strong> — the joke must be specific to this character's world view; the same line in another character's mouth would fall flat. <strong>It must express a unique point of view</strong> — it has to say something that could only be said from this character's particular perspective. And <strong>it must be compressed</strong> — comedy requires economy; every unnecessary word is a leak in the balloon.</p>
+            <p>A joke that meets all four requirements isn't just funny — it's doing four jobs at once. That's the mark of great comedy writing: every laugh earns its place by advancing the story, deepening character, and expressing truth.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the biggest mistake writers make in comedy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Trying to be funny. This sounds paradoxical, but it's the most important thing to understand. When a writer is trying to write something funny, they're writing toward a result — a laugh — rather than writing toward a character and a truth. The result is jokes that feel forced, characters who exist only to deliver setups, and scenes that have no life beyond their punchlines.</p>
+            <p>The alternative: write toward what the character wants. Write the truth of who this person is and what they're willing to do to get it. Trust that if you've built a real character in an impossible situation pursuing their goal with complete sincerity, the comedy will emerge organically. Trying to be funny is the enemy of funny.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How does the Straight Line / Wavy Line work in practice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>In practice, every comedy scene benefits from identifying which character is the Straight Line and which is the Wavy Line. The Straight Line is the one who doesn't know there's a problem — who proceeds with total confidence through whatever madness surrounds them. The Wavy Line knows something is wrong and cannot escape or fix it.</p>
+            <p>The Wavy Line does most of the emotional heavy lifting. They're the audience's representative — we see through them, we feel through them, we suffer through them. This is why Wavy Line characters are often more sympathetic and more central to our engagement. When writing or directing, ask: who is seeing the problem right now? Are they able to do anything about it? If yes, the comedy dissipates. If they're trapped and aware, you have comedy.</p>
+            <p><strong>Important:</strong> characters can switch functions. In one scene, Character A is the Wavy Line dealing with Character B's oblivious Straight Line behavior. In the next scene, their roles might reverse. This dynamic switching is a source of great comic texture.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is the gap between expectation and reality?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>The gap between expectation and reality is one of the fundamental mechanisms of comedy. We set up an expectation — through character, situation, or genre convention — and then reality fails to meet it. The size and nature of that gap determines the type and intensity of the comedy.</p>
+            <p>A small gap produces gentle comedy: we expected the party to go smoothly, and it's slightly awkward. A large gap produces farce: we expected the dignified dinner party, and it has completely collapsed into chaos. The gap must be real — genuine expectation met with genuine failure — not telegraphed or performed.</p>
+            <p>The key is that the expectation must be established honestly. If we never believe the expectation, the gap is invisible and unfunny. Comedy requires us to genuinely think, for a moment, that things might work out — before they spectacularly don't.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can comedy really be taught? And what can be taught?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Yes — though with a nuance that Kaplan is careful to articulate. What can be taught is not "how to be funny" in some absolute, generic sense. What can be taught is how to look deeply at comedy — to understand its structure, its mechanisms, its character requirements, its relationship to truth.</p>
+            <p>Comedy, like drama, like music, like painting, has a craft that can be studied and improved. A student of comedy who understands the Non-Hero, the Comic Equation, the tools of Positive Action and Active Emotion and the Straight/Wavy Line dynamic, will be a better comedy writer, director, or performer than they were before — regardless of their natural talent level.</p>
+            <p>Natural talent still matters, of course. But the history of comedy is full of people who started out unfunny and became masterful through rigorous study, practice, and the willingness to fail, analyze, and try again. This book is proof that the tools of comedy can be articulated — and if they can be articulated, they can be learned.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What's the difference between drama and comedy, structurally?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>The difference is deeper than tone or genre. Drama and comedy operate on different structural principles. <strong>Drama</strong> gives us characters who grow into their potential — who earn their transformation through struggle and emerge genuinely changed and capable. The dramatic hero is on an arc toward competence, toward truth, toward becoming who they were always meant to be.</p>
+            <p><strong>Comedy</strong> gives us characters who struggle to remain themselves in a world that's trying to change them — or who try desperately to change and fail to do so completely. The comic character often ends roughly where they began, slightly wiser but fundamentally the same. The arc of comedy is not transformation — it's survival, adaptation, endurance.</p>
+            <p>This is also why the same story can be either comedy or drama depending on how it's told: the same man-faces-impossible-odds story becomes comedy when he's incompetent and survives through luck and persistence, and drama when he grows into the competence required to overcome.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What about writing for sitcoms? Are there specific secrets?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Kaplan identifies several secrets specific to sitcom writing that build on the foundational tools: <strong>1. Status</strong> — every comic relationship involves a status dynamic, and the best sitcom writing constantly plays with who has status and who doesn't. <strong>2. The B-Story should mirror the A-Story thematically</strong> — the best sitcom episodes have two storylines that illuminate the same truth from different angles. <strong>3. Sitcom characters are defined by what they want from every other character</strong> — these specific wants create the specific comedy of each relationship. <strong>4. Every act should end with the situation worse</strong> than it began — comedy escalates by accumulating problems, not by solving them. <strong>5. The tag is a gift</strong> — the brief scene after the main story resolves can say the thing the episode couldn't quite say during the main action. <strong>6. Characters don't change</strong> — they learn the lesson of the episode and then forget it by next week, because comedy requires consistent character over transformation. <strong>7. The world of the show is a pressure cooker</strong> — sitcom worlds work because the characters can't leave. The relationships are inescapable, which means the comedy is inescapable too.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STEVE KAPLAN -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label reveal">✍️ The Author</p>
+    <h2 class="section-heading reveal">About <em>Steve Kaplan</em></h2>
+    <div class="about-grid reveal">
+      <div class="about-sidebar">
+        <div class="about-portrait">
+          <span>🎭</span>
+          <span style="font-size:1rem;color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;">Comedy Teacher</span>
+        </div>
+        <div class="about-name">Steve Kaplan</div>
+        <div class="about-tagline">Co-founder, Manhattan Punch Line Theatre · Comedy Consultant · Author</div>
+        <div class="about-stats">
+          <div class="stat-row">
+            <span class="stat-label">Theater Founded</span>
+            <span class="stat-value">Manhattan Punch Line</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Publisher</span>
+            <span class="stat-value">Michael Wiese Productions</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Workshop Reach</span>
+            <span class="stat-value">International</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Focus</span>
+            <span class="stat-value">30+ Years</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-body">
+        <p>Steve Kaplan is one of the world's foremost authorities on comedy — not as a performer or stand-up, but as a teacher, theorist, and the man who has spent decades figuring out exactly why things are funny and how to help writers, directors, and performers make them funnier.</p>
+        <p>He is the co-founder and former artistic director of <strong>Manhattan Punch Line</strong>, New York City's premier comedy theater, where he worked with and developed some of the most significant comedy talent of the past three decades. The theater was a crucible for comedy in the truest sense: a place where the craft was taken seriously, where funny was understood as something you could get better at.</p>
+        <p>Among the writers, directors, and performers who have come through Kaplan's workshops and the theater he built are names that have shaped American comedy: <strong>David Crane</strong> and <strong>Marta Kauffman</strong>, creators of <em>Friends</em>; <strong>Nathan Lane</strong>, one of the most accomplished comic actors of his generation; <strong>Oliver Platt</strong>; and many others whose work has defined comedy on stage and screen.</p>
+        <p>Kaplan's workshops and seminars have been taken by thousands of writers, directors, actors, and storytellers around the world. He consults for studios, networks, and production companies. His approach is always the same: rigorous, practical, deeply grounded in the history and theory of comedy, and immediately applicable to the work.</p>
+        <p><em>The Hidden Tools of Comedy</em> is the culmination of this work — the distillation of decades of teaching, observing, and refining what it means to be funny on purpose. It is both a theory of comedy and a practical toolkit, written with the clarity and wit you'd expect from someone who has spent a career studying exactly why things are funny and how to make them funnier.</p>
+        <div class="alumni-list">
+          <span class="alumni-tag">David Crane</span>
+          <span class="alumni-tag">Marta Kauffman</span>
+          <span class="alumni-tag">Nathan Lane</span>
+          <span class="alumni-tag">Oliver Platt</span>
+          <span class="alumni-tag">Will Scheffer</span>
+          <span class="alumni-tag">+ Hundreds more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK STRUCTURE -->
+<section id="book-structure">
+  <div class="section-inner">
+    <p class="section-label reveal">📚 The Book</p>
+    <h2 class="section-heading reveal">Structure of <em>The Hidden Tools</em></h2>
+    <p class="section-lead reveal">The book is organized into three parts, moving from theory to tools to application — building a complete system for understanding and creating comedy.</p>
+    <div class="toc-grid reveal">
+      <div class="toc-part">
+        <p class="toc-part-label">Part One</p>
+        <h3>What Is Comedy? The Theory of the Laugh</h3>
+        <ul>
+          <li>The Myths of Comedy — and why they persist</li>
+          <li>The Comedy Perception Test: 7 banana peels</li>
+          <li>Defining comedy: truth, humanity, hope</li>
+          <li>The Comic Equation</li>
+          <li>Drama vs. Comedy: structural differences</li>
+          <li>The human condition and why we laugh</li>
+        </ul>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part Two</p>
+        <h3>The Hidden Tools: Eight Keys to Comedy</h3>
+        <ul>
+          <li>Tool #1: Winning</li>
+          <li>Tool #2: The Non-Hero</li>
+          <li>Tool #3: Metaphorical Relationships</li>
+          <li>Tool #4: Positive Action</li>
+          <li>Tool #5: Active Emotion</li>
+          <li>Tool #6: Straight Line / Wavy Line</li>
+          <li>Tool #7: Archetypes (Commedia Tonight!)</li>
+          <li>Tool #8: Comic Premise</li>
+        </ul>
+      </div>
+      <div class="toc-part">
+        <p class="toc-part-label">Part Three</p>
+        <h3>Applying the Tools: Comedy in Practice</h3>
+        <ul>
+          <li>Writing comedy: scenes, structure, jokes</li>
+          <li>Directing comedy: working with actors</li>
+          <li>Performing comedy: the actor's toolkit</li>
+          <li>Sitcom writing: the seven secrets</li>
+          <li>Stand-up: finding your comic truth</li>
+          <li>Putting it all together</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / FOOTER -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-icon reveal">🎭</div>
+    <h2 class="cta-title reveal">The <span>Hidden Tools</span><br>of Comedy</h2>
+    <p class="cta-author reveal">by Steve Kaplan</p>
+    <p class="cta-publisher reveal">Published by Michael Wiese Productions</p>
+    <p class="cta-text reveal">Whether you write scripts, direct actors, perform on stage, tell jokes at parties, or simply want to understand why things are funny — these tools work. They have worked for three thousand years. They work because they're not rules invented by critics or academics. They're observations drawn from the oldest, most universal human experience: the attempt to make another person laugh.<br><br>Start applying these tools to your writing, directing, or performing today. The truth is already in you. Comedy just needs you to tell it.</p>
+    <div class="reveal">
+      <a href="#hero" class="btn-gold">↑ Back to the Beginning</a>
+    </div>
+    <div class="footer-note reveal">
+      <p>This educational resource is based on <em>The Hidden Tools of Comedy: The Serious Business of Being Funny</em> by Steve Kaplan (Michael Wiese Productions). All quotes, concepts, and frameworks are the intellectual property of Steve Kaplan. This page is created for educational purposes.</p>
+      <p style="margin-top:0.6rem;">🎬 Comedy is the art of hope. Never stop trying to win.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Back to Top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+// ============================================================
+// PROGRESS BAR
+// ============================================================
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+});
+
+// ============================================================
+// BACK TO TOP
+// ============================================================
+const btt = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('visible', window.scrollY > 400);
+});
+
+// ============================================================
+// HAMBURGER MENU
+// ============================================================
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+// ============================================================
+// ACTIVE NAV LINK
+// ============================================================
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navAs.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ============================================================
+// HERO CANVAS — PARTICLE EFFECT
+// ============================================================
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COLORS = ['rgba(244,196,48,', 'rgba(255,217,102,', 'rgba(184,146,42,'];
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.r = Math.random() * 1.8 + 0.4;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = -Math.random() * 0.4 - 0.1;
+      this.alpha = Math.random() * 0.5 + 0.1;
+      this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      this.alpha -= 0.0008;
+      if (this.y < -5 || this.alpha <= 0) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = this.color + this.alpha + ')';
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// ============================================================
+// HERO CYCLING TEXT
+// ============================================================
+const cycleEl = document.getElementById('hero-cycle');
+const cycleTexts = ['For Writers ✍️', 'For Directors 🎬', 'For Actors 🎭', 'For Anyone Who Wants to Make People Laugh 😄'];
+let cycleIdx = 0;
+function nextCycle() {
+  cycleEl.style.opacity = '0';
+  cycleEl.style.transform = 'translateY(-8px)';
+  setTimeout(() => {
+    cycleIdx = (cycleIdx + 1) % cycleTexts.length;
+    cycleEl.textContent = cycleTexts[cycleIdx];
+    cycleEl.style.transition = 'opacity 0.5s, transform 0.5s';
+    cycleEl.style.opacity = '1';
+    cycleEl.style.transform = 'translateY(0)';
+  }, 350);
+}
+setInterval(nextCycle, 2600);
+
+// ============================================================
+// TESTIMONIAL CAROUSEL
+// ============================================================
+(function() {
+  const track  = document.getElementById('carousel-track');
+  const dotsEl = document.getElementById('carousel-dots');
+  const cards  = track.querySelectorAll('.testimonial-card');
+  let current = 0;
+  let autoTimer;
+
+  cards.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(n) {
+    current = (n + cards.length) % cards.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current));
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  function startAuto() {
+    autoTimer = setInterval(() => goTo(current + 1), 5500);
+  }
+
+  document.getElementById('carousel-prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('carousel-next').addEventListener('click', () => goTo(current + 1));
+  startAuto();
+})();
+
+// ============================================================
+// BANANA PEEL TOGGLE
+// ============================================================
+function toggleBanana(el) {
+  el.classList.toggle('selected');
+}
+
+// ============================================================
+// TOOLS TABS
+// ============================================================
+function showTool(idx, btn) {
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tool-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tool-' + idx).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// FAQ ACCORDION
+// ============================================================
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

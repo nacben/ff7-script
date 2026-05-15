@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traffic Secrets — Free Traffic Mastery System</title>
+<style>
+  :root {
+    --gold: #f5a623;
+    --gold-dark: #d4860a;
+    --gold-light: #ffd97d;
+    --deep: #0a0a1a;
+    --deep2: #111128;
+    --mid: #1a1a3e;
+    --accent: #6c63ff;
+    --accent2: #ff6584;
+    --green: #00c896;
+    --text: #e8e8f0;
+    --text-dim: #9999bb;
+    --card: rgba(255,255,255,0.04);
+    --card-border: rgba(255,255,255,0.08);
+    --gradient-hero: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1a2e 100%);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── UTILITIES ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000;
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 40px;
+    margin-bottom: 16px;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), #ff9500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-label {
+    font-size: .78rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    border-radius: 2px;
+    margin: 20px 0;
+  }
+  .tag {
+    display: inline-block;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--text-dim);
+    font-size: .78rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin: 3px;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,26,.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 0 24px;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-weight: 900; font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -.02em;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: .88rem; font-weight: 500;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000 !important;
+    font-weight: 700 !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: opacity .2s !important;
+  }
+  .nav-cta:hover { opacity: .88; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--gradient-hero);
+    display: flex; align-items: center;
+    padding: 100px 24px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); pointer-events: none;
+  }
+  .orb1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(108,99,255,.25) 0%, transparent 70%);
+    top: -200px; right: -200px;
+  }
+  .orb2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(245,166,35,.15) 0%, transparent 70%);
+    bottom: -150px; left: -150px;
+  }
+  .orb3 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,200,150,.12) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .pulse-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(0,200,150,.4);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,200,150,.5); }
+    70% { box-shadow: 0 0 0 12px rgba(0,200,150,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,200,150,0); }
+  }
+  .hero-eyebrow span { font-size: .85rem; color: var(--green); font-weight: 600; }
+  .hero-h1 {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -.03em; margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: 1.12rem; color: var(--text-dim);
+    margin-bottom: 36px; max-width: 500px;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000; font-weight: 800; font-size: 1rem;
+    padding: 16px 32px; border-radius: 12px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 8px 30px rgba(245,166,35,.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(245,166,35,.5); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    border: 1.5px solid var(--card-border);
+    color: var(--text); font-weight: 600; font-size: 1rem;
+    padding: 15px 28px; border-radius: 12px;
+    text-decoration: none; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); background: rgba(245,166,35,.06); }
+
+  /* hero stats */
+  .hero-stats {
+    display: flex; gap: 28px; margin-top: 44px;
+    flex-wrap: wrap;
+  }
+  .stat-item { }
+  .stat-num {
+    font-size: 2rem; font-weight: 900;
+    line-height: 1;
+  }
+  .stat-label { font-size: .78rem; color: var(--text-dim); margin-top: 4px; }
+
+  /* hero card */
+  .hero-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 32px;
+    backdrop-filter: blur(10px);
+    position: relative; overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .card-price-tag {
+    display: flex; align-items: baseline; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .price-was {
+    font-size: 1.1rem; color: var(--text-dim);
+    text-decoration: line-through;
+  }
+  .price-now {
+    font-size: 3rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .price-label { font-size: .82rem; color: var(--text-dim); }
+  .feature-list { list-style: none; margin: 20px 0; }
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--card-border);
+    font-size: .95rem;
+  }
+  .feature-list li:last-child { border-bottom: none; }
+  .check { color: var(--green); font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+  .guarantee-bar {
+    background: rgba(0,200,150,.1);
+    border: 1px solid rgba(0,200,150,.2);
+    border-radius: 10px; padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 20px; font-size: .88rem;
+  }
+  .guarantee-icon { font-size: 1.5rem; }
+
+  /* ── SOCIAL PROOF BAR ── */
+  #proof-bar {
+    background: rgba(245,166,35,.08);
+    border-top: 1px solid rgba(245,166,35,.15);
+    border-bottom: 1px solid rgba(245,166,35,.15);
+    padding: 20px 24px;
+    overflow: hidden;
+  }
+  .proof-scroll {
+    display: flex; gap: 60px; align-items: center;
+    animation: scroll-left 30s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .proof-item {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text-dim); font-size: .88rem;
+  }
+  .proof-item strong { color: var(--gold); }
+
+  /* ── SECTION STYLES ── */
+  section { padding: 100px 0; }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900; letter-spacing: -.03em;
+    line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-header p { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+
+  /* ── CORE CONCEPTS ── */
+  #concepts { background: var(--deep2); }
+  .concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .concept-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 32px;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+    cursor: default;
+  }
+  .concept-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245,166,35,.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  }
+  .concept-icon {
+    font-size: 2.4rem; margin-bottom: 16px;
+    display: block;
+  }
+  .concept-card h3 {
+    font-size: 1.18rem; font-weight: 800;
+    margin-bottom: 12px; letter-spacing: -.01em;
+  }
+  .concept-card p { color: var(--text-dim); font-size: .95rem; }
+
+  /* ── TRAFFIC TYPES ── */
+  #traffic-types { background: var(--deep); }
+  .traffic-trio {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border-radius: 24px; overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .traffic-tier {
+    padding: 40px 32px;
+    border-right: 1px solid var(--card-border);
+    position: relative; overflow: hidden;
+    transition: background .3s;
+  }
+  .traffic-tier:last-child { border-right: none; }
+  .traffic-tier:hover { background: rgba(255,255,255,.03); }
+  .tier-num {
+    font-size: 4rem; font-weight: 900;
+    opacity: .08; position: absolute;
+    top: 16px; right: 20px; line-height: 1;
+  }
+  .tier-tag {
+    font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+    font-weight: 700; padding: 4px 12px; border-radius: 20px;
+    display: inline-block; margin-bottom: 20px;
+  }
+  .tier-earn .tier-tag { background: rgba(108,99,255,.2); color: #a09bff; }
+  .tier-control .tier-tag { background: rgba(255,101,132,.2); color: #ff9eb5; }
+  .tier-own .tier-tag { background: rgba(0,200,150,.2); color: #00c896; }
+  .tier-own { background: rgba(0,200,150,.03); }
+  .traffic-tier h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; }
+  .traffic-tier p { color: var(--text-dim); font-size: .92rem; margin-bottom: 16px; }
+  .tier-details { list-style: none; }
+  .tier-details li {
+    font-size: .88rem; color: var(--text-dim);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--card-border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tier-details li:last-child { border-bottom: none; }
+  .tier-details li::before { content: '→'; color: var(--gold); font-size: .8rem; }
+
+  /* ── DREAM 100 ── */
+  #dream100 { background: var(--deep2); }
+  .d100-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: start;
+  }
+  .d100-visual {
+    position: relative;
+  }
+  .circle-diagram {
+    width: 100%; aspect-ratio: 1;
+    max-width: 400px; margin: 0 auto;
+    position: relative;
+  }
+  .circle-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; height: 100px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    font-weight: 900; font-size: .85rem;
+    color: #000; z-index: 3;
+    box-shadow: 0 0 40px rgba(245,166,35,.4);
+  }
+  .orbit {
+    position: absolute;
+    top: 50%; left: 50%;
+    border: 1px dashed rgba(255,255,255,.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .orbit1 { width: 200px; height: 200px; animation: spin 20s linear infinite; }
+  .orbit2 { width: 300px; height: 300px; animation: spin 30s linear infinite reverse; }
+  .orbit3 { width: 390px; height: 390px; animation: spin 40s linear infinite; }
+  @keyframes spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+  .orbit-dot {
+    position: absolute;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    animation: counter-spin var(--dur) linear infinite;
+  }
+  .orbit1 .orbit-dot { --dur: 20s; background: rgba(108,99,255,.3); border: 1px solid rgba(108,99,255,.5); top: -18px; left: calc(50% - 18px); }
+  .orbit2 .orbit-dot:nth-child(1) { --dur: 30s; background: rgba(255,101,132,.3); border: 1px solid rgba(255,101,132,.5); top: -18px; left: calc(50% - 18px); animation-direction: reverse; }
+  .orbit2 .orbit-dot:nth-child(2) { --dur: 30s; background: rgba(0,200,150,.3); border: 1px solid rgba(0,200,150,.5); bottom: -18px; left: calc(50% - 18px); animation-direction: reverse; }
+  .orbit3 .orbit-dot:nth-child(1) { --dur: 40s; background: rgba(245,166,35,.3); border: 1px solid rgba(245,166,35,.5); top: -18px; left: calc(50% - 18px); }
+  .orbit3 .orbit-dot:nth-child(2) { --dur: 40s; background: rgba(108,99,255,.3); border: 1px solid rgba(108,99,255,.5); bottom: -18px; right: -18px; }
+  .orbit3 .orbit-dot:nth-child(3) { --dur: 40s; background: rgba(255,101,132,.3); border: 1px solid rgba(255,101,132,.5); bottom: -18px; left: -18px; }
+  @keyframes counter-spin {
+    from { rotate: 0deg; }
+    to { rotate: -360deg; }
+  }
+  .d100-steps { }
+  .step-item {
+    display: flex; gap: 20px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+  }
+  .step-num-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: .95rem; color: #000;
+    flex-shrink: 0;
+  }
+  .step-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+  .step-content p { color: var(--text-dim); font-size: .9rem; }
+
+  /* ── HOOK STORY OFFER ── */
+  #hso { background: var(--deep); }
+  .hso-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .hso-card {
+    border-radius: 20px; padding: 36px 28px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .hso-hook { background: linear-gradient(135deg, rgba(108,99,255,.15), rgba(108,99,255,.05)); border: 1px solid rgba(108,99,255,.2); }
+  .hso-story { background: linear-gradient(135deg, rgba(255,101,132,.15), rgba(255,101,132,.05)); border: 1px solid rgba(255,101,132,.2); }
+  .hso-offer { background: linear-gradient(135deg, rgba(245,166,35,.15), rgba(245,166,35,.05)); border: 1px solid rgba(245,166,35,.2); }
+  .hso-number {
+    font-size: 5rem; font-weight: 900; opacity: .07;
+    position: absolute; top: -10px; right: 10px; line-height: 1;
+  }
+  .hso-emoji { font-size: 2.8rem; margin-bottom: 16px; display: block; }
+  .hso-card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 14px; }
+  .hso-hook h3 { color: #a09bff; }
+  .hso-story h3 { color: #ff9eb5; }
+  .hso-offer h3 { color: var(--gold); }
+  .hso-card p { color: var(--text-dim); font-size: .92rem; }
+  .hso-example {
+    background: rgba(255,255,255,.04);
+    border-radius: 10px; padding: 12px 16px;
+    margin-top: 16px; font-size: .82rem;
+    color: var(--text-dim);
+    text-align: left;
+    border-left: 3px solid;
+  }
+  .hso-hook .hso-example { border-color: #a09bff; }
+  .hso-story .hso-example { border-color: #ff9eb5; }
+  .hso-offer .hso-example { border-color: var(--gold); }
+
+  /* ── PLATFORMS ── */
+  #platforms { background: var(--deep2); }
+  .platform-tabs {
+    display: flex; gap: 0;
+    border: 1px solid var(--card-border);
+    border-radius: 14px; overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .tab-btn {
+    flex: 1; padding: 16px;
+    background: transparent; border: none;
+    color: var(--text-dim); font-weight: 600; font-size: .9rem;
+    cursor: pointer; transition: background .2s, color .2s;
+    border-right: 1px solid var(--card-border);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn.active {
+    background: rgba(245,166,35,.1);
+    color: var(--gold);
+  }
+  .tab-btn:hover:not(.active) { background: rgba(255,255,255,.03); color: var(--text); }
+  .platform-content { display: none; }
+  .platform-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .platform-info h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; }
+  .platform-info p { color: var(--text-dim); margin-bottom: 20px; font-size: .95rem; }
+  .platform-steps { list-style: none; }
+  .platform-steps li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--card-border);
+    display: grid; grid-template-columns: 24px 1fr;
+    gap: 12px; align-items: start;
+    font-size: .92rem; color: var(--text-dim);
+  }
+  .platform-steps li:last-child { border-bottom: none; }
+  .platform-steps strong { color: var(--text); }
+  .step-arrow { color: var(--gold); font-weight: 700; font-size: .9rem; }
+  .platform-metrics {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 28px;
+  }
+  .platform-metrics h4 { font-size: .95rem; font-weight: 700; margin-bottom: 20px; color: var(--text-dim); letter-spacing: .05em; text-transform: uppercase; }
+  .metric-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--card-border);
+    font-size: .9rem;
+  }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-label { color: var(--text-dim); }
+  .metric-value { font-weight: 700; }
+  .metric-bar {
+    width: 80px; height: 6px; background: rgba(255,255,255,.1);
+    border-radius: 3px; overflow: hidden; display: inline-block;
+    vertical-align: middle; margin-left: 8px;
+  }
+  .metric-fill { height: 100%; border-radius: 3px; }
+
+  /* ── FUNNEL MATH ── */
+  #funnel-math { background: var(--deep); }
+  .math-demo {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 48px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .math-flow {
+    display: flex; align-items: center; gap: 0;
+    margin: 36px 0; flex-wrap: wrap;
+  }
+  .math-step {
+    flex: 1; min-width: 120px;
+    text-align: center; padding: 20px 10px;
+  }
+  .math-icon { font-size: 2rem; margin-bottom: 8px; }
+  .math-label { font-size: .78rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .08em; }
+  .math-amount {
+    font-size: 1.4rem; font-weight: 900;
+    margin: 4px 0;
+  }
+  .math-pct { font-size: .78rem; color: var(--text-dim); }
+  .math-arrow {
+    color: var(--gold); font-size: 1.5rem;
+    padding: 0 4px; flex-shrink: 0;
+  }
+  .math-result {
+    background: linear-gradient(135deg, rgba(0,200,150,.15), rgba(0,200,150,.05));
+    border: 1px solid rgba(0,200,150,.25);
+    border-radius: 16px; padding: 24px;
+    text-align: center; margin-top: 20px;
+  }
+  .math-result .big-num {
+    font-size: 3rem; font-weight: 900;
+    color: var(--green); line-height: 1;
+  }
+  .math-result p { color: var(--text-dim); font-size: .9rem; margin-top: 8px; }
+
+  /* ── GROWTH HACKS ── */
+  #growth-hacks { background: var(--deep2); }
+  .hacks-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .hack-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 28px;
+    transition: transform .2s, border-color .2s;
+  }
+  .hack-card:hover { transform: translateY(-3px); border-color: rgba(108,99,255,.3); }
+  .hack-brand {
+    font-size: .72rem; font-weight: 800; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hack-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .hack-card p { color: var(--text-dim); font-size: .88rem; }
+  .hack-result {
+    margin-top: 14px; padding: 8px 12px;
+    background: rgba(108,99,255,.1); border-radius: 8px;
+    font-size: .82rem; color: #a09bff; font-weight: 600;
+  }
+
+  /* ── QUOTE SECTION ── */
+  #quotes { background: var(--deep); }
+  .quotes-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .quote-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 32px;
+    position: relative;
+  }
+  .quote-mark {
+    font-size: 4rem; color: var(--gold);
+    opacity: .3; line-height: .5;
+    font-family: Georgia, serif;
+    margin-bottom: 16px; display: block;
+  }
+  .quote-text {
+    font-size: 1rem; color: var(--text);
+    font-style: italic; line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .quote-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1rem; color: white;
+    flex-shrink: 0;
+  }
+  .author-name { font-weight: 700; font-size: .92rem; }
+  .author-role { font-size: .8rem; color: var(--text-dim); }
+
+  /* ── ROADMAP ── */
+  #roadmap { background: var(--deep2); }
+  .roadmap-line {
+    position: relative;
+    max-width: 700px; margin: 0 auto;
+  }
+  .roadmap-line::before {
+    content: '';
+    position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .road-item {
+    display: flex; gap: 24px;
+    margin-bottom: 40px; position: relative;
+    align-items: flex-start;
+  }
+  .road-dot {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--deep2); border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0; z-index: 2;
+    transition: background .3s;
+  }
+  .road-item:hover .road-dot { background: rgba(245,166,35,.15); }
+  .road-text h4 { font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+  .road-text p { color: var(--text-dim); font-size: .9rem; }
+  .road-text .road-tip {
+    margin-top: 10px; padding: 10px 14px;
+    background: rgba(245,166,35,.07); border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0; font-size: .85rem; color: var(--text-dim);
+  }
+
+  /* ── CTA ── */
+  #cta-section {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a0030 50%, #001a30 100%);
+    padding: 100px 24px;
+    position: relative; overflow: hidden;
+  }
+  .cta-orb1 {
+    position: absolute; width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,.2) 0%, transparent 70%);
+    top: -200px; left: -200px; pointer-events: none;
+  }
+  .cta-orb2 {
+    position: absolute; width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,166,35,.15) 0%, transparent 70%);
+    bottom: -150px; right: -150px; pointer-events: none;
+  }
+  .cta-inner {
+    max-width: 700px; margin: 0 auto; text-align: center;
+    position: relative; z-index: 2;
+  }
+  .cta-inner h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900; letter-spacing: -.03em;
+    line-height: 1.15; margin-bottom: 20px;
+  }
+  .cta-inner p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 36px; }
+  .cta-features {
+    display: flex; gap: 20px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .cta-feat {
+    display: flex; align-items: center; gap: 8px;
+    font-size: .9rem; color: var(--text-dim);
+  }
+  .cta-feat span { color: var(--green); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: rgba(0,0,0,.5);
+    border-top: 1px solid var(--card-border);
+    padding: 40px 24px; text-align: center;
+  }
+  .footer-logo {
+    font-size: 1.3rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 16px;
+  }
+  .footer-links {
+    display: flex; gap: 24px; justify-content: center;
+    list-style: none; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .footer-links a { color: var(--text-dim); text-decoration: none; font-size: .88rem; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold); }
+  footer p { color: var(--text-dim); font-size: .82rem; }
+
+  /* ── ACCORDION ── */
+  .accordion { max-width: 700px; margin: 0 auto; }
+  .acc-item {
+    border: 1px solid var(--card-border); border-radius: 12px;
+    margin-bottom: 8px; overflow: hidden;
+    transition: border-color .2s;
+  }
+  .acc-item.open { border-color: rgba(245,166,35,.3); }
+  .acc-head {
+    width: 100%; background: var(--card);
+    border: none; cursor: pointer; padding: 20px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--text); font-size: .95rem; font-weight: 600;
+    text-align: left;
+  }
+  .acc-icon { color: var(--gold); font-size: 1.2rem; transition: rotate .3s; flex-shrink: 0; }
+  .acc-item.open .acc-icon { rotate: 45deg; }
+  .acc-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease, padding .3s;
+    background: rgba(255,255,255,.02);
+  }
+  .acc-body-inner { padding: 0 24px 20px; color: var(--text-dim); font-size: .92rem; line-height: 1.8; }
+  .acc-item.open .acc-body { max-height: 300px; }
+
+  /* ── PROGRESS BARS SECTION ── */
+  #metrics { background: var(--deep); }
+  .metrics-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+  }
+  .metric-block { }
+  .metric-block h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+  .metric-block p { color: var(--text-dim); font-size: .92rem; margin-bottom: 32px; }
+  .bar-list { list-style: none; }
+  .bar-item { margin-bottom: 20px; }
+  .bar-meta { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: .88rem; }
+  .bar-name { color: var(--text-dim); }
+  .bar-pct { font-weight: 700; color: var(--text); }
+  .bar-track {
+    height: 8px; background: rgba(255,255,255,.08);
+    border-radius: 4px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+    width: 0;
+    transition: width 1.2s ease;
+  }
+  .metrics-visual {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .mini-stat {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 24px;
+    text-align: center;
+    transition: transform .25s, border-color .25s;
+  }
+  .mini-stat:hover { transform: translateY(-3px); border-color: rgba(245,166,35,.2); }
+  .mini-stat .big { font-size: 2.2rem; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+  .mini-stat .lbl { font-size: .78rem; color: var(--text-dim); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { max-width: 500px; }
+    .traffic-trio { grid-template-columns: 1fr; }
+    .traffic-tier { border-right: none; border-bottom: 1px solid var(--card-border); }
+    .traffic-tier:last-child { border-bottom: none; }
+    .d100-layout { grid-template-columns: 1fr; }
+    .hso-grid { grid-template-columns: 1fr; }
+    .platform-content.active { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    .metrics-visual { }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .hero-stats { gap: 20px; }
+    .math-flow { flex-direction: column; }
+    .math-arrow { transform: rotate(90deg); }
+    .metrics-visual { grid-template-columns: 1fr 1fr; }
+    .platform-tabs { flex-wrap: wrap; }
+    .tab-btn { flex: 0 0 50%; border-right: 1px solid var(--card-border); }
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .fade-up-delay-1 { transition-delay: .1s; }
+  .fade-up-delay-2 { transition-delay: .2s; }
+  .fade-up-delay-3 { transition-delay: .3s; }
+  .fade-up-delay-4 { transition-delay: .4s; }
+
+  /* counter animation */
+  .count-up { transition: all .1s; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Traffic Secrets™</div>
+    <ul class="nav-links">
+      <li><a href="#concepts">Core Concepts</a></li>
+      <li><a href="#dream100">Dream 100</a></li>
+      <li><a href="#platforms">Platforms</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#cta-section" class="nav-cta">Get Empire — $1</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="pulse-dot"></div>
+        <span>Newbie-Friendly • No Ads Required • 30 Min/Day</span>
+      </div>
+      <h1 class="hero-h1">
+        Make Up To
+        <span class="gradient-text">$128+ Per Day</span>
+        With FREE Traffic
+      </h1>
+      <p class="hero-sub">
+        The underground method thousands of entrepreneurs use to flood their funnels with unlimited free traffic — no Google Ads, no Facebook Ads, no video creation required.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta-section" class="btn-primary">
+          <span>🚀</span> Get Empire for Just $1
+        </a>
+        <a href="#concepts" class="btn-secondary">
+          <span>📖</span> Learn the Secrets
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num gradient-text"><span class="count-up" data-target="100000">0</span>+</div>
+          <div class="stat-label">Active Entrepreneurs</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num gradient-text"><span class="count-up" data-target="223000">0</span>+</div>
+          <div class="stat-label">Community Members</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num gradient-text">$<span class="count-up" data-target="100">0</span>M+</div>
+          <div class="stat-label">Revenue Generated</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card fade-up">
+        <div class="card-price-tag">
+          <span class="price-was">$197</span>
+          <span class="price-now">$1</span>
+          <span class="price-label">One-time access</span>
+        </div>
+        <div class="badge">Empire System — Why You Need This Now</div>
+        <ul class="feature-list">
+          <li>
+            <span class="check">✓</span>
+            <span>No Google, Facebook or Bing Ads required</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span>No creating videos — just 30 minutes per day</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span>Newbie-friendly method — works for <em>anyone</em></span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span>Unlimited FREE Traffic System included</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span>Access to Dream 100 strategy framework</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span>Hook, Story, Offer mastery training</span>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <span>Follow-up funnel sequences & templates</span>
+          </li>
+        </ul>
+        <a href="#cta-section" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px;">
+          Start for Just $1 →
+        </a>
+        <div class="guarantee-bar">
+          <span class="guarantee-icon">🛡️</span>
+          <span><strong>60-Day Money-Back Guarantee</strong> — Get results or 100% of your money back</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROOF BAR ── -->
+<div id="proof-bar">
+  <div class="proof-scroll">
+    <div class="proof-item">🏆 <strong>John Lee Dumas</strong> — 500+ books sold from one interview</div>
+    <div class="proof-item">📈 <strong>Tony Robbins</strong> — 3.1 million video views, one campaign</div>
+    <div class="proof-item">💰 <strong>ClickFunnels</strong> — $100M+ without a single VC dollar</div>
+    <div class="proof-item">📚 <strong>DotCom Secrets</strong> — 100,000+ copies sold at launch</div>
+    <div class="proof-item">🎯 <strong>Expert Secrets</strong> — 71,248 copies in opening week</div>
+    <div class="proof-item">🌟 <strong>Natalie Hodson</strong> — 120,000 e-books sold with one hook</div>
+    <div class="proof-item">🚀 <strong>Quest Nutrition</strong> — Billion-dollar brand via Dream 100</div>
+    <!-- repeat for seamless scroll -->
+    <div class="proof-item">🏆 <strong>John Lee Dumas</strong> — 500+ books sold from one interview</div>
+    <div class="proof-item">📈 <strong>Tony Robbins</strong> — 3.1 million video views, one campaign</div>
+    <div class="proof-item">💰 <strong>ClickFunnels</strong> — $100M+ without a single VC dollar</div>
+    <div class="proof-item">📚 <strong>DotCom Secrets</strong> — 100,000+ copies sold at launch</div>
+    <div class="proof-item">🎯 <strong>Expert Secrets</strong> — 71,248 copies in opening week</div>
+    <div class="proof-item">🌟 <strong>Natalie Hodson</strong> — 120,000 e-books sold with one hook</div>
+    <div class="proof-item">🚀 <strong>Quest Nutrition</strong> — Billion-dollar brand via Dream 100</div>
+  </div>
+</div>
+
+<!-- ── CORE CONCEPTS ── -->
+<section id="concepts">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Foundation</div>
+      <h2>20 Traffic Secrets That <span class="gradient-text">Change Everything</span></h2>
+      <p>These aren't tactics that expire in 6 months. These are evergreen strategies that worked before the internet, work today, and will work forever — because traffic is people, and people never change.</p>
+    </div>
+    <div class="concepts-grid">
+      <div class="concept-card fade-up">
+        <span class="concept-icon">🎯</span>
+        <h3>Secret #1 — Know Your Dream Customer</h3>
+        <p>Companies obsessed with their customers beat companies obsessed with their products — every time. Build your customer avatar with surgical precision: know their pains, desires, the exact phrases looping in their head, and where they congregate online.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag">3 Core Desires</span>
+          <span class="tag">Away from Pain</span>
+          <span class="tag">Toward Pleasure</span>
+          <span class="tag">Customer Avatar</span>
+        </div>
+      </div>
+      <div class="concept-card fade-up fade-up-delay-1">
+        <span class="concept-icon">💎</span>
+        <h3>Secret #2 — The Dream 100</h3>
+        <p>Your dream customers are already congregated by 100 people or companies. Find them, serve them, work your way into their audiences, and buy your way in with ads. This single strategy is the foundation of every successful traffic system.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag">Find Your 100</span>
+          <span class="tag">Interest-Based</span>
+          <span class="tag">Search-Based</span>
+          <span class="tag">Dig Your Well</span>
+        </div>
+      </div>
+      <div class="concept-card fade-up fade-up-delay-2">
+        <span class="concept-icon">🎣</span>
+        <h3>Secret #3 — Hook, Story, Offer</h3>
+        <p>Every ad, funnel, email, and post that ever converted used this exact framework. The hook stops the scroll, the story builds desire and connection, and the irresistible offer converts. Master this and you'll never write a losing ad again.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag">Pattern Interrupt</span>
+          <span class="tag">Story Selling</span>
+          <span class="tag">Attractive Character</span>
+        </div>
+      </div>
+      <div class="concept-card fade-up">
+        <span class="concept-icon">🔑</span>
+        <h3>Secret #5 — Traffic You Own</h3>
+        <p>The only real asset in any company is the list. Earned traffic and controlled traffic are rented. The second a platform slaps or snaps, it's gone. Build your email list obsessively — it's the one asset no algorithm can take from you.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag">Email List</span>
+          <span class="tag">Messenger</span>
+          <span class="tag">SMS</span>
+          <span class="tag">Pixel Lists</span>
+        </div>
+      </div>
+      <div class="concept-card fade-up fade-up-delay-1">
+        <span class="concept-icon">📧</span>
+        <h3>Secret #6 — Follow-Up Funnels</h3>
+        <p>81% of all sales happen after the 5th contact. Your follow-up funnel is where the real money is made. Using Emotion → Logic → Fear sequencing, you can multiply your front-end profits by 16x or more within 30 days of acquiring a lead.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag">Soap Opera Sequences</span>
+          <span class="tag">Seinfeld Emails</span>
+          <span class="tag">Value Ladder</span>
+        </div>
+      </div>
+      <div class="concept-card fade-up fade-up-delay-2">
+        <span class="concept-icon">📡</span>
+        <h3>Secret #7 — Infiltrate the Dream 100</h3>
+        <p>When Arsenio Hall had his show, everyone returned his calls — even the future president. Your own show is your platform currency. It's the key to getting your Dream 100 to say yes, give you access, and send their audiences your way.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag">Your Own Show</span>
+          <span class="tag">Podcast</span>
+          <span class="tag">YouTube</span>
+          <span class="tag">Blog</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRAFFIC TYPES ── -->
+<section id="traffic-types">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Three Traffic Temperatures</div>
+      <h2>Not All Traffic Is <span class="gradient-text">Created Equal</span></h2>
+      <p>Understanding the three types of traffic — and which one to build first — is the difference between a company that survives every Google slap and one that disappears overnight.</p>
+    </div>
+    <div class="traffic-trio">
+      <div class="traffic-tier tier-earn fade-up">
+        <div class="tier-num">01</div>
+        <span class="tier-tag">Traffic You Earn</span>
+        <h3>Work Your Way In</h3>
+        <p>Free, organic traffic you earn through relationships, content, and being a guest on other people's platforms. Harder to scale, but converts at the highest rate of all traffic types.</p>
+        <ul class="tier-details">
+          <li>Podcast interviews & guest posts</li>
+          <li>Dream 100 collaborations</li>
+          <li>Social media networking</li>
+          <li>Joint venture promotions</li>
+          <li>Affiliate endorsements</li>
+        </ul>
+      </div>
+      <div class="traffic-tier tier-control fade-up fade-up-delay-1">
+        <div class="tier-num">02</div>
+        <span class="tier-tag">Traffic You Control</span>
+        <h3>Buy Your Way In</h3>
+        <p>Paid traffic you control via ads. Turns on instantly, scalable, testable. Critical for rapid growth — but dangerous if it's your <em>only</em> source. Never let a platform control your business.</p>
+        <ul class="tier-details">
+          <li>Facebook & Instagram Ads</li>
+          <li>Google Search & Display</li>
+          <li>YouTube pre-roll ads</li>
+          <li>Solo email ad buys</li>
+          <li>Podcast sponsorships</li>
+        </ul>
+      </div>
+      <div class="traffic-tier tier-own fade-up fade-up-delay-2">
+        <div class="tier-num">03</div>
+        <span class="tier-tag">Traffic You Own</span>
+        <h3>The Only Real Asset</h3>
+        <p>Your email list, Messenger subscribers, SMS list, and pixeled audiences. This is the holy grail. Convert ALL earned and controlled traffic here. Market for free, forever. No algorithm can take it.</p>
+        <ul class="tier-details">
+          <li>Email list (~$1/subscriber/month)</li>
+          <li>Facebook Messenger lists</li>
+          <li>SMS/text message lists</li>
+          <li>Retargeting pixel audiences</li>
+          <li>Desktop push subscribers</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--text-dim);margin-top:28px;font-size:.9rem;">
+      ⚡ Pro Truth: <strong style="color:var(--text)">The goal of ALL traffic is to convert it into traffic you own.</strong> Your break-even funnel is the machine that makes this possible.
+    </p>
+  </div>
+</section>
+
+<!-- ── DREAM 100 ── -->
+<section id="dream100">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Core Strategy</div>
+      <h2>The Dream 100 — <span class="gradient-text">Your Secret Weapon</span></h2>
+      <p>Chet Holmes called it Dream 100. Rachel Hollis used it to sell 1 million books. Quest Nutrition used it to build a billion-dollar brand. ClickFunnels used it to hit $100M without VC funding. This is the backbone of all traffic.</p>
+    </div>
+    <div class="d100-layout">
+      <div class="d100-visual fade-up">
+        <div class="circle-diagram">
+          <div class="orbit orbit1">
+            <div class="orbit-dot">📧</div>
+          </div>
+          <div class="orbit orbit2">
+            <div class="orbit-dot">🎙️</div>
+            <div class="orbit-dot">📱</div>
+          </div>
+          <div class="orbit orbit3">
+            <div class="orbit-dot">▶️</div>
+            <div class="orbit-dot">📝</div>
+            <div class="orbit-dot">👥</div>
+          </div>
+          <div class="circle-center">YOUR<br>DREAM<br>100</div>
+        </div>
+        <p style="text-align:center;color:var(--text-dim);font-size:.88rem;margin-top:24px;">
+          Each orbit represents a platform: Email, Podcasts, Social, YouTube, Blogs, Groups
+        </p>
+      </div>
+      <div class="d100-steps">
+        <div class="step-item fade-up">
+          <div class="step-num-circle">1</div>
+          <div class="step-content">
+            <h4>Identify Your Dream 100</h4>
+            <p>List every influencer, blogger, podcaster, YouTuber, and Facebook group owner who has already congregated your dream customers. Aim for 100+ per platform. This is your most valuable business exercise.</p>
+          </div>
+        </div>
+        <div class="step-item fade-up fade-up-delay-1">
+          <div class="step-num-circle">2</div>
+          <div class="step-content">
+            <h4>Dig Your Well Before You're Thirsty</h4>
+            <p>Subscribe to their content. Buy their products. Comment on their posts. Send thoughtful DMs — never templated, never pitching. Build genuine rapport over weeks before asking for anything. One real relationship can be worth millions.</p>
+          </div>
+        </div>
+        <div class="step-item fade-up fade-up-delay-2">
+          <div class="step-num-circle">3</div>
+          <div class="step-content">
+            <h4>Work Your Way In</h4>
+            <p>Ask to be on their podcast. Guest post on their blog. Do Q&A collaborations on Instagram. Offer interviews on your platform. Each "yes" from a Dream 100 member can bring hundreds of your ideal customers into your funnel.</p>
+          </div>
+        </div>
+        <div class="step-item fade-up fade-up-delay-3">
+          <div class="step-num-circle">4</div>
+          <div class="step-content">
+            <h4>Buy Your Way In</h4>
+            <p>While building relationships, simultaneously run paid ads targeting your Dream 100's followers. On Facebook, target their fan page audiences. On YouTube, place pre-roll ads on their videos. You get their traffic without their endorsement.</p>
+          </div>
+        </div>
+        <div class="step-item fade-up">
+          <div class="step-num-circle">5</div>
+          <div class="step-content">
+            <h4>Build Your Affiliate Army</h4>
+            <p>Turn your Dream 100 into affiliates. Pay them generously — 40-50%+ commission. They become your commission-based sales team. They run ads for you, email their lists for you, and promote you for free until a sale is made.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOOK STORY OFFER ── -->
+<section id="hso">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Conversion Framework</div>
+      <h2>Hook. Story. <span class="gradient-text">Offer.</span></h2>
+      <p>Natalie Hodson used this exact framework to sell 120,000 copies of one e-book. Every ad that converts, every email that gets opened, every video that drives sales — all follow this one timeless pattern.</p>
+    </div>
+    <div class="hso-grid">
+      <div class="hso-card hso-hook fade-up">
+        <div class="hso-number">1</div>
+        <span class="hso-emoji">🎣</span>
+        <h3>HOOK</h3>
+        <p>The pattern interrupt that stops the scroll. Every picture, headline, subject line, and video thumbnail is a hook. The better your hooks, the more attention you command — and attention is the currency of the internet.</p>
+        <div class="hso-example">
+          <strong>Example:</strong> An image of a fitness mom who accidentally peed her pants during a workout. Impossible to scroll past. It stopped Jessica cold — and sold 120,000 e-books.
+        </div>
+      </div>
+      <div class="hso-card hso-story fade-up fade-up-delay-1">
+        <div class="hso-number">2</div>
+        <span class="hso-emoji">📖</span>
+        <h3>STORY</h3>
+        <p>Stories build two things: desire for your offer, and connection to you as the Attractive Character. People buy emotionally and justify logically — your story triggers the emotion. Even if they don't buy today, they become your follower.</p>
+        <div class="hso-example">
+          <strong>Example:</strong> Natalie told the embarrassing story, introduced the doctor, showed the solution, and built a relationship with every mom who felt seen. The story created desire before any offer was made.
+        </div>
+      </div>
+      <div class="hso-card hso-offer fade-up fade-up-delay-2">
+        <div class="hso-number">3</div>
+        <span class="hso-emoji">💸</span>
+        <h3>OFFER</h3>
+        <p>The offer doesn't always mean selling something. It could be "like this post," "subscribe," or "click the link." But make it irresistible. If people aren't taking action, it's almost always the offer — increase the value until they can't say no.</p>
+        <div class="hso-example">
+          <strong>Example:</strong> The e-book + bonuses (diet tips, exercises, training programs) for just $47. The offer was so well-matched to the pain in the story that Jessica literally ran to find her credit card.
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:40px;background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:28px;text-align:center;">
+      <p style="color:var(--text-dim);font-size:.92rem;margin-bottom:8px;">🔑 The Golden Diagnostic</p>
+      <p style="font-size:1.1rem;font-weight:700;">If your ad isn't converting, if your funnel isn't selling, if your emails aren't opening — <span class="gradient-text">it's always the Hook, the Story, or the Offer.</span> Fix one of those three things and watch everything change.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FUNNEL MATH ── -->
+<section id="funnel-math">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Numbers That Free You</div>
+      <h2>The Break-Even Funnel — <span class="gradient-text">Unlimited Advertising Budget</span></h2>
+      <p>When you build a funnel that breaks even on ad spend, you no longer have an advertising budget. Every dollar you put in, you get back — and your customer list grows for free. This is the secret Russell used to build ClickFunnels without VC money.</p>
+    </div>
+    <div class="math-demo fade-up">
+      <p style="text-align:center;color:var(--text-dim);margin-bottom:8px;font-size:.9rem;">Real Example: DotCom Secrets Book Funnel (30-day window)</p>
+      <h3 style="text-align:center;margin-bottom:4px;">Spend $23 in ads → Receive $37.71 back</h3>
+      <p style="text-align:center;color:var(--green);font-size:.9rem;margin-bottom:32px;">Net profit of $14.71 per customer acquired</p>
+      <div class="math-flow">
+        <div class="math-step">
+          <div class="math-icon">📚</div>
+          <div class="math-amount" style="color:var(--text)">$7.95</div>
+          <div class="math-label">Book Purchase</div>
+          <div class="math-pct">Core product</div>
+        </div>
+        <div class="math-arrow">→</div>
+        <div class="math-step">
+          <div class="math-icon">🎧</div>
+          <div class="math-amount" style="color:#a09bff">+$7.70</div>
+          <div class="math-label">Order Bump</div>
+          <div class="math-pct">20.8% take rate</div>
+        </div>
+        <div class="math-arrow">→</div>
+        <div class="math-step">
+          <div class="math-icon">📱</div>
+          <div class="math-amount" style="color:#ff9eb5">+$9.62</div>
+          <div class="math-label">OTO #1 — $97</div>
+          <div class="math-pct">9.92% take rate</div>
+        </div>
+        <div class="math-arrow">→</div>
+        <div class="math-step">
+          <div class="math-icon">🚀</div>
+          <div class="math-amount" style="color:var(--gold)">+$12.44</div>
+          <div class="math-label">OTO #2 — $297</div>
+          <div class="math-pct">4.19% take rate</div>
+        </div>
+      </div>
+      <div class="math-result">
+        <div class="big-num">$37.71</div>
+        <p>Average Cart Value per customer<br>Subtract $23 in ads = <strong style="color:var(--green)">$14.71 net profit per new customer</strong></p>
+      </div>
+      <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center;">
+        <div style="background:rgba(0,200,150,.08);border:1px solid rgba(0,200,150,.2);border-radius:10px;padding:16px;">
+          <div style="font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Front-End Revenue</div>
+          <div style="font-size:1.4rem;font-weight:900;color:var(--green)">$142K</div>
+          <div style="font-size:.78rem;color:var(--text-dim)">30 days, 4 funnels</div>
+        </div>
+        <div style="background:rgba(255,101,132,.08);border:1px solid rgba(255,101,132,.2);border-radius:10px;padding:16px;">
+          <div style="font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Follow-Up Revenue</div>
+          <div style="font-size:1.4rem;font-weight:900;color:#ff9eb5">$234K</div>
+          <div style="font-size:.78rem;color:var(--text-dim)">30 days, free traffic</div>
+        </div>
+        <div style="background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.2);border-radius:10px;padding:16px;">
+          <div style="font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">Return Multiplier</div>
+          <div style="font-size:1.4rem;font-weight:900;color:#a09bff">16.49×</div>
+          <div style="font-size:.78rem;color:var(--text-dim)">per $1 of front-end revenue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLATFORM STRATEGIES ── -->
+<section id="platforms">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Fill Your Funnel Framework</div>
+      <h2>Master Every Platform <span class="gradient-text">With One Framework</span></h2>
+      <p>The same 6-step framework works on Instagram, Facebook, Google, YouTube — and any platform that doesn't exist yet. Learn the framework once, apply it everywhere, forever.</p>
+    </div>
+    <div class="platform-tabs">
+      <button class="tab-btn active" data-tab="instagram">📸 Instagram</button>
+      <button class="tab-btn" data-tab="facebook">👥 Facebook</button>
+      <button class="tab-btn" data-tab="google">🔍 Google</button>
+      <button class="tab-btn" data-tab="youtube">▶️ YouTube</button>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="platform-content active" id="tab-instagram">
+      <div class="platform-info fade-up">
+        <h3>📸 Instagram Traffic Secrets</h3>
+        <p>Instagram is the most powerful platform for building an Attractive Character relationship with your audience. Stories create intimacy. The JK5 method builds brand. And the Highlights mini-webinar hack converts followers into buyers 24/7.</p>
+        <ul class="platform-steps">
+          <li><span class="step-arrow">→</span><span><strong>JK5 Method:</strong> Pick 5 brand categories, rotate posts between them. Build connection beyond what you sell.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Profile hooks:</strong> Every image is a hook. Run every post through the ABCDQ test before publishing.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Stories = Reality Show:</strong> Post 10-30 Stories per day documenting your journey in 15-second clips.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Highlights Webinar Hack:</strong> Create a 15-50 Story "mini webinar" once per month using the Perfect Webinar script. Save as a Highlight — it sells forever.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Collabs with Dream 100:</strong> Q&A swaps that expose you to new audiences and grow both channels simultaneously.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Paid shout-outs:</strong> Pay Dream 100 members to post about you with tags back to your profile.</span></li>
+        </ul>
+      </div>
+      <div class="platform-metrics fade-up">
+        <h4>Platform Benchmarks</h4>
+        <div class="metric-row">
+          <span class="metric-label">Daily Stories target</span>
+          <span class="metric-value">10-30 <div class="metric-bar"><div class="metric-fill" style="width:85%;background:linear-gradient(90deg,#e1306c,#f77737);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Profile posts per day</span>
+          <span class="metric-value">2 posts <div class="metric-bar"><div class="metric-fill" style="width:40%;background:linear-gradient(90deg,#e1306c,#f77737);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">DMs to Dream 100 daily</span>
+          <span class="metric-value">10 DMs <div class="metric-bar"><div class="metric-fill" style="width:50%;background:linear-gradient(90deg,#e1306c,#f77737);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Swipe-up CTAs per day</span>
+          <span class="metric-value">1-2 <div class="metric-bar"><div class="metric-fill" style="width:30%;background:linear-gradient(90deg,#e1306c,#f77737);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Mini webinar frequency</span>
+          <span class="metric-value">1×/month <div class="metric-bar"><div class="metric-fill" style="width:25%;background:linear-gradient(90deg,#e1306c,#f77737);"></div></div></span>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(225,48,108,.1);border-radius:10px;font-size:.85rem;color:var(--text-dim);">
+          💡 <strong style="color:var(--text)">Key Insight:</strong> After 10K followers, unlock "swipe up" in Stories — your single most powerful tool to push followers directly into your funnels without friction.
+        </div>
+      </div>
+    </div>
+
+    <!-- FACEBOOK -->
+    <div class="platform-content" id="tab-facebook">
+      <div class="platform-info fade-up">
+        <h3>👥 Facebook Traffic Secrets</h3>
+        <p>Facebook is the world's biggest party. Your personal profile is your home. Your Fan Page is your show. Groups are your hangout. Messenger is your private distribution channel. Each serves a different — essential — role.</p>
+        <ul class="platform-steps">
+          <li><span class="step-arrow">→</span><span><strong>Personal Profile = Home:</strong> Make daily posts rotating through your JK5 categories. Post links in comments (not posts) to avoid algorithmic penalty.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Fan Page = Your Show:</strong> Only post content you'd pay $10-20 to boost. Produced value videos, Live value videos, and Live Perfect Webinars.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Groups = Hangout:</strong> Run a community group. Provides free organic reach, builds tribe loyalty, and generates hundreds of new customers per month.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Messenger = Distribution:</strong> Never blast promotions. Send conversations once/week: "Are you still looking for X?" Then give them a choice. Highest open rates available.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Network in groups:</strong> Find groups with your dream customers, spend 30 min/day answering questions, providing value with zero pitching.</span></li>
+        </ul>
+      </div>
+      <div class="platform-metrics fade-up">
+        <h4>Platform Benchmarks</h4>
+        <div class="metric-row">
+          <span class="metric-label">Personal profile posts/day</span>
+          <span class="metric-value">1-2 <div class="metric-bar"><div class="metric-fill" style="width:35%;background:linear-gradient(90deg,#1877f2,#42a5f5);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Groups to network in</span>
+          <span class="metric-value">5-10+ <div class="metric-bar"><div class="metric-fill" style="width:60%;background:linear-gradient(90deg,#1877f2,#42a5f5);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Group member target</span>
+          <span class="metric-value">1M reach <div class="metric-bar"><div class="metric-fill" style="width:90%;background:linear-gradient(90deg,#1877f2,#42a5f5);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Messenger open rate vs email</span>
+          <span class="metric-value">5-10× higher <div class="metric-bar"><div class="metric-fill" style="width:95%;background:linear-gradient(90deg,#1877f2,#42a5f5);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Fan Page boost budget/post</span>
+          <span class="metric-value">$10-20 <div class="metric-bar"><div class="metric-fill" style="width:40%;background:linear-gradient(90deg,#1877f2,#42a5f5);"></div></div></span>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(24,119,242,.1);border-radius:10px;font-size:.85rem;color:var(--text-dim);">
+          💡 <strong style="color:var(--text)">Zanos Warning:</strong> If 100% of your traffic comes from Facebook, a single algorithm change can destroy your business overnight. This is why you need traffic you OWN.
+        </div>
+      </div>
+    </div>
+
+    <!-- GOOGLE -->
+    <div class="platform-content" id="tab-google">
+      <div class="platform-info fade-up">
+        <h3>🔍 Google Traffic Secrets</h3>
+        <p>Google SEO has evolved through Panda, Penguin, Hummingbird, and Fred — each update punishing spammers and rewarding those who align with Google's core goal: the best user experience. Give Google what it wants and it sends unlimited traffic.</p>
+        <ul class="platform-steps">
+          <li><span class="step-arrow">→</span><span><strong>Find Dream 100 Keywords:</strong> Build your dream keyword list, then find 9 long-tail variations for each. Total: 100 keywords to dominate.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Skyscraper Technique:</strong> Find content ranked #1 for your keyword, create a longer, better, more comprehensive version. Get all their backlinks pointing to you instead.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Linkable Asset (Letterman Lists):</strong> "21 Best Tools for X" or "57 Ways to Y" — content people naturally link to and Google loves to rank.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Guest Posting:</strong> 1 guest post/week on Dream 100 blogs. Get instant traffic from their readers AND quality backlinks for your skyscraper articles.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Buy on ranked pages:</strong> While waiting to rank organically, buy banner ads on pages already ranking for your dream keywords. Get their qualified traffic now.</span></li>
+        </ul>
+      </div>
+      <div class="platform-metrics fade-up">
+        <h4>Platform Benchmarks</h4>
+        <div class="metric-row">
+          <span class="metric-label">Skyscraper articles/month</span>
+          <span class="metric-value">1-2 <div class="metric-bar"><div class="metric-fill" style="width:30%;background:linear-gradient(90deg,#4285f4,#34a853);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Guest posts/week</span>
+          <span class="metric-value">1+ <div class="metric-bar"><div class="metric-fill" style="width:25%;background:linear-gradient(90deg,#4285f4,#34a853);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Skyscraper link outreach rate</span>
+          <span class="metric-value">11% <div class="metric-bar"><div class="metric-fill" style="width:22%;background:linear-gradient(90deg,#4285f4,#34a853);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Time to rank (competitive KW)</span>
+          <span class="metric-value">3-8 months <div class="metric-bar"><div class="metric-fill" style="width:70%;background:linear-gradient(90deg,#4285f4,#34a853);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">2nd-click visitor value vs 1st</span>
+          <span class="metric-value">3-5× higher <div class="metric-bar"><div class="metric-fill" style="width:85%;background:linear-gradient(90deg,#4285f4,#34a853);"></div></div></span>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(66,133,244,.1);border-radius:10px;font-size:.85rem;color:var(--text-dim);">
+          💡 <strong style="color:var(--text)">Secret Shortcut:</strong> People who click twice (Google → ranked page → your ad) are far more qualified than raw Google clicks. Target people on ranked pages for the best ROI of any traffic source.
+        </div>
+      </div>
+    </div>
+
+    <!-- YOUTUBE -->
+    <div class="platform-content" id="tab-youtube">
+      <div class="platform-info fade-up">
+        <h3>▶️ YouTube Traffic Secrets</h3>
+        <p>YouTube is the only platform where your content compounds over time. A video posted 6 years ago can still drive 10,000+ views per month today. Russell's affiliate Joe Marfoglio posted two videos that generated 2 million total views — years after upload.</p>
+        <ul class="platform-steps">
+          <li><span class="step-arrow">→</span><span><strong>Channel Focus Phrase:</strong> Build your entire channel around one root keyword like "how to shave" — then create 100+ videos with that root + variations.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>ABC Keyword Hack:</strong> Type your root keyword + letter A in YouTube search, collect suggestions. Repeat with B, C... = 500+ video ideas instantly.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Discoverable Videos:</strong> Hook (15 sec) → Trailer (5 sec) → Intro (15-30 sec) → Content (7-12 min) → CTA. Optimized to rank for keywords and convert viewers to subscribers.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Binge-Watch Playlists:</strong> Break long content into 5-10 min episodes in a playlist. Each video auto-plays the next, sending binge signals to YouTube's algorithm that boost your entire channel.</span></li>
+          <li><span class="step-arrow">→</span><span><strong>Buy on Dream 100 videos:</strong> Place pre-roll ads on any YouTube video or channel in your Dream 100 — directly in front of your ideal audience.</span></li>
+        </ul>
+      </div>
+      <div class="platform-metrics fade-up">
+        <h4>Platform Benchmarks</h4>
+        <div class="metric-row">
+          <span class="metric-label">Click-Through Rate target (CTR)</span>
+          <span class="metric-value">6-9%+ <div class="metric-bar"><div class="metric-fill" style="width:65%;background:linear-gradient(90deg,#ff0000,#ff6347);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">First-minute retention target</span>
+          <span class="metric-value">70%+ <div class="metric-bar"><div class="metric-fill" style="width:70%;background:linear-gradient(90deg,#ff0000,#ff6347);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Overall retention (party time)</span>
+          <span class="metric-value">50%+ <div class="metric-bar"><div class="metric-fill" style="width:50%;background:linear-gradient(90deg,#ff0000,#ff6347);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Videos per week</span>
+          <span class="metric-value">1-3 <div class="metric-bar"><div class="metric-fill" style="width:40%;background:linear-gradient(90deg,#ff0000,#ff6347);"></div></div></span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Playlist launch frequency</span>
+          <span class="metric-value">1×/month <div class="metric-bar"><div class="metric-fill" style="width:25%;background:linear-gradient(90deg,#ff0000,#ff6347);"></div></div></span>
+        </div>
+        <div style="margin-top:20px;padding:14px;background:rgba(255,0,0,.08);border-radius:10px;font-size:.85rem;color:var(--text-dim);">
+          💡 <strong style="color:var(--text)">The Compounding Secret:</strong> YouTube videos grow over time — unlike every other platform. Invest in YouTube once, benefit forever. Joe Marfoglio's two-video campaign still generated 10,361 views in a single month, six years later.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── METRICS / PROGRESS ── -->
+<section id="metrics">
+  <div class="container">
+    <div class="metrics-grid">
+      <div class="metric-block fade-up">
+        <div class="section-label">The Numbers Don't Lie</div>
+        <h3>What Mastering Traffic Actually Produces</h3>
+        <p>These aren't theoretical numbers. These are real results from real funnels, documented in real-time. Every metric here represents a predictable, repeatable system.</p>
+        <ul class="bar-list">
+          <li class="bar-item">
+            <div class="bar-meta"><span class="bar-name">Email list → Monthly revenue correlation</span><span class="bar-pct">$1/subscriber</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="72"></div></div>
+          </li>
+          <li class="bar-item">
+            <div class="bar-meta"><span class="bar-name">Sales that happen after 5th contact</span><span class="bar-pct">81%</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="81"></div></div>
+          </li>
+          <li class="bar-item">
+            <div class="bar-meta"><span class="bar-name">Organic reach vs paid — conversion quality</span><span class="bar-pct">Organic wins</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="88" style="background:linear-gradient(90deg,var(--green),#00a878);"></div></div>
+          </li>
+          <li class="bar-item">
+            <div class="bar-meta"><span class="bar-name">Follow-up funnel 30-day profit multiplier</span><span class="bar-pct">16.49×</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="95" style="background:linear-gradient(90deg,#a09bff,var(--accent));"></div></div>
+          </li>
+          <li class="bar-item">
+            <div class="bar-meta"><span class="bar-name">Podcast listeners more likely to be affluent</span><span class="bar-pct">45% more</span></div>
+            <div class="bar-track"><div class="bar-fill" data-width="65" style="background:linear-gradient(90deg,#ff9eb5,var(--accent2));"></div></div>
+          </li>
+        </ul>
+      </div>
+      <div class="metrics-visual fade-up">
+        <div class="mini-stat">
+          <div class="big gradient-text">$16.49</div>
+          <div class="lbl">Return per $1 of front-end revenue (30 days)</div>
+        </div>
+        <div class="mini-stat">
+          <div class="big gradient-text">71K+</div>
+          <div class="lbl">Expert Secrets copies — opening week</div>
+        </div>
+        <div class="mini-stat">
+          <div class="big gradient-text">$12M</div>
+          <div class="lbl">Annual revenue from one badge on ClickFunnels pages</div>
+        </div>
+        <div class="mini-stat">
+          <div class="big gradient-text">1.6M</div>
+          <div class="lbl">Sign-ups in 6 weeks — viral funnel with invite codes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GROWTH HACKS ── -->
+<section id="growth-hacks">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Section Three</div>
+      <h2>Growth Hacks That <span class="gradient-text">Changed Industries</span></h2>
+      <p>Small changes, massive results. The butterfly effect is real — these tiny tweaks to your funnel triggered compounding viral growth that turned startups into household names. Model them in your own funnels.</p>
+    </div>
+    <div class="hacks-grid">
+      <div class="hack-card fade-up">
+        <div class="hack-brand">Dropbox</div>
+        <h4>Storage for Referrals</h4>
+        <p>After sign-up, Dropbox offered extra free storage in exchange for sharing on Twitter and Facebook. Each new user grew their list for Dropbox.</p>
+        <div class="hack-result">Result: 500 million worldwide users</div>
+      </div>
+      <div class="hack-card fade-up fade-up-delay-1">
+        <div class="hack-brand">Hotmail</div>
+        <h4>The Signature Line Hack</h4>
+        <p>Added "P.S. I love you. Get your free email at Hotmail.com" to every single outgoing email from every user. Free, viral, unstoppable.</p>
+        <div class="hack-result">Result: 12 million users in 18 months</div>
+      </div>
+      <div class="hack-card fade-up fade-up-delay-2">
+        <div class="hack-brand">Facebook</div>
+        <h4>Contact Import Engine</h4>
+        <p>New users were invited to import contacts. Facebook cross-referenced existing members and emailed non-members with personal invitations from their friends.</p>
+        <div class="hack-result">Result: 2.7 billion users today</div>
+      </div>
+      <div class="hack-card fade-up">
+        <div class="hack-brand">Gmail</div>
+        <h4>Scarcity Invite System</h4>
+        <p>Launch access was invite-only. Each user got a limited number of invite codes to share. Scarcity made invites so valuable they sold on eBay for $100+ each.</p>
+        <div class="hack-result">Result: Instant cultural phenomenon</div>
+      </div>
+      <div class="hack-card fade-up fade-up-delay-1">
+        <div class="hack-brand">ClickFunnels</div>
+        <h4>The $12M Badge</h4>
+        <p>Every ClickFunnels page gets a "Made with ClickFunnels" badge encoded with the page owner's affiliate link. Default: on. Users could turn it off but most didn't.</p>
+        <div class="hack-result">Result: $12M+ annual recurring revenue</div>
+      </div>
+      <div class="hack-card fade-up fade-up-delay-2">
+        <div class="hack-brand">ClickFunnels</div>
+        <h4>Tell-a-Friend Webinar Growth</h4>
+        <p>After registering for a free webinar, users could refer 5 friends to unlock a free product. 20%+ of webinar sign-ups came from these referrals — free traffic.</p>
+        <div class="hack-result">Result: 20%+ of attendees = free</div>
+      </div>
+    </div>
+    <div style="margin-top:40px;background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:28px;text-align:center;">
+      <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:10px;">💡 The Growth Hacking Mindset</p>
+      <p style="font-size:1.05rem;font-weight:700;max-width:600px;margin:0 auto;">That one tiny badge we placed on member pages — almost as an afterthought — pays us over <span class="gradient-text">$12 million per year</span>. Start looking at your funnel as a game. The next million-dollar hack might be right in front of your face.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="quotes">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Industry Voices</div>
+      <h2>What Leaders Say About <span class="gradient-text">Controlling Traffic</span></h2>
+    </div>
+    <div class="quotes-grid">
+      <div class="quote-card fade-up">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">Controlling traffic is the holy grail for any profitable business. This book is the online formula to create the attention every product needs to thrive.</p>
+        <div class="quote-author">
+          <div class="author-avatar">DG</div>
+          <div>
+            <div class="author-name">Dean Graziosi</div>
+            <div class="author-role">Multiple NYT Bestselling Author • 13 Companies • $1B+ in sales</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card fade-up fade-up-delay-1">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">I already had the fire, but you gave me the framework I needed to grow. These concepts changed everything about how I build my business.</p>
+        <div class="quote-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#ff6584,#e91e63);">GW</div>
+          <div>
+            <div class="author-name">Garrett J. White</div>
+            <div class="author-role">Founder, Wake Up Warrior</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card fade-up fade-up-delay-2">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">We went old school — researching several hundred health and fitness influencers, sending them handwritten letters and free samples. Our mess became our message. The Dream 100 is exactly what we did.</p>
+        <div class="quote-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#00c896,#009688);">TB</div>
+          <div>
+            <div class="author-name">Tom Bilyeu</div>
+            <div class="author-role">Co-Founder, Quest Nutrition (Billion-Dollar Brand)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ROADMAP ── -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Your Action Plan</div>
+      <h2>The Step-by-Step <span class="gradient-text">Traffic Roadmap</span></h2>
+      <p>Here's exactly what to do, in what order. Don't skip steps. Don't try to do everything at once. Follow this sequence and you'll build a traffic foundation that no Google slap or Zanos snap can destroy.</p>
+    </div>
+    <div class="roadmap-line">
+      <div class="road-item fade-up">
+        <div class="road-dot">🎯</div>
+        <div class="road-text">
+          <h4>Step 1 — Define Your Dream Customer Avatar</h4>
+          <p>Write out 12+ phrases your customers say when moving away from pain. Write 12+ phrases they say when moving toward pleasure. These phrases reveal where they congregate and what hooks will grab them.</p>
+          <div class="road-tip">Time: 2-3 hours. This is the foundation everything else is built on. Do not skip this.</div>
+        </div>
+      </div>
+      <div class="road-item fade-up fade-up-delay-1">
+        <div class="road-dot">📋</div>
+        <div class="road-text">
+          <h4>Step 2 — Build Your Dream 100 List</h4>
+          <p>Pick one platform. Find 100+ influencers, podcasters, bloggers, and group owners who have already congregated your dream customers. Map both interest-based and search-based congregations.</p>
+          <div class="road-tip">Time: 3-4 hours. If Russell were your $100K consultant, this is what he'd have you do first. It's that important.</div>
+        </div>
+      </div>
+      <div class="road-item fade-up fade-up-delay-2">
+        <div class="road-dot">🌱</div>
+        <div class="road-text">
+          <h4>Step 3 — Start Digging Your Well</h4>
+          <p>Subscribe to their content. Comment daily on their posts. Buy their products. Message them personally. Provide value before asking for anything. Start this process 30-60 days before you need them to promote for you.</p>
+          <div class="road-tip">Time: 15 minutes, twice per day. This builds relationships worth millions over time.</div>
+        </div>
+      </div>
+      <div class="road-item fade-up">
+        <div class="road-dot">🎙️</div>
+        <div class="road-text">
+          <h4>Step 4 — Launch Your Show & Publish Daily</h4>
+          <p>Pick one channel (podcast, YouTube, blog, or social). Commit to publishing daily for 12 months minimum. Document your journey — don't create from scratch. Your first 45 episodes won't be good, and that's perfect — because no one is watching yet.</p>
+          <div class="road-tip">Key truth: If you publish every day for a year, you'll never have to worry about money again.</div>
+        </div>
+      </div>
+      <div class="road-item fade-up fade-up-delay-1">
+        <div class="road-dot">💰</div>
+        <div class="road-text">
+          <h4>Step 5 — Build a Break-Even Funnel</h4>
+          <p>Create a front-end offer with an order form bump + 2 OTOs. The goal is to get your average cart value to equal or exceed your cost per click. When you achieve this, you have an unlimited advertising budget.</p>
+          <div class="road-tip">Once break-even is achieved, scale spend as fast as possible. Spend $1, get $1 back, grow your list for free.</div>
+        </div>
+      </div>
+      <div class="road-item fade-up fade-up-delay-2">
+        <div class="road-dot">📧</div>
+        <div class="road-text">
+          <h4>Step 6 — Build Your Follow-Up Funnel</h4>
+          <p>Write Soap Opera Sequences for each product in your value ladder. Use Emotion (days 1-3) → Logic (days 4-5) → Fear/Urgency (days 6-7). Add retargeting ads to reach people who opened emails but didn't click. Multiply your profits 16x.</p>
+          <div class="road-tip">This is where 80% of your revenue is hiding. Every lead you've ever generated is money waiting to be unlocked.</div>
+        </div>
+      </div>
+      <div class="road-item fade-up">
+        <div class="road-dot">🚀</div>
+        <div class="road-text">
+          <h4>Step 7 — Scale with Your Affiliate Army</h4>
+          <p>Turn your Dream 100 into affiliates. Offer 40-50%+ commission. Create an affiliate center with done-for-you email swipes, banner ads, and social posts. Pay them as much as possible — they'll promote you over competitors who pay less.</p>
+          <div class="road-tip">One good affiliate who says yes can bring in more customers than 6 months of your own paid ads.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ACCORDION ── -->
+<section style="background:var(--deep);padding:80px 0;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Common Questions</div>
+      <h2>Everything You Need to <span class="gradient-text">Know Before You Start</span></h2>
+    </div>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-head">
+          Do I need an existing audience or list to start?
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            No. Russell Brunson started with zero followers and zero list. The Dream 100 strategy is specifically designed to leverage <em>other people's</em> existing audiences. You work your way in (by being on their show, guest posting, doing interviews) and buy your way in (by targeting their followers with ads). Your list grows as you divert traffic from their audiences into your own funnels. Start with a list of zero and a Dream 100 of 100 people — that's all you need.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head">
+          Does this work for local brick-and-mortar businesses?
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            Absolutely. The Dream 100 still applies — you just focus on local influencers instead of national ones. If you own a juice bar, your Dream 100 would be local gyms, chiropractors, nutritionists, health food stores, and personal trainers. Build relationships with them, work your way into their customer base, and run locally targeted ads to their followers on Facebook and Instagram. The entire framework scales down perfectly to local markets.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head">
+          What if Facebook or Google changes their algorithm again?
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            This is exactly why the strategies in Traffic Secrets are evergreen. Traffic is people — and people don't change. The Dream 100 strategy worked before the internet (Chet Holmes used it for print advertising), it works today, and it will work on platforms that haven't been invented yet. The secret is to never build on one platform. Instead, focus on converting all traffic into traffic you own (your email list). That way, when Facebook inevitably "snaps," your business survives.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head">
+          How much does it cost to start driving traffic?
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            You can start with $0 using earned traffic (working your way in through the Dream 100). Russell ran his business entirely on earned traffic for the first 8 years. If you want to add paid traffic, you can start testing with as little as $100 — but only put money in once you have a break-even funnel. Start with $100, see if the funnel returns $100+, and then scale from there. If it doesn't break even, fix the hook, story, or offer before spending more.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head">
+          What's the 60-day money-back guarantee?
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            The guarantee is simple: get results with this system, or receive 100% of your money back inside 60 days. No questions, no hassle. Given that the entry price is just $1, this is essentially a risk-free trial. You have 60 full days to implement the strategies, see results, and decide if this is right for your business.
+          </div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-head">
+          How much time does this realistically take each day?
+          <span class="acc-icon">+</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            The core daily work is about 30 minutes: 15 minutes twice per day to consume your Dream 100's content, comment on their posts, and dig your well. Beyond that, you'll need time to publish your show (which can be as little as a 10-minute car ride, like Russell's original Marketing in Your Car podcast). If you use the Conversation Domination master show approach, one weekly 90-minute live creates all your content for every platform simultaneously.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta-section">
+  <div class="cta-orb1"></div>
+  <div class="cta-orb2"></div>
+  <div class="cta-inner">
+    <span class="badge">⚡ Limited Offer — Act Now</span>
+    <h2>Get <span class="gradient-text">Empire</span> for Just $1 and Start Flooding Your Sites with FREE Traffic</h2>
+    <p>Join 100,000+ entrepreneurs who have discovered the evergreen strategy that survives every Google slap and Facebook snap — because it's built on traffic you own, not traffic you borrow.</p>
+    <div class="cta-features">
+      <div class="cta-feat"><span>✓</span> No Google or Facebook Ads needed</div>
+      <div class="cta-feat"><span>✓</span> No video creation required</div>
+      <div class="cta-feat"><span>✓</span> 30 minutes per day method</div>
+      <div class="cta-feat"><span>✓</span> Works for complete beginners</div>
+      <div class="cta-feat"><span>✓</span> 60-day money-back guarantee</div>
+    </div>
+    <a href="#" class="btn-primary" style="font-size:1.15rem;padding:20px 48px;">
+      🚀 Get Instant Access for $1 →
+    </a>
+    <p style="margin-top:20px;font-size:.85rem;color:var(--text-dim);">
+      Secure checkout • Instant access • 60-day guarantee • Cancel anytime
+    </p>
+    <div style="margin-top:40px;display:inline-flex;gap:12px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--card-border);border-radius:12px;padding:16px 24px;">
+      <span style="font-size:1.5rem;">🛡️</span>
+      <div style="text-align:left;">
+        <div style="font-weight:700;font-size:.95rem;">60-Day Money-Back Guarantee</div>
+        <div style="color:var(--text-dim);font-size:.82rem;">Get results with this system or receive 100% of your money back — no questions asked</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Traffic Secrets™</div>
+  <ul class="footer-links">
+    <li><a href="#concepts">Core Concepts</a></li>
+    <li><a href="#dream100">Dream 100</a></li>
+    <li><a href="#hso">Hook Story Offer</a></li>
+    <li><a href="#platforms">Platforms</a></li>
+    <li><a href="#funnel-math">Funnel Math</a></li>
+    <li><a href="#growth-hacks">Growth Hacks</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#cta-section">Get Access</a></li>
+  </ul>
+  <p>Based on Traffic Secrets by Russell Brunson. Educational resource. Results may vary.<br>
+  The strategies presented are evergreen principles derived from 15+ years of testing by industry leaders.</p>
+</footer>
+
+<script>
+// ── PLATFORM TABS ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+// ── ACCORDION ──
+document.querySelectorAll('.acc-head').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.acc-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // animate bars
+      entry.target.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
+        const w = bar.dataset.width;
+        setTimeout(() => bar.style.width = w + '%', 100);
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+document.querySelectorAll('#metrics').forEach(el => observer.observe(el));
+
+// Also trigger bars on metrics section directly
+const metricsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
+        setTimeout(() => bar.style.width = bar.dataset.width + '%', 200);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('#metrics').forEach(el => metricsObserver.observe(el));
+
+// ── COUNTER ANIMATIONS ──
+function animateCounter(el, target, duration = 2000) {
+  const start = performance.now();
+  const startVal = 0;
+  const format = n => {
+    if (n >= 100000) return (n/1000).toFixed(0) + 'K';
+    if (n >= 1000) return (n/1000).toFixed(0) + 'K';
+    return n.toFixed(0);
+  };
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(startVal + (target - startVal) * eased);
+    el.textContent = format(current);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = format(target);
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.count-up').forEach(el => {
+        animateCounter(el, parseInt(el.dataset.target));
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('#hero').forEach(el => counterObserver.observe(el));
+
+// ── SMOOTH NAV ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ── INITIAL BAR STATE ──
+document.querySelectorAll('.bar-fill[data-width]').forEach(bar => {
+  bar.style.width = '0';
+});
+</script>
+</body>
+</html>

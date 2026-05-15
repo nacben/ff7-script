@@ -1,0 +1,3370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Science in K-12 — An A to Z Handbook on Teaching Programming</title>
+<meta name="description" content="A comprehensive guide for teachers covering the concepts, practices, and pedagogies of teaching introductory programming in K-12 classrooms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf5ee;
+    --bg-card: #fffbf5;
+    --bg-dark: #1a1625;
+    --text: #1a1625;
+    --text-muted: #6b6480;
+    --text-light: #9a93ab;
+    --border: #e8dcc8;
+    --border-dark: #c9b896;
+
+    --concept: #5b4fd9;
+    --concept-bg: #efedfd;
+    --practice: #d94f7a;
+    --practice-bg: #fdedf3;
+    --pedagogy: #1d8a7e;
+    --pedagogy-bg: #e6f5f2;
+    --gold: #c9962a;
+    --gold-bg: #faf0d9;
+
+    --radius-sm: 8px;
+    --radius: 16px;
+    --radius-lg: 28px;
+
+    --max-width: 1320px;
+    --max-content: 880px;
+
+    --shadow-sm: 0 1px 2px rgba(26,22,37,.06);
+    --shadow: 0 8px 30px rgba(26,22,37,.08);
+    --shadow-lg: 0 24px 60px rgba(26,22,37,.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+  .content { max-width: var(--max-content); margin: 0 auto; padding: 0 24px; }
+
+  /* ============ NAVIGATION ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,245,238,.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--bg-dark); color: var(--bg);
+    border-radius: 8px;
+    font-family: 'Fraunces', serif; font-weight: 700;
+    font-style: italic; font-size: 1.1rem;
+  }
+  .nav-links { display: flex; gap: 28px; font-size: .92rem; color: var(--text-muted); }
+  .nav-links a { transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--bg-dark); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px;
+    font-size: .88rem; font-weight: 500;
+    transition: transform .2s, background .2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); }
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: 80px 0 60px;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-bg); color: #846220;
+    padding: 7px 16px; border-radius: 999px;
+    font-size: .82rem; font-weight: 500; letter-spacing: .02em;
+    margin-bottom: 28px;
+    border: 1px solid #ecdba2;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 0.98; letter-spacing: -0.035em;
+    font-weight: 400; margin: 0 0 24px;
+    max-width: 16ch;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+    color: var(--concept);
+  }
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 56ch; margin: 0 0 36px;
+    line-height: 1.55;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border-radius: 999px;
+    font-weight: 500; font-size: .95rem;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--bg-dark); color: var(--bg); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn-secondary {
+    background: var(--bg-card); color: var(--text);
+    border-color: var(--border-dark);
+  }
+  .btn-secondary:hover { background: var(--bg-dark); color: var(--bg); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* Hero alphabet visualization */
+  .hero-alphabet {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 6px;
+    max-width: 100%;
+  }
+  .hero-letter {
+    aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(.9rem, 2vw, 1.6rem);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    transition: all .3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .hero-letter:hover {
+    background: var(--bg-dark);
+    color: var(--bg);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow);
+    z-index: 2;
+  }
+  .hero-letter[data-type="concept"] { color: var(--concept); border-color: #d6d2f5; }
+  .hero-letter[data-type="practice"] { color: var(--practice); border-color: #f0c7d3; }
+  .hero-letter[data-type="pedagogy"] { color: var(--pedagogy); border-color: #bee0d8; }
+
+  @media (max-width: 720px) {
+    .hero-alphabet { grid-template-columns: repeat(7, 1fr); }
+  }
+
+  /* ============ SECTION TITLES ============ */
+  .section { padding: 96px 0; position: relative; }
+  .section-dark { background: var(--bg-dark); color: var(--bg); }
+  .section-dark .section-eyebrow { color: #d6c79e; }
+
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: .82rem; font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-eyebrow::before {
+    content: ''; width: 24px; height: 1px;
+    background: currentColor;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 1.05; letter-spacing: -0.025em;
+    font-weight: 400; margin: 0 0 24px;
+  }
+  .section-title em { font-style: italic; color: var(--concept); }
+  .section-dark .section-title em { color: #ebcf83; }
+  .section-lead {
+    font-size: 1.15rem; color: var(--text-muted);
+    max-width: 60ch; line-height: 1.6;
+  }
+  .section-dark .section-lead { color: #c9bea1; }
+
+  /* ============ WHY SECTION ============ */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 60px;
+  }
+  @media (max-width: 880px) {
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .why-stats {
+    display: grid; gap: 24px;
+  }
+  .stat-card {
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    transition: all .3s;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--border-dark);
+  }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem; font-weight: 500;
+    line-height: 1; letter-spacing: -0.02em;
+    color: var(--concept);
+  }
+  .stat-label {
+    color: var(--text-muted);
+    font-size: .95rem; margin-top: 8px;
+  }
+  .stat-detail {
+    margin-top: 14px; font-size: .9rem;
+    color: var(--text); line-height: 1.5;
+  }
+
+  .why-text h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    margin: 32px 0 12px;
+    line-height: 1.3;
+  }
+  .why-text h3:first-child { margin-top: 0; }
+  .why-text p {
+    color: var(--text-muted); margin: 0 0 16px;
+    line-height: 1.7;
+  }
+
+  /* ============ PILLARS ============ */
+  .pillars-section { background: var(--bg-dark); color: var(--bg); }
+  .pillars-section .section-title { color: var(--bg); }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) {
+    .pillars { grid-template-columns: 1fr; }
+  }
+  .pillar {
+    padding: 40px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius-lg);
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.16);
+  }
+  .pillar-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+  .pillar-concept .pillar-icon { background: var(--concept); color: white; }
+  .pillar-practice .pillar-icon { background: var(--practice); color: white; }
+  .pillar-pedagogy .pillar-icon { background: var(--pedagogy); color: white; }
+
+  .pillar-tag {
+    font-size: .78rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: #d6c79e; margin-bottom: 6px;
+  }
+  .pillar-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem; font-weight: 400;
+    margin: 0 0 14px;
+  }
+  .pillar-description {
+    color: #c9bea1; line-height: 1.6;
+    margin: 0 0 24px; font-size: .96rem;
+  }
+  .pillar-count {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: .85rem; color: #d6c79e;
+  }
+  .pillar-count strong {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem; color: var(--bg);
+    font-weight: 500;
+  }
+
+  /* ============ A-Z EXPLORER ============ */
+  .explorer-header {
+    display: flex; align-items: end; justify-content: space-between;
+    gap: 32px; flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .filter-group {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    font-size: .88rem; font-weight: 500;
+    color: var(--text-muted);
+    transition: all .2s;
+  }
+  .filter-btn:hover {
+    border-color: var(--border-dark);
+    color: var(--text);
+  }
+  .filter-btn.active {
+    background: var(--bg-dark);
+    border-color: var(--bg-dark);
+    color: var(--bg);
+  }
+  .filter-btn .count {
+    margin-left: 6px;
+    font-size: .78rem;
+    opacity: .7;
+  }
+
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .chapter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+    cursor: pointer;
+    transition: all .25s ease;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 200px;
+  }
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--border-dark);
+  }
+  .chapter-card:hover::before { opacity: 1; }
+  .chapter-card.hidden {
+    display: none;
+  }
+  .chapter-card[data-type="concept"] { color: var(--concept); }
+  .chapter-card[data-type="practice"] { color: var(--practice); }
+  .chapter-card[data-type="pedagogy"] { color: var(--pedagogy); }
+
+  .chapter-header {
+    display: flex; align-items: start; justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .chapter-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 3.4rem;
+    line-height: 0.8;
+    font-weight: 400;
+    color: currentColor;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+  }
+  .chapter-type {
+    font-size: .7rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px;
+    background: currentColor;
+    color: var(--bg-card);
+  }
+  .chapter-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem; line-height: 1.25;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0 0 10px;
+    flex-grow: 1;
+  }
+  .chapter-authors {
+    font-size: .82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-top: auto;
+  }
+
+  /* ============ KEY IDEAS / PEDAGOGIES ============ */
+  .ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) {
+    .ideas-grid { grid-template-columns: 1fr; }
+  }
+  .idea-card {
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all .3s;
+  }
+  .idea-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .idea-card::after {
+    content: '';
+    position: absolute;
+    top: -40%; right: -20%;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .08;
+    transition: transform .4s;
+  }
+  .idea-card:hover::after { transform: scale(1.2); }
+
+  .idea-letter {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.4rem;
+    background: var(--accent);
+    color: white;
+    margin-bottom: 20px;
+    position: relative; z-index: 2;
+  }
+  .idea-card[data-color="concept"] { --accent: var(--concept); }
+  .idea-card[data-color="practice"] { --accent: var(--practice); }
+  .idea-card[data-color="pedagogy"] { --accent: var(--pedagogy); }
+  .idea-card[data-color="gold"] { --accent: var(--gold); }
+
+  .idea-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.55rem; font-weight: 500;
+    margin: 0 0 14px;
+    line-height: 1.25;
+    position: relative; z-index: 2;
+  }
+  .idea-text {
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0 0 18px;
+    position: relative; z-index: 2;
+    font-size: .98rem;
+  }
+  .idea-meta {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: .82rem; color: var(--text-muted);
+    position: relative; z-index: 2;
+  }
+
+  /* ============ PEDAGOGY DEEP DIVE ============ */
+  .pedagogy-list {
+    display: grid; gap: 14px;
+    margin-top: 56px;
+  }
+  .pedagogy-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 28px;
+    align-items: center;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all .25s;
+  }
+  .pedagogy-row:hover {
+    transform: translateX(6px);
+    border-color: var(--pedagogy);
+    background: var(--pedagogy-bg);
+  }
+  .pedagogy-acronym {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem; font-weight: 500;
+    color: var(--pedagogy);
+    font-style: italic;
+    line-height: 1;
+  }
+  .pedagogy-info h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem; font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .pedagogy-info p {
+    margin: 0; color: var(--text-muted);
+    font-size: .93rem; line-height: 1.5;
+  }
+  .pedagogy-chapter {
+    font-size: .78rem; font-weight: 500;
+    padding: 6px 12px;
+    background: var(--pedagogy-bg);
+    color: var(--pedagogy);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .pedagogy-row { grid-template-columns: 60px 1fr; gap: 16px; padding: 20px; }
+    .pedagogy-chapter { grid-column: 1 / -1; justify-self: start; }
+  }
+
+  /* ============ LEARNING GOALS / FRAMEWORK ============ */
+  .framework {
+    background: var(--bg-dark);
+    color: var(--bg);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    margin: 80px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) {
+    .framework { padding: 36px 24px; }
+  }
+  .framework-header {
+    text-align: center; margin-bottom: 48px;
+  }
+  .framework-header h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .framework-header p {
+    color: #c9bea1;
+    max-width: 50ch; margin: 0 auto;
+  }
+  .domains {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 720px) {
+    .domains { grid-template-columns: 1fr; }
+  }
+  .domain {
+    padding: 32px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .domain-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem; font-weight: 500;
+    border: 2px solid currentColor;
+  }
+  .domain-cognitive { color: #a8a0f7; }
+  .domain-interpersonal { color: #f7a0c3; }
+  .domain-intrapersonal { color: #a0e8d4; }
+  .domain h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem; font-weight: 500;
+    margin: 0 0 12px;
+    color: var(--bg);
+  }
+  .domain p {
+    color: #c9bea1; margin: 0;
+    font-size: .9rem; line-height: 1.5;
+  }
+
+  /* ============ QUOTES / WISDOM ============ */
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) {
+    .quotes { grid-template-columns: 1fr; }
+  }
+  .quote {
+    padding: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    transition: all .3s;
+  }
+  .quote:hover {
+    background: var(--bg-dark);
+    color: var(--bg);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .quote:hover .quote-text { color: var(--bg); }
+  .quote:hover .quote-author { color: #d6c79e; }
+  .quote:hover .quote-mark { color: rgba(255,255,255,.15); }
+
+  .quote-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 6rem; line-height: 0.7;
+    font-weight: 400;
+    color: var(--border-dark);
+    margin-bottom: -20px;
+    transition: color .3s;
+    font-style: italic;
+  }
+  .quote-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem; line-height: 1.45;
+    font-weight: 400;
+    color: var(--text);
+    margin: 0 0 24px;
+    transition: color .3s;
+  }
+  .quote-author {
+    font-size: .85rem; color: var(--text-muted);
+    font-weight: 500; letter-spacing: .02em;
+    transition: color .3s;
+  }
+
+  /* ============ EDITOR SECTION ============ */
+  .editor-section {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 880px) {
+    .editor-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .editor-portrait {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--concept-bg), var(--gold-bg));
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .editor-portrait::before {
+    content: 'SG';
+    font-family: 'Fraunces', serif;
+    font-size: 8rem; font-weight: 400;
+    font-style: italic;
+    color: var(--concept);
+    opacity: .9;
+  }
+  .editor-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: calc(var(--radius-lg) - 12px);
+    pointer-events: none;
+  }
+  .editor-info h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    font-weight: 400; margin: 0 0 16px;
+  }
+  .editor-role {
+    color: var(--concept); font-weight: 500;
+    font-size: .98rem; margin-bottom: 24px;
+  }
+  .editor-info p {
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0 0 16px;
+  }
+  .editor-credentials {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .credential strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    color: var(--text);
+  }
+  .credential span {
+    font-size: .82rem; color: var(--text-muted);
+  }
+
+  /* ============ HOW TO USE ============ */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 720px) {
+    .audience-grid { grid-template-columns: 1fr; }
+  }
+  .audience-card {
+    padding: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    transition: all .3s;
+  }
+  .audience-card:hover {
+    border-color: var(--text);
+    box-shadow: var(--shadow);
+  }
+  .audience-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    margin: 0 0 14px;
+  }
+  .audience-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .audience-card .tip {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    font-size: .9rem;
+    color: #6b4d10;
+    line-height: 1.5;
+  }
+  .audience-card .tip strong {
+    color: #523a06;
+  }
+
+  /* ============ CHALLENGES SECTION ============ */
+  .challenges {
+    display: grid; gap: 14px;
+    margin-top: 56px;
+  }
+  .challenge {
+    display: flex; gap: 24px;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    align-items: start;
+    transition: all .25s;
+  }
+  .challenge:hover {
+    transform: translateX(6px);
+    border-color: var(--practice);
+  }
+  .challenge-num {
+    flex-shrink: 0;
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem; font-weight: 500;
+    color: var(--practice);
+    line-height: 1;
+    min-width: 44px;
+    font-style: italic;
+  }
+  .challenge h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem; font-weight: 500;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  .challenge p {
+    margin: 0; color: var(--text-muted);
+    line-height: 1.6;
+    font-size: .96rem;
+  }
+
+  /* ============ DETAIL MODAL ============ */
+  .modal {
+    position: fixed; inset: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26,22,37,.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+    padding: 24px;
+  }
+  .modal.open {
+    opacity: 1; pointer-events: auto;
+  }
+  .modal-content {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px;
+    position: relative;
+    transform: translateY(20px) scale(.97);
+    transition: transform .3s ease;
+  }
+  .modal.open .modal-content { transform: translateY(0) scale(1); }
+  @media (max-width: 720px) {
+    .modal-content { padding: 32px 24px; }
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: var(--text-muted);
+    transition: all .2s;
+  }
+  .modal-close:hover {
+    background: var(--bg-dark); color: var(--bg);
+  }
+  .modal-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+    margin-bottom: 8px;
+  }
+  .modal-type {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem; font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+  .modal-authors {
+    font-size: .92rem;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-body {
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .modal-body p {
+    margin: 0 0 16px;
+  }
+  .modal-body .key-quote {
+    padding: 20px 24px;
+    background: var(--gold-bg);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: #5a4310;
+    margin: 24px 0;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    background: var(--bg-dark);
+    color: var(--bg);
+    padding: 80px 0 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  .footer-brand h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem; font-weight: 400;
+    margin: 0 0 14px;
+    line-height: 1.2;
+  }
+  .footer-brand p {
+    color: #c9bea1;
+    margin: 0;
+    max-width: 36ch;
+    line-height: 1.6;
+  }
+  .footer h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    margin: 0 0 18px;
+    color: var(--bg);
+    font-weight: 500;
+  }
+  .footer-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 10px;
+  }
+  .footer-list li {
+    color: #c9bea1;
+    font-size: .92rem;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 32px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: .85rem;
+    color: #9a8e6f;
+  }
+  .footer-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #ebcf83;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal[data-delay="1"] { transition-delay: .1s; }
+  .reveal[data-delay="2"] { transition-delay: .2s; }
+  .reveal[data-delay="3"] { transition-delay: .3s; }
+  .reveal[data-delay="4"] { transition-delay: .4s; }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-letter {
+    animation: floatIn .5s ease both;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ============ PRINCIPLES (numbered cards) ============ */
+  :root {
+    --warn: #d04a36;
+    --warn-bg: #fcebe7;
+    --good: #1d8a7e;
+    --good-bg: #e6f5f2;
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) { .principles { grid-template-columns: 1fr; } }
+  .principle {
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    transition: all .3s;
+  }
+  .principle:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--border-dark);
+  }
+  .principle-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+    font-size: 3.4rem;
+    line-height: 1; font-weight: 400;
+    color: var(--concept);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .principle h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem; font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+  .principle-lede {
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0 0 18px;
+    font-size: .98rem;
+  }
+  .principle-practice {
+    padding: 16px 18px;
+    background: var(--pedagogy-bg);
+    border-left: 3px solid var(--pedagogy);
+    border-radius: 8px;
+    margin-top: 18px;
+  }
+  .principle-practice strong {
+    display: block;
+    font-size: .78rem; font-weight: 600;
+    color: var(--pedagogy);
+    letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .principle-practice ul {
+    margin: 0; padding: 0 0 0 18px;
+    color: var(--text);
+    font-size: .92rem; line-height: 1.55;
+  }
+  .principle-practice li { margin-bottom: 4px; }
+
+  /* ============ LESSON ANATOMY (phase timeline) ============ */
+  .lesson-anatomy {
+    margin-top: 56px;
+    display: grid;
+    gap: 14px;
+  }
+  .phase {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 32px;
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    transition: all .3s;
+  }
+  .phase:hover {
+    border-color: var(--border-dark);
+    transform: translateX(6px);
+  }
+  @media (max-width: 720px) {
+    .phase { grid-template-columns: 1fr; gap: 16px; padding: 24px; }
+  }
+  .phase-meta {
+    border-right: 1px solid var(--border);
+    padding-right: 32px;
+  }
+  @media (max-width: 720px) {
+    .phase-meta { border-right: 0; padding-right: 0; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  }
+  .phase-time {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem; font-weight: 500;
+    color: var(--concept);
+    line-height: 1; margin-bottom: 4px;
+    font-style: italic;
+  }
+  .phase-label {
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .phase-body h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem; font-weight: 500;
+    margin: 0 0 10px; line-height: 1.25;
+  }
+  .phase-body p {
+    margin: 0 0 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: .96rem;
+  }
+  .phase-do, .phase-avoid {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: .88rem;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  .phase-do {
+    background: var(--good-bg);
+    color: #0e574e;
+    border-left: 3px solid var(--good);
+  }
+  .phase-avoid {
+    background: var(--warn-bg);
+    color: #8a2c1c;
+    border-left: 3px solid var(--warn);
+  }
+  .phase-do strong, .phase-avoid strong {
+    display: block;
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  /* ============ LESSON WALKTHROUGH ============ */
+  .walkthrough {
+    margin-top: 56px;
+    background: var(--bg-dark);
+    color: var(--bg);
+    border-radius: var(--radius-lg);
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .walkthrough { padding: 32px 24px; } }
+  .walkthrough-header {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .walkthrough-eyebrow {
+    font-size: .78rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: #d6c79e;
+    margin-bottom: 14px;
+  }
+  .walkthrough-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin: 0 0 20px;
+    line-height: 1.15;
+  }
+  .walkthrough-meta {
+    display: flex; gap: 28px; flex-wrap: wrap;
+    font-size: .9rem;
+  }
+  .walkthrough-meta span {
+    color: #c9bea1;
+  }
+  .walkthrough-meta strong {
+    color: var(--bg);
+    margin-left: 6px;
+  }
+  .walkthrough-goals {
+    margin: 24px 0 0;
+    padding: 20px 24px;
+    background: rgba(255,255,255,.04);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .walkthrough-goals strong {
+    display: block;
+    font-size: .78rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: #ebcf83;
+    margin-bottom: 10px;
+  }
+  .walkthrough-goals ul {
+    margin: 0; padding-left: 20px;
+    color: #d6c79e;
+    line-height: 1.7;
+    font-size: .94rem;
+  }
+  .wt-phases {
+    display: grid; gap: 18px;
+  }
+  .wt-phase {
+    padding: 24px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    transition: all .25s;
+  }
+  .wt-phase:hover {
+    background: rgba(255,255,255,.06);
+    transform: translateX(4px);
+  }
+  .wt-phase-header {
+    display: flex; align-items: baseline;
+    gap: 16px; flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .wt-phase-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem; font-weight: 500;
+    color: #ebcf83;
+    font-style: italic;
+    line-height: 1;
+  }
+  .wt-phase-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem; font-weight: 500;
+    color: var(--bg);
+    flex-grow: 1;
+  }
+  .wt-phase-time {
+    font-size: .82rem;
+    color: #c9bea1;
+    padding: 4px 12px;
+    background: rgba(255,255,255,.06);
+    border-radius: 999px;
+  }
+  .wt-phase-body {
+    color: #d6c79e;
+    line-height: 1.65;
+    font-size: .94rem;
+  }
+  .wt-phase-body p { margin: 0 0 12px; }
+  .wt-phase-body p:last-child { margin-bottom: 0; }
+  .wt-phase-body strong { color: var(--bg); font-weight: 500; }
+  .wt-phase-body code {
+    background: rgba(255,255,255,.08);
+    color: #ffd9a8;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .85em;
+  }
+
+  /* ============ SCAFFOLDING MATRIX ============ */
+  .matrix {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 880px) { .matrix { grid-template-columns: 1fr; } }
+  .matrix-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all .25s;
+  }
+  .matrix-row:hover {
+    border-color: var(--concept);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+  .matrix-need {
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.4;
+  }
+  .matrix-need strong {
+    display: block;
+    color: var(--text);
+    font-size: .78rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .matrix-tech {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--concept);
+    line-height: 1.3;
+  }
+  .matrix-tech small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: .82rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+
+  /* ============ MISCONCEPTION DESIGN PATTERNS ============ */
+  .design-patterns {
+    margin-top: 56px;
+    display: grid;
+    gap: 18px;
+  }
+  .pattern {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all .25s;
+  }
+  .pattern:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--border-dark);
+  }
+  .pattern-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    background: linear-gradient(to right, var(--concept-bg), transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .pattern-concept {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--concept);
+  }
+  .pattern-arrow {
+    color: var(--text-muted);
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+  }
+  .pattern-bug {
+    color: var(--practice);
+    font-size: .95rem;
+    font-style: italic;
+  }
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 720px) { .pattern-grid { grid-template-columns: 1fr; } }
+  .pattern-step {
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .pattern-step:last-child { border-right: 0; }
+  @media (max-width: 720px) {
+    .pattern-step { border-right: 0; border-bottom: 1px solid var(--border); }
+    .pattern-step:last-child { border-bottom: 0; }
+  }
+  .pattern-step-label {
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .pattern-step p {
+    margin: 0;
+    color: var(--text);
+    font-size: .92rem;
+    line-height: 1.55;
+  }
+  @media (max-width: 720px) {
+    .pattern-header { grid-template-columns: 1fr; gap: 8px; }
+    .pattern-arrow { display: none; }
+  }
+
+  /* ============ RED FLAGS ============ */
+  .redflags {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) { .redflags { grid-template-columns: 1fr; } }
+  .redflag {
+    display: flex;
+    gap: 18px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all .25s;
+  }
+  .redflag:hover {
+    background: var(--warn-bg);
+    border-color: var(--warn);
+    transform: translateX(4px);
+  }
+  .redflag-x {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--warn-bg);
+    color: var(--warn);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.2rem;
+    transition: all .25s;
+  }
+  .redflag:hover .redflag-x {
+    background: var(--warn);
+    color: white;
+  }
+  .redflag-body h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem; font-weight: 500;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .redflag-body p {
+    margin: 0; color: var(--text-muted);
+    font-size: .9rem; line-height: 1.55;
+  }
+
+  /* ============ EQUITY BY DESIGN ============ */
+  .equity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) { .equity-grid { grid-template-columns: 1fr; } }
+  .equity-card {
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: all .3s;
+    position: relative;
+  }
+  .equity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .equity-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: var(--practice);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .equity-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem; font-weight: 500;
+    margin: 0 0 12px;
+    line-height: 1.25;
+  }
+  .equity-card > p {
+    color: var(--text-muted);
+    margin: 0 0 16px;
+    line-height: 1.6;
+    font-size: .96rem;
+  }
+  .equity-card ul {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .equity-card li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: .9rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .equity-card li::before {
+    content: '→';
+    position: absolute;
+    left: 0; top: 8px;
+    color: var(--practice);
+    font-weight: 500;
+  }
+
+  /* ============ MODAL ENHANCEMENTS ============ */
+  .modal-body h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 22px 0 8px;
+    line-height: 1.3;
+  }
+  .modal-body h4:first-child { margin-top: 0; }
+  .modal-body ul {
+    padding-left: 22px;
+    margin: 0 0 16px;
+  }
+  .modal-body li {
+    margin-bottom: 6px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .modal-section {
+    margin: 18px 0;
+    padding: 16px 18px;
+    border-radius: 8px;
+    font-size: .92rem;
+    line-height: 1.55;
+  }
+  .modal-section.misconception {
+    background: var(--warn-bg);
+    border-left: 3px solid var(--warn);
+  }
+  .modal-section.strategy {
+    background: var(--good-bg);
+    border-left: 3px solid var(--good);
+  }
+  .modal-section.activity {
+    background: var(--concept-bg);
+    border-left: 3px solid var(--concept);
+  }
+  .modal-section strong {
+    display: block;
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .modal-section.misconception strong { color: var(--warn); }
+  .modal-section.strategy strong { color: var(--good); }
+  .modal-section.activity strong { color: var(--concept); }
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">A</span>
+      <span>K–12 Computer Science</span>
+    </a>
+    <div class="nav-links">
+      <a href="#principles">Principles</a>
+      <a href="#anatomy">Lesson anatomy</a>
+      <a href="#walkthrough">Walkthrough</a>
+      <a href="#matrix">Scaffolding</a>
+      <a href="#patterns">Design patterns</a>
+      <a href="#chapters">A–Z</a>
+    </div>
+    <a href="#principles" class="nav-cta">Start with the principles →</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-tag">A field guide for K–12 curriculum writers & teachers</div>
+    <h1 class="hero-title">
+      Designing <em>computer science</em> curriculum that actually works.
+    </h1>
+    <p class="hero-subtitle">
+      Not just <em>what</em> to teach, but <em>how</em> students learn it — and where they get stuck. A practical synthesis of research and classroom practice from 40+ leading CS educators, organized as 26 chapters from A to Z, plus the design principles, lesson anatomy, and antipatterns every curriculum writer needs.
+    </p>
+    <div class="hero-actions">
+      <a href="#principles" class="btn btn-primary">
+        8 design principles
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#walkthrough" class="btn btn-secondary">See a lesson walkthrough</a>
+    </div>
+
+    <div class="hero-alphabet" id="heroAlphabet" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / WHY ============ -->
+<section class="section" id="about">
+  <div class="content">
+    <div class="section-eyebrow">The challenge</div>
+    <h2 class="section-title">Coding is reaching schools at <em>unprecedented scale</em>. But who teaches the teachers?</h2>
+    <p class="section-lead">Learning to code is the cool new thing in K–12 schools worldwide. There's enthusiasm among children and parents — and widespread anxiety among schools, teachers, and administrators about how to actually teach it well.</p>
+  </div>
+
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-stats">
+        <div class="stat-card reveal">
+          <div class="stat-number">26</div>
+          <div class="stat-label">Chapters, alphabetically organized</div>
+          <p class="stat-detail">From <strong>A</strong>lgorithms to <strong>Z</strong>estful Learning, each chapter tackles a foundational concept, practice, or pedagogy in teaching introductory programming.</p>
+        </div>
+        <div class="stat-card reveal" data-delay="1">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Contributing teachers & researchers</div>
+          <p class="stat-detail">Authors include full-time classroom teachers, teacher trainers, and researchers from the US, UK, Canada, Finland, Switzerland, Germany, and Australia.</p>
+        </div>
+        <div class="stat-card reveal" data-delay="2">
+          <div class="stat-number">K–12</div>
+          <div class="stat-label">Every grade band, every context</div>
+          <p class="stat-detail">Ideas transcend programming languages and geographical boundaries — applicable in elementary, middle, and high school classrooms worldwide.</p>
+        </div>
+      </div>
+
+      <div class="why-text reveal" data-delay="1">
+        <h3>The “best of times, worst of times”</h3>
+        <p>On one hand, excitement surrounds the introduction of programming to students at all grade levels. On the other, there's widespread confusion about teacher preparation: <em>What should be taught? How should it be taught? What do students typically struggle with? How can we support all learners?</em></p>
+
+        <h3>Beyond access to a curriculum</h3>
+        <p>Teaching is not just about having a curriculum — it's about knowing <strong>what</strong> needs to be taught and <strong>how</strong> it should be taught. This combination is called <em>pedagogical content knowledge</em> (PCK), and it's exactly what this book aims to build.</p>
+
+        <h3>For every curious teacher</h3>
+        <p>Whether you're preparing to teach programming for the first time, or you've been teaching it for years, this guide offers an enduring foundation in both <strong>content</strong> and <strong>pedagogy</strong> — the two pillars of effective instruction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THREE PILLARS ============ -->
+<section class="section pillars-section" id="pillars">
+  <div class="container">
+    <div class="section-eyebrow">A unique approach</div>
+    <h2 class="section-title">Three intertwined pillars of <em>teaching programming</em>.</h2>
+    <p class="section-lead">The book is organized around 14 chapters on <strong>what</strong> to teach (concepts and practices) and 12 chapters on <strong>how</strong> to teach (pedagogy) — drawing on 30+ years of research in CS education and the learning sciences.</p>
+
+    <div class="pillars">
+      <div class="pillar pillar-concept">
+        <div class="pillar-icon">C</div>
+        <div class="pillar-tag">10 chapters</div>
+        <h3 class="pillar-title">Concepts</h3>
+        <p class="pillar-description">The semantics of creating programs. Foundational ideas like algorithms, variables, conditionals, loops, recursion, data structures, events, modularity, expressions, and physical computing.</p>
+        <div class="pillar-count">
+          <strong>A · D · E · J · M · O · R · S · V · X</strong>
+        </div>
+      </div>
+      <div class="pillar pillar-practice">
+        <div class="pillar-icon">P</div>
+        <div class="pillar-tag">4 chapters</div>
+        <h3 class="pillar-title">Practices</h3>
+        <p class="pillar-description">The pragmatics and strategies students learn hand-in-hand with concepts: planning before programming, setting learning goals, testing and debugging, and developing good habits of programming.</p>
+        <div class="pillar-count">
+          <strong>B · K · T · Y</strong>
+        </div>
+      </div>
+      <div class="pillar pillar-pedagogy">
+        <div class="pillar-icon">T</div>
+        <div class="pillar-tag">12 chapters</div>
+        <h3 class="pillar-title">Pedagogies</h3>
+        <p class="pillar-description">How to teach. From creative coding and culturally relevant pedagogy to formative feedback, project-based learning, pair programming, scaffolding, and zestful learning.</p>
+        <div class="pillar-count">
+          <strong>C · F · G · H · I · L · N · P · Q · U · W · Z</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCAFFOLDING MATRIX ============ -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="matrix">
+  <div class="content">
+    <div class="section-eyebrow">Choosing the right scaffold</div>
+    <h2 class="section-title">The scaffolding <em>decision matrix</em>.</h2>
+    <p class="section-lead">There is no single best pedagogy — only the best pedagogy for <em>this</em> concept, with <em>these</em> students, at <em>this</em> point in their development. Match the learner's need to the technique that fits it. Then plan to fade the scaffold as competence grows.</p>
+  </div>
+  <div class="container">
+    <div class="matrix">
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students are meeting a brand-new concept for the first time and have no working mental model yet.
+        </div>
+        <div class="matrix-tech">
+          Unplugged + worked example
+          <small>Build the concept in everyday language. Then a fully solved code example with subgoal labels.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students can describe the concept but can't yet read code that uses it accurately.
+        </div>
+        <div class="matrix-tech">
+          PRIMM
+          <small>Predict → Run → Investigate → Modify → Make. The predict-first habit forces engagement before guess-and-check.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students can read code and trace it, but need practice applying the concept in new contexts.
+        </div>
+        <div class="matrix-tech">
+          Use-Modify-Create
+          <small>Hand them a working program. Modify it. Then create a similar one of their own. Ownership shifts gradually.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students are tackling a multi-step Scratch project and need a roadmap for engaging with example code.
+        </div>
+        <div class="matrix-tech">
+          TIPPSEE
+          <small>Title, Instructions, Purpose, Play, Sprites, Explore, Extend. A reading-comprehension lens for example projects.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          The problem is too big to hold in one head. Cognitive load is choking student progress.
+        </div>
+        <div class="matrix-tech">
+          Decomposition + checklists
+          <small>Break the problem into named subgoals. Provide a checklist. Mark complete as each subgoal lands.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          A student is stuck and frustrated. Their confidence is going faster than their understanding.
+        </div>
+        <div class="matrix-tech">
+          Pair programming
+          <small>Pair them with a peer. Driver/navigator roles. Talking through the problem aloud is half the cure.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students have learned a construct but their code is shallow — they used it once, mechanically.
+        </div>
+        <div class="matrix-tech">
+          Creative coding within constraints
+          <small>An open project with required constructs. Students bring themselves in; the constraints ensure depth of practice.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students need to see the concept across <em>multiple</em> contexts to abstract it.
+        </div>
+        <div class="matrix-tech">
+          Analogous representations
+          <small>Show the same algorithm in pseudocode, Scratch, and Python. Have students see the structure beneath the syntax.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students with diverse abilities and prior preparation in the same classroom.
+        </div>
+        <div class="matrix-tech">
+          Universal Design for Learning
+          <small>Multiple means of engagement, representation, and expression. Multiple entry points to the same project.</small>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div class="matrix-need">
+          <strong>The need</strong>
+          Students are debugging and don't know where to start.
+        </div>
+        <div class="matrix-tech">
+          Debugging detective questions
+          <small>"What did you predict? What happened? Where did they differ?" A scripted self-questioning protocol.</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ A-Z EXPLORER ============ -->
+<section class="section" id="chapters">
+  <div class="container">
+    <div class="explorer-header">
+      <div>
+        <div class="section-eyebrow">The chapters</div>
+        <h2 class="section-title">The complete <em>A to Z</em>.</h2>
+      </div>
+    </div>
+
+    <div class="filter-group" role="tablist" aria-label="Filter chapters by type">
+      <button class="filter-btn active" data-filter="all" role="tab">
+        All chapters <span class="count">26</span>
+      </button>
+      <button class="filter-btn" data-filter="concept" role="tab">
+        Concepts <span class="count">10</span>
+      </button>
+      <button class="filter-btn" data-filter="practice" role="tab">
+        Practices <span class="count">4</span>
+      </button>
+      <button class="filter-btn" data-filter="pedagogy" role="tab">
+        Pedagogies <span class="count">12</span>
+      </button>
+    </div>
+
+    <div class="chapter-grid" id="chapterGrid"></div>
+  </div>
+</section>
+
+<!-- ============ KEY PEDAGOGIES ============ -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="pedagogies">
+  <div class="content">
+    <div class="section-eyebrow">Research-backed pedagogies</div>
+    <h2 class="section-title">Scaffolding frameworks that <em>actually work</em>.</h2>
+    <p class="section-lead">Decades of research and classroom practice have produced powerful, well-tested approaches for teaching programming. These pedagogies appear throughout the book.</p>
+  </div>
+
+  <div class="container">
+    <div class="pedagogy-list">
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">UMC</div>
+        <div class="pedagogy-info">
+          <h4>Use → Modify → Create</h4>
+          <p>A learning progression where students first explore an existing program, then modify it bit by bit, before creating their own original work. Ownership gradually shifts from teacher to learner.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">PRIMM</div>
+        <div class="pedagogy-info">
+          <h4>Predict · Run · Investigate · Modify · Make</h4>
+          <p>A carefully sequenced approach where students first predict what code does (without running it), then explore, modify, and finally create their own. Builds code reading habits and conceptual understanding.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">TIPPSEE</div>
+        <div class="pedagogy-info">
+          <h4>Title · Instructions · Purpose · Play · Sprites · Explore · Extend</h4>
+          <p>A reading-comprehension–inspired strategy for learning through example projects in Scratch. Adapted from Use-Modify-Create to give students a clear roadmap for exploration.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">UDL</div>
+        <div class="pedagogy-info">
+          <h4>Universal Design for Learning</h4>
+          <p>Plan instruction proactively for the widest range of learners. Provide multiple means of engagement, representation, and expression — maximizing student strengths while reducing instructional barriers.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 21</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">CRP</div>
+        <div class="pedagogy-info">
+          <h4>Culturally Relevant Pedagogy</h4>
+          <p>Connect computing to students' cultural assets and lived experiences. Empower learners to become change agents and build authentic relationships with families and communities.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 12</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">PP</div>
+        <div class="pedagogy-info">
+          <h4>Pair Programming</h4>
+          <p>Two students share one computer, trading roles as "driver" and "navigator." Builds collaboration, communication, and code quality — and helps every student feel they belong in CS.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 16</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">WE</div>
+        <div class="pedagogy-info">
+          <h4>Worked Examples & Subgoal Labels</h4>
+          <p>Present a problem, a complete solution, and a clear explanation. Group steps into named subgoals to reduce cognitive load and help students see the structure of a solution before writing their own.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">SW</div>
+        <div class="pedagogy-info">
+          <h4>Semantic Waves</h4>
+          <p>Move learners between everyday language and abstract technical concepts. Unpack a concept using metaphors and unplugged activities, then repack it back into precise programming vocabulary.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 PRINCIPLES ============ -->
+<section class="section" id="principles">
+  <div class="content">
+    <div class="section-eyebrow">For curriculum writers</div>
+    <h2 class="section-title">8 principles for designing CS curriculum that <em>actually works</em>.</h2>
+    <p class="section-lead">A curriculum is not a list of topics — it is a sequence of <em>experiences</em> designed to move students from misconception to mastery. These are the design principles that distinguish curricula that produce real understanding from curricula that produce running code with brittle foundations.</p>
+  </div>
+  <div class="container">
+    <div class="principles">
+
+      <div class="principle">
+        <span class="principle-num">01</span>
+        <h3>Design <em>against</em> misconceptions, not just toward concepts.</h3>
+        <p class="principle-lede">Every concept arrives pre-loaded with wrong intuitions students bring from everyday speech and mathematics. A curriculum that only teaches "what variables are" leaves those intuitions intact. The most effective curricula anticipate the misconception, surface it deliberately, then design specifically to replace it.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Open the variables unit with an unplugged Story Variables activity that surfaces what students <em>already</em> think about quantities that change.</li>
+            <li>Choose the whiteboard metaphor (one value, erased before write) over the box metaphor that suggests storing multiple things.</li>
+            <li>Include at least one multiple-choice item that <em>traps</em> the known misconception — your students' answers tell you whether the lesson worked.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">02</span>
+        <h3>Spend more time reading code than writing it.</h3>
+        <p class="principle-lede">Research consistently shows that code-reading ability correlates strongly with code-writing ability. Most beginner curricula reverse this and rush students into writing. The strongest pedagogies — PRIMM, Use-Modify-Create, worked examples — all begin with reading and predicting.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Open every new concept with an example program that students <em>predict</em> the output of before running it.</li>
+            <li>Make "explain what this code does" a graded skill, not a side activity — code tracing is foundational.</li>
+            <li>Build in Parsons problems (rearrange given code) before free coding to let students focus on structure without syntax overload.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">03</span>
+        <h3>Plan across four levels of abstraction.</h3>
+        <p class="principle-lede">A program exists at four levels: the <strong>Problem</strong> (what's the idea?), the <strong>Algorithm</strong> (the plan in plain language), the <strong>Program</strong> (the code), and the <strong>Execution</strong> (what actually happens when it runs). Students who can only think in code produce shallow understanding and brittle debugging skills.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Every project planning template has separate sections for problem statement, algorithm, code structure, and test cases — students fill them out before coding.</li>
+            <li>Pseudocode and flowcharts are explicitly taught as bridges between algorithm and code, not skipped over.</li>
+            <li>When a student is stuck, ask "which level is the problem at?" before suggesting code changes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">04</span>
+        <h3>Scaffold heavily, then fade deliberately.</h3>
+        <p class="principle-lede">The first lesson of a unit should be so supported that almost any student can succeed. The last lesson should have them working close to independence. The arc between them <em>is</em> the curriculum. Scaffolds that never come down create dependence; scaffolds that come down too fast create dropout.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Lesson 1: worked examples with subgoal labels, teacher live-coding, pair programming required.</li>
+            <li>Lesson 2: PRIMM activity with most code provided — predict, run, investigate, modify.</li>
+            <li>Lesson 3: Use-Modify-Create with substantial starter code and a target outcome.</li>
+            <li>Lesson 4: Open project with constraints — choice of theme, fixed required constructs.</li>
+            <li>Lesson 5: Open project with peer feedback; scaffolds available on request.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">05</span>
+        <h3>Build formative feedback into every session.</h3>
+        <p class="principle-lede">You can't course-correct what you don't measure. Curriculum without designed-in formative assessment is curriculum that drifts. Every lesson should have at least one moment where students reveal what they're actually thinking — and the next lesson should be shaped by what you saw.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Exit tickets with one or two targeted multiple-choice items aligned to the day's concept (and to known misconceptions).</li>
+            <li>Mid-lesson code-trace activities students complete and submit before moving on.</li>
+            <li>Code reviews where pairs explain each other's projects — speaking aloud surfaces gaps in understanding.</li>
+            <li>A written record of which misconceptions you observed, used to redesign tomorrow.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">06</span>
+        <h3>Connect to student identity, culture, and interest.</h3>
+        <p class="principle-lede">Students who see themselves in the curriculum engage; students who don't disengage. This is not cosmetic. It determines who gets to become a programmer. A curriculum that allows real choice — of theme, of audience, of community problem — is a curriculum that includes everyone.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Project briefs are "creative constraints" — required constructs are specified, but theme, characters, and audience are chosen by the student.</li>
+            <li>Worked examples include the names, faces, and concerns of the students in your classroom — audit your materials for representation.</li>
+            <li>At least one project per unit invites students to address a problem in their own community.</li>
+            <li>Showcase events include families and community members as the audience.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">07</span>
+        <h3>Make bugs the curriculum.</h3>
+        <p class="principle-lede">The single biggest predictor of student frustration in CS is the silent assumption that bugs mean failure. Curricula that hide bugs, punish them, or treat them as something to "fix and move on" produce brittle learners. Curricula that make bugs the most interesting thing in the room produce resilient ones.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>A "buggy wall" or "favorite mistake of the day" segment in every class.</li>
+            <li>Teacher live-coding deliberately includes bugs to surface debugging strategies in real time.</li>
+            <li>Debugging is taught as a named skill with explicit strategies (line-by-line trace, decomposition, comparison to working examples).</li>
+            <li>At least one assessment item per unit involves identifying and fixing a bug.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle">
+        <span class="principle-num">08</span>
+        <h3>Pilot with real students, then iterate.</h3>
+        <p class="principle-lede">A lesson that reads beautifully on paper often falls apart in class. A curriculum is not done when it's written — it's done when it works for the students it was written for. Treat curriculum revision as ongoing, evidence-driven, and never finished.</p>
+        <div class="principle-practice">
+          <strong>In practice</strong>
+          <ul>
+            <li>Pilot every new lesson with a small group of students before rolling out to all sections.</li>
+            <li>Maintain a misconception catalog from real student artifacts — exit tickets, code submissions, recorded conversations.</li>
+            <li>Schedule explicit revision cycles after every unit, with documented changes and rationale.</li>
+            <li>Invite teachers who will use the curriculum into the design process — what they see in their rooms is data.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE LESSON WALKTHROUGH ============ -->
+<section class="section" id="walkthrough">
+  <div class="content">
+    <div class="section-eyebrow">Worked example</div>
+    <h2 class="section-title">A complete lesson, <em>annotated</em>.</h2>
+    <p class="section-lead">The principles above, applied to a real 5th-grade lesson introducing variables. Every phase is annotated with what students do, what the teacher does, and what's being assessed. Adapt freely — the structure is the point.</p>
+  </div>
+  <div class="container">
+    <div class="walkthrough">
+      <div class="walkthrough-header">
+        <div class="walkthrough-eyebrow">Sample lesson · Apply the framework</div>
+        <h3 class="walkthrough-title">Introducing Variables — 5th grade, 45 minutes, Scratch</h3>
+        <div class="walkthrough-meta">
+          <span>Grade band: <strong>Upper Elementary (4–6)</strong></span>
+          <span>Environment: <strong>Scratch 3</strong></span>
+          <span>Prior knowledge: <strong>Sequences, loops, basic sprite motion</strong></span>
+        </div>
+        <div class="walkthrough-goals">
+          <strong>Learning goals</strong>
+          <ul>
+            <li>Recognize that a variable stores a single value at a time, with a name we can refer to.</li>
+            <li>Distinguish a variable's <em>name</em> from its <em>value</em>.</li>
+            <li>Use a variable in a Scratch program that updates over time inside a loop.</li>
+            <li>Predict the value of a variable after an assignment (foundational for trace fluency).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="wt-phases">
+
+        <div class="wt-phase">
+          <div class="wt-phase-header">
+            <div class="wt-phase-num">01</div>
+            <div class="wt-phase-title">Hook · Whiteboard variable</div>
+            <div class="wt-phase-time">5 min</div>
+          </div>
+          <div class="wt-phase-body">
+            <p><strong>Teacher does:</strong> Writes <code>my_num = 5</code> on a small whiteboard. "Add 2 to <code>my_num</code>. What's the value now?" When a student says "7," the teacher <em>erases 5</em> and writes 7. Repeats: "Subtract 3." Erase. Writes 4. "Set <code>my_num</code> to 10." Erase. Writes 10.</p>
+            <p><strong>Students do:</strong> Call out values. Notice that the name stays the same and the value changes. Notice that the old value is gone.</p>
+            <p><strong>Designed against:</strong> The "box that holds many values" misconception. The whiteboard makes the single-value, erase-on-write property visible.</p>
+            <p><strong>Assessment:</strong> Listen for "the old number is still in there somewhere" — that's the misconception you need to address head-on.</p>
+          </div>
+        </div>
+
+        <div class="wt-phase">
+          <div class="wt-phase-header">
+            <div class="wt-phase-num">02</div>
+            <div class="wt-phase-title">Model · Live-code the Counting Cat</div>
+            <div class="wt-phase-time">10 min</div>
+          </div>
+          <div class="wt-phase-body">
+            <p><strong>Teacher does:</strong> Projects Scratch. Creates a variable named <code>Number</code>. Asks the class: "What value should it start with?" Sets it to 0. Drags a loop. Inside, drags <code>say (Number) for 1 second</code>, then <code>change Number by 1</code>. Runs it. The cat counts up.</p>
+            <p><strong>Then deliberately introduces a question:</strong> "What if I swap the order — change first, then say?" Asks the class to predict. Then swaps and runs. The cat now counts from 1, not 0. <strong>Names the subgoals out loud</strong>: "First we <em>initialize</em>. Then we <em>display</em>. Then we <em>update</em>."</p>
+            <p><strong>Students do:</strong> Predict, watch, react. Notice that order of operations matters. Begin to internalize the subgoal labels.</p>
+            <p><strong>Designed against:</strong> The "code is just sequential" misconception that erases the importance of <em>when</em> a variable is read versus updated.</p>
+          </div>
+        </div>
+
+        <div class="wt-phase">
+          <div class="wt-phase-header">
+            <div class="wt-phase-num">03</div>
+            <div class="wt-phase-title">Guided practice · PRIMM Counting Cat</div>
+            <div class="wt-phase-time">10 min</div>
+          </div>
+          <div class="wt-phase-body">
+            <p><strong>Students do:</strong> In pairs, receive a shared Scratch project with three Counting Cat variants. For each: <strong>P</strong>redict the output <em>on paper</em>. <strong>R</strong>un it. Compare. <strong>I</strong>nvestigate why predictions failed. The variants:</p>
+            <p><strong>Variant A:</strong> Counts 0–9 by 1. (The base case.)<br>
+            <strong>Variant B:</strong> Counts 0–18 by 2 (uses <code>change Number by 2</code>). Pairs predict — many predict 0–9 because they didn't notice the 2.<br>
+            <strong>Variant C:</strong> The variable is never initialized in the script (Scratch defaults it to 0, but if the project was run before, it starts wherever it left off). Re-runs may produce surprising starting values.</p>
+            <p><strong>Teacher does:</strong> Circulates. When a pair gets a "wrong" prediction, asks "where exactly did your prediction diverge from what happened?" Doesn't reveal the answer.</p>
+            <p><strong>Assessment:</strong> The written predictions are formative data. Collect them. The Variant C surprise is the seed of the next lesson on initialization.</p>
+          </div>
+        </div>
+
+        <div class="wt-phase">
+          <div class="wt-phase-header">
+            <div class="wt-phase-num">04</div>
+            <div class="wt-phase-title">Productive struggle · Score-keeper</div>
+            <div class="wt-phase-time">15 min</div>
+          </div>
+          <div class="wt-phase-body">
+            <p><strong>Open task (with constraints):</strong> "Build a Scratch project where a sprite earns points for something. The score must be a variable. The score must change in response to something happening on screen."</p>
+            <p><strong>Multiple entry points:</strong></p>
+            <p>· <strong>Blank canvas</strong> for students ready to design from scratch.<br>
+            · <strong>Starter project</strong> with sprites placed but no score variable, for students who need a leg up.<br>
+            · <strong>Exploded code</strong> — the necessary blocks scattered on screen, students assemble them, for students who need maximum scaffolding.</p>
+            <p><strong>Pair programming required:</strong> One driver, one navigator. Switch roles after 7 minutes. The teacher walks around, asks "show me how the score changes — what triggers it?" When a pair is stuck, asks "what does your variable hold right now? What do you <em>want</em> it to hold?"</p>
+            <p><strong>Designed against:</strong> The temptation for the teacher to fix bugs <em>for</em> students. Productive struggle is the point.</p>
+          </div>
+        </div>
+
+        <div class="wt-phase">
+          <div class="wt-phase-header">
+            <div class="wt-phase-num">05</div>
+            <div class="wt-phase-title">Showcase + exit ticket</div>
+            <div class="wt-phase-time">5 min</div>
+          </div>
+          <div class="wt-phase-body">
+            <p><strong>Showcase:</strong> Two pairs randomly selected to share. Each pair shows what works <em>and</em> a bug they hit. Class gives "two stars and a wish."</p>
+            <p><strong>Exit ticket — one targeted multiple-choice item:</strong></p>
+            <p><code>set steps to 10<br>move steps steps</code></p>
+            <p>"After this code runs, what is the value of <code>steps</code>?"<br>
+            A) 0 &nbsp; B) 10 &nbsp; C) 20</p>
+            <p><strong>The trap:</strong> Many students pick C, because they think "move <code>steps</code> steps" updates the variable. (It doesn't — the move block <em>reads</em> the variable; it doesn't write to it.) If a third or more of your students pick C, tomorrow's lesson needs explicit work on read-vs-write before moving forward.</p>
+            <p><strong>This is the loop that closes the day.</strong> The exit ticket is data. The next lesson is shaped by what it reveals.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANATOMY OF A LESSON ============ -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="anatomy">
+  <div class="content">
+    <div class="section-eyebrow">Lesson architecture</div>
+    <h2 class="section-title">Anatomy of an effective <em>CS lesson</em>.</h2>
+    <p class="section-lead">A research-backed structure for a 45-minute introductory programming lesson. The phases are intentional: each one does work the others can't. Skip the hook and you skip surfacing misconceptions. Skip the showcase and you skip the moment where students consolidate.</p>
+  </div>
+  <div class="container">
+    <div class="lesson-anatomy">
+
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-time">5 min</div>
+          <div class="phase-label">Phase 01 · Hook</div>
+        </div>
+        <div class="phase-body">
+          <h4>Surface what students already think.</h4>
+          <p>Open with an unplugged activity, a short story, or a question that pulls students' existing intuitions into the open. The point isn't to teach — it's to <em>listen</em>. Whatever misconceptions live in your room will surface here.</p>
+          <div class="phase-do">
+            <strong>Do</strong>
+            Story Variables, Simon Says, "what's changing in this story?", a buggy code prediction, a tiny role-play. Whole-class or pairs.
+          </div>
+          <div class="phase-avoid">
+            <strong>Avoid</strong>
+            Skipping this phase to "save time." You're not saving time — you're moving forward without knowing what's in students' heads.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-time">10 min</div>
+          <div class="phase-label">Phase 02 · Model</div>
+        </div>
+        <div class="phase-body">
+          <h4>Show your thinking, not just your code.</h4>
+          <p>Live-code or walk through a worked example with explicit subgoal labels. Narrate your internal dialogue: "I'm initializing here because…", "I'm using a variable because…". Make mistakes <em>on purpose</em> and fix them aloud — this is where you teach debugging.</p>
+          <div class="phase-do">
+            <strong>Do</strong>
+            Project the code. Label subgoals. Make and fix a deliberate bug. Pause to ask "what would happen if I changed this?"
+          </div>
+          <div class="phase-avoid">
+            <strong>Avoid</strong>
+            Code without commentary. Polished, bug-free modeling teaches students that "real" programmers don't make mistakes. They do.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-time">10 min</div>
+          <div class="phase-label">Phase 03 · Guided practice</div>
+        </div>
+        <div class="phase-body">
+          <h4>Predict → Run → Investigate.</h4>
+          <p>Hand pairs a code snippet. They predict the output <em>on paper</em> before touching the keyboard. Then they run it. Then they investigate why their prediction differed from reality. The disconfirmed prediction is where the learning happens.</p>
+          <div class="phase-do">
+            <strong>Do</strong>
+            Require written predictions before running. Use PRIMM-style worksheets. Pair students up. Walk around and listen.
+          </div>
+          <div class="phase-avoid">
+            <strong>Avoid</strong>
+            Letting students skip the predict step. Without prediction, "run the code" becomes guess-and-check.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-time">15 min</div>
+          <div class="phase-label">Phase 04 · Productive struggle</div>
+        </div>
+        <div class="phase-body">
+          <h4>Open task with multiple entry points.</h4>
+          <p>Now students apply the concept to something <em>they</em> chose. Pair programming is the default. Provide multiple starting points — blank canvas, exploded code, partial program — so every student can engage at their level. The teacher circulates, asking questions rather than giving answers.</p>
+          <div class="phase-do">
+            <strong>Do</strong>
+            "Show me, don't tell me." Ask "what did you predict would happen?" Encourage pairs to ask three peers before asking you.
+          </div>
+          <div class="phase-avoid">
+            <strong>Avoid</strong>
+            Rescuing struggling students too quickly. Productive struggle is the curriculum — but it must be <em>productive</em>, not despair.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-meta">
+          <div class="phase-time">5 min</div>
+          <div class="phase-label">Phase 05 · Showcase + exit</div>
+        </div>
+        <div class="phase-body">
+          <h4>Two students present. Everyone reflects.</h4>
+          <p>Random-select two pairs to share work — including the bugs they hit. The class identifies "two stars and a wish." An exit ticket with one targeted multiple-choice item closes the loop: did the concept land? Tomorrow's lesson is shaped by tonight's exit tickets.</p>
+          <div class="phase-do">
+            <strong>Do</strong>
+            Equity sticks for selection. Celebrate the bugs. Collect exit tickets and read them tonight, not next week.
+          </div>
+          <div class="phase-avoid">
+            <strong>Avoid</strong>
+            Cutting this phase when running short. If you cut anything, cut productive struggle by five minutes — never showcase.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEARNING GOALS / FRAMEWORK ============ -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="framework">
+      <div class="framework-header">
+        <div class="section-eyebrow" style="justify-content: center; display: inline-flex;">The deeper learning framework</div>
+        <h3>Programming teaches more than programming.</h3>
+        <p>Successful programming classrooms attend to three interconnected domains of student growth — not just content knowledge, but also collaboration skills and the mindsets that fuel resilient learning.</p>
+      </div>
+      <div class="domains">
+        <div class="domain">
+          <div class="domain-circle domain-cognitive">C</div>
+          <h4>Cognitive</h4>
+          <p>Deep content knowledge, critical thinking, problem-solving, computational thinking — algorithms, variables, debugging.</p>
+        </div>
+        <div class="domain">
+          <div class="domain-circle domain-interpersonal">I</div>
+          <h4>Interpersonal</h4>
+          <p>Collaboration and communication. Expressing ideas, working in pairs and teams, sharing work, giving feedback.</p>
+        </div>
+        <div class="domain">
+          <div class="domain-circle domain-intrapersonal">I</div>
+          <h4>Intrapersonal</h4>
+          <p>Beliefs, mindsets, persistence, self-efficacy. The growth mindset that lets students persevere through bugs and frustration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN PATTERNS / MISCONCEPTIONS ============ -->
+<section class="section" id="patterns">
+  <div class="content">
+    <div class="section-eyebrow">Misconception-driven design</div>
+    <h2 class="section-title">Design patterns for <em>known misconceptions</em>.</h2>
+    <p class="section-lead">For every well-documented misconception in CS education, there is a tested teaching pattern that addresses it. Pair them in your curriculum. Each pattern below shows the concept, the specific wrong intuition students bring, and three moves: <strong>surface</strong> it, <strong>replace</strong> it, <strong>verify</strong> the replacement landed.</p>
+  </div>
+  <div class="container">
+    <div class="design-patterns">
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Variables</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"A variable holds multiple values."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Show <code>x = 5; x = 10</code>. Ask: "What's in x now?" Listen for students who say "both 5 and 10" or "10, but 5 is still there."</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>Whiteboard metaphor: a small whiteboard holds one value. Writing a new value <em>erases</em> the old one. Avoid the "box" metaphor.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Exit ticket: predict the final value of x after a short reassignment sequence. Trap distractors that look like accumulation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Assignment</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"= means equality, like in math."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Show <code>x = x + 1</code> and ask students to read it aloud. Those who say "x equals x plus one" reveal the misconception.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>Read assignment right-to-left, narrating: "Evaluate the right side. Take that value. Store it in x, erasing what was there."</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Trace a sequence of three assignments with shared variables. Students draw the whiteboard state after each line.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Loops</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"The condition is monitored continuously."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Show a <code>while x &lt; 5</code> loop where x changes inside. Ask: "Exactly when does the loop check x?"</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>Role-play the loop. A student stands at the "check point" at the top. They <em>only</em> check when the loop returns to them — never mid-body.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Predict how many extra iterations a loop runs after its variable crosses the boundary mid-body.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Conditionals</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"Multiple IFs are the same as IF-ELSEIF-ELSE."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Show two grade-assignment programs — one with cascading IFs, one with IF-ELSE-IF. Trace both with score = 92.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>Demonstrate that with cascading IFs, the final value overwrites earlier matches. Conditions must be mutually exclusive or use ELSE.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Multiple-choice item with a cascading-IF bug. Students identify the issue and rewrite using IF-ELSEIF.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Functions</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"Print and return do the same thing."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Show two near-identical functions — one prints, one returns. Show what happens when you try to <em>use</em> their output in another expression.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>Print = side effect, the audience sees it. Return = hands a value back to the caller, so it can be stored or composed further.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Have students compose two functions: <code>average(a, b) + 10</code>. Only return works. The compile-or-runtime failure makes the difference visceral.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Recursion</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"Calls evaluate outside-in."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Ask students to diagram the call stack of a simple recursive call. Many will start at the outer call and resolve outward.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>"Subcontractor" role-play: each student stands when called, hires the next, sits only when their result is computed. Calls resolve <em>inside-out</em>.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Trace <code>factorial(4)</code> on paper showing the stack growth and the return path. Identify the base case.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Initialization</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"Variables start fresh every time you run a program."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Have students build a Scratch quiz that adds points but forgets to reset on green-flag click. Run it twice. Watch the score carry over.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>Teach <em>initialization</em> as a deliberate first move. Every variable, every program-start. Initialization is a named concept, not a side note.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Code-review checklist: "Is every variable initialized exactly once at program start?" Students audit each other's projects.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern">
+        <div class="pattern-header">
+          <div class="pattern-concept">Event handlers</div>
+          <div class="pattern-arrow">→</div>
+          <div class="pattern-bug">"Events run sequentially, like normal code."</div>
+        </div>
+        <div class="pattern-grid">
+          <div class="pattern-step">
+            <div class="pattern-step-label">Surface</div>
+            <p>Show two Scratch scripts on one sprite, both triggered by green-flag click. Predict which runs first. Reveal: they run in parallel.</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Replace</div>
+            <p>"Each event is its own little program, waiting for its trigger. When the trigger fires, the event runs — independent of any other event."</p>
+          </div>
+          <div class="pattern-step">
+            <div class="pattern-step-label">Verify</div>
+            <p>Build a project where two events update the same variable. Predict the final value. (You can't reliably — that's the lesson.)</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ RED FLAGS ============ -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="redflags">
+  <div class="content">
+    <div class="section-eyebrow">What to avoid</div>
+    <h2 class="section-title">Curriculum <em>antipatterns</em>.</h2>
+    <p class="section-lead">Some curriculum decisions feel productive but quietly undermine student learning. If your draft includes any of these, treat it as a flag to redesign. These antipatterns come up repeatedly in research on novice programmers — and in real classrooms.</p>
+  </div>
+  <div class="container">
+    <div class="redflags">
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Writing code before reading it</h4>
+          <p>Throwing students into "write a program that…" before they've seen and traced working examples. Almost guarantees guess-and-check coding and shallow understanding.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Solo work as the default</h4>
+          <p>Students sitting alone at screens for the entire period. CS is inherently social — pair programming should be the baseline, not the exception.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Open-ended discovery with no scaffolds</h4>
+          <p>"Just explore Scratch for the period." Minimally guided learning has been repeatedly shown to be less efficient than scaffolded approaches. Free play has a role — but not as the curriculum.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Assessment only at the end</h4>
+          <p>A unit test in week six is too late. Without formative feedback every lesson, misconceptions calcify. By the time you know there's a problem, fixing it requires undoing weeks of practice.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>The box metaphor for variables</h4>
+          <p>"A variable is like a box that holds values." This single sentence produces years of misconceptions: boxes hold multiple things, retain old contents, accumulate. Use the whiteboard metaphor instead.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Identical project briefs for every student</h4>
+          <p>"Everyone make a snowman animation." Crushes student agency, identity, and engagement. Use creative constraints instead — specify the constructs, not the theme.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Forever loops everywhere</h4>
+          <p>Teaching <code>forever + if-then-stop</code> as the default looping pattern instead of structured <code>repeat until</code> or <code>while</code>. Produces tangled, hard-to-reason-about code that hides the loop's terminating condition.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Fine-grained, bottom-up coding in blocks</h4>
+          <p>Encouraging students to write many tiny scripts attached to separate triggers. Spaghetti results. Teach top-down planning and structured loops in any block-based environment.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Skipping unplugged activities to "get to the real stuff"</h4>
+          <p>The unplugged activity <em>is</em> the real stuff — it's where the concept becomes concrete. Skipping it means moving to code before students have a mental model strong enough to hold the syntax up.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Hiding bugs from students</h4>
+          <p>"Polished" worked examples that always work the first time teach students that real programmers don't make mistakes. They do. Bring the bugs into the open and use them to teach debugging.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>"Just give them the syntax" attitude</h4>
+          <p>Treating concepts as obvious once the syntax is shown. Concepts like variables, recursion, and event handlers require deliberate, scaffolded conceptual work. Syntax is the easy part.</p>
+        </div>
+      </div>
+
+      <div class="redflag">
+        <div class="redflag-x">✕</div>
+        <div class="redflag-body">
+          <h4>Testing only the "happy path"</h4>
+          <p>Curriculum that doesn't require students to test with invalid, edge-case, or unexpected inputs produces brittle programs and brittle thinkers. Test with negative numbers, empty strings, division by zero.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EQUITY BY DESIGN ============ -->
+<section class="section" id="equity">
+  <div class="content">
+    <div class="section-eyebrow">Equity by design</div>
+    <h2 class="section-title">A curriculum is <em>who</em> it includes.</h2>
+    <p class="section-lead">Inclusivity is not an add-on or a final polish. It's a property of how the curriculum is structured from the first principle to the last lesson. These are the concrete design moves that make a CS curriculum work for every student, not just the ones who already fit the mold.</p>
+  </div>
+  <div class="container">
+    <div class="equity-grid">
+
+      <div class="equity-card">
+        <div class="equity-icon">↗</div>
+        <h4>Multiple entry points into every project</h4>
+        <p>The same project brief should be accessible to students at every level of preparation. Build each project to support at least three starting points so students can engage at the level that stretches them — without leaving anyone behind.</p>
+        <ul>
+          <li>Blank canvas for advanced students</li>
+          <li>Exploded code (Parsons-style) for students assembling their understanding</li>
+          <li>Partial program with annotated TODOs for students needing more structure</li>
+          <li>Complete program to modify or extend for students still building confidence</li>
+        </ul>
+      </div>
+
+      <div class="equity-card">
+        <div class="equity-icon">≈</div>
+        <h4>Identity reflection in every example</h4>
+        <p>Audit your examples ruthlessly. Whose names appear in worked examples? Whose stories drive the projects? Whose problems are worth solving? The students who don't see themselves silently learn that CS isn't for them.</p>
+        <ul>
+          <li>Names in examples reflect the diversity of your students' communities</li>
+          <li>Project themes connect to real student-community concerns</li>
+          <li>Worked examples include critical discussions of bias in technology</li>
+          <li>Role-model figures span genders, races, and trajectories into computing</li>
+        </ul>
+      </div>
+
+      <div class="equity-card">
+        <div class="equity-icon">↔</div>
+        <h4>Collaboration structures, not solo defaults</h4>
+        <p>The lone-coder stereotype is both inaccurate and exclusionary. Build collaboration into the structure of the curriculum so students experience CS as the social, communicative practice it actually is.</p>
+        <ul>
+          <li>Pair programming with explicit driver/navigator roles and rotation</li>
+          <li>"Ask three peers before asking the teacher" as a classroom norm</li>
+          <li>Classroom experts list — every student is named as the go-to for something</li>
+          <li>Group code reviews with structured peer feedback protocols</li>
+        </ul>
+      </div>
+
+      <div class="equity-card">
+        <div class="equity-icon">⌂</div>
+        <h4>Family and community as audience</h4>
+        <p>Showcasing student work to authentic audiences is one of the most powerful drivers of engagement — especially for students from communities historically excluded from CS. Build it into the unit calendar, not as a one-off "demo day."</p>
+        <ul>
+          <li>End-of-unit showcases with families invited</li>
+          <li>Projects that address real problems in students' local communities</li>
+          <li>Tribal leadership and elders consulted on curriculum for Indigenous students</li>
+          <li>Family programming nights where students teach their parents the project</li>
+        </ul>
+      </div>
+
+      <div class="equity-card">
+        <div class="equity-icon">⊕</div>
+        <h4>UDL built in, not bolted on</h4>
+        <p>Universal Design for Learning is most powerful when it's a property of the design phase, not a retrofit. If you have to add accessibility "for student X" later, the curriculum design itself has a gap.</p>
+        <ul>
+          <li>Multiple representations of each concept (visual, verbal, physical, code)</li>
+          <li>Text alternatives for visual materials; verbal alternatives for written</li>
+          <li>Pacing flexibility — some students will need more time on the same goal</li>
+          <li>Screen-reader-aware environments where blind or low-vision students participate</li>
+        </ul>
+      </div>
+
+      <div class="equity-card">
+        <div class="equity-icon">✦</div>
+        <h4>Joy as a design requirement</h4>
+        <p>A curriculum that produces only "competent" programmers without producing students who <em>want</em> to keep coding has failed at its primary mission. Joy is not the reward for learning — it's the engine that makes the learning happen.</p>
+        <ul>
+          <li>Real choice of project theme and audience in every unit</li>
+          <li>Scaffolded creativity — constraints that enable rather than restrict</li>
+          <li>Celebration moments built into every lesson (showcase, "favorite bug")</li>
+          <li>Physical movement, unplugged activities, music — the screen is not the only space</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Wisdom from the contributors</div>
+    <h2 class="section-title">Voices from the <em>field</em>.</h2>
+    <p class="section-lead" style="max-width: 56ch;">Forty authors. Decades of combined experience. Here are a few of the ideas they return to again and again.</p>
+
+    <div class="quotes">
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">Programs must be written for people to read, and only incidentally for machines to execute.</p>
+        <div class="quote-author">— Hal Abelson & Gerald Sussman</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">Weeks of programming can save you hours of planning.</p>
+        <div class="quote-author">— Anonymous, but every teacher knows</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">The best programs are written so that computing machines can perform them quickly and so that human beings can understand them clearly.</p>
+        <div class="quote-author">— Donald Knuth</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">My basic idea is that programming is the most powerful medium of developing the sophisticated and rigorous thinking needed for mathematics, for grammar, for physics, for statistics, for all the hard subjects.</p>
+        <div class="quote-author">— Seymour Papert</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">The most effective debugging tool is still careful thought, coupled with judiciously placed print statements.</p>
+        <div class="quote-author">— Brian W. Kernighan</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">Educating the mind without educating the heart is no education at all.</p>
+        <div class="quote-author">— Aristotle, on culturally relevant pedagogy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDITOR ============ -->
+<section class="section editor-section" id="editor">
+  <div class="container">
+    <div class="editor-grid">
+      <div class="editor-portrait" aria-hidden="true"></div>
+      <div class="editor-info">
+        <div class="section-eyebrow">Editor & lead author</div>
+        <h2>Shuchi Grover, Ph.D.</h2>
+        <div class="editor-role">Senior Research Scientist · Visiting Scholar, Stanford University</div>
+        <p>Shuchi has been working with children and programming since 2001 — first in informal afterschool settings, then in classrooms. Her research spans the design of curricula and assessments for all levels of preK–12 CS education, and the integration of computing into STEM and other subjects.</p>
+        <p>She has served on the National K–12 Computer Science Framework team, the ACM Education Advisory Committee, the CSTA standards taskforce, and the editorial board of <em>ACM Transactions on Computing Education</em>. The vision for this handbook took shape during her doctoral studies at Stanford, designing an introductory programming curriculum that drew on learnings from CS education research and the learning sciences.</p>
+        <div class="editor-credentials">
+          <div class="credential">
+            <strong>Stanford</strong>
+            <span>Ph.D. in Learning Sciences & Technology Design</span>
+          </div>
+          <div class="credential">
+            <strong>Harvard</strong>
+            <span>Ed.M. in Technology in Education</span>
+          </div>
+          <div class="credential">
+            <strong>8 years</strong>
+            <span>In the making</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO USE ============ -->
+<section class="section">
+  <div class="content">
+    <div class="section-eyebrow">How to use the book</div>
+    <h2 class="section-title">For every teacher, at <em>every stage</em>.</h2>
+  </div>
+  <div class="container">
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h4>New to teaching programming?</h4>
+        <p>Read the book in its entirety. It will give you an enduring foundation in <strong>what</strong> you're teaching and <strong>how</strong> to teach it. Begin with four overarching “umbrella” chapters: K (Learning Goals), J (Programming Languages), N (Naive Conceptions), and F (Formative Feedback).</p>
+        <div class="tip">
+          <strong>Tip:</strong> Pair each concept chapter with a pedagogy chapter. Read about variables, then read about scaffolding strategies. Read about loops, then read about debugging.
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>Already teaching CS?</h4>
+        <p>Use the book as a reference. Read a chapter over a coffee break. Pull it off the shelf when planning a unit. You'll discover new ideas and have plenty of “aha” moments from the examples and pedagogical tips shared by 40+ experienced teachers and researchers.</p>
+        <div class="tip">
+          <strong>Tip:</strong> The chapters reference each other extensively. Each chapter cross-references related concepts and pedagogies, so you can follow your curiosity through the book.
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>A curriculum designer?</h4>
+        <p>Use the book to inform what topics to teach, in what order, and with what supports. Each chapter discusses what students typically struggle with — invaluable when designing a coherent learning progression for elementary, middle, or high school.</p>
+        <div class="tip">
+          <strong>Tip:</strong> The book is programming-language agnostic. Examples appear in Scratch, Snap!, Python, Java, JavaScript, App Inventor, and more — but the foundational ideas transcend any single language.
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>A teacher trainer?</h4>
+        <p>The book is ideal as a text in K–12 CS teacher-training programs. Each chapter is designed to be accessible and friendly to all teachers, drawing on research but written for practical, actionable use in real classrooms.</p>
+        <div class="tip">
+          <strong>Tip:</strong> The book transcends geographical boundaries. With authors from the US, UK, Canada, Finland, Switzerland, Germany, and Australia, the ideas are deliberately portable across school systems.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Computer Science in K–12</h3>
+        <p>An A to Z handbook on teaching programming. Built for and by the global community of computer science educators.</p>
+      </div>
+      <div>
+        <h4>The book</h4>
+        <ul class="footer-list">
+          <li>26 chapters · A through Z</li>
+          <li>Concepts, practices & pedagogy</li>
+          <li>10 concepts · 4 practices · 12 pedagogies</li>
+          <li>Edited by Shuchi Grover</li>
+          <li>Foreword by Mark Guzdial</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contributors</h4>
+        <ul class="footer-list">
+          <li>40+ co-authors</li>
+          <li>USA · UK · Canada · Finland</li>
+          <li>Switzerland · Germany · Australia</li>
+          <li>Elementary · Middle · High School</li>
+          <li>Classroom · Research · Curriculum</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-quote">“When you learn, teach. When you get, give.” — Maya Angelou</div>
+      <div>This page summarizes the book for educational and informational purposes.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ DETAIL MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-letter" id="modalLetter"></div>
+    <div class="modal-type" id="modalType"></div>
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <div class="modal-authors" id="modalAuthors"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // ============ CHAPTER DATA ============
+  const chapters = [
+    { letter: 'A', title: 'Algorithms', authors: 'Shuchi Grover', type: 'concept',
+      summary: 'Algorithms are precise step-by-step plans for solving a problem — conceptual blueprints for the programs we write. Every program is essentially an algorithm encoded for a machine to execute.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Algorithmic thinking is the foundation everything else stands on. Students who learn loops and variables without algorithmic thinking write code that "happens to work" rather than code that <em>solves a problem</em>. Curriculum that prioritizes algorithm design before coding produces deeper transfer and stronger problem-solving habits across the K–12 arc.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li>Conflating "an algorithm" with "the code" — losing the abstraction that lets them recognize the same algorithm across languages.</li><li>Assuming there is one correct algorithm for any problem.</li><li>Producing algorithms that have steps but no real decomposition.</li><li>Skipping algorithm design entirely and jumping to code.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Open with everyday algorithms (recipes, Google Maps routes, knitting patterns) before any code.</li><li>Require pseudocode or flowcharts as a graded artifact, not a side activity.</li><li>Have students compare two algorithms for the same problem — and discuss trade-offs.</li><li>Use the AP CS Principles "two algorithms for class average" item as a model.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Give students the Wikipedia leap year algorithm in plain English and ask them to translate it into Scratch. The translation effort makes the structural similarity between algorithm and code visible — and exposes any gaps in their pseudocode-to-code bridge. Students feel empowered to code an algorithm they found on Wikipedia.'}
+      ],
+      quote: 'An algorithm must be seen to be believed, and the best way to learn what an algorithm is all about is to try it. — Donald Knuth'
+    },
+    { letter: 'B', title: 'Before You Program, Plan!', authors: 'Philip Bagge & Shuchi Grover', type: 'practice',
+      summary: 'Planning before programming is not a separate skill — it is the skill that makes programming work. Students who plan produce code they can debug, explain, and revise.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'The four levels of abstraction — Problem, Algorithm, Program, Execution — give your curriculum a planning structure. Curriculum that scaffolds students through all four levels produces programmers who can debug their own work. Curriculum that lets them skip straight to code produces students who hit a wall when their program doesn\'t work.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li>"Why plan when I can just start coding?" — students see planning as a waste of time until they hit a real bug.</li><li>Confusing the algorithm with the code: writing pseudocode that\'s actually Python with the colons removed.</li><li>Decomposing too little (one big undifferentiated blob) or too much (every line is its own subgoal).</li><li>Forgetting initialization at the planning stage, then being baffled by carry-over values at runtime.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Provide planning templates as graded artifacts — not optional pre-work.</li><li>Teach pseudocode and flowcharts as bridges <em>between</em> the algorithm and program levels.</li><li>Decompose by function: each subgoal of the program is a thing the program does.</li><li>For game-style projects, have students design appearance and structure before the code.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Use the Guess My Number game as a worked example. Help students identify the knowns, the unknowns, and what to keep track of. Then write pseudocode together — with explicit IF-THEN-ELSE and a loop. <em>Then</em> code it. Students experience the relief of having a plan before they touch the keyboard.'}
+      ],
+      quote: 'Weeks of programming can save you hours of planning. — Anonymous'
+    },
+    { letter: 'C', title: 'Creative Coding', authors: 'Miles Berry', type: 'pedagogy',
+      summary: 'A pedagogy of making, originality, quality, fluency, and culture. Students develop original artifacts that express their thinking — but the curriculum must structure that creativity, not just allow it.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Pure scaffolded instruction produces students who can replicate but not create. Pure open-ended creativity produces students with patchy concept coverage and frustrated teachers. Strong curriculum interleaves the two: creative briefs with explicit conceptual requirements, and structured lessons that culminate in creative projects.'},
+        { kind: 'misconception', title: 'Risks of unstructured creativity',
+          body: '<ul><li>Students who only make animations never encounter conditionals or variables in meaningful contexts.</li><li>"Open project" becomes "do whatever" — engagement is high, learning is shallow.</li><li>Ambition outruns capability; frustration builds, agency collapses.</li><li>Assessment becomes impossible because no two projects use the same concepts.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Use <em>creative constraints</em>: required constructs (e.g., "must use at least one variable and one loop"), free choice of theme, characters, audience.</li><li>Sequence projects so each one introduces a new construct while reusing previously taught ones.</li><li>Make sharing structural — every project ends with a showcase, not just a save.</li><li>Build "breakable toys" — small projects students can fail safely before bigger ones.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'For middle-school Scratch, set a project brief like: "Create a two-character story with a scene change. Must use the green flag to start, broadcast messages to coordinate characters, and at least one variable." Students choose the theme freely. Result: every project demonstrates parallelism, events, and variables — but no two projects look alike.'}
+      ],
+      quote: 'Imagination does not become great until human beings, given the courage and the strength, use it to create. — Maria Montessori'
+    },
+    { letter: 'D', title: 'Data Structures', authors: 'Baker Franke & Richard Kick', type: 'concept',
+      summary: 'Programs don\'t just compute — they organize, store, and retrieve. Data structures are how programs hold data, and the choice of structure shapes everything else.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Curriculum that introduces lists as "a way to store many things" misses the point. Lists are an answer to a problem — keeping track of many things by name becomes intractable. Curriculum that motivates the data structure before introducing it produces students who understand <em>why</em> these tools exist.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li>Confusing the list (collection of values) with the variable that refers to it.</li><li>Thinking of an "ordered list" as a sorted list (it just means indexed).</li><li>Different languages, different indexing conventions — Scratch indexes from 1, most others from 0.</li><li>Treating library data structures as magic, never developing intuition for trade-offs.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Motivate the data structure with a need — show the painful 50-variable version first.</li><li>Visualize lists explicitly: drawings, debugger inspectors, indexed slots.</li><li>Have students physically enact data structures (array vs. linked list role-play).</li><li>Before using built-in library functions, have students implement the logic by hand once.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'For middle school, the "famous computer scientists quiz" activity: start with 50 separate variables for 50 names, watch students recoil at the complexity, then introduce the list as the obvious answer. The pain motivates the abstraction. For high school, analyze word frequencies in a Project Gutenberg text — real data, real motivation.'}
+      ],
+      quote: 'The difference between a bad programmer and a good one is whether {they} consider {their} code or {their} data structures more important. — Linus Torvalds'
+    },
+    { letter: 'E', title: 'Events', authors: 'Jennifer Rosato & David Wolber', type: 'concept',
+      summary: 'Modern programs react more than they compute. Event-based programming lets beginners build apps that respond to clicks, sensors, and messages — and shifts what is possible in week one.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Curriculum built around command-line "compute and print" programs underestimates what beginners can do. Event-driven curriculum opens up real-world apps — geo-aware tools, social apps, sensor-driven projects — and motivates students whose interests sit outside traditional algorithmic puzzles.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li>Believing events run sequentially like normal code (they don\'t — they run when triggered).</li><li>Adding multiple event handlers for the same event and being surprised at parallel execution.</li><li>Confusing event parameters (data carried by the event) with regular variables.</li><li>Forgetting that user testing happens out of code order — events fire in whatever sequence users produce.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Start with UI design on paper — students plan the user interface before they touch event handlers.</li><li>Teach students to <em>list</em> the events first, then write pseudocode for each handler.</li><li>Build in usability testing — students watch a peer try their app without explanation.</li><li>Use the debug-by-Notifier technique: temporary alerts inside handlers to confirm they\'re firing.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'The "I Have a Dream" speech-board app in App Inventor — two buttons, two speeches, mutually exclusive playback. Students build a fully functional mobile app in one period. The motivation is immediate; the conceptual payload (event handlers, mutual exclusion logic) lands precisely because the project feels real.'}
+      ],
+      quote: 'It\'s not what happens to you, but how you react that matters. — Epictetus'
+    },
+    { letter: 'F', title: 'Feedback Through Formative Check-Ins', authors: 'Shuchi Grover, Vicky Sedgwick & Kelly Powers', type: 'pedagogy',
+      summary: 'Formative assessment is assessment <em>for</em> learning, not <em>of</em> it. A curriculum without designed-in formative checks is a curriculum that drifts.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Most CS curricula assess via projects — open-ended, time-consuming, and slow to grade. Projects are essential, but they reveal student thinking far too late. A balanced assessment system pairs projects with frequent, fast, targeted instruments: multiple-choice items aligned to known misconceptions, code-trace exercises, Parsons problems, exit tickets. The teacher sees thinking before the project is finished.'},
+        { kind: 'misconception', title: 'What goes wrong without formative checks',
+          body: '<ul><li>Misconceptions calcify over weeks before being detected by a unit test.</li><li>Projects "work" but students can\'t explain them — they pattern-matched, didn\'t learn.</li><li>The teacher discovers in week six that the variables unit didn\'t land in week one.</li><li>Lessons can\'t adapt — there\'s no signal to adapt to.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Build at least one formative check into every lesson — exit ticket, prediction, code trace, hotspot item.</li><li>Design multiple-choice items that <em>trap</em> known misconceptions, not just test recall.</li><li>Code reviews and "show me your project" conversations are formative gold.</li><li>Use peer and self-assessment with rubrics — students internalize the assessment criteria.</li><li>Artifact-based interviews: ask students to walk you through their code aloud.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'After teaching loops with variables, give a one-question exit ticket: <code>set x to 10; move x steps</code>. "What\'s x now?" A, 0; B, 10; C, 20. Students who pick C reveal the read-vs-write misconception. Read these tonight; tomorrow\'s lesson is shaped by them.'}
+      ],
+      quote: 'There is no failure. Only feedback. — Robert Allen'
+    },
+    { letter: 'G', title: 'Guided Exploration Through Unplugged Activities', authors: 'Paul Curzon & Shuchi Grover', type: 'pedagogy',
+      summary: 'Programming concepts are invisible. Unplugged activities make them physical, then bridge them back to code. The key is the bridge — unplugged alone teaches nothing about programming.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Legitimation Code Theory frames effective teaching as movement along a "semantic wave" — from abstract technical concepts down to concrete everyday meaning, then back up. Curriculum that lives only at the top of the wave (jargon, syntax) leaves novices behind. Curriculum that lives only at the bottom (analogies, stories) teaches nothing about programming. The art is the journey.'},
+        { kind: 'misconception', title: 'When unplugged backfires',
+          body: '<ul><li>Activities that never bridge back to code — students enjoy them but learn nothing transferable.</li><li>Metaphors taken too far (the box variable; the recipe algorithm) that produce new misconceptions.</li><li>Treating unplugged as the warm-up rather than the conceptual core.</li><li>Skipping unplugged "to save time" — and losing the mental model that holds the syntax up.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Design every unplugged activity with an explicit bridge — "now look at this code, that\'s what the photocopier-shredder was doing."</li><li>Use the unplugged activity\'s memory as a hook in future code lessons.</li><li>Combine role-play with code-tracing exercises so students traverse both routes.</li><li>Watch for limits of metaphors and surface them explicitly with students.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'The "Box Variables" activity: variables are special boxes with a built-in copier and shredder. Reading the variable produces a copy; assigning writes new contents and shreds the old. Role-play a swap algorithm with students as variables. Then bridge: show the equivalent code, line by line, mapping the role-play to the syntax.'}
+      ],
+      quote: 'Tell me and I forget. Teach me and I remember. Involve me and I learn. — Benjamin Franklin'
+    },
+    { letter: 'H', title: 'Hard Fun With Hands-On Constructionist Project-Based Learning', authors: 'Deborah A. Fields & Yasmin B. Kafai', type: 'pedagogy',
+      summary: 'Students learn deeply when making things they care about that are <em>hard</em>. The art of curriculum is choosing the right kind of hard — and providing the right kind of support.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Constructionism, Seymour Papert\'s legacy, holds that students learn most powerfully through making artifacts of personal and social relevance. But "make whatever you want" is not constructionism — it\'s abdication. Real constructionist curriculum scaffolds the project, makes the mistakes legitimate, and treats portfolios as the assessment.'},
+        { kind: 'misconception', title: 'When project-based learning goes wrong',
+          body: '<ul><li>Projects with no concept requirements — students reuse the same three blocks for everything.</li><li>Ambition without scaffolding — students set goals they can\'t reach, frustration mounts, identity collapses.</li><li>Final product as the only assessment — process is lost, mistakes are hidden.</li><li>"Aesthetics last" — students rush the design, lose investment, abandon projects.</li></ul>'},
+        { kind: 'strategy', title: 'Six principles to design around',
+          body: '<ul><li><strong>Creative constraints:</strong> required constructs, free theme.</li><li><strong>A series of growing projects</strong>, not one big one.</li><li><strong>Aesthetics first:</strong> students sketch and design before they code.</li><li><strong>Celebrate mistakes:</strong> "favorite bug of the day."</li><li><strong>Keep track:</strong> design notebooks as daily 5-min exit tickets.</li><li><strong>Portfolios:</strong> describe, reflect on revisions, communicate learning.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'For the e-textiles "wristband" project: students sketch their wristband on paper first, including where each LED will go and how the switch will work. Get teacher approval of the diagram <em>before</em> sewing begins. The diagram becomes the artifact that proves they understood the circuit — and prevents wasted material on infeasible designs.'}
+      ],
+      quote: 'All sorts of things can happen when you\'re open to new ideas and playing around with things. — Stephanie Kwolek'
+    },
+    { letter: 'I', title: 'Integrating Programming Into Other Subjects', authors: 'Shuchi Grover & Aman Yadav', type: 'pedagogy',
+      summary: 'Coding doesn\'t need its own silo. The most impactful CS curricula integrate programming into math, science, language arts, social studies, and music — and use it to deepen the host subject.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Standalone CS classes reach a fraction of students. Integration reaches everyone. Curriculum that integrates programming into existing subjects has the double benefit of enriching that subject\'s learning <em>and</em> giving students authentic contexts for CS. The challenge: subject teachers often aren\'t CS-trained, and CS teachers don\'t own the host subjects.'},
+        { kind: 'misconception', title: 'Where integration breaks down',
+          body: '<ul><li>"Decorative" integration — coding bolted onto a lesson without enriching either subject.</li><li>Asking subject teachers to teach CS without support — overload, retreat, abandonment.</li><li>Treating high cognitive load as an acceptable cost when students are learning two things at once.</li><li>Skipping the subject\'s learning goals in favor of "we coded it."</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Use existing integrated curricula (Bootstrap, CT-STEM, Project GUTS, STEMcoding, Media Computation) as anchors.</li><li>Move from simple integration (unplugged + simple code) to complex (modeling and simulation) over time.</li><li>Provide CS-trained co-teachers or coaches for subject teachers.</li><li>Make sure assessment honors both the subject and the computing goals.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'High school math + physics integration: use the BBC Micro:bit accelerometer and Python\'s math library to build a "tree height" measurement tool. Students apply <code>tan(θ) = height / distance</code> to a real measurement they take. Trigonometry becomes the engine of a working device. Programming becomes the embodiment of math.'}
+      ],
+      quote: 'Programming is the most powerful medium of developing the sophisticated and rigorous thinking needed for all the hard subjects. — Seymour Papert'
+    },
+    { letter: 'J', title: 'JavaScript, Python, Scratch, or Something Else?', authors: 'David Weintrop & Shuchi Grover', type: 'concept',
+      summary: 'Language choice is the single highest-leverage decision in any CS curriculum. It shapes what students can do, what they struggle with, and what they\'ll be able to transfer.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'The "right" programming language depends on grade band, prior knowledge, what comes next, and what kinds of artifacts you want students to be able to make. Curriculum that chooses a language for adult reasons ("Python is what professionals use") often produces frustrated novices. Curriculum that chooses for learner reasons can produce both engagement and rigorous transfer.'},
+        { kind: 'strategy', title: 'Six dimensions to evaluate',
+          body: '<ul><li><strong>Low floor:</strong> how quickly can a novice produce something working?</li><li><strong>High ceiling:</strong> what can a motivated learner go on to build?</li><li><strong>Wide walls:</strong> what kinds of artifacts are possible (animations, games, apps, art, music, data)?</li><li><strong>Social dimensions:</strong> sharing, remixing, online community.</li><li><strong>Curriculum & community support:</strong> what materials, training, and peers exist?</li><li><strong>Preparation for future learning:</strong> what skills transfer to the next language?</li></ul>'},
+        { kind: 'misconception', title: 'Where curriculum writers go wrong',
+          body: '<ul><li>"Text-based is more rigorous." False — modality and rigor are independent.</li><li>"Scratch is just for kids." False — Scratch teaches concepts every CS student needs.</li><li>"Pick one language and stick with it." Real careers span many — the underlying ideas are what transfer.</li><li>"Functional programming is too advanced." Bootstrap and Pyret show otherwise.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'When transitioning students from block-based to text-based programming, use a bridging environment like Pencil Code that supports both views of the same code. Students migrate gradually, with the conceptual structure preserved while the syntax shifts. Or use Snap!\'s extensibility to teach text-language ideas (first-class functions, lists-as-data) while staying in blocks.'}
+      ],
+      quote: 'The tools we use have a profound effect on our thinking habits. — Edsger Dijkstra'
+    },
+    { letter: 'K', title: 'Knowledge, Skills, Attitudes & Beliefs', authors: 'Rebecca Vivian, Shuchi Grover & Katrina Falkner', type: 'practice',
+      summary: 'The learning goals for introductory programming are bigger than the syntax. They span thinking skills, mindsets, identity, and the ability to collaborate. Curriculum should be designed for all three.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'The Deeper Learning Framework names three intertwined domains: <strong>cognitive</strong> (knowledge, computational thinking, problem-solving), <strong>intrapersonal</strong> (mindsets, persistence, identity, self-efficacy), and <strong>interpersonal</strong> (collaboration, communication). A curriculum that addresses only the first produces students who can pass a test but won\'t continue with CS. A curriculum that addresses all three produces students who choose to stay.'},
+        { kind: 'strategy', title: 'Cognitive skills to design for',
+          body: '<ul><li><strong>Decomposition</strong> — name the subgoals, plan before coding.</li><li><strong>Algorithmic thinking</strong> — represent the plan in pseudocode/flowcharts.</li><li><strong>Abstraction</strong> — identify what to keep, what to hide.</li><li><strong>Pattern recognition</strong> — see repetition, find loops.</li><li><strong>Evaluation</strong> — compare solutions, test, refine.</li><li><strong>Design thinking</strong> — empathize, define, ideate, prototype, test.</li><li><strong>Systems thinking</strong> — see the program as a whole, including its hardware and users.</li></ul>'},
+        { kind: 'activity', title: 'Intrapersonal moves',
+          body: 'Build the classroom culture by example. Live-code your own bugs out loud. Highlight strategies, not "right answers." Use the "favorite mistake of the day" routine. Set up clear classroom guidelines for help-seeking ("ask three before me"). Frame setbacks as effort-related, not ability-related — the difference between "I can\'t do this" and "I haven\'t done this <em>yet</em>."'},
+        { kind: 'misconception', title: 'Interpersonal traps to avoid',
+          body: '<ul><li>Treating CS as a solo, silent activity. It isn\'t — and the stereotype excludes.</li><li>Letting one student in each pair do all the coding.</li><li>Failing to give students a vocabulary for talking about their code.</li><li>Showcasing only finished, polished projects — never bugs and iteration.</li></ul>'}
+      ],
+      quote: 'Educating the mind without educating the heart is no education at all. — Aristotle'
+    },
+    { letter: 'L', title: 'Learner-Centered & Culturally Relevant Pedagogy', authors: 'Tia C. Madkins, Jakita O. Thomas, Jessica Solyom, Joanna Goode & Frieda McAlear', type: 'pedagogy',
+      summary: 'Access to a CS class isn\'t enough. Curriculum that doesn\'t engage students\' cultures, experiences, and identities will keep producing the same exclusion that\'s held CS back for decades.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Underrepresented students of color have historically experienced racial bias and structural inequities both inside and outside school. Culturally Relevant Pedagogy (CRP), first articulated by Ladson-Billings and Allen & Boykin, names three tenets: <strong>academic rigor</strong>, <strong>honoring students\' cultural and linguistic backgrounds</strong>, and <strong>helping students recognize and critique social inequities</strong>. Curriculum designed around these tenets transforms who CS is for.'},
+        { kind: 'strategy', title: 'Three categories of design moves',
+          body: '<ul><li><strong>Connect with students\' cultures and life experiences.</strong> Examples grounded in school communities. Project-based assignments addressing real concerns. Storytelling from teachers\' own paths into CS.</li><li><strong>Empower students as change agents.</strong> Point out sociopolitical influences in programming. Critical discussions about data, privacy, surveillance. Power-mapping of the technology ecosystem.</li><li><strong>Build relationships with students, families, and communities.</strong> Recruiting events. Family showcases. Tribal leadership consultation for Indigenous students.</li></ul>'},
+        { kind: 'misconception', title: 'Where curriculum writers go wrong',
+          body: '<ul><li>"Add diverse names" as cosmetic, with the rest of the curriculum unchanged.</li><li>Treating CRP as the responsibility of teachers of color only.</li><li>Skipping the critique of inequity in tech because "we\'re just teaching programming."</li><li>Designing curriculum without consulting the communities it serves.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'In introductory CS, use the Exploring Computer Science culturally situated design tools — students program simulations of Native American beadwork, Black hair braiding, skateboard culture mathematics. The same algorithmic ideas (loops, parameters, conditionals) land — but they land through cultural artifacts students recognize as theirs.'}
+      ],
+      quote: 'Students\' STEM identities, experiences and interests are profoundly impacted by historical legacies, structural issues and opportunities. — Jane Margolis'
+    },
+    { letter: 'M', title: 'Modularity With Methods and Functions', authors: 'Mike Zamansky, Jens Mönig & JonAlf Dyrland-Weaver', type: 'concept',
+      summary: 'Functions are not just a syntax feature — they\'re how programmers manage complexity. Curriculum that teaches functions as "just another construct" misses their conceptual weight.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Functions enable five interrelated capabilities: <strong>modularity, readability, maintainability, abstraction, and reuse</strong>. Curriculum that introduces functions early — even before conditionals — primes students to think in terms of composable parts. Curriculum that delays functions until "advanced topics" produces students who write 100-line scripts they can\'t debug.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li><strong>Scope confusion:</strong> assuming a variable inside a function is the "same" as a variable in the calling code with the same name.</li><li><strong>Print vs. return:</strong> not understanding why one prevents composition and the other enables it.</li><li><strong>Parameters as variables:</strong> trying to "pass a variable" rather than its value.</li><li><strong>"Why bother?":</strong> not seeing the point of functions for short programs.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Introduce functions by motivating duplication — show a program with three near-identical sections, then refactor.</li><li>Steer students away from <code>print</code> inside functions until they\'re comfortable returning values.</li><li>Use the cat-drawing exercise (Python ASCII art) — students build <code>make_head()</code>, <code>make_body()</code>, <code>make_legs()</code> and compose them into different cats.</li><li>Trace function calls explicitly — debugger step-through or pen-and-paper.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'In Snap!, build a polygon-drawing block with parameters for size and number of sides. Once it works, use it to draw houses, flowers, and stars by calling it with different parameters. Then add recursion: a fractal tree from a function that calls itself with a smaller input. The same function, called four ways, produces four artifacts. The power of abstraction becomes visceral.'}
+      ],
+      quote: 'Sometimes, the elegant implementation is just a function. — John Carmack'
+    },
+    { letter: 'N', title: 'Naive Conceptions of Novice Programmers', authors: 'Juha Sorva', type: 'pedagogy',
+      summary: 'Students don\'t arrive as blank slates. They arrive with intuitions from everyday speech and mathematics — intuitions that systematically mislead them about programs. This chapter is the misconception catalog every curriculum writer should keep on their desk.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Decades of research has produced an extensive catalog of well-documented programming misconceptions. Curriculum writers who design without this catalog rediscover the same student difficulties year after year. Curriculum writers who design <em>with</em> it pre-empt them. The "notional machine" — a model of program execution students can reason from — is the conceptual artifact your curriculum is building toward.'},
+        { kind: 'misconception', title: 'The general patterns to design against',
+          body: '<ul><li><strong>Human-interpreter problems:</strong> students expect the computer to fill in obvious gaps, take reasonable defaults, infer intent.</li><li><strong>Mathematics carry-over:</strong> <code>=</code> as equality; variables as single letters; "solve for x".</li><li><strong>Natural-language carry-over:</strong> "while" implies continuous monitoring; "if" implies a single check.</li><li><strong>Imagined restrictions:</strong> students think rules are stricter than they are (functions must always return; arguments must be literals).</li></ul>'},
+        { kind: 'strategy', title: 'Design moves the chapter recommends',
+          body: '<ul><li><strong>Target specific misconceptions with example programs</strong> — design code that exposes the wrong intuition.</li><li><strong>Contrast the concept with what it isn\'t.</strong> Vary one aspect at a time across examples.</li><li><strong>Highlight finer structure</strong> — expressions, values, evaluation — not just whole-line purpose.</li><li><strong>Let students use abstractions before defining them</strong> (call functions before writing them).</li><li><strong>Use analogies with caution</strong> — and explicitly name where they break down.</li><li><strong>Make execution visible</strong> with visualizations (Python Tutor) and stepping debuggers.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Before students write their first function, give them a worksheet of seven function calls to evaluate in a verbose REPL that explains what happens at each step. <code>print("hello")</code>, <code>average(2, 5)</code>, <code>average(min(3, 7), 10)</code>. Students gain confidence calling functions before they have to define them — and the misconceptions about argument evaluation, return values, and composition surface in a low-stakes setting.'}
+      ],
+      quote: 'I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question. — Charles Babbage'
+    },
+    { letter: 'O', title: 'Operators and Expressions', authors: 'Matthias Hauswirth & Shuchi Grover', type: 'concept',
+      summary: 'Expressions are the workhorse of programs — and the source of many subtle bugs. Curriculum that teaches expressions as "the stuff between operators" misses their tree structure and their evaluation rules.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Every expression has a tree structure that determines its evaluation order. Students who can\'t see the tree write buggy compound conditions, misuse operator precedence, and produce expressions that "look right" but compute the wrong thing. Curriculum that surfaces the tree structure — through circles of evaluation, node-link diagrams, or nested blocks — gives students the visual scaffold they need.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li>Comparing booleans to literal <code>true</code>/<code>false</code> instead of using the value directly.</li><li>Misordering nested function calls — assuming outside-in evaluation when it\'s inside-out.</li><li>Confusion between assignment <code>=</code> and equality <code>==</code> (or <code>===</code>).</li><li>Inappropriate operator precedence in compound conditions: <code>year % 400 == 0 || year % 4 == 0 && year % 100 != 0</code> looks right but isn\'t.</li><li>"NoAtomicExpression": thinking an expression must have multiple parts; a literal or variable alone doesn\'t count.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Use Bootstrap\'s "circles of evaluation" or node-link diagrams to make tree structure visible.</li><li>Trace expressions inside-out with explicit arrows showing what each subexpression evaluates to.</li><li>Use unplugged games (Dice Game, Boole Says) to practice Boolean logic before code.</li><li>Provide annotated worked examples where every operator is labeled with its type and precedence.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Dice Game: pairs of students roll two dice. Player 1 or Player 2 scores based on evaluating a written expression — e.g., <code>IF Dice1 + Dice2 < 12, Player 1 scores</code>. Students see relational operators, arithmetic operators, and conditionals work together — and gain practice with compound expressions before any code touches the screen.'}
+      ],
+      quote: 'By the word operation, we mean any process which alters the mutual relation of two or more things. — Ada Lovelace'
+    },
+    { letter: 'P', title: 'Peer Collaboration and Pair Programming', authors: 'Shannon Campe & Jill Denner', type: 'pedagogy',
+      summary: 'Pair programming is not "two students sharing a computer." It is a structured pedagogy with explicit roles, deliberate switches, and concrete classroom protocols. Done right, it transforms who gets to belong in CS.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'The lone-coder stereotype is both inaccurate and exclusionary. Curriculum that makes pair programming a structural default (not an option) produces deeper learning, broader participation, and more resilient learners. The driver/navigator structure forces collaboration to be visible and equitable — but only if the curriculum teaches the structure explicitly.'},
+        { kind: 'strategy', title: 'What the curriculum must include',
+          body: '<ul><li><strong>Pairing logic:</strong> brief survey on collaboration preferences, trial pairs early, then assigned pairs (not always friends).</li><li><strong>Explicit role teaching:</strong> driver (mouse and keyboard, types) vs. navigator (catches mistakes, holds the goal). Define these on a poster.</li><li><strong>Switching:</strong> some classes switch every 7 minutes; others let pairs negotiate. Both work; uniformity matters.</li><li><strong>Conflict protocols:</strong> what to do when a pair stalls.</li><li><strong>Equity monitoring:</strong> who is driving most? Who is silent?</li></ul>'},
+        { kind: 'misconception', title: 'Where pair programming fails',
+          body: '<ul><li>One student does all the typing, the other watches passively.</li><li>"You drive, I\'ll just tell you what to do" with no rotation.</li><li>Pairs that talk freely but never write written predictions before running code.</li><li>The teacher assumes pairs will figure out collaboration without being taught.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Co-create a Pair Programming poster with the class on day one. Big ideas: listen, share ideas, respectfully disagree, check in (about roles and decisions), step back if you tend to take over, step in if you tend to be quiet. Refer to the poster every session. Affirm specific behaviors: "I see Maya stepped back so Jordan could try the keyboard."'}
+      ],
+      quote: 'Alone we can do so little; together we can do so much. — Helen Keller'
+    },
+    { letter: 'Q', title: 'Questions and Inquiry', authors: 'Shuchi Grover & Steven Floyd', type: 'pedagogy',
+      summary: 'The questions teachers ask shape the thinking students do. Curriculum that scripts good questions — and equips teachers to respond well — moves classrooms from procedural to conceptual.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Most CS curricula provide code and exercises. Few provide the <em>questions</em>: the warm-up prompts, the probing follow-ups, the artifact-based interview scripts, the buggy-code questions. These questions are where deep thinking happens — and they\'re the part of curriculum most likely to be ad-libbed (badly) by a stressed teacher.'},
+        { kind: 'strategy', title: 'What strong question design looks like',
+          body: '<ul><li><strong>Journal-entry openers</strong> for each lesson: "Imagine you\'re finding seat H16 at a concert — describe how." (For algorithm lessons.)</li><li><strong>Probing follow-ups</strong> embedded in lesson plans: "What if we swap these two blocks?" "What if the input is negative?"</li><li><strong>Artifact-based interview prompts:</strong> "Walk me through how this works. Why did you decide that?"</li><li><strong>Buggy-code questions</strong> as a regular item type: "Why doesn\'t this work? What\'s the smallest change that fixes it?"</li></ul>'},
+        { kind: 'misconception', title: 'How teacher responses can undermine learning',
+          body: '<ul><li>Answering syntax questions instantly (fine) but also answering conceptual questions instantly (not fine).</li><li>"Let me show you" — taking the keyboard.</li><li>Failing to leverage the student\'s strengths in the response ("you\'ve gotten good at tracing — what happens line by line here?").</li><li>Treating the student\'s question as the question to answer, instead of the question behind it.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'For every code snippet you put in your curriculum, write three follow-up questions: one to verify reading comprehension, one to probe the conceptual structure, one to invite a modification. Hand these to teachers as part of the lesson plan. The questions are the curriculum.'}
+      ],
+      quote: 'I have six honest serving-men. Their names are What, Where, When, Why, How and Who. — Rudyard Kipling'
+    },
+    { letter: 'R', title: 'Repetition and Recursion', authors: 'Dan Garcia & Joshua Paley', type: 'concept',
+      summary: 'Iteration and recursion are the two ways programs do things many times. Both are foundational — but each has distinct uses, common bugs, and pedagogical challenges.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Choice of loop construct shapes student thinking. Curricula that lean on <code>forever + if-then-stop</code> produce tangled code. Curricula that teach <code>repeat-until</code> as the structured default produce clearer reasoning. Recursion is its own beast — and worth teaching well at the secondary level for the problems where it\'s genuinely simpler than iteration.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li><strong>Loops:</strong> off-by-one errors, conditions checked continuously (they\'re not), forever-loops as the default, variables that never get updated inside the loop.</li><li><strong>Boolean conditions:</strong> compound expressions like "while a or b are 0" translated as <code>(a or b) == 0</code> instead of <code>a == 0 or b == 0</code>.</li><li><strong>Recursion:</strong> missing base case → stack overflow; assuming outside-in evaluation; not trusting the recursive call.</li></ul>'},
+        { kind: 'strategy', title: 'A 4-step guide for recursion',
+          body: '<ol><li><strong>Divide:</strong> how do I break this problem into smaller parts?</li><li><strong>Invoke:</strong> call yourself recursively with those smaller parts.</li><li><strong>Combine:</strong> what do I do with the smaller results to produce my answer?</li><li><strong>Stop dividing:</strong> what\'s the base case? What do I return when the problem can\'t be divided anymore?</li></ol>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'For recursion: the "subcontractor" role-play. Stand a row of students. The first one is asked to compute factorial(5). They can\'t — so they "hire" the next student to compute factorial(4), and stand waiting. That student hires the next for factorial(3). And so on, until the base case. Then results return up the line. Students <em>feel</em> the stack growing and unwinding. Then map to code.'}
+      ],
+      quote: 'There\'s Joy in Repetition. — Prince'
+    },
+    { letter: 'S', title: 'Selecting Pathways With Conditionals', authors: 'Shuchi Grover', type: 'concept',
+      summary: 'Conditionals look simple. The bugs students produce with them are not. Compound Boolean expressions, nested IFs, and IF-ELSE structures are where many novices stumble — and curriculum has to be deliberate.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Curriculum that treats conditionals as a one-lesson topic misses the depth. Conditionals interact with Boolean logic, operator precedence, nested structures, mutual exclusivity, edge cases. Curriculum that scaffolds students through each of these — and surfaces the specific bugs they produce — yields students who can reason about complex control flow.'},
+        { kind: 'misconception', title: 'Where students stumble',
+          body: '<ul><li><strong>Redundant conditions:</strong> checking both <code>x > y</code> and <code>y < x</code> as if they were different.</li><li><strong>Unnecessary IF-ELSE:</strong> identical code in both branches.</li><li><strong>Multiple IFs instead of nested IF-ELSE:</strong> overwriting earlier matches.</li><li><strong>Compound expression bugs:</strong> wrong parentheses produce wrong precedence. The leap year algorithm is a classic case.</li><li><strong>Catch-all ELSE traps:</strong> code that handles "everything else" — including illogical inputs — incorrectly.</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li>Start with everyday IF-THEN scenarios before any code (Simon Says, dressing for the weather).</li><li>Teach IF, IF-ELSE, and IF-ELSEIF-ELSE as distinct patterns with explicit use cases.</li><li>Use flowcharts to make branching structure visible.</li><li>Practice compound Boolean expressions in unplugged settings before code (Dice Game, Boole Says).</li><li>For nested vs. compound: show both forms of the leap year algorithm side by side.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'The car-seat law: "Children under 2 must ride rear-facing unless they weigh 40 pounds OR are 40 inches tall." Have students translate this into a Boolean expression with explicit AND/OR. Test it against edge cases. Then introduce a buggy version with wrong precedence and ask: "Why does this say a 3-year-old needs to be rear-facing?"'}
+      ],
+      quote: 'When you come to a fork in the road, take it. — Yogi Berra'
+    },
+    { letter: 'T', title: 'Testing and Debugging', authors: 'Kathryn Rich & Carla Strickland', type: 'practice',
+      summary: 'Debugging is the central practice of programming. Curriculum that treats bugs as obstacles produces fragile learners. Curriculum that treats bugs as the most interesting thing in the room produces resilient ones.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'In school culture, errors mean failure. In programming, errors are the work. Curriculum design must <em>reframe</em> bugs explicitly. That reframing happens through classroom norms, teacher language, assessment design, and the explicit teaching of debugging strategies as named skills.'},
+        { kind: 'misconception', title: 'Types of bugs students produce',
+          body: '<ul><li><strong>Natural-language problems:</strong> the "while" carry-over.</li><li><strong>Human-interpreter problems:</strong> expecting the computer to fill in obvious steps.</li><li><strong>Boundary problems:</strong> off-by-one, edge cases, division by zero.</li><li><strong>Control-flow errors:</strong> counter inside loop never increments, faulty conditions.</li><li><strong>Design errors:</strong> the code does what was designed; the design was wrong.</li><li><strong>Typos and syntax errors.</strong></li></ul>'},
+        { kind: 'strategy', title: 'Debugging strategies to teach explicitly',
+          body: '<ul><li><strong>Line-by-line outcome tracing</strong> — slow execution, predict each line, find where prediction diverges.</li><li><strong>Decompose and test in parts</strong> — bisect the problem.</li><li><strong>Utilize error codes</strong> — train students to read them, not panic.</li><li><strong>For logic bugs:</strong> scrutinize, consider omissions, compare to working code, step away.</li><li><strong>Group reengagement:</strong> the class debugs one student\'s code together as a routine.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Establish a "bug museum" or "favorite mistake of the day." Each day, surface one specific student bug with permission, anonymously. The class debugs it together. Over a year, you build a class catalog of bugs you\'ve all defeated — and students stop hiding their bugs because bugs are how the class learns.'}
+      ],
+      quote: 'The most effective debugging tool is still careful thought, coupled with judiciously placed print statements. — Brian W. Kernighan'
+    },
+    { letter: 'U', title: 'Universal Design: Reaching All Students', authors: 'Maya Israel & Todd Lash', type: 'pedagogy',
+      summary: 'Design for the widest range of learners from the start, not retrofit later for the few who struggle. UDL is not a checklist — it\'s a property of how your curriculum is designed.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Two foundational concepts: <strong>learner variability is the norm</strong> (not the exception), and <strong>disability is contextual</strong> — tools, materials, and curricula can disable students. Curriculum that treats accommodations as an afterthought designs in barriers and then patches them. Curriculum designed with UDL principles from the start dramatically reduces who needs individualized support.'},
+        { kind: 'strategy', title: 'Three principles, applied to programming',
+          body: '<ul><li><strong>Multiple means of engagement (the "why"):</strong> choice of project, culturally relevant examples, clear goals, opportunities for peer collaboration.</li><li><strong>Multiple means of representation (the "what"):</strong> model with physical objects, video tutorials, anchor charts, multiple programming-language examples.</li><li><strong>Multiple means of action and expression (the "how"):</strong> templates, scaffolded code, partially completed projects, pseudocode options.</li></ul>'},
+        { kind: 'misconception', title: 'Common UDL implementation traps',
+          body: '<ul><li>Treating UDL as "make a worksheet for the IEP kids" — that\'s individualization, not UDL.</li><li>Adding accommodations after the fact — every retrofit reveals a design gap.</li><li>Choosing programming environments that aren\'t accessible (most block languages aren\'t screen-reader-friendly).</li><li>Failing to teach debugging as a self-monitored skill — leaving struggling students stuck.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Provide every project with at least three entry points: (1) blank canvas, (2) "exploded code" — the blocks needed are visible but unassembled, (3) a partial program with annotated TODOs. The same project, three doorways in. Every student engages at the level that stretches them.'}
+      ],
+      quote: 'Every student can learn, just not on the same day, or the same way. — George Evans'
+    },
+    { letter: 'V', title: 'Variables', authors: 'Philip Bagge & Shuchi Grover', type: 'concept',
+      summary: 'A variable is "a named thing whose value changes." Easy to say. Deeply hard for students to internalize. Curriculum that treats variables as a one-lesson topic will produce misconceptions that haunt students for years.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'Variables are the most fundamental — and most misunderstood — concept in introductory programming. Curriculum design choices here propagate everywhere: how you introduce variables shapes how students understand assignment, loops, parameters, scope, and state. Get variables right and the rest follows. Get them wrong and you spend the year debugging misconceptions.'},
+        { kind: 'misconception', title: 'The misconceptions you must design against',
+          body: '<ul><li>"A variable holds multiple values." (The box metaphor.)</li><li>"<code>=</code> means equality." (Math carry-over.)</li><li>"Variables work like links between two things." (Aliasing confusion.)</li><li>"Single-letter names are how variables work." (Math carry-over again.)</li><li>"Variables retain values across program runs." (Initialization gap.)</li></ul>'},
+        { kind: 'strategy', title: 'Curriculum moves that work',
+          body: '<ul><li><strong>Avoid the box metaphor.</strong> Use the whiteboard analogy: one value, erased on write.</li><li><strong>Story Variables</strong> first: identify variables in everyday narratives before code.</li><li><strong>Naming as a graded skill:</strong> meaningful names, conventions, roles.</li><li><strong>Initialization as a deliberate step:</strong> every variable, every program start.</li><li><strong>Eight roles</strong> for variables (counter, accumulator, flag, etc.) — name them, use them.</li><li><strong>Read-vs-write</strong>: the move block reads a variable; the change block writes to it. Critical distinction.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Story Variables: hand students four short everyday narratives ("Last week the pen cost $1.50, today it costs $3"). Pairs identify what\'s changing, name the variable, list possible values, describe how the value changes. Without any code, students develop the concept of "a named thing whose value updates." Then bridge to a Scratch program that models one of the stories.'}
+      ],
+      quote: 'One man\'s constant is another man\'s variable. — Alan Perlis'
+    },
+    { letter: 'W', title: 'Worked Examples and Other Scaffolding Strategies', authors: 'Jane Waite & Shuchi Grover', type: 'pedagogy',
+      summary: 'Hands-on programming alone is not enough. Curriculum must scaffold students into independence — and the scaffolds must be designed to fade. This chapter is the toolkit.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'The dominant misconception about CS pedagogy is that hands-on tinkering produces understanding. Research consistently shows otherwise: minimal-guidance discovery learning is less efficient than well-designed scaffolded instruction. The art is to scaffold heavily early, then fade. Curriculum that knows when to use which scaffold — and when to remove it — produces deep, transferable understanding.'},
+        { kind: 'strategy', title: 'The full scaffolding toolkit',
+          body: '<ul><li><strong>Worked examples</strong> — problem, full solution, explanation. Pair with subgoal labels.</li><li><strong>Subgoal labeling</strong> — name the steps as a sequence of intent: "initialize, loop, terminate."</li><li><strong>Live/shared coding</strong> — teacher models thinking aloud, including mistakes.</li><li><strong>Code reading and tracing</strong> — explicit skill, not a side activity.</li><li><strong>Use-Modify-Create</strong> — ownership transfers gradually from teacher to learner.</li><li><strong>TIPPSEE</strong> — a reading-comprehension lens for Scratch projects.</li><li><strong>PRIMM</strong> — Predict, Run, Investigate, Modify, Make.</li><li><strong>Parsons problems</strong> — rearrange given code blocks to form a working program.</li></ul>'},
+        { kind: 'misconception', title: 'Common scaffolding mistakes',
+          body: '<ul><li>Scaffolds that never come down — students stay dependent.</li><li>Scaffolds that come down too fast — students fall.</li><li>Skipping the Make phase of PRIMM — students never apply.</li><li>Treating worked examples as something to copy, not study.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'PRIMM in practice: hand pairs a working Scratch program. <strong>Predict</strong> what it does — on paper. <strong>Run</strong> it. <strong>Investigate</strong> the discrepancy. <strong>Modify</strong> it to do something new (extension challenges of increasing difficulty). <strong>Make</strong> their own program using the same construct. Each phase has explicit prompts. The teacher\'s job is to maintain the discipline of the phases — especially "no running before predicting."'}
+      ],
+      quote: 'Scaffolding situations are those in which a learner gets assistance to perform a task beyond what could be achieved unassisted. — Roy Pea'
+    },
+    { letter: 'X', title: 'X-ing Boundaries With Physical Computing', authors: 'Sue Sentance & Katharine Childs', type: 'concept',
+      summary: 'Physical computing makes programming tangible — and dramatically expands what students can build. But the logistics are real, and curriculum has to design for them, not around them.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'When code drives hardware — LEDs, sensors, motors, e-textiles — abstract concepts become physical. Students who don\'t engage with traditional CS often engage deeply with physical computing because the artifact is tangible. But the logistics (kit management, software install, USB ports, costs) defeat many would-be physical-computing curricula. Design with logistics in mind from day one.'},
+        { kind: 'strategy', title: 'Curriculum design for physical computing',
+          body: '<ul><li><strong>Match the kit to the goal:</strong> Bee-Bot for primary spatial reasoning; Micro:bit for sensor-based projects; Raspberry Pi for full-stack physical computing; LilyPad for e-textiles and wearables.</li><li><strong>Scaffold heavily — start with working code</strong>, modify it, then design from scratch.</li><li><strong>Plan for group work</strong> with explicit roles (designer, programmer, tester, builder).</li><li><strong>Encourage planning before building</strong> — sketches, circuit diagrams, prototypes.</li><li><strong>Have backup plans</strong> when hardware fails (emulators, paired devices).</li></ul>'},
+        { kind: 'misconception', title: 'Logistical traps for curriculum writers',
+          body: '<ul><li>Assuming the school will allow software installation or USB access. (Many won\'t.)</li><li>Underestimating kit organization. Lost components kill lessons.</li><li>Treating physical computing as "just like screen-based" — fine-motor demands, fragile components, soldering.</li><li>Designing lessons that depend on every device working perfectly.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'For primary students, the Micro:bit pedometer. Pairs use the Micro:bit\'s accelerometer to count their steps. Concepts taught: variable (the step count), input (motion detection), output (display). Real-world purpose: "Who in the class walks farthest in a day?" Data is collected, analyzed, displayed — integrating CS, math, and PE in one project.'}
+      ],
+      quote: 'When code becomes physical, students stop seeing programs as something on a screen — and start seeing them as ways to change the world.'
+    },
+    { letter: 'Y', title: 'Yay, My Program Works! Beyond Working Code', authors: 'Shuchi Grover', type: 'practice',
+      summary: 'Working code is the floor, not the ceiling. Curriculum must explicitly teach the habits that distinguish "it runs" from "it\'s well-built" — naming, initialization, comments, structure, testing.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'In real software, working code is a small part of quality. Readability, maintainability, robustness, and elegance are equally important. Curriculum that grades only on "does it work?" rewards brittle patterns. Curriculum that includes habits as graded skills — meaningful names, proper initialization, comments, no duplication, testing with diverse inputs — produces students whose code others can read.'},
+        { kind: 'strategy', title: 'The good habits to teach explicitly',
+          body: '<ul><li><strong>Meaningful variable names</strong> tied to the role (counter, accumulator, flag).</li><li><strong>Proper initialization</strong> — every variable, once, at the right place.</li><li><strong>Code comments</strong> as self-explanation, not narration.</li><li><strong>No duplication</strong> — refactor repeated chunks into functions.</li><li><strong>No unreachable code</strong> — clean up extraneous blocks.</li><li><strong>Iterative refinement</strong> — small, testable increments.</li><li><strong>Test with a range of inputs</strong> — valid, invalid, edge cases, illogical.</li><li><strong>Structured loops</strong> over <code>forever + if-then-stop</code> patterns.</li></ul>'},
+        { kind: 'misconception', title: 'Common quality traps',
+          body: '<ul><li><strong>Merging functional plans:</strong> the Rainfall problem (read, validate, sum, count, average) — too many goals interleaved. Separate them.</li><li><strong>Inappropriate conditionalization:</strong> identical code in both branches of an IF-ELSE.</li><li><strong>Fine-grained, bottom-up coding</strong> in block-based languages — spaghetti as the default.</li><li><strong>Skipping invalid-input tests</strong> — the program "works" until a user types a letter.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Code review as a graded artifact. Pairs review each other\'s projects using a checklist: meaningful names, initialization once, comments where the why is non-obvious, no duplicate code, no unreachable blocks, tested with at least three inputs including an edge case. The reviewer\'s feedback is graded; the reviewee revises. Students internalize quality criteria by applying them.'}
+      ],
+      quote: 'Programs must be written for people to read, and only incidentally for machines to execute. — Hal Abelson & Gerald Sussman'
+    },
+    { letter: 'Z', title: 'Zestful Learning', authors: 'Bryan Twarek', type: 'pedagogy',
+      summary: 'Joy is not the reward for learning — it is the engine that makes learning happen. Zestful classrooms are built deliberately, through curriculum design choices that compound across a year.',
+      sections: [
+        { kind: 'why', title: 'Why this matters for curriculum design',
+          body: 'A curriculum that produces "competent" but disengaged students has failed at its primary mission. The students who keep coming to CS — who choose to continue past the required course, who form a CS identity — are the ones who experience joy. Joy is a curriculum-design output, not a happy accident.'},
+        { kind: 'strategy', title: 'Six tenets to design around',
+          body: '<ul><li><strong>Relevant projects</strong> rooted in student interest and identity.</li><li><strong>Scaffolded creativity</strong> — constraints that enable, not restrict.</li><li><strong>Showcasing to authentic audiences</strong> — peers, families, communities.</li><li><strong>Supportive classroom culture</strong> where vulnerability is safe.</li><li><strong>Room for discovery</strong> — tinkering, classroom experts, just-in-time learning.</li><li><strong>Physical activity</strong> — unplugged moments, movement, brain breaks.</li></ul>'},
+        { kind: 'misconception', title: 'Joy-killing curriculum patterns',
+          body: '<ul><li>Step-by-step instructions with no real choice.</li><li>Solo work at screens for the entire period.</li><li>Project showcases as one-off events, not routine.</li><li>"Coverage" pressure that crowds out creativity.</li><li>Rigid pacing that ignores discovery moments.</li></ul>'},
+        { kind: 'activity', title: 'A specific lesson move',
+          body: 'Build a "two stars and a wish" showcase into the last 5–10 minutes of every class. Random-select 1–3 students to share. Each chooses what to highlight. Peers note two things they liked and one wish. Even a 5-minute version normalizes showcasing, builds collaborative culture, and creates an authentic audience daily. Students start working with sharing in mind — and that lifts the quality of what they make.'}
+      ],
+      quote: 'True happiness comes from the joy of deeds well done, the zest of creating things new. — Antoine de Saint-Exupéry'
+    },
+  ];
+
+  // ============ BUILD HERO ALPHABET ============
+  const heroAlphabet = document.getElementById('heroAlphabet');
+  chapters.forEach((ch, i) => {
+    const el = document.createElement('div');
+    el.className = 'hero-letter';
+    el.dataset.type = ch.type;
+    el.dataset.letter = ch.letter;
+    el.title = `${ch.letter} – ${ch.title}`;
+    el.textContent = ch.letter;
+    el.style.animationDelay = `${i * 0.02}s`;
+    el.addEventListener('click', () => openModal(ch));
+    heroAlphabet.appendChild(el);
+  });
+
+  // ============ BUILD CHAPTER GRID ============
+  const chapterGrid = document.getElementById('chapterGrid');
+  chapters.forEach(ch => {
+    const card = document.createElement('article');
+    card.className = 'chapter-card';
+    card.dataset.type = ch.type;
+    card.tabIndex = 0;
+    card.innerHTML = `
+      <div class="chapter-header">
+        <div class="chapter-letter">${ch.letter}</div>
+        <div class="chapter-type">${ch.type}</div>
+      </div>
+      <h3 class="chapter-title">${ch.title}</h3>
+      <div class="chapter-authors">${ch.authors}</div>
+    `;
+    card.addEventListener('click', () => openModal(ch));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(ch); }
+    });
+    chapterGrid.appendChild(card);
+  });
+
+  // ============ FILTER ============
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.chapter-card').forEach(card => {
+        if (filter === 'all' || card.dataset.type === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // ============ MODAL ============
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  const modalLetter = document.getElementById('modalLetter');
+  const modalType = document.getElementById('modalType');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalAuthors = document.getElementById('modalAuthors');
+  const modalBody = document.getElementById('modalBody');
+
+  const typeColors = {
+    concept: { bg: 'var(--concept-bg)', color: 'var(--concept)' },
+    practice: { bg: 'var(--practice-bg)', color: 'var(--practice)' },
+    pedagogy: { bg: 'var(--pedagogy-bg)', color: 'var(--pedagogy)' }
+  };
+
+  function openModal(ch) {
+    modalLetter.textContent = ch.letter;
+    modalLetter.style.color = typeColors[ch.type].color;
+    modalType.textContent = ch.type;
+    modalType.style.background = typeColors[ch.type].bg;
+    modalType.style.color = typeColors[ch.type].color;
+    modalTitle.textContent = ch.title;
+    modalAuthors.textContent = `Authored by ${ch.authors}`;
+
+    let bodyHTML = `<p><strong>${ch.summary}</strong></p>`;
+
+    if (ch.sections && ch.sections.length) {
+      // Rich format: render each section with appropriate styling
+      ch.sections.forEach(s => {
+        if (s.kind === 'why') {
+          bodyHTML += `<h4>${s.title}</h4><p>${s.body}</p>`;
+        } else {
+          bodyHTML += `<div class="modal-section ${s.kind}"><strong>${s.title}</strong>${s.body}</div>`;
+        }
+      });
+    } else if (ch.detail) {
+      // Legacy format: just render detail as a paragraph
+      bodyHTML += `<p>${ch.detail}</p>`;
+    }
+
+    if (ch.quote) bodyHTML += `<div class="key-quote">${ch.quote}</div>`;
+    modalBody.innerHTML = bodyHTML;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // ============ REVEAL ON SCROLL ============
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    // Auto-tag elements for reveal
+    const revealEls = document.querySelectorAll('.stat-card, .pillar, .chapter-card, .idea-card, .pedagogy-row, .challenge, .quote, .audience-card, .domain, .reveal');
+    revealEls.forEach((el, i) => {
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+      observer.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // ============ SMOOTH SCROLL HANDLER ============
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

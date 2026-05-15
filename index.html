@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Science in K-12 — An A to Z Handbook on Teaching Programming</title>
+<meta name="description" content="A comprehensive guide for teachers covering the concepts, practices, and pedagogies of teaching introductory programming in K-12 classrooms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf5ee;
+    --bg-card: #fffbf5;
+    --bg-dark: #1a1625;
+    --text: #1a1625;
+    --text-muted: #6b6480;
+    --text-light: #9a93ab;
+    --border: #e8dcc8;
+    --border-dark: #c9b896;
+
+    --concept: #5b4fd9;
+    --concept-bg: #efedfd;
+    --practice: #d94f7a;
+    --practice-bg: #fdedf3;
+    --pedagogy: #1d8a7e;
+    --pedagogy-bg: #e6f5f2;
+    --gold: #c9962a;
+    --gold-bg: #faf0d9;
+
+    --radius-sm: 8px;
+    --radius: 16px;
+    --radius-lg: 28px;
+
+    --max-width: 1320px;
+    --max-content: 880px;
+
+    --shadow-sm: 0 1px 2px rgba(26,22,37,.06);
+    --shadow: 0 8px 30px rgba(26,22,37,.08);
+    --shadow-lg: 0 24px 60px rgba(26,22,37,.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+  .content { max-width: var(--max-content); margin: 0 auto; padding: 0 24px; }
+
+  /* ============ NAVIGATION ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,245,238,.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--bg-dark); color: var(--bg);
+    border-radius: 8px;
+    font-family: 'Fraunces', serif; font-weight: 700;
+    font-style: italic; font-size: 1.1rem;
+  }
+  .nav-links { display: flex; gap: 28px; font-size: .92rem; color: var(--text-muted); }
+  .nav-links a { transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--bg-dark); color: var(--bg);
+    padding: 10px 18px; border-radius: 999px;
+    font-size: .88rem; font-weight: 500;
+    transition: transform .2s, background .2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); }
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: 80px 0 60px;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-bg); color: #846220;
+    padding: 7px 16px; border-radius: 999px;
+    font-size: .82rem; font-weight: 500; letter-spacing: .02em;
+    margin-bottom: 28px;
+    border: 1px solid #ecdba2;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 0.98; letter-spacing: -0.035em;
+    font-weight: 400; margin: 0 0 24px;
+    max-width: 16ch;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+    color: var(--concept);
+  }
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 56ch; margin: 0 0 36px;
+    line-height: 1.55;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border-radius: 999px;
+    font-weight: 500; font-size: .95rem;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--bg-dark); color: var(--bg); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn-secondary {
+    background: var(--bg-card); color: var(--text);
+    border-color: var(--border-dark);
+  }
+  .btn-secondary:hover { background: var(--bg-dark); color: var(--bg); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* Hero alphabet visualization */
+  .hero-alphabet {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 6px;
+    max-width: 100%;
+  }
+  .hero-letter {
+    aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(.9rem, 2vw, 1.6rem);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    transition: all .3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .hero-letter:hover {
+    background: var(--bg-dark);
+    color: var(--bg);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow);
+    z-index: 2;
+  }
+  .hero-letter[data-type="concept"] { color: var(--concept); border-color: #d6d2f5; }
+  .hero-letter[data-type="practice"] { color: var(--practice); border-color: #f0c7d3; }
+  .hero-letter[data-type="pedagogy"] { color: var(--pedagogy); border-color: #bee0d8; }
+
+  @media (max-width: 720px) {
+    .hero-alphabet { grid-template-columns: repeat(7, 1fr); }
+  }
+
+  /* ============ SECTION TITLES ============ */
+  .section { padding: 96px 0; position: relative; }
+  .section-dark { background: var(--bg-dark); color: var(--bg); }
+  .section-dark .section-eyebrow { color: #d6c79e; }
+
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: .82rem; font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-eyebrow::before {
+    content: ''; width: 24px; height: 1px;
+    background: currentColor;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 1.05; letter-spacing: -0.025em;
+    font-weight: 400; margin: 0 0 24px;
+  }
+  .section-title em { font-style: italic; color: var(--concept); }
+  .section-dark .section-title em { color: #ebcf83; }
+  .section-lead {
+    font-size: 1.15rem; color: var(--text-muted);
+    max-width: 60ch; line-height: 1.6;
+  }
+  .section-dark .section-lead { color: #c9bea1; }
+
+  /* ============ WHY SECTION ============ */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 60px;
+  }
+  @media (max-width: 880px) {
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .why-stats {
+    display: grid; gap: 24px;
+  }
+  .stat-card {
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    transition: all .3s;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--border-dark);
+  }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem; font-weight: 500;
+    line-height: 1; letter-spacing: -0.02em;
+    color: var(--concept);
+  }
+  .stat-label {
+    color: var(--text-muted);
+    font-size: .95rem; margin-top: 8px;
+  }
+  .stat-detail {
+    margin-top: 14px; font-size: .9rem;
+    color: var(--text); line-height: 1.5;
+  }
+
+  .why-text h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    margin: 32px 0 12px;
+    line-height: 1.3;
+  }
+  .why-text h3:first-child { margin-top: 0; }
+  .why-text p {
+    color: var(--text-muted); margin: 0 0 16px;
+    line-height: 1.7;
+  }
+
+  /* ============ PILLARS ============ */
+  .pillars-section { background: var(--bg-dark); color: var(--bg); }
+  .pillars-section .section-title { color: var(--bg); }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) {
+    .pillars { grid-template-columns: 1fr; }
+  }
+  .pillar {
+    padding: 40px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius-lg);
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.16);
+  }
+  .pillar-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+  .pillar-concept .pillar-icon { background: var(--concept); color: white; }
+  .pillar-practice .pillar-icon { background: var(--practice); color: white; }
+  .pillar-pedagogy .pillar-icon { background: var(--pedagogy); color: white; }
+
+  .pillar-tag {
+    font-size: .78rem; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: #d6c79e; margin-bottom: 6px;
+  }
+  .pillar-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem; font-weight: 400;
+    margin: 0 0 14px;
+  }
+  .pillar-description {
+    color: #c9bea1; line-height: 1.6;
+    margin: 0 0 24px; font-size: .96rem;
+  }
+  .pillar-count {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: .85rem; color: #d6c79e;
+  }
+  .pillar-count strong {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem; color: var(--bg);
+    font-weight: 500;
+  }
+
+  /* ============ A-Z EXPLORER ============ */
+  .explorer-header {
+    display: flex; align-items: end; justify-content: space-between;
+    gap: 32px; flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .filter-group {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    font-size: .88rem; font-weight: 500;
+    color: var(--text-muted);
+    transition: all .2s;
+  }
+  .filter-btn:hover {
+    border-color: var(--border-dark);
+    color: var(--text);
+  }
+  .filter-btn.active {
+    background: var(--bg-dark);
+    border-color: var(--bg-dark);
+    color: var(--bg);
+  }
+  .filter-btn .count {
+    margin-left: 6px;
+    font-size: .78rem;
+    opacity: .7;
+  }
+
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .chapter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    position: relative;
+    cursor: pointer;
+    transition: all .25s ease;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 200px;
+  }
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--border-dark);
+  }
+  .chapter-card:hover::before { opacity: 1; }
+  .chapter-card.hidden {
+    display: none;
+  }
+  .chapter-card[data-type="concept"] { color: var(--concept); }
+  .chapter-card[data-type="practice"] { color: var(--practice); }
+  .chapter-card[data-type="pedagogy"] { color: var(--pedagogy); }
+
+  .chapter-header {
+    display: flex; align-items: start; justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .chapter-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 3.4rem;
+    line-height: 0.8;
+    font-weight: 400;
+    color: currentColor;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+  }
+  .chapter-type {
+    font-size: .7rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px;
+    background: currentColor;
+    color: var(--bg-card);
+  }
+  .chapter-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem; line-height: 1.25;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0 0 10px;
+    flex-grow: 1;
+  }
+  .chapter-authors {
+    font-size: .82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-top: auto;
+  }
+
+  /* ============ KEY IDEAS / PEDAGOGIES ============ */
+  .ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) {
+    .ideas-grid { grid-template-columns: 1fr; }
+  }
+  .idea-card {
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    transition: all .3s;
+  }
+  .idea-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .idea-card::after {
+    content: '';
+    position: absolute;
+    top: -40%; right: -20%;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .08;
+    transition: transform .4s;
+  }
+  .idea-card:hover::after { transform: scale(1.2); }
+
+  .idea-letter {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.4rem;
+    background: var(--accent);
+    color: white;
+    margin-bottom: 20px;
+    position: relative; z-index: 2;
+  }
+  .idea-card[data-color="concept"] { --accent: var(--concept); }
+  .idea-card[data-color="practice"] { --accent: var(--practice); }
+  .idea-card[data-color="pedagogy"] { --accent: var(--pedagogy); }
+  .idea-card[data-color="gold"] { --accent: var(--gold); }
+
+  .idea-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.55rem; font-weight: 500;
+    margin: 0 0 14px;
+    line-height: 1.25;
+    position: relative; z-index: 2;
+  }
+  .idea-text {
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0 0 18px;
+    position: relative; z-index: 2;
+    font-size: .98rem;
+  }
+  .idea-meta {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: .82rem; color: var(--text-muted);
+    position: relative; z-index: 2;
+  }
+
+  /* ============ PEDAGOGY DEEP DIVE ============ */
+  .pedagogy-list {
+    display: grid; gap: 14px;
+    margin-top: 56px;
+  }
+  .pedagogy-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 28px;
+    align-items: center;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all .25s;
+  }
+  .pedagogy-row:hover {
+    transform: translateX(6px);
+    border-color: var(--pedagogy);
+    background: var(--pedagogy-bg);
+  }
+  .pedagogy-acronym {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem; font-weight: 500;
+    color: var(--pedagogy);
+    font-style: italic;
+    line-height: 1;
+  }
+  .pedagogy-info h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem; font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .pedagogy-info p {
+    margin: 0; color: var(--text-muted);
+    font-size: .93rem; line-height: 1.5;
+  }
+  .pedagogy-chapter {
+    font-size: .78rem; font-weight: 500;
+    padding: 6px 12px;
+    background: var(--pedagogy-bg);
+    color: var(--pedagogy);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    .pedagogy-row { grid-template-columns: 60px 1fr; gap: 16px; padding: 20px; }
+    .pedagogy-chapter { grid-column: 1 / -1; justify-self: start; }
+  }
+
+  /* ============ LEARNING GOALS / FRAMEWORK ============ */
+  .framework {
+    background: var(--bg-dark);
+    color: var(--bg);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    margin: 80px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) {
+    .framework { padding: 36px 24px; }
+  }
+  .framework-header {
+    text-align: center; margin-bottom: 48px;
+  }
+  .framework-header h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 400;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .framework-header p {
+    color: #c9bea1;
+    max-width: 50ch; margin: 0 auto;
+  }
+  .domains {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 720px) {
+    .domains { grid-template-columns: 1fr; }
+  }
+  .domain {
+    padding: 32px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .domain-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem; font-weight: 500;
+    border: 2px solid currentColor;
+  }
+  .domain-cognitive { color: #a8a0f7; }
+  .domain-interpersonal { color: #f7a0c3; }
+  .domain-intrapersonal { color: #a0e8d4; }
+  .domain h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem; font-weight: 500;
+    margin: 0 0 12px;
+    color: var(--bg);
+  }
+  .domain p {
+    color: #c9bea1; margin: 0;
+    font-size: .9rem; line-height: 1.5;
+  }
+
+  /* ============ QUOTES / WISDOM ============ */
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 880px) {
+    .quotes { grid-template-columns: 1fr; }
+  }
+  .quote {
+    padding: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    transition: all .3s;
+  }
+  .quote:hover {
+    background: var(--bg-dark);
+    color: var(--bg);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .quote:hover .quote-text { color: var(--bg); }
+  .quote:hover .quote-author { color: #d6c79e; }
+  .quote:hover .quote-mark { color: rgba(255,255,255,.15); }
+
+  .quote-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 6rem; line-height: 0.7;
+    font-weight: 400;
+    color: var(--border-dark);
+    margin-bottom: -20px;
+    transition: color .3s;
+    font-style: italic;
+  }
+  .quote-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem; line-height: 1.45;
+    font-weight: 400;
+    color: var(--text);
+    margin: 0 0 24px;
+    transition: color .3s;
+  }
+  .quote-author {
+    font-size: .85rem; color: var(--text-muted);
+    font-weight: 500; letter-spacing: .02em;
+    transition: color .3s;
+  }
+
+  /* ============ EDITOR SECTION ============ */
+  .editor-section {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 880px) {
+    .editor-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .editor-portrait {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--concept-bg), var(--gold-bg));
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .editor-portrait::before {
+    content: 'SG';
+    font-family: 'Fraunces', serif;
+    font-size: 8rem; font-weight: 400;
+    font-style: italic;
+    color: var(--concept);
+    opacity: .9;
+  }
+  .editor-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: calc(var(--radius-lg) - 12px);
+    pointer-events: none;
+  }
+  .editor-info h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    font-weight: 400; margin: 0 0 16px;
+  }
+  .editor-role {
+    color: var(--concept); font-weight: 500;
+    font-size: .98rem; margin-bottom: 24px;
+  }
+  .editor-info p {
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0 0 16px;
+  }
+  .editor-credentials {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .credential strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    color: var(--text);
+  }
+  .credential span {
+    font-size: .82rem; color: var(--text-muted);
+  }
+
+  /* ============ HOW TO USE ============ */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  @media (max-width: 720px) {
+    .audience-grid { grid-template-columns: 1fr; }
+  }
+  .audience-card {
+    padding: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    transition: all .3s;
+  }
+  .audience-card:hover {
+    border-color: var(--text);
+    box-shadow: var(--shadow);
+  }
+  .audience-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    margin: 0 0 14px;
+  }
+  .audience-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .audience-card .tip {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    font-size: .9rem;
+    color: #6b4d10;
+    line-height: 1.5;
+  }
+  .audience-card .tip strong {
+    color: #523a06;
+  }
+
+  /* ============ CHALLENGES SECTION ============ */
+  .challenges {
+    display: grid; gap: 14px;
+    margin-top: 56px;
+  }
+  .challenge {
+    display: flex; gap: 24px;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    align-items: start;
+    transition: all .25s;
+  }
+  .challenge:hover {
+    transform: translateX(6px);
+    border-color: var(--practice);
+  }
+  .challenge-num {
+    flex-shrink: 0;
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem; font-weight: 500;
+    color: var(--practice);
+    line-height: 1;
+    min-width: 44px;
+    font-style: italic;
+  }
+  .challenge h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem; font-weight: 500;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  .challenge p {
+    margin: 0; color: var(--text-muted);
+    line-height: 1.6;
+    font-size: .96rem;
+  }
+
+  /* ============ DETAIL MODAL ============ */
+  .modal {
+    position: fixed; inset: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26,22,37,.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+    padding: 24px;
+  }
+  .modal.open {
+    opacity: 1; pointer-events: auto;
+  }
+  .modal-content {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px;
+    position: relative;
+    transform: translateY(20px) scale(.97);
+    transition: transform .3s ease;
+  }
+  .modal.open .modal-content { transform: translateY(0) scale(1); }
+  @media (max-width: 720px) {
+    .modal-content { padding: 32px 24px; }
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: var(--text-muted);
+    transition: all .2s;
+  }
+  .modal-close:hover {
+    background: var(--bg-dark); color: var(--bg);
+  }
+  .modal-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    line-height: 1;
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144;
+    margin-bottom: 8px;
+  }
+  .modal-type {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: .75rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem; font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 16px;
+  }
+  .modal-authors {
+    font-size: .92rem;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-body {
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .modal-body p {
+    margin: 0 0 16px;
+  }
+  .modal-body .key-quote {
+    padding: 20px 24px;
+    background: var(--gold-bg);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: #5a4310;
+    margin: 24px 0;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    background: var(--bg-dark);
+    color: var(--bg);
+    padding: 80px 0 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+  }
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  .footer-brand h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem; font-weight: 400;
+    margin: 0 0 14px;
+    line-height: 1.2;
+  }
+  .footer-brand p {
+    color: #c9bea1;
+    margin: 0;
+    max-width: 36ch;
+    line-height: 1.6;
+  }
+  .footer h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    margin: 0 0 18px;
+    color: var(--bg);
+    font-weight: 500;
+  }
+  .footer-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 10px;
+  }
+  .footer-list li {
+    color: #c9bea1;
+    font-size: .92rem;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 32px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: .85rem;
+    color: #9a8e6f;
+  }
+  .footer-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #ebcf83;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal[data-delay="1"] { transition-delay: .1s; }
+  .reveal[data-delay="2"] { transition-delay: .2s; }
+  .reveal[data-delay="3"] { transition-delay: .3s; }
+  .reveal[data-delay="4"] { transition-delay: .4s; }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-letter {
+    animation: floatIn .5s ease both;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">A</span>
+      <span>K–12 Computer Science</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#pillars">Approach</a>
+      <a href="#chapters">A–Z Chapters</a>
+      <a href="#pedagogies">Pedagogies</a>
+      <a href="#editor">Editor</a>
+    </div>
+    <a href="#chapters" class="nav-cta">Explore Chapters →</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-tag">A handbook for teachers, by teachers</div>
+    <h1 class="hero-title">
+      Teaching <em>Computer Science</em> from A to Z.
+    </h1>
+    <p class="hero-subtitle">
+      A comprehensive guide for K–12 teachers covering the fundamental concepts, practices, and well-researched pedagogies that transform an introductory programming classroom — from elementary school through high school.
+    </p>
+    <div class="hero-actions">
+      <a href="#chapters" class="btn btn-primary">
+        Explore all 26 chapters
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#about" class="btn btn-secondary">Why this book exists</a>
+    </div>
+
+    <div class="hero-alphabet" id="heroAlphabet" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / WHY ============ -->
+<section class="section" id="about">
+  <div class="content">
+    <div class="section-eyebrow">The challenge</div>
+    <h2 class="section-title">Coding is reaching schools at <em>unprecedented scale</em>. But who teaches the teachers?</h2>
+    <p class="section-lead">Learning to code is the cool new thing in K–12 schools worldwide. There's enthusiasm among children and parents — and widespread anxiety among schools, teachers, and administrators about how to actually teach it well.</p>
+  </div>
+
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-stats">
+        <div class="stat-card reveal">
+          <div class="stat-number">26</div>
+          <div class="stat-label">Chapters, alphabetically organized</div>
+          <p class="stat-detail">From <strong>A</strong>lgorithms to <strong>Z</strong>estful Learning, each chapter tackles a foundational concept, practice, or pedagogy in teaching introductory programming.</p>
+        </div>
+        <div class="stat-card reveal" data-delay="1">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Contributing teachers & researchers</div>
+          <p class="stat-detail">Authors include full-time classroom teachers, teacher trainers, and researchers from the US, UK, Canada, Finland, Switzerland, Germany, and Australia.</p>
+        </div>
+        <div class="stat-card reveal" data-delay="2">
+          <div class="stat-number">K–12</div>
+          <div class="stat-label">Every grade band, every context</div>
+          <p class="stat-detail">Ideas transcend programming languages and geographical boundaries — applicable in elementary, middle, and high school classrooms worldwide.</p>
+        </div>
+      </div>
+
+      <div class="why-text reveal" data-delay="1">
+        <h3>The “best of times, worst of times”</h3>
+        <p>On one hand, excitement surrounds the introduction of programming to students at all grade levels. On the other, there's widespread confusion about teacher preparation: <em>What should be taught? How should it be taught? What do students typically struggle with? How can we support all learners?</em></p>
+
+        <h3>Beyond access to a curriculum</h3>
+        <p>Teaching is not just about having a curriculum — it's about knowing <strong>what</strong> needs to be taught and <strong>how</strong> it should be taught. This combination is called <em>pedagogical content knowledge</em> (PCK), and it's exactly what this book aims to build.</p>
+
+        <h3>For every curious teacher</h3>
+        <p>Whether you're preparing to teach programming for the first time, or you've been teaching it for years, this guide offers an enduring foundation in both <strong>content</strong> and <strong>pedagogy</strong> — the two pillars of effective instruction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THREE PILLARS ============ -->
+<section class="section pillars-section" id="pillars">
+  <div class="container">
+    <div class="section-eyebrow">A unique approach</div>
+    <h2 class="section-title">Three intertwined pillars of <em>teaching programming</em>.</h2>
+    <p class="section-lead">The book is organized around 14 chapters on <strong>what</strong> to teach (concepts and practices) and 12 chapters on <strong>how</strong> to teach (pedagogy) — drawing on 30+ years of research in CS education and the learning sciences.</p>
+
+    <div class="pillars">
+      <div class="pillar pillar-concept">
+        <div class="pillar-icon">C</div>
+        <div class="pillar-tag">10 chapters</div>
+        <h3 class="pillar-title">Concepts</h3>
+        <p class="pillar-description">The semantics of creating programs. Foundational ideas like algorithms, variables, conditionals, loops, recursion, data structures, events, modularity, expressions, and physical computing.</p>
+        <div class="pillar-count">
+          <strong>A · D · E · J · M · O · R · S · V · X</strong>
+        </div>
+      </div>
+      <div class="pillar pillar-practice">
+        <div class="pillar-icon">P</div>
+        <div class="pillar-tag">4 chapters</div>
+        <h3 class="pillar-title">Practices</h3>
+        <p class="pillar-description">The pragmatics and strategies students learn hand-in-hand with concepts: planning before programming, setting learning goals, testing and debugging, and developing good habits of programming.</p>
+        <div class="pillar-count">
+          <strong>B · K · T · Y</strong>
+        </div>
+      </div>
+      <div class="pillar pillar-pedagogy">
+        <div class="pillar-icon">T</div>
+        <div class="pillar-tag">12 chapters</div>
+        <h3 class="pillar-title">Pedagogies</h3>
+        <p class="pillar-description">How to teach. From creative coding and culturally relevant pedagogy to formative feedback, project-based learning, pair programming, scaffolding, and zestful learning.</p>
+        <div class="pillar-count">
+          <strong>C · F · G · H · I · L · N · P · Q · U · W · Z</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ A-Z EXPLORER ============ -->
+<section class="section" id="chapters">
+  <div class="container">
+    <div class="explorer-header">
+      <div>
+        <div class="section-eyebrow">The chapters</div>
+        <h2 class="section-title">The complete <em>A to Z</em>.</h2>
+      </div>
+    </div>
+
+    <div class="filter-group" role="tablist" aria-label="Filter chapters by type">
+      <button class="filter-btn active" data-filter="all" role="tab">
+        All chapters <span class="count">26</span>
+      </button>
+      <button class="filter-btn" data-filter="concept" role="tab">
+        Concepts <span class="count">10</span>
+      </button>
+      <button class="filter-btn" data-filter="practice" role="tab">
+        Practices <span class="count">4</span>
+      </button>
+      <button class="filter-btn" data-filter="pedagogy" role="tab">
+        Pedagogies <span class="count">12</span>
+      </button>
+    </div>
+
+    <div class="chapter-grid" id="chapterGrid"></div>
+  </div>
+</section>
+
+<!-- ============ KEY PEDAGOGIES ============ -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="pedagogies">
+  <div class="content">
+    <div class="section-eyebrow">Research-backed pedagogies</div>
+    <h2 class="section-title">Scaffolding frameworks that <em>actually work</em>.</h2>
+    <p class="section-lead">Decades of research and classroom practice have produced powerful, well-tested approaches for teaching programming. These pedagogies appear throughout the book.</p>
+  </div>
+
+  <div class="container">
+    <div class="pedagogy-list">
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">UMC</div>
+        <div class="pedagogy-info">
+          <h4>Use → Modify → Create</h4>
+          <p>A learning progression where students first explore an existing program, then modify it bit by bit, before creating their own original work. Ownership gradually shifts from teacher to learner.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">PRIMM</div>
+        <div class="pedagogy-info">
+          <h4>Predict · Run · Investigate · Modify · Make</h4>
+          <p>A carefully sequenced approach where students first predict what code does (without running it), then explore, modify, and finally create their own. Builds code reading habits and conceptual understanding.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">TIPPSEE</div>
+        <div class="pedagogy-info">
+          <h4>Title · Instructions · Purpose · Play · Sprites · Explore · Extend</h4>
+          <p>A reading-comprehension–inspired strategy for learning through example projects in Scratch. Adapted from Use-Modify-Create to give students a clear roadmap for exploration.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">UDL</div>
+        <div class="pedagogy-info">
+          <h4>Universal Design for Learning</h4>
+          <p>Plan instruction proactively for the widest range of learners. Provide multiple means of engagement, representation, and expression — maximizing student strengths while reducing instructional barriers.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 21</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">CRP</div>
+        <div class="pedagogy-info">
+          <h4>Culturally Relevant Pedagogy</h4>
+          <p>Connect computing to students' cultural assets and lived experiences. Empower learners to become change agents and build authentic relationships with families and communities.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 12</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">PP</div>
+        <div class="pedagogy-info">
+          <h4>Pair Programming</h4>
+          <p>Two students share one computer, trading roles as "driver" and "navigator." Builds collaboration, communication, and code quality — and helps every student feel they belong in CS.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 16</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">WE</div>
+        <div class="pedagogy-info">
+          <h4>Worked Examples & Subgoal Labels</h4>
+          <p>Present a problem, a complete solution, and a clear explanation. Group steps into named subgoals to reduce cognitive load and help students see the structure of a solution before writing their own.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 23</div>
+      </div>
+      <div class="pedagogy-row">
+        <div class="pedagogy-acronym">SW</div>
+        <div class="pedagogy-info">
+          <h4>Semantic Waves</h4>
+          <p>Move learners between everyday language and abstract technical concepts. Unpack a concept using metaphors and unplugged activities, then repack it back into precise programming vocabulary.</p>
+        </div>
+        <div class="pedagogy-chapter">Chapter 7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEY IDEAS ============ -->
+<section class="section">
+  <div class="content">
+    <div class="section-eyebrow">Powerful ideas inside</div>
+    <h2 class="section-title">What students actually <em>struggle with</em> — and how to help.</h2>
+    <p class="section-lead">Beneath every working program lies a forest of misconceptions and partial understandings. The book is candid about what trips students up — and what to do about it.</p>
+  </div>
+
+  <div class="container">
+    <div class="ideas-grid">
+      <div class="idea-card" data-color="concept">
+        <div class="idea-letter">V</div>
+        <h3 class="idea-title">Variables aren't boxes</h3>
+        <p class="idea-text">The familiar “box” metaphor for variables produces stubborn misconceptions: that boxes hold multiple values, never lose old ones, or contain expressions. A better mental model: a small whiteboard that holds exactly one value, erased when a new one is written.</p>
+        <div class="idea-meta">From Chapter 14 · Naive Conceptions</div>
+      </div>
+      <div class="idea-card" data-color="practice">
+        <div class="idea-letter">B</div>
+        <h3 class="idea-title">Plan before you program</h3>
+        <p class="idea-text">Four levels of planning: <strong>Problem</strong> (what's the idea?), <strong>Algorithm</strong> (in everyday language), <strong>Program</strong> (in actual code), <strong>Execution</strong> (debugging behavior). Moving between these levels gives students a roadmap and prevents the “just-start-coding” trap.</p>
+        <div class="idea-meta">From Chapter 2 · Before You Program, Plan!</div>
+      </div>
+      <div class="idea-card" data-color="pedagogy">
+        <div class="idea-letter">T</div>
+        <h3 class="idea-title">Bugs are the curriculum</h3>
+        <p class="idea-text">Debugging isn't an obstacle to the lesson — it <em>is</em> the lesson. Build a classroom culture that celebrates errors: hold up a “buggy wall,” share favorite mistakes of the day, and teach systematic strategies for locating and fixing problems.</p>
+        <div class="idea-meta">From Chapter 20 · Testing and Debugging</div>
+      </div>
+      <div class="idea-card" data-color="gold">
+        <div class="idea-letter">Y</div>
+        <h3 class="idea-title">Working code isn't enough</h3>
+        <p class="idea-text">Good habits of programming: meaningful variable names, proper initialization, well-placed comments, no duplicated code, no unreachable blocks, testing with a range of inputs. The goal isn't a program that runs — it's a program that anyone can read.</p>
+        <div class="idea-meta">From Chapter 25 · Good Habits of Programming</div>
+      </div>
+      <div class="idea-card" data-color="concept">
+        <div class="idea-letter">O</div>
+        <h3 class="idea-title">Expressions are trees</h3>
+        <p class="idea-text">Every expression has a hidden tree structure. Visualizing nested operations as “circles of evaluation” or node-link diagrams reveals the order of evaluation — and exposes common misconceptions like comparing booleans to <code>true</code> or assuming nested calls evaluate outside-in.</p>
+        <div class="idea-meta">From Chapter 15 · Operators and Expressions</div>
+      </div>
+      <div class="idea-card" data-color="pedagogy">
+        <div class="idea-letter">G</div>
+        <h3 class="idea-title">Unplugged comes first</h3>
+        <p class="idea-text">Before code, before screens — start with the everyday. Role-play variable assignment with boxes and shredders. Simulate searching with a divide-and-conquer game. Build the concept in the body, then bridge it back to the technical language of programming.</p>
+        <div class="idea-meta">From Chapter 7 · Guided Exploration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEARNING GOALS / FRAMEWORK ============ -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="framework">
+      <div class="framework-header">
+        <div class="section-eyebrow" style="justify-content: center; display: inline-flex;">The deeper learning framework</div>
+        <h3>Programming teaches more than programming.</h3>
+        <p>Successful programming classrooms attend to three interconnected domains of student growth — not just content knowledge, but also collaboration skills and the mindsets that fuel resilient learning.</p>
+      </div>
+      <div class="domains">
+        <div class="domain">
+          <div class="domain-circle domain-cognitive">C</div>
+          <h4>Cognitive</h4>
+          <p>Deep content knowledge, critical thinking, problem-solving, computational thinking — algorithms, variables, debugging.</p>
+        </div>
+        <div class="domain">
+          <div class="domain-circle domain-interpersonal">I</div>
+          <h4>Interpersonal</h4>
+          <p>Collaboration and communication. Expressing ideas, working in pairs and teams, sharing work, giving feedback.</p>
+        </div>
+        <div class="domain">
+          <div class="domain-circle domain-intrapersonal">I</div>
+          <h4>Intrapersonal</h4>
+          <p>Beliefs, mindsets, persistence, self-efficacy. The growth mindset that lets students persevere through bugs and frustration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHALLENGES SECTION ============ -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border);">
+  <div class="content">
+    <div class="section-eyebrow">Common student misconceptions</div>
+    <h2 class="section-title">What teachers need to <em>watch out for</em>.</h2>
+    <p class="section-lead">Students don't arrive as blank slates. They bring intuitions from everyday language and mathematics that can lead them astray. Knowing the most common misconceptions lets you address them head-on.</p>
+  </div>
+  <div class="container">
+    <div class="challenges">
+      <div class="challenge">
+        <div class="challenge-num">01</div>
+        <div>
+          <h4>The “human interpreter” problem</h4>
+          <p>Students expect computers to fill in obvious steps, interpret intent, or take “reasonable” defaults — because that's how humans communicate. Computers, of course, do not.</p>
+        </div>
+      </div>
+      <div class="challenge">
+        <div class="challenge-num">02</div>
+        <div>
+          <h4>Assignment isn't equality</h4>
+          <p>From mathematics, students bring <code>=</code> as equality. In code, <code>a = b</code> means: evaluate <code>b</code>, then store the value in <code>a</code>. Right to left. Replacing, not equating.</p>
+        </div>
+      </div>
+      <div class="challenge">
+        <div class="challenge-num">03</div>
+        <div>
+          <h4>The continuous-checking myth</h4>
+          <p>“While the cat is touching red, do X.” Students often assume the condition is monitored continuously and the loop exits the instant it becomes false. The condition is only checked at the top of each iteration.</p>
+        </div>
+      </div>
+      <div class="challenge">
+        <div class="challenge-num">04</div>
+        <div>
+          <h4>Boundary and off-by-one errors</h4>
+          <p>Loops that iterate one too many or too few times. Conditions that miss edge cases. Mishandled empty lists or division by zero. The classic Rainfall problem — average a list of numbers, stop at 99999 — has tripped up novices for decades.</p>
+        </div>
+      </div>
+      <div class="challenge">
+        <div class="challenge-num">05</div>
+        <div>
+          <h4>Mixing up print and return</h4>
+          <p>Many beginners can't articulate why a function should <em>return</em> a value rather than <em>print</em> it. Building functions that return values — then composing them — is one of the harder pedagogical leaps in introductory programming.</p>
+        </div>
+      </div>
+      <div class="challenge">
+        <div class="challenge-num">06</div>
+        <div>
+          <h4>Fine-grained, bottom-up coding</h4>
+          <p>Block-based environments make it easy to write many small disconnected scripts, each attached to its own trigger. The result: spaghetti code that loses logical coherence. Teach students to plan from the top down and use structured loops.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTES ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-eyebrow">Wisdom from the contributors</div>
+    <h2 class="section-title">Voices from the <em>field</em>.</h2>
+    <p class="section-lead" style="max-width: 56ch;">Forty authors. Decades of combined experience. Here are a few of the ideas they return to again and again.</p>
+
+    <div class="quotes">
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">Programs must be written for people to read, and only incidentally for machines to execute.</p>
+        <div class="quote-author">— Hal Abelson & Gerald Sussman</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">Weeks of programming can save you hours of planning.</p>
+        <div class="quote-author">— Anonymous, but every teacher knows</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">The best programs are written so that computing machines can perform them quickly and so that human beings can understand them clearly.</p>
+        <div class="quote-author">— Donald Knuth</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">My basic idea is that programming is the most powerful medium of developing the sophisticated and rigorous thinking needed for mathematics, for grammar, for physics, for statistics, for all the hard subjects.</p>
+        <div class="quote-author">— Seymour Papert</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">The most effective debugging tool is still careful thought, coupled with judiciously placed print statements.</p>
+        <div class="quote-author">— Brian W. Kernighan</div>
+      </div>
+      <div class="quote">
+        <div class="quote-mark">“</div>
+        <p class="quote-text">Educating the mind without educating the heart is no education at all.</p>
+        <div class="quote-author">— Aristotle, on culturally relevant pedagogy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDITOR ============ -->
+<section class="section editor-section" id="editor">
+  <div class="container">
+    <div class="editor-grid">
+      <div class="editor-portrait" aria-hidden="true"></div>
+      <div class="editor-info">
+        <div class="section-eyebrow">Editor & lead author</div>
+        <h2>Shuchi Grover, Ph.D.</h2>
+        <div class="editor-role">Senior Research Scientist · Visiting Scholar, Stanford University</div>
+        <p>Shuchi has been working with children and programming since 2001 — first in informal afterschool settings, then in classrooms. Her research spans the design of curricula and assessments for all levels of preK–12 CS education, and the integration of computing into STEM and other subjects.</p>
+        <p>She has served on the National K–12 Computer Science Framework team, the ACM Education Advisory Committee, the CSTA standards taskforce, and the editorial board of <em>ACM Transactions on Computing Education</em>. The vision for this handbook took shape during her doctoral studies at Stanford, designing an introductory programming curriculum that drew on learnings from CS education research and the learning sciences.</p>
+        <div class="editor-credentials">
+          <div class="credential">
+            <strong>Stanford</strong>
+            <span>Ph.D. in Learning Sciences & Technology Design</span>
+          </div>
+          <div class="credential">
+            <strong>Harvard</strong>
+            <span>Ed.M. in Technology in Education</span>
+          </div>
+          <div class="credential">
+            <strong>8 years</strong>
+            <span>In the making</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO USE ============ -->
+<section class="section">
+  <div class="content">
+    <div class="section-eyebrow">How to use the book</div>
+    <h2 class="section-title">For every teacher, at <em>every stage</em>.</h2>
+  </div>
+  <div class="container">
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h4>New to teaching programming?</h4>
+        <p>Read the book in its entirety. It will give you an enduring foundation in <strong>what</strong> you're teaching and <strong>how</strong> to teach it. Begin with four overarching “umbrella” chapters: K (Learning Goals), J (Programming Languages), N (Naive Conceptions), and F (Formative Feedback).</p>
+        <div class="tip">
+          <strong>Tip:</strong> Pair each concept chapter with a pedagogy chapter. Read about variables, then read about scaffolding strategies. Read about loops, then read about debugging.
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>Already teaching CS?</h4>
+        <p>Use the book as a reference. Read a chapter over a coffee break. Pull it off the shelf when planning a unit. You'll discover new ideas and have plenty of “aha” moments from the examples and pedagogical tips shared by 40+ experienced teachers and researchers.</p>
+        <div class="tip">
+          <strong>Tip:</strong> The chapters reference each other extensively. Each chapter cross-references related concepts and pedagogies, so you can follow your curiosity through the book.
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>A curriculum designer?</h4>
+        <p>Use the book to inform what topics to teach, in what order, and with what supports. Each chapter discusses what students typically struggle with — invaluable when designing a coherent learning progression for elementary, middle, or high school.</p>
+        <div class="tip">
+          <strong>Tip:</strong> The book is programming-language agnostic. Examples appear in Scratch, Snap!, Python, Java, JavaScript, App Inventor, and more — but the foundational ideas transcend any single language.
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>A teacher trainer?</h4>
+        <p>The book is ideal as a text in K–12 CS teacher-training programs. Each chapter is designed to be accessible and friendly to all teachers, drawing on research but written for practical, actionable use in real classrooms.</p>
+        <div class="tip">
+          <strong>Tip:</strong> The book transcends geographical boundaries. With authors from the US, UK, Canada, Finland, Switzerland, Germany, and Australia, the ideas are deliberately portable across school systems.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Computer Science in K–12</h3>
+        <p>An A to Z handbook on teaching programming. Built for and by the global community of computer science educators.</p>
+      </div>
+      <div>
+        <h4>The book</h4>
+        <ul class="footer-list">
+          <li>26 chapters · A through Z</li>
+          <li>Concepts, practices & pedagogy</li>
+          <li>10 concepts · 4 practices · 12 pedagogies</li>
+          <li>Edited by Shuchi Grover</li>
+          <li>Foreword by Mark Guzdial</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contributors</h4>
+        <ul class="footer-list">
+          <li>40+ co-authors</li>
+          <li>USA · UK · Canada · Finland</li>
+          <li>Switzerland · Germany · Australia</li>
+          <li>Elementary · Middle · High School</li>
+          <li>Classroom · Research · Curriculum</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-quote">“When you learn, teach. When you get, give.” — Maya Angelou</div>
+      <div>This page summarizes the book for educational and informational purposes.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ DETAIL MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-letter" id="modalLetter"></div>
+    <div class="modal-type" id="modalType"></div>
+    <h3 class="modal-title" id="modalTitle"></h3>
+    <div class="modal-authors" id="modalAuthors"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // ============ CHAPTER DATA ============
+  const chapters = [
+    { letter: 'A', title: 'Algorithms', authors: 'Shuchi Grover', type: 'concept',
+      summary: 'Algorithms are precise step-by-step plans for solving a problem. They are conceptual blueprints for the programs we write — every program is essentially an algorithm encoded for a machine to execute.',
+      detail: 'This chapter introduces students to algorithms through everyday examples (recipes, knitting patterns, Google Maps directions), unplugged activities, and a progression from simple sequences in primary school to searching and sorting algorithms in high school. Key idea: algorithms are abstract — they hide irrelevant detail and focus on the essential structure of a solution. Students learn that the same problem can have multiple correct algorithms, with trade-offs in speed, memory, and elegance.',
+      quote: 'An algorithm must be seen to be believed, and the best way to learn what an algorithm is all about is to try it. — Donald Knuth'
+    },
+    { letter: 'B', title: 'Before You Program, Plan!', authors: 'Philip Bagge & Shuchi Grover', type: 'practice',
+      summary: 'Articulating an algorithm — in any form, from a sketch to pseudocode to a flowchart — greatly aids students in translating intent into code.',
+      detail: 'The chapter introduces four levels of programming abstraction: the Problem level (what is the idea?), the Algorithm level (how will it work?), the Program level (translation into code), and the Program Execution level (debugging behavior). Younger students may verbalize plans or draw pictures; older students benefit from pseudocode and flowcharts. The chapter emphasizes decomposition — breaking large problems into manageable subparts — and warns against jumping straight into code.',
+      quote: 'Weeks of programming can save you hours of planning. — Anonymous'
+    },
+    { letter: 'C', title: 'Creative Coding', authors: 'Miles Berry', type: 'pedagogy',
+      summary: 'A pedagogy centered on student expression through code — characterized by making, originality, quality, fluency, and culture.',
+      detail: 'Creative coding gives pupils open design briefs rather than narrow problems. Students develop digital artifacts that reflect their own ideas. The chapter explores examples in ScratchJr (primary), Scratch (middle), and Python (high school) — and is honest about the caveats: when students always make animations, they may never encounter loops; when projects are unconstrained, learning can become biased. The pragmatic teacher balances creative work with structured instruction.',
+      quote: 'Imagination does not become great until human beings, given the courage and the strength, use it to create. — Maria Montessori'
+    },
+    { letter: 'D', title: 'Data Structures', authors: 'Baker Franke & Richard Kick', type: 'concept',
+      summary: 'Programs work with data. Beyond single variables, students need to understand collections: lists, arrays, maps, and the trade-offs between them.',
+      detail: 'Lists are usually the first data structure students learn. The chapter moves from why-do-we-need-this motivation (a famous computer scientists quiz with many names) to ways of visualizing lists, project ideas for elementary through high school, and the deeper distinction between an abstract data structure and its implementation. Kinesthetic activities — students arranging themselves as arrays or linked lists — help concretize abstract ideas.',
+      quote: 'The difference between a bad programmer and a good one is whether {they} consider {their} code or {their} data structures more important. — Linus Torvalds'
+    },
+    { letter: 'E', title: 'Events', authors: 'Jennifer Rosato & David Wolber', type: 'concept',
+      summary: 'Modern programs respond to events — button clicks, sensor readings, messages. Event-based languages let beginners build real interactive apps from day one.',
+      detail: 'The chapter explains event handlers (callback procedures triggered by external events), event parameters, and the event queue. It contrasts traditional command-line programs with event-based apps in Scratch, Snap!, App Inventor, and Thunkable. A high school student\'s "No Text While Driving" app — built in weeks — illustrates the real-world power of event-driven programming for beginners.',
+      quote: 'It\'s not what happens to you, but how you react that matters. — Epictetus'
+    },
+    { letter: 'F', title: 'Feedback Through Formative Check-Ins', authors: 'Shuchi Grover, Vicky Sedgwick & Kelly Powers', type: 'pedagogy',
+      summary: 'Formative assessment is assessment <em>for</em> learning. Frequent low-stakes check-ins let teachers see what students are thinking — and adjust instruction in real time.',
+      detail: 'The chapter surveys types of formative assessment: open-ended programming assignments, autogradable quizzes, innovative item types (Parsons problems, hotspot items), project showcases, artifact-based interviews, peer and self-assessment, and reflection journals. Worksheets, rubrics, and concrete examples are provided. The central message: balance creative project work with short, targeted assessments that surface specific misconceptions.',
+      quote: 'There is no failure. Only feedback. — Robert Allen'
+    },
+    { letter: 'G', title: 'Guided Exploration Through Unplugged Activities', authors: 'Paul Curzon & Shuchi Grover', type: 'pedagogy',
+      summary: 'Unplugged activities link abstract programming concepts to everyday experience — making invisible semantics visible and manipulable.',
+      detail: 'The chapter draws on Legitimation Code Theory and semantic waves: effective teaching moves between concrete everyday context and abstract technical language. Role-play activities (variables as photocopier-and-shredder boxes), stories (the Locked-In Syndrome binary search), games (20 Questions, Simon Says, Story Variables), and physical sorting all serve to scaffold conceptual understanding. The key is to always bridge back to actual code.',
+      quote: 'Tell me and I forget. Teach me and I remember. Involve me and I learn. — Benjamin Franklin'
+    },
+    { letter: 'H', title: 'Hard Fun With Hands-On Constructionist Project-Based Learning', authors: 'Deborah A. Fields & Yasmin B. Kafai', type: 'pedagogy',
+      summary: 'Students learn deeply when making complex, personally meaningful things — software, e-textiles, physical artifacts.',
+      detail: 'Six principles for constructionist teaching: (1) creativity within constraints, (2) growing complexity in a series of projects, (3) aesthetics first — students design how it looks before coding it, (4) celebrating mistakes as legitimate classroom knowledge, (5) keeping track of progress through design notebooks and checkpoints, (6) reflective portfolios as computational communication. Examples draw from Scratch and high school e-textile curricula.',
+      quote: 'All sorts of things can happen when you\'re open to new ideas and playing around with things. — Stephanie Kwolek'
+    },
+    { letter: 'I', title: 'Integrating Programming In School Subjects', authors: 'Shuchi Grover & Aman Yadav', type: 'pedagogy',
+      summary: 'Coding need not live in its own silo. Math, science, language arts, social studies, and music all offer rich, authentic contexts for programming.',
+      detail: 'Integration is bidirectional — it enriches both computing and the host subject. Examples include drawing geometric shapes with turtle graphics in math, agent-based modeling in science (NetLogo, StarLogo Nova, Project GUTS), social network analysis of Hamlet in language arts, web-scraping public data in social studies, and generative music in Sonic Pi. The chapter discusses Bootstrap, CT-STEM, STEMcoding, and Media Computation, plus practical concerns about teacher familiarity and time.',
+      quote: 'Programming is the most powerful medium of developing the sophisticated and rigorous thinking needed for all the hard subjects. — Seymour Papert'
+    },
+    { letter: 'J', title: 'JavaScript, Python, Scratch, or Something Else?', authors: 'David Weintrop & Shuchi Grover', type: 'concept',
+      summary: 'Navigating the bustling world of introductory programming languages — and choosing the right tool for your students.',
+      detail: 'Six dimensions for evaluating a language: low floor, high ceiling, wide walls, social dimensions, curriculum support, and preparation for future learning. The chapter surveys block-based languages (Scratch, Snap!, Alice, App Inventor), text-based languages (Logo, Python, Java, Quorum), hybrid environments (Pencil Code, Code.org AppLab, Greenfoot 3), physical computing kits, and preliterate/symbolic environments (ScratchJr, Kodable). Closing thoughts emphasize transfer: the deeper ideas of computational thinking matter more than any specific language.',
+      quote: 'The tools we use have a profound effect on our thinking habits. — Edsger Dijkstra'
+    },
+    { letter: 'K', title: 'Knowledge, Skills, Attitudes & Beliefs', authors: 'Rebecca Vivian, Shuchi Grover & Katrina Falkner', type: 'practice',
+      summary: 'Learning programming is not just about syntax and semantics. It is about thinking skills, mindsets, identity, and the ability to collaborate.',
+      detail: 'Framed by the Deeper Learning Framework: cognitive (computational thinking, design thinking, systems thinking), intrapersonal (persistence, growth mindset, inclusivity, identity), and interpersonal (collaboration and communication). The chapter offers practical strategies for fostering each — from celebrating bugs to designing gender-neutral classroom environments to teaching code reading alongside code writing.',
+      quote: 'Educating the mind without educating the heart is no education at all. — Aristotle'
+    },
+    { letter: 'L', title: 'Learner-Centered & Culturally Relevant Pedagogy', authors: 'Tia C. Madkins, Jakita O. Thomas, Jessica Solyom, Joanna Goode & Frieda McAlear', type: 'pedagogy',
+      summary: 'Engaging underrepresented students requires more than access. It requires curriculum and pedagogy grounded in their cultures, experiences, and identities.',
+      detail: 'Three tenets of CRP applied to programming: (1) academic rigor, (2) honoring students\' cultural and linguistic backgrounds, (3) helping students recognize and critique social inequities. Practical strategies include connecting CS to students\' communities, empowering students as change agents, building relationships with families, and — for Native American communities — aligning curriculum with tribal leadership and elders. Examples include Exploring Computer Science and ethnocomputing design tools.',
+      quote: 'What we have learned in the past is that students\' STEM identities, experiences and interests are profoundly impacted by historical legacies, structural issues and opportunities. — Jane Margolis'
+    },
+    { letter: 'M', title: 'Modularity With Methods and Functions', authors: 'Mike Zamansky, Jens Mönig & JonAlf Dyrland-Weaver', type: 'concept',
+      summary: 'Functions are the verbs of a programming language. They enable abstraction, reuse, readability, and the ability to compose simple parts into complex systems.',
+      detail: 'The chapter introduces functions through hands-on examples in Snap! (defining custom blocks, drawing polygons and fractals) and Python (a cat-drawing exercise that grows into reusable functions, then language games with parameters). It covers recursion (a fractal tree drawn by a function calling itself), higher-order functions (combine/reduce in Snap! and Python), and the most common pitfalls: scope confusion, print-vs-return confusion, and parameter passing.',
+      quote: 'Sometimes, the elegant implementation is just a function. — John Carmack'
+    },
+    { letter: 'N', title: 'Naive Conceptions of Novice Programmers', authors: 'Juha Sorva', type: 'pedagogy',
+      summary: 'Students arrive with intuitions from human conversation and mathematics — intuitions that often mislead them about how programs work.',
+      detail: 'The chapter catalogs dozens of well-documented misconceptions: assignment statements as equations, conditionals as continuous monitors, variables as multi-valued boxes, return as a kind of print. It offers a powerful pedagogical principle: teach learners a viable model of program execution — a "notional machine." Strategies include code reading before code writing, targeted multiple-choice items, visualizations (Python Tutor), and metaphors used carefully — with explicit attention to where the metaphor breaks down.',
+      quote: 'I am not able rightly to apprehend the kind of confusion of ideas that could provoke such a question. — Charles Babbage'
+    },
+    { letter: 'O', title: 'Operators and Expressions', authors: 'Matthias Hauswirth & Shuchi Grover', type: 'concept',
+      summary: 'Expressions are the building blocks that produce values. Understanding their tree structure and order of evaluation is fundamental.',
+      detail: 'The chapter distinguishes operators (arithmetic, relational, Boolean, string, function-call) from operands, and shows the same expression rendered in Java, Scheme, Python, Scratch, Snap!, and Alice. Bootstrap\'s "circles of evaluation" and node-link diagrams reveal the hidden tree structure of expressions. Common misconceptions: comparing booleans to true/false, mistaking inside-out for outside-in evaluation in nested calls.',
+      quote: 'By the word operation, we mean any process which alters the mutual relation of two or more things, be this relation of what kind it may. — Ada Lovelace'
+    },
+    { letter: 'P', title: 'Peer Collaboration and Pair Programming', authors: 'Shannon Campe & Jill Denner', type: 'pedagogy',
+      summary: 'Two students. One computer. Trading roles as driver and navigator. The classic agile practice — adapted for the K-12 classroom.',
+      detail: 'The chapter walks through every stage: how to pair students (using surveys, trial partners, and student preferences), how to teach the roles, how to support pairs over time, and what good vs. poor collaboration looks like in practice. It addresses role-switching, conflict, equity, and what to do when a partnership stalls. Pair programming improves not just learning, but also engagement, persistence, and a sense of belonging in CS.',
+      quote: 'Alone we can do so little; together we can do so much. — Helen Keller'
+    },
+    { letter: 'Q', title: 'Questions and Inquiry', authors: 'Shuchi Grover & Steven Floyd', type: 'pedagogy',
+      summary: 'Questions are at the heart of all teaching and learning. Good questions guide students into deeper understanding — and good responses guide them toward independence.',
+      detail: 'The chapter offers questions teachers should ask themselves about their lessons, questions to deepen student thinking (about code snippets, alternative solutions, artifact-based interviews), and questions based on buggy programs. The second half addresses how to respond to student questions — when to give a direct answer, when to guide, when to point a student toward their elbow partner. Real classroom dialogue is included.',
+      quote: 'I have six honest serving-men. Their names are What, Where, When, Why, How and Who. — Rudyard Kipling'
+    },
+    { letter: 'R', title: 'Repetition and Recursion', authors: 'Dan Garcia & Joshua Paley', type: 'concept',
+      summary: 'Computers excel at repetitive tasks. The two great mechanisms: iteration (loops) and recursion (functions calling themselves).',
+      detail: 'The chapter contrasts iteration (for, while, repeat-until, forever) across Snap! and Python, then introduces recursion through a four-step guide: divide, invoke, combine, stop dividing. Examples scale from simple linear recursion (length of a sentence) to tree recursion (all subsets of a list, Count Change Problem, fractal trees). The chapter ends with the most common bugs: infinite loops, off-by-one errors, missing base cases, and a poor grasp of the call stack.',
+      quote: 'There\'s Joy in Repetition. — Prince'
+    },
+    { letter: 'S', title: 'Selecting Pathways With Conditionals', authors: 'Shuchi Grover', type: 'concept',
+      summary: 'IF-THEN-ELSE. The mechanism by which programs make decisions based on the state of the world.',
+      detail: 'The chapter walks through the structure of conditionals — how to construct the Boolean condition, how to demarcate the THEN and ELSE blocks, how to nest them. Activities for primary grades (everyday IF-THENs), middle grades (nested conditionals, the leap year algorithm), and high school (compound Boolean expressions, Rock-Paper-Scissors, FizzBuzz). Common pitfalls: redundant conditions, unnecessary use of IF-ELSE, incorrect order of precedence in compound expressions.',
+      quote: 'When you come to a fork in the road, take it. — Yogi Berra'
+    },
+    { letter: 'T', title: 'Testing and Debugging', authors: 'Kathryn Rich & Carla Strickland', type: 'practice',
+      summary: 'Bugs are inevitable. Debugging is not a frustrating side-quest — it is the central practice of programming, and the central practice of learning to think computationally.',
+      detail: 'The chapter distinguishes compilation errors, runtime errors, and logical errors. It catalogs the most common student bugs (natural-language problems, boundary problems, control-flow errors, design errors) and presents systematic strategies for finding errors (line-by-line tracing, decomposition, using error codes) and fixing them (scrutinizing code, considering omissions, comparing to working examples, stepping away to reconsider the design). Above all: build a classroom culture that celebrates errors as learning.',
+      quote: 'The most effective debugging tool is still careful thought, coupled with judiciously placed print statements. — Brian W. Kernighan'
+    },
+    { letter: 'U', title: 'Universal Design: Reaching All Students', authors: 'Maya Israel & Todd Lash', type: 'pedagogy',
+      summary: 'Plan instruction proactively for the widest range of learners — not reactively for the few who struggle.',
+      detail: 'The chapter applies the UDL framework (three principles: engagement, representation, action and expression) to programming instruction. Scaffolds include project planning checklists, storyboards, "exploded code" (think Parsons problems), video tutorials, debugging detective questions, and academic language support. UDL doesn\'t replace individualized accommodations — but it dramatically reduces how many students need them.',
+      quote: 'Every student can learn, just not on the same day, or the same way. — George Evans'
+    },
+    { letter: 'V', title: 'Variables', authors: 'Philip Bagge & Shuchi Grover', type: 'concept',
+      summary: 'A named value that can change over time. Simple to describe — yet a frequent source of deep misconception.',
+      detail: 'The chapter walks through every essential aspect: names and values, types (numeric, string, Boolean), range, assignment, initialization, scope, and the eight common "roles" variables play (counter, accumulator, flag, transformer, etc.). The Story Variables activity uses everyday narratives to introduce the concept before any code is written. A clear warning: avoid the "box" metaphor — prefer the whiteboard analogy, which doesn\'t suggest that boxes can hold multiple things.',
+      quote: 'One man\'s constant is another man\'s variable. — Alan Perlis'
+    },
+    { letter: 'W', title: 'Worked Examples and Other Scaffolding Strategies', authors: 'Jane Waite & Shuchi Grover', type: 'pedagogy',
+      summary: 'Hands-on programming alone is not enough. Carefully designed scaffolds reduce cognitive load and guide students into deeper understanding.',
+      detail: 'The chapter surveys scaffolding approaches: worked examples (with subgoal labeling), live/shared coding, code reading and tracing, Use-Modify-Create, PRIMM (Predict-Run-Investigate-Modify-Make), and TIPPSEE. Each technique fades support over time, transferring ownership from teacher to learner. The chapter is candid that scaffolds must be designed with care — and that minimal-guidance discovery learning rarely produces deep conceptual understanding on its own.',
+      quote: 'Scaffolding situations are those in which a learner gets assistance to perform a task beyond what could be achieved unassisted. — Roy Pea'
+    },
+    { letter: 'X', title: 'X-ing Boundaries With Physical Computing', authors: 'Sue Sentance & Katharine Childs', type: 'concept',
+      summary: 'When code meets the physical world — sensors, motors, microcontrollers, e-textiles — programming becomes tangible, surprising, and deeply motivating.',
+      detail: 'A practical guide to physical computing in school: what kits to choose (Micro:bit, Raspberry Pi, LilyPad Arduino, BeeBot, Sphero), what makes a good lesson, and the very real challenges (USB ports disabled, software installation, fragile components, cost). Two full lesson examples: a primary-school step counter using the Micro:bit accelerometer, and a secondary-school weather sensor using the Raspberry Pi Sense HAT. Practical tips for organizing kit and supporting independent learning.',
+      quote: 'When code becomes physical, students stop seeing programs as something on a screen — and start seeing them as ways to change the world.'
+    },
+    { letter: 'Y', title: 'Yay, My Program Works! Beyond Working Code... Good Habits of Programming', authors: 'Shuchi Grover', type: 'practice',
+      summary: 'Working code is not enough. Teach students to write code that is readable, well-named, properly initialized, tested, and elegant.',
+      detail: 'The chapter is a catalog of good habits: meaningful variable names (matched to the role the variable plays), proper initialization (once, at the right place), code comments (a form of self-explanation), avoiding duplication via functions, avoiding unreachable or extraneous code, iterative refinement, testing with valid AND invalid AND illogical inputs, avoiding fine-grained bottom-up coding, and using structured loops (repeat-until, while) rather than forever-with-an-if-then-stop.',
+      quote: 'Programs must be written for people to read, and only incidentally for machines to execute. — Hal Abelson & Gerald Sussman'
+    },
+    { letter: 'Z', title: 'Zestful Learning', authors: 'Bryan Twarek', type: 'pedagogy',
+      summary: 'Joy is not optional. Engaged, motivated students learn more — and the classroom culture that produces them is built deliberately.',
+      detail: 'Six tenets: (1) create relevant projects rooted in student interests, (2) scaffold creativity with constraints (not free-for-all, not lock-step), (3) showcase student work to authentic audiences, (4) build a supportive classroom culture where vulnerability is safe, (5) leave room for discovery and exploration, (6) include physical activity. Stories from San Francisco classrooms illustrate every principle. The result: students lose track of time and don\'t want class to end.',
+      quote: 'True happiness comes from the joy of deeds well done, the zest of creating things new. — Antoine de Saint-Exupéry'
+    },
+  ];
+
+  // ============ BUILD HERO ALPHABET ============
+  const heroAlphabet = document.getElementById('heroAlphabet');
+  chapters.forEach((ch, i) => {
+    const el = document.createElement('div');
+    el.className = 'hero-letter';
+    el.dataset.type = ch.type;
+    el.dataset.letter = ch.letter;
+    el.title = `${ch.letter} – ${ch.title}`;
+    el.textContent = ch.letter;
+    el.style.animationDelay = `${i * 0.02}s`;
+    el.addEventListener('click', () => openModal(ch));
+    heroAlphabet.appendChild(el);
+  });
+
+  // ============ BUILD CHAPTER GRID ============
+  const chapterGrid = document.getElementById('chapterGrid');
+  chapters.forEach(ch => {
+    const card = document.createElement('article');
+    card.className = 'chapter-card';
+    card.dataset.type = ch.type;
+    card.tabIndex = 0;
+    card.innerHTML = `
+      <div class="chapter-header">
+        <div class="chapter-letter">${ch.letter}</div>
+        <div class="chapter-type">${ch.type}</div>
+      </div>
+      <h3 class="chapter-title">${ch.title}</h3>
+      <div class="chapter-authors">${ch.authors}</div>
+    `;
+    card.addEventListener('click', () => openModal(ch));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(ch); }
+    });
+    chapterGrid.appendChild(card);
+  });
+
+  // ============ FILTER ============
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.chapter-card').forEach(card => {
+        if (filter === 'all' || card.dataset.type === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // ============ MODAL ============
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  const modalLetter = document.getElementById('modalLetter');
+  const modalType = document.getElementById('modalType');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalAuthors = document.getElementById('modalAuthors');
+  const modalBody = document.getElementById('modalBody');
+
+  const typeColors = {
+    concept: { bg: 'var(--concept-bg)', color: 'var(--concept)' },
+    practice: { bg: 'var(--practice-bg)', color: 'var(--practice)' },
+    pedagogy: { bg: 'var(--pedagogy-bg)', color: 'var(--pedagogy)' }
+  };
+
+  function openModal(ch) {
+    modalLetter.textContent = ch.letter;
+    modalLetter.style.color = typeColors[ch.type].color;
+    modalType.textContent = ch.type;
+    modalType.style.background = typeColors[ch.type].bg;
+    modalType.style.color = typeColors[ch.type].color;
+    modalTitle.textContent = ch.title;
+    modalAuthors.textContent = `Authored by ${ch.authors}`;
+    modalBody.innerHTML = `
+      <p><strong>${ch.summary}</strong></p>
+      <p>${ch.detail}</p>
+      ${ch.quote ? `<div class="key-quote">${ch.quote}</div>` : ''}
+    `;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // ============ REVEAL ON SCROLL ============
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    // Auto-tag elements for reveal
+    const revealEls = document.querySelectorAll('.stat-card, .pillar, .chapter-card, .idea-card, .pedagogy-row, .challenge, .quote, .audience-card, .domain, .reveal');
+    revealEls.forEach((el, i) => {
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+      observer.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // ============ SMOOTH SCROLL HANDLER ============
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

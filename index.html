@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You vs. Google — The Unauthorized Guide to Google Ads</title>
+<meta name="description" content="The ultimate, comprehensive guide to Google Ads — from PPC basics to Performance Max. By Solutions 8.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf7f2;
+  --bg-alt: #f3ede3;
+  --ink: #0d1b2a;
+  --ink-soft: #2e3a4d;
+  --muted: #6b7280;
+  --line: #e6dfd2;
+  --accent: #c8553d;
+  --accent-deep: #9d3c2a;
+  --gold: #d4a574;
+  --google-blue: #4285f4;
+  --google-red: #ea4335;
+  --google-yellow: #fbbc05;
+  --google-green: #34a853;
+  --shadow-sm: 0 1px 2px rgba(13,27,42,0.06);
+  --shadow: 0 8px 30px rgba(13,27,42,0.08);
+  --shadow-lg: 0 24px 60px rgba(13,27,42,0.14);
+  --radius: 14px;
+  --radius-lg: 22px;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ============ NAV ============ */
+nav.top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 32px;
+  background: rgba(250,247,242,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s, padding .3s;
+}
+nav.top.scrolled { border-bottom-color: var(--line); padding: 12px 32px; }
+nav.top .row {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+}
+nav.top .brand {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: 10px;
+}
+nav.top .brand .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+nav.top ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+nav.top ul a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  transition: color .2s;
+}
+nav.top ul a:hover { color: var(--accent); }
+nav.top .cta {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+nav.top .cta:hover { background: var(--accent); transform: translateY(-1px); }
+.menu-btn { display: none; }
+
+@media (max-width: 900px) {
+  nav.top ul { display: none; }
+  nav.top.open ul {
+    display: flex;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    padding: 24px 32px;
+    gap: 18px;
+  }
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .menu-btn span {
+    width: 22px; height: 2px;
+    background: var(--ink);
+    transition: transform .25s;
+  }
+}
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  padding: 140px 32px 80px;
+  display: flex; align-items: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at top right, rgba(200,85,61,0.08), transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(212,165,116,0.10), transparent 60%),
+    var(--bg);
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(13,27,42,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,27,42,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+.hero .container {
+  max-width: 1320px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 80px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero .badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px; border-radius: 999px;
+  background: rgba(13,27,42,0.06);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero .badge .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: 28px;
+}
+.hero h1 .you {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+.hero h1 .vs {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.45em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin: 0 10px;
+  padding: 6px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  transform: translateY(-0.15em);
+}
+.hero h1 .google {
+  background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero .lede {
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin-bottom: 40px;
+  line-height: 1.55;
+}
+.hero .lede em { font-family: var(--serif); font-style: italic; font-weight: 500; }
+.hero .ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-weight: 600; font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s, background .2s;
+  cursor: pointer; border: none;
+}
+.btn.primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn.primary:hover { background: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn.ghost {
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+}
+.btn.ghost:hover { background: var(--ink); color: var(--bg); transform: translateY(-2px); }
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  max-width: 560px;
+}
+.hero-stats .stat .num {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stats .stat .lbl {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* hero visual */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 1/1.05;
+  display: flex; align-items: center; justify-content: center;
+}
+.book-cover {
+  position: relative;
+  width: 78%;
+  aspect-ratio: 2/3;
+  background: linear-gradient(155deg, #0d1b2a 0%, #1d3557 60%, #2a4f7c 100%);
+  border-radius: 6px 14px 14px 6px;
+  padding: 50px 36px;
+  color: #f3ede3;
+  box-shadow:
+    -3px 0 0 #0a141f inset,
+    var(--shadow-lg);
+  transform: rotate(-3deg);
+  transition: transform .6s cubic-bezier(.2,.7,.3,1);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.hero-visual:hover .book-cover { transform: rotate(-1deg) translateY(-6px); }
+.book-cover::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: 18px;
+  width: 2px;
+  background: rgba(255,255,255,0.08);
+}
+.book-cover .top-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  opacity: 0.6;
+}
+.book-cover .you-label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1;
+  margin: 22px 0 12px;
+}
+.book-cover .vs-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  font-weight: 700;
+  border: 1px solid rgba(243,237,227,0.3);
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+}
+.book-cover .google-label {
+  font-family: var(--serif);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.book-cover .google-label span:nth-child(1) { color: var(--google-blue); }
+.book-cover .google-label span:nth-child(2) { color: var(--google-red); }
+.book-cover .google-label span:nth-child(3) { color: var(--google-yellow); }
+.book-cover .google-label span:nth-child(4) { color: var(--google-blue); }
+.book-cover .google-label span:nth-child(5) { color: var(--google-green); }
+.book-cover .google-label span:nth-child(6) { color: var(--google-red); }
+.book-cover .subtitle {
+  font-size: 0.9rem;
+  margin-top: auto;
+  opacity: 0.8;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+}
+.book-cover .authors {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  margin-top: 12px;
+}
+
+.floating-pill {
+  position: absolute;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+}
+.floating-pill.p1 { top: 8%; right: -8%; animation: float 6s ease-in-out infinite; }
+.floating-pill.p2 { bottom: 14%; left: -10%; animation: float 6s ease-in-out infinite 2s; }
+.floating-pill.p3 { top: 50%; right: -14%; animation: float 6s ease-in-out infinite 4s; }
+.floating-pill .icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: grid; place-items: center;
+  font-size: 0.95rem;
+}
+.floating-pill.p1 .icon { background: rgba(66,133,244,0.12); color: var(--google-blue); }
+.floating-pill.p2 .icon { background: rgba(52,168,83,0.12); color: var(--google-green); }
+.floating-pill.p3 .icon { background: rgba(234,67,53,0.12); color: var(--google-red); }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@media (max-width: 960px) {
+  .hero { padding: 120px 24px 64px; }
+  .hero .container { grid-template-columns: 1fr; gap: 56px; }
+  .hero-visual { max-width: 360px; margin: 0 auto; }
+  .floating-pill.p3 { right: -4%; }
+  .floating-pill.p1 { right: -2%; }
+  .floating-pill.p2 { left: -4%; }
+  .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .hero-stats .stat .num { font-size: 1.7rem; }
+}
+
+/* ============ SECTION SHELL ============ */
+section { padding: 110px 32px; position: relative; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+.section-head {
+  display: grid; grid-template-columns: 1fr 1.8fr;
+  gap: 60px;
+  margin-bottom: 64px;
+  align-items: end;
+}
+.section-head .eyebrow {
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.section-head .eyebrow::before {
+  content: ""; width: 32px; height: 1px;
+  background: var(--accent);
+}
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+.section-head h2 em { font-style: italic; font-weight: 400; color: var(--accent); }
+.section-head .intro {
+  font-size: 1.12rem; color: var(--ink-soft);
+  line-height: 1.65;
+}
+.section-head .intro p + p { margin-top: 14px; }
+
+@media (max-width: 800px) {
+  .section-head { grid-template-columns: 1fr; gap: 24px; }
+  section { padding: 80px 24px; }
+}
+
+/* ============ PART ONE — Basics ============ */
+#basics { background: var(--bg-alt); }
+
+.lib-analogy {
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px;
+  align-items: center;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  box-shadow: var(--shadow);
+  margin-bottom: 80px;
+}
+.lib-analogy .visual {
+  position: relative;
+  aspect-ratio: 1/1;
+  background: radial-gradient(circle at 30% 30%, var(--google-yellow) 0%, transparent 35%),
+              radial-gradient(circle at 70% 70%, var(--google-blue) 0%, transparent 35%),
+              radial-gradient(circle at 70% 30%, var(--google-red) 0%, transparent 35%),
+              radial-gradient(circle at 30% 70%, var(--google-green) 0%, transparent 35%),
+              var(--bg-alt);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 4.5rem;
+  filter: saturate(0.85);
+}
+.lib-analogy .visual .center {
+  background: var(--bg);
+  width: 50%; height: 50%;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  box-shadow: var(--shadow);
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+  line-height: 1.2;
+  padding: 18px;
+}
+.lib-analogy h3 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+.lib-analogy p { color: var(--ink-soft); margin-bottom: 14px; font-size: 1.05rem; }
+.lib-analogy .pull {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
+  padding-left: 18px;
+  margin-top: 24px;
+}
+@media (max-width: 800px) {
+  .lib-analogy { grid-template-columns: 1fr; padding: 32px; gap: 28px; }
+}
+
+/* ecosystem grid */
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.eco-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.eco-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: transparent;
+}
+.eco-card .icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  margin-bottom: 18px;
+  font-size: 1.4rem;
+}
+.eco-card.search .icon-wrap { background: rgba(66,133,244,0.12); color: var(--google-blue); }
+.eco-card.youtube .icon-wrap { background: rgba(234,67,53,0.12); color: var(--google-red); }
+.eco-card.gmail .icon-wrap { background: rgba(251,188,5,0.18); color: #b88a00; }
+.eco-card.maps .icon-wrap { background: rgba(52,168,83,0.12); color: var(--google-green); }
+.eco-card.apps .icon-wrap { background: rgba(200,85,61,0.12); color: var(--accent); }
+.eco-card.android .icon-wrap { background: rgba(13,27,42,0.08); color: var(--ink); }
+.eco-card h4 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.eco-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.55; }
+.eco-card ul { font-size: 0.88rem; color: var(--ink-soft); margin-top: 12px; padding-left: 18px; }
+.eco-card ul li { margin-bottom: 4px; }
+
+/* ============ CAMPAIGN TYPES ============ */
+.campaign-types {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 50px;
+}
+.ctype {
+  position: relative;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  transition: all .35s cubic-bezier(.2,.7,.3,1);
+  overflow: hidden;
+}
+.ctype::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s;
+}
+.ctype:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.ctype:hover::before { transform: scaleX(1); }
+.ctype .num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0.4;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.ctype h4 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+.ctype p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; }
+.ctype.featured { background: linear-gradient(155deg, var(--ink) 0%, #1d3557 100%); color: #f3ede3; border-color: transparent; }
+.ctype.featured .num { color: var(--gold); opacity: 0.6; }
+.ctype.featured p { color: rgba(243,237,227,0.78); }
+.ctype.featured::before { background: var(--gold); }
+.ctype.featured .tag {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+/* ============ AUCTION ============ */
+#auction { background: var(--ink); color: var(--bg-alt); }
+#auction .section-head .eyebrow { color: var(--gold); }
+#auction .section-head .eyebrow::before { background: var(--gold); }
+#auction .section-head h2 em { color: var(--gold); }
+#auction .section-head .intro { color: rgba(243,237,227,0.75); }
+
+.formula {
+  display: flex; align-items: center; justify-content: center;
+  gap: 22px; flex-wrap: wrap;
+  background: rgba(243,237,227,0.04);
+  border: 1px solid rgba(243,237,227,0.15);
+  border-radius: var(--radius-lg);
+  padding: 56px 32px;
+  margin-bottom: 64px;
+}
+.formula .term {
+  text-align: center;
+  flex: 1 1 180px;
+}
+.formula .term .label {
+  font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.formula .term .value {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--bg);
+}
+.formula .op {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.auction-3 {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+.auction-step {
+  background: rgba(243,237,227,0.04);
+  border: 1px solid rgba(243,237,227,0.12);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  transition: background .3s, border-color .3s;
+}
+.auction-step:hover { background: rgba(243,237,227,0.06); border-color: rgba(212,165,116,0.4); }
+.auction-step .step-num {
+  font-family: var(--serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.auction-step h4 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--bg);
+}
+.auction-step p {
+  color: rgba(243,237,227,0.7);
+  font-size: 0.95rem;
+}
+@media (max-width: 720px) { .auction-3 { grid-template-columns: 1fr; } }
+
+.callout {
+  margin-top: 64px;
+  padding: 48px;
+  background: linear-gradient(135deg, rgba(212,165,116,0.15), rgba(200,85,61,0.10));
+  border: 1px solid rgba(212,165,116,0.3);
+  border-radius: var(--radius-lg);
+  display: grid; grid-template-columns: auto 1fr; gap: 32px;
+  align-items: center;
+}
+.callout .icon { font-size: 2.6rem; color: var(--gold); }
+.callout h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--bg);
+}
+.callout p { color: rgba(243,237,227,0.75); font-size: 1.02rem; }
+@media (max-width: 700px) { .callout { grid-template-columns: 1fr; padding: 28px; } }
+
+/* ============ READINESS CHECKLIST ============ */
+.readiness {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 50px;
+}
+.check-item {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex; gap: 18px;
+  transition: all .3s;
+}
+.check-item:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+.check-item .check {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  display: grid; place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.check-item h4 {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.check-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+/* ============ CORE CONCEPTS / FLYWHEEL ============ */
+#core { background: var(--bg-alt); }
+
+.flywheel {
+  display: grid; grid-template-columns: 1.1fr 1.4fr;
+  gap: 64px; align-items: center;
+  margin-top: 30px;
+}
+.flywheel-visual {
+  position: relative;
+  aspect-ratio: 1/1;
+  display: grid; place-items: center;
+}
+.flywheel-circle {
+  width: 100%; height: 100%;
+  border: 2px dashed var(--line);
+  border-radius: 50%;
+  position: absolute;
+  animation: rotate 32s linear infinite;
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+.flywheel-center {
+  width: 38%; height: 38%;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 50%;
+  display: grid; place-items: center; text-align: center;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 16px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  z-index: 2;
+  box-shadow: var(--shadow);
+}
+.flywheel-node {
+  position: absolute;
+  width: 110px; height: 110px;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.92rem;
+  box-shadow: var(--shadow);
+  transition: transform .3s, background .3s, color .3s;
+  z-index: 1;
+}
+.flywheel-node:hover { background: var(--accent); color: var(--bg); transform: scale(1.08); }
+.flywheel-node .step {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+.flywheel-node:hover .step { color: var(--bg); }
+.flywheel-node.n1 { top: -8%; left: 50%; transform: translateX(-50%); }
+.flywheel-node.n2 { right: -8%; top: 50%; transform: translateY(-50%); }
+.flywheel-node.n3 { bottom: -8%; left: 50%; transform: translateX(-50%); }
+.flywheel-node.n4 { left: -8%; top: 50%; transform: translateY(-50%); }
+.flywheel-node.n1:hover { transform: translateX(-50%) scale(1.08); }
+.flywheel-node.n2:hover { transform: translateY(-50%) scale(1.08); }
+.flywheel-node.n3:hover { transform: translateX(-50%) scale(1.08); }
+.flywheel-node.n4:hover { transform: translateY(-50%) scale(1.08); }
+
+.flywheel-text h3 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+.flywheel-step {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.flywheel-step:last-child { border-bottom: none; }
+.flywheel-step h4 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex; align-items: center; gap: 12px;
+}
+.flywheel-step h4 .badge {
+  font-size: 0.7rem;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.1em;
+  font-family: var(--sans);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.flywheel-step p { font-size: 0.92rem; color: var(--ink-soft); }
+
+@media (max-width: 900px) { .flywheel { grid-template-columns: 1fr; } .flywheel-visual { max-width: 380px; margin: 0 auto; } }
+
+.offer-formula {
+  margin-top: 80px;
+  background: var(--bg);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.offer-formula h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 30px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.offer-formula .math {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.offer-formula .math .term {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.offer-formula .math .term.result { color: var(--accent); font-style: italic; }
+.offer-formula .math .op {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* ============ THE BIG SIX (Campaigns) ============ */
+.six-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+.six-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  transition: all .3s;
+}
+.six-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+.six-card .header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 18px;
+}
+.six-card .name {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.six-card .pct {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(200,85,61,0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.six-card p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px; }
+.six-card .bar {
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+.six-card .bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  border-radius: 999px;
+  transform-origin: left;
+  animation: bar-grow 1.2s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes bar-grow { from { transform: scaleX(0); } to { transform: scaleX(var(--w, 0.2)); } }
+
+/* ============ TABS / DEEP DIVE ============ */
+#deepdive { background: var(--bg); }
+.tab-nav {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 14px 22px;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  position: relative;
+  transition: color .2s;
+  letter-spacing: -0.01em;
+}
+.tab-btn::after {
+  content: ""; position: absolute;
+  bottom: -5px; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0);
+  transition: transform .25s;
+}
+.tab-btn.active { color: var(--ink); }
+.tab-btn.active::after { transform: scaleX(1); }
+.tab-btn:hover { color: var(--ink); }
+.tab-pane { display: none; animation: fadeIn .4s ease; }
+.tab-pane.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.dd-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+}
+.dd-grid h3 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.dd-grid p { font-size: 1.02rem; color: var(--ink-soft); margin-bottom: 16px; line-height: 1.7; }
+.dd-grid ul.bullets {
+  list-style: none;
+  margin: 20px 0;
+}
+.dd-grid ul.bullets li {
+  padding: 14px 0 14px 32px;
+  border-bottom: 1px dashed var(--line);
+  position: relative;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+.dd-grid ul.bullets li::before {
+  content: "→";
+  position: absolute; left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.dd-card {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 36px;
+  align-self: start;
+  position: sticky; top: 100px;
+}
+.dd-card .kw {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.dd-card h4 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.dd-card .stats-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.dd-card .stats-mini .num {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: block;
+  color: var(--accent);
+}
+.dd-card .stats-mini .lbl {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.dd-card .quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--ink);
+  border-left: 3px solid var(--accent);
+  padding-left: 16px;
+  margin-top: 22px;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .dd-grid { grid-template-columns: 1fr; }
+  .dd-card { position: static; }
+}
+
+/* ============ PMAX ============ */
+#pmax {
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(212,165,116,0.18), transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(200,85,61,0.12), transparent 50%),
+    var(--ink);
+  color: var(--bg-alt);
+}
+#pmax .section-head .eyebrow { color: var(--gold); }
+#pmax .section-head .eyebrow::before { background: var(--gold); }
+#pmax .section-head h2 em { color: var(--gold); }
+#pmax .section-head .intro { color: rgba(243,237,227,0.78); }
+
+.pmax-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-bottom: 80px;
+}
+.pillar {
+  background: rgba(243,237,227,0.04);
+  border: 1px solid rgba(243,237,227,0.15);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  transition: all .35s;
+}
+.pillar:hover {
+  background: rgba(243,237,227,0.07);
+  transform: translateY(-6px);
+}
+.pillar .pillar-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: var(--gold);
+  opacity: 0.65;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.pillar h4 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--bg);
+  letter-spacing: -0.01em;
+}
+.pillar p { color: rgba(243,237,227,0.72); font-size: 0.96rem; line-height: 1.65; }
+
+@media (max-width: 800px) { .pmax-pillars { grid-template-columns: 1fr; } }
+
+.before-after {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+.ba-panel {
+  background: rgba(243,237,227,0.04);
+  border: 1px solid rgba(243,237,227,0.15);
+  border-radius: var(--radius-lg);
+  padding: 44px 36px;
+}
+.ba-panel .label {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+.ba-panel.before .label { color: rgba(243,237,227,0.5); }
+.ba-panel.after .label { color: var(--gold); }
+.ba-panel h4 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  margin-bottom: 22px;
+  font-weight: 600;
+  color: var(--bg);
+}
+.ba-list {
+  list-style: none;
+}
+.ba-list li {
+  padding: 12px 0 12px 28px;
+  position: relative;
+  font-size: 0.95rem;
+  color: rgba(243,237,227,0.75);
+  border-bottom: 1px dashed rgba(243,237,227,0.12);
+}
+.ba-list li:last-child { border-bottom: none; }
+.ba-list li::before {
+  position: absolute; left: 0;
+  font-family: var(--serif);
+  font-weight: 700;
+}
+.ba-panel.before .ba-list li::before { content: "×"; color: rgba(243,237,227,0.5); }
+.ba-panel.after .ba-list li::before { content: "✓"; color: var(--gold); }
+@media (max-width: 700px) { .before-after { grid-template-columns: 1fr; } }
+
+/* ============ AGENCY ============ */
+#agency { background: var(--bg-alt); }
+
+.agency-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+}
+.ag-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all .3s;
+  border: 1px solid var(--line);
+}
+.ag-card::before {
+  content: ""; position: absolute;
+  top: 0; left: 0; bottom: 0; width: 4px;
+  background: var(--accent);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform .35s;
+}
+.ag-card:hover::before { transform: scaleY(1); }
+.ag-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.ag-card .ag-num {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.ag-card h4 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.ag-card p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6; }
+
+.redflag-strip {
+  margin-top: 60px;
+  background: var(--ink);
+  color: var(--bg-alt);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+  align-items: center;
+}
+.redflag-strip .icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: grid; place-items: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.redflag-strip h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: var(--bg);
+  font-weight: 600;
+}
+.redflag-strip ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 32px;
+  margin-top: 14px;
+}
+.redflag-strip ul li {
+  padding: 4px 0 4px 22px;
+  position: relative;
+  font-size: 0.92rem;
+  color: rgba(243,237,227,0.78);
+}
+.redflag-strip ul li::before {
+  content: "⚑"; position: absolute; left: 0;
+  color: var(--accent);
+}
+@media (max-width: 700px) {
+  .redflag-strip { grid-template-columns: 1fr; padding: 28px; }
+  .redflag-strip ul { grid-template-columns: 1fr; }
+}
+
+/* ============ QUOTES ============ */
+.quotes {
+  padding: 110px 32px;
+  background: var(--bg);
+  overflow: hidden;
+}
+.quotes h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.quotes h2 em { font-style: italic; color: var(--accent); }
+.quotes .sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 64px;
+  font-size: 1.05rem;
+}
+.quote-grid {
+  max-width: 1240px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+}
+.quote-card {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  position: relative;
+}
+.quote-card::before {
+  content: "“";
+  position: absolute;
+  top: 8px; left: 18px;
+  font-family: var(--serif);
+  font-size: 5rem;
+  color: var(--accent);
+  opacity: 0.18;
+  line-height: 1;
+}
+.quote-card p {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 22px;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+.quote-card .author {
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 2px;
+}
+.quote-card .title {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* ============ TIMELINE / TOC ============ */
+#toc { background: var(--bg-alt); }
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
+}
+.toc-part {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all .3s;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--line);
+  display: block;
+}
+.toc-part:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+.toc-part .part-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.toc-part h4 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.toc-part p { font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
+.toc-part .arrow {
+  margin-top: 16px;
+  font-size: 1.15rem;
+  color: var(--accent);
+}
+
+/* ============ FOOTER / CTA ============ */
+.final-cta {
+  padding: 120px 32px;
+  background: var(--ink);
+  color: var(--bg-alt);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(66,133,244,0.10), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(234,67,53,0.10), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(251,188,5,0.10), transparent 40%);
+  pointer-events: none;
+}
+.final-cta .wrap { position: relative; z-index: 1; max-width: 900px; }
+.final-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+.final-cta h2 em { font-style: italic; color: var(--gold); }
+.final-cta p {
+  font-size: 1.2rem;
+  color: rgba(243,237,227,0.78);
+  margin-bottom: 40px;
+  max-width: 640px;
+  margin-left: auto; margin-right: auto;
+}
+.final-cta .btn.primary { background: var(--bg); color: var(--ink); }
+.final-cta .btn.primary:hover { background: var(--gold); }
+.final-cta .btn.ghost { border-color: var(--bg-alt); color: var(--bg-alt); }
+.final-cta .btn.ghost:hover { background: var(--bg-alt); color: var(--ink); }
+
+footer {
+  padding: 56px 32px;
+  background: #050d18;
+  color: rgba(243,237,227,0.45);
+  font-size: 0.85rem;
+  text-align: center;
+}
+footer .wrap {
+  max-width: 1240px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 18px;
+}
+footer p { line-height: 1.6; }
+footer .ft-links { display: flex; gap: 20px; flex-wrap: wrap; }
+footer .ft-links a { color: rgba(243,237,227,0.55); text-decoration: none; transition: color .2s; }
+footer .ft-links a:hover { color: var(--gold); }
+
+/* ============ utility / reveal anim ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .8s, transform .8s;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-alt); }
+::-webkit-scrollbar-thumb { background: var(--ink-soft); border-radius: 999px; }
+</style>
+</head>
+<body>
+
+<nav class="top" id="topnav">
+  <div class="row">
+    <div class="brand"><span class="dot"></span> You vs. Google</div>
+    <ul>
+      <li><a href="#basics">Basics</a></li>
+      <li><a href="#auction">Auction</a></li>
+      <li><a href="#core">Core Concepts</a></li>
+      <li><a href="#deepdive">Deep Dive</a></li>
+      <li><a href="#pmax">Performance Max</a></li>
+      <li><a href="#agency">Agency</a></li>
+    </ul>
+    <a class="cta" href="#start">Start Reading →</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="start">
+  <div class="container">
+    <div>
+      <div class="badge"><span class="pulse"></span> The Unauthorized Guide · 2026 Edition</div>
+      <h1>
+        <span class="you">You</span><span class="vs">vs</span><br>
+        <span class="google">Google.</span>
+      </h1>
+      <p class="lede">
+        The most comprehensive guide to Google Ads ever written — from PPC basics to <em>Performance Max</em>. Built by the agency that's run more than a billion dollars through the platform. <strong>No fluff. No promises. Just everything that actually works.</strong>
+      </p>
+      <div class="ctas">
+        <a class="btn primary" href="#toc">Explore the Guide <span>→</span></a>
+        <a class="btn ghost" href="#basics">Start From the Beginning</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="num">67%</span><span class="lbl">High-intent searches click ads</span></div>
+        <div class="stat"><span class="num">6</span><span class="lbl">Key Campaign Types</span></div>
+        <div class="stat"><span class="num">500+</span><span class="lbl">Touchpoints to convert</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="book-cover">
+        <div class="top-row">
+          <span>Solutions 8</span>
+          <span>Vol. 01</span>
+        </div>
+        <div>
+          <div class="you-label">You</div>
+          <div class="vs-label">VERSUS</div>
+          <div class="google-label">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>.
+          </div>
+        </div>
+        <div>
+          <div class="subtitle">The unauthorized guide to Google Ads.</div>
+          <div class="authors">Hurlburt-Lawton · Moran · Aslam</div>
+        </div>
+      </div>
+      <div class="floating-pill p1"><span class="icon">🔍</span> Search Campaigns</div>
+      <div class="floating-pill p2"><span class="icon">🛒</span> Shopping Ads</div>
+      <div class="floating-pill p3"><span class="icon">▶</span> YouTube Ads</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<section id="toc">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">The Path Ahead</div>
+        <h2>A field guide,<br><em>not</em> a fairytale.</h2>
+      </div>
+      <div class="intro">
+        <p>This isn't a "double your traffic overnight" book. Any thought leader who promises that is — let's be honest — selling snake oil. What this guide <em>will</em> do is teach you the <strong>why</strong> behind every Google Ads strategy, so when the platform inevitably changes (and it will, probably by tomorrow), you'll be able to think critically and act decisively.</p>
+        <p>Skim Part One. Jump to the part that fits your business. Come back when the algorithm rewrites itself.</p>
+      </div>
+    </div>
+
+    <div class="toc-grid reveal">
+      <a class="toc-part" href="#basics">
+        <div class="part-num">Part One</div>
+        <h4>The Basics of Google Ads</h4>
+        <p>What PPC actually is, how the Google network works, and why search is the strongest signal of intent on the internet.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a class="toc-part" href="#deepdive">
+        <div class="part-num">Part Two</div>
+        <h4>Google Ads for Lead Generation</h4>
+        <p>The six key campaigns we build for every lead-gen client — brand, general, competitor, remarketing, DSA, Performance Max.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a class="toc-part" href="#deepdive">
+        <div class="part-num">Part Three</div>
+        <h4>Google Ads for eCommerce</h4>
+        <p>Standard Shopping vs. Performance Max, robust product feeds, GTINs, average order value strategy, and the nine eComm prerequisites.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a class="toc-part" href="#deepdive">
+        <div class="part-num">Part Four</div>
+        <h4>Google Ads for YouTube</h4>
+        <p>Five ad types, scripting that converts, video ad sequences, and why YouTube is the long-form sales letter of the internet.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a class="toc-part" href="#pmax">
+        <div class="part-num">Part Five</div>
+        <h4>Performance Max</h4>
+        <p>The campaign type that rewrote the rules. Goals, asset groups, audience signals — and why advertisers either love it or fear it.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a class="toc-part" href="#agency">
+        <div class="part-num">Part Six</div>
+        <h4>How to Pick a Google Ads Agency</h4>
+        <p>The questions that separate strategists from account managers. Red flags, must-haves, and a transparent pricing checklist.</p>
+        <div class="arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PART ONE: BASICS ============ -->
+<section id="basics">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Part One · The Basics</div>
+        <h2>Google is a <em>librarian</em><br>with a long memory.</h2>
+      </div>
+      <div class="intro">
+        <p>Pay-per-click advertising is exactly what it sounds like: advertisers only pay when someone clicks. But Google Ads — formerly Google AdWords — is the most powerful PPC system on the planet because Google itself is the closest thing to publicly available AI. It's a machine that <em>thinks</em>.</p>
+        <p>And it knows you. Probably better than you know yourself.</p>
+      </div>
+    </div>
+
+    <div class="lib-analogy reveal">
+      <div class="visual">
+        <div class="center">Google<br>knows<br>everything</div>
+      </div>
+      <div>
+        <h3>The library analogy.</h3>
+        <p>Google is the librarian. The internet is the library. Every webpage, video, product listing, and news article is a book on a shelf — and the librarian's job is to collect, sort, and personally guide every reader to exactly what they need.</p>
+        <p>This librarian is observant. They notice what you're wearing. They know your checkout history. They remember every book you returned with a sigh. They watch what other readers like you have picked up.</p>
+        <p class="pull">Google's number one priority is relevancy. Everything else flows from that one obsession.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-size:2rem; font-weight:600; margin-bottom: 14px; letter-spacing:-0.02em;">Google is much more than a search engine.</h3>
+    <p style="color: var(--ink-soft); max-width:760px; margin-bottom: 40px; font-size: 1.05rem;">Every branch of the Google ecosystem is collecting a different kind of intimate signal. Together, they paint a picture sharp enough to predict <em>intent</em> — and that means putting your ad in front of someone who's ready to buy, before they even know they want to.</p>
+
+    <div class="ecosystem-grid">
+      <div class="eco-card search reveal">
+        <div class="icon-wrap">🔍</div>
+        <h4>Google Search</h4>
+        <p>The questions you type are the most honest things about you.</p>
+        <ul><li>What you want</li><li>What you fear</li><li>What you don't know</li><li>Your active problems</li></ul>
+      </div>
+      <div class="eco-card youtube reveal">
+        <div class="icon-wrap">▶</div>
+        <h4>YouTube</h4>
+        <p>The second largest search engine on Earth — and the most personal.</p>
+        <ul><li>When you're slacking off</li><li>What you want to learn</li><li>What you love and hate</li><li>When you're vulnerable</li></ul>
+      </div>
+      <div class="eco-card gmail reveal">
+        <div class="icon-wrap">✉</div>
+        <h4>Gmail</h4>
+        <p>Even non-Gmail users send signals through people who do.</p>
+        <ul><li>How productive you are</li><li>When you work</li><li>Who you communicate with</li></ul>
+      </div>
+      <div class="eco-card maps reveal">
+        <div class="icon-wrap">📍</div>
+        <h4>Maps</h4>
+        <p>Every route you ask for tells a story about your life.</p>
+        <ul><li>Where you live & work</li><li>Where you eat, play, shop</li><li>Whether you speed</li></ul>
+      </div>
+      <div class="eco-card apps reveal">
+        <div class="icon-wrap">📅</div>
+        <h4>Apps (Calendar, Drive)</h4>
+        <p>Your schedule, files, and faces — all sitting in the index.</p>
+        <ul><li>What you store</li><li>Who you meet</li><li>What you and your loved ones look like</li></ul>
+      </div>
+      <div class="eco-card android reveal">
+        <div class="icon-wrap">📱</div>
+        <h4>Android</h4>
+        <p>If you (or anyone you call) uses Android, Google has the call log.</p>
+        <ul><li>Who you call</li><li>Who calls you</li><li>Who you ignore</li></ul>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-size:2rem; font-weight:600; margin: 90px 0 14px; letter-spacing:-0.02em;">Every piece of real estate has an ad slot.</h3>
+    <p style="color: var(--ink-soft); max-width:760px; margin-bottom: 30px; font-size: 1.05rem;">For every property Google owns, there's a campaign type. While all have their place, <strong>search is the strongest signal of intent</strong> — when someone is ready to buy, they Google it. So that's where most foundations get built.</p>
+
+    <div class="campaign-types">
+      <div class="ctype featured reveal">
+        <span class="tag">Start Here</span>
+        <div class="num">01</div>
+        <h4>Search</h4>
+        <p>The text ads at the top of search results. 67% of high-commercial intent keyphrases click a paid ad. The foundation for almost every account.</p>
+      </div>
+      <div class="ctype reveal">
+        <div class="num">02</div>
+        <h4>Shopping</h4>
+        <p>Image-rich product ads for eCommerce. Pulls live from your Merchant Center feed and includes price, photo, and reviews.</p>
+      </div>
+      <div class="ctype reveal">
+        <div class="num">03</div>
+        <h4>Display</h4>
+        <p>Image ads across millions of partner sites. Google is the realtor, websites are landlords, advertisers are tenants.</p>
+      </div>
+      <div class="ctype reveal">
+        <div class="num">04</div>
+        <h4>Video (YouTube)</h4>
+        <p>Skippable, non-skippable, bumper, and discovery formats. Avatar-based, not intent-based — perfect for long sales cycles.</p>
+      </div>
+      <div class="ctype reveal">
+        <div class="num">05</div>
+        <h4>Discovery</h4>
+        <p>Native ads on YouTube, Gmail, and Google's Discover feed. Best with low-barrier offers like ebooks or first-purchase discounts.</p>
+      </div>
+      <div class="ctype reveal">
+        <div class="num">06</div>
+        <h4>App</h4>
+        <p>Promotes your app across Search, Display, YouTube, and Google Play with a single goal-based campaign.</p>
+      </div>
+      <div class="ctype featured reveal">
+        <span class="tag" style="background:var(--gold); color:var(--ink);">New Paradigm</span>
+        <div class="num">07</div>
+        <h4>Performance Max</h4>
+        <p>Goal-driven, audience-oriented, algorithmically controlled. Feed Google your assets and let it match them across the entire ecosystem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUCTION ============ -->
+<section id="auction">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">The Ads Auction</div>
+        <h2>You're not bidding<br>against <em>each other</em>.</h2>
+      </div>
+      <div class="intro">
+        <p>This is the part most advertisers misunderstand. There's a fixed number of ad slots per search, and yes — advertisers place bids. But the highest bidder doesn't automatically win. And when they do win, they don't even pay what they bid.</p>
+        <p>You're not bidding against your competitors. You're bidding for the <em>value of the click</em>.</p>
+      </div>
+    </div>
+
+    <div class="formula reveal">
+      <div class="term">
+        <div class="label">Your Bid</div>
+        <div class="value">Maximum you'll pay per click</div>
+      </div>
+      <div class="op">+</div>
+      <div class="term">
+        <div class="label">Ad Quality</div>
+        <div class="value">Relevance · Landing page · CTR</div>
+      </div>
+      <div class="op">+</div>
+      <div class="term">
+        <div class="label">Extensions</div>
+        <div class="value">Sitelinks · Callouts · Calls</div>
+      </div>
+      <div class="op">=</div>
+      <div class="term">
+        <div class="label">Ad Rank</div>
+        <div class="value" style="color:var(--gold);">Your slot. Your price.</div>
+      </div>
+    </div>
+
+    <div class="auction-3">
+      <div class="auction-step reveal">
+        <div class="step-num">Step 01</div>
+        <h4>The Googler enters a query.</h4>
+        <p>"Red shoes." A user types it, taps it, or whispers it to their phone. Google instantly takes inventory.</p>
+      </div>
+      <div class="auction-step reveal">
+        <div class="step-num">Step 02</div>
+        <h4>The advertisers are weighed.</h4>
+        <p>Every bid is compared with quality scores, extensions, landing-page relevance, and the searcher's own profile and context.</p>
+      </div>
+      <div class="auction-step reveal">
+        <div class="step-num">Step 03</div>
+        <h4>The slots are filled.</h4>
+        <p>In under a second, ads are sorted by Ad Rank. The winner pays only what's needed to beat #2. Sometimes #2 is the best place to be.</p>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <div class="icon">★</div>
+      <div>
+        <h3>Quality Score: the only score you can see.</h3>
+        <p>Graded 1–10, your quality score reflects expected CTR, ad relevance, and landing page experience. Not your Ad Rank — but your tool for making it better. Higher quality means lower CPC <em>and</em> higher placement. Win twice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CORE CONCEPTS / FLYWHEEL ============ -->
+<section id="core">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Core Concepts</div>
+        <h2>The flywheel<br><em>never</em> ends.</h2>
+      </div>
+      <div class="intro">
+        <p>Every successful Google Ads campaign rotates through the same four stages — forever. Skip a stage and you'll either run out of budget or run out of patience. The most counterintuitive part? You start by <em>guessing</em>. You'll be wrong as often as you're right. That's the whole point.</p>
+        <p>You aren't paying for customers up front. You're paying for <em>data</em>.</p>
+      </div>
+    </div>
+
+    <div class="flywheel">
+      <div class="flywheel-visual">
+        <div class="flywheel-circle"></div>
+        <div class="flywheel-center">The Flywheel</div>
+        <div class="flywheel-node n1"><div><span class="step">01</span>Assume</div></div>
+        <div class="flywheel-node n2"><div><span class="step">02</span>Test</div></div>
+        <div class="flywheel-node n3"><div><span class="step">03</span>Observe</div></div>
+        <div class="flywheel-node n4"><div><span class="step">04</span>Optimize</div></div>
+      </div>
+      <div class="flywheel-text">
+        <h3>From guess to gospel — in four turns.</h3>
+        <div class="flywheel-step">
+          <h4><span class="badge">01</span> Assume</h4>
+          <p>Guess your audience, keywords, offer, and ad copy. Yes, guess. Even our worst assumptions teach us something.</p>
+        </div>
+        <div class="flywheel-step">
+          <h4><span class="badge">02</span> Test</h4>
+          <p>Launch the campaign. Resist the urge to tweak. Learning what doesn't work is just as valuable as learning what does.</p>
+        </div>
+        <div class="flywheel-step">
+          <h4><span class="badge">03</span> Observe</h4>
+          <p>Let it sit. Use the statistician's base-100 model: 100 impressions reveal CTR, 100 clicks reveal time-on-site. Don't pull the plug at 40.</p>
+        </div>
+        <div class="flywheel-step">
+          <h4><span class="badge">04</span> Optimize</h4>
+          <p>Now act on data, not feelings. Double down on what works. Cut what doesn't. Spawn new assumptions. Repeat forever.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="offer-formula reveal">
+      <h3>The Magic Formula for Crafting Your Offer</h3>
+      <div class="math">
+        <span class="term">Specificity</span>
+        <span class="op">+</span>
+        <span class="term">Continuity</span>
+        <span class="op">=</span>
+        <span class="term result">Success</span>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-size:2rem; font-weight:600; margin: 100px 0 14px; letter-spacing:-0.02em;">The Six Key Campaigns.</h3>
+    <p style="color: var(--ink-soft); max-width:760px; margin-bottom: 30px; font-size: 1.05rem;">For lead-generation accounts, this is the structure we deploy almost every time. Budget allocations are <em>starting points</em>, not laws — adjust based on performance, not assumption.</p>
+
+    <div class="six-grid">
+      <div class="six-card reveal">
+        <div class="header"><div class="name">Brand</div><div class="pct">10%</div></div>
+        <p>Capture searches for your name. Easiest to convert, cheapest CPC, fastest learnings. Don't let competitors steal your brand traffic.</p>
+        <div class="bar"><div class="fill" style="--w:0.10"></div></div>
+      </div>
+      <div class="six-card reveal">
+        <div class="header"><div class="name">General</div><div class="pct">25%</div></div>
+        <p>High-intent terms for your core offer. The real money-maker once dialed in. Bottom-of-funnel first, then climb the funnel.</p>
+        <div class="bar"><div class="fill" style="--w:0.25"></div></div>
+      </div>
+      <div class="six-card reveal">
+        <div class="header"><div class="name">Competitor</div><div class="pct">10%</div></div>
+        <p>Target alternatives. Low Quality Score is unavoidable, so never use Enhanced CPC. Bid where you genuinely beat them.</p>
+        <div class="bar"><div class="fill" style="--w:0.10"></div></div>
+      </div>
+      <div class="six-card reveal">
+        <div class="header"><div class="name">Remarketing</div><div class="pct">10%</div></div>
+        <p>Bring back visitors who already engaged. Cheapest conversions in the account. Always exclude users who already converted.</p>
+        <div class="bar"><div class="fill" style="--w:0.10"></div></div>
+      </div>
+      <div class="six-card reveal">
+        <div class="header"><div class="name">DSA</div><div class="pct">25%</div></div>
+        <p>Dynamic Search Ads fill the keyword gaps. Google scrapes your site to match queries you didn't think to bid on.</p>
+        <div class="bar"><div class="fill" style="--w:0.25"></div></div>
+      </div>
+      <div class="six-card reveal">
+        <div class="header"><div class="name">Performance Max</div><div class="pct">20%</div></div>
+        <p>Goal-driven, ecosystem-wide. Feed it audience signals and assets — let it discover audiences you'd never have found.</p>
+        <div class="bar"><div class="fill" style="--w:0.20"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ READINESS / PREREQS ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Before You Spend a Dollar</div>
+        <h2>Is Google Ads <em>right</em><br>for your business?</h2>
+      </div>
+      <div class="intro">
+        <p>For most businesses, the answer is yes — but it's not always, and it's never <em>immediately</em>. It takes time to build, launch, and optimize. It takes money to gather meaningful data. And it takes a business that's actually ready to handle what comes through the door.</p>
+        <p>Answer the seven honestly. If two or more are no, hold off.</p>
+      </div>
+    </div>
+
+    <div class="readiness">
+      <div class="check-item reveal"><div class="check">1</div><div><h4>Are you ready to commit?</h4><p>It can take months to determine whether there's a predictable, scalable growth path.</p></div></div>
+      <div class="check-item reveal"><div class="check">2</div><div><h4>Can you afford the cost?</h4><p>$1,000–$1,500/mo bare minimum. We recommend starting at $2,000+ for meaningful data velocity.</p></div></div>
+      <div class="check-item reveal"><div class="check">3</div><div><h4>Do you know your goals?</h4><p>Close rates, leads-to-sale ratio, monthly leads needed for profit — these aren't optional.</p></div></div>
+      <div class="check-item reveal"><div class="check">4</div><div><h4>Is your website fast and clear?</h4><p>Under 2–3 second load time. Mobile responsive. Informative. Trust signals everywhere.</p></div></div>
+      <div class="check-item reveal"><div class="check">5</div><div><h4>Can you handle the traffic?</h4><p>Will you answer the phone? Is inventory stocked? Is the sales team trained?</p></div></div>
+      <div class="check-item reveal"><div class="check">6</div><div><h4>Is your audience big enough?</h4><p>Hyper-local, rural, niche-of-a-niche audiences may be too small for Google Ads to scale meaningfully.</p></div></div>
+      <div class="check-item reveal"><div class="check">7</div><div><h4>Can you compete on spend?</h4><p>If your bids can't compete in your industry, Google Ads won't tip the scales. Choose your battles.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEEP DIVE TABS ============ -->
+<section id="deepdive">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Deep Dive</div>
+        <h2>Pick your <em>battlefield</em>.</h2>
+      </div>
+      <div class="intro">
+        <p>Lead generation, eCommerce, YouTube — each requires its own foundations, prerequisites, and campaign architecture. Choose your context. The strategy is built around it.</p>
+      </div>
+    </div>
+
+    <div class="tab-nav" role="tablist">
+      <button class="tab-btn active" data-tab="lead">Lead Generation</button>
+      <button class="tab-btn" data-tab="ecom">eCommerce</button>
+      <button class="tab-btn" data-tab="youtube">YouTube</button>
+    </div>
+
+    <div class="tab-pane active" data-pane="lead">
+      <div class="dd-grid">
+        <div>
+          <h3>Lead generation: data first, leads second.</h3>
+          <p>Your initial budget isn't buying customers. It's buying the signals Google needs to build the audience that <em>will</em> become customers. The first three months are the most painful. After Performance Max entered the mix, the old 90-day rule became more like <strong>45 days just to see what you've built</strong>. Day 46 is now Day 0.</p>
+          <p>Before launch, you'll need these seven non-negotiables:</p>
+          <ul class="bullets">
+            <li>Reasonable monthly spend (we don't take clients under $2,000/mo)</li>
+            <li>Appropriate time expectations (45+ days before judging anything)</li>
+            <li>Quality website with depth, not a one-pager</li>
+            <li>Margins that can actually support paid traffic</li>
+            <li>Unique selling proposition (no, "cheapest" doesn't count)</li>
+            <li>Customer avatars — sub-types of your demographic, not demographics</li>
+            <li>15-question minimum form fills to deter click farms</li>
+          </ul>
+          <p>Then comes the build: the six key campaigns, conversion tracking via Google Tag Manager, ad extensions, RLSA observation lists, exclusion lists for past converters — and yes, manually scoring inbound phone calls so Google learns from <em>real</em> conversions, not random hang-ups.</p>
+        </div>
+        <aside class="dd-card">
+          <div class="kw">Lead Gen · By the Numbers</div>
+          <h4>What "ready" actually looks like.</h4>
+          <p style="color: var(--ink-soft); font-size: 0.95rem;">A campaign optimized for lead generation, measured honestly, looks like this:</p>
+          <div class="stats-mini">
+            <div><span class="num">$2k+</span><span class="lbl">Min monthly spend</span></div>
+            <div><span class="num">45d</span><span class="lbl">Until day-zero data</span></div>
+            <div><span class="num">15+</span><span class="lbl">Form-fill questions</span></div>
+            <div><span class="num">6×</span><span class="lbl">Cheaper to keep a customer than acquire</span></div>
+          </div>
+          <p class="quote">Don't get distracted by vanity metrics. The goal is always conversions — quality and quantity, at the lowest price.</p>
+        </aside>
+      </div>
+    </div>
+
+    <div class="tab-pane" data-pane="ecom">
+      <div class="dd-grid">
+        <div>
+          <h3>eCommerce: the feed makes or breaks you.</h3>
+          <p>For online stores, your product feed is the campaign. Out-of-stock items, broken pages, mismatched prices — any of these will sink performance fast. We use <strong>DataFeedWatch</strong> to optimize feeds before they reach Google Merchant Center, because static spreadsheets can't catch a 404 in real time.</p>
+          <p>Your nine prerequisites:</p>
+          <ul class="bullets">
+            <li>Reasonable monthly spend ($2k+ minimum)</li>
+            <li>Realistic time expectations (Day 46 is Day 0)</li>
+            <li>A quality website that does more than transact</li>
+            <li>Margins that survive rising CPCs</li>
+            <li>A unique selling proposition that isn't "cheaper"</li>
+            <li>No one-off products — single GTINs vanish forever</li>
+            <li>Customer avatars + bespoke creative for each</li>
+            <li>A robust, live, audited product data feed</li>
+            <li>Average order values that justify paid traffic (~$50+)</li>
+          </ul>
+          <p>The campaign mix shifts: Standard Shopping (20%), Performance Max (15%), Dynamic Remarketing (10%), Search Brand (10%), Search Competitor (10%), DSA (20%), and expansion campaigns — YouTube, Discovery, Display — at 5% each. Performance Max wins on volume, Standard Shopping wins on transparency, and you need both.</p>
+        </div>
+        <aside class="dd-card">
+          <div class="kw">eCommerce · Feed Health</div>
+          <h4>The four feed checkpoints.</h4>
+          <p style="color: var(--ink-soft); font-size: 0.95rem;">Your data feed is a living document. Treat it like one.</p>
+          <ul class="bullets" style="margin-top:14px;">
+            <li>Product titles & IDs</li>
+            <li>Prices & shipping fees</li>
+            <li>Images & descriptions</li>
+            <li>UPC/GTIN attribution</li>
+          </ul>
+          <p class="quote">Your first sale is always your most expensive. Don't make every sale your first.</p>
+          <div class="stats-mini">
+            <div><span class="num">10%</span><span class="lbl">Min profit margin signal</span></div>
+            <div><span class="num">$50+</span><span class="lbl">Healthy AOV target</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="tab-pane" data-pane="youtube">
+      <div class="dd-grid">
+        <div>
+          <h3>YouTube: avatar-based, not intent-based.</h3>
+          <p>Google Search is intent. A user with a problem is actively looking for a solution. YouTube is avatar — a user with an interest, but not necessarily ready right now. YouTube is the long-form sales letter of the internet: position yourself in front of the right audience and drip content over time. With the right business, it's extraordinarily effective.</p>
+          <p>The five ad types:</p>
+          <ul class="bullets">
+            <li><strong>Skippable in-stream</strong> — pay only after 30s or a click</li>
+            <li><strong>Non-skippable in-stream</strong> — up to 30s, charged per 1,000 impressions</li>
+            <li><strong>Bumper ads</strong> — 6 seconds, unskippable, impression-billed</li>
+            <li><strong>Video discovery</strong> — appears in search & related videos, click-billed</li>
+            <li><strong>Overlay / non-video</strong> — banner ads on the bottom 20% of a video</li>
+          </ul>
+          <p>The script is everything. Hook in the first six seconds. Address identity, agitate the problem, present the solution, dismantle objections, show proof, end with a clear CTA. Then upload five videos minimum — Google split-tests them against each other and pushes ~80% of spend to the winners.</p>
+        </div>
+        <aside class="dd-card">
+          <div class="kw">YouTube · Real Numbers</div>
+          <h4>Budget honestly. Watch carefully.</h4>
+          <p style="color: var(--ink-soft); font-size: 0.95rem;">YouTube needs more data than search, because users go view → search → click — that extra step has a cost.</p>
+          <div class="stats-mini">
+            <div><span class="num">$5k</span><span class="lbl">Recommended monthly</span></div>
+            <div><span class="num">5+</span><span class="lbl">Videos per ad group</span></div>
+            <div><span class="num">0.50%</span><span class="lbl">Target CTR</span></div>
+            <div><span class="num">22%</span><span class="lbl">Target watch rate</span></div>
+          </div>
+          <p class="quote">DIY content beats over-produced content nine times out of ten. Authenticity is the algorithm.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PMAX ============ -->
+<section id="pmax">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Part Five · The New Paradigm</div>
+        <h2>Performance Max<br>changes <em>everything</em>.</h2>
+      </div>
+      <div class="intro">
+        <p>Between 2020 and 2022, Google ripped feature after feature out of the ads platform. Many of us thought they were trying to muscle out agencies entirely. We were wrong. They were phasing in something new — and on its surface, it looks deceptively simple.</p>
+        <p>Performance Max isn't lazy. It's leveraging Google's full ecosystem on your behalf. Lazy advertisers will fail with it. Strategic ones get separated from the pack.</p>
+      </div>
+    </div>
+
+    <div class="pmax-pillars">
+      <div class="pillar reveal">
+        <div class="pillar-num">i.</div>
+        <h4>Goals</h4>
+        <p>This is the first Google campaign that's truly goal-oriented. Define your primary conversion actions carefully — Google chases what you tell it to chase. Secondary goals report, but don't optimize.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">ii.</div>
+        <h4>Assets</h4>
+        <p>You no longer create the ads. You provide asset groups — images, logos, videos, headlines, descriptions. Google mixes, matches, and deploys them across Search, Display, YouTube, Gmail, Discovery. URL Expansion picks the right landing page per user.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">iii.</div>
+        <h4>Audiences</h4>
+        <p>Audience Signals are starting points — custom segments, customer data, interests, demographics. Google uses your signal as a hypothesis, then finds <em>better</em> audiences than you would have. The Insights tab tells you who's actually converting.</p>
+      </div>
+    </div>
+
+    <div class="before-after reveal">
+      <div class="ba-panel before">
+        <div class="label">Old Google Ads</div>
+        <h4>Keyword-centric. Network-targeted.</h4>
+        <ul class="ba-list">
+          <li>You picked the campaign type per network</li>
+          <li>You built ad groups around keywords</li>
+          <li>You manually targeted demographics</li>
+          <li>You decided which landing page received traffic</li>
+          <li>You chased Quality Score and Ad Rank</li>
+        </ul>
+      </div>
+      <div class="ba-panel after">
+        <div class="label">Performance Max</div>
+        <h4>Goal-oriented. Audience-centric. Algorithmic.</h4>
+        <ul class="ba-list">
+          <li>One campaign reaches every Google surface</li>
+          <li>Asset groups replace ad groups, organized by audience</li>
+          <li>Audience signals seed discovery, not constraint</li>
+          <li>URL Expansion sends users to the highest-converting page</li>
+          <li>You give Google a goal — it finds the rest</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout reveal" style="margin-top: 56px;">
+      <div class="icon">⚡</div>
+      <div>
+        <h3>The 500-touchpoint paradigm.</h3>
+        <p>Google understands that on average, a user converts after roughly 500 brand touchpoints. So instead of forcing every click straight to a product page, URL Expansion routes users through whichever pages — "About," case studies, blog posts — actually move them toward conversion. Trust the machine. (But audit it.)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTES ============ -->
+<section class="quotes">
+  <h2>What people are <em>saying</em>.</h2>
+  <div class="sub">Praise for the book — and for the team behind it.</div>
+  <div class="quote-grid">
+    <div class="quote-card reveal">
+      <p>If you are looking to up your game when it comes to Google Ads, get this book.</p>
+      <div class="author">Tom Breeze</div>
+      <div class="title">World Authority · YouTube</div>
+    </div>
+    <div class="quote-card reveal">
+      <p>Kasim is THE MAN when it comes to understanding how to get good leads with great clients that convert into real money.</p>
+      <div class="author">Tommy Mello</div>
+      <div class="title">9-Figure Entrepreneur · CEO, A1 Garage Door</div>
+    </div>
+    <div class="quote-card reveal">
+      <p>The book is phenomenal, you've got to get it, it's going to make you smarter.</p>
+      <div class="author">Steve Sims</div>
+      <div class="title">"The Real Life Wizard of Oz" – Forbes</div>
+    </div>
+    <div class="quote-card reveal">
+      <p>Kasim is the #1 expert in the world when it comes to generating traffic to your business using the Google platform and ecosystem.</p>
+      <div class="author">Ryan Levesque</div>
+      <div class="title">Inc. 500 CEO · The ASK Method® Company</div>
+    </div>
+    <div class="quote-card reveal">
+      <p>I highly recommend anybody to read this book — they are the number one experts when it comes to Google.</p>
+      <div class="author">Ralph Burns</div>
+      <div class="title">Founder &amp; CEO · Tier 11</div>
+    </div>
+    <div class="quote-card reveal">
+      <p>Google kinda scared me a lot! What I love about what Kasim has done is broken it down into steps so anyone can become a marketer at Google.</p>
+      <div class="author">Rachel Miller</div>
+      <div class="title">CEO · Moolah Marketing</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AGENCY ============ -->
+<section id="agency">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Part Six · Hiring Help</div>
+        <h2>How to pick<br>the <em>right</em> agency.</h2>
+      </div>
+      <div class="intro">
+        <p>Running Google Ads is a full-time job. Many businesses are better served by an outside expert than an in-house generalist trying to juggle SEO, content, email, and PPC simultaneously. But agencies vary wildly — some are strategists, most are account managers, and a few are flat-out criminal in how they bill.</p>
+        <p>Here's what to actually look for.</p>
+      </div>
+    </div>
+
+    <div class="agency-grid">
+      <div class="ag-card reveal">
+        <div class="ag-num">01</div>
+        <h4>Certifications &amp; Experience</h4>
+        <p>Google Ads Certified is the floor. Google Partner — better. Premier Partner (top 3% in the U.S.) — best. Continued education matters more than the badge alone.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">02</div>
+        <h4>Real Tracking Stack</h4>
+        <p>Google Analytics <em>and</em> Google Tag Manager — not one or the other. Plus call tracking, form tracking, predictive indicators, and manual conversion scoring for phone calls.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">03</div>
+        <h4>Transparent Reporting</h4>
+        <p>Reports built in Google Data Studio (or similar) that reconcile cleanly with your Google account. If they use "proprietary dashboards," walk away — that's how vanity metrics get hidden.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">04</div>
+        <h4>Account Ownership</h4>
+        <p>The Google account belongs to <em>you</em>. The agency is a guest. If they claim ownership, you'll lose every campaign asset the day you leave.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">05</div>
+        <h4>No Long-Term Contracts</h4>
+        <p>Markets change. Algorithms change. Your business might change. A reputable agency earns its keep month-to-month and welcomes the pressure.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">06</div>
+        <h4>Diagnose Before Prescribe</h4>
+        <p>No strategy should be proposed before they understand your business in depth. A doctor never prescribes without an exam. Neither should your agency.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">07</div>
+        <h4>Active In Your Account</h4>
+        <p>Expect 100+ changes per month, especially in the first 90 days. Search terms reviewed monthly. Negative keywords updated. Real, visible work.</p>
+      </div>
+      <div class="ag-card reveal">
+        <div class="ag-num">08</div>
+        <h4>Specialists, Not Generalists</h4>
+        <p>"Do-it-all" agencies do nothing well. A great Google Ads agency makes Google Ads their entire craft. The rest of your stack deserves its own experts.</p>
+      </div>
+    </div>
+
+    <div class="redflag-strip reveal">
+      <div class="icon">!</div>
+      <div>
+        <h3>Walk away if you hear...</h3>
+        <p style="color: rgba(243,237,227,0.7);">Any one of these is a warning. More than one is a verdict.</p>
+        <ul>
+          <li>Guaranteed results or promised revenue lifts</li>
+          <li>Long-term contracts with cancellation penalties</li>
+          <li>Proprietary dashboards you can't audit</li>
+          <li>Pricing that seems "too affordable to be real"</li>
+          <li>One person doing PPC + SEO + email + social</li>
+          <li>They want to own your Google Ads account</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Now you know <em>how</em><br>Google really works.</h2>
+    <p>The strategy in this guide will keep working long after Google rewrites the interface. The "why" outlives the "how." Bookmark this, share it, and come back when the next update breaks half the internet.</p>
+    <div class="ctas" style="justify-content:center; display:flex; gap:16px; flex-wrap:wrap;">
+      <a class="btn primary" href="#start">Back to the Top ↑</a>
+      <a class="btn ghost" href="#basics">Re-read Part One</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© Solutions 8 · Hurlburt-Lawton · Moran · Aslam · The unauthorized guide to Google Ads</p>
+    <div class="ft-links">
+      <a href="#basics">Basics</a>
+      <a href="#auction">Auction</a>
+      <a href="#core">Core</a>
+      <a href="#deepdive">Deep Dive</a>
+      <a href="#pmax">PMax</a>
+      <a href="#agency">Agency</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- nav scroll state ----
+const nav = document.getElementById('topnav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// ---- mobile menu ----
+const menuBtn = document.getElementById('menuBtn');
+menuBtn.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});
+nav.querySelectorAll('ul a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+// ---- tabs ----
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.dataset.pane === tab));
+  });
+});
+
+// ---- reveal-on-scroll ----
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

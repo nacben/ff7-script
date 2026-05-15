@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Go-Getter — "It Shall Be Done"</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET & CUSTOM PROPERTIES ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:        #08162a;
+      --navy-mid:    #0f2240;
+      --navy-light:  #163354;
+      --gold:        #c9a84c;
+      --gold-lt:     #e8c97a;
+      --gold-dk:     #8a6f2e;
+      --cream:       #f5f0e8;
+      --cream-muted: #c8bfad;
+      --red:         #8b1a2a;
+      --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      overflow-x: hidden;
+      line-height: 1.75;
+    }
+
+    /* ── SCROLL PROGRESS BAR ───────────────────────────────────────────── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      width: 0%; z-index: 9999; transition: width 0.1s linear;
+    }
+
+    /* ── NAVIGATION ────────────────────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s var(--ease), padding 0.4s var(--ease);
+    }
+    #navbar.scrolled {
+      background: rgba(8,22,42,0.95);
+      backdrop-filter: blur(12px);
+      padding: 0.6rem 2rem;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream-muted); font-size: 0.85rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      text-decoration: none; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: var(--ease) 0.3s; }
+
+    /* ── HERO SECTION ──────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem 4rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(22,51,84,0.9) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 100% at 50% 100%, rgba(139,26,42,0.15) 0%, transparent 60%),
+        var(--navy);
+    }
+    /* animated stars */
+    .stars { position: absolute; inset: 0; overflow: hidden; }
+    .star {
+      position: absolute; border-radius: 50%;
+      background: white; animation: twinkle var(--d, 4s) infinite var(--delay, 0s);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(1); }
+      50%       { opacity: 0.9; transform: scale(1.3); }
+    }
+    .hero-vase-ring {
+      position: absolute;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.15);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ring-pulse 6s ease-in-out infinite;
+    }
+    .hero-vase-ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 2s; }
+    .hero-vase-ring:nth-child(3) { width: 680px; height: 680px; animation-delay: 4s; }
+    @keyframes ring-pulse {
+      0%, 100% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 0.2;  transform: translate(-50%, -50%) scale(1.03); }
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+    .hero-eyebrow {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem; opacity: 0;
+      animation: fade-up 0.8s var(--ease) 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3.5rem, 10vw, 7.5rem);
+      font-weight: 900; line-height: 1;
+      color: var(--cream); margin-bottom: 1.5rem;
+      opacity: 0; animation: fade-up 0.9s var(--ease) 0.5s forwards;
+    }
+    .hero-title span { color: var(--gold); display: block; }
+    .hero-divider {
+      width: 80px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.5rem auto; opacity: 0;
+      animation: fade-up 0.8s var(--ease) 0.7s forwards;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 300;
+      color: var(--cream-muted); max-width: 600px; margin: 0 auto 2.5rem;
+      opacity: 0; animation: fade-up 0.8s var(--ease) 0.9s forwards;
+    }
+    .hero-authors {
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold-lt);
+      margin-bottom: 3rem; opacity: 0;
+      animation: fade-up 0.8s var(--ease) 1.1s forwards;
+    }
+    .hero-scroll {
+      opacity: 0; animation: fade-up 0.8s var(--ease) 1.4s forwards;
+    }
+    .hero-scroll-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--cream-muted); font-size: 0.75rem; letter-spacing: 0.2em;
+      text-transform: uppercase; cursor: pointer;
+      transition: color 0.3s;
+    }
+    .hero-scroll-inner:hover { color: var(--gold); }
+    .scroll-arrow {
+      width: 30px; height: 50px; border: 1px solid currentColor;
+      border-radius: 15px; display: flex; align-items: flex-start;
+      justify-content: center; padding-top: 8px;
+    }
+    .scroll-dot {
+      width: 4px; height: 8px; background: currentColor;
+      border-radius: 2px; animation: scroll-bounce 2s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      80%       { transform: translateY(18px); opacity: 0; }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── ORNAMENT DIVIDER ──────────────────────────────────────────────── */
+    .ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin: 3rem auto;
+    }
+    .ornament-line {
+      flex: 1; max-width: 120px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dk));
+    }
+    .ornament-line.right { background: linear-gradient(90deg, var(--gold-dk), transparent); }
+    .ornament-diamond {
+      width: 10px; height: 10px; background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    /* ── SECTION COMMON ────────────────────────────────────────────────── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; color: var(--cream);
+      line-height: 1.2; margin-bottom: 1.25rem;
+    }
+    .section-body {
+      font-size: 1.05rem; color: var(--cream-muted);
+      max-width: 720px; line-height: 1.8;
+    }
+    .section-body + .section-body { margin-top: 1rem; }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── ABOUT / LEGACY SECTION ────────────────────────────────────────── */
+    #about { background: var(--navy-mid); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .book-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      padding: 2.5rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .book-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-dk));
+    }
+    .book-card:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-4px); }
+    .book-year {
+      font-size: 3.5rem; font-weight: 900;
+      font-family: 'Playfair Display', serif;
+      color: rgba(201,168,76,0.15);
+      line-height: 1; margin-bottom: 1rem;
+      position: absolute; top: 1.5rem; right: 1.5rem;
+    }
+    .book-tag {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .book-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .book-author { font-size: 0.9rem; color: var(--cream-muted); margin-bottom: 1rem; }
+    .book-desc { font-size: 0.95rem; color: var(--cream-muted); line-height: 1.7; }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; margin-top: 4rem; text-align: center;
+    }
+    .stat-card {
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 4px; padding: 2rem 1rem;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--cream-muted); font-weight: 600; }
+
+    /* ── CHARACTERS SECTION ────────────────────────────────────────────── */
+    #characters { background: var(--navy); }
+    .char-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .char-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px; padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: all 0.4s var(--ease);
+      cursor: default;
+    }
+    .char-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      background: rgba(201,168,76,0.05);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .char-symbol {
+      font-size: 2.5rem; margin-bottom: 1rem; display: block;
+    }
+    .char-role {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .char-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .char-desc { font-size: 0.9rem; color: var(--cream-muted); line-height: 1.65; }
+    .char-quote {
+      margin-top: 1.25rem; padding-top: 1.25rem;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      font-style: italic; font-size: 0.85rem;
+      color: var(--gold-lt);
+    }
+
+    /* ── STORY TIMELINE ────────────────────────────────────────────────── */
+    #story { background: var(--navy-mid); }
+    .timeline {
+      position: relative; margin-top: 3rem;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--gold-dk), transparent);
+    }
+    .timeline-item {
+      position: relative; padding: 0 0 3rem 2.5rem;
+    }
+    .timeline-dot {
+      position: absolute; left: -7px; top: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--navy-mid);
+      border: 2px solid var(--gold);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .timeline-item:hover .timeline-dot {
+      background: var(--gold); transform: scale(1.3);
+    }
+    .timeline-chapter {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .timeline-body { font-size: 0.95rem; color: var(--cream-muted); line-height: 1.7; max-width: 700px; }
+    .timeline-highlight {
+      display: inline-block; background: rgba(201,168,76,0.1);
+      border-left: 3px solid var(--gold);
+      padding: 0.5rem 1rem; margin-top: 0.75rem;
+      font-style: italic; font-size: 0.9rem; color: var(--cream);
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* ── BLUE VASE SECTION ─────────────────────────────────────────────── */
+    #blue-vase {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    .vase-hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 85% 50%, rgba(22,51,84,0.6) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .vase-intro-block {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin: 3rem 0;
+    }
+    .vase-visual {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .vase-svg-wrap {
+      position: relative; animation: vase-float 5s ease-in-out infinite;
+    }
+    @keyframes vase-float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+    .vase-glow {
+      position: absolute; bottom: -20px; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 20px;
+      background: rgba(100,150,255,0.3);
+      filter: blur(12px); border-radius: 50%;
+    }
+    .obstacle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem; margin-top: 3rem;
+    }
+    .obstacle-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px; padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .obstacle-card::after {
+      content: ''; position: absolute;
+      inset: 0; background: rgba(201,168,76,0.05);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .obstacle-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
+    .obstacle-card:hover::after { opacity: 1; }
+    .obstacle-card.solved { border-color: rgba(100,200,120,0.4); background: rgba(100,200,120,0.04); }
+    .obstacle-num {
+      font-size: 2rem; font-weight: 900;
+      font-family: 'Playfair Display', serif;
+      color: rgba(201,168,76,0.2); line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .obstacle-title {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .obstacle-desc { font-size: 0.85rem; color: var(--cream-muted); }
+    .obstacle-solution {
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(100,200,120,0.2);
+      font-size: 0.85rem; color: #7ec8a0;
+      display: none;
+    }
+    .obstacle-card.solved .obstacle-solution { display: block; }
+    .obstacle-card .solve-btn {
+      display: inline-block; margin-top: 0.75rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold);
+      cursor: pointer; border: none; background: none;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 3px; transition: all 0.3s;
+    }
+    .obstacle-card .solve-btn:hover { background: rgba(201,168,76,0.1); }
+    .obstacle-card.solved .solve-btn { display: none; }
+    .vase-verdict {
+      margin-top: 4rem;
+      background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(139,26,42,0.08));
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 8px; padding: 3rem;
+      text-align: center;
+    }
+    .verdict-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-style: italic; color: var(--cream);
+      line-height: 1.5; margin-bottom: 1.5rem;
+    }
+    .verdict-reveal {
+      font-size: 0.9rem; color: var(--cream-muted); max-width: 600px; margin: 0 auto;
+    }
+    .vase-counter {
+      text-align: center; margin-top: 2rem;
+      font-size: 0.85rem; color: var(--cream-muted);
+    }
+    .vase-progress-bar {
+      height: 4px; background: rgba(255,255,255,0.1);
+      border-radius: 2px; margin: 1rem auto;
+      max-width: 400px; overflow: hidden;
+    }
+    .vase-progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--gold), #7ec8a0);
+      border-radius: 2px; transition: width 0.5s var(--ease);
+      width: 0%;
+    }
+    .btn-solve-all {
+      display: inline-block; margin-top: 1.5rem;
+      padding: 0.75rem 2rem; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--navy); background: var(--gold);
+      border: none; border-radius: 3px; cursor: pointer;
+      transition: all 0.3s; text-decoration: none;
+    }
+    .btn-solve-all:hover { background: var(--gold-lt); transform: translateY(-2px); }
+
+    /* ── PRINCIPLES SECTION ────────────────────────────────────────────── */
+    #principles { background: var(--navy-mid); }
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .principle-card {
+      perspective: 1000px; height: 280px; cursor: default;
+    }
+    .principle-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s var(--ease);
+    }
+    .principle-card:hover .principle-inner { transform: rotateY(180deg); }
+    .principle-front, .principle-back {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      border-radius: 6px; padding: 2rem;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+    .principle-front {
+      background: rgba(255,255,255,0.03);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .principle-back {
+      background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(22,51,84,0.9));
+      transform: rotateY(180deg);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .principle-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; font-weight: 900;
+      color: rgba(201,168,76,0.15); line-height: 1;
+    }
+    .principle-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .principle-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .principle-tagline { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+    .principle-back-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .principle-back-body { font-size: 0.9rem; color: var(--cream-muted); line-height: 1.65; }
+    .principle-back-quote {
+      margin-top: 1rem; font-style: italic; font-size: 0.85rem;
+      color: var(--cream); opacity: 0.8;
+    }
+    .flip-hint {
+      text-align: center; font-size: 0.75rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--cream-muted); margin-top: 1rem;
+    }
+
+    /* ── GARCIA SECTION ────────────────────────────────────────────────── */
+    #garcia { background: var(--navy); }
+    .garcia-intro {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; margin: 3rem 0; align-items: start;
+    }
+    .comparison-table {
+      margin-top: 3rem;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 6px; overflow: hidden;
+    }
+    .comparison-header {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      background: rgba(201,168,76,0.08);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .comparison-header div {
+      padding: 1rem 1.5rem;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .comparison-header div:nth-child(2) { color: #7ec8a0; border-left: 1px solid rgba(201,168,76,0.2); }
+    .comparison-header div:nth-child(3) { color: #e07070; border-left: 1px solid rgba(201,168,76,0.2); }
+    .comparison-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.3s;
+    }
+    .comparison-row:last-child { border-bottom: none; }
+    .comparison-row:hover { background: rgba(255,255,255,0.02); }
+    .comparison-row div {
+      padding: 0.9rem 1.5rem;
+      font-size: 0.9rem; color: var(--cream-muted);
+    }
+    .comparison-row div:nth-child(1) { color: var(--cream); font-weight: 600; }
+    .comparison-row div:nth-child(2) { border-left: 1px solid rgba(255,255,255,0.05); color: #7ec8a0; }
+    .comparison-row div:nth-child(3) { border-left: 1px solid rgba(255,255,255,0.05); color: #e07070; }
+    .garcia-questions {
+      margin-top: 3rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px; padding: 2rem;
+    }
+    .garcia-questions h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--cream);
+      margin-bottom: 1.25rem;
+    }
+    .question-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--cream-muted);
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .question-item:hover { background: rgba(200,70,70,0.06); color: var(--cream); }
+    .q-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── CIRCULAR LEGEND ───────────────────────────────────────────────── */
+    #circular { background: var(--navy-mid); }
+    .legend-flow {
+      margin: 3rem 0;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    .legend-node {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 2rem; align-items: start;
+      padding: 2rem 0; position: relative;
+    }
+    .legend-node:not(:last-child)::after {
+      content: ''; position: absolute;
+      left: 27px; top: calc(2rem + 56px); bottom: -1rem;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), rgba(201,168,76,0.1));
+    }
+    .legend-icon-wrap {
+      width: 56px; height: 56px; flex-shrink: 0;
+      border-radius: 50%; border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      background: var(--navy-mid);
+      position: relative; z-index: 1;
+    }
+    .legend-content-head {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.5rem;
+    }
+    .legend-content-body { font-size: 0.9rem; color: var(--cream-muted); line-height: 1.7; }
+    .legend-badge {
+      display: inline-block; padding: 0.25rem 0.75rem;
+      background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+      color: var(--gold); margin-top: 0.5rem; letter-spacing: 0.1em;
+    }
+
+    /* ── QUOTES SECTION ────────────────────────────────────────────────── */
+    #quotes { background: var(--navy); }
+    .quotes-container {
+      position: relative; overflow: hidden; margin-top: 3rem;
+    }
+    .quotes-track {
+      display: flex;
+      transition: transform 0.6s var(--ease);
+    }
+    .quote-slide {
+      flex-shrink: 0; width: 100%;
+      padding: 3rem; text-align: center;
+    }
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem; line-height: 0.5;
+      color: rgba(201,168,76,0.2);
+      display: block; margin-bottom: 1.5rem;
+    }
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      font-style: italic; color: var(--cream);
+      line-height: 1.6; max-width: 800px; margin: 0 auto 1.5rem;
+    }
+    .quote-author {
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .quote-source { font-size: 0.8rem; color: var(--cream-muted); margin-top: 0.25rem; }
+    .quote-dots {
+      display: flex; justify-content: center; gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .quote-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(201,168,76,0.3);
+      cursor: pointer; transition: background 0.3s;
+      border: none;
+    }
+    .quote-dot.active { background: var(--gold); }
+    .quote-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--gold); border-radius: 3px;
+      width: 44px; height: 44px;
+      cursor: pointer; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    .quote-nav:hover { background: rgba(201,168,76,0.15); }
+    .quote-nav.prev { left: 0; }
+    .quote-nav.next { right: 0; }
+
+    /* ── SELF-ASSESSMENT ───────────────────────────────────────────────── */
+    #assessment { background: var(--navy-mid); }
+    .assessment-intro {
+      max-width: 680px; font-size: 1.05rem;
+      color: var(--cream-muted); margin-bottom: 2.5rem; line-height: 1.8;
+    }
+    .assessment-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .assessment-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px; padding: 1.25rem;
+      cursor: pointer; transition: all 0.3s;
+      user-select: none;
+    }
+    .assessment-item:hover { border-color: rgba(201,168,76,0.3); }
+    .assessment-item.checked {
+      border-color: rgba(100,200,120,0.4);
+      background: rgba(100,200,120,0.05);
+    }
+    .assessment-check {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border-radius: 50%; border: 2px solid rgba(201,168,76,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; transition: all 0.3s;
+    }
+    .assessment-item.checked .assessment-check {
+      background: #7ec8a0; border-color: #7ec8a0; color: var(--navy);
+    }
+    .assessment-text { font-size: 0.9rem; color: var(--cream-muted); line-height: 1.6; }
+    .assessment-item.checked .assessment-text { color: var(--cream); }
+    .assessment-result {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 6px; padding: 2.5rem;
+      text-align: center; display: none;
+    }
+    .assessment-result.visible { display: block; }
+    .result-score {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; font-weight: 900;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .result-label {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 1rem;
+    }
+    .result-desc { font-size: 0.95rem; color: var(--cream-muted); max-width: 500px; margin: 0 auto; }
+    .btn-check {
+      display: inline-block; margin-top: 1.5rem;
+      padding: 0.75rem 2rem; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--navy); background: var(--gold);
+      border: none; border-radius: 3px; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-check:hover { background: var(--gold-lt); }
+
+    /* ── APPLY TODAY ───────────────────────────────────────────────────── */
+    #apply { background: var(--navy); }
+    .apply-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .apply-card {
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px; padding: 1.75rem;
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      transition: all 0.35s;
+    }
+    .apply-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-4px); }
+    .apply-context {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .apply-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .apply-body { font-size: 0.875rem; color: var(--cream-muted); line-height: 1.65; }
+    .apply-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+
+    /* ── PLEDGE SECTION ────────────────────────────────────────────────── */
+    #pledge {
+      background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      text-align: center;
+    }
+    .pledge-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .pledge-title em { color: var(--gold); font-style: normal; }
+    .pledge-text {
+      font-size: 1.05rem; color: var(--cream-muted);
+      max-width: 600px; margin: 0 auto 3rem; line-height: 1.8;
+    }
+    .pledge-card {
+      max-width: 600px; margin: 0 auto;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 8px; padding: 3rem;
+    }
+    .pledge-words {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900; color: var(--gold);
+      letter-spacing: 0.04em; margin-bottom: 1.5rem;
+    }
+    .pledge-instruction { font-size: 0.85rem; color: var(--cream-muted); }
+
+    /* ── FOOTER ────────────────────────────────────────────────────────── */
+    footer {
+      background: rgba(0,0,0,0.4);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .footer-links {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 2rem; list-style: none; margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--cream-muted);
+      text-decoration: none; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.8rem; color: rgba(200,191,173,0.5); line-height: 1.6; }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(8,22,42,0.97); padding: 1rem 2rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-burger { display: flex; }
+      .about-grid, .garcia-intro, .vase-intro-block { grid-template-columns: 1fr; gap: 2rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .comparison-header, .comparison-row { grid-template-columns: 1fr; }
+      .comparison-header div:nth-child(2),
+      .comparison-header div:nth-child(3),
+      .comparison-row div:nth-child(2),
+      .comparison-row div:nth-child(3) { border-left: none; border-top: 1px solid rgba(255,255,255,0.05); }
+      .quote-nav { display: none; }
+      section { padding: 4rem 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+
+  <!-- ── NAVIGATION ─────────────────────────────────────────────────────── -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#hero">The Go-Getter</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">The Books</a></li>
+      <li><a href="#characters">Characters</a></li>
+      <li><a href="#blue-vase">Blue Vase</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#garcia">Garcia</a></li>
+      <li><a href="#assessment">Self-Test</a></li>
+    </ul>
+    <div class="nav-burger" id="nav-burger" role="button" aria-label="Toggle menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="stars" id="stars"></div>
+    <div class="hero-vase-ring"></div>
+    <div class="hero-vase-ring"></div>
+    <div class="hero-vase-ring"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">A parable of ambition &amp; resolve</p>
+      <h1 class="hero-title">
+        The Go-Getter
+        <span>"It shall be done."</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-subtitle">
+        The hundred-year-old story of Bill Peck—a one-armed veteran who refused every obstacle,
+        invented every solution, and delivered the impossible—distilled into lessons that still shape how driven people work and live.
+      </p>
+      <p class="hero-authors">Peter B. Kyne (1921) &nbsp;·&nbsp; Elbert Hubbard (1899)</p>
+      <div class="hero-scroll">
+        <a class="hero-scroll-inner" href="#about" aria-label="Scroll down">
+          <div class="scroll-arrow"><div class="scroll-dot"></div></div>
+          <span>Explore</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE BOOKS ──────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-inner">
+      <span class="section-tag reveal">Legacy</span>
+      <h2 class="section-title reveal reveal-delay-1">Two classics. One philosophy.</h2>
+      <p class="section-body reveal reveal-delay-2">
+        Two slim books, written decades apart, share the same electrifying conviction: the rarest quality on earth
+        is a person who receives a task and simply&nbsp;<em>does it</em>—without excuses, without endless questions,
+        without waiting to be rescued. Together they have influenced CEOs, generals, entrepreneurs, and
+        ordinary people in search of an extraordinary life.
+      </p>
+
+      <div class="about-grid" style="margin-top:3rem;">
+        <div class="book-card reveal">
+          <div class="book-year">1921</div>
+          <div class="book-tag">The Parable</div>
+          <div class="book-title">The Go-Getter</div>
+          <div class="book-author">Peter B. Kyne &nbsp;·&nbsp; San Francisco</div>
+          <p class="book-desc">
+            Bill Peck, a young WWI veteran with one arm and a limp, refuses to accept refusal. He talks his way into a job
+            at Ricks Logging &amp; Lumbering, out-sells every territory he touches—then faces a cryptic Sunday errand:
+            find a blue vase and deliver it by 7:45 that evening. He doesn't know it's a test. He doesn't know it's
+            nearly impossible. He only knows one thing: it shall be done.
+          </p>
+        </div>
+        <div class="book-card reveal reveal-delay-2">
+          <div class="book-year">1899</div>
+          <div class="book-tag">The Essay</div>
+          <div class="book-title">A Message to Garcia</div>
+          <div class="book-author">Elbert Hubbard &nbsp;·&nbsp; East Aurora, NY</div>
+          <p class="book-desc">
+            During the Spanish-American War, Lieutenant Rowan was handed a letter and told to deliver it to General Garcia—somewhere
+            in the Cuban jungle. He asked no questions. He took the letter, sealed it in oilskin over his heart,
+            landed by night off an open boat, disappeared into the jungle, and three weeks later emerged on the
+            other side having delivered it. Hubbard's meditation on that act became a global phenomenon.
+          </p>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card reveal">
+          <div class="stat-number" data-target="100">0</div>
+          <div class="stat-label">Years in continuous print</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-number" data-target="40">0</div>
+          <div class="stat-label">Million copies of Garcia distributed</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-number" data-target="2">0</div>
+          <div class="stat-label">Out of 15 candidates delivered the blue vase</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHARACTERS ─────────────────────────────────────────────────────── -->
+  <section id="characters">
+    <div class="section-inner">
+      <span class="section-tag reveal">Dramatis Personae</span>
+      <h2 class="section-title reveal reveal-delay-1">Meet the cast</h2>
+      <p class="section-body reveal reveal-delay-2">
+        Kyne populated his slim parable with vivid, archetypal figures. Each one teaches us something about
+        leadership, loyalty, skepticism, and what it truly means to earn trust.
+      </p>
+
+      <div class="char-grid" style="margin-top:3rem;">
+        <div class="char-card reveal">
+          <span class="char-symbol">🎖️</span>
+          <div class="char-role">The Go-Getter</div>
+          <div class="char-name">Bill Peck</div>
+          <p class="char-desc">
+            WWI veteran. One arm (lost in France), a slightly shortened leg, early TB—and the most compelling smile
+            Cappy Ricks had ever seen. Before the war, a lumber salesman. After: a man who had been trained,
+            by a great brigadier, to say three words to every obstacle.
+          </p>
+          <div class="char-quote">"All I ask is fighting room and I'll hack my way into Mr. Skinner's heart."</div>
+        </div>
+
+        <div class="char-card reveal reveal-delay-1">
+          <span class="char-symbol">🪄</span>
+          <div class="char-role">The Wise Tester</div>
+          <div class="char-name">Cappy Ricks</div>
+          <p class="char-desc">
+            President emeritus of the Ricks interests—logging, lumber, and Pacific shipping. Nominally retired.
+            Actually the most active mind in the room. He sees men before they see themselves. He invented
+            the Degree of the Blue Vase because he knows that experience alone is not enough: courage is what counts.
+          </p>
+          <div class="char-quote">"The go-getters of this world are under thirty years of age."</div>
+        </div>
+
+        <div class="char-card reveal reveal-delay-2">
+          <span class="char-symbol">📋</span>
+          <div class="char-role">The Skeptic</div>
+          <div class="char-name">Mr. Skinner</div>
+          <p class="char-desc">
+            General manager of the Ricks Logging &amp; Lumbering Company. Efficient, cold, practical—and
+            convinced that sentiment has no place in business. He turned Peck away without a second look.
+            He is not a villain; he is simply the ceiling that every Peck eventually rises through.
+          </p>
+          <div class="char-quote">"There is no sentiment in business."</div>
+        </div>
+
+        <div class="char-card reveal reveal-delay-3">
+          <span class="char-symbol">⚔️</span>
+          <div class="char-role">The Soul Behind the Motto</div>
+          <div class="char-name">The Brigadier</div>
+          <p class="char-desc">
+            Never named. Never fully described. And yet the most powerful presence in the book.
+            He gave his brigade a motto. He once failed to buy a blue vase—and threw a cobblestone through
+            a shop window to get it. Cappy let him go to his destiny. Twenty years later, his motto walked
+            through Cappy's door wearing Bill Peck's face.
+          </p>
+          <div class="char-quote">"It shall be done." — Brigade motto</div>
+        </div>
+
+        <div class="char-card reveal reveal-delay-4">
+          <span class="char-symbol">🌊</span>
+          <div class="char-role">The Doer</div>
+          <div class="char-name">Lt. Andrew Rowan</div>
+          <p class="char-desc">
+            Real historical figure. In 1898, handed a letter for General Garcia somewhere in the Cuban jungle,
+            he did not ask "Where is he?" He strapped the letter over his heart and vanished into a hostile country.
+            Three weeks later the letter was delivered. Hubbard spent 1,800 words celebrating that silence.
+          </p>
+          <div class="char-quote">He took the letter. He did not ask "Where is he at?"</div>
+        </div>
+
+        <div class="char-card reveal reveal-delay-5">
+          <span class="char-symbol">🚢</span>
+          <div class="char-role">The Son-in-Law</div>
+          <div class="char-name">Captain Matt Peasley</div>
+          <p class="char-desc">
+            President of the Blue Star Navigation Company. Good-natured, loyal—but he too, like Skinner,
+            tells Peck the company is full. He later refuses to lend Peck the $2,000 for the vase on a Sunday night.
+            Not unkind. Not a go-getter.
+          </p>
+          <div class="char-quote">"Go home and to bed and forget it."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STORY TIMELINE ─────────────────────────────────────────────────── -->
+  <section id="story">
+    <div class="section-inner">
+      <span class="section-tag reveal">The Narrative</span>
+      <h2 class="section-title reveal reveal-delay-1">The story, chapter by chapter</h2>
+      <p class="section-body reveal reveal-delay-2">
+        The Go-Getter moves briskly through four chapters. Each phase reveals a new layer of Peck's character—
+        and Cappy's shrewd, patient genius for finding the people who carry the world forward.
+      </p>
+
+      <div class="timeline" style="margin-top:3rem;">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-chapter">Chapter I</div>
+          <div class="timeline-heading">Cappy's problem—and an unexpected visitor</div>
+          <p class="timeline-body">
+            Cappy Ricks—president emeritus of a Pacific Coast lumber and shipping empire—is exasperated.
+            His Shanghai office manager has absconded with the bank account. His two deputies, Skinner and
+            Matt Peasley, can't agree on a replacement. Cappy decides the next man must be tested
+            before he's trusted. He's mid-thought when a one-armed veteran walks through the door
+            without an appointment and says: "I've called for my job."
+          </p>
+          <div class="timeline-highlight">"I've called for my job." — not "I'd like a job," but "my job."</div>
+        </div>
+
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="timeline-dot"></div>
+          <div class="timeline-chapter">Chapter II</div>
+          <div class="timeline-heading">The sell—and the first obstacle</div>
+          <p class="timeline-body">
+            Peck has already had his business cards engraved. He began planning this job a week ago.
+            He sells Cappy on himself in minutes, then gracefully wins over Skinner's reluctant compliance.
+            Cappy assigns him Andrews' territory—plus the stock nobody else can move: "skunk spruce,"
+            the worst lumber in the yard. Peck doesn't flinch. "Can you drive nails in it?" "Yes."
+            "Then I can sell it."
+          </p>
+          <div class="timeline-highlight">He had business cards engraved before he had the job. That is preparation.</div>
+        </div>
+
+        <div class="timeline-item reveal reveal-delay-2">
+          <div class="timeline-dot"></div>
+          <div class="timeline-chapter">Chapter III &amp; IV</div>
+          <div class="timeline-heading">Two months on the road—and the test is set</div>
+          <p class="timeline-body">
+            From Salt Lake City to Texas, Peck sends orders flying in. He opens new accounts nobody else could crack.
+            He sells five carloads of skunk spruce. Skinner grudgingly raises his salary. Cappy watches, satisfied—
+            then tells Skinner: "I think I shall give him the thirty-third degree. I'm going to have him deliver a blue vase."
+            Skinner smiles his swordfish smile and starts arranging the obstacles.
+          </p>
+          <div class="timeline-highlight">Only 2 of 15 candidates have ever delivered the vase. The degree is real.</div>
+        </div>
+
+        <div class="timeline-item reveal reveal-delay-3">
+          <div class="timeline-dot"></div>
+          <div class="timeline-chapter">Chapter V</div>
+          <div class="timeline-heading">The Blue Vase — and the verdict</div>
+          <p class="timeline-body">
+            On Sunday afternoon, Skinner—supposedly ill in bed—routes Cappy's call to Peck. Cappy asks for one
+            small errand: find a blue vase on Sutter Street and deliver it to his train by 7:45 pm.
+            Every detail is wrong. The street is wrong. The shop is closed. The owner's name is spelled three ways.
+            The vase costs $2,000 cash. Nobody will help. The train leaves without him.
+            At 2 a.m. Bill Peck flags the train from the middle of the tracks and delivers the vase.
+          </p>
+          <div class="timeline-highlight">"What you carried in was a $10,000-a-year job as our Shanghai manager."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BLUE VASE ───────────────────────────────────────────────────────── -->
+  <section id="blue-vase">
+    <div class="vase-hero-bg"></div>
+    <div class="section-inner" style="position:relative;z-index:1;">
+      <span class="section-tag reveal">The Ultimate Test</span>
+      <h2 class="section-title reveal reveal-delay-1">The Degree of the Blue Vase</h2>
+
+      <div class="vase-intro-block">
+        <div class="reveal">
+          <p class="section-body" style="max-width:100%;">
+            Cappy Ricks has tested fifteen candidates with this challenge. Only two ever delivered
+            the vase. The test is designed to be impossible: deliberately wrong information,
+            deliberately stacked obstacles, deliberately timed to fail.
+          </p>
+          <br>
+          <p class="section-body" style="max-width:100%;">
+            The point is not the vase. The point is whether a person—when alone, exhausted, out of
+            resources, and out of time—will find another way or simply stop. Click each obstacle below
+            to see how Peck refused to let it end his mission.
+          </p>
+          <div style="margin-top:2rem;">
+            <button class="btn-solve-all" id="solve-all-btn">Reveal Peck's Solutions</button>
+          </div>
+        </div>
+        <div class="vase-visual reveal reveal-delay-2">
+          <div class="vase-svg-wrap">
+            <!-- SVG Blue Vase -->
+            <svg width="200" height="280" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Teak base -->
+              <rect x="55" y="252" width="90" height="18" rx="3" fill="#5a3a1a" opacity="0.8"/>
+              <rect x="60" y="248" width="80" height="8" rx="2" fill="#7a5030" opacity="0.7"/>
+              <!-- Vase body -->
+              <path d="M70 250 C60 220 45 180 50 130 C55 80 60 40 100 30 C140 40 145 80 150 130 C155 180 140 220 130 250 Z" fill="url(#vaseGrad)" opacity="0.95"/>
+              <!-- Neck -->
+              <path d="M85 30 C90 15 110 15 115 30" fill="url(#vaseGrad)" opacity="0.95"/>
+              <!-- Lip -->
+              <ellipse cx="100" cy="28" rx="20" ry="5" fill="#3a5a8a" opacity="0.9"/>
+              <!-- Cloisonné pattern - birds/flowers -->
+              <circle cx="85" cy="120" r="12" fill="none" stroke="#7ab8d4" stroke-width="1.5" opacity="0.6"/>
+              <circle cx="115" cy="140" r="10" fill="none" stroke="#7ab8d4" stroke-width="1.5" opacity="0.6"/>
+              <path d="M78 108 Q85 98 92 108" stroke="#c9d87a" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <path d="M108 128 Q115 118 122 128" stroke="#c9d87a" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <circle cx="85" cy="120" r="3" fill="#7ab8d4" opacity="0.8"/>
+              <circle cx="115" cy="140" r="3" fill="#7ab8d4" opacity="0.8"/>
+              <!-- Highlight -->
+              <path d="M70 100 C68 130 68 160 72 190" stroke="rgba(255,255,255,0.25)" stroke-width="6" stroke-linecap="round"/>
+              <!-- Gradient def -->
+              <defs>
+                <linearGradient id="vaseGrad" x1="50" y1="30" x2="150" y2="250" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#4a7aaa"/>
+                  <stop offset="50%" stop-color="#2a5080"/>
+                  <stop offset="100%" stop-color="#1a3060"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="vase-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vase-counter">
+        <div id="obstacles-solved-text">0 of 12 obstacles overcome</div>
+        <div class="vase-progress-bar"><div class="vase-progress-fill" id="vase-progress"></div></div>
+      </div>
+
+      <div class="obstacle-grid" id="obstacle-grid">
+        <!-- Obstacles are injected by JS -->
+      </div>
+
+      <div class="vase-verdict reveal" id="vase-verdict" style="margin-top:4rem;">
+        <p class="verdict-quote">
+          "Bill, old boy, it was cruel—damnably cruel, but I had a big job for you and I had to find out a lot of things about you before I entrusted you with that job."
+        </p>
+        <p class="verdict-reveal">
+          At 2 a.m., standing in the doorway of Cappy's train compartment in his nightshirt, Cappy stared at Bill Peck
+          as if he were a ghost. The vase cost fifteen cents. It came from a five-and-dime store.
+          What Bill Peck actually carried in was a $10,000-a-year job as Oriental manager. Cappy has given this
+          test to fifteen men. Bill is only the third to deliver the vase.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRINCIPLES ─────────────────────────────────────────────────────── -->
+  <section id="principles">
+    <div class="section-inner">
+      <span class="section-tag reveal">The Philosophy</span>
+      <h2 class="section-title reveal reveal-delay-1">Six principles of the go-getter</h2>
+      <p class="section-body reveal reveal-delay-2">
+        The Go-Getter is not a self-help checklist. It's a lived philosophy—demonstrated through action,
+        not words. These six principles emerge from Peck's conduct and Cappy's commentary. Hover each
+        card to go deeper.
+      </p>
+      <p class="flip-hint reveal reveal-delay-3">↕ Hover to flip</p>
+
+      <div class="principles-grid" style="margin-top:2rem;">
+
+        <div class="principle-card reveal">
+          <div class="principle-inner">
+            <div class="principle-front">
+              <div class="principle-number">01</div>
+              <div>
+                <div class="principle-icon">🎯</div>
+                <div class="principle-title">Unconditional Commitment</div>
+                <div class="principle-tagline">The motto is not a feeling—it's a command.</div>
+              </div>
+            </div>
+            <div class="principle-back">
+              <div class="principle-back-title">01 — Unconditional Commitment</div>
+              <div class="principle-back-body">
+                "It shall be done" is not an expression of confidence. It's a vow made before the outcome
+                is known. The brigadier didn't say "I'll try." He said it shall be done—and then found
+                a way to make it true. Peck inherited this: when Cappy gives the order, the how
+                is Peck's problem to solve, not Cappy's.
+              </div>
+              <div class="principle-back-quote">"In the army the commanding general's request is always tantamount to an order."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-1">
+          <div class="principle-inner">
+            <div class="principle-front">
+              <div class="principle-number">02</div>
+              <div>
+                <div class="principle-icon">🚪</div>
+                <div class="principle-title">Refuse the First No</div>
+                <div class="principle-tagline">Skinner said no. Matt said no. Cappy said yes.</div>
+              </div>
+            </div>
+            <div class="principle-back">
+              <div class="principle-back-title">02 — Refuse the First No</div>
+              <div class="principle-back-body">
+                Peck was turned down by Skinner. Then by Matt Peasley. Most people stop there—
+                and those people stay where they are. Peck went over their heads to the founder,
+                not out of disrespect but out of certainty. He knew he had value. He refused to let
+                someone else's fear or indifference be the final word on his future.
+              </div>
+              <div class="principle-back-quote">"He sized you up just like that, Skinner. He declined to permit you to block him."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-2">
+          <div class="principle-inner">
+            <div class="principle-front">
+              <div class="principle-number">03</div>
+              <div>
+                <div class="principle-icon">🔧</div>
+                <div class="principle-title">Resourcefulness Under Pressure</div>
+                <div class="principle-tagline">When the obvious path closes, find another.</div>
+              </div>
+            </div>
+            <div class="principle-back">
+              <div class="principle-back-title">03 — Resourcefulness Under Pressure</div>
+              <div class="principle-back-body">
+                No cash? Use the ring. No time? Call the pilot. Train left? Flag it down.
+                Peck never waited for permission to think creatively. Every obstacle he hit
+                was an engineering problem, not a stop sign. This is not luck—it's the
+                product of a mind trained to always ask: what else can I try?
+              </div>
+              <div class="principle-back-quote">"You told me what to do, but you did not insult my intelligence by telling me how to do it."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-1">
+          <div class="principle-inner">
+            <div class="principle-front">
+              <div class="principle-number">04</div>
+              <div>
+                <div class="principle-icon">🛡️</div>
+                <div class="principle-title">Loyalty to the Mission</div>
+                <div class="principle-tagline">Not to the boss—to what the boss sent you to do.</div>
+              </div>
+            </div>
+            <div class="principle-back">
+              <div class="principle-back-title">04 — Loyalty to the Mission</div>
+              <div class="principle-back-body">
+                When Matt Peasley told Peck to go home and forget the vase, Peck refused—not to defy Matt,
+                but because he felt he owed Cappy better than failure. His loyalty wasn't to rank
+                or convenience. It was to completion. He would rather flag a train at 1 a.m.
+                than live with not having tried hard enough.
+              </div>
+              <div class="principle-back-quote">"I wouldn't disappoint him for my right arm. He's been a dead game sport with me."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-2">
+          <div class="principle-inner">
+            <div class="principle-front">
+              <div class="principle-number">05</div>
+              <div>
+                <div class="principle-icon">⚡</div>
+                <div class="principle-title">Initiative Without Being Asked</div>
+                <div class="principle-tagline">He had cards printed before he had the job.</div>
+              </div>
+            </div>
+            <div class="principle-back">
+              <div class="principle-back-title">05 — Initiative Without Being Asked</div>
+              <div class="principle-back-body">
+                Peck planned his job at Ricks a week before he applied. He had engraved business cards ready.
+                "By the Twelve Ragged Apostles! When did you first make up your mind to go to work for us?"
+                "A week ago." You can't engrave cards in half an hour—Cappy knew. That level of
+                pre-commitment signals something beyond ambition. It signals conviction.
+              </div>
+              <div class="principle-back-quote">"He was a go-getter. He carried his objective." — Cappy on Peck</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="principle-card reveal reveal-delay-3">
+          <div class="principle-inner">
+            <div class="principle-front">
+              <div class="principle-number">06</div>
+              <div>
+                <div class="principle-icon">🌱</div>
+                <div class="principle-title">Resilience Through Setbacks</div>
+                <div class="principle-tagline">His leg hurt. His stump hurt. He delivered anyway.</div>
+              </div>
+            </div>
+            <div class="principle-back">
+              <div class="principle-back-title">06 — Resilience Through Setbacks</div>
+              <div class="principle-back-body">
+                Peck's tears in the train compartment are not weakness—they are the mark of someone
+                who has given everything. He was exhausted, hungry (skipped both meals), in physical
+                pain, and had been manipulated. And yet he still delivered. The brigadier's lesson:
+                "Private Peck will do his utmost to recover—and as a starter he will smile."
+              </div>
+              <div class="principle-back-quote">"Sir, it shall be done." — Peck in the field hospital, told to smile.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── A MESSAGE TO GARCIA ─────────────────────────────────────────────── -->
+  <section id="garcia">
+    <div class="section-inner">
+      <span class="section-tag reveal">Elbert Hubbard, 1899</span>
+      <h2 class="section-title reveal reveal-delay-1">A Message to Garcia</h2>
+
+      <div class="garcia-intro">
+        <div class="reveal">
+          <p class="section-body" style="max-width:100%;">
+            Hubbard's essay began as a dinner-table story and grew into one of the most widely
+            distributed pieces of writing in history—over 40 million copies given to soldiers,
+            workers, and students across the world. Its premise is simple and devastating:
+          </p>
+          <br>
+          <p class="section-body" style="max-width:100%;">
+            Lieutenant Andrew Rowan was given a letter and told to deliver it to Garcia. He didn't ask
+            where Garcia was. He didn't ask which route. He didn't ask what would happen if he failed.
+            He took the letter and went. Hubbard spent the rest of the essay asking why that
+            is so extraordinarily rare—and what it costs the world that it is.
+          </p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="garcia-questions">
+            <h3>The questions the average man would have asked Rowan:</h3>
+            <div class="question-item"><span class="q-icon">❓</span>"Who is Garcia?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"Where is he at?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"Which encyclopedia?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"Was I hired for that?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"What do you want to know for?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"Is there any hurry?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"Can't you look it up yourself?"</div>
+            <div class="question-item"><span class="q-icon">❓</span>"What's the matter with Charlie doing it?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-table reveal" style="margin-top:1rem;">
+        <div class="comparison-header">
+          <div style="color: var(--cream-muted);">Dimension</div>
+          <div>Rowan / Peck (Go-Getter)</div>
+          <div>The Average Employee</div>
+        </div>
+        <div class="comparison-row">
+          <div>On receiving a task</div>
+          <div>Takes it and begins immediately</div>
+          <div>Asks clarifying questions, seeks reassurance</div>
+        </div>
+        <div class="comparison-row">
+          <div>When the path is unclear</div>
+          <div>Maps a new route</div>
+          <div>Returns to report it can't be done</div>
+        </div>
+        <div class="comparison-row">
+          <div>When resources run out</div>
+          <div>Pledges the ring; calls the pilot</div>
+          <div>Stops and waits for help</div>
+        </div>
+        <div class="comparison-row">
+          <div>When the boss isn't watching</div>
+          <div>Works as if he is</div>
+          <div>Loafs until he returns</div>
+        </div>
+        <div class="comparison-row">
+          <div>Relationship to authority</div>
+          <div>Loyal to the mission</div>
+          <div>Suspicious of the employer's motives</div>
+        </div>
+        <div class="comparison-row">
+          <div>When told "no"</div>
+          <div>Finds the next door</div>
+          <div>Accepts the answer and goes home</div>
+        </div>
+        <div class="comparison-row">
+          <div>On the question "Is it done?"</div>
+          <div>"It shall be done."</div>
+          <div>"I tried, but…"</div>
+        </div>
+      </div>
+
+      <div class="ornament reveal">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line right"></div>
+      </div>
+
+      <div class="reveal" style="background:rgba(255,255,255,0.02); border:1px solid rgba(201,168,76,0.15); border-radius:6px; padding:2.5rem; max-width:800px; margin:0 auto;">
+        <p style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--cream); line-height:1.7; margin-bottom:1.25rem;">
+          "My heart goes out to the man who does his work when the 'boss' is away, as well as when he is at home.
+          And the man who, when given a letter for Garcia, quietly takes the missive, without asking any idiotic questions,
+          and with no lurking intention of chucking it into the nearest sewer—never gets laid off, nor has to go on
+          a strike for higher wages. Civilization is one long anxious search for just such individuals."
+        </p>
+        <p style="font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">
+          Elbert Hubbard — A Message to Garcia, 1899
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CIRCULAR LEGEND ─────────────────────────────────────────────────── -->
+  <section id="circular">
+    <div class="section-inner">
+      <span class="section-tag reveal">The Hidden Thread</span>
+      <h2 class="section-title reveal reveal-delay-1">The circular legend</h2>
+      <p class="section-body reveal reveal-delay-2">
+        The most beautiful structural detail of The Go-Getter is a secret most readers miss on first reading.
+        The blue vase test was invented by Cappy decades ago—and the brigadier who gave Peck his unbreakable
+        motto was once tested by that very same vase. Trace the thread:
+      </p>
+
+      <div class="legend-flow" style="margin-top:3rem; max-width:700px;">
+        <div class="legend-node reveal">
+          <div class="legend-icon-wrap">🏭</div>
+          <div>
+            <div class="legend-content-head">Decades earlier — Cappy invents the test</div>
+            <p class="legend-content-body">
+              Cappy Ricks creates the Degree of the Blue Vase as the ultimate screen for high-trust positions.
+              Only those who deliver it—despite impossible obstacles—are fit for the $10,000 Shanghai post.
+              Over the years, fifteen candidates attempt it.
+            </p>
+            <span class="legend-badge">The Test Is Born</span>
+          </div>
+        </div>
+
+        <div class="legend-node reveal reveal-delay-1">
+          <div class="legend-icon-wrap">⚔️</div>
+          <div>
+            <div class="legend-content-head">The brigadier takes the test — and smashes a window</div>
+            <p class="legend-content-body">
+              A young candidate—later to become Bill Peck's general—is given the blue vase errand.
+              When he cannot buy the vase legally, he throws a cobblestone through the shop window,
+              grabs the vase, and runs a mile and a half before police catch him.
+              It costs Cappy money to square the case. He lets the man go to his destiny.
+            </p>
+            <span class="legend-badge">The Brigadier Delivers</span>
+          </div>
+        </div>
+
+        <div class="legend-node reveal reveal-delay-2">
+          <div class="legend-icon-wrap">🎖️</div>
+          <div>
+            <div class="legend-content-head">The war — "It shall be done" is born in the trenches</div>
+            <p class="legend-content-body">
+              The brigadier leads his brigade with a single, irreducible motto. He visits Peck in the field hospital
+              after Peck is wounded, tells him he isn't half dead, and orders him to smile. The motto becomes
+              the spine of Peck's entire character.
+            </p>
+            <span class="legend-badge">A Soul Is Transmitted</span>
+          </div>
+        </div>
+
+        <div class="legend-node reveal reveal-delay-3">
+          <div class="legend-icon-wrap">🔵</div>
+          <div>
+            <div class="legend-content-head">Bill Peck delivers the blue vase — for the brigadier</div>
+            <p class="legend-content-body">
+              Twenty-odd years after the brigadier threw his cobblestone, Bill Peck walks into Cappy's office carrying
+              the brigadier's motto. He cannot know that he is completing a circle. When he says "It shall be done,"
+              he is channeling a man Cappy knew well—a man who once stood where Peck now stands.
+              The soul of a great leader travels through time through the people it shaped.
+            </p>
+            <span class="legend-badge">The Circle Closes</span>
+          </div>
+        </div>
+
+        <div class="legend-node reveal reveal-delay-4">
+          <div class="legend-icon-wrap">✨</div>
+          <div>
+            <div class="legend-content-head">The revelation — Cappy recognizes the ghost</div>
+            <p class="legend-content-body">
+              When Peck names his idol—the brigadier—awe fills Cappy's voice. He whispers: "By the Twelve Ragged Apostles!"
+              He understands everything. He was the one who set the brigadier free. And the brigadier's spirit walked back
+              in through his own door. "His soul goes marching on," Cappy says softly.
+            </p>
+            <span class="legend-badge">Recognition &amp; Wonder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUOTES ──────────────────────────────────────────────────────────── -->
+  <section id="quotes">
+    <div class="section-inner">
+      <span class="section-tag reveal">In Their Own Words</span>
+      <h2 class="section-title reveal reveal-delay-1">Lines that endure</h2>
+
+      <div class="quotes-container reveal" style="margin-top:3rem;">
+        <button class="quote-nav prev" id="quote-prev" aria-label="Previous quote">‹</button>
+        <button class="quote-nav next" id="quote-next" aria-label="Next quote">›</button>
+        <div class="quotes-track" id="quotes-track">
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">It shall be done.</p>
+            <div class="quote-author">Bill Peck / The Brigadier</div>
+            <div class="quote-source">The Go-Getter — The brigade's motto</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">All I ask is fighting room and I'll hack my way into Mr. Skinner's heart.</p>
+            <div class="quote-author">Bill Peck</div>
+            <div class="quote-source">The Go-Getter — Chapter II</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">You told me what to do, but you did not insult my intelligence by telling me how to do it.</p>
+            <div class="quote-author">Bill Peck</div>
+            <div class="quote-source">The Go-Getter — Chapter V, to Cappy Ricks</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">The go-getters of this world are under thirty years of age.</p>
+            <div class="quote-author">Cappy Ricks</div>
+            <div class="quote-source">The Go-Getter — Chapter I</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">In the army the esprit de corps doesn't bubble up from the bottom. It filters down from the top. An organization is what its commanding officer is—neither better nor worse.</p>
+            <div class="quote-author">Bill Peck</div>
+            <div class="quote-source">The Go-Getter — Chapter V</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">His soul goes marching on.</p>
+            <div class="quote-author">Cappy Ricks</div>
+            <div class="quote-source">The Go-Getter — Chapter V, on the brigadier</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">McKinley gave Rowan a letter to be delivered to Garcia; Rowan took the letter and did not ask, "Where is he at?" By the Eternal! there is a man whose form should be cast in deathless bronze.</p>
+            <div class="quote-author">Elbert Hubbard</div>
+            <div class="quote-source">A Message to Garcia, 1899</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">Civilization is one long anxious search for just such individuals. Anything such a man asks shall be granted; his kind is so rare that no employer can afford to let him go.</p>
+            <div class="quote-author">Elbert Hubbard</div>
+            <div class="quote-source">A Message to Garcia, 1899</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">I was often tempted to quit, but whenever I'd reflect on the number of American lives I was saving daily, a commission was just a scrap of paper to me.</p>
+            <div class="quote-author">Bill Peck</div>
+            <div class="quote-source">The Go-Getter — Chapter III, on refusing promotion</div>
+          </div>
+
+          <div class="quote-slide">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">Count that day lost whose low descending sun finds prices shot to glory and business done for fun.</p>
+            <div class="quote-author">Bill Peck</div>
+            <div class="quote-source">The Go-Getter — Chapter II, quoting his own maxim</div>
+          </div>
+
+        </div>
+        <div class="quote-dots" id="quote-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SELF ASSESSMENT ─────────────────────────────────────────────────── -->
+  <section id="assessment">
+    <div class="section-inner">
+      <span class="section-tag reveal">Honest Reckoning</span>
+      <h2 class="section-title reveal reveal-delay-1">Are you a go-getter?</h2>
+      <p class="assessment-intro reveal reveal-delay-2">
+        Cappy Ricks' test was designed to reveal character under pressure. You can't be set a blue vase errand
+        right now—but you can reflect honestly. Check each statement that genuinely describes you,
+        then see where you stand.
+      </p>
+
+      <div class="assessment-grid" id="assessment-grid">
+        <!-- Injected by JS -->
+      </div>
+
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <button class="btn-check" id="check-score-btn">See My Score</button>
+      </div>
+
+      <div class="assessment-result" id="assessment-result">
+        <div class="result-score" id="result-score">0/10</div>
+        <div class="result-label" id="result-label"></div>
+        <p class="result-desc" id="result-desc"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APPLY TODAY ─────────────────────────────────────────────────────── -->
+  <section id="apply">
+    <div class="section-inner">
+      <span class="section-tag reveal">Modern Application</span>
+      <h2 class="section-title reveal reveal-delay-1">The philosophy, applied today</h2>
+      <p class="section-body reveal reveal-delay-2">
+        The world of 1921 is gone. Cappy's logging empire, Pacific steamships, and Shanghai trading posts
+        are historical artifacts. But the human behaviors that make someone irreplaceable—or replaceable—
+        haven't changed one molecule.
+      </p>
+
+      <div class="apply-grid">
+        <div class="apply-card reveal">
+          <div class="apply-icon">💼</div>
+          <div class="apply-context">Early Career</div>
+          <div class="apply-heading">Volunteer for the task no one else will touch</div>
+          <p class="apply-body">
+            Peck asked for the skunk spruce—the stock nobody could move. He turned it into a demonstration
+            of capability. The thankless, unglamorous project in your organization is your blue vase. Take it.
+          </p>
+        </div>
+
+        <div class="apply-card reveal reveal-delay-1">
+          <div class="apply-icon">🔑</div>
+          <div class="apply-context">Interviews &amp; Job Seeking</div>
+          <div class="apply-heading">Prepare as if you already have the job</div>
+          <p class="apply-body">
+            Peck had engraved business cards before his interview. Research the company so deeply you
+            can speak to specific problems. Bring solutions. Show that you've already started—
+            the question is whether they're smart enough to let you finish.
+          </p>
+        </div>
+
+        <div class="apply-card reveal reveal-delay-2">
+          <div class="apply-icon">🗺️</div>
+          <div class="apply-context">Project Execution</div>
+          <div class="apply-heading">Own the outcome, not the steps</div>
+          <p class="apply-body">
+            Cappy didn't tell Peck how to find the vase. He told him to deliver it.
+            When you own an outcome, you stop asking for permission at each obstacle.
+            You find the next route—ring, pilot, torch, train—until the objective is carried.
+          </p>
+        </div>
+
+        <div class="apply-card reveal reveal-delay-3">
+          <div class="apply-icon">👥</div>
+          <div class="apply-context">Leadership</div>
+          <div class="apply-heading">The esprit de corps filters from the top</div>
+          <p class="apply-body">
+            "An organization is what its commanding officer is—neither better nor worse."
+            If you lead a team, your attitude toward obstacles is the attitude your team will adopt.
+            Your standards are the ceiling they aim for. Your words become their inner voice.
+          </p>
+        </div>
+
+        <div class="apply-card reveal reveal-delay-1">
+          <div class="apply-icon">⏰</div>
+          <div class="apply-context">Time &amp; Priorities</div>
+          <div class="apply-heading">"Count that day lost…"</div>
+          <p class="apply-body">
+            Peck returned from lunch at 1 p.m. to earn half a day's pay on day one.
+            He skipped lunch and dinner during the vase hunt without complaint.
+            Productivity isn't about grinding—it's about the unwillingness to let
+            a day pass without forward movement.
+          </p>
+        </div>
+
+        <div class="apply-card reveal reveal-delay-2">
+          <div class="apply-icon">🏆</div>
+          <div class="apply-context">Long-Term Career</div>
+          <div class="apply-heading">Be the person Cappy is always looking for</div>
+          <p class="apply-body">
+            Every organization has its Cappy Ricks—the person who truly controls opportunity and is searching
+            desperately for someone to trust with it. They are not impressed by credentials.
+            They are watching for the one person who shows up, says "it shall be done," and then actually does it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PLEDGE ──────────────────────────────────────────────────────── -->
+  <section id="pledge">
+    <div class="section-inner" style="max-width:800px; text-align:center;">
+      <span class="section-tag reveal" style="display:block; margin:0 auto 0.75rem;">Your Turn</span>
+      <h2 class="pledge-title reveal reveal-delay-1">
+        Look at your goal and say:<br><em>It shall be done.</em>
+      </h2>
+      <p class="pledge-text reveal reveal-delay-2">
+        Joel Fotinos wrote in the foreword: "No matter what your circumstances, read this book,
+        and then look at your goals and say 'It shall be done'—and then go do it."
+        The words are easy. The commitment they represent is rare. That gap is the whole point.
+      </p>
+
+      <div class="pledge-card reveal reveal-delay-3">
+        <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:1.25rem;">
+          The Motto of the Brigade
+        </div>
+        <div class="pledge-words">It shall be done.</div>
+        <div style="width:60px; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent); margin: 1.5rem auto;"></div>
+        <p class="pledge-instruction">
+          Not "I'll try." Not "I'll see what I can do." Not "If it's possible."<br>
+          <em style="color:var(--cream);">It. Shall. Be. Done.</em>
+        </p>
+      </div>
+
+      <div class="ornament reveal" style="margin-top:3rem;">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line right"></div>
+      </div>
+
+      <p class="reveal" style="font-size:0.85rem; color:var(--cream-muted); margin-top:2rem; font-style:italic;">
+        The Go-Getter by Peter B. Kyne (originally published 1921) &nbsp;·&nbsp;
+        A Message to Garcia by Elbert Hubbard (originally published 1899)
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">The Go-Getter</div>
+    <ul class="footer-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">The Books</a></li>
+      <li><a href="#characters">Characters</a></li>
+      <li><a href="#blue-vase">Blue Vase</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#garcia">Garcia</a></li>
+      <li><a href="#circular">The Legend</a></li>
+      <li><a href="#quotes">Quotes</a></li>
+      <li><a href="#assessment">Self-Test</a></li>
+    </ul>
+    <p class="footer-copy">
+      Educational companion to <em>The Go-Getter</em> by Peter B. Kyne (1921)
+      and <em>A Message to Garcia</em> by Elbert Hubbard (1899).<br>
+      Both works are in the public domain. Content adapted for educational purposes.
+    </p>
+  </footer>
+
+  <!-- ── JAVASCRIPT ─────────────────────────────────────────────────────── -->
+  <script>
+    /* ── STARS ────────────────────────────────────────────────── */
+    (function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2.5 + 0.5;
+        star.style.cssText = `
+          width:${size}px; height:${size}px;
+          left:${Math.random()*100}%;
+          top:${Math.random()*100}%;
+          --d:${Math.random()*4+3}s;
+          --delay:${Math.random()*5}s;
+        `;
+        container.appendChild(star);
+      }
+    })();
+
+    /* ── NAVBAR ───────────────────────────────────────────────── */
+    const navbar = document.getElementById('navbar');
+    const burger = document.getElementById('nav-burger');
+    const navLinks = document.getElementById('nav-links');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    burger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    /* ── SCROLL PROGRESS ──────────────────────────────────────── */
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      progressBar.style.width = pct + '%';
+    });
+
+    /* ── REVEAL ON SCROLL ─────────────────────────────────────── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── COUNTER ANIMATION ────────────────────────────────────── */
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || (el.dataset.target == '2' ? '/15' : '+');
+        const duration = 1200;
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target) + (progress < 1 ? '' : suffix);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+    /* ── OBSTACLE DATA ────────────────────────────────────────── */
+    const obstacles = [
+      {
+        n: '01', title: 'Wrong street coordinates',
+        desc: 'Cappy says Sutter Street between Stockton and Powell. No vase exists anywhere in that block.',
+        solution: 'Peck expands his search systematically—four blocks in each direction, then shifts to Bush, Post, then Geary. He finds it on Geary near Grant, four blocks from where Cappy described.'
+      },
+      {
+        n: '02', title: 'Shop closed on Sunday',
+        desc: 'B. Cohen\'s Art Shop is locked. Peck kicks the door and raises a racket. No watchman comes.',
+        solution: 'He reads the sign and determines he needs to find the owner directly. He heads to the Palace Hotel for phone directories.'
+      },
+      {
+        n: '03', title: '19 B. Cohens in the city directory',
+        desc: 'The directory lists nineteen B. Cohens in San Francisco. He must call them all.',
+        solution: 'He systematically calls all 19. Four don\'t answer, three are disconnected, six reply in Yiddish, five are not the right Cohen. One claims to be Irish (Cohan). Zero matches.'
+      },
+      {
+        n: '04', title: 'Name spelled three different ways',
+        desc: 'He searched Cohen, then realizes it might be Cohn or Cohan. He wasted time on the wrong spelling.',
+        solution: 'He returns to the shop, reads the sign under electric lights, and confirms it\'s B. COHN with an H. Then he starts calling all B. Cohns—eight more calls.'
+      },
+      {
+        n: '05', title: 'Mr. Cohn is dining in Mill Valley',
+        desc: 'On the sixth Cohn call he finds the right one—who is across the bay dining at a Mr. Simon\'s home.',
+        solution: 'Three Simons in Mill Valley. He calls all three. Reaches Cohn. Cohn won\'t come back; he\'s finishing soup. Directs Peck to his head salesman, Herman Joost.'
+      },
+      {
+        n: '06', title: 'Herman Joost at an unknown country club',
+        desc: 'Joost\'s mother says he\'s dining at "the country club"—but doesn\'t know which one.',
+        solution: 'Peck gets a list of every country club in and around San Francisco and calls them all. "Mr. Juice," "Mr. Luce," "Mr. Coos"—nobody can find him. He is listed under no club at all.'
+      },
+      {
+        n: '07', title: 'Policeman guarding the shop window',
+        desc: 'Desperate, Peck considers smashing the window to grab the vase. A policeman is standing right there, smoking.',
+        solution: 'He abandons the break-in plan and continues pursuing the ownership angle. Eventually Joost arrives with a policeman of his own—legitimately opening the store.'
+      },
+      {
+        n: '08', title: 'Vase costs $2,000 cash',
+        desc: 'Herman Joost finally opens the store and names the price: $2,000 cash. Peck has $10 in his pocket.',
+        solution: 'Peck offers his platinum ring set with diamonds and sapphires—worth $2,500—as security for his personal check. Joost accepts, writes a receipt, releases the vase.'
+      },
+      {
+        n: '09', title: 'Skinner refuses to help',
+        desc: 'Peck calls Skinner for cash or identification. Skinner says he has no $2,000 at home.',
+        solution: 'Skinner also claims the office safe has a time lock. Peck screams at him—then calls the next number.'
+      },
+      {
+        n: '10', title: 'Matt Peasley refuses to help',
+        desc: '"Go home and go to bed and forget it." Matt won\'t lend money on a Sunday night.',
+        solution: 'Peck argues briefly, then stops arguing. He pivots entirely: calls his pilot friend at the Marina flying school. A different route to the same destination.'
+      },
+      {
+        n: '11', title: 'The train already left at 8 p.m.',
+        desc: 'It is now 9:15 p.m. when Joost opens the store. The deadline was 7:45. The train departed an hour ago.',
+        solution: 'Midnight—Peck and his pilot friend lift off from the Marina and fly south. They land in the Salinas Valley. Peck bribes his way aboard the stopped train with a flaming torch.'
+      },
+      {
+        n: '12', title: 'No ticket and no money left',
+        desc: 'Peck has no train ticket and has essentially spent everything on phone calls, the taxi, and the vase.',
+        solution: 'He talks his way aboard, finds car 7, knocks on stateroom A at 2 a.m., and hands a startled Cappy Ricks the vase—six hours past deadline, having never stopped moving.'
+      }
+    ];
+
+    let solvedCount = 0;
+
+    function renderObstacles() {
+      const grid = document.getElementById('obstacle-grid');
+      obstacles.forEach((o, i) => {
+        const card = document.createElement('div');
+        card.className = 'obstacle-card reveal' + (i > 0 ? ' reveal-delay-' + Math.min(i % 5 + 1, 5) : '');
+        card.id = 'obstacle-' + i;
+        card.innerHTML = `
+          <div class="obstacle-num">${o.n}</div>
+          <div class="obstacle-title">${o.title}</div>
+          <p class="obstacle-desc">${o.desc}</p>
+          <div class="obstacle-solution">✓ ${o.solution}</div>
+          <button class="solve-btn" data-idx="${i}">How Peck solved it →</button>
+        `;
+        grid.appendChild(card);
+        revealObserver.observe(card);
+      });
+
+      grid.addEventListener('click', e => {
+        const btn = e.target.closest('.solve-btn');
+        if (!btn) return;
+        const idx = parseInt(btn.dataset.idx, 10);
+        const card = document.getElementById('obstacle-' + idx);
+        if (!card.classList.contains('solved')) {
+          card.classList.add('solved');
+          solvedCount++;
+          updateVaseProgress();
+        }
+      });
+    }
+
+    function updateVaseProgress() {
+      const pct = (solvedCount / obstacles.length) * 100;
+      document.getElementById('vase-progress').style.width = pct + '%';
+      document.getElementById('obstacles-solved-text').textContent =
+        solvedCount + ' of ' + obstacles.length + ' obstacles overcome';
+    }
+
+    document.getElementById('solve-all-btn').addEventListener('click', () => {
+      obstacles.forEach((_, i) => {
+        const card = document.getElementById('obstacle-' + i);
+        if (card && !card.classList.contains('solved')) {
+          card.classList.add('solved');
+          solvedCount++;
+        }
+      });
+      updateVaseProgress();
+    });
+
+    renderObstacles();
+
+    /* ── QUOTE CAROUSEL ───────────────────────────────────────── */
+    const track = document.getElementById('quotes-track');
+    const dotsContainer = document.getElementById('quote-dots');
+    const slides = track.querySelectorAll('.quote-slide');
+    let currentSlide = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'quote-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Quote ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    function goTo(idx) {
+      currentSlide = (idx + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dotsContainer.querySelectorAll('.quote-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    document.getElementById('quote-prev').addEventListener('click', () => goTo(currentSlide - 1));
+    document.getElementById('quote-next').addEventListener('click', () => goTo(currentSlide + 1));
+
+    // Auto-advance
+    let autoQuote = setInterval(() => goTo(currentSlide + 1), 6000);
+    track.addEventListener('mouseenter', () => clearInterval(autoQuote));
+    track.addEventListener('mouseleave', () => { autoQuote = setInterval(() => goTo(currentSlide + 1), 6000); });
+
+    // Swipe
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(currentSlide + (diff > 0 ? 1 : -1));
+    });
+
+    /* ── ASSESSMENT ───────────────────────────────────────────── */
+    const assessmentItems = [
+      "When given a vague task, I figure out the specifics myself rather than asking for step-by-step guidance.",
+      "I have been rejected or turned down for something I wanted and found another path forward anyway.",
+      "I often prepare for opportunities before they're officially available—just in case.",
+      "When I hit an obstacle, my instinct is to look for a workaround, not to stop.",
+      "I do the same quality of work whether or not someone is watching me.",
+      "I have accepted a difficult, unglamorous task specifically because others avoided it.",
+      "I can honestly say I've stayed loyal to a goal long after it became inconvenient.",
+      "I make commitments in advance of knowing exactly how I'll fulfill them.",
+      "When others tell me something is impossible, I take it as information, not as a final answer.",
+      "I can recall a time when I succeeded at something by finding a completely unconventional solution.",
+    ];
+
+    const grid2 = document.getElementById('assessment-grid');
+    assessmentItems.forEach((text, i) => {
+      const item = document.createElement('div');
+      item.className = 'assessment-item reveal' + (i > 0 ? ' reveal-delay-' + Math.min((i % 4) + 1, 5) : '');
+      item.innerHTML = `
+        <div class="assessment-check"></div>
+        <div class="assessment-text">${text}</div>
+      `;
+      item.addEventListener('click', () => item.classList.toggle('checked'));
+      grid2.appendChild(item);
+      revealObserver.observe(item);
+    });
+
+    document.getElementById('check-score-btn').addEventListener('click', () => {
+      const checked = document.querySelectorAll('.assessment-item.checked').length;
+      const total = assessmentItems.length;
+      const result = document.getElementById('assessment-result');
+      document.getElementById('result-score').textContent = checked + '/' + total;
+
+      let label, desc;
+      if (checked >= 9) {
+        label = 'Go-Getter — Blue Vase Delivered';
+        desc = 'Cappy Ricks would give you the Shanghai job. You carry objectives, not excuses. You\'ve internalized the motto without even knowing it. The challenge now: transmit that soul to the people around you.';
+      } else if (checked >= 7) {
+        label = 'Strong Candidate — Close to the Vase';
+        desc = 'You have the instincts. You\'ve been tested and you\'ve mostly delivered. But there are moments when the fog settles and you wait instead of move. Find those moments. That\'s your growth edge.';
+      } else if (checked >= 5) {
+        label = 'The Territory Has Potential';
+        desc = 'You have the foundation—curiosity, some resilience, some initiative. But there are patterns of hesitation worth examining. Peck didn\'t become a go-getter in a day; neither will you. But the next obstacle is a chance.';
+      } else if (checked >= 3) {
+        label = 'Early Stage — The Work Begins';
+        desc = 'Like the average employee in Hubbard\'s essay, you may default to asking questions rather than finding answers. That\'s learnable. The first step is noticing the reflex before it fires—and choosing differently.';
+      } else {
+        label = 'Room to Grow — Start Here';
+        desc = 'Honesty counts. Recognizing the gap is the first act of initiative. The brigadier\'s motto isn\'t about pretending to be certain—it\'s about making a commitment before certainty arrives. What is one thing you could commit to today?';
+      }
+
+      document.getElementById('result-label').textContent = label;
+      document.getElementById('result-desc').textContent = desc;
+      result.classList.add('visible');
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  </script>
+</body>
+</html>

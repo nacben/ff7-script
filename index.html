@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storytelling Craft: Lessons from Final Fantasy X</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1525;
+    --bg3: #141c30;
+    --card: #111827;
+    --border: #1e2d4a;
+    --accent: #4f9cf9;
+    --accent2: #a78bfa;
+    --accent3: #34d399;
+    --accent4: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --quote-bg: #0c1420;
+    --quote-border: #2d4a7a;
+    --highlight: #1a2744;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.75;
+    font-size: 17px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,14,26,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); font-family: 'Arial', sans-serif; font-weight: 700;
+  }
+  .nav-links {
+    display: flex; gap: 1.5rem; list-style: none;
+    font-family: 'Arial', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(79,156,249,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(167,139,250,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    border: 1px solid rgba(79,156,249,0.3);
+    padding: 0.35rem 1rem; border-radius: 20px;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: normal;
+    line-height: 1.15;
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #e2e8f0 0%, #a5b4fc 50%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted); max-width: 600px;
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+  .hero-meta {
+    display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;
+    font-family: 'Arial', sans-serif; font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); }
+
+  /* ── LAYOUT ── */
+  main { padding-top: 56px; }
+
+  .section {
+    max-width: 900px; margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  .section + .section {
+    border-top: 1px solid var(--border);
+  }
+  .section-tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 0.75rem;
+  }
+  .section h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+    font-weight: normal; margin-bottom: 1.25rem;
+    color: #f1f5f9;
+  }
+  .section > p, .section > .lead {
+    color: var(--muted); margin-bottom: 1.5rem;
+  }
+  .lead {
+    font-size: 1.1rem; color: #cbd5e1 !important;
+    border-left: 3px solid var(--accent); padding-left: 1.25rem;
+    font-style: italic;
+  }
+
+  /* ── LESSON CARDS ── */
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem; margin: 3rem 0;
+  }
+  .lesson-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; color: inherit;
+    display: block;
+  }
+  .lesson-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(79,156,249,0.12);
+  }
+  .lesson-num {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .lesson-card h3 {
+    font-size: 1.05rem; margin-bottom: 0.5rem; color: #f1f5f9;
+  }
+  .lesson-card p {
+    font-size: 0.85rem; color: var(--muted); font-family: 'Arial', sans-serif;
+    line-height: 1.55;
+  }
+
+  /* ── DIALOGUE QUOTE ── */
+  .quote-block {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 1.5rem 1.75rem;
+    margin: 1.75rem 0;
+    position: relative;
+  }
+  .quote-block.purple { border-left-color: var(--accent2); }
+  .quote-block.green  { border-left-color: var(--accent3); }
+  .quote-block.amber  { border-left-color: var(--accent4); }
+  .quote-source {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .quote-block.purple .quote-source { color: var(--accent2); }
+  .quote-block.green  .quote-source { color: var(--accent3); }
+  .quote-block.amber  .quote-source { color: var(--accent4); }
+
+  .dialogue {
+    font-style: normal;
+    line-height: 2;
+  }
+  .dialogue .speaker {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent2); font-weight: 700;
+    margin-top: 0.6rem;
+  }
+  .dialogue .speaker:first-child { margin-top: 0; }
+  .dialogue .line {
+    color: #d1d9e6; padding-left: 1rem;
+    border-left: 2px solid rgba(167,139,250,0.15);
+    margin-left: 0.1rem;
+  }
+  .dialogue .stage {
+    color: var(--muted); font-style: italic;
+    font-size: 0.88rem; padding-left: 1rem;
+  }
+
+  /* ── ANALYSIS BOX ── */
+  .analysis {
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+  }
+  .analysis-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent3); margin-bottom: 0.75rem; font-weight: 700;
+  }
+  .analysis p {
+    font-size: 0.95rem; color: var(--muted); margin-bottom: 0.75rem;
+    font-family: 'Arial', sans-serif; line-height: 1.65;
+  }
+  .analysis p:last-child { margin-bottom: 0; }
+  .analysis strong { color: #e2e8f0; }
+
+  /* ── TECHNIQUE CALLOUT ── */
+  .technique {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 1.5rem 0;
+  }
+  .technique-icon {
+    font-size: 1.4rem; flex-shrink: 0; line-height: 1;
+    margin-top: 0.15rem;
+  }
+  .technique-body { flex: 1; }
+  .technique-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent4); font-weight: 700; margin-bottom: 0.35rem;
+  }
+  .technique-body p {
+    font-size: 0.92rem; color: var(--muted);
+    font-family: 'Arial', sans-serif; line-height: 1.6;
+    margin: 0;
+  }
+  .technique-body strong { color: var(--text); }
+
+  /* ── COMPARISON ── */
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media(max-width: 600px) { .compare { grid-template-columns: 1fr; } }
+  .compare-col {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem;
+  }
+  .compare-col.bad { border-color: rgba(239,68,68,0.3); }
+  .compare-col.good { border-color: rgba(52,211,153,0.3); }
+  .compare-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 0.6rem; font-weight: 700;
+  }
+  .compare-col.bad .compare-label  { color: #f87171; }
+  .compare-col.good .compare-label { color: var(--accent3); }
+  .compare-col p {
+    font-size: 0.9rem; color: var(--muted);
+    font-family: 'Arial', sans-serif; line-height: 1.6; margin: 0;
+  }
+
+  /* ── STRUCTURE DIAGRAM ── */
+  .diagram {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+  .timeline {
+    display: flex; align-items: center; gap: 0;
+    min-width: 560px;
+  }
+  .tl-node {
+    display: flex; flex-direction: column; align-items: center;
+    flex: 1;
+  }
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    box-shadow: 0 0 8px rgba(79,156,249,0.5);
+    position: relative; z-index: 2;
+  }
+  .tl-dot.purple { background: var(--accent2); box-shadow: 0 0 8px rgba(167,139,250,0.5); }
+  .tl-dot.amber  { background: var(--accent4); box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+  .tl-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem; text-align: center; color: var(--muted);
+    margin-top: 0.5rem; max-width: 80px; line-height: 1.3;
+  }
+  .tl-time {
+    font-size: 0.65rem; color: var(--accent); letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .tl-line {
+    flex: 1; height: 2px;
+    background: linear-gradient(90deg, var(--border), var(--accent), var(--border));
+    margin-bottom: 22px;
+  }
+  .tl-arrow {
+    width: 0; height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 8px solid var(--accent);
+    margin-bottom: 22px; flex-shrink: 0;
+  }
+
+  /* ── PULLOUT STAT ── */
+  .stat-row {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;
+  }
+  .stat {
+    flex: 1; min-width: 160px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 2.2rem; font-weight: 300;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block; margin-bottom: 0.25rem;
+  }
+  .stat-desc {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem; color: var(--muted); line-height: 1.4;
+  }
+
+  /* ── ACCORDION ── */
+  .accordion { margin: 1.5rem 0; }
+  .acc-item {
+    border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .acc-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.25rem; cursor: pointer;
+    background: var(--card);
+    font-family: 'Arial', sans-serif; font-size: 0.92rem;
+    color: #e2e8f0; font-weight: 600;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .acc-header:hover { background: var(--bg3); }
+  .acc-chevron {
+    width: 20px; height: 20px; flex-shrink: 0;
+    transition: transform 0.25s;
+    color: var(--muted);
+  }
+  .acc-item.open .acc-chevron { transform: rotate(180deg); }
+  .acc-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease;
+    background: var(--bg2);
+  }
+  .acc-inner {
+    padding: 1.25rem 1.5rem;
+    font-family: 'Arial', sans-serif; font-size: 0.9rem;
+    color: var(--muted); line-height: 1.65;
+  }
+  .acc-inner strong { color: var(--text); }
+
+  /* ── CHARACTER VOICES TABLE ── */
+  .voice-grid {
+    display: grid; gap: 1rem; margin: 2rem 0;
+  }
+  .voice-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+    display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem;
+  }
+  @media(max-width: 600px) { .voice-card { grid-template-columns: 1fr; } }
+  .voice-name {
+    font-size: 1.1rem; color: #f1f5f9; margin-bottom: 0.25rem;
+  }
+  .voice-archetype {
+    font-family: 'Arial', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 0.75rem;
+  }
+  .voice-traits {
+    list-style: none;
+    font-family: 'Arial', sans-serif; font-size: 0.8rem;
+    color: var(--muted); line-height: 1.8;
+  }
+  .voice-traits li::before { content: '→ '; color: var(--accent); }
+  .voice-sample {
+    font-style: italic; color: #d1d9e6;
+    font-size: 0.95rem; line-height: 1.7;
+    padding: 1rem 1.25rem;
+    background: var(--quote-bg);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* ── WORKSHOP ── */
+  .workshop {
+    background: linear-gradient(135deg, #0c1628, #0f1c35);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 2rem 2rem;
+    margin: 2.5rem 0;
+  }
+  .workshop-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .workshop h3 {
+    font-size: 1.25rem; margin-bottom: 1rem; color: #f1f5f9;
+  }
+  .workshop ol, .workshop ul {
+    padding-left: 1.5rem;
+    font-family: 'Arial', sans-serif; font-size: 0.92rem;
+    color: var(--muted); line-height: 2;
+  }
+  .workshop strong { color: var(--accent3); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem; color: var(--muted);
+    max-width: 900px; margin: 0 auto;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── SCROLL PROGRESS ── */
+  #progress {
+    position: fixed; top: 56px; left: 0; right: 0; height: 2px; z-index: 99;
+    background: var(--border);
+  }
+  #progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.1s;
+  }
+
+  /* ── UTILITY ── */
+  .mt { margin-top: 1.5rem; }
+  .mb { margin-bottom: 1.5rem; }
+  .em { font-style: italic; color: #d1d9e6; }
+  h3.sub { font-size: 1.2rem; margin: 2rem 0 0.75rem; color: #e2e8f0; font-weight: normal; }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<div id="progress"><div id="progress-bar"></div></div>
+
+<nav>
+  <span class="nav-logo">Craft &amp; Script</span>
+  <ul class="nav-links">
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#subtext">Subtext</a></li>
+    <li><a href="#exposition">Exposition</a></li>
+    <li><a href="#pacing">Pacing</a></li>
+    <li><a href="#world">World-building</a></li>
+    <li><a href="#workshop">Workshop</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="hero">
+  <span class="hero-tag">A storywriter's field guide</span>
+  <h1>Narrative Craft Lessons from<br>Final Fantasy X</h1>
+  <p class="hero-sub">How one game script became a masterclass in structure, voice, subtext, and the architecture of emotional impact.</p>
+  <div class="hero-meta">
+    <span><span class="dot"></span> 8 core lessons</span>
+    <span><span class="dot" style="background:var(--accent2)"></span> 30+ script excerpts</span>
+    <span><span class="dot" style="background:var(--accent4)"></span> Workshop exercises</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══════════════════ INTRO ═══════════════════ -->
+<section class="section" id="intro">
+  <div class="section-tag">Introduction</div>
+  <h2>Why study a video game script?</h2>
+  <p class="lead">Final Fantasy X (2001) is one of the most technically sophisticated scripts in interactive media — and most storywriters have never read it.</p>
+  <p>The script contains roughly 100,000 words of dialogue, but what makes it extraordinary isn't length. It's architecture. Writer Kazushige Nojima constructed an unreliable first-person narrator, embedded a complete second story inside the first, disguised its core theme (grief and letting go) as an action quest, and gave every named character a distinct and linguistically coherent voice — all without a single chapter break in the traditional sense.</p>
+  <p>These lessons treat the FFX script not as fan material but as a professional document. The goal is to make its techniques extractable and applicable to your own work — in any medium.</p>
+
+  <div class="stat-row">
+    <div class="stat"><span class="stat-num">29</span><span class="stat-desc">story chapters across a single continuous journey</span></div>
+    <div class="stat"><span class="stat-num">8+</span><span class="stat-desc">named characters with fully individuated dialogue voices</span></div>
+    <div class="stat"><span class="stat-num">2</span><span class="stat-desc">complete timelines running simultaneously throughout</span></div>
+    <div class="stat"><span class="stat-num">1</span><span class="stat-desc">unreliable narrator who doesn't know he's unreliable</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON INDEX ═══════════════════ -->
+<section class="section">
+  <div class="section-tag">Contents</div>
+  <h2>Eight lessons in craft</h2>
+  <div class="lessons-grid">
+    <a class="lesson-card" href="#structure">
+      <div class="lesson-num">Lesson 01</div>
+      <h3>The Frame Narrative</h3>
+      <p>How a story-within-a-story doubles emotional resonance without doubling length.</p>
+    </a>
+    <a class="lesson-card" href="#voice">
+      <div class="lesson-num">Lesson 02</div>
+      <h3>Character Voice</h3>
+      <p>Building linguistically unique characters so readers hear who is speaking without attribution.</p>
+    </a>
+    <a class="lesson-card" href="#subtext">
+      <div class="lesson-num">Lesson 03</div>
+      <h3>Subtext &amp; Silence</h3>
+      <p>What characters don't say — and how the script teaches you to write around the unspeakable.</p>
+    </a>
+    <a class="lesson-card" href="#exposition">
+      <div class="lesson-num">Lesson 04</div>
+      <h3>Organic Exposition</h3>
+      <p>The art of delivering world-building through conflict, resistance, and misunderstanding.</p>
+    </a>
+    <a class="lesson-card" href="#pacing">
+      <div class="lesson-num">Lesson 05</div>
+      <h3>Emotional Pacing</h3>
+      <p>How tension, release, and tonal shifts are scripted — not left to performance.</p>
+    </a>
+    <a class="lesson-card" href="#foreshadow">
+      <div class="lesson-num">Lesson 06</div>
+      <h3>Foreshadowing &amp; Callbacks</h3>
+      <p>Planting and paying off information across a long narrative arc.</p>
+    </a>
+    <a class="lesson-card" href="#world">
+      <div class="lesson-num">Lesson 07</div>
+      <h3>NPCs as World-builders</h3>
+      <p>Using minor characters to reveal setting, theme, and social texture without exposition dumps.</p>
+    </a>
+    <a class="lesson-card" href="#workshop">
+      <div class="lesson-num">Lesson 08</div>
+      <h3>Workshop Exercises</h3>
+      <p>Practical writing exercises derived directly from FFX techniques.</p>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 1: STRUCTURE ═══════════════════ -->
+<section class="section" id="structure">
+  <div class="section-tag">Lesson 01</div>
+  <h2>The Frame Narrative: Two Stories, One Spine</h2>
+  <p class="lead">The T-Narrative — a story told in retrospect by a narrator who was not who he thought he was — is one of the most elegant structural devices in modern scripted fiction.</p>
+
+  <p>FFX opens with its narrator, Tidus, already at the end. He sits in darkness and begins: <span class="em">"Listen to my story. This may be our last chance."</span> Every event that follows is a memory he is recounting to an unseen listener. This is the frame.</p>
+  <p>Inside that frame lives the main narrative: Tidus's journey across Spira with a group of guardians protecting a summoner named Yuna on a pilgrimage that will kill her. The two stories — the retrospective frame and the forward-moving journey — braid together and share a single devastating resolution.</p>
+
+  <div class="diagram">
+    <p style="font-family:'Arial',sans-serif;font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;letter-spacing:0.1em;text-transform:uppercase;">Structural overview: The T-Narrative</p>
+    <div class="timeline">
+      <div class="tl-node">
+        <div class="tl-time">Frame</div>
+        <div class="tl-dot purple"></div>
+        <div class="tl-label">Opening monologue — narrator in darkness</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-arrow"></div>
+      <div class="tl-node">
+        <div class="tl-time">Past</div>
+        <div class="tl-dot"></div>
+        <div class="tl-label">Zanarkand — the world before</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-arrow"></div>
+      <div class="tl-node">
+        <div class="tl-time">Journey</div>
+        <div class="tl-dot"></div>
+        <div class="tl-label">Spira — forward narrative</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-arrow"></div>
+      <div class="tl-node">
+        <div class="tl-time">Climax</div>
+        <div class="tl-dot amber"></div>
+        <div class="tl-label">Revelation — narrator's true nature</div>
+      </div>
+      <div class="tl-line"></div>
+      <div class="tl-arrow"></div>
+      <div class="tl-node">
+        <div class="tl-time">Frame</div>
+        <div class="tl-dot purple"></div>
+        <div class="tl-label">Return to darkness — everything recontextualised</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">The opening monologue: what it actually does</h3>
+  <div class="quote-block">
+    <div class="quote-source">FFX — Zanarkand (opening)</div>
+    <div class="dialogue">
+      <div class="speaker">Tidus</div>
+      <div class="line">"Listen to my story. This may be our last chance."</div>
+      <div class="stage">[pause]</div>
+      <div class="line">"It all began when I heard my father had died. My old man... I think I understand now. I didn't want to. Maybe I didn't want to understand him. I wanted to hate him. It was easier that way."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>In two sentences, the script accomplishes four things. <strong>(1) Urgency:</strong> "this may be our last chance" creates stakes before we know the story. <strong>(2) Retrospection:</strong> "it all began" signals we're in a told-story structure. <strong>(3) Core conflict:</strong> the father-son rift is planted immediately — this is the real story beneath the fantasy quest. <strong>(4) Unreliable sympathy:</strong> "I wanted to hate him. It was easier that way" tells us the narrator is rationalizing. The reader/player begins to suspect this character before he's done anything.</p>
+    <p>Notice what is absent: no world-building. No explanation of who Tidus is or where he lives. The emotional premise arrives before any context — because <strong>context without emotion is just information</strong>, but emotion without context creates active curiosity.</p>
+  </div>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — The Retrospective Frame</div>
+      <p>Opening a story with a narrator recounting events creates what theorists call <strong>dramatic irony by position</strong>: the narrator already knows how things end. The reader senses this knowledge gap and leans forward. The craft challenge is to write a narrator who reveals just enough of their future knowledge to create tension, but withholds enough to preserve surprise. FFX threads this needle by having Tidus speak in emotional retrospect without plot spoilers.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">How the frame recontextualises the whole story</h3>
+  <p>The frame narrative's true power is revealed only at the script's end. Throughout the story, readers assume Tidus is a normal protagonist. When the truth emerges — that he is a dream-construct, a summoned memory given temporary flesh — every scene with him rewatches differently. His exuberance isn't naivety; it's the joy of a ghost who doesn't know he's a ghost. His confusion about Spira isn't ignorance; it's the confusion of a thing that was never real navigating a world that is.</p>
+  <p>This is the structural masterwork: the frame creates a second reading embedded inside the first. Every reread is a different story.</p>
+
+  <div class="quote-block green">
+    <div class="quote-source">FFX — Inside Sin (late game revelation)</div>
+    <div class="dialogue">
+      <div class="speaker">Auron</div>
+      <div class="line">"Now! This is it! Now is the time to choose! Die and be free of pain or live and fight your sorrow! Now is the time to shape your stories!"</div>
+      <div class="stage">[Tidus turns to Yuna]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Yuna... I have to go."</div>
+      <div class="speaker">Yuna</div>
+      <div class="line">"I... I know."</div>
+      <div class="stage">[She catches herself, refuses to accept it]</div>
+      <div class="speaker">Yuna</div>
+      <div class="line">"I'm sorry I couldn't... I wasn't able..."</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"No, it's okay. I wasn't real. But the good times we had together..."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>The line "I wasn't real. But the good times we had together..." does something almost impossibly difficult in dialogue: it simultaneously completes the frame (now we fully understand the opening monologue), resolves the central relationship (Tidus and Yuna's love is acknowledged), and delivers the story's theme — that <strong>the authenticity of an experience is not determined by the ontological status of the one who had it</strong>. Whether or not Tidus was "real," what he felt was real. What Yuna felt was real. The story argues for the validity of ephemeral things.</p>
+    <p>And it does it in eight words.</p>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Apply It</div>
+    <h3>Exercise: Write a retrospective frame</h3>
+    <ol>
+      <li>Take a story you're developing. Identify its <strong>emotional core</strong> — what the main character ultimately learns or loses.</li>
+      <li>Write a 3–5 sentence opening monologue from after the ending. Have your character speak in present tense about the past, with the emotional knowledge of having survived it.</li>
+      <li>Plant one detail in the monologue that will be meaningless on first read but devastating in retrospect.</li>
+      <li>Forbid yourself from explaining the world. Trust emotional stakes to carry the opening.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 2: CHARACTER VOICE ═══════════════════ -->
+<section class="section" id="voice">
+  <div class="section-tag">Lesson 02</div>
+  <h2>Character Voice: Writing People You Can Hear</h2>
+  <p class="lead">In a well-written script, you should be able to cover character tags and still know who is speaking. FFX is a clinic in building this kind of vocal distinctness.</p>
+
+  <p>Each principal character in FFX has a set of linguistic markers — specific vocabulary, sentence length patterns, rhetorical habits — that function like a fingerprint. These aren't accidental. They're engineered. Understanding the system lets you build it deliberately in your own work.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div>
+        <div class="voice-name">Tidus</div>
+        <div class="voice-archetype">The Unfiltered Heart</div>
+        <ul class="voice-traits">
+          <li>Short sentences, often fragments</li>
+          <li>Sports metaphors and direct address</li>
+          <li>Emotional outbursts, self-corrections</li>
+          <li>Boyish enthusiasm colliding with grief</li>
+        </ul>
+      </div>
+      <div class="voice-sample">
+        "No way, no way! I'm not gonna let that happen! Not to Yuna, not to anyone! There has to be another way!"
+        <br><br>
+        "I hate you, Dad."
+      </div>
+    </div>
+    <div class="voice-card">
+      <div>
+        <div class="voice-name">Auron</div>
+        <div class="voice-archetype">The Reluctant Oracle</div>
+        <ul class="voice-traits">
+          <li>Declarative, minimal sentences</li>
+          <li>Never explains more than needed</li>
+          <li>Oblique references to the past</li>
+          <li>Ellipsis and silence as punctuation</li>
+        </ul>
+      </div>
+      <div class="voice-sample">
+        "This is your story."
+        <br><br>
+        "Now it begins."
+        <br><br>
+        "One more thing. There's something you should know about me."
+      </div>
+    </div>
+    <div class="voice-card">
+      <div>
+        <div class="voice-name">Yuna</div>
+        <div class="voice-archetype">The Duty-bound Romantic</div>
+        <ul class="voice-traits">
+          <li>Formal register shifting to intimate</li>
+          <li>Begins sentences with others in mind</li>
+          <li>Precise emotional vocabulary</li>
+          <li>Sentences that sacrifice self mid-clause</li>
+        </ul>
+      </div>
+      <div class="voice-sample">
+        "I will live with my sorrow, I will live my own life! I will defeat sorrow, in his place. I will stand my ground and be strong."
+      </div>
+    </div>
+    <div class="voice-card">
+      <div>
+        <div class="voice-name">Lulu</div>
+        <div class="voice-archetype">The Armored Intellect</div>
+        <ul class="voice-traits">
+          <li>Complex syntax, qualifications</li>
+          <li>Cold precision concealing deep care</li>
+          <li>Rhetorical questions as corrections</li>
+          <li>Never speaks about her own pain directly</li>
+        </ul>
+      </div>
+      <div class="voice-sample">
+        "You must understand that we are capable of looking after Yuna ourselves. What she needs most from you is for you to behave."
+      </div>
+    </div>
+    <div class="voice-card">
+      <div>
+        <div class="voice-name">Wakka</div>
+        <div class="voice-archetype">The Loyal Dogmatist</div>
+        <ul class="voice-traits">
+          <li>Working-class idiom, dialect markers</li>
+          <li>Filler ("ya?", "ya know")</li>
+          <li>Strong conviction, easily shaken</li>
+          <li>Belief as emotional armor</li>
+        </ul>
+      </div>
+      <div class="voice-sample">
+        "The Al Bhed are a bad bunch, ya? They use machina, mess with things that Yevon says are forbidden. That's why they got what they deserved."
+      </div>
+    </div>
+    <div class="voice-card">
+      <div>
+        <div class="voice-name">Rikku</div>
+        <div class="voice-archetype">The Relentless Optimist</div>
+        <ul class="voice-traits">
+          <li>Rapid-fire short clauses</li>
+          <li>Deflects serious topics with energy</li>
+          <li>Emotions leak through despite effort</li>
+          <li>Uses humor as camouflage</li>
+        </ul>
+      </div>
+      <div class="voice-sample">
+        "Well, it's not like we have a choice, right? We have to try! I mean, come on! Giving up already? That's so not like you!"
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">Same scene, different people</h3>
+  <p>The clearest test of character voice is to put multiple characters in the same scene facing the same information and watch them respond differently. FFX passes this test consistently. Here is one scene from the Moonflow chapter, where the party must accept that their summoner's pilgrimage ends in her death:</p>
+
+  <div class="quote-block purple">
+    <div class="quote-source">FFX — Moonflow</div>
+    <div class="dialogue">
+      <div class="speaker">Wakka</div>
+      <div class="line">"If the Final Summoning kills you... we lose you and Sin both. I always... I never really thought about it like that."</div>
+      <div class="speaker">Lulu</div>
+      <div class="line">"Because you chose not to. We all did."</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"What do you mean?"</div>
+      <div class="speaker">Lulu</div>
+      <div class="line">"We knew, and we didn't want to know. So we didn't ask. We just... played along."</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"That's horrible."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>Wakka's voice: incomplete sentence, trailing off. He's a man of action, not reflection — being forced to sit with an idea is foreign. <strong>"I always... I never really"</strong> — the self-correction is a vocal tic that shows his mind catching up to his mouth.</p>
+    <p>Lulu's voice: precise, morally unflinching. She names the collective delusion in one exact sentence: <strong>"We knew, and we didn't want to know."</strong> This is the voice of someone who has already done her grieving in private.</p>
+    <p>Tidus's voice: reactive, short, emotionally immediate. He's always responding. His lines in this scene are two words and five words. He is a character who experiences things rather than processes them.</p>
+    <p>The scene gives each character the same information and shows three completely different emotional responses — through vocabulary, syntax, and what each person notices first.</p>
+  </div>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — Voice Fingerprinting</div>
+      <p>For each major character, define: <strong>(1) their default sentence length</strong> (Auron = 6 words, Tidus = 4–8, Lulu = 15–25); <strong>(2) their emotional reflex</strong> (what they do when under pressure — Rikku accelerates, Auron compresses, Lulu grows more formal); <strong>(3) what they never say directly</strong> (what emotion is always off-limits for this person?). These three parameters, consistently applied, produce a voice that survives any scene.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Voice as character development</h3>
+  <p>One of FFX's subtler achievements: character voice changes over the course of the story. Tidus's sentences grow longer and more measured as he matures. Yuna's formal register gradually relaxes as she reclaims agency. These aren't just emotional arcs — they are grammatical arcs. The language itself charts the growth.</p>
+
+  <div class="compare">
+    <div class="compare-col bad">
+      <div class="compare-label">Early Yuna (Act I)</div>
+      <p><em>"I will go to Zanarkand with my guardians, and there I will obtain the Final Aeon. And with it... with it, I will defeat Sin. That is my duty."</em></p>
+    </div>
+    <div class="compare-col good">
+      <div class="compare-label">Late Yuna (Act III)</div>
+      <p><em>"I will live with my sorrow, I will live my own life! I will defeat sorrow, in his place."</em></p>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>Early Yuna speaks in the third person about herself ("my duty") — she's performing a role. Late Yuna uses "I will" three times in two sentences — she's claiming agency. The sentence structure has shifted from dutiful statement to personal declaration. This is characterization through grammar.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 3: SUBTEXT ═══════════════════ -->
+<section class="section" id="subtext">
+  <div class="section-tag">Lesson 03</div>
+  <h2>Subtext &amp; Silence: Writing What Cannot Be Said</h2>
+  <p class="lead">The most emotionally powerful moments in the FFX script are not the loudest ones. They are the ones where characters cannot say what they mean, and the unsaid thing is louder than any speech.</p>
+
+  <p>Subtext is what a character means but doesn't say — usually because they can't, due to social constraint, emotional defense, or the simple impossibility of speaking grief directly. The craft is in finding the oblique approach: what a character says instead, and why.</p>
+
+  <h3 class="sub">The lake scene: a masterclass in emotional obliqueness</h3>
+
+  <div class="quote-block">
+    <div class="quote-source">FFX — Lake Macalania (often cited as one of gaming's most effective romantic scenes)</div>
+    <div class="dialogue">
+      <div class="stage">[Yuna is crying; Tidus doesn't know what to say or do]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Okay, just — just laugh."</div>
+      <div class="stage">[He laughs loudly and fakely]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Hahahaha! Come on!"</div>
+      <div class="stage">[Slowly, Yuna begins to laugh too, then Tidus really begins laughing with her]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"See? Doesn't that feel better?"</div>
+      <div class="speaker">Yuna</div>
+      <div class="line">"Thank you."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>What this scene is about on the surface: two people by a lake, one crying, one trying to cheer her up. What the scene is actually about: a young man who has no language for grief offering the only thing he can — a refusal to drown in it with her. Tidus cannot say "I don't know how to help you, but I refuse to let you suffer alone." He doesn't have those words. Instead, he does something ridiculous and sincere.</p>
+    <p>The laugh is false. That's the point. Everyone watching knows it's false. <strong>Yuna knows it's false.</strong> She laughs anyway — not because it's funny, but because she loves someone who would do something that absurd for her. The subtext of "thank you" is not gratitude for laughter. It's gratitude for the refusal to abandon her to the weight of what she knows is coming.</p>
+    <p>This is what subtext does: it asks the reader to understand what is not there on the page. The scene is carrying a freight of unstated meaning that the explicit words are too small to hold — and the gap between words and meaning is where the emotion lives.</p>
+  </div>
+
+  <h3 class="sub">Silence as punctuation</h3>
+  <p>Auron speaks rarely, and the script uses his silence as a deliberate tool. His most powerful moments aren't lines — they're the lines before he speaks, where other characters fill the void with interpretation, revealing themselves in the process.</p>
+
+  <div class="quote-block amber">
+    <div class="quote-source">FFX — Mushroom Rock Road</div>
+    <div class="dialogue">
+      <div class="speaker">Tidus</div>
+      <div class="line">"Hey, you. You knew this was going to happen, didn't you?"</div>
+      <div class="stage">[Auron is silent]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Why didn't you tell me?!"</div>
+      <div class="speaker">Auron</div>
+      <div class="line">"Would it have stopped you?"</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>Auron's reply is technically a question but functions as an answer. He already knows Tidus wouldn't have been stopped. More importantly, so does Tidus. The question is a mirror: it redirects the anger back at the person feeling it. <strong>Auron doesn't defend himself because there's no defense to make — only a truth to return.</strong></p>
+    <p>The script lets the silence between Tidus's first accusation and Auron's response do enormous work. In that silence: Tidus's anger peaks, Auron considers, and the reader senses that there is a history between these two that has not yet been revealed. A silence is not an absence of content — it is a container for unspoken content that the reader fills with anxiety, suspicion, or longing.</p>
+  </div>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — Deflection as Revelation</div>
+      <p>When a character cannot speak directly about their emotional truth, they talk about something adjacent. Lulu never says "I loved Chappu and his death broke me." She talks about how Wakka projects Chappu onto Tidus, how she can see the damage that does. <strong>Her criticism of Wakka's coping mechanism is a confession of her own wound.</strong> Subtext works this way: characters who cannot say "I hurt" describe the hurt they observe in others — and the reader sees through it.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">The unfinished sentence</h3>
+  <p>FFX uses the interrupted or unfinished sentence as a consistent subtext marker. Characters begin sentences they can't complete — and the incompletion reveals the weight of what is withheld.</p>
+
+  <div class="quote-block green">
+    <div class="quote-source">FFX — Bevelle (after Yuna's near-execution)</div>
+    <div class="dialogue">
+      <div class="speaker">Yuna</div>
+      <div class="line">"I'm sorry I couldn't... I wasn't able..."</div>
+      <div class="stage">[She stops. She cannot say what she failed to do. She begins again.]</div>
+      <div class="speaker">Yuna</div>
+      <div class="line">"No. I'm glad we're alive."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>She was about to apologize for being unable to keep her promise to die. She was going to name the guilt she felt for letting herself be rescued. But she stops — because saying it would name a grief she is trying to refuse. Her recovery to "I'm glad we're alive" is not a platitude; it's a decision. The interrupted sentence lets us see the decision being made in real time. This is the subtext made visible through the gap in the syntax.</p>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Apply It</div>
+    <h3>Exercise: The unsayable thing</h3>
+    <ol>
+      <li>Identify a scene in your story where a character has something important to communicate but <strong>cannot say it directly</strong> — due to pride, fear, social constraint, or incapacity.</li>
+      <li>Write a version of the scene where the character says it directly (the "bad" version). This is your subtext map: you now know exactly what the scene is about.</li>
+      <li>Now delete everything direct. <strong>Replace each direct statement with what the character does or says instead</strong> — the action they take, the irrelevant topic they raise, the thing they criticize in another person that is really about themselves.</li>
+      <li>Read both versions. The gap between them is your subtext depth.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 4: EXPOSITION ═══════════════════ -->
+<section class="section" id="exposition">
+  <div class="section-tag">Lesson 04</div>
+  <h2>Organic Exposition: The Art of the Resistant Learner</h2>
+  <p class="lead">FFX's single most useful structural innovation for storywriters may be its delivery mechanism for world-building: a main character who is genuinely, justifiably ignorant of the world he enters.</p>
+
+  <p>World-building is the information problem at the heart of all speculative and secondary-world fiction. Readers need to understand the setting, but direct explanation is tedious and breaks narrative flow. FFX's solution: make the protagonist a stranger. Tidus arrives in Spira with no knowledge of its religion, history, language, or customs. Every piece of exposition he receives, he receives because he needs it — which means the reader needs it too.</p>
+
+  <div class="compare">
+    <div class="compare-col bad">
+      <div class="compare-label">Exposition Dump (the wrong way)</div>
+      <p>A character explains the world's history, politics, and cosmology in a lecture. No one has asked. No one has a reason to need the information now. The reader receives information without the motivation to retain it.</p>
+    </div>
+    <div class="compare-col good">
+      <div class="compare-label">Resistant Learner (the FFX way)</div>
+      <p>The protagonist asks a question because a problem has arisen that requires the answer. Another character explains — but briefly, incompletely, sometimes reluctantly. The reader receives the same information, but attached to a need.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Exposition through conflict</h3>
+
+  <div class="quote-block">
+    <div class="quote-source">FFX — Kilika Island (Tidus first encounters the religion of Yevon)</div>
+    <div class="dialogue">
+      <div class="speaker">Tidus</div>
+      <div class="line">"What's that thing she's doing with her hands?"</div>
+      <div class="speaker">Wakka</div>
+      <div class="line">"The Yevon bow? Everyone does it."</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Why?"</div>
+      <div class="speaker">Wakka</div>
+      <div class="line">"It's a sign of respect to the teachings. Don't you do it where you come from?"</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"No... should I?"</div>
+      <div class="speaker">Wakka</div>
+      <div class="line">"If you want people to like you, ya? Come on, I'll show you."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>In 70 words, the script delivers several pieces of information: Spira has a dominant religion called Yevon; it has specific ceremonial gestures; not performing them marks you as an outsider; social acceptance is tied to religious conformity. None of this is stated as fact. All of it is embedded in a naturalistic exchange prompted by Tidus's genuine confusion. Wakka's slight surprise at Tidus's ignorance also does exposition work — it tells us this is universal in this world, which makes Tidus's outsider status more vivid.</p>
+    <p><strong>The key mechanism: every exposition beat is triggered by a problem (Tidus doesn't know something that's causing social friction) and delivered through someone with a reason to explain.</strong></p>
+  </div>
+
+  <h3 class="sub">Delayed and partial exposition</h3>
+  <p>FFX is also masterful at what it withholds. The full truth about Yevon — that the church is corrupt, that its dogma is wrong, that it has suppressed information — is not delivered all at once. It is revealed in fragments across the entire narrative, each fragment recontextualizing what came before.</p>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <div class="acc-header">
+        Act I: The Information Given <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        Yevon is presented as the world's guiding religion. The pilgrimage is holy. The Maesters are its leaders and are trustworthy. Machina (technology) is forbidden by Yevon because it caused the tragedy of the ancient war. The Al Bhed, who use machina, are treated as heretics. This is information presented to us through Wakka's sincere belief — and because Wakka is likable and clearly good-hearted, we provisionally accept his worldview.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header">
+        Act II: The Cracks Show <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        The Maesters arrange for Yuna's execution in Bevelle. The pilgimage's "Final Aeon" is revealed to require the summoner's death. The church knows, has always known, and says nothing. Yevon uses its own forbidden machina in secret. The prohibition isn't moral — it's political, designed to keep the population dependent. The Al Bhed, we now understand, were heretics because they found out.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header">
+        Act III: Full Revelation <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        Sin itself is a construct of the original Yu Yevon — a recursive summoning that destroys the world to perpetuate itself. The "Final Summoning" that ends Sin only ends it temporarily. Yevon has known there is no permanent solution, and has built a religious system around managing collective grief rather than seeking truth. Wakka's entire belief system — the thing that defines his identity — is a lie maintained to prevent despair.
+      </div></div>
+    </div>
+  </div>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — Information Rationing</div>
+      <p>Map your world-building information into three tiers: <strong>Surface</strong> (what the world looks like from inside the dominant belief system), <strong>Friction</strong> (anomalies that don't fit the official explanation), and <strong>Truth</strong> (the reality beneath the system). Release these tiers sequentially. This creates a world that becomes progressively more interesting rather than exhausting itself at the start. The early information becomes subtext for the later information — which makes rereads richer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 5: PACING ═══════════════════ -->
+<section class="section" id="pacing">
+  <div class="section-tag">Lesson 05</div>
+  <h2>Emotional Pacing: Scripting Tension and Release</h2>
+  <p class="lead">Pacing is not about speed. It is about emotional contrast — calibrating how much weight a scene asks the reader to carry, and when to set it down.</p>
+
+  <p>FFX is unusual in scripted fiction for how explicitly it manages tonal register. High-intensity dramatic scenes are consistently followed by levity — not to deflate emotion, but to let the reader breathe, which makes the next dramatic beat land harder. This is contrast-based pacing, and it is a deliberate structural tool.</p>
+
+  <h3 class="sub">The function of comic relief in tragedy</h3>
+  <p>The Blitzball scenes — particularly the banter in early Zanarkand — establish a baseline register of lightness before the world falls apart. When Tidus is riffing with teammates:</p>
+
+  <div class="quote-block">
+    <div class="quote-source">FFX — Zanarkand Blitzball (pre-disaster)</div>
+    <div class="dialogue">
+      <div class="speaker">Tidus</div>
+      <div class="line">"Yeah, alright! That's it! That's the Jecht Shot, baby!"</div>
+      <div class="stage">[Team cheers]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"And the crowd goes wild! Oh yeah, they love me! They really love me!"</div>
+    </div>
+  </div>
+
+  <p>...the register is deliberately light, bordering on silly. The writer is banking emotional credit. When Sin attacks minutes later and the world ends, the contrast devastates. If the story opened at the same emotional intensity as the attack, there would be nowhere for the reader to fall from. The lightness isn't padding — it's structural preparation.</p>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — Emotional Baseline Investment</div>
+      <p>Before a devastating scene, spend time at the opposite register. The longer and more convincingly you establish "things are good," the further the fall. This is not manipulation — it is the fundamental grammar of tragic structure. Shakespeare understood it: the feast before the murder, the marriage before the exile. <strong>The lightness makes the darkness darker.</strong> Do not cut your comic scenes in a drama because they feel tonally inconsistent. They are structurally essential.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">The Luca beach scene: deliberate tonal interruption</h3>
+  <p>After the tension of the Luca Blitzball tournament and Auron's dramatic entrance, the story could have pushed straight into the next plot beat. Instead, the script pauses for a scene on the beach where Tidus and Yuna talk about simple things — their home cities, what they miss, whether they'll be okay. Nothing of plot consequence happens.</p>
+
+  <div class="quote-block purple">
+    <div class="quote-source">FFX — Luca Beach</div>
+    <div class="dialogue">
+      <div class="speaker">Yuna</div>
+      <div class="line">"Do you... do you like Spira so far?"</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Parts of it. The people are nice. And the scenery is amazing."</div>
+      <div class="speaker">Yuna</div>
+      <div class="line">"What about Zanarkand? Do you miss it?"</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Yeah... but hey, I've got you guys, right?"</div>
+      <div class="stage">[A beat of comfortable silence]</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>This scene accomplishes something structural: it creates the relationship breathing room that will make later sacrifices credible. When Tidus eventually fights for Yuna, for this group, for this world — the reader must believe he cares. Scenes like this one are the evidence. They are also pacing anchors: a moment of quiet human connection inside a relentless journey. <strong>Without them, the story becomes a series of plot events. With them, it becomes about people.</strong></p>
+  </div>
+
+  <h3 class="sub">The script rhythm of a climactic scene</h3>
+  <p>FFX's climactic scenes move in a recognizable pattern: escalating pressure → confrontation → release → quiet aftermath. The Bevelle temple sequence demonstrates this:</p>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <div class="acc-header">
+        Phase 1: Escalating Pressure <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <strong>Short, urgent lines.</strong> Characters interrupt each other. Information arrives in fragments. The reader is in the same position as the character — receiving incomplete information under time pressure. Sentence length drops to 4–8 words. Stage directions multiply. The physical space of the page gets busier.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header">
+        Phase 2: Confrontation <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <strong>Longer lines return.</strong> Characters speak past each other — each asserting a position without engaging the other's reality. Yuna's "I don't think I can do this alone" against Seymour's manipulation. The conflict is now explicit. This is the moment of maximum narrative tension — and the script slows down slightly to let it breathe.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header">
+        Phase 3: Release <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <strong>A single action breaks the stalemate.</strong> Often very few words. Sometimes one. "Now!" or a character's name. The release comes abruptly — not telegraphed — because that's how relief works emotionally: unexpected.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header">
+        Phase 4: Quiet Aftermath <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="acc-body"><div class="acc-inner">
+        <strong>The scene exhales.</strong> Characters assess what happened. Emotional processing happens in brief exchanges. Yuna's "I'm glad we're alive." These aftermath beats are not filler — they are how the reader metabolizes the climactic scene. Skip them, and the next scene feels disconnected. Include them, and the narrative feels like it breathes.
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 6: FORESHADOWING ═══════════════════ -->
+<section class="section" id="foreshadow">
+  <div class="section-tag">Lesson 06</div>
+  <h2>Foreshadowing &amp; Callbacks: Writing the Reread</h2>
+  <p class="lead">The best foreshadowing is invisible on first read and inevitable on second. FFX plants information that only becomes meaningful in retrospect — and the gap between invisible and inevitable is where the craft lives.</p>
+
+  <h3 class="sub">Jecht and the pattern of the father</h3>
+  <p>The entire narrative of FFX is, beneath its fantasy architecture, a story about a boy who hates his father and must come to understand him in order to exist at all. This theme is established in the opening monologue and seeded throughout via the Jecht Spheres — recorded messages from Tidus's missing father found scattered across Spira.</p>
+
+  <div class="quote-block amber">
+    <div class="quote-source">FFX — Jecht Sphere (early game)</div>
+    <div class="dialogue">
+      <div class="speaker">Jecht (on recording)</div>
+      <div class="line">"Hey, I know you're watching this. I know you're mad at me. But I'm gonna tell you what my old man always told me: someday, it'll make sense. Now get off my back about it."</div>
+      <div class="stage">[Recording ends]</div>
+      <div class="speaker">Tidus</div>
+      <div class="line">"Always had to have the last word."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>The line "someday, it'll make sense" is planted foreshadowing: on first read it sounds like dismissive parental arrogance, Jecht avoiding accountability. By the end of the story, it reads differently — Jecht knew, or suspected, the truth about what Tidus was, and couldn't say it. The "someday" wasn't deflection. It was a promise for a conversation that could only happen at the edge of death.</p>
+    <p>The callback: in the final confrontation inside Sin, when Tidus faces the monstrous form of his father, Jecht says simply: <em>"I knew you'd come."</em> The emotional weight of that line is entirely dependent on every Jecht Sphere the player encountered — each one a small deposit in an account of grief that is finally cashed.</p>
+  </div>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — Distributed Foreshadowing</div>
+      <p>Don't plant a single foreshadowing moment — build a pattern. In FFX, Jecht's characterization across eight spheres creates a cumulative portrait of a man who couldn't express love directly. By the time the final reveal lands, it doesn't require explanation — the reader has already done the interpretive work. <strong>Foreshadowing works best when it's a pattern rather than a hint.</strong> A reader who notices the pattern feels smart; a reader who doesn't notices a meaningful payoff at the end.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">The "laughing" callback</h3>
+  <p>Early in the game, Auron tells Tidus a story about Jecht: that Jecht told Braska (Yuna's father) to laugh when the going got hard — that laughing was Jecht's weapon against despair. It reads as backstory color.</p>
+  <p>In the lake scene (which we analyzed in Lesson 03), Tidus spontaneously tells Yuna to laugh when she's crying. He doesn't consciously recall Auron's story — but the writer has made Tidus his father's son in the one way that matters: the instinct to meet grief with absurdity, to laugh in the dark.</p>
+  <p>This is a callback with the attribution removed — which makes it more resonant, not less. The reader makes the connection, and that act of connection is satisfying in a way that explicit callbacks never are.</p>
+
+  <h3 class="sub">Yuna's prayer as structural echo</h3>
+  <div class="quote-block green">
+    <div class="quote-source">FFX — Kilika Island (early game)</div>
+    <div class="dialogue">
+      <div class="speaker">Yuna</div>
+      <div class="line">"I'm sorry. I'm so sorry. This is all I can do for you now... but I promise — your deaths will not be in vain. Goodbye."</div>
+      <div class="stage">[She sends the dead]</div>
+    </div>
+  </div>
+
+  <div class="quote-block green">
+    <div class="quote-source">FFX — Ending (Yuna sending the Aeons)</div>
+    <div class="dialogue">
+      <div class="speaker">Yuna</div>
+      <div class="line">"I'm sorry. I'm sorry it took so long. Thank you for everything. Goodbye."</div>
+      <div class="stage">[She sends the Aeons — her lifelong companions]</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>The same ritual. The same phrases. But the scale is entirely different: in Kilika she's sending strangers, in the ending she's sending the most intimate spiritual relationships of her life. The callback works because the words are nearly identical — but the reader carries the weight of everything that happened between the two scenes. <strong>The words stay the same; the weight changes.</strong> This is structural economy: the scene at the end borrows all its emotional freight from the established ritual of the early game.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 7: WORLD-BUILDING ═══════════════════ -->
+<section class="section" id="world">
+  <div class="section-tag">Lesson 07</div>
+  <h2>NPCs as World-builders: The Texture of a Living World</h2>
+  <p class="lead">A world feels alive not because the main characters explain it but because the peripheral characters live in it — with their own concerns, idioms, and unresolved pasts.</p>
+
+  <p>FFX's NPC Dialogue Index (the game's enormous library of background character conversations) is a secondary curriculum in world-building through voice. These characters never appear in cutscenes. They have no narrative function. And yet they carry the world's texture — its class structure, its theology, its fear, its absurdity.</p>
+
+  <h3 class="sub">Class and ideology through idiom</h3>
+  <p>Yevon's stratified society shows up most clearly in NPC dialogue, where working people speak about religion differently from nobles, and where the same doctrine sounds different depending on who is quoting it:</p>
+
+  <div class="quote-block">
+    <div class="quote-source">FFX — NPC Dialogue, Luca (dockworker)</div>
+    <div class="dialogue">
+      <div class="speaker">Dockworker NPC</div>
+      <div class="line">"You know what they say — Sin is punishment for the sins of our ancestors. So we pray, and hope the next generation gets it a little easier, ya?"</div>
+    </div>
+  </div>
+
+  <div class="quote-block purple">
+    <div class="quote-source">FFX — NPC Dialogue, Bevelle (temple official)</div>
+    <div class="dialogue">
+      <div class="speaker">Temple Monk NPC</div>
+      <div class="line">"The Teachings of Yevon are the light that guides us through this age of Sin. Any who would deviate from that light court oblivion."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>Same theology. Completely different relationship to it. The dockworker holds the doctrine lightly — "they say" is distancing language, and "ya?" invites agreement rather than demanding it. He carries Yevon as communal identity. The monk holds the doctrine as official truth — "Teachings" is capitalized in the translation, the sentence is a pronouncement rather than a reflection. The NPC dialogue is doing sociology through idiom: showing how the same belief system occupies different spaces in different classes of people who hold it.</p>
+    <p>For storywriters: <strong>one worldview is not one dialect.</strong> Any ideology, religion, or social system sounds different at different levels of the hierarchy, different degrees of commitment, different stages of doubt. Your peripheral characters should speak their relation to the world's dominant systems — not just describe those systems.</p>
+  </div>
+
+  <h3 class="sub">The grief beneath the ordinary</h3>
+  <p>What elevates FFX's NPC dialogue beyond world-building function is its persistent undercurrent of loss. Because Sin has been attacking for 1,000 years, every person alive has lost people. The NPCs carry this with them in the margins of their dialogue — not as exposition but as texture:</p>
+
+  <div class="quote-block amber">
+    <div class="quote-source">FFX — NPC Dialogue, Kilika (survivor of Sin attack)</div>
+    <div class="dialogue">
+      <div class="speaker">Villager</div>
+      <div class="line">"My husband was a fisherman. Went out three days before Sin came. I thought maybe he'd be safe out at sea. Funny thought, that."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>"Funny thought, that" — three words that carry a grief too old for weeping. The humor is a survival mechanism, a way of holding the absurdity of hope without breaking under it. This NPC will never appear again. She has no role in the plot. She exists so the world feels real — so Sin isn't just a monster, but a historical force of bereavement that has shaped how every person in this world speaks and thinks about loss.</p>
+    <p>The craft lesson: <strong>peripheral characters don't need arcs, but they need texture.</strong> Give them one specific detail of loss, desire, or belief — not backstory, not plot relevance, just specificity. Specificity is what makes a world feel inhabited rather than constructed.</p>
+  </div>
+
+  <h3 class="sub">The Cactuar sidequest: absurdity as world-breathing</h3>
+  <p>Not all NPC dialogue is tragic. The Cactuar sidequest — one of FFX's optional content arcs — features a character (Marnela) and her dialogue with ten small cactus-like beings, each of whom has a personality and name. The quest contributes nothing to the main narrative. It exists to show that Spira contains whimsy, eccentricity, tenderness for harmless things.</p>
+
+  <div class="quote-block green">
+    <div class="quote-source">FFX — Bikanel Desert (Cactuar quest)</div>
+    <div class="dialogue">
+      <div class="speaker">Marnela</div>
+      <div class="line">"Isken has always been the playful one. He likes to jump out of the sand and surprise people. He doesn't mean to hurt them. He just... he doesn't understand he's frightening."</div>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <div class="analysis-title">Craft Analysis</div>
+    <p>The tenderness here is exact and specific. Marnela knows this creature as an individual. Her mild exasperation ("he doesn't understand he's frightening") is the precise register of a person who loves something that causes inadvertent trouble. This moment has nothing to do with Sin, Yevon, or the main plot. It exists to prove the world is bigger than its tragedy — that there are small beings with personalities, small caretakers with affections, and that a 1000-year apocalypse hasn't destroyed the capacity for exactly this kind of gentle, slightly frustrated love.</p>
+  </div>
+
+  <div class="technique">
+    <div class="technique-icon">◈</div>
+    <div class="technique-body">
+      <div class="technique-label">Technique — The World Beyond the Plot</div>
+      <p>Your world exists before and after your plot. To make it feel real, write at least some of it as if the plot were not happening. Give one peripheral character a preoccupation entirely unrelated to the main conflict. Let one conversation between minor characters turn on something small — a recipe, a grievance, a small animal's habits. <strong>The world breathes because it has concerns that don't care about the protagonist's story.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LESSON 8: WORKSHOP ═══════════════════ -->
+<section class="section" id="workshop">
+  <div class="section-tag">Lesson 08</div>
+  <h2>Workshop: Applied Exercises</h2>
+  <p class="lead">These exercises are drawn directly from FFX's structural and dialogue techniques. Each can be completed in a single session.</p>
+
+  <div class="workshop">
+    <div class="workshop-title">Exercise 01 — The Frame</div>
+    <h3>The Retrospective Monologue</h3>
+    <ul>
+      <li>Write a 100-word opening from a narrator who has survived the story's climax.</li>
+      <li>They must speak from emotional retrospect without naming any plot events.</li>
+      <li>Plant exactly one line that means something different at the end than it does at the beginning.</li>
+      <li><strong>Target:</strong> A reader should feel the weight of an ending without knowing what it is.</li>
+    </ul>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Exercise 02 — Voice</div>
+    <h3>The Same Scene, Three Characters</h3>
+    <ul>
+      <li>Choose a situation: someone has just arrived with bad news.</li>
+      <li>Write three versions of the same scene, each from the perspective of a different character with a different emotional reflex.</li>
+      <li>Cover all speaker attributions. If the voice isn't clear, the exercise isn't done.</li>
+      <li><strong>Target:</strong> Each version should feel like a different genre — same facts, different register.</li>
+    </ul>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Exercise 03 — Subtext</div>
+    <h3>The Thing That Cannot Be Said</h3>
+    <ul>
+      <li>Identify your character's deepest emotional truth in a given scene. Write it as a direct statement.</li>
+      <li>Now delete that statement entirely. Write the scene around the hole it leaves.</li>
+      <li>The character should talk about anything except what they actually mean.</li>
+      <li><strong>Target:</strong> A reader who does not know what was deleted should still feel exactly what the character cannot say.</li>
+    </ul>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Exercise 04 — Exposition</div>
+    <h3>The Resistant Learner</h3>
+    <ul>
+      <li>Identify one piece of world-building in your story that is currently delivered in narration or lecture.</li>
+      <li>Invent a situation in which a character needs this information urgently — and receives it imperfectly, from someone who resents having to explain.</li>
+      <li>The explainer should reveal, through how they explain, something about their own relationship to the information.</li>
+      <li><strong>Target:</strong> The same information should feel twice as significant because of who is receiving it and why.</li>
+    </ul>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Exercise 05 — Foreshadowing</div>
+    <h3>The Pattern Across Three Scenes</h3>
+    <ul>
+      <li>Pick a character truth that is not revealed until late in your story.</li>
+      <li>Write three early scenes that foreshadow it — but each planted so naturally that a first-time reader cannot see the thread.</li>
+      <li>The three scenes should each approach the truth from a different angle: action, idiom, and what the character ignores.</li>
+      <li><strong>Target:</strong> On reread, a reader should feel the foreshadowing was inevitable. On first read, it should be invisible.</li>
+    </ul>
+  </div>
+
+  <div class="workshop">
+    <div class="workshop-title">Exercise 06 — World-building via Periphery</div>
+    <h3>The NPC Who Carries History</h3>
+    <ul>
+      <li>Write a conversation between two minor characters who never appear in your main plot.</li>
+      <li>They must discuss something mundane. Through their idiom, reveal: (1) their class position in the world, (2) their relationship to the dominant ideology or religion, (3) one specific loss they carry.</li>
+      <li>The conversation should be under 150 words and contain no exposition — only texture.</li>
+      <li><strong>Target:</strong> A reader should understand the world's emotional climate without being told anything directly.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════ CLOSING ═══════════════════ -->
+<section class="section" id="closing">
+  <div class="section-tag">Conclusion</div>
+  <h2>What FFX Teaches Storywriters</h2>
+  <p>The script of Final Fantasy X is not great because it is a game. It is great because it solves the same problems every storywriter faces: how to open before you've earned the trust, how to build a world without losing the story inside it, how to write characters who feel like different people rather than different mouths for the same voice, how to deliver information as if it matters, how to pace grief.</p>
+  <p>The specific solutions — the retrospective frame, the resistant learner, the voice fingerprint, the distributed foreshadowing, the subtext built from what cannot be said — are not exclusive to interactive media. They are tools. Any medium, any genre, any length: these techniques translate.</p>
+  <p>The most important thing the script demonstrates is harder to formalize: it takes its emotional stakes seriously. It does not hedge. When Yuna says goodbye to her Aeons, the scene earns that weight because 40 hours of writing have built it. When Tidus tells Yuna he wasn't real but the good times were, the line doesn't need explanation because the architecture already holds it.</p>
+
+  <p style="color:var(--accent2);font-style:italic;margin-top:2rem;font-size:1.05rem;">
+    The craft goal, in every medium, is the same: build the architecture so carefully that, when the moment comes, the simplest words carry the most weight.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <p>Craft &amp; Script: Narrative Lessons from Final Fantasy X</p>
+  <p style="margin-top:0.5rem;">For storywriters. Educational analysis; all script excerpts cited from their original source.</p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Accordion
+  document.querySelectorAll('.acc-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const body = item.querySelector('.acc-body');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.acc-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.acc-body').style.maxHeight = '0';
+      });
+
+      // Open clicked if was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Millionaire Fastlane — Core Concepts</title>
+<style>
+  :root {
+    --fastlane: #f5a623;
+    --fastlane-dark: #c47d0e;
+    --slowlane: #4a90d9;
+    --slowlane-dark: #2c6fad;
+    --sidewalk: #e05b5b;
+    --sidewalk-dark: #b03030;
+    --bg: #0a0a0f;
+    --bg2: #12121a;
+    --bg3: #1a1a28;
+    --text: #e8e8f0;
+    --text-muted: #8888aa;
+    --accent: #f5a623;
+    --border: #2a2a3a;
+    --card-bg: #16161f;
+    --green: #4caf82;
+    --purple: #9b59b6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 58px;
+  }
+  nav .logo {
+    font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px;
+    color: var(--fastlane); white-space: nowrap; margin-right: auto;
+  }
+  nav a {
+    color: var(--text-muted); text-decoration: none; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: var(--fastlane); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(245,166,35,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .road-bg {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+    background: linear-gradient(to top, rgba(245,166,35,0.04), transparent);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(245,166,35,0.12);
+    border: 1px solid rgba(245,166,35,0.3);
+    color: var(--fastlane);
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.8rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 900; line-height: 1.05; letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--fastlane); }
+  .hero p.lead {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-muted); max-width: 640px; margin: 0 auto 2.5rem;
+  }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    padding: 0.8rem 2rem; border-radius: 8px; font-weight: 700;
+    font-size: 0.9rem; cursor: pointer; text-decoration: none;
+    transition: all 0.2s; display: inline-block; letter-spacing: 0.3px;
+  }
+  .btn-primary {
+    background: var(--fastlane); color: #000;
+    border: 2px solid var(--fastlane);
+  }
+  .btn-primary:hover { background: var(--fastlane-dark); border-color: var(--fastlane-dark); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 2px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--fastlane); color: var(--fastlane); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border);
+    width: 100%; max-width: 700px;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 900; color: var(--fastlane); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.3rem; }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--fastlane); margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
+    letter-spacing: -1px; line-height: 1.1;
+  }
+  .section-sub {
+    margin-top: 0.8rem; color: var(--text-muted);
+    font-size: 1.05rem; max-width: 560px; margin-left: auto; margin-right: auto;
+  }
+
+  /* ROADMAPS */
+  #roadmaps { background: var(--bg2); }
+  .roadmap-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .roadmap-card {
+    background: var(--card-bg); border-radius: 16px;
+    border: 2px solid var(--border);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .roadmap-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .roadmap-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .roadmap-card.sidewalk::before { background: var(--sidewalk); }
+  .roadmap-card.slowlane::before { background: var(--slowlane); }
+  .roadmap-card.fastlane::before { background: var(--fastlane); }
+  .roadmap-card.fastlane { border-color: rgba(245,166,35,0.3); }
+
+  .road-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .sidewalk .road-icon { background: rgba(224,91,91,0.15); }
+  .slowlane .road-icon { background: rgba(74,144,217,0.15); }
+  .fastlane .road-icon { background: rgba(245,166,35,0.15); }
+
+  .roadmap-card h3 {
+    font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;
+  }
+  .sidewalk h3 { color: var(--sidewalk); }
+  .slowlane h3 { color: var(--slowlane); }
+  .fastlane h3 { color: var(--fastlane); }
+
+  .roadmap-card .tagline {
+    font-size: 0.85rem; color: var(--text-muted); font-style: italic;
+    margin-bottom: 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border);
+  }
+  .roadmap-card ul { list-style: none; }
+  .roadmap-card ul li {
+    padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-muted);
+    display: flex; align-items: flex-start; gap: 0.5rem;
+  }
+  .roadmap-card ul li::before { content: '→'; flex-shrink: 0; margin-top: 0.05rem; }
+  .sidewalk ul li::before { color: var(--sidewalk); }
+  .slowlane ul li::before { color: var(--slowlane); }
+  .fastlane ul li::before { color: var(--fastlane); }
+
+  .verdict {
+    margin-top: 1.5rem; padding: 0.8rem 1rem; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .sidewalk .verdict { background: rgba(224,91,91,0.1); color: var(--sidewalk); }
+  .slowlane .verdict { background: rgba(74,144,217,0.1); color: var(--slowlane); }
+  .fastlane .verdict { background: rgba(245,166,35,0.1); color: var(--fastlane); }
+
+  /* WEALTH EQUATION */
+  #equation { background: var(--bg); }
+  .eq-container {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: 3rem; text-align: center;
+    max-width: 800px; margin: 0 auto;
+  }
+  .eq-formula {
+    font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 900;
+    letter-spacing: -0.5px; margin: 2rem 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .eq-term {
+    background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.3);
+    color: var(--fastlane); padding: 0.4rem 1rem; border-radius: 8px;
+  }
+  .eq-op { color: var(--text-muted); font-size: 1.5rem; }
+  .eq-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 2rem; text-align: left;
+  }
+  .eq-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem;
+  }
+  .eq-card-title { font-weight: 800; color: var(--fastlane); margin-bottom: 0.4rem; font-size: 0.9rem; }
+  .eq-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* CENTS */
+  #cents { background: var(--bg2); }
+  .cents-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .cents-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.8rem; text-align: center;
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  .cents-card:hover { border-color: var(--fastlane); transform: translateY(-3px); }
+  .cents-letter {
+    font-size: 4rem; font-weight: 900; line-height: 1;
+    background: linear-gradient(135deg, var(--fastlane), var(--fastlane-dark));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 0.5rem;
+  }
+  .cents-word { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .cents-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .cents-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .cents-check {
+    margin-top: 1rem; padding: 0.5rem; background: rgba(245,166,35,0.08);
+    border-radius: 6px; font-size: 0.78rem; color: var(--fastlane); font-weight: 600;
+  }
+
+  /* LAW OF EFFECTION */
+  #effection { background: var(--bg); }
+  .effection-hero {
+    background: linear-gradient(135deg, var(--card-bg), var(--bg2));
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 3rem; position: relative; overflow: hidden;
+  }
+  .effection-hero::before {
+    content: '';
+    position: absolute; top: -50%; right: -10%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .effection-formula {
+    font-size: clamp(1.5rem, 5vw, 3.5rem); font-weight: 900;
+    text-align: center; margin: 2rem 0; line-height: 1.2;
+  }
+  .effection-formula .big { color: var(--fastlane); }
+  .effection-examples {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; margin-top: 2rem;
+  }
+  .effection-ex {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem;
+  }
+  .effection-ex .num { font-size: 1.8rem; font-weight: 900; color: var(--fastlane); }
+  .effection-ex p { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* MONEY TREES */
+  #moneytrees { background: var(--bg2); }
+  .trees-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.2rem;
+  }
+  .tree-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.8rem;
+    transition: all 0.2s;
+  }
+  .tree-card:hover { border-color: var(--green); transform: translateY(-3px); }
+  .tree-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .tree-card h4 { font-size: 1.05rem; font-weight: 800; color: var(--green); margin-bottom: 0.5rem; }
+  .tree-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .tree-examples {
+    margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tree-ex-tag {
+    background: rgba(76,175,130,0.1); color: var(--green);
+    font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* PRODUCER vs CONSUMER */
+  #producer { background: var(--bg); }
+  .pvsc {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    max-width: 900px; margin: 0 auto;
+  }
+  .pvsc-col {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem; overflow: hidden; position: relative;
+  }
+  .pvsc-col::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .pvsc-col.producer::before { background: var(--fastlane); }
+  .pvsc-col.consumer::before { background: var(--sidewalk); }
+  .pvsc-col h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 1.2rem; }
+  .producer h3 { color: var(--fastlane); }
+  .consumer h3 { color: var(--sidewalk); }
+  .pvsc-col ul { list-style: none; }
+  .pvsc-col ul li {
+    padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.88rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .pvsc-col ul li:last-child { border-bottom: none; }
+  .check { color: var(--fastlane); }
+  .cross { color: var(--sidewalk); }
+
+  /* CHAPTERS */
+  #insights { background: var(--bg2); }
+  .insights-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .insight-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.5rem;
+    transition: all 0.2s;
+  }
+  .insight-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-2px); }
+  .insight-num {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--fastlane); margin-bottom: 0.6rem;
+  }
+  .insight-card h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.3; }
+  .insight-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .insight-quote {
+    margin-top: 0.8rem; padding: 0.7rem; background: rgba(245,166,35,0.05);
+    border-left: 3px solid var(--fastlane); border-radius: 0 6px 6px 0;
+    font-size: 0.8rem; color: var(--text-muted); font-style: italic;
+  }
+
+  /* TIME */
+  #time { background: var(--bg); }
+  .time-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem; margin-top: 2rem;
+  }
+  .time-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.5rem; text-align: center;
+  }
+  .time-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .time-card h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .time-card p { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* FASTLANE INTERSTATES */
+  #interstates { background: var(--bg2); }
+  .interstate-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .interstate-card {
+    background: var(--card-bg); border: 2px solid var(--border);
+    border-radius: 18px; padding: 2rem; position: relative; overflow: hidden;
+    transition: all 0.2s;
+  }
+  .interstate-card:hover { border-color: var(--fastlane); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+  .interstate-num {
+    position: absolute; top: -10px; right: 1.5rem;
+    font-size: 5rem; font-weight: 900; color: rgba(245,166,35,0.06);
+    line-height: 1; pointer-events: none;
+  }
+  .interstate-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--fastlane); margin-bottom: 0.8rem; }
+  .interstate-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+  .interstate-tags { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .i-tag {
+    background: rgba(245,166,35,0.1); color: var(--fastlane);
+    font-size: 0.72rem; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;
+  }
+
+  /* GUIDELINES */
+  #guidelines { background: var(--bg); }
+  .guidelines-list {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.7rem;
+  }
+  .guideline {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.2rem;
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    font-size: 0.87rem; transition: all 0.15s;
+  }
+  .guideline:hover { border-color: rgba(245,166,35,0.3); }
+  .g-num {
+    min-width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(245,166,35,0.1); color: var(--fastlane);
+    font-size: 0.72rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 0.05rem;
+  }
+  .guideline span { color: var(--text-muted); line-height: 1.5; }
+
+  /* QUOTES */
+  .quote-section { background: var(--bg2); padding: 6rem 2rem; }
+  .quotes-track {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .quote-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem; position: relative;
+  }
+  .quote-card::before {
+    content: '"'; font-size: 5rem; line-height: 0.8; color: rgba(245,166,35,0.15);
+    position: absolute; top: 1.5rem; left: 1.5rem; font-family: Georgia, serif;
+  }
+  .quote-card blockquote {
+    font-size: 0.95rem; color: var(--text); line-height: 1.7;
+    padding-top: 1.5rem; font-style: italic; position: relative; z-index: 1;
+  }
+  .quote-attr { margin-top: 1rem; font-size: 0.75rem; color: var(--fastlane); font-weight: 700; }
+
+  /* CTA */
+  .cta { background: var(--bg); padding: 6rem 2rem; text-align: center; }
+  .cta-box {
+    max-width: 700px; margin: 0 auto;
+    background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(245,166,35,0.03));
+    border: 2px solid rgba(245,166,35,0.3); border-radius: 24px; padding: 4rem;
+  }
+  .cta-box h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1rem; }
+  .cta-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--text-muted);
+  }
+
+  /* MISC */
+  .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  .alert-box {
+    background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 12px; padding: 1.5rem; margin: 2rem 0;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .alert-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .alert-box p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+  .alert-box strong { color: var(--fastlane); }
+
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .pvsc { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.2rem; }
+    .hero { padding: 5rem 1.2rem 3rem; }
+    .hero-stats { gap: 2rem; }
+  }
+
+  /* SCROLL ANIMATIONS */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .tab-btn {
+    padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text-muted); font-size: 0.85rem; font-weight: 600;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .tab-btn.active { background: var(--fastlane); color: #000; border-color: var(--fastlane); }
+  .tab-btn:hover:not(.active) { border-color: var(--fastlane); color: var(--fastlane); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed; top: 58px; left: 0; right: 0; height: 2px;
+    background: rgba(255,255,255,0.05); z-index: 99;
+  }
+  .progress-fill {
+    height: 100%; background: var(--fastlane);
+    width: 0%; transition: width 0.1s linear;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .compare-table th, .compare-table td {
+    padding: 0.9rem 1rem; text-align: left; font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table th {
+    font-weight: 700; font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-muted); background: var(--bg2);
+  }
+  .compare-table th:nth-child(2) { color: var(--sidewalk); }
+  .compare-table th:nth-child(3) { color: var(--slowlane); }
+  .compare-table th:nth-child(4) { color: var(--fastlane); }
+  .compare-table tr:hover { background: rgba(255,255,255,0.02); }
+  .compare-table td.s-val { color: var(--sidewalk); font-weight: 600; }
+  .compare-table td.sl-val { color: var(--slowlane); font-weight: 600; }
+  .compare-table td.f-val { color: var(--fastlane); font-weight: 600; }
+  .compare-table-wrap {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">⚡ Fastlane</div>
+  <a href="#roadmaps">Roadmaps</a>
+  <a href="#equation">Wealth Equation</a>
+  <a href="#cents">CENTS</a>
+  <a href="#effection">Law of Effection</a>
+  <a href="#moneytrees">Money Trees</a>
+  <a href="#interstates">Interstates</a>
+  <a href="#insights">Key Insights</a>
+  <a href="#guidelines">40 Guidelines</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="road-bg"></div>
+  <div class="hero-tag">Based on MJ DeMarco's Book</div>
+  <h1>The <span>Millionaire</span><br>Fastlane</h1>
+  <p class="lead">Crack the code to wealth and live rich for a lifetime. Get rich slow is a broken system — here's the mathematical and psychological framework to escape it.</p>
+  <div class="hero-buttons">
+    <a href="#roadmaps" class="btn btn-primary">Explore the Roadmaps</a>
+    <a href="#cents" class="btn btn-outline">The CENTS Framework</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Roadmaps to wealth</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">CENTS commandments</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Money tree types</div></div>
+    <div class="stat"><div class="stat-num">40</div><div class="stat-label">Fastlane guidelines</div></div>
+  </div>
+</section>
+
+<!-- INTRO ALERT -->
+<div style="background:var(--bg2); padding:0 2rem;">
+  <div style="max-width:1100px; margin:0 auto; padding: 2rem 0;">
+    <div class="alert-box">
+      <div class="alert-icon">⚡</div>
+      <p><strong>The core premise:</strong> "Get Rich Slow" — the idea of working 40+ years, maxing your 401(k), living frugally and hoping the stock market rewards you in your 60s — is a <strong>mathematically flawed</strong> system that trades the best years of your life for money you can't fully enjoy. The Fastlane is an alternative: a <strong>business-driven, leverage-based</strong> system that can produce extraordinary wealth in years, not decades. It requires producing value for millions, not punching a clock.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAPS -->
+<section id="roadmaps">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The Three Paths</div>
+      <h2>Choose Your Roadmap</h2>
+      <p class="section-sub">Every person travels one of three financial roadmaps. Most are on the Sidewalk or Slowlane by default.</p>
+    </div>
+
+    <div class="roadmap-grid fade-in">
+      <!-- SIDEWALK -->
+      <div class="roadmap-card sidewalk">
+        <div class="road-icon">🚧</div>
+        <h3>The Sidewalk</h3>
+        <p class="tagline">"Live for today, damn tomorrow."</p>
+        <ul>
+          <li>No financial plan or savings</li>
+          <li>Instant gratification drives every decision</li>
+          <li>Wealth = image (fancy cars, clothes, gadgets)</li>
+          <li>Income always spent, often in debt</li>
+          <li>Blames others, "one event" away from poverty</li>
+          <li>Poor money mindset baked into identity</li>
+          <li>Lottery tickets as a financial plan</li>
+        </ul>
+        <div class="verdict">❌ Destination: Poverty &amp; dependence</div>
+      </div>
+
+      <!-- SLOWLANE -->
+      <div class="roadmap-card slowlane">
+        <div class="road-icon">🐢</div>
+        <h3>The Slowlane</h3>
+        <p class="tagline">"Get a good job, save hard, invest wisely, retire at 65."</p>
+        <ul>
+          <li>Trade time for money (W-2 job)</li>
+          <li>Rely on compound interest and market returns</li>
+          <li>Limited leverage: one person, one job</li>
+          <li>No control over income or value</li>
+          <li>Sacrifices youth &amp; health for future money</li>
+          <li>Rich at 65 — if markets cooperate</li>
+          <li>Follows conventional financial wisdom</li>
+        </ul>
+        <div class="verdict">⚠️ Destination: Mediocrity, possibly comfort</div>
+      </div>
+
+      <!-- FASTLANE -->
+      <div class="roadmap-card fastlane">
+        <div class="road-icon">🚀</div>
+        <h3>The Fastlane</h3>
+        <p class="tagline">"Serve millions, make millions — then enjoy it while you're young."</p>
+        <ul>
+          <li>Build scalable systems &amp; businesses</li>
+          <li>Controllable, unlimited leverage</li>
+          <li>Income decoupled from personal time</li>
+          <li>Focused on creating massive value</li>
+          <li>Wealth in years, not decades</li>
+          <li>Freedom: Family, Fitness, Finance</li>
+          <li>Process-driven, long-term thinking</li>
+        </ul>
+        <div class="verdict">✅ Destination: Wealth &amp; financial freedom</div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div style="margin-top: 3rem;" class="fade-in">
+      <h3 style="margin-bottom:1.5rem; font-size:1.3rem; font-weight:800;">Side-by-Side Comparison</h3>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Sidewalk</th>
+              <th>Slowlane</th>
+              <th>Fastlane</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary Income</td><td class="s-val">Debt / Wage</td><td class="sl-val">Salary + Investments</td><td class="f-val">Business Systems</td></tr>
+            <tr><td>Wealth Vehicle</td><td class="s-val">None / Lottery</td><td class="sl-val">Market (uncontrolled)</td><td class="f-val">Own business / assets</td></tr>
+            <tr><td>Leverage Type</td><td class="s-val">None</td><td class="sl-val">ULL (Uncontrollable Limited)</td><td class="f-val">CUL (Controllable Unlimited)</td></tr>
+            <tr><td>Time Horizon</td><td class="s-val">Now (instant)</td><td class="sl-val">40+ years</td><td class="f-val">5–20 years</td></tr>
+            <tr><td>Income Ceiling</td><td class="s-val">Very low</td><td class="sl-val">Salary cap</td><td class="f-val">Unlimited</td></tr>
+            <tr><td>Control</td><td class="s-val">None</td><td class="sl-val">Very little</td><td class="f-val">High</td></tr>
+            <tr><td>Risk</td><td class="s-val">Very high (poverty)</td><td class="sl-val">Market risk, time risk</td><td class="f-val">Execution risk</td></tr>
+            <tr><td>Mindset</td><td class="s-val">Consumer / Victim</td><td class="sl-val">Employee / Saver</td><td class="f-val">Producer / Entrepreneur</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEALTH EQUATION -->
+<section id="equation">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The Math of Wealth</div>
+      <h2>The Fastlane Wealth Equation</h2>
+      <p class="section-sub">Wealth isn't built by saving pennies — it's built by maximizing two levers in a simple equation.</p>
+    </div>
+
+    <div class="eq-container fade-in">
+      <p style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; letter-spacing:2px;">The Fastlane Formula</p>
+      <div class="eq-formula">
+        <span class="eq-term">Wealth</span>
+        <span class="eq-op">=</span>
+        <span class="eq-term">Net Profit</span>
+        <span class="eq-op">+</span>
+        <span class="eq-term">Asset Value</span>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.9rem; max-width:500px; margin:0 auto;">
+        Where <strong style="color:var(--text)">Net Profit = Units Sold × Profit Per Unit</strong> and <strong style="color:var(--text)">Asset Value = Net Profit × Industry Multiple</strong>
+      </p>
+
+      <div class="eq-cards">
+        <div class="eq-card">
+          <div class="eq-card-title">Units Sold (Scale)</div>
+          <p>How many people do you serve? Serving 10 people vs. 10 million changes everything. The Law of Effection lives here.</p>
+        </div>
+        <div class="eq-card">
+          <div class="eq-card-title">Profit Per Unit (Magnitude)</div>
+          <p>Price minus cost per transaction. Your pricing power and margins directly multiply your scale.</p>
+        </div>
+        <div class="eq-card">
+          <div class="eq-card-title">Industry Multiple</div>
+          <p>What buyers will pay for a stream of earnings (e.g. 3× to 25×). Build to sell and this multiplier unlocks massive paydays.</p>
+        </div>
+        <div class="eq-card">
+          <div class="eq-card-title">Asset Value</div>
+          <p>The market value of your business or asset. A $500K/yr business at 10× multiple = $5M payday. This is where generational wealth lives.</p>
+        </div>
+      </div>
+
+      <div class="alert-box" style="margin-top:2rem; text-align:left;">
+        <div class="alert-icon">🐢</div>
+        <p><strong>Slowlane vs Fastlane comparison:</strong> The Slowlane wealth equation is <strong style="color:var(--slowlane)">Wealth = Hourly Rate × Hours Worked + Market Returns</strong>. Your income is capped by your hours (limited) and market performance (uncontrollable). The Fastlane removes both caps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTS -->
+<section id="cents">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The 5 Commandments</div>
+      <h2>The CENTS Framework</h2>
+      <p class="section-sub">Any legitimate Fastlane business must satisfy these five commandments. Violate even one and you risk building on sand.</p>
+    </div>
+
+    <div class="cents-grid fade-in">
+      <div class="cents-card">
+        <div class="cents-letter">C</div>
+        <div class="cents-word">Commandment of</div>
+        <h4>Control</h4>
+        <p>You must be the architect of your plan — not a passenger. If someone else controls your income (employer, franchisor, platform), you're vulnerable to being shut down at any moment.</p>
+        <div class="cents-check">Own the system, don't just participate in it</div>
+      </div>
+      <div class="cents-card">
+        <div class="cents-letter">E</div>
+        <div class="cents-word">Commandment of</div>
+        <h4>Entry</h4>
+        <p>If anyone can do it with minimal effort, everyone will. Easy entry = commoditized market = price wars = low margins. True fastlanes have barriers to entry that protect your position.</p>
+        <div class="cents-check">High barriers protect your market position</div>
+      </div>
+      <div class="cents-card">
+        <div class="cents-letter">N</div>
+        <div class="cents-word">Commandment of</div>
+        <h4>Need</h4>
+        <p>Money is a reflection of the value you create for others. Business ideas must solve a real problem, fill a real need, or satisfy a desire. "Chase passion" is bad advice — chase needs.</p>
+        <div class="cents-check">Solve real problems for real people</div>
+      </div>
+      <div class="cents-card">
+        <div class="cents-letter">T</div>
+        <div class="cents-word">Commandment of</div>
+        <h4>Time</h4>
+        <p>Your business must eventually work without your constant presence. If you stop working and income stops, you have a job — not a Fastlane. Build systems that run independently.</p>
+        <div class="cents-check">Income must be separable from your time</div>
+      </div>
+      <div class="cents-card">
+        <div class="cents-letter">S</div>
+        <div class="cents-word">Commandment of</div>
+        <h4>Scale</h4>
+        <p>Your income potential is limited by the size of your addressable market. A local hair salon can never create Fastlane wealth. Your business must be able to reach millions.</p>
+        <div class="cents-check">Reach must extend beyond local geography</div>
+      </div>
+    </div>
+
+    <div class="alert-box fade-in" style="margin-top:2.5rem;">
+      <div class="alert-icon">💡</div>
+      <p><strong>The CENTS audit:</strong> Before investing time and money into a business, run it through every commandment. A great idea that fails the Commandment of Scale (e.g., selling homemade candles at a craft fair) cannot become a Fastlane. A great idea that fails the Commandment of Control (e.g., selling exclusively on someone else's platform) can be killed overnight with a policy change.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LAW OF EFFECTION -->
+<section id="effection">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The Universal Law</div>
+      <h2>The Law of Effection</h2>
+      <p class="section-sub">The richest people in the world are those who have touched the most lives. Wealth is a direct byproduct of impact — at scale.</p>
+    </div>
+
+    <div class="effection-hero fade-in">
+      <p style="text-align:center; color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; letter-spacing:2px;">The Core Law</p>
+      <div class="effection-formula">
+        Affect <span class="big">Millions</span><br>Make <span class="big">Millions</span>
+      </div>
+      <p style="text-align:center; color:var(--text-muted); max-width:600px; margin:0 auto; font-size:0.95rem;">
+        The more lives you impact in scale and magnitude, the richer you become. This is why software, media, and platform businesses can make founders billionaires — they serve millions simultaneously.
+      </p>
+
+      <div class="effection-examples">
+        <div class="effection-ex">
+          <div class="num">1M</div>
+          <p>Users paying $10/mo = $10M ARR. Serve 10M = $100M/yr. Scale is everything.</p>
+        </div>
+        <div class="effection-ex">
+          <div class="num">$1</div>
+          <p>Profit per user × 100M users = $100M. Magnitude × Scale = Wealth.</p>
+        </div>
+        <div class="effection-ex">
+          <div class="num">0×</div>
+          <p>Serving only yourself or a handful of people produces zero Fastlane wealth regardless of hours worked.</p>
+        </div>
+        <div class="effection-ex">
+          <div class="num">∞</div>
+          <p>Software, content, systems can serve unlimited people with near-zero marginal cost. That's infinite scale potential.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem; padding: 1.5rem; background:var(--bg); border-radius:12px; border:1px solid var(--border);">
+        <p style="font-size:0.9rem; color:var(--text-muted); text-align:center;">
+          <strong style="color:var(--text)">Why does a doctor make less than a tech founder?</strong> A doctor can only see ~20 patients a day — limited by hours and physical presence. A tech founder's app can serve 20 million people simultaneously. It's not effort that creates wealth — it's <em>reach</em>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY TREES -->
+<section id="moneytrees">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Passive Income Systems</div>
+      <h2>The Five Money Tree Seedlings</h2>
+      <p class="section-sub">A money tree is a business system that generates income independent of your time. Plant these seeds — water them — then harvest for life.</p>
+    </div>
+
+    <div class="trees-grid fade-in">
+      <div class="tree-card">
+        <div class="tree-icon">🏢</div>
+        <h4>Rental Systems</h4>
+        <p>Rent out assets — real estate, equipment, intellectual property — so money works for you. Buy once, collect forever.</p>
+        <div class="tree-examples">
+          <span class="tree-ex-tag">Rental properties</span>
+          <span class="tree-ex-tag">Storage units</span>
+          <span class="tree-ex-tag">IP licensing</span>
+          <span class="tree-ex-tag">Equipment rental</span>
+        </div>
+      </div>
+      <div class="tree-card">
+        <div class="tree-icon">💻</div>
+        <h4>Computer / Software Systems</h4>
+        <p>Software runs 24/7 with zero additional labor. Build once, sell millions of times. The ultimate passive money tree.</p>
+        <div class="tree-examples">
+          <span class="tree-ex-tag">SaaS products</span>
+          <span class="tree-ex-tag">Mobile apps</span>
+          <span class="tree-ex-tag">Scripts / Tools</span>
+          <span class="tree-ex-tag">Platforms</span>
+        </div>
+      </div>
+      <div class="tree-card">
+        <div class="tree-icon">📝</div>
+        <h4>Content Systems</h4>
+        <p>Books, courses, articles, videos — create once, earn indefinitely. Content compounds over time and reaches global audiences.</p>
+        <div class="tree-examples">
+          <span class="tree-ex-tag">Books</span>
+          <span class="tree-ex-tag">Online courses</span>
+          <span class="tree-ex-tag">YouTube channels</span>
+          <span class="tree-ex-tag">Newsletters</span>
+        </div>
+      </div>
+      <div class="tree-card">
+        <div class="tree-icon">🌐</div>
+        <h4>Distribution Systems</h4>
+        <p>Networks, pipelines, and channels that move goods and information at scale. Distribution beats innovation in most markets.</p>
+        <div class="tree-examples">
+          <span class="tree-ex-tag">Marketplaces</span>
+          <span class="tree-ex-tag">Affiliate networks</span>
+          <span class="tree-ex-tag">Franchises</span>
+          <span class="tree-ex-tag">E-commerce</span>
+        </div>
+      </div>
+      <div class="tree-card">
+        <div class="tree-icon">👥</div>
+        <h4>Human Resource Systems</h4>
+        <p>Teams multiply your productivity. A business run by capable employees operates and grows without your daily presence.</p>
+        <div class="tree-examples">
+          <span class="tree-ex-tag">Managed businesses</span>
+          <span class="tree-ex-tag">Agencies</span>
+          <span class="tree-ex-tag">Staffing firms</span>
+          <span class="tree-ex-tag">Outsourcing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-box fade-in" style="margin-top:2.5rem;">
+      <div class="alert-icon">🌱</div>
+      <p><strong>The key insight:</strong> A money tree system takes years to plant and grow, but once mature, it bears fruit indefinitely. The Slowlaner trades hours for dollars forever. The Fastlaner builds systems that generate dollars without hours — then enjoys the harvest. The best systems combine multiple money tree types simultaneously.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCER vs CONSUMER -->
+<section id="producer">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The Mindset Shift</div>
+      <h2>Producer vs. Consumer</h2>
+      <p class="section-sub">The Fastlane starts with a fundamental identity shift. You must stop consuming and start producing.</p>
+    </div>
+
+    <div class="pvsc fade-in">
+      <div class="pvsc-col producer">
+        <h3>⚡ The Producer Mindset</h3>
+        <ul>
+          <li><span class="check">✓</span> <span>Sees a new gadget and thinks: "How can I build something like this?"</span></li>
+          <li><span class="check">✓</span> <span>Reads self-help books and immediately implements lessons</span></li>
+          <li><span class="check">✓</span> <span>Owns businesses rather than just working in them</span></li>
+          <li><span class="check">✓</span> <span>Creates systems that generate income passively</span></li>
+          <li><span class="check">✓</span> <span>Invests in assets, not liabilities</span></li>
+          <li><span class="check">✓</span> <span>Lives below means to reinvest capital</span></li>
+          <li><span class="check">✓</span> <span>Solves problems for others at scale</span></li>
+          <li><span class="check">✓</span> <span>Sees money as a byproduct of providing value</span></li>
+        </ul>
+      </div>
+      <div class="pvsc-col consumer">
+        <h3>💸 The Consumer Mindset</h3>
+        <ul>
+          <li><span class="cross">✗</span> <span>Sees a new gadget and immediately buys it</span></li>
+          <li><span class="cross">✗</span> <span>Buys self-help books to feel productive</span></li>
+          <li><span class="cross">✗</span> <span>Works in businesses owned by others</span></li>
+          <li><span class="cross">✗</span> <span>Trades every hour of life for an hourly rate</span></li>
+          <li><span class="cross">✗</span> <span>Invests in cars, fashion, and status symbols</span></li>
+          <li><span class="cross">✗</span> <span>Spends 110% of income to maintain appearances</span></li>
+          <li><span class="cross">✗</span> <span>Dependent on a single employer for survival</span></li>
+          <li><span class="cross">✗</span> <span>Sees money as something that must be chased</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="max-width:900px; margin: 2rem auto 0;" class="fade-in">
+      <div class="alert-box">
+        <div class="alert-icon">🔑</div>
+        <p><strong>The Producer Equation:</strong> Every time you interact with a business as a customer, ask yourself: "How can I be on the other side of this transaction?" The consumer pays the producer. The producer pockets the consumer's payment. Wealth flows from consumers to producers — every transaction, every day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY INSIGHTS -->
+<section id="insights">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Chapter-by-Chapter</div>
+      <h2>Core Insights &amp; Concepts</h2>
+      <p class="section-sub">The most powerful ideas from each section of the book, distilled to their essence.</p>
+    </div>
+
+    <div class="tabs fade-in">
+      <button class="tab-btn active" onclick="showTab('tab-mindset')">Mindset</button>
+      <button class="tab-btn" onclick="showTab('tab-sidewalk')">Sidewalk</button>
+      <button class="tab-btn" onclick="showTab('tab-slowlane')">Slowlane</button>
+      <button class="tab-btn" onclick="showTab('tab-fastlane')">Fastlane</button>
+      <button class="tab-btn" onclick="showTab('tab-vehicle')">Your Vehicle</button>
+      <button class="tab-btn" onclick="showTab('tab-speed')">Speed</button>
+    </div>
+
+    <!-- MINDSET TAB -->
+    <div class="tab-content active" id="tab-mindset">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-num">Foundation</div>
+          <h4>Wealth Is a Formula, Not Luck</h4>
+          <p>Wealth is a mathematical process driven by decisions and execution. It has a formula that can be understood, studied, and applied. Most people think wealth is random — it isn't.</p>
+          <div class="insight-quote">"Wealth is a process, not an event."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 2</div>
+          <h4>Stop Blaming, Start Owning</h4>
+          <p>The Fastlane begins when you stop blaming the economy, your boss, your upbringing, and start taking full responsibility for your financial outcomes. Victimhood is the enemy of wealth.</p>
+          <div class="insight-quote">"Hitchhikers relinquish control of their lives."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 3</div>
+          <h4>Your Roadmap Is Your Financial GPS</h4>
+          <p>Your financial roadmap is the internalized set of beliefs guiding all your money decisions. If your roadmap is flawed, no amount of intelligence or hard work will lead you to wealth.</p>
+          <div class="insight-quote">"The Sidewalk is a plan for poverty."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Core Concept</div>
+          <h4>Wealth Is Freedom, Not Things</h4>
+          <p>True wealth is defined as three freedoms: Family (time with people you love), Fitness (your physical health), and Finance (money without stress). Rich and wealthy are different things.</p>
+          <div class="insight-quote">"Wealth is not about money. Wealth is about freedom."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Key Insight</div>
+          <h4>Events vs. Process</h4>
+          <p>Overnight successes are always 10-year processes in disguise. Lottery winners, viral hits, and billion-dollar exits all look like events from outside, but they're the culmination of endless process work.</p>
+          <div class="insight-quote">"What you see is the event. What you don't see is the process."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 4</div>
+          <h4>The Paradox of Practice</h4>
+          <p>Many wealth gurus selling "get rich slow" advice are themselves rich from selling that advice — not from following it. The Paradox of Practice: do what they DO, not what they say.</p>
+          <div class="insight-quote">"Gurus selling Slowlane advice got rich fast selling books."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEWALK TAB -->
+    <div class="tab-content" id="tab-sidewalk">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-num">Chapter 5</div>
+          <h4>The Sidewalker's Disease: Poorness</h4>
+          <p>Poorness isn't just a lack of money — it's a lifestyle defined by instant gratification, no savings, and financial recklessness. Many high earners are Sidewalkers because they spend every dollar.</p>
+          <div class="insight-quote">"A Sidewalker is one emergency away from disaster."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 6</div>
+          <h4>Lifestyle Servitude</h4>
+          <p>When you buy expensive things that require ongoing income to maintain (a luxury car, a big house), you become enslaved to that income. The stuff starts owning you — you can't quit, can't take risks.</p>
+          <div class="insight-quote">"Lifestyle Servitude is buying things you don't need with money you don't have."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 7</div>
+          <h4>The Luck Myth</h4>
+          <p>Lucky people create their own luck through process. They take more shots, meet more people, build more things — and statistically, more things work out. "Luck" is opportunity meeting preparation.</p>
+          <div class="insight-quote">"Luck is created by process — not by prayers."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 8</div>
+          <h4>Sidewalk Mindposts</h4>
+          <p>Sidewalkers are guided by false beliefs: "I'll start saving next year," "I deserve this," "The government will take care of me," "Money is evil." These mindposts keep them trapped.</p>
+          <div class="insight-quote">"Debt is the Sidewalker's parasite."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 9</div>
+          <h4>The 'Uncontrollable' Distinction</h4>
+          <p>Sidewalkers have zero control over their financial destiny. They're subject to layoffs, economic crashes, inflation, health crises — all without any cushion. They've built zero resilience.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Key Warning</div>
+          <h4>Parasitic Debt</h4>
+          <p>Credit cards, car loans, and consumer debt compound against you the way investments compound for you — but in the wrong direction. Every interest payment is wealth destruction, paid from your labor.</p>
+          <div class="insight-quote">"Interest is the killer of wealth ambition."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLOWLANE TAB -->
+    <div class="tab-content" id="tab-slowlane">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-num">Chapter 10</div>
+          <h4>The Job = Slowlane Trap</h4>
+          <p>A job is not an asset — it's a liability disguised as security. You can be fired, made redundant, or rendered obsolete. Income stops the moment you do. There is no leverage.</p>
+          <div class="insight-quote">"A job is just a deferral of the Slowlane."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 11</div>
+          <h4>ULL: Uncontrollable Limited Leverage</h4>
+          <p>The Slowlane relies on two levers — your hourly rate and hours worked. Both are limited and largely outside your control. Your boss controls your raise; the market controls your returns.</p>
+          <div class="insight-quote">"Two variables control income and neither is truly yours."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 12</div>
+          <h4>The Compound Interest Con</h4>
+          <p>Compound interest is real but requires: decades of time (your best years), consistent returns (not guaranteed), and enough starting capital (most people have little). It's a strategy for the patient and already-wealthy.</p>
+          <div class="insight-quote">"Compound interest has an enemy: time. And you only have so much of it."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 13</div>
+          <h4>The Education Trap</h4>
+          <p>A $200,000 degree to land a $60,000/yr job that takes 25 years to recoup — and doesn't guarantee wealth — is a deeply flawed investment. Education costs are compounding against you.</p>
+          <div class="insight-quote">"Your degree doesn't guarantee you freedom — it guarantees debt."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 14</div>
+          <h4>The Slowlane Dangers</h4>
+          <p>The Slowlane fails when: the market crashes near retirement, health deteriorates before you're "rich," a company downsizes your entire department, or inflation erodes your savings.</p>
+          <div class="insight-quote">"The Slowlane is a 40-year plan that can collapse in one market crash."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Key Concept</div>
+          <h4>Time as the True Currency</h4>
+          <p>The Slowlane's biggest cost isn't money — it's time. You spend the prime years of your life (20s–50s) building someone else's wealth, hoping to enjoy your own in your 60s. What if those years are all you get?</p>
+          <div class="insight-quote">"Youth is the currency the Slowlane steals."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASTLANE TAB -->
+    <div class="tab-content" id="tab-fastlane">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-num">Chapter 16</div>
+          <h4>CUL: Controllable Unlimited Leverage</h4>
+          <p>Unlike the Slowlane, the Fastlane gives you levers you actually control (your business) with no inherent ceiling. You can scale from 1 customer to 1 million without proportionally more labor.</p>
+          <div class="insight-quote">"The Fastlane is controllable. Your speed, your destination."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 17</div>
+          <h4>The Fastlane Mindpost</h4>
+          <p>Fastlaners think differently: they see themselves as responsible for their outcomes, they're relentlessly solution-focused, and they understand that wealth is created by serving others massively well.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 18</div>
+          <h4>Your Business Is Your Vehicle</h4>
+          <p>Your company or entrepreneurial venture is the vehicle that drives you to wealth. Just as a car's quality determines your journey, the quality of your business vehicle determines your financial destination.</p>
+          <div class="insight-quote">"The Fastlane is a business system, not a job in disguise."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 19</div>
+          <h4>Income vs. Asset Value</h4>
+          <p>Don't just chase income. Build asset value. A business generating $500K/yr might sell for $5M. That single liquidity event can exceed 20 years of Slowlane saving. Focus on building, not just earning.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 20</div>
+          <h4>The Power of Systems</h4>
+          <p>Systems are the backbone of the Fastlane. A system runs without you. It processes orders, delivers products, handles customers, and generates revenue while you sleep. Build systems first, income follows.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 21</div>
+          <h4>Intrinsic vs. Extrinsic Value</h4>
+          <p>You can only get paid what the market is willing to pay. Stop trading your hourly worth for an employer's number. On the Fastlane, your income is limited only by the value you create in the market.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEHICLE TAB -->
+    <div class="tab-content" id="tab-vehicle">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-num">Chapter 22</div>
+          <h4>Own Yourself First</h4>
+          <p>Incorporate early. Your legal entity (LLC, C-Corp) protects your personal assets, provides tax advantages, and signals seriousness. Running a business in your personal name is driving without a seatbelt.</p>
+          <div class="insight-quote">"Own yourself. Don't be an employee of you."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 23</div>
+          <h4>Choices: Your Steering Wheel</h4>
+          <p>Every choice — from what you eat to who you marry to which business you start — is a fork in your road. Choices compound over time. Small decisions repeated daily create your destiny.</p>
+          <div class="insight-quote">"Your choices are the steering wheel of your life's journey."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 24</div>
+          <h4>WCCA: Worst Case Consequence Analysis</h4>
+          <p>Before any major decision, analyze the absolute worst outcome. If you can survive the worst case, take the risk. Most "scary" decisions have survivable worst cases people never actually think through.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 24</div>
+          <h4>WADM: Weighted Average Decision Matrix</h4>
+          <p>When facing complex multi-factor decisions, list your criteria, weight them by importance, and score each option. This process removes emotion and clarifies choices that feel impossibly complex.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 25</div>
+          <h4>Time: The Primordial Fuel</h4>
+          <p>Time is the one truly finite resource. Unlike money, it cannot be earned back. Every hour spent watching TV, sleeping in, or on low-value activities is gone forever. Guard it aggressively.</p>
+          <div class="insight-quote">"Money can be made again. Time cannot."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 28</div>
+          <h4>Commit at the Redline</h4>
+          <p>Ideas without execution are worthless. Most entrepreneurs stay in perpetual "planning mode" and never commit fully. The Redline is the point of no return — the commitment to go all in. Everything changes there.</p>
+          <div class="insight-quote">"Commitments separate dreamers from achievers."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEED TAB -->
+    <div class="tab-content" id="tab-speed">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-num">Chapter 38</div>
+          <h4>Execution Over Ideas</h4>
+          <p>Ideas are worthless without execution. The world is full of people with great ideas who did nothing. Value is created only by execution. Ideas are worth $0 — implemented ideas are worth millions.</p>
+          <div class="insight-quote">"The idea is not the business. Execution is the business."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 39</div>
+          <h4>Burn the Business Plan</h4>
+          <p>A 50-page business plan is procrastination. The market is the ultimate judge, not your spreadsheet. Start with a minimal viable product, get feedback, and iterate. Action reveals what planning never can.</p>
+          <div class="insight-quote">"Business plans are guesses. The market has the real answer."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 40</div>
+          <h4>Complaints Are Gold</h4>
+          <p>Customer complaints are the best market research money can't buy. Every complaint identifies a need unmet, a product gap, an opportunity to improve. The best companies obsess over complaints.</p>
+          <div class="insight-quote">"Complaints reveal unmet needs. Mine them like gold."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 41</div>
+          <h4>The Right Team</h4>
+          <p>You cannot build a massive business alone. The right team amplifies your strengths and covers your weaknesses. Hire for culture fit and competence — bad hires cost more than missed hires.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 43</div>
+          <h4>Monogamy in Business</h4>
+          <p>Entrepreneurs often suffer from "shiny object syndrome" — jumping between ideas constantly. Lasting wealth requires sustained focus on one business long enough for it to reach its potential.</p>
+          <div class="insight-quote">"One business, fully committed, beats ten businesses half-hearted."</div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-num">Chapter 42</div>
+          <h4>Build a Brand, Not Just a Business</h4>
+          <p>Brands command premium pricing, loyalty, and trust. A commodity business competes on price. A brand competes on perception. Build something people feel — and they'll pay more and return repeatedly.</p>
+          <div class="insight-quote">"Brands are built by consistent delivery of a unique promise."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIME SECTION -->
+<section id="time">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The Real Resource</div>
+      <h2>Time Is the Real Wealth</h2>
+      <p class="section-sub">The Slowlane trades the best years of your life for money you can't fully enjoy. The Fastlane reclaims your time while you're still young and healthy.</p>
+    </div>
+
+    <div class="time-grid fade-in">
+      <div class="time-card">
+        <div class="time-icon">⏰</div>
+        <h4>The Slowlane Trade</h4>
+        <p>Work 40 years, sacrifice health and relationships, retire at 65 with "enough" money — but with a damaged body and limited years left to enjoy it.</p>
+      </div>
+      <div class="time-card">
+        <div class="time-icon">🚀</div>
+        <h4>The Fastlane Trade</h4>
+        <p>Work intensely for 5–15 years building systems, then achieve financial freedom while still in your 30s or 40s — with decades of healthy, wealthy life ahead.</p>
+      </div>
+      <div class="time-card">
+        <div class="time-icon">💀</div>
+        <h4>Time vs. Money</h4>
+        <p>Every dollar lost can be recovered. Every hour lost is gone forever. The greatest poverty is not having money — it's having money without time to enjoy it.</p>
+      </div>
+      <div class="time-card">
+        <div class="time-icon">🔄</div>
+        <h4>The Compound Effect of Time</h4>
+        <p>Time spent building scalable systems compounds. Every customer, every system, every process you build today multiplies into tomorrow's passive income.</p>
+      </div>
+    </div>
+
+    <div style="max-width:800px; margin:3rem auto 0;" class="fade-in">
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead><tr><th>Age</th><th>Slowlane Path</th><th>Fastlane Path</th></tr></thead>
+          <tbody>
+            <tr><td>20s</td><td class="sl-val">College debt, entry-level job</td><td class="f-val">Building skills, starting first ventures</td></tr>
+            <tr><td>30s</td><td class="sl-val">Corporate climb, mortgage, kids</td><td class="f-val">First business scaling, early exits possible</td></tr>
+            <tr><td>40s</td><td class="sl-val">Peak earning, maxing 401(k)</td><td class="f-val">Financially free, building next venture or investing</td></tr>
+            <tr><td>50s</td><td class="sl-val">Pre-retirement planning, fear</td><td class="f-val">Philanthropy, mentorship, or building legacy</td></tr>
+            <tr><td>60s+</td><td class="sl-val">Retirement (if market cooperates)</td><td class="f-val">Enjoying decades of freedom already secured</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASTLANE INTERSTATES -->
+<section id="interstates">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">The Roads to Travel</div>
+      <h2>The Three Fastlane Interstates</h2>
+      <p class="section-sub">The most accessible highways to Fastlane wealth in today's economy. Each has different on-ramps and speeds.</p>
+    </div>
+
+    <div class="interstate-grid fade-in">
+      <div class="interstate-card">
+        <div class="interstate-num">01</div>
+        <h3>The Internet Interstate</h3>
+        <p>The internet is the greatest wealth-creation tool in human history. Software, e-commerce, SaaS, content platforms, and marketplaces can reach billions of people with near-zero marginal distribution cost. A single person with internet access can build a globally-scaled business.</p>
+        <div class="interstate-tags">
+          <span class="i-tag">SaaS</span>
+          <span class="i-tag">E-commerce</span>
+          <span class="i-tag">Marketplaces</span>
+          <span class="i-tag">Content</span>
+          <span class="i-tag">Apps</span>
+        </div>
+      </div>
+      <div class="interstate-card">
+        <div class="interstate-num">02</div>
+        <h3>The Innovation Interstate</h3>
+        <p>Innovation is the process of creating new products, services, or solutions that better serve an existing need. True innovation doesn't require inventing something from scratch — it can be improving, simplifying, or repositioning what already exists for a different audience.</p>
+        <div class="interstate-tags">
+          <span class="i-tag">New products</span>
+          <span class="i-tag">Process improvement</span>
+          <span class="i-tag">Category creation</span>
+          <span class="i-tag">R&amp;D</span>
+        </div>
+      </div>
+      <div class="interstate-card">
+        <div class="interstate-num">03</div>
+        <h3>The Intentional Iteration Interstate</h3>
+        <p>Start a business in any industry, learn it deeply, improve it systematically, and scale it. Most millionaire entrepreneurs didn't start with breakthrough ideas — they took ordinary businesses and executed them extraordinarily well. The iteration and the intentionality is the edge.</p>
+        <div class="interstate-tags">
+          <span class="i-tag">Service businesses</span>
+          <span class="i-tag">Franchise models</span>
+          <span class="i-tag">Local businesses scaled</span>
+          <span class="i-tag">Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert-box fade-in" style="margin-top:2.5rem;">
+      <div class="alert-icon">🗺️</div>
+      <p><strong>Finding your on-ramp:</strong> The best Fastlane for you combines your existing skills, knowledge, and passions with a real market need and scalable business model. The intersection of "what you know well" + "what others need" + "what can be systematized and scaled" is your personal Fastlane on-ramp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<div class="quote-section">
+  <div class="section-header" style="max-width:1100px; margin:0 auto 3rem;">
+    <div class="section-tag">Straight from the Source</div>
+    <h2>Most Powerful Quotes</h2>
+  </div>
+  <div class="quotes-track fade-in">
+    <div class="quote-card">
+      <blockquote>"The Fastlane isn't about becoming a millionaire — it's about becoming the architect of your life."</blockquote>
+      <div class="quote-attr">— MJ DeMarco</div>
+    </div>
+    <div class="quote-card">
+      <blockquote>"Stop buying things you don't need, to impress people you don't like, with money you don't have."</blockquote>
+      <div class="quote-attr">— MJ DeMarco</div>
+    </div>
+    <div class="quote-card">
+      <blockquote>"The roads to wealth are paved not with your passion but with what you can do for others."</blockquote>
+      <div class="quote-attr">— MJ DeMarco</div>
+    </div>
+    <div class="quote-card">
+      <blockquote>"Wealth is a process, not an event. The journey matters as much as the destination."</blockquote>
+      <div class="quote-attr">— MJ DeMarco</div>
+    </div>
+    <div class="quote-card">
+      <blockquote>"The Slowlane's fundamental problem is trading your only life asset — time — for an employer's paycheck."</blockquote>
+      <div class="quote-attr">— MJ DeMarco</div>
+    </div>
+    <div class="quote-card">
+      <blockquote>"Engage in the business of solving problems. Solve problems massively and you will be paid massively."</blockquote>
+      <div class="quote-attr">— MJ DeMarco</div>
+    </div>
+  </div>
+</div>
+
+<!-- 40 GUIDELINES -->
+<section id="guidelines">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Appendix B</div>
+      <h2>The 40 Fastlane Lifestyle Guidelines</h2>
+      <p class="section-sub">These are the operating principles of a Fastlaner. Print them. Live them.</p>
+    </div>
+
+    <div class="guidelines-list fade-in">
+      <div class="guideline"><div class="g-num">1</div><span>Accept that the Fastlane is a lifestyle, not a get-rich-quick scheme.</span></div>
+      <div class="guideline"><div class="g-num">2</div><span>Drown out the noise. Ignore media that promotes the Slowlane as the only path.</span></div>
+      <div class="guideline"><div class="g-num">3</div><span>Associate with people who are where you want to go.</span></div>
+      <div class="guideline"><div class="g-num">4</div><span>Consume what you produce. Be a producer first, consumer second.</span></div>
+      <div class="guideline"><div class="g-num">5</div><span>Hire for what you're weak at. Focus on your strengths.</span></div>
+      <div class="guideline"><div class="g-num">6</div><span>Face failure as a learning experience, not as a death sentence.</span></div>
+      <div class="guideline"><div class="g-num">7</div><span>Focus on creating value. Money follows value.</span></div>
+      <div class="guideline"><div class="g-num">8</div><span>Resist consuming debt. If it's not profitable, don't borrow for it.</span></div>
+      <div class="guideline"><div class="g-num">9</div><span>Seek first to understand, then to profit. Listen to the market.</span></div>
+      <div class="guideline"><div class="g-num">10</div><span>Guard your time like it's your most valuable asset — because it is.</span></div>
+      <div class="guideline"><div class="g-num">11</div><span>Never let your business get bigger than your passion for it.</span></div>
+      <div class="guideline"><div class="g-num">12</div><span>Don't mistake motion for progress. Execution matters more than planning.</span></div>
+      <div class="guideline"><div class="g-num">13</div><span>Focus on CENTS: Control, Entry, Need, Time, Scale.</span></div>
+      <div class="guideline"><div class="g-num">14</div><span>Survive the long nights by focusing on your why.</span></div>
+      <div class="guideline"><div class="g-num">15</div><span>Own your brand. A brand is worth more than a business.</span></div>
+      <div class="guideline"><div class="g-num">16</div><span>Never let a mediocre product ship. Quality is your brand promise.</span></div>
+      <div class="guideline"><div class="g-num">17</div><span>Treat customers as if they're your boss — because they are.</span></div>
+      <div class="guideline"><div class="g-num">18</div><span>Read customer complaints as gold-mine market intelligence.</span></div>
+      <div class="guideline"><div class="g-num">19</div><span>Build for your exit from day one.</span></div>
+      <div class="guideline"><div class="g-num">20</div><span>Don't chase passion — chase need. Passion follows mastery and success.</span></div>
+      <div class="guideline"><div class="g-num">21</div><span>The market doesn't care about your feelings. It responds to value.</span></div>
+      <div class="guideline"><div class="g-num">22</div><span>Execute on ideas immediately. Ideas without action are worthless.</span></div>
+      <div class="guideline"><div class="g-num">23</div><span>Scale or fail. A business that can't scale will hit a ceiling.</span></div>
+      <div class="guideline"><div class="g-num">24</div><span>Create a USP (Unique Selling Proposition). Give people a reason to choose you.</span></div>
+      <div class="guideline"><div class="g-num">25</div><span>Don't rely on one customer, one platform, or one source of income.</span></div>
+      <div class="guideline"><div class="g-num">26</div><span>Invest in education that has an immediate economic application.</span></div>
+      <div class="guideline"><div class="g-num">27</div><span>Use your money to buy assets that produce more money.</span></div>
+      <div class="guideline"><div class="g-num">28</div><span>Be frugal early — then be generous once the machine is running.</span></div>
+      <div class="guideline"><div class="g-num">29</div><span>Accept that the process is hard. Embrace the difficulty as a filter.</span></div>
+      <div class="guideline"><div class="g-num">30</div><span>Never outsource your thinking. Understand your own business deeply.</span></div>
+      <div class="guideline"><div class="g-num">31</div><span>Seek mentors who have done it, not just those who teach it.</span></div>
+      <div class="guideline"><div class="g-num">32</div><span>Build recurring revenue streams that don't require you daily.</span></div>
+      <div class="guideline"><div class="g-num">33</div><span>Health is wealth. Physical fitness underpins everything else.</span></div>
+      <div class="guideline"><div class="g-num">34</div><span>Give back. Generosity is the hallmark of lasting wealth.</span></div>
+      <div class="guideline"><div class="g-num">35</div><span>Know your numbers. Financial literacy is non-negotiable.</span></div>
+      <div class="guideline"><div class="g-num">36</div><span>Stay focused on one major business. Monogamy of effort beats polyamory of ideas.</span></div>
+      <div class="guideline"><div class="g-num">37</div><span>Think long-term about your reputation. It's your most valuable currency.</span></div>
+      <div class="guideline"><div class="g-num">38</div><span>Differentiate or die. Being the same as everyone is a slow death.</span></div>
+      <div class="guideline"><div class="g-num">39</div><span>Measure what matters. Track your progress toward financial freedom.</span></div>
+      <div class="guideline"><div class="g-num">40</div><span>Enjoy the journey. Wealth without happiness is just another form of poverty.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-box fade-in">
+    <h2>The Fastlane Starts With a Decision</h2>
+    <p>You've read the map. The roadmap you choose determines where you end up. The Sidewalk leads to dependence. The Slowlane leads to mediocrity. The Fastlane — if you build it — leads to freedom.</p>
+    <p style="margin-bottom:2rem; color:var(--text-muted);">The process begins with a single decision: to stop being a passenger in your own financial life and become the driver.</p>
+    <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+      <a href="#roadmaps" class="btn btn-primary">Back to Roadmaps</a>
+      <a href="#cents" class="btn btn-outline">Audit Your Idea (CENTS)</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Educational content based on <strong>The Millionaire Fastlane</strong> by MJ DeMarco. For educational purposes only.</p>
+  <p style="margin-top:0.5rem;">All concepts and quotes are attributed to the original author.</p>
+</footer>
+
+<script>
+  // PROGRESS BAR
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progressFill').style.width = (scrolled / max * 100) + '%';
+  });
+
+  // INTERSECTION OBSERVER for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // TABS
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

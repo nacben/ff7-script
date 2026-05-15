@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1000 Events That Shaped the World — A Journey Through Human History</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e1620;
+    --ink-soft: #2a3340;
+    --parchment: #f5ede0;
+    --parchment-deep: #e8dcc6;
+    --gold: #c19a4b;
+    --gold-bright: #d9b366;
+    --gold-deep: #8a6b2e;
+    --burgundy: #7a2a2a;
+    --terra: #b8542e;
+    --sea: #2d4a5c;
+    --sage: #5e6b4f;
+    --cream: #faf6ee;
+    --shadow: rgba(14, 22, 32, 0.15);
+
+    --era-prehistory: #4a3b2e;
+    --era-medieval: #5a3a2a;
+    --era-discovery: #2d4a5c;
+    --era-revolution: #7a2a2a;
+    --era-imperial: #5e6b4f;
+    --era-world-war: #2a2a2a;
+    --era-modern: #c19a4b;
+
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ============ TYPOGRAPHY ============ */
+  h1, h2, h3, h4, h5 {
+    font-family: var(--serif);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .display {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .year-tag {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 30% 40%, #1a2738 0%, #0a1320 60%, #050a13 100%);
+    color: var(--parchment);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 80% 10%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 33% 80%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 15% 65%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 25%, rgba(255,255,255,0.4), transparent);
+    background-size: 100% 100%;
+    opacity: 0.7;
+    animation: drift 120s linear infinite;
+  }
+
+  @keyframes drift {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-frame {
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 3rem 0;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    color: var(--gold-bright);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    height: 1px;
+    flex: 0 0 40px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 0.95;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 .numeric {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-style: italic;
+    max-width: 700px;
+    color: #d4c9b5;
+    margin-bottom: 3rem;
+    line-height: 1.5;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    color: var(--gold-bright);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .hero-meta div span {
+    display: block;
+    color: var(--parchment);
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 0.3rem;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .scroll-indicator::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: var(--gold);
+    margin: 1rem auto 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  /* ============ FOREWORD ============ */
+  .foreword {
+    padding: 8rem 2rem;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .foreword-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .foreword-author {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--parchment-deep);
+  }
+
+  .author-mark {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: var(--cream);
+    font-style: italic;
+    flex-shrink: 0;
+  }
+
+  .author-info p:first-child {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .author-info p:last-child {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 0.2rem;
+  }
+
+  .foreword h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
+
+  .foreword h2 em {
+    color: var(--gold-deep);
+  }
+
+  .foreword-body {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  .foreword-body p {
+    margin-bottom: 1.5rem;
+  }
+
+  .dropcap::first-letter {
+    font-family: var(--serif);
+    font-size: 5rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.3rem 0.8rem 0 0;
+    color: var(--burgundy);
+    font-weight: 500;
+  }
+
+  .foreword-quote {
+    margin: 3rem 0;
+    padding: 2rem 0 2rem 2rem;
+    border-left: 3px solid var(--gold);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .foreword-quote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 1.5rem;
+    font-weight: 600;
+  }
+
+  /* ============ STATS BAR ============ */
+  .stats {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 5rem 2rem;
+  }
+
+  .stats-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-item .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--gold-bright);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #aaa;
+  }
+
+  /* ============ TIMELINE ============ */
+  .timeline-section {
+    padding: 8rem 2rem;
+    background: var(--parchment);
+  }
+
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+
+  .section-header .eyebrow {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .section-header h2 em {
+    color: var(--burgundy);
+    font-style: italic;
+  }
+
+  .section-header p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .timeline-viz {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .timeline-track {
+    position: relative;
+    padding: 4rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) transparent;
+  }
+
+  .timeline-track::-webkit-scrollbar {
+    height: 8px;
+  }
+  .timeline-track::-webkit-scrollbar-track {
+    background: var(--parchment-deep);
+  }
+  .timeline-track::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+  }
+
+  .timeline-line {
+    position: relative;
+    height: 4px;
+    background: linear-gradient(to right,
+      var(--era-prehistory) 0%, var(--era-prehistory) 14%,
+      var(--era-medieval) 14%, var(--era-medieval) 28%,
+      var(--era-discovery) 28%, var(--era-discovery) 42%,
+      var(--era-revolution) 42%, var(--era-revolution) 56%,
+      var(--era-imperial) 56%, var(--era-imperial) 70%,
+      var(--era-world-war) 70%, var(--era-world-war) 84%,
+      var(--era-modern) 84%, var(--era-modern) 100%);
+    min-width: 2000px;
+    margin: 6rem 2rem;
+    border-radius: 2px;
+  }
+
+  .timeline-event {
+    position: absolute;
+    transform: translateX(-50%);
+    cursor: pointer;
+  }
+
+  .timeline-event-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 3px solid var(--parchment);
+    box-shadow: 0 0 0 2px var(--ink);
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+  }
+
+  .timeline-event:hover .timeline-event-dot {
+    transform: translateX(-50%) scale(1.4);
+    background: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+
+  .timeline-event-label {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    transition: color 0.3s;
+  }
+
+  .timeline-event-label .year-tag {
+    display: block;
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-event-label strong {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    display: block;
+  }
+
+  .timeline-event.above .timeline-event-label {
+    top: auto;
+    bottom: 20px;
+  }
+
+  .timeline-era-label {
+    position: absolute;
+    bottom: -3rem;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ============ ERAS SECTION ============ */
+  .eras {
+    padding: 8rem 2rem;
+    background: var(--cream);
+  }
+
+  .eras-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--parchment-deep);
+    border: 1px solid var(--parchment-deep);
+  }
+
+  .era-card {
+    background: var(--cream);
+    padding: 3rem 2.5rem;
+    position: relative;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .era-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--era-color, var(--gold));
+    transition: height 0.3s ease;
+  }
+
+  .era-card:hover {
+    background: var(--parchment);
+    transform: translateY(-4px);
+  }
+
+  .era-card:hover::before {
+    height: 8px;
+  }
+
+  .era-card .era-num {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--era-color, var(--gold-deep));
+    margin-bottom: 1rem;
+  }
+
+  .era-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .era-card .era-dates {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .era-card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .era-card .era-highlights {
+    list-style: none;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--parchment-deep);
+  }
+
+  .era-card .era-highlights li {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+
+  .era-card .era-highlights li::before {
+    content: '◆';
+    color: var(--era-color, var(--gold));
+    font-size: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  /* ============ FEATURED EVENTS ============ */
+  .featured {
+    padding: 8rem 0;
+    background: var(--ink);
+    color: var(--parchment);
+  }
+
+  .featured-controls {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid #2a3340;
+    color: #aaa;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.78rem;
+    font-family: var(--sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold-bright);
+  }
+
+  .filter-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+
+  .featured-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+
+  .event-card {
+    background: #141d29;
+    border: 1px solid #1f2935;
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-card:hover {
+    background: #1a2533;
+    border-color: var(--gold-deep);
+    transform: translateY(-4px);
+  }
+
+  .event-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-deep);
+    opacity: 0.6;
+  }
+
+  .event-year {
+    font-family: var(--mono);
+    color: var(--gold-bright);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
+  }
+
+  .event-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--parchment);
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .event-card .event-era {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 1rem;
+  }
+
+  .event-card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #c9bfa9;
+    flex: 1;
+  }
+
+  .event-card .event-impact {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1f2935;
+    font-size: 0.85rem;
+    color: var(--gold-bright);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  /* ============ DEEP DIVE / MOMENTS ============ */
+  .moments {
+    padding: 0;
+    background: var(--parchment);
+  }
+
+  .moment {
+    padding: 8rem 2rem;
+    border-bottom: 1px solid var(--parchment-deep);
+    position: relative;
+  }
+
+  .moment:nth-child(even) {
+    background: var(--cream);
+  }
+
+  .moment-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .moment-meta {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .moment-number {
+    font-family: var(--serif);
+    font-size: 4rem;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .moment-year {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--gold-deep);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .moment-era {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 0.4rem 0.8rem;
+    background: var(--parchment-deep);
+    display: inline-block;
+    font-weight: 600;
+  }
+
+  .moment-body h3 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    line-height: 1.05;
+    font-weight: 400;
+  }
+
+  .moment-body h3 em {
+    color: var(--burgundy);
+    font-style: italic;
+  }
+
+  .moment-lede {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--parchment-deep);
+  }
+
+  .moment-body > p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .moment-body > p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 4.5rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.3rem 0.7rem 0 0;
+    color: var(--burgundy);
+    font-weight: 500;
+  }
+
+  .moment-pullquote {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--parchment-deep);
+    border-left: 4px solid var(--gold);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .moment-pullquote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-top: 1.5rem;
+    font-weight: 600;
+  }
+
+  .moment-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid var(--parchment-deep);
+    border-bottom: 1px solid var(--parchment-deep);
+  }
+
+  .moment-stat .num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--burgundy);
+    font-weight: 500;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .moment-stat .lbl {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ============ FIRST PERSON ============ */
+  .testimonies {
+    padding: 8rem 2rem;
+    background: linear-gradient(180deg, var(--ink) 0%, #15202d 100%);
+    color: var(--parchment);
+  }
+
+  .testimonies-header {
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    text-align: center;
+  }
+
+  .testimonies-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--parchment);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonies-header h2 em {
+    color: var(--gold-bright);
+    font-style: italic;
+  }
+
+  .testimonies-header p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #c9bfa9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .testimonies-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 3rem;
+  }
+
+  .testimony {
+    position: relative;
+    padding: 2rem 0 2rem 3rem;
+  }
+
+  .testimony::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--serif);
+    font-size: 6rem;
+    line-height: 0.8;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+
+  .testimony-text {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--parchment);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  .testimony-attr {
+    border-top: 1px solid #2a3340;
+    padding-top: 1.5rem;
+  }
+
+  .testimony-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--gold-bright);
+    margin-bottom: 0.3rem;
+  }
+
+  .testimony-context {
+    font-size: 0.78rem;
+    color: #aaa;
+    letter-spacing: 0.08em;
+  }
+
+  /* ============ THEMES ============ */
+  .themes {
+    padding: 8rem 2rem;
+    background: var(--cream);
+  }
+
+  .themes-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .theme-card {
+    background: var(--parchment);
+    padding: 3rem 2rem;
+    border-top: 4px solid var(--gold);
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .theme-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .theme-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+    color: var(--burgundy);
+  }
+
+  .theme-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .theme-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* ============ CLOSING ============ */
+  .closing {
+    padding: 10rem 2rem;
+    background: var(--ink);
+    color: var(--parchment);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(193, 154, 75, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(122, 42, 42, 0.08) 0%, transparent 40%);
+  }
+
+  .closing-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .closing .eyebrow {
+    color: var(--gold-bright);
+    margin-bottom: 2rem;
+  }
+
+  .closing h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 2rem;
+    line-height: 1.1;
+    font-weight: 300;
+  }
+
+  .closing p {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: #d4c9b5;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing-ornament {
+    margin: 3rem auto;
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    position: relative;
+  }
+
+  .closing-ornament::before, .closing-ornament::after {
+    content: '◆';
+    position: absolute;
+    top: -8px;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .closing-ornament::before { left: -16px; }
+  .closing-ornament::after { right: -16px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #050a13;
+    color: #777;
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer .ng-mark {
+    color: var(--gold-bright);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .moment-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .moment-meta {
+      position: static;
+    }
+    .moment {
+      padding: 4rem 1.5rem;
+    }
+    .foreword, .timeline-section, .featured, .testimonies, .themes, .closing, .eras {
+      padding: 5rem 1.5rem;
+    }
+    .hero {
+      padding: 3rem 1.5rem;
+    }
+    .hero-meta {
+      gap: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-frame">
+      <div class="eyebrow hero-eyebrow">National Geographic · A Universal Chronicle</div>
+      <h1>One Thousand <span class="numeric">Events</span><br>That Shaped<br>the World</h1>
+      <p class="hero-sub">From the first stirrings of life in primordial oceans to the discovery of distant worlds — a chronicle of the moments that made us, broken open and held to the light.</p>
+      <div class="hero-meta">
+        <div>Time Span<span>3.8 Billion Years</span></div>
+        <div>Pivotal Events<span>1,000</span></div>
+        <div>Foreword by<span>Jared Diamond</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">Begin the Journey</div>
+</section>
+
+<!-- ============ FOREWORD ============ -->
+<section class="foreword">
+  <div class="foreword-inner">
+    <div class="foreword-author">
+      <div class="author-mark">JD</div>
+      <div class="author-info">
+        <p>Jared Diamond</p>
+        <p>Pulitzer Prize-winning author of <em>Guns, Germs, and Steel</em></p>
+      </div>
+    </div>
+    <div class="eyebrow">Foreword · A Note on Sipping History</div>
+    <h2>You have just opened an unusual <em>history book</em>.</h2>
+    <div class="foreword-body">
+      <p class="dropcap">Within the limits of a small volume, it covers the history of the whole world on all continents. A mere two sentences in the first paragraph whisk us from the mastery of fire by primitive humans hundreds of thousands of years ago, to the development of writing around 3300 B.C.E. Thereafter, about 175,000 words of text carry the story from 3300 B.C.E. up to the present.</p>
+      <p>You can easily do the underlying math. You'll be racing along at one word per year of written history until the fall of the Roman Empire, slowing down to 100 words per year for the Middle Ages, and finally a generous 750 words per year for the 20th century.</p>
+      <blockquote class="foreword-quote">
+        This book is not like a light wine cooler, intended to be gulped down without stopping until you have drained your glass. Instead, it's meant to be sipped, like a great sweet sauterne. Start anywhere, and read for as long as you like.
+        <cite>— Jared Diamond</cite>
+      </blockquote>
+      <p>A brief account, laying out a framework and readable in a short time, will actually let you grasp the big picture better than will a 700-page monograph. By the time you have sipped your way through the whole book, you will have a good feel for the big picture of history. Perhaps most important, you will actually enjoy history, and you will want to read more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">3.8B</div>
+      <div class="stat-label">Years Since Life Began</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Great Eras of History</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1,000</div>
+      <div class="stat-label">Pivotal Events</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200K</div>
+      <div class="stat-label">Years of Modern Humans</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5,300</div>
+      <div class="stat-label">Years of Written History</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE VISUALIZATION ============ -->
+<section class="timeline-section" id="timeline">
+  <div class="section-header">
+    <div class="eyebrow">Chapter Marker · Visual Compass</div>
+    <h2>The Long <em>Arc</em> of Time</h2>
+    <p>Civilizations rise and fall in moments. Scroll horizontally to trace the path from fire to flight, from agriculture to artificial intelligence.</p>
+  </div>
+  <div class="timeline-viz">
+    <div class="timeline-track">
+      <div class="timeline-line">
+        <!-- Era markers -->
+        <div class="timeline-era-label" style="left: 7%;">Ancient World</div>
+        <div class="timeline-era-label" style="left: 21%;">Middle Ages</div>
+        <div class="timeline-era-label" style="left: 35%;">Discovery</div>
+        <div class="timeline-era-label" style="left: 49%;">Revolution</div>
+        <div class="timeline-era-label" style="left: 63%;">Imperialism</div>
+        <div class="timeline-era-label" style="left: 77%;">World Wars</div>
+        <div class="timeline-era-label" style="left: 91%;">Modern Age</div>
+
+        <!-- Events distributed across timeline -->
+        <div class="timeline-event" style="left: 1%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">3.8 BYA</span>
+            <strong>Life Begins</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 4%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1.4 MYA</span>
+            <strong>Fire is Mastered</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 7%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">9000 BCE</span>
+            <strong>Agriculture</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 11%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">2550 BCE</span>
+            <strong>Great Pyramid</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 14%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">528 BCE</span>
+            <strong>Buddha Born</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 18%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">476 CE</span>
+            <strong>Rome Falls</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 22%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">622 CE</span>
+            <strong>Muhammad's Hijra</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 27%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1066</span>
+            <strong>Norman Conquest</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 32%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1347</span>
+            <strong>Black Death</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 36%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1455</span>
+            <strong>Gutenberg Bible</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 40%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1492</span>
+            <strong>Columbus Sails</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 44%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1543</span>
+            <strong>Heliocentrism</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 50%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1776</span>
+            <strong>American Independence</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 54%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1789</span>
+            <strong>French Revolution</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 58%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1848</span>
+            <strong>Communist Manifesto</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 64%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1859</span>
+            <strong>Origin of Species</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 68%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1879</span>
+            <strong>Lightbulb</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 73%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1903</span>
+            <strong>Wright Brothers</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 76%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1914</span>
+            <strong>WWI Begins</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 81%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1945</span>
+            <strong>Atomic Age</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 86%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1969</span>
+            <strong>Moon Landing</strong>
+          </div>
+        </div>
+        <div class="timeline-event above" style="left: 91%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">1989</span>
+            <strong>Berlin Wall Falls</strong>
+          </div>
+        </div>
+        <div class="timeline-event" style="left: 96%;">
+          <div class="timeline-event-dot"></div>
+          <div class="timeline-event-label">
+            <span class="year-tag">2001</span>
+            <strong>Genome Decoded</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SEVEN ERAS ============ -->
+<section class="eras" id="eras">
+  <div class="section-header">
+    <div class="eyebrow">The Seven Chapters · Eras of Humanity</div>
+    <h2>Ages of <em>Becoming</em></h2>
+    <p>Seven sweeping epochs, each a world unto itself. Each carried humanity from one mode of being into the next.</p>
+  </div>
+  <div class="eras-grid">
+
+    <article class="era-card" style="--era-color: var(--era-prehistory);">
+      <div class="era-num">Chapter One</div>
+      <h3>Ancient World</h3>
+      <div class="era-dates">PREHISTORY — 400 C.E.</div>
+      <p>Civilization dawns as humans master fire, domesticate plants, build the first cities, and codify their world in writing. The pyramids rise. Empires of Rome, Han China, and the Maya etch their names in stone.</p>
+      <ul class="era-highlights">
+        <li>Origins of agriculture in the Fertile Crescent</li>
+        <li>Writing emerges in Mesopotamia</li>
+        <li>Buddha, Confucius, and Socrates teach</li>
+        <li>Roman Empire encircles the Mediterranean</li>
+      </ul>
+    </article>
+
+    <article class="era-card" style="--era-color: var(--era-medieval);">
+      <div class="era-num">Chapter Two</div>
+      <h3>Middle Ages</h3>
+      <div class="era-dates">400 — 1500</div>
+      <p>Kings, saints, and imams. The age of faith witnesses the rise of Islam, the Crusades, the splendor of Tang China, and a continent shattered by the Black Death. Manuscripts are preserved by candlelight.</p>
+      <ul class="era-highlights">
+        <li>Muhammad and the rise of Islam</li>
+        <li>Charlemagne crowned Holy Roman Emperor</li>
+        <li>Mongol Empire spans Asia</li>
+        <li>Black Death reshapes Europe</li>
+      </ul>
+    </article>
+
+    <article class="era-card" style="--era-color: var(--era-discovery);">
+      <div class="era-num">Chapter Three</div>
+      <h3>Age of Discovery</h3>
+      <div class="era-dates">1500 — 1700</div>
+      <p>Caravels cross oceans. Printing presses spread ideas like wildfire. Copernicus moves the Earth, Galileo defends him, and Newton names the laws of nature. New worlds collide, for better and for worse.</p>
+      <ul class="era-highlights">
+        <li>Columbus reaches the Americas</li>
+        <li>Luther's 95 Theses ignite Reformation</li>
+        <li>Heliocentric solar system proposed</li>
+        <li>Scientific revolution takes hold</li>
+      </ul>
+    </article>
+
+    <article class="era-card" style="--era-color: var(--era-revolution);">
+      <div class="era-num">Chapter Four</div>
+      <h3>Revolutionary Era</h3>
+      <div class="era-dates">1700 — 1850</div>
+      <p>The rights of man and woman. Steam transforms labor. Citizens overthrow kings in Philadelphia and Paris. Bolívar liberates a continent. Telegraphs leap across oceans. The modern world stirs awake.</p>
+      <ul class="era-highlights">
+        <li>American & French Revolutions</li>
+        <li>James Watt's steam engine</li>
+        <li>Napoleonic Wars reshape Europe</li>
+        <li>Darwin sets sail on the Beagle</li>
+      </ul>
+    </article>
+
+    <article class="era-card" style="--era-color: var(--era-imperial);">
+      <div class="era-num">Chapter Five</div>
+      <h3>Age of Imperialism</h3>
+      <div class="era-dates">1850 — 1913</div>
+      <p>Trade and technology rule. European empires carve up Africa. The telephone, the lightbulb, and the automobile transform daily life. Marie Curie discovers radioactivity. The world becomes electric, networked, and dangerous.</p>
+      <ul class="era-highlights">
+        <li>Origin of Species published</li>
+        <li>Edison and Bell transform technology</li>
+        <li>Africa colonized by European powers</li>
+        <li>Einstein publishes relativity</li>
+      </ul>
+    </article>
+
+    <article class="era-card" style="--era-color: var(--era-world-war);">
+      <div class="era-num">Chapter Six</div>
+      <h3>World War Years</h3>
+      <div class="era-dates">1914 — 1945</div>
+      <p>Conflicts escalate. Two cataclysms rage across the globe, claiming tens of millions of lives. The atom is split. The Holocaust scars humanity. Out of the rubble, a new world order — and the nuclear age — emerge.</p>
+      <ul class="era-highlights">
+        <li>Russian & Chinese Revolutions</li>
+        <li>Hitler's rise and the Holocaust</li>
+        <li>Pearl Harbor and total war</li>
+        <li>Atomic bombs end the war</li>
+      </ul>
+    </article>
+
+    <article class="era-card" style="--era-color: var(--era-modern);">
+      <div class="era-num">Chapter Seven</div>
+      <h3>Modern Age</h3>
+      <div class="era-dates">1946 — PRESENT</div>
+      <p>Looking into the future. The Cold War divides the world. Humans walk on the moon. DNA reveals the code of life. Berlin Wall falls. The internet connects everyone. A new planet is found that might harbor life.</p>
+      <ul class="era-highlights">
+        <li>DNA double helix described</li>
+        <li>Moon landing and space exploration</li>
+        <li>Fall of the Soviet Union</li>
+        <li>World Wide Web changes everything</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ FEATURED EVENTS / FILTERABLE ============ -->
+<section class="featured">
+  <div class="section-header" style="color: var(--parchment);">
+    <div class="eyebrow">A Walk Through Time · Selected Moments</div>
+    <h2 style="color: var(--parchment); font-weight: 300;">Pivots of <em style="color: var(--gold-bright);">History</em></h2>
+    <p style="color: #c9bfa9;">Filter the centuries. Each card holds an instant that altered the trajectory of our species.</p>
+  </div>
+
+  <div class="featured-controls">
+    <button class="filter-btn active" data-filter="all">All Eras</button>
+    <button class="filter-btn" data-filter="ancient">Ancient World</button>
+    <button class="filter-btn" data-filter="medieval">Middle Ages</button>
+    <button class="filter-btn" data-filter="discovery">Discovery</button>
+    <button class="filter-btn" data-filter="revolution">Revolution</button>
+    <button class="filter-btn" data-filter="imperial">Imperialism</button>
+    <button class="filter-btn" data-filter="war">World Wars</button>
+    <button class="filter-btn" data-filter="modern">Modern Age</button>
+  </div>
+
+  <div class="featured-grid">
+
+    <article class="event-card" data-num="№ 1" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">3.8 Billion Years Ago</div>
+      <h4>Life Begins</h4>
+      <p>Out of the primordial soup of Earth's early oceans arose the first simple chains of carbon-based compounds. Around hydrothermal vents spewing sulfur and methane, the first heat-loving, oxygen-loathing bacteria emerged, setting off a chain reaction of unprecedented proportions.</p>
+      <div class="event-impact">A single cell became the ancestor of every living thing.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 6" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">1.4 Million Years Ago</div>
+      <h4>Fire Is Mastered</h4>
+      <p>Fire served as warmth, illumination, defense, cooking, and a place to gather. By a million years ago, our ancestors had spread throughout much of Eurasia, including regions subject to seasonal cold. To survive, they had to control flame.</p>
+      <div class="event-impact">Cooking unlocked the calories that grew our brains.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 18" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">9000 B.C.E.</div>
+      <h4>Origins of Agriculture</h4>
+      <p>A regional dry spell in the Middle East limited wild grain available for harvest. Settled communities began to supplement wild crops with their own plantings and to store the excess. Within millennia, the practice arose independently across the globe.</p>
+      <div class="event-impact">Humans stopped following food. Food began to follow humans.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 33" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">3500 B.C.E.</div>
+      <h4>Earliest Known Writing</h4>
+      <p>Mesopotamian merchants used clay tokens as bills and receipts. By 3500 B.C.E., tokens enclosed in clay envelopes evolved into impressed pictographs on flat tablets — the basis of the world's first writing system.</p>
+      <div class="event-impact">Memory escaped the mind. History became possible.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 42" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">2550 B.C.E.</div>
+      <h4>The Great Pyramid Rises</h4>
+      <p>Originally 481 feet tall, composed of 2.3 million blocks of limestone, some weighing 15 tons. With perfectly sloped sides oriented to the cardinal points — a marvel of precision intended to stand for eternity. It largely has.</p>
+      <div class="event-impact">A monument so vast it remained the tallest structure for nearly 4,000 years.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 88" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">528 B.C.E.</div>
+      <h4>Buddha Begins Teaching</h4>
+      <p>After six years of wandering, Gautama sat alone for 49 days under a bo tree, where he became the Buddha — the "enlightened one." He immediately set out to share the Four Noble Truths and the Noble Eightfold Path.</p>
+      <div class="event-impact">A prince's quest for the end of suffering became the spiritual path of a quarter of humanity.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 94" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">479 B.C.E.</div>
+      <h4>Confucius Preserves Teachings</h4>
+      <p>Chinese statesman and philosopher Confucius died in 479 B.C.E. following an uneventful political career. His philosophy, which exhorted rulers to lead through moral authority rather than force of arms, would shape Chinese politics, education, and daily life for more than 2,000 years.</p>
+      <div class="event-impact">Wisdom outlived its teacher by twenty-five centuries.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 126" data-era="ancient">
+      <div class="event-era">Ancient World</div>
+      <div class="event-year">49 B.C.E.</div>
+      <h4>Caesar Crosses the Rubicon</h4>
+      <p>Julius Caesar led his army across the Rubicon River into Italian territory, deliberately violating Roman law and initiating a bloody three-year civil war that would drastically change the Greco-Roman world. Within five years, he was dictator-for-life.</p>
+      <div class="event-impact">Three words sealed an empire: "The die is cast."</div>
+    </article>
+
+    <article class="event-card" data-num="№ 154" data-era="medieval">
+      <div class="event-era">Middle Ages</div>
+      <div class="event-year">476 C.E.</div>
+      <h4>The Roman Empire Falls</h4>
+      <p>Germanic prince Odoacer conquered Ravenna, dethroned Emperor Romulus Augustus, and named himself king. The mighty Roman Empire's roadways, architecture, and education system died with it, leading to what scholars call the Dark Ages.</p>
+      <div class="event-impact">The end of an era — and the beginning of feudal Europe.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 166" data-era="medieval">
+      <div class="event-era">Middle Ages</div>
+      <div class="event-year">622 C.E.</div>
+      <h4>Muhammad's Hijra</h4>
+      <p>Muhammad's emigration from Mecca to Medina marks the first year of the Islamic calendar. In Medina, the Believers found legitimacy and political power they had never known. The Constitution of Medina laid the foundation for an Islamic society.</p>
+      <div class="event-impact">A community in exile became a civilization.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 173" data-era="medieval">
+      <div class="event-era">Middle Ages</div>
+      <div class="event-year">800 C.E.</div>
+      <h4>Charlemagne Crowned</h4>
+      <p>On Christmas Day, Pope Leo III crowned Charlemagne Holy Roman Emperor in St. Peter's Basilica. The king who had united much of western Europe was now its symbolic father — a Christian emperor in the West for the first time since Rome's fall.</p>
+      <div class="event-impact">The seed of what would become Europe.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 196" data-era="medieval">
+      <div class="event-era">Middle Ages</div>
+      <div class="event-year">1095</div>
+      <h4>Crusades Draw First Blood</h4>
+      <p>Pope Urban II rallied Europe's Christians to war, urging them to travel to the Holy Land and free Jerusalem. Tens of thousands answered the call, seeking adventure, salvation, and plunder — setting in motion two centuries of religious warfare.</p>
+      <div class="event-impact">Europe encountered the East — and was never the same.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 213" data-era="medieval">
+      <div class="event-era">Middle Ages</div>
+      <div class="event-year">1215</div>
+      <h4>The Magna Carta is Signed</h4>
+      <p>Thrust upon King John as rebels held London, the original "Articles of the Barons" limited monarchical power. Though John discarded it, the document's nine subject matters — devoted to human rights, land ownership, law reform — planted the seeds of parliamentary government.</p>
+      <div class="event-impact">For the first time, even a king was bound by law.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 233" data-era="medieval">
+      <div class="event-era">Middle Ages</div>
+      <div class="event-year">1347</div>
+      <h4>The Plague Decimates Europe</h4>
+      <p>Modern scholars believe two diseases concurrently hit Europe between 1347 and 1351, killing between 25 and 40 percent of its population. The Black Death emptied villages, broke the feudal system, and changed how Europeans saw God, death, and the body.</p>
+      <div class="event-impact">A third of a continent vanished — and the modern world began.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 244" data-era="discovery">
+      <div class="event-era">Age of Discovery</div>
+      <div class="event-year">1455</div>
+      <h4>Gutenberg Prints the Bible</h4>
+      <p>The German inventor Johannes Gutenberg altered a wine press and devised a method that would remain largely unchanged until the 20th century. Suddenly books could be had cheaply, inspiring many to learn to read.</p>
+      <div class="event-impact">Knowledge escaped the monastery and entered the public square.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 256" data-era="discovery">
+      <div class="event-era">Age of Discovery</div>
+      <div class="event-year">1492</div>
+      <h4>Columbus Sets Sail</h4>
+      <p>Queen Isabella championed the Genoese sailor's quest to chart a westward sea route to India. After a two-month journey, Columbus struck land in the Bahamas. He died believing he had reached Asia. He had not — but he had connected two worlds that had developed in isolation for millennia.</p>
+      <div class="event-impact">Two hemispheres became one — for better and for terrible worse.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 272" data-era="discovery">
+      <div class="event-era">Age of Discovery</div>
+      <div class="event-year">1517</div>
+      <h4>Luther Posts the 95 Theses</h4>
+      <p>The German friar Martin Luther reacted to a Dominican preacher who claimed indulgences could buy forgiveness. Luther wanted a discussion within the church. Instead, he started the Protestant Reformation — and a century of religious war.</p>
+      <div class="event-impact">A nailed manuscript split Christendom in two.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 291" data-era="discovery">
+      <div class="event-era">Age of Discovery</div>
+      <div class="event-year">1543</div>
+      <h4>Copernicus Moves the Earth</h4>
+      <p>In <em>On the Revolution of Heavenly Bodies</em>, Nicolaus Copernicus placed the sun at the center of the solar system, overturning the Ptolemaic model that had shaped people's ideas for 1,400 years.</p>
+      <div class="event-impact">Humanity was no longer the center of the universe.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 319" data-era="discovery">
+      <div class="event-era">Age of Discovery</div>
+      <div class="event-year">1600</div>
+      <h4>Shakespeare Writes Hamlet</h4>
+      <p>First performed at London's Globe Theatre, the play broke the mold of one-dimensional protagonists. Hamlet was complex, philosophical, hesitant — a hero who could not act. He gave Western drama its inner life.</p>
+      <div class="event-impact">The soliloquy was born. The modern self followed.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 378" data-era="discovery">
+      <div class="event-era">Age of Discovery</div>
+      <div class="event-year">1687</div>
+      <h4>Newton Publishes Principia</h4>
+      <p>In <em>Philosophiae Naturalis Principia Mathematica</em>, Newton gave the world the three laws of motion and universal gravitation, explaining the natural world in mathematical terms. His framework would govern physics for two centuries.</p>
+      <div class="event-impact">Apples and planets obeyed the same law.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 424" data-era="revolution">
+      <div class="event-era">Revolutionary Era</div>
+      <div class="event-year">1776</div>
+      <h4>Independence Declared</h4>
+      <p>On July 4, the Continental Congress approved the Declaration of Independence. Thomas Jefferson outlined the colonists' grievances against the king and articulated "unalienable rights" of life, liberty, and the pursuit of happiness.</p>
+      <div class="event-impact">A philosophical claim became a country.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 433" data-era="revolution">
+      <div class="event-era">Revolutionary Era</div>
+      <div class="event-year">1789</div>
+      <h4>Mob Storms the Bastille</h4>
+      <p>On July 14, a mob stormed France's Bastille prison after King Louis XVI's troops ignored his order to fire on the citizens. The Bastille fell — and the French Revolution began. The monarchy would not survive it.</p>
+      <div class="event-impact">The age of kings was ending; the age of citizens had begun.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 451" data-era="revolution">
+      <div class="event-era">Revolutionary Era</div>
+      <div class="event-year">1804</div>
+      <h4>Haiti Freed From France</h4>
+      <p>Former slave and military leader Toussaint-Louverture led the only successful slave revolt in modern history. Haiti became the second country in the Americas — after the United States — to be free of colonial rule, and the first founded by formerly enslaved people.</p>
+      <div class="event-impact">Slavery, in one place, was undone by the slaves themselves.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 489" data-era="revolution">
+      <div class="event-era">Revolutionary Era</div>
+      <div class="event-year">1831</div>
+      <h4>Darwin Sails on the Beagle</h4>
+      <p>Charles Darwin embarked on a five-year voyage to South America and the Pacific, collecting plants, animals, and fossils. Observations of Galápagos finches — beaks adapted to local foods — would lead him to the theory of natural selection.</p>
+      <div class="event-impact">Life had a history. Species changed. We were not designed; we descended.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 507" data-era="revolution">
+      <div class="event-era">Revolutionary Era</div>
+      <div class="event-year">1844</div>
+      <h4>Morse Sends a Telegraph</h4>
+      <p>The first message — "What hath God wrought!" — traveled between Washington, D.C., and Baltimore. Distance, the great enemy of news, was suddenly nearly defeated. The world had begun to think in real time.</p>
+      <div class="event-impact">Messages now traveled faster than horses.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 517" data-era="revolution">
+      <div class="event-era">Revolutionary Era</div>
+      <div class="event-year">1848</div>
+      <h4>The Communist Manifesto</h4>
+      <p>Karl Marx and Friedrich Engels published the slim pamphlet that would convulse the next century and a half. They argued that all of history was the history of class struggle — and predicted that the working class would inherit the world.</p>
+      <div class="event-impact">An idea armed itself, and would soon take half the planet.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 526" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1853</div>
+      <h4>Perry Opens Japan</h4>
+      <p>Commodore Matthew C. Perry steamed into Edo Bay with four black warships. He refused to leave until Japan opened to trade. The Treaty of Kanagawa ended 200 years of self-imposed isolation — and sent Japan racing into the modern industrial age.</p>
+      <div class="event-impact">A closed door was forced open; a samurai nation became an industrial empire.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 540" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1859</div>
+      <h4>On the Origin of Species</h4>
+      <p>Charles Darwin published the book that would transform biology. Every copy sold out the first day. Most scientists were impressed; much of the public was outraged at the removal of God from the evolutionary process.</p>
+      <div class="event-impact">Six years of voyage, twenty years of caution, one explosive book.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 546" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1863</div>
+      <h4>Emancipation Proclamation</h4>
+      <p>Lincoln issued the proclamation declaring "all persons held as slaves" within rebellious states "shall be then, thenceforward, and forever free." Though limited in immediate effect, it transformed the Civil War's moral meaning.</p>
+      <div class="event-impact">A war for the Union became a war for freedom.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 570" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1876</div>
+      <h4>Bell Invents the Telephone</h4>
+      <p>"Mr. Watson, come here, I want you." With those words spoken into a liquid transmitter on March 10, Alexander Graham Bell completed the first telephone call. Within five years, telephone exchanges were operating in most major cities and towns in the United States.</p>
+      <div class="event-impact">The human voice escaped the room.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 574" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1879</div>
+      <h4>Edison Perfects the Lightbulb</h4>
+      <p>After testing hundreds of materials for the filament, Edison arrived at carbonized sewing thread. With a lower electrical current and a better vacuum, he had a light that would burn for hours. By 1882, his Pearl Street station served 59 customers in Manhattan.</p>
+      <div class="event-impact">Night was no longer dark.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 645" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1903</div>
+      <h4>First Flight at Kitty Hawk</h4>
+      <p>On December 17, watched by four men and a boy, the Wright Flyer lifted off the windy sands of Kitty Hawk and flew for 12 seconds before thudding into the ground 120 feet away. It was the first controlled, piloted flight of a heavier-than-air machine.</p>
+      <div class="event-impact">Twelve seconds altered the geography of the world.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 647" data-era="imperial">
+      <div class="event-era">Age of Imperialism</div>
+      <div class="event-year">1905</div>
+      <h4>Einstein's Special Relativity</h4>
+      <p>In a single year, the 26-year-old patent clerk published four papers that overturned classical physics. The most famous proposed that space and time were not absolute, that mass and energy were two forms of one thing, that the universe was stranger than anyone had imagined. E = mc².</p>
+      <div class="event-impact">Time itself depended on the observer.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 685" data-era="war">
+      <div class="event-era">World War Years</div>
+      <div class="event-year">1914</div>
+      <h4>The Great War Erupts</h4>
+      <p>A gunman in Sarajevo killed Archduke Franz Ferdinand. Within five weeks, Europe was at war. By the time it ended four years later, an entire generation had been buried in the mud of France, and four empires had fallen.</p>
+      <div class="event-impact">The world Europeans had built was incinerated in the trenches.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 699" data-era="war">
+      <div class="event-era">World War Years</div>
+      <div class="event-year">1917</div>
+      <h4>Russian Revolution</h4>
+      <p>Tsar Nicholas II abdicated in March. In November, Vladimir Lenin's Bolsheviks seized power, promising peace, land, and bread. The largest experiment in revolutionary socialism in history had begun. Within decades, it would govern a third of humanity.</p>
+      <div class="event-impact">A 300-year dynasty ended; the Soviet century began.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 764" data-era="war">
+      <div class="event-era">World War Years</div>
+      <div class="event-year">1933</div>
+      <h4>Hitler Takes Power</h4>
+      <p>On January 30, Paul von Hindenburg named Adolf Hitler chancellor. Within weeks, an emergency decree suspended civil rights. Within months, dictatorship was complete. The Reichstag had voted itself out of existence.</p>
+      <div class="event-impact">Democracy can vote itself out of existence in a single election.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 810" data-era="war">
+      <div class="event-era">World War Years</div>
+      <div class="event-year">1941</div>
+      <h4>Pearl Harbor Attacked</h4>
+      <p>On Sunday, December 7, Japanese warplanes took off from six aircraft carriers near Oahu and attacked the U.S. Pacific Fleet. Two battleships destroyed, nearly 200 aircraft wrecked, more than 2,300 troops killed. "A day which will live in infamy."</p>
+      <div class="event-impact">An ocean that had protected America was suddenly a battlefield.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 833" data-era="war">
+      <div class="event-era">World War Years</div>
+      <div class="event-year">1945</div>
+      <h4>The Atomic Age</h4>
+      <p>On August 6, "Little Boy" exploded over Hiroshima. Three days later, "Fat Man" devastated Nagasaki. Together, the bombs killed nearly 120,000 people instantly, ending World War II — and beginning a new era in which humanity could destroy itself.</p>
+      <div class="event-impact">For the first time, a species could end itself.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 836" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1945</div>
+      <h4>United Nations Born</h4>
+      <p>Framed to "save succeeding generations from the scourge of war," the UN replaced the failed League of Nations. Fifty-one founding members agreed to create the first global organization designed to keep the peace and uphold human rights.</p>
+      <div class="event-impact">For the first time, every nation had a forum, however imperfect.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 867" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1953</div>
+      <h4>The Double Helix</h4>
+      <p>Francis Crick and James Watson, drawing on Rosalind Franklin's x-ray crystallography, described DNA's molecular structure. A simple, elegant ladder that unzipped to copy itself. The code of life had been broken.</p>
+      <div class="event-impact">Life turned out to be written in a four-letter alphabet.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 880" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1957</div>
+      <h4>Sputnik Launched</h4>
+      <p>The Soviet Union placed the first artificial satellite in orbit. About the size of a basketball, Sputnik shocked the world. The United States raced to catch up. The Space Race had begun.</p>
+      <div class="event-impact">A beeping metal ball changed the gravity of the Cold War.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 895" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1962</div>
+      <h4>Standoff Over Cuba</h4>
+      <p>U-2 spy planes photographed Soviet missile sites in Cuba. For thirteen days, the world held its breath as Kennedy and Khrushchev came as close to nuclear war as anyone has come since. The Soviets withdrew. Both sides blinked.</p>
+      <div class="event-impact">For thirteen days, the world stared into the abyss and stepped back.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 925" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1969</div>
+      <h4>Man Walks on the Moon</h4>
+      <p>Neil Armstrong stepped down onto the lunar surface as 600 million people watched or listened. "That's one small step for [a] man, one giant leap for mankind." A species born on the savanna had stood on another world.</p>
+      <div class="event-impact">For one summer, every human eye looked up together.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 973" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1989</div>
+      <h4>The Berlin Wall Falls</h4>
+      <p>On November 9, the East German government opened the wall that had divided Berlin since 1961. Jubilant crowds sang "Wir sind ein Volk" — "We are one people." The Cold War was effectively over.</p>
+      <div class="event-impact">A concrete symbol of division was dismantled brick by brick.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 981" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">1991</div>
+      <h4>The Web Goes Worldwide</h4>
+      <p>Tim Berners-Lee, working at CERN, needed software to organize his files "in a brain-like way." He built HTML and HTTP and gave them away for free. Within five years, the number of Internet users grew from 600,000 to 40 million.</p>
+      <div class="event-impact">A library larger than the universe was made available to everyone.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 994" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">2001</div>
+      <h4>Terrorists Attack U.S.</h4>
+      <p>On September 11, four hijacked airliners changed history. Nearly 3,000 people died as the World Trade Center towers collapsed, the Pentagon burned, and a fourth plane crashed in Pennsylvania. The twenty-first century had found its first defining trauma.</p>
+      <div class="event-impact">A new century learned what it meant to be vulnerable.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 993" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">2001</div>
+      <h4>The Genome Decoded</h4>
+      <p>The Human Genome Project successfully decoded human DNA, identifying the 30,000 genes and 3 billion DNA base pairs that make up the human species — an "instruction manual" for how the human body is built.</p>
+      <div class="event-impact">For the first time, a species read its own design.</div>
+    </article>
+
+    <article class="event-card" data-num="№ 1000" data-era="modern">
+      <div class="event-era">Modern Age</div>
+      <div class="event-year">2007</div>
+      <h4>New Planet Found</h4>
+      <p>Astronomers discovered Gliese 581 c, the first known planet beyond the solar system that could harbor life as we know it. Only 20.5 light-years away, in the constellation Libra, it may contain liquid water — and perhaps something more.</p>
+      <div class="event-impact">We are no longer alone in being possible.</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ DEEP DIVE MOMENTS ============ -->
+<section class="moments">
+
+  <article class="moment">
+    <div class="moment-inner">
+      <div class="moment-meta">
+        <div class="moment-number">№ 1</div>
+        <div class="moment-year">3.8 Billion Years Ago</div>
+        <div class="moment-era">Origins</div>
+      </div>
+      <div class="moment-body">
+        <h3>Life <em>Begins</em></h3>
+        <p class="moment-lede">Out of the torrid conditions that would paralyze almost all forms of life today, the first heat-loving, sulfur-eating, oxygen-loathing bacteria are theorized to have emerged, setting off a chain reaction of unprecedented proportions.</p>
+        <p>Earth was a very different place. Abundant volcanoes and hydrothermal vents spewed massive amounts of sulfur and methane into a thin atmosphere nearly devoid of oxygen. Meteorites, comets, and lightning strikes continually pounded the planet, bringing additional elements from space. It was hot — likely over 200°F. And yet, in this hostile chemistry, something happened that has happened nowhere else in our universe that we know of: matter became alive.</p>
+        <p>Evidence of the earliest life forms appears in the fossil record around 480 million years ago. Bacteria and possibly some algae moved from the oceans and fresh water to evolve into land plants; fungi branched into animals. Every cell of every living thing on the planet today — the redwoods, the whales, the moss, the reader of these words — traces its lineage in an unbroken chain back to one of those first cells.</p>
+        <div class="moment-stats">
+          <div class="moment-stat">
+            <span class="num">3.8B</span>
+            <span class="lbl">Years of Life</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">200°F</span>
+            <span class="lbl">Early Earth Temp</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">~0%</span>
+            <span class="lbl">Atmospheric O₂</span>
+          </div>
+        </div>
+        <blockquote class="moment-pullquote">
+          The deepest darkness of caverns, a male, and the moonless darkness of night, a female, gave birth to the simple life-forms of the sea.
+          <cite>— The Kumulipo, Ancient Hawaiian Chant</cite>
+        </blockquote>
+        <p>From a single ancestor: every breath, every birdsong, every kingdom and species. The story you are about to read is, in a sense, the story of what one resilient molecule has done with four billion years.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="moment">
+    <div class="moment-inner">
+      <div class="moment-meta">
+        <div class="moment-number">№ 18</div>
+        <div class="moment-year">9,000 B.C.E.</div>
+        <div class="moment-era">Ancient World</div>
+      </div>
+      <div class="moment-body">
+        <h3>The Origins of <em>Agriculture</em></h3>
+        <p class="moment-lede">Around 9000 B.C.E., a regional dry spell in the Middle East limited the amount of wild grain available for harvesting. With a lifestyle dependent on these grains, settled communities began to plant their own.</p>
+        <p>The practice of agriculture, and the domestication of animals, arose quickly in different parts of the world: in the Americas by 8000 B.C.E., Africa and India by 7000 B.C.E., and in East Asia and Europe by 6000 B.C.E. Each area cultivated its own regional foods, though a number of crops were spread across geographic boundaries by traders and migrants.</p>
+        <p>The consequences cascaded across millennia. Food surpluses freed people from constant foraging. Surpluses also meant specialization — some hands could devote themselves to pottery, others to writing, others to soldiering. Villages grew into cities. Cities became kingdoms. Kingdoms eventually became nations. Widespread deforestation and animal-borne diseases were the unintended companions of this transformation.</p>
+        <div class="moment-stats">
+          <div class="moment-stat">
+            <span class="num">11,000</span>
+            <span class="lbl">Years Ago</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">7</span>
+            <span class="lbl">Independent Origins</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">99%</span>
+            <span class="lbl">Of Humanity's History Predates It</span>
+          </div>
+        </div>
+        <p>Hunter-gatherer societies continued to flourish in some areas, but the sedentary agricultural village became — for better and worse — the primary way of life for humankind. We had not invented farming so much as we had been recruited by it. Grasses had found in us a transportation network. We had found in them a contract: settle down, work harder than your ancestors ever did, and food will be plentiful enough to feed children, and their children, and their children.</p>
+        <blockquote class="moment-pullquote">
+          Humans stopped following food. Food began to follow humans. From this single act flow cities, writing, kings, mathematics, hierarchy, slavery, philosophy, and the modern world.
+        </blockquote>
+      </div>
+    </div>
+  </article>
+
+  <article class="moment">
+    <div class="moment-inner">
+      <div class="moment-meta">
+        <div class="moment-number">№ 244</div>
+        <div class="moment-year">1455</div>
+        <div class="moment-era">Age of Discovery</div>
+      </div>
+      <div class="moment-body">
+        <h3>Gutenberg <em>Prints</em> the Bible</h3>
+        <p class="moment-lede">Literacy's watershed moment came to humanity when the German inventor Johannes Gutenberg altered a wine press to create the first modern printing press in Europe.</p>
+        <p>Using the machine's heavy screw to press a printing block on a sheet of paper, Gutenberg pioneered a method that would remain largely unchanged until the 20th century. To produce enough of each letter for his type, he devised a punch-stamp mold that could cut precise letters en masse. A new metal alloy for the type and an oil-based ink completed his system.</p>
+        <p>Bringing forth his 42-line Bible in 1455, Gutenberg changed the course of history. Suddenly books could be had relatively cheaply, inspiring many middle-class people to learn to read. Writers published in the vernacular rather than Latin, strengthening the diverse Romance languages in Europe today.</p>
+        <blockquote class="moment-pullquote">
+          The press was capable of producing about 240 pages per hour. Before, a single Bible had taken a scribe a year of his life. After, an apprentice could produce one in an afternoon.
+        </blockquote>
+        <p>Despite the importance of this event in retrospect, Gutenberg's financier sued him for the rights to his printing enterprise and grew rich while the inventor died in relative obscurity. He had given the modern world a thousand voices and could no longer afford his own.</p>
+        <div class="moment-stats">
+          <div class="moment-stat">
+            <span class="num">42</span>
+            <span class="lbl">Lines Per Page</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">240</span>
+            <span class="lbl">Pages Per Hour</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">180</span>
+            <span class="lbl">Bibles First Printed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="moment">
+    <div class="moment-inner">
+      <div class="moment-meta">
+        <div class="moment-number">№ 925</div>
+        <div class="moment-year">July 20, 1969</div>
+        <div class="moment-era">Modern Age</div>
+      </div>
+      <div class="moment-body">
+        <h3>A Man Walks <em>on the Moon</em></h3>
+        <p class="moment-lede">The crew of Apollo 11 — Neil Armstrong, Buzz Aldrin, and Michael Collins — began their 240,000-mile journey on July 16, 1969. Four days later, Armstrong and Aldrin boarded the lunar module Eagle for the dangerous descent.</p>
+        <p>Despite alarms blasting in the Eagle and boulders threatening on the lunar surface, Armstrong piloted the craft to a safe landing — with just 30 seconds of fuel remaining. On July 20, 1969, at 10:56 p.m. Eastern time, he stepped down onto the moon's surface. As 600 million people watched or listened — the largest single audience for any human event before or since — he spoke the words: "That's one small step for [a] man, one giant leap for mankind."</p>
+        <div class="moment-stats">
+          <div class="moment-stat">
+            <span class="num">240K</span>
+            <span class="lbl">Miles Traveled</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">600M</span>
+            <span class="lbl">Watching Worldwide</span>
+          </div>
+          <div class="moment-stat">
+            <span class="num">30s</span>
+            <span class="lbl">Of Fuel Remaining</span>
+          </div>
+        </div>
+        <blockquote class="moment-pullquote">
+          We came in peace for all mankind.
+          <cite>— Plaque Left on the Moon, Apollo 11</cite>
+        </blockquote>
+        <p>The crew returned to Earth with moon rocks and powdery dust. They left behind an American flag, a patch honoring the astronauts who perished in the fire of Apollo 1, and that plaque. For a species born on the savanna, ten thousand years from agriculture, sixty-six years from the first powered flight — to have walked on another world is, in a sense, the central event of our time, and perhaps of any time.</p>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ============ FIRST PERSON TESTIMONIES ============ -->
+<section class="testimonies">
+  <div class="testimonies-header">
+    <div class="eyebrow" style="color: var(--gold-bright);">First Person · Eyewitnesses to History</div>
+    <h2>Voices from <em>Within</em> the Storm</h2>
+    <p>Across the centuries, the people who lived through these moments left us their words. Listen.</p>
+  </div>
+  <div class="testimonies-grid">
+
+    <div class="testimony">
+      <p class="testimony-text">I am Odysseus, son of Laertes, who am known among men for all manner of wiles, and my fame reaches unto heaven. So true is it that naught is sweeter than a man's own land and his parents, even though it be in a rich house that he dwells afar in a foreign land.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Homer</div>
+        <div class="testimony-context">The Odyssey · ca 750 B.C.E.</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">At fifteen, I had my mind bent on learning. At thirty, I stood firm. At forty, I had no doubts. At fifty, I knew the decrees of Heaven. At sixty, my ear was an obedient organ. At seventy, I could follow what my heart desired, without transgressing what was right.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Confucius</div>
+        <div class="testimony-context">The Analects · ca 500 B.C.E.</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">The body is a source of endless trouble to us. For whence come wars, and fightings, and factions? Whence but from the body and the lusts of the body? Wars are occasioned by the love of money, and money has to be acquired for the sake of the body.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Socrates, via Plato</div>
+        <div class="testimony-context">Euthyphro · ca 450 B.C.E.</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">In a short space of time the tumours spread from the two parts named all over the body. These spots were a certain sign of death. Brother abandoned brother, the uncle his nephew, the sister her brother, and very often the wife her husband. Fathers and mothers refused to see and tend their children.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Giovanni Boccaccio</div>
+        <div class="testimony-context">The Decameron · 1350</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">Suddenly, it became pitch dark. The last thing I saw was the ash being pushed up through the cracks in the floorboards, like a fountain. I turned to my husband and heard him say in despair, "Where is the knife... I will cut all our wrists and then we shall be released from our suffering sooner."</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Wife of the Controller</div>
+        <div class="testimony-context">Krakatau Eruption · 1883</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">I have a dream that one day this nation will rise up and live out the true meaning of its creed: We hold these truths to be self-evident, that all men are created equal. I have a dream that one day my four little children will not be judged by the color of their skin but by the content of their character.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Dr. Martin Luther King, Jr.</div>
+        <div class="testimony-context">Washington, D.C. · 1963</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">I felt no great elation at first, just relief and a sense of wonder. Then I turn to Tenzing and shake his hand. Even through the snow glasses, the ice-encrusted mask, the knitted helmet, I can see that happy, flashing smile.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Sir Edmund Hillary</div>
+        <div class="testimony-context">Summit of Everest · 1953</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">All I was trying to do was get home from work. The driver said, "You'd better let me have those seats." When the three people stood up and moved into the aisle, I remained where I was. After I had paid my fare and occupied a seat, I didn't think I should have to give it up.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Rosa Parks</div>
+        <div class="testimony-context">Montgomery, Alabama · 1955</div>
+      </div>
+    </div>
+
+    <div class="testimony">
+      <p class="testimony-text">The vast loneliness is awe-inspiring and it makes you realize just what you have back there on Earth. And from the crew of Apollo 8, we close with good night, good luck, a Merry Christmas, and God bless all of you — all of you on the good Earth.</p>
+      <div class="testimony-attr">
+        <div class="testimony-name">Frank Borman, Apollo 8</div>
+        <div class="testimony-context">Lunar Orbit · Christmas Eve 1968</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ THEMES ============ -->
+<section class="themes">
+  <div class="section-header">
+    <div class="eyebrow">Threads in the Tapestry · Universal Themes</div>
+    <h2>The <em>Patterns</em> Beneath</h2>
+    <p>Empires rise and fall. Inventions cascade across centuries. Five universal threads weave the chronicle together.</p>
+  </div>
+  <div class="themes-grid">
+
+    <article class="theme-card">
+      <svg class="theme-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="25" cy="25" r="18"/>
+        <path d="M25 7 L25 43 M7 25 L43 25"/>
+        <circle cx="25" cy="25" r="3" fill="currentColor"/>
+      </svg>
+      <h4>The Spread of Ideas</h4>
+      <p>From cuneiform to the printing press to the internet. Each leap in communication compresses time and distance, allowing ideas to outlive their thinkers and travel where their authors could not.</p>
+    </article>
+
+    <article class="theme-card">
+      <svg class="theme-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 40 L25 10 L40 40 Z"/>
+        <path d="M16 30 L34 30"/>
+      </svg>
+      <h4>The Mastery of Energy</h4>
+      <p>Fire. Animals. Wind. Steam. Electricity. The atom. Each new source of power has reshaped what humans can build, where they can live, and how many of them can exist together.</p>
+    </article>
+
+    <article class="theme-card">
+      <svg class="theme-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 25 Q25 5, 40 25 Q25 45, 10 25 Z"/>
+        <circle cx="25" cy="25" r="6"/>
+        <circle cx="25" cy="25" r="2" fill="currentColor"/>
+      </svg>
+      <h4>The Search for Knowledge</h4>
+      <p>Babylonian stargazers, Greek philosophers, Arab mathematicians, Renaissance dissectors, modern physicists. Across cultures and centuries, the same question: <em>What is real, and how can we know?</em></p>
+    </article>
+
+    <article class="theme-card">
+      <svg class="theme-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="10" y="15" width="30" height="25" rx="2"/>
+        <path d="M10 25 L40 25"/>
+        <path d="M25 15 L25 40"/>
+        <circle cx="25" cy="11" r="3"/>
+      </svg>
+      <h4>The Rise of Rights</h4>
+      <p>From Hammurabi's code to the Magna Carta, from the Declaration of Independence to the Universal Declaration of Human Rights. The slow, contested, never-finished work of extending dignity to everyone.</p>
+    </article>
+
+    <article class="theme-card">
+      <svg class="theme-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 35 Q25 10, 40 35"/>
+        <path d="M10 35 L40 35"/>
+        <circle cx="25" cy="22" r="2" fill="currentColor"/>
+        <path d="M25 24 L25 35"/>
+      </svg>
+      <h4>Migration and Encounter</h4>
+      <p>Out of Africa. Across Beringia. Around the Cape. To the Americas. Across the Pacific. To the moon. Movement is the human signature, and every encounter — peaceful or violent — has remade the world.</p>
+    </article>
+
+    <article class="theme-card">
+      <svg class="theme-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M15 10 L15 40 M35 10 L35 40 M10 15 L40 15 M10 35 L40 35"/>
+        <circle cx="25" cy="25" r="5"/>
+      </svg>
+      <h4>Empire and its Discontents</h4>
+      <p>Sumer. Rome. China. Mongolia. Islam. Britain. The United States. Empires arise, prosper, overextend, and fragment — but they leave behind languages, laws, roads, and grievances that long outlive them.</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing">
+  <div class="closing-inner">
+    <div class="eyebrow">A Final Word</div>
+    <h2>The story is not yet <em>finished</em>.</h2>
+    <p>From the first cell in a warm, dark ocean to the first message sent across a continent, from the first cave painting to the first photograph of Earth from the moon — each event in this chronicle was once the future.</p>
+    <div class="closing-ornament"></div>
+    <p>The next thousand events are being lived now, in places we have not yet thought to look, by people who do not yet know they will be remembered.</p>
+  </div>
+</section>
+
+<footer>
+  <span class="ng-mark">National Geographic</span>
+  <p>1000 Events That Shaped the World · Foreword by Jared Diamond</p>
+  <p style="margin-top: 0.5rem; opacity: 0.6;">A visual exploration · Crafted with reverence for the source material</p>
+</footer>
+
+<script>
+  // ============ INTERSECTION OBSERVER FOR REVEALS ============
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.era-card, .event-card, .theme-card, .testimony, .moment-inner').forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+
+  // ============ FILTER FUNCTIONALITY ============
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const eventCards = document.querySelectorAll('.event-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active state
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+
+      eventCards.forEach(card => {
+        if (filter === 'all' || card.dataset.era === filter) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+
+  // ============ SMOOTH TIMELINE SCROLL ============
+  const timelineTrack = document.querySelector('.timeline-track');
+  if (timelineTrack) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    timelineTrack.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - timelineTrack.offsetLeft;
+      scrollLeft = timelineTrack.scrollLeft;
+      timelineTrack.style.cursor = 'grabbing';
+    });
+
+    timelineTrack.addEventListener('mouseleave', () => {
+      isDown = false;
+      timelineTrack.style.cursor = 'grab';
+    });
+
+    timelineTrack.addEventListener('mouseup', () => {
+      isDown = false;
+      timelineTrack.style.cursor = 'grab';
+    });
+
+    timelineTrack.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - timelineTrack.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      timelineTrack.scrollLeft = scrollLeft - walk;
+    });
+
+    timelineTrack.style.cursor = 'grab';
+  }
+
+  // ============ HERO PARALLAX ============
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.querySelector('.hero');
+    if (hero && scrolled < window.innerHeight) {
+      hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+      hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+    }
+  });
+</script>
+
+</body>
+</html>

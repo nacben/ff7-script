@@ -1,0 +1,2263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日本語文法 — Japanese Grammar Patterns</title>
+<meta name="description" content="A comprehensive, beautifully typeset reference of Japanese grammar patterns from N5 to N1, with furigana and example sentences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ====== TOKENS ====== */
+:root {
+  --paper:        #faf7f0;
+  --paper-2:      #f3ede0;
+  --ink:          #1a1a22;
+  --ink-soft:     #3a3a45;
+  --ink-mute:     #6b6b7a;
+  --line:         #d9d1bf;
+  --line-soft:    #ece5d3;
+  --shu:          #b8392c;   /* vermillion */
+  --shu-soft:     #d8665a;
+  --gold:         #b8860b;
+  --indigo:       #2b3a67;
+  --moss:         #4a6d3a;
+  --t1: #b8392c; --t2: #c97b3b; --t3: #b8860b; --t4: #4a6d3a; --t5: #2b3a67;
+  --shadow:       0 1px 0 rgba(26,26,34,.04), 0 12px 32px -16px rgba(26,26,34,.18);
+  --radius:      18px;
+  --radius-sm:   10px;
+  --serif: "Noto Serif JP", "Cormorant Garamond", "Times New Roman", serif;
+  --sans:  "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --jp:    "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --jp-sans:"Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+[data-theme="dark"] {
+  --paper:        #14141a;
+  --paper-2:      #1c1c25;
+  --ink:          #f1ede2;
+  --ink-soft:     #cfcbbf;
+  --ink-mute:     #8d8a80;
+  --line:         #2d2d39;
+  --line-soft:    #22222c;
+  --shu:          #e87263;
+  --shu-soft:     #f0998d;
+  --gold:         #e6c267;
+  --indigo:       #8aa0d6;
+  --moss:         #9ac084;
+  --t1: #e87263; --t2: #e8a26b; --t3: #e6c267; --t4: #9ac084; --t5: #8aa0d6;
+  --shadow:       0 1px 0 rgba(0,0,0,.4), 0 12px 32px -16px rgba(0,0,0,.6);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background .25s ease, color .25s ease;
+}
+
+/* ====== BACKGROUND PATTERN ====== */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(184,57,44,.05), transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(43,58,103,.04), transparent 50%);
+}
+[data-theme="dark"] body::before {
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(232,114,99,.06), transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(138,160,214,.05), transparent 50%);
+}
+
+/* ====== HEADER ====== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; gap: 18px;
+  padding: 14px 24px;
+}
+.brand {
+  display: flex; align-items: baseline; gap: 12px;
+  text-decoration: none; color: var(--ink);
+  font-family: var(--serif); font-weight: 600;
+}
+.brand .kanji { font-size: 22px; font-family: var(--jp); letter-spacing: .04em; }
+.brand .romaji { font-size: 13px; color: var(--ink-mute); letter-spacing: .14em; text-transform: uppercase; }
+.topbar .spacer { flex: 1; }
+.search {
+  position: relative; display: flex; align-items: center;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px 8px 38px;
+  width: min(360px, 40vw);
+  transition: border-color .15s, box-shadow .15s;
+}
+.search:focus-within { border-color: var(--shu); box-shadow: 0 0 0 3px color-mix(in srgb, var(--shu) 18%, transparent); }
+.search input {
+  border: 0; outline: 0; background: transparent;
+  color: var(--ink); font: inherit; width: 100%;
+}
+.search svg { position: absolute; left: 12px; color: var(--ink-mute); }
+.search kbd {
+  font: 11px var(--sans); color: var(--ink-mute);
+  border: 1px solid var(--line); border-radius: 4px;
+  padding: 1px 5px; background: var(--paper);
+}
+.theme-btn {
+  border: 1px solid var(--line);
+  background: var(--paper-2); color: var(--ink);
+  border-radius: 999px; padding: 8px 12px;
+  font: 13px/1 var(--sans); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: border-color .15s, background .15s;
+}
+.theme-btn:hover { border-color: var(--shu); }
+
+/* ====== HERO ====== */
+.hero {
+  position: relative;
+  max-width: 1320px; margin: 0 auto;
+  padding: 80px 24px 36px;
+  z-index: 1;
+}
+.hero h1 {
+  font-family: var(--jp);
+  font-weight: 600;
+  font-size: clamp(40px, 7vw, 84px);
+  line-height: 1.05;
+  margin: 0 0 14px;
+  letter-spacing: .02em;
+}
+.hero h1 .red { color: var(--shu); }
+.hero .subtitle {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.6vw, 30px);
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0 0 28px;
+}
+.hero .lede {
+  max-width: 720px;
+  font-size: 17px; color: var(--ink-soft);
+}
+.hero-meta {
+  margin-top: 36px;
+  display: flex; flex-wrap: wrap; gap: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.hero-meta .stat .n {
+  display: block;
+  font-family: var(--serif); font-weight: 600;
+  font-size: 34px; color: var(--shu);
+  line-height: 1;
+}
+.hero-meta .stat .l {
+  font-size: 11px; color: var(--ink-mute);
+  letter-spacing: .16em; text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ====== TIER LEGEND ====== */
+.legend {
+  max-width: 1320px; margin: 24px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  position: relative; z-index: 1;
+}
+.tier-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 18px;
+  background: var(--paper-2);
+  cursor: pointer;
+  transition: transform .15s, border-color .15s, box-shadow .2s;
+  text-align: left;
+  font: inherit; color: inherit;
+}
+.tier-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.tier-card .stars { color: var(--gold); font-size: 13px; letter-spacing: .15em; }
+.tier-card .name { font-family: var(--serif); font-weight: 600; font-size: 22px; margin: 4px 0 2px; }
+.tier-card .name .n { color: var(--ink-mute); font-size: 13px; margin-left: 6px; letter-spacing: .1em; }
+.tier-card .desc { color: var(--ink-mute); font-size: 13.5px; line-height: 1.45; }
+.tier-card .count { float: right; font-family: var(--serif); font-size: 28px; color: var(--shu); line-height: 1; }
+.tier-card[data-tier="1"] { border-left: 4px solid var(--t1); }
+.tier-card[data-tier="2"] { border-left: 4px solid var(--t2); }
+.tier-card[data-tier="3"] { border-left: 4px solid var(--t3); }
+.tier-card[data-tier="4"] { border-left: 4px solid var(--t4); }
+.tier-card[data-tier="5"] { border-left: 4px solid var(--t5); }
+
+/* ====== TOOLBAR ====== */
+.toolbar {
+  max-width: 1320px; margin: 36px auto 8px;
+  padding: 0 24px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  position: relative; z-index: 1;
+}
+.chip {
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink-soft);
+  font: 13px/1 var(--sans);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.chip:hover { border-color: var(--shu); color: var(--ink); }
+.chip .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block;
+}
+.chip[data-tier="1"] .dot { background: var(--t1); }
+.chip[data-tier="2"] .dot { background: var(--t2); }
+.chip[data-tier="3"] .dot { background: var(--t3); }
+.chip[data-tier="4"] .dot { background: var(--t4); }
+.chip[data-tier="5"] .dot { background: var(--t5); }
+.chip.active {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink);
+}
+.toolbar .info { margin-left: auto; color: var(--ink-mute); font-size: 13px; }
+
+/* ====== LAYOUT ====== */
+.layout {
+  max-width: 1320px; margin: 0 auto;
+  padding: 24px 24px 120px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 48px;
+  position: relative; z-index: 1;
+}
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  position: sticky; top: 80px;
+  align-self: start;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 8px;
+  font-size: 13px;
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+.sidebar h3 {
+  font-family: var(--serif); font-size: 11px; letter-spacing: .2em;
+  color: var(--ink-mute); text-transform: uppercase;
+  margin: 18px 0 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sidebar h3::before {
+  content: ""; width: 14px; height: 2px; background: var(--shu); display: inline-block;
+}
+.sidebar .group:first-child h3 { margin-top: 0; }
+.sidebar a {
+  display: block;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border-left: 2px solid transparent;
+  margin-bottom: 1px;
+  transition: all .12s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sidebar a:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+  border-left-color: var(--shu);
+}
+.sidebar a .jp { font-family: var(--jp); margin-right: 6px; color: var(--ink); }
+.sidebar a .en { color: var(--ink-mute); font-size: 11.5px; }
+
+/* ====== TIER SECTION ====== */
+.tier-section {
+  margin-bottom: 80px;
+}
+.tier-header {
+  display: flex; align-items: baseline; gap: 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 28px;
+  position: relative;
+}
+.tier-header::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 80px; height: 2px;
+  background: var(--shu);
+}
+.tier-header .stars { color: var(--gold); font-size: 16px; letter-spacing: .12em; }
+.tier-header .title {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 36px; margin: 0;
+}
+.tier-header .level {
+  font-family: var(--serif); font-style: italic;
+  color: var(--ink-mute); font-size: 18px;
+}
+.tier-header .pill {
+  margin-left: auto;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  padding: 4px 12px; border-radius: 999px;
+  font-size: 12px; color: var(--ink-mute);
+  letter-spacing: .1em;
+}
+
+/* ====== ENTRY CARD ====== */
+.entry {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  padding: 28px 32px 32px;
+  margin-bottom: 22px;
+  transition: border-color .15s, box-shadow .2s, transform .15s;
+  scroll-margin-top: 96px;
+}
+.entry:hover { border-color: var(--shu); box-shadow: var(--shadow); }
+.entry::before {
+  content: "";
+  position: absolute;
+  left: -1px; top: 22px; bottom: 22px;
+  width: 3px; border-radius: 3px;
+}
+.entry[data-tier="1"]::before { background: var(--t1); }
+.entry[data-tier="2"]::before { background: var(--t2); }
+.entry[data-tier="3"]::before { background: var(--t3); }
+.entry[data-tier="4"]::before { background: var(--t4); }
+.entry[data-tier="5"]::before { background: var(--t5); }
+
+.entry-head {
+  display: flex; align-items: baseline;
+  flex-wrap: wrap; gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 18px;
+}
+.entry-title {
+  font-family: var(--jp); font-weight: 600;
+  font-size: 38px; color: var(--shu);
+  margin: 0; line-height: 1;
+  letter-spacing: .02em;
+}
+.entry-reading {
+  font-family: var(--serif); font-style: italic;
+  color: var(--ink-mute); font-size: 18px;
+}
+.entry-reading::before { content: "/ "; opacity: .5; }
+.entry-reading::after { content: " /"; opacity: .5; }
+.entry-gloss {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 22px; color: var(--ink);
+  margin-left: 6px;
+}
+.entry-gloss::before {
+  content: "—"; color: var(--ink-mute); margin-right: 10px; font-weight: 400;
+}
+
+.entry-desc {
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  margin: 0 0 18px;
+}
+.entry-desc b { color: var(--ink); font-weight: 600; }
+
+.entry-form {
+  display: inline-block;
+  background: var(--paper-2);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-family: var(--jp-sans);
+  font-size: 14.5px;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.entry-form b {
+  color: var(--ink-mute);
+  font: 11px var(--sans); font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+  margin-right: 10px;
+}
+
+.examples { list-style: none; padding: 0; margin: 0; counter-reset: ex; }
+.examples li {
+  position: relative;
+  padding: 10px 0 10px 36px;
+  border-top: 1px solid var(--line-soft);
+  counter-increment: ex;
+}
+.examples li:first-child { border-top: 0; }
+.examples li::before {
+  content: counter(ex);
+  position: absolute; left: 0; top: 13px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--shu);
+  font: 600 11px/22px var(--serif);
+  text-align: center;
+  border: 1px solid var(--line);
+}
+.examples .jp {
+  font-family: var(--jp);
+  font-size: 19px;
+  color: var(--ink);
+  line-height: 1.9;
+  display: block;
+}
+.examples .en {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  font-style: italic;
+  margin-top: 4px;
+}
+.examples ruby rt {
+  font-family: var(--jp-sans);
+  font-size: .52em;
+  color: var(--ink-mute);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.entry.hidden { display: none; }
+.entry mark {
+  background: color-mix(in srgb, var(--gold) 35%, transparent);
+  color: inherit; border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 36px 24px;
+  text-align: center;
+  color: var(--ink-mute);
+  font-size: 13px;
+  background: var(--paper-2);
+  position: relative; z-index: 1;
+}
+footer .seal {
+  display: inline-block;
+  width: 38px; height: 38px;
+  background: var(--shu);
+  color: var(--paper);
+  border-radius: 6px;
+  font: 600 18px/38px var(--jp);
+  margin-bottom: 12px;
+  transform: rotate(-2deg);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 640px) {
+  .topbar .brand .romaji { display: none; }
+  .search { width: auto; flex: 1; }
+  .hero { padding: 56px 20px 24px; }
+  .layout { padding: 12px 16px 80px; }
+  .entry { padding: 22px 20px; }
+  .entry-title { font-size: 30px; }
+  .entry-gloss { font-size: 18px; }
+  .examples .jp { font-size: 17px; }
+}
+
+/* ====== NO RESULTS ====== */
+.empty {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-mute);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+}
+.empty.visible { display: block; }
+.empty .kanji { font-family: var(--jp); font-size: 48px; color: var(--shu); display: block; margin-bottom: 12px; }
+
+/* ====== TIER-SECTION HIDDEN ====== */
+.tier-section.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="kanji">日本語文法</span>
+      <span class="romaji">Nihongo Bunpō</span>
+    </a>
+    <span class="spacer"></span>
+    <label class="search" aria-label="Search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="search" type="search" placeholder="Search particles, meanings, examples…" autocomplete="off">
+      <kbd>/</kbd>
+    </label>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+      <svg id="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <span>Theme</span>
+    </button>
+  </div>
+</header>
+
+<div id="top"></div>
+<section class="hero">
+  <h1>日本語<span class="red">文法</span></h1>
+  <p class="subtitle">A reader's compendium of Japanese grammar — N5 → N1</p>
+  <p class="lede">Particles, copulas, conditionals, conjugations, honorifics — every pattern grouped by frequency of use, with concise descriptions, structural forms, and three living example sentences carrying full furigana.</p>
+  <div class="hero-meta">
+    <div class="stat"><span class="n" id="stat-patterns">—</span><span class="l">Patterns</span></div>
+    <div class="stat"><span class="n">5</span><span class="l">Tiers · N5–N1</span></div>
+    <div class="stat"><span class="n" id="stat-examples">—</span><span class="l">Example sentences</span></div>
+    <div class="stat"><span class="n">漢字</span><span class="l">With furigana</span></div>
+  </div>
+</section>
+
+<section class="legend" id="legend"></section>
+
+<section class="toolbar">
+  <button class="chip active" data-filter="all">All tiers</button>
+  <button class="chip" data-filter="1" data-tier="1"><span class="dot"></span>★★★★★ N5</button>
+  <button class="chip" data-filter="2" data-tier="2"><span class="dot"></span>★★★★ N4</button>
+  <button class="chip" data-filter="3" data-tier="3"><span class="dot"></span>★★★ N3</button>
+  <button class="chip" data-filter="4" data-tier="4"><span class="dot"></span>★★ N2</button>
+  <button class="chip" data-filter="5" data-tier="5"><span class="dot"></span>★ N1</button>
+  <span class="info" id="result-info"></span>
+</section>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar" aria-label="Pattern index"></aside>
+  <main id="main">
+    <div class="empty" id="empty">
+      <span class="kanji">無</span>
+      No patterns match your search.
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="seal">語</div>
+  <div>Crafted for learners of 日本語. Furigana follows the <code>漢字(かんじ)</code> convention from the source index.</div>
+  <div style="margin-top:6px; font-style: italic;">頑張ってください — Good luck on your journey.</div>
+</footer>
+
+<script>
+/* ============ DATA ============ */
+const TIERS = [
+  { n: 1, stars: "★★★★★", name: "Essential",          jlpt: "N5", desc: "Particles, copula, and verb forms used in nearly every sentence." },
+  { n: 2, stars: "★★★★",  name: "Common",             jlpt: "N4", desc: "Connectives, conditionals, giving/receiving, modal expressions." },
+  { n: 3, stars: "★★★",   name: "Intermediate",       jlpt: "N3", desc: "Auxiliary verbs, evidentials, nominalisers, comparative phrases." },
+  { n: 4, stars: "★★",    name: "Upper Intermediate", jlpt: "N2", desc: "Passive, causative, honorific system, nuanced concession." },
+  { n: 5, stars: "★",     name: "Advanced / Literary",jlpt: "N1", desc: "Sentence-final particles, classical forms, formal connectives." },
+];
+
+const PATTERNS = [
+/* ============ TIER 1 ============ */
+{ tier:1, jp:"は", reading:"wa¹", gloss:"Theme / Topic Marker",
+  desc:"Marks the topic of the sentence — what the sentence is <b>about</b>. It does not always mark the grammatical subject. Often sets up a contrast with other things.",
+  form:"[Noun / Phrase] + は",
+  ex:[
+    ["私(わたし)は学生(がくせい)です。","I am a student."],
+    ["東京(とうきょう)は大(おお)きい都市(とし)です。","Tokyo is a big city."],
+    ["魚(さかな)は好(す)きですが、肉(にく)は嫌(きら)いです。","I like fish, but I dislike meat."],
+  ]},
+{ tier:1, jp:"が", reading:"ga¹", gloss:"Subject Marker",
+  desc:"Marks the grammatical subject. Used when introducing new information, with stative verbs like わかる / ある / いる, and inside subordinate clauses.",
+  form:"[Noun] + が",
+  ex:[
+    ["猫(ねこ)が庭(にわ)にいます。","There is a cat in the garden."],
+    ["誰(だれ)が来(き)ましたか。","Who came?"],
+    ["私(わたし)は日本語(にほんご)がわかります。","I understand Japanese."],
+  ]},
+{ tier:1, jp:"を", reading:"o¹", gloss:"Direct Object Marker",
+  desc:"Marks the direct object of a transitive verb — the thing the action is done <b>to</b>.",
+  form:"[Noun] + を",
+  ex:[
+    ["コーヒーを飲(の)みます。","I drink coffee."],
+    ["本(ほん)を読(よ)みました。","I read a book."],
+    ["音楽(おんがく)を聞(き)いています。","I am listening to music."],
+  ]},
+{ tier:1, jp:"の", reading:"no¹", gloss:"Possessive Marker",
+  desc:"Connects two nouns, showing possession, belonging, or modification (like “of” or “’s” in English).",
+  form:"[Noun A] + の + [Noun B]",
+  ex:[
+    ["これは私(わたし)の本(ほん)です。","This is my book."],
+    ["日本(にほん)の食(た)べ物(もの)が好(す)きです。","I like Japanese food."],
+    ["東京(とうきょう)の夏(なつ)は暑(あつ)いです。","Tokyo's summers are hot."],
+  ]},
+{ tier:1, jp:"の", reading:"no²", gloss:"Pronoun (“one”)",
+  desc:"Replaces a previously mentioned or contextually clear noun, meaning “one” or “the one”.",
+  form:"[Adjective / Modifier] + の",
+  ex:[
+    ["赤(あか)いのをください。","Please give me the red one."],
+    ["大(おお)きいのと小(ちい)さいの、どっちがいいですか。","Which do you prefer, the big one or the small one?"],
+    ["これは私(わたし)のじゃなくて、彼女(かのじょ)のです。","This isn't mine; it's hers."],
+  ]},
+{ tier:1, jp:"の", reading:"no³", gloss:"Nominalizer",
+  desc:"Turns a verb or adjective clause into a noun phrase (like “the fact that…” or “-ing”).",
+  form:"[Verb / Adj plain form] + の",
+  ex:[
+    ["泳(およ)ぐのが好(す)きです。","I like swimming."],
+    ["彼(かれ)が来(く)るのを待(ま)っています。","I am waiting for him to come."],
+    ["ピアノを弾(ひ)くのは難(むずか)しいです。","Playing the piano is difficult."],
+  ]},
+{ tier:1, jp:"の", reading:"no⁴", gloss:"Sentence-Final Particle",
+  desc:"Adds a soft, explanatory, or seeking-understanding tone at the end of a sentence. Common in casual female speech, but used broadly.",
+  form:"[Sentence] + の  (rising = question · falling = explanation)",
+  ex:[
+    ["どこへ行(い)くの？","Where are you going?"],
+    ["疲(つか)れたの。もう帰(かえ)りたい。","I'm tired. I want to go home already."],
+    ["そうなの！知(し)らなかった。","Oh really! I didn't know that."],
+  ]},
+{ tier:1, jp:"に", reading:"ni¹", gloss:"Point in Time",
+  desc:"Marks a specific point in time at which something happens. Used with clock times, days, months, years, etc.",
+  form:"[Time expression] + に",
+  ex:[
+    ["七時(しちじ)に起(お)きます。","I wake up at seven o'clock."],
+    ["月曜日(げつようび)に会議(かいぎ)があります。","There is a meeting on Monday."],
+    ["来年(らいねん)の三月(さんがつ)に卒業(そつぎょう)します。","I will graduate in March next year."],
+  ]},
+{ tier:1, jp:"に", reading:"ni²", gloss:"Indirect Object Marker",
+  desc:"Marks the recipient or target of an action — the person or thing something is given, said, or done <b>to</b>.",
+  form:"[Recipient] + に",
+  ex:[
+    ["友達(ともだち)にメールを送(おく)りました。","I sent an email to my friend."],
+    ["先生(せんせい)に質問(しつもん)しました。","I asked the teacher a question."],
+    ["子供(こども)に本(ほん)を読(よ)んであげました。","I read a book to my child."],
+  ]},
+{ tier:1, jp:"に", reading:"ni³", gloss:"Agent / Source Marker",
+  desc:"Marks the agent in passive sentences or the source from which something is received.",
+  form:"[Agent / Source] + に",
+  ex:[
+    ["先生(せんせい)に褒(ほ)められました。","I was praised by the teacher."],
+    ["友達(ともだち)にお金(かね)を借(か)りました。","I borrowed money from a friend."],
+    ["犯人(はんにん)は警察(けいさつ)に捕(つか)まえられた。","The criminal was caught by the police."],
+  ]},
+{ tier:1, jp:"に", reading:"ni⁴", gloss:"Direct Contact",
+  desc:"Indicates direct physical contact, attachment, or the surface / location something is applied to.",
+  form:"[Target surface / place] + に",
+  ex:[
+    ["壁(かべ)に絵(え)を掛(か)けました。","I hung a picture on the wall."],
+    ["椅子(いす)に座(すわ)ってください。","Please sit on the chair."],
+    ["手(て)に薬(くすり)を塗(ぬ)りました。","I applied medicine to my hand."],
+  ]},
+{ tier:1, jp:"に", reading:"ni⁵", gloss:"Purpose",
+  desc:"Marks the purpose of movement — why someone is going somewhere.",
+  form:"[Verb stem / Noun] + に + [motion verb]",
+  ex:[
+    ["昼(ひる)ご飯(はん)を食(た)べに行(い)きましょう。","Let's go eat lunch."],
+    ["図書館(としょかん)に本(ほん)を借(か)りに行(い)きました。","I went to the library to borrow a book."],
+    ["友達(ともだち)が遊(あそ)びに来(き)ました。","My friend came to hang out."],
+  ]},
+{ tier:1, jp:"に", reading:"ni⁶", gloss:"Location of Existence",
+  desc:"Marks the location where something or someone exists (with いる / ある).",
+  form:"[Place] + に + いる / ある",
+  ex:[
+    ["冷蔵庫(れいぞうこ)にジュースがあります。","There is juice in the refrigerator."],
+    ["公園(こうえん)に子供(こども)たちがいます。","There are children in the park."],
+    ["机(つくえ)の上(うえ)に鍵(かぎ)がありますよ。","Your key is on the desk."],
+  ]},
+{ tier:1, jp:"に", reading:"ni⁷", gloss:"Direction (Goal)",
+  desc:"Marks the destination or direction of movement.",
+  form:"[Destination] + に + [motion verb]",
+  ex:[
+    ["学校(がっこう)に行(い)きます。","I go to school."],
+    ["日本(にほん)に帰(かえ)りたいです。","I want to return to Japan."],
+    ["駅(えき)に着(つ)いたら電話(でんわ)して。","Call me when you arrive at the station."],
+  ]},
+{ tier:1, jp:"で", reading:"de¹", gloss:"Location of Action",
+  desc:"Marks the place where an action takes place (not mere existence, but activity).",
+  form:"[Place] + で",
+  ex:[
+    ["図書館(としょかん)で勉強(べんきょう)します。","I study at the library."],
+    ["レストランで晩(ばん)ご飯(はん)を食(た)べました。","I ate dinner at a restaurant."],
+    ["公園(こうえん)でサッカーをしましょう。","Let's play soccer in the park."],
+  ]},
+{ tier:1, jp:"で", reading:"de²", gloss:"Instrument / Means",
+  desc:"Marks the tool, means, language, or method used to perform an action.",
+  form:"[Instrument / Means] + で",
+  ex:[
+    ["箸(はし)でご飯(はん)を食(た)べます。","I eat rice with chopsticks."],
+    ["バスで学校(がっこう)へ行(い)きます。","I go to school by bus."],
+    ["日本語(にほんご)で話(はな)しましょう。","Let's speak in Japanese."],
+  ]},
+{ tier:1, jp:"で", reading:"de³", gloss:"Time / Limit (Scope)",
+  desc:"Marks the extent, limit, or timeframe within which something is completed or the total used.",
+  form:"[Amount / Time] + で",
+  ex:[
+    ["三時間(さんじかん)で終(お)わります。","It will be finished in three hours."],
+    ["千円(せんえん)でこのランチが食(た)べられます。","You can eat this lunch for 1,000 yen."],
+    ["これで全部(ぜんぶ)です。","This is all of it."],
+  ]},
+{ tier:1, jp:"へ", reading:"e", gloss:"Direction Marker",
+  desc:"Marks the direction of movement. Similar to に⁷ but emphasizes the <b>direction</b> rather than the destination.",
+  form:"[Place] + へ",
+  ex:[
+    ["学校(がっこう)へ行(い)きます。","I am going to school."],
+    ["右(みぎ)へ曲(ま)がってください。","Please turn right."],
+    ["海外(かいがい)へ旅行(りょこう)したいです。","I want to travel abroad."],
+  ]},
+{ tier:1, jp:"も", reading:"mo¹", gloss:"Also / Too",
+  desc:"Indicates that the same applies to the item marked with も, replacing は / が / を.",
+  form:"[Noun] + も",
+  ex:[
+    ["私(わたし)も行(い)きます。","I will go too."],
+    ["コーヒーもお茶(ちゃ)も好(す)きです。","I like both coffee and tea."],
+    ["弟(おとうと)も学生(がくせい)です。","My younger brother is also a student."],
+  ]},
+{ tier:1, jp:"も", reading:"mo²", gloss:"Even",
+  desc:"Used to express “even X” — emphasizing that X is an unexpected or extreme case.",
+  form:"[Noun / Quantity] + も",
+  ex:[
+    ["子供(こども)でもわかる話(はなし)です。","It's a story that even children can understand."],
+    ["一度(いちど)も会(あ)ったことがない。","I have never met them even once."],
+    ["百円(ひゃくえん)も持(も)っていない。","I don't even have 100 yen."],
+  ]},
+{ tier:1, jp:"か", reading:"ka²", gloss:"Question Marker",
+  desc:"Added to the end of a sentence to turn it into a yes/no or information question.",
+  form:"[Sentence] + か",
+  ex:[
+    ["これは本(ほん)ですか。","Is this a book?"],
+    ["どこに住(す)んでいますか。","Where do you live?"],
+    ["もう食(た)べましたか。","Have you eaten already?"],
+  ]},
+{ tier:1, jp:"か", reading:"ka¹", gloss:"Or",
+  desc:"Connects two or more alternatives, meaning “or”.",
+  form:"[A] + か + [B] (+ か)",
+  ex:[
+    ["コーヒーか紅茶(こうちゃ)はいかがですか。","Would you like coffee or tea?"],
+    ["土曜日(どようび)か日曜日(にちようび)に来(き)てください。","Please come on Saturday or Sunday."],
+    ["行(い)くか行(い)かないか、まだ決(き)めていない。","I haven't decided yet whether to go or not."],
+  ]},
+{ tier:1, jp:"ね", reading:"ne", gloss:"Seeking Agreement / Softening",
+  desc:"Added to the end of a sentence to seek agreement or confirmation, or to soften a statement. Like “right?” or “isn't it?”",
+  form:"[Sentence] + ね",
+  ex:[
+    ["今日(きょう)は寒(さむ)いですね。","It's cold today, isn't it?"],
+    ["このケーキ、おいしいですね。","This cake is delicious, isn't it!"],
+    ["また来週(らいしゅう)ね。","See you again next week, okay?"],
+  ]},
+{ tier:1, jp:"よ", reading:"yo", gloss:"Assertion / New Information",
+  desc:"Added to assert information the speaker believes the listener does not know, or to add emphasis. Like “you know” or “I'm telling you”.",
+  form:"[Sentence] + よ",
+  ex:[
+    ["もうすぐ着(つ)きますよ。","We'll arrive soon, you know."],
+    ["それは間違(まちが)いですよ。","That is a mistake."],
+    ["気(き)をつけてよ！","Be careful!"],
+  ]},
+{ tier:1, jp:"です・だ", reading:"desu / da", gloss:"Copula (to be)",
+  desc:"The copula “to be”. です is the polite form; だ is plain. Links a noun or na-adjective to a subject.",
+  form:"[Noun / Na-adj] + です / だ",
+  ex:[
+    ["私(わたし)は医者(いしゃ)です。","I am a doctor."],
+    ["この映画(えいが)は面白(おもしろ)い。","This movie is interesting."],
+    ["彼女(かのじょ)は親切(しんせつ)だ。","She is kind."],
+  ]},
+{ tier:1, jp:"〜ましょう", reading:"-mashō", gloss:"Let's / Shall we",
+  desc:"Proposes doing something together, or expresses the speaker's intention politely.",
+  form:"[Verb masu-stem] + ましょう",
+  ex:[
+    ["一緒(いっしょ)に昼(ひる)ご飯(はん)を食(た)べましょう。","Let's eat lunch together."],
+    ["始(はじ)めましょうか。","Shall we begin?"],
+    ["早(はや)く出発(しゅっぱつ)しましょう。","Let's depart quickly."],
+  ]},
+{ tier:1, jp:"〜たい", reading:"-tai", gloss:"Want to Do",
+  desc:"Expresses the speaker's desire to do something. Used only for first-person desires; for third person, use ~たがる.",
+  form:"[Verb masu-stem] + たい",
+  ex:[
+    ["水(みず)が飲(の)みたいです。","I want to drink water."],
+    ["日本(にほん)に行(い)きたい。","I want to go to Japan."],
+    ["もっと寝(ね)たかったです。","I wanted to sleep more."],
+  ]},
+{ tier:1, jp:"〜てください", reading:"-te kudasai", gloss:"Please Do",
+  desc:"A polite request asking someone to do something for you.",
+  form:"[Verb te-form] + ください",
+  ex:[
+    ["ここに名前(なまえ)を書(か)いてください。","Please write your name here."],
+    ["もう少(すこ)し待(ま)ってください。","Please wait a little longer."],
+    ["静(しず)かにしてください。","Please be quiet."],
+  ]},
+{ tier:1, jp:"〜なさい", reading:"-nasai", gloss:"Do (Mild Command)",
+  desc:"A mild command, softer than the plain imperative but more direct than てください. Often used by parents to children or teachers to students.",
+  form:"[Verb masu-stem] + なさい",
+  ex:[
+    ["早(はや)く起(お)きなさい。","Get up quickly."],
+    ["野菜(やさい)を食(た)べなさい。","Eat your vegetables."],
+    ["宿題(しゅくだい)をしなさい。","Do your homework."],
+  ]},
+{ tier:1, jp:"から", reading:"kara¹", gloss:"From (Starting Point)",
+  desc:"Marks the starting point of time, place, or sequence.",
+  form:"[Noun / Place / Time] + から",
+  ex:[
+    ["東京(とうきょう)から大阪(おおさか)まで新幹線(しんかんせん)で行(い)きます。","I go from Tokyo to Osaka by bullet train."],
+    ["朝(あさ)八時(はちじ)から働(はたら)きます。","I work from 8 a.m."],
+    ["日本語(にほんご)の勉強(べんきょう)はひらがなから始(はじ)めました。","I started studying Japanese from hiragana."],
+  ]},
+{ tier:1, jp:"まで", reading:"made", gloss:"Until / Up To",
+  desc:"Marks the end point of time or place — “until”, “up to”, “as far as”.",
+  form:"[Noun / Time / Place] + まで",
+  ex:[
+    ["五時(ごじ)まで働(はたら)きます。","I work until 5 o'clock."],
+    ["駅(えき)まで歩(ある)きました。","I walked as far as the station."],
+    ["どこまで行(い)きますか。","How far are you going?"],
+  ]},
+{ tier:1, jp:"までに", reading:"made ni", gloss:"By (Deadline)",
+  desc:"Marks a deadline — something must be completed <b>by</b> a certain time.",
+  form:"[Time / Date] + までに",
+  ex:[
+    ["明日(あした)までにレポートを出(だ)してください。","Please submit the report by tomorrow."],
+    ["三時(さんじ)までに戻(もど)ります。","I will return by 3 o'clock."],
+    ["来週(らいしゅう)までに決(き)めなければなりません。","I must decide by next week."],
+  ]},
+{ tier:1, jp:"と", reading:"to¹", gloss:"And (Exhaustive)",
+  desc:"Lists nouns together exhaustively (implying the list is complete).",
+  form:"[A] + と + [B] (と …)",
+  ex:[
+    ["机(つくえ)の上(うえ)に本(ほん)とノートとペンがあります。","On the desk there are a book, a notebook, and a pen."],
+    ["父(ちち)と母(はは)はどちらも元気(げんき)です。","Both my father and mother are well."],
+    ["電車(でんしゃ)と地下鉄(ちかてつ)を乗(の)り継(つ)ぎました。","I transferred between the train and the subway."],
+  ]},
+{ tier:1, jp:"と", reading:"to²", gloss:"With (Accompaniment)",
+  desc:"Marks a companion doing the action together with the subject.",
+  form:"[Person] + と + [verb]",
+  ex:[
+    ["友達(ともだち)と映画(えいが)を見(み)ました。","I watched a movie with my friend."],
+    ["彼女(かのじょ)と公園(こうえん)を散歩(さんぽ)した。","I took a walk in the park with her."],
+    ["誰(だれ)と来(き)たんですか。","Who did you come with?"],
+  ]},
+{ tier:1, jp:"と", reading:"to³", gloss:"Quotation Marker",
+  desc:"Marks a direct or indirect quotation, thought, or the content of saying / thinking / asking.",
+  form:"[Clause] + と + 言(い)う / 思(おも)う / 聞(き)く …",
+  ex:[
+    ["彼(かれ)は「明日(あした)来(く)る」と言(い)いました。","He said, “I'll come tomorrow.”"],
+    ["もう遅(おそ)いと思(おも)います。","I think it is already late."],
+    ["試験(しけん)はどうだったかと聞(き)かれました。","I was asked how the exam went."],
+  ]},
+{ tier:1, jp:"と", reading:"to⁴", gloss:"Conditional “If / When” (Natural Result)",
+  desc:"Expresses a natural or automatic consequence: “when / if [A], [B] naturally follows”. Cannot be used with requests or volitional endings in the result clause.",
+  form:"[Verb / Adj plain form] + と",
+  ex:[
+    ["春(はる)になると、桜(さくら)が咲(さ)きます。","When spring comes, the cherry blossoms bloom."],
+    ["右(みぎ)に曲(ま)がると、駅(えき)が見(み)えます。","If you turn right, you'll see the station."],
+    ["このボタンを押(お)すと、ドアが開(あ)きます。","When you press this button, the door opens."],
+  ]},
+{ tier:1, jp:"や", reading:"ya", gloss:"And (Partial List)",
+  desc:"Lists nouns as examples, implying the list is <b>not</b> exhaustive — “among other things”.",
+  form:"[A] + や + [B] (+ など)",
+  ex:[
+    ["冷蔵庫(れいぞうこ)に野菜(やさい)や果物(くだもの)が入(はい)っています。","There are vegetables and fruit (among other things) in the fridge."],
+    ["公園(こうえん)で犬(いぬ)や猫(ねこ)が遊(あそ)んでいた。","Dogs and cats and so on were playing in the park."],
+    ["週末(しゅうまつ)は映画(えいが)や買(か)い物(もの)をします。","On weekends I do things like watch movies and go shopping."],
+  ]},
+{ tier:1, jp:"〜て-form", reading:"-te", gloss:"Connective Verb Form",
+  desc:"The te-form connects clauses (“and then”), expresses manner, or serves as the base for many grammar patterns — one of the most fundamental forms in Japanese.",
+  form:"Verb → て / で (conjugation varies by verb type)",
+  ex:[
+    ["朝(あさ)起(お)きて、シャワーを浴(あ)びます。","I wake up and then take a shower."],
+    ["走(はし)って学校(がっこう)に行(い)きました。","I went to school running."],
+    ["窓(まど)を開(あ)けて、部屋(へや)を換気(かんき)してください。","Please open the window and ventilate the room."],
+  ]},
+{ tier:1, jp:"ある", reading:"aru¹", gloss:"Exist (Inanimate)",
+  desc:"Expresses the existence of inanimate objects or abstract things. Also expresses possession (“have”) for non-living things.",
+  form:"[Place] + に + [Object] + が + ある",
+  ex:[
+    ["机(つくえ)の上(うえ)にリモコンがある。","There is a remote control on the desk."],
+    ["時間(じかん)がありません。","I don't have time."],
+    ["この町(まち)にはスーパーが三(みっ)つあります。","There are three supermarkets in this town."],
+  ]},
+{ tier:1, jp:"いる", reading:"iru¹", gloss:"Exist (Animate)",
+  desc:"Expresses the existence of animate beings — people and animals.",
+  form:"[Place] + に + [Person / Animal] + が + いる",
+  ex:[
+    ["部屋(へや)に誰(だれ)かいますか。","Is someone in the room?"],
+    ["庭(にわ)に鳥(とり)がいた。","There was a bird in the garden."],
+    ["兄弟(きょうだい)が二人(ふたり)います。","I have two siblings."],
+  ]},
+{ tier:1, jp:"〜ている", reading:"-te iru", gloss:"Progressive / Resultant State",
+  desc:"With action verbs: ongoing action. With change-of-state verbs: a resulting state.",
+  form:"[Verb te-form] + いる",
+  ex:[
+    ["今(いま)、本(ほん)を読(よ)んでいます。","I am reading a book right now."],
+    ["もう結婚(けっこん)しています。","I am already married. (resultant state)"],
+    ["雨(あめ)が降(ふ)っています。","It is raining."],
+  ]},
+
+/* ============ TIER 2 ============ */
+{ tier:2, jp:"から", reading:"kara³", gloss:"Because (Subjective)",
+  desc:"A conjunction meaning “because / so”, linking a reason to a result. More subjective than ので.",
+  form:"[Clause (plain / polite)] + から + [Result]",
+  ex:[
+    ["疲(つか)れているから、早(はや)く寝(ね)ます。","Because I'm tired, I'll go to bed early."],
+    ["雨(あめ)が降(ふ)っているから、傘(かさ)を持(も)っていこう。","Since it's raining, let's bring an umbrella."],
+    ["お腹(なか)が空(す)いたから、何(なに)か食(た)べたい。","I'm hungry, so I want to eat something."],
+  ]},
+{ tier:2, jp:"ので", reading:"node", gloss:"Because / Since (Objective)",
+  desc:"Expresses reason or cause, like から³ but more objective and formal. Considered more polite in explanations.",
+  form:"[Clause (plain)] + ので  ·  Na-adj / Noun → なので",
+  ex:[
+    ["電車(でんしゃ)が遅(おく)れたので、遅刻(ちこく)しました。","Since the train was delayed, I was late."],
+    ["明日(あした)は試験(しけん)があるので、勉強(べんきょう)します。","I'll study because I have an exam tomorrow."],
+    ["体調(たいちょう)が悪(わる)いので、休(やす)ませてください。","Since I'm not feeling well, please let me rest."],
+  ]},
+{ tier:2, jp:"が", reading:"ga²", gloss:"But / However",
+  desc:"A conjunction connecting two contrasting or unexpected clauses.",
+  form:"[Clause A] + が + [Clause B]",
+  ex:[
+    ["日本語(にほんご)は好(す)きですが、難(むずか)しいです。","I like Japanese, but it's difficult."],
+    ["行(い)きたいですが、時間(じかん)がありません。","I want to go, but I don't have time."],
+    ["電話(でんわ)しましたが、出(で)ませんでした。","I called, but there was no answer."],
+  ]},
+{ tier:2, jp:"けれども", reading:"keredomo", gloss:"But / Although",
+  desc:"Similar to が², but somewhat more formal. Colloquially shortened to けど or けれど.",
+  form:"[Clause A] + けれども + [Clause B]",
+  ex:[
+    ["頑張(がんば)ったけれども、試験(しけん)に落(お)ちた。","I worked hard, but I failed the exam."],
+    ["高(たか)いけれど、買(か)います。","It's expensive, but I'll buy it."],
+    ["寒(さむ)いけど、窓(まど)を開(あ)けてもいいですか。","It's cold, but may I open the window?"],
+  ]},
+{ tier:2, jp:"〜てある", reading:"-te aru", gloss:"State Resulting from Purposeful Action",
+  desc:"Expresses that something has been done (by someone) and the resulting state remains. The action was done intentionally.",
+  form:"[Transitive verb te-form] + ある",
+  ex:[
+    ["窓(まど)が開(あ)けてある。","The window has been opened / is open."],
+    ["テーブルの上(うえ)に飲(の)み物(もの)が置(お)いてあります。","Drinks have been placed on the table."],
+    ["予約(よやく)がしてあるから大丈夫(だいじょうぶ)です。","It's fine because the reservation has been made."],
+  ]},
+{ tier:2, jp:"あげる", reading:"ageru¹", gloss:"Give (to someone else)",
+  desc:"The giver gives something to the receiver. The receiver is not the speaker. (Use やる for giving downward in status, さしあげる for humble form.)",
+  form:"[Giver] + が + [Receiver] + に + [Object] + を + あげる",
+  ex:[
+    ["友達(ともだち)に誕生日(たんじょうび)プレゼントをあげました。","I gave my friend a birthday present."],
+    ["弟(おとうと)にお菓子(かし)をあげた。","I gave my younger brother some sweets."],
+    ["彼女(かのじょ)に花(はな)をあげましょう。","Let's give her flowers."],
+  ]},
+{ tier:2, jp:"〜てあげる", reading:"-te ageru", gloss:"Do a Favor For Someone",
+  desc:"The subject does something <b>for</b> the benefit of the receiver (not the speaker), expressed with the te-form.",
+  form:"[Verb te-form] + あげる",
+  ex:[
+    ["荷物(にもつ)を持(も)ってあげましょうか。","Shall I carry your luggage for you?"],
+    ["子供(こども)に本(ほん)を読(よ)んであげました。","I read a book to the child (as a favor)."],
+    ["道(みち)を教(おし)えてあげた。","I showed them the way."],
+  ]},
+{ tier:2, jp:"くれる", reading:"kureru¹", gloss:"Give (to me / my in-group)",
+  desc:"Someone gives something to the speaker or someone in the speaker's in-group.",
+  form:"[Giver] + が + [me / in-group] + に + [Object] + を + くれる",
+  ex:[
+    ["友達(ともだち)がプレゼントをくれました。","My friend gave me a present."],
+    ["先生(せんせい)がアドバイスをくれた。","The teacher gave me advice."],
+    ["彼(かれ)が花(はな)をくれた！","He gave me flowers!"],
+  ]},
+{ tier:2, jp:"〜てくれる", reading:"-te kureru", gloss:"Do a Favor For Me",
+  desc:"Someone does something for the benefit of the speaker or their in-group.",
+  form:"[Verb te-form] + くれる",
+  ex:[
+    ["友達(ともだち)が手伝(てつだ)ってくれました。","My friend helped me (as a favor)."],
+    ["先生(せんせい)が説明(せつめい)してくれた。","The teacher explained it to me."],
+    ["駅(えき)まで送(おく)ってくれますか。","Will you take me to the station?"],
+  ]},
+{ tier:2, jp:"もらう", reading:"morau¹", gloss:"Receive",
+  desc:"The speaker receives something from someone else.",
+  form:"[Speaker] + が + [Giver] + に / から + [Object] + を + もらう",
+  ex:[
+    ["母(はは)にセーターをもらいました。","I received a sweater from my mother."],
+    ["友達(ともだち)からチケットをもらった。","I received tickets from my friend."],
+    ["誕生日(たんじょうび)に何(なに)かもらいましたか。","Did you receive anything for your birthday?"],
+  ]},
+{ tier:2, jp:"〜てもらう", reading:"-te morau", gloss:"Have Someone Do (Receiving a Favor)",
+  desc:"The speaker has or asks someone to do something, receiving the benefit of that action.",
+  form:"[Verb te-form] + もらう",
+  ex:[
+    ["先生(せんせい)に説明(せつめい)してもらいました。","I had the teacher explain it to me."],
+    ["友達(ともだち)に写真(しゃしん)を撮(と)ってもらった。","I had my friend take a photo for me."],
+    ["医者(いしゃ)に診(み)てもらってください。","Please have a doctor examine you."],
+  ]},
+{ tier:2, jp:"〜たら", reading:"-tara", gloss:"Conditional “If / When”",
+  desc:"Expresses a condition: “when / if [A] happens, [B]”. More versatile than other conditionals; the result clause may be volitional.",
+  form:"[Verb / Adj ta-form] + ら",
+  ex:[
+    ["雨(あめ)が降(ふ)ったら、中止(ちゅうし)です。","If it rains, it will be cancelled."],
+    ["宿題(しゅくだい)が終(お)わったら、ゲームしてもいいよ。","Once you finish your homework, you may play games."],
+    ["大阪(おおさか)に着(つ)いたら、電話(でんわ)してね。","When you arrive in Osaka, give me a call."],
+  ]},
+{ tier:2, jp:"〜ば", reading:"-ba", gloss:"Conditional “If”",
+  desc:"Expresses a condition for a hypothetical or general case. The result clause typically cannot include past tense or direct commands.",
+  form:"Verb → e-stem + ば  ·  i-adj: い → ければ",
+  ex:[
+    ["もっと練習(れんしゅう)すれば、上手(じょうず)になります。","If you practice more, you'll get better."],
+    ["安(やす)ければ、買(か)います。","If it's cheap, I'll buy it."],
+    ["天気(てんき)がよければ、ピクニックに行(い)きましょう。","If the weather is nice, let's go on a picnic."],
+  ]},
+{ tier:2, jp:"〜なければならない", reading:"-nakereba naranai", gloss:"Must / Have to",
+  desc:"Expresses obligation — “must do / have to do”. Colloquially: なきゃ / なくちゃ.",
+  form:"[Verb nai-form] + なければならない",
+  ex:[
+    ["毎日(まいにち)薬(くすり)を飲(の)まなければなりません。","I must take medicine every day."],
+    ["明日(あした)早(はや)く起(お)きなければならない。","I have to get up early tomorrow."],
+    ["もっと真剣(しんけん)に考(かんが)えなくちゃ。","I've got to think about this more seriously."],
+  ]},
+{ tier:2, jp:"〜てもいい", reading:"-te mo ii", gloss:"May / It's OK to",
+  desc:"Expresses permission — “may do, it's alright to do”.",
+  form:"[Verb te-form] + もいい",
+  ex:[
+    ["ここに座(すわ)ってもいいですか。","May I sit here?"],
+    ["写真(しゃしん)を撮(と)ってもいいです。","You may take photos."],
+    ["辛(から)ければ残(のこ)してもいいよ。","If it's too spicy, you can leave it."],
+  ]},
+{ tier:2, jp:"〜てはいけない", reading:"-te wa ikenai", gloss:"Must Not / May Not",
+  desc:"Expresses prohibition — “must not do, may not do”.",
+  form:"[Verb te-form] + はいけない",
+  ex:[
+    ["ここでタバコを吸(す)ってはいけません。","You must not smoke here."],
+    ["嘘(うそ)をついてはいけないよ。","You mustn't tell lies."],
+    ["授業中(じゅぎょうちゅう)はスマホを使(つか)ってはいけない。","You may not use your phone during class."],
+  ]},
+{ tier:2, jp:"だろう・でしょう", reading:"darō / deshō", gloss:"Probably / I Suppose",
+  desc:"Expresses conjecture or supposition about something uncertain. でしょう is the polite form.",
+  form:"[Verb / Adj plain] + だろう  ·  [Noun / Na-adj] + だろう",
+  ex:[
+    ["明日(あした)は晴(は)れるでしょう。","It will probably be sunny tomorrow."],
+    ["彼(かれ)はもう知(し)っているだろう。","He probably already knows."],
+    ["これは難(むずか)しいだろうと思(おも)った。","I thought this would probably be difficult."],
+  ]},
+{ tier:2, jp:"かもしれない", reading:"kamoshirenai", gloss:"Might / Perhaps",
+  desc:"Expresses possibility — something <b>might</b> be the case. Less certain than だろう (≤ 50%).",
+  form:"[Verb / Adj plain] + かもしれない  ·  [Noun / Na-adj] + かもしれない",
+  ex:[
+    ["明日(あした)は雨(あめ)かもしれない。","It might rain tomorrow."],
+    ["彼女(かのじょ)はもう帰(かえ)ったかもしれません。","She might have already gone home."],
+    ["この薬(くすり)は効(き)かないかもしれない。","This medicine might not work."],
+  ]},
+{ tier:2, jp:"はずだ", reading:"hazu da", gloss:"Should / Expected to Be",
+  desc:"Expresses that something is expected or supposed to be the case based on logic or prior knowledge.",
+  form:"[Verb / Adj plain] + はずだ  ·  [Noun] + の + はずだ",
+  ex:[
+    ["彼(かれ)はもう着(つ)いているはずです。","He should have arrived by now."],
+    ["この店(みせ)は今日(きょう)開(あ)いているはずだ。","This store should be open today."],
+    ["そんなはずはない！","That can't be!"],
+  ]},
+{ tier:2, jp:"つもり", reading:"tsumori", gloss:"Intend to / Plan to",
+  desc:"Expresses the speaker's intention or plan. Can also express what the speaker considers to be the case (even if it isn't).",
+  form:"[Verb plain] + つもり  ·  [Verb nai] + つもり",
+  ex:[
+    ["来年(らいねん)日本(にほん)へ行(い)くつもりです。","I intend to go to Japan next year."],
+    ["タバコはやめるつもりです。","I plan to quit smoking."],
+    ["気(き)をつけているつもりだけど…","I think I'm being careful, but…"],
+  ]},
+{ tier:2, jp:"こと", reading:"koto²", gloss:"Nominalizer (Formal)",
+  desc:"Turns a verb clause into a noun. Similar to の³ but more formal and used in set expressions. Emphasises the “fact” or “act” abstractly.",
+  form:"[Verb plain] + こと",
+  ex:[
+    ["毎日(まいにち)運動(うんどう)することが大切(たいせつ)です。","It is important to exercise every day."],
+    ["一人(ひとり)で旅行(りょこう)することが好(す)きです。","I like traveling alone."],
+    ["彼(かれ)が合格(ごうかく)したことは知(し)っています。","I know that he passed."],
+  ]},
+{ tier:2, jp:"こと", reading:"koto¹", gloss:"Thing (Abstract)",
+  desc:"Refers to an abstract “thing, matter, fact, experience” — as opposed to もの which refers to physical objects.",
+  form:"[Modifier clause] + こと",
+  ex:[
+    ["大事(だいじ)なことを忘(わす)れていた。","I had forgotten something important."],
+    ["健康(けんこう)のことを考(かんが)えてください。","Please think about your health."],
+    ["彼(かれ)のことが好(す)きです。","I like him (as a person)."],
+  ]},
+{ tier:2, jp:"のだ・んだ", reading:"no da / n da", gloss:"Explanation / Emphasis",
+  desc:"Explains the reason for or gives background to a situation. Used for seeking or giving explanations. Contracted to んだ in speech.",
+  form:"[Clause plain] + のだ / んです / んだ",
+  ex:[
+    ["実(じつ)は、昨日(きのう)熱(ねつ)があったんです。","Actually, I had a fever yesterday."],
+    ["なぜ遅(おそ)かったんですか。","Why were you late?"],
+    ["もう行(い)かなければならないんだ。","I have to go now."],
+  ]},
+{ tier:2, jp:"修飾節", reading:"Relative Clause", gloss:"Noun Modification",
+  desc:"Modifying clauses come <b>before</b> the noun they modify. The verb in the clause uses plain form.",
+  form:"[Modifier clause (plain)] + [Noun]",
+  ex:[
+    ["昨日(きのう)読(よ)んだ本(ほん)はとても面白(おもしろ)かった。","The book I read yesterday was very interesting."],
+    ["あそこにいる人(ひと)は誰(だれ)ですか。","Who is the person standing over there?"],
+    ["彼女(かのじょ)が作(つく)った料理(りょうり)を食(た)べた。","I ate the dish she made."],
+  ]},
+{ tier:2, jp:"とき", reading:"toki", gloss:"When / At the Time of",
+  desc:"Expresses the time at which something happens. The verb before とき can be past or non-past depending on sequence.",
+  form:"[Clause plain] + とき",
+  ex:[
+    ["子供(こども)のとき、よく川(かわ)で遊(あそ)んだ。","When I was a child, I often played in the river."],
+    ["困(こま)ったときは相談(そうだん)してください。","When you are in trouble, please consult me."],
+    ["出(で)かけるとき、鍵(かぎ)を忘(わす)れました。","When I was leaving, I forgot my key."],
+  ]},
+{ tier:2, jp:"まえに", reading:"mae ni", gloss:"Before",
+  desc:"Expresses that one action takes place before another. The verb before まえに is always plain <b>non-past</b>, regardless of tense.",
+  form:"[Verb plain non-past] + まえに  ·  [Noun] + の + まえに",
+  ex:[
+    ["寝(ね)るまえに歯(は)を磨(みが)きます。","I brush my teeth before going to sleep."],
+    ["食事(しょくじ)のまえに手(て)を洗(あら)ってください。","Please wash your hands before the meal."],
+    ["日本(にほん)に来(く)る前(まえ)に少(すこ)し勉強(べんきょう)した。","I studied a little before coming to Japan."],
+  ]},
+{ tier:2, jp:"あとで", reading:"ato de", gloss:"After / Later",
+  desc:"Expresses that one action takes place after another.",
+  form:"[Verb ta-form] + あとで  ·  [Noun] + の + あとで",
+  ex:[
+    ["宿題(しゅくだい)をしたあとで、テレビを見(み)ます。","I'll watch TV after doing my homework."],
+    ["授業(じゅぎょう)のあとで話(はな)しましょう。","Let's talk after class."],
+    ["食事(しょくじ)のあとで少(すこ)し休(やす)んだ。","I rested a little after the meal."],
+  ]},
+{ tier:2, jp:"〜てから", reading:"-te kara", gloss:"After Doing (Sequential)",
+  desc:"Expresses that one action is fully completed, and <b>then</b> another begins. Stronger sequence than あとで.",
+  form:"[Verb te-form] + から",
+  ex:[
+    ["手(て)を洗(あら)ってから食(た)べてください。","Please eat after washing your hands."],
+    ["考(かんが)えてから返事(へんじ)します。","I'll reply after thinking about it."],
+    ["大学(だいがく)を卒業(そつぎょう)してから就職(しゅうしょく)する。","I'll get a job after graduating from university."],
+  ]},
+{ tier:2, jp:"あいだ(に)", reading:"aida (ni)", gloss:"While / During",
+  desc:"Expresses that something happens during the interval of another action or state.",
+  form:"[Verb te-iru / Noun + の] + あいだ(に)",
+  ex:[
+    ["夏休(なつやす)みのあいだ、毎日(まいにち)泳(およ)いだ。","During summer vacation, I swam every day."],
+    ["彼女(かのじょ)が寝(ね)ているあいだに洗濯(せんたく)した。","I did the laundry while she was sleeping."],
+    ["会議(かいぎ)のあいだはスマホをしまってください。","Please put away your phone during the meeting."],
+  ]},
+{ tier:2, jp:"〜ながら", reading:"-nagara", gloss:"While Doing (Simultaneous)",
+  desc:"Expresses two actions occurring simultaneously by the same subject. The main action comes after.",
+  form:"[Verb masu-stem] + ながら + [main action]",
+  ex:[
+    ["音楽(おんがく)を聴(き)きながら勉強(べんきょう)します。","I study while listening to music."],
+    ["コーヒーを飲(の)みながら話(はな)しましょう。","Let's talk over coffee."],
+    ["歩(ある)きながらスマホを見(み)るのは危(あぶ)ない。","Looking at your phone while walking is dangerous."],
+  ]},
+{ tier:2, jp:"〜たり〜たりする", reading:"-tari -tari suru", gloss:"Do Things Like … and …",
+  desc:"Lists actions as examples of activities, implying the list is not complete. Often expresses alternation or variety.",
+  form:"[Verb ta-form] + り + [Verb ta-form] + り + する",
+  ex:[
+    ["週末(しゅうまつ)は映画(えいが)を見(み)たり、本(ほん)を読(よ)んだりします。","On weekends I do things like watch movies and read books."],
+    ["天気(てんき)が良(よ)かったり悪(わる)かったりしています。","The weather keeps going back and forth between good and bad."],
+    ["笑(わら)ったり泣(な)いたりする映画(えいが)でした。","It was a movie that made you laugh and cry."],
+  ]},
+{ tier:2, jp:"まだ", reading:"mada", gloss:"Still / Not Yet",
+  desc:"With affirmative: “still ongoing”. With negative: “not yet”.",
+  form:"まだ + [Verb / Adj] · まだ + [Verb negative]",
+  ex:[
+    ["まだ宿題(しゅくだい)をしていません。","I haven't done my homework yet."],
+    ["彼女(かのじょ)はまだ寝(ね)ています。","She is still sleeping."],
+    ["まだ時間(じかん)はあるよ。","There's still time."],
+  ]},
+{ tier:2, jp:"もう", reading:"mō", gloss:"Already / Anymore",
+  desc:"With affirmative: “already”. With negative: “no longer / not anymore”.",
+  form:"もう + [Verb affirmative / negative]",
+  ex:[
+    ["もう食(た)べました。","I already ate."],
+    ["もう疲(つか)れた！","I'm already tired!"],
+    ["もうそんなことは言(い)わない。","I won't say that kind of thing anymore."],
+  ]},
+{ tier:2, jp:"ほうがいい", reading:"hō ga ii", gloss:"Had Better / It's Better to",
+  desc:"Gives advice or a recommendation. The <b>past tense</b> before ほうがいい is often used even for future recommendations.",
+  form:"[Verb ta-form] + ほうがいい  ·  [Verb nai] + ほうがいい",
+  ex:[
+    ["早(はや)く寝(ね)たほうがいいよ。","You'd better go to sleep soon."],
+    ["医者(いしゃ)に行(い)ったほうがいいです。","You should go to the doctor."],
+    ["そんなに飲(の)まないほうがいい。","You'd better not drink that much."],
+  ]},
+{ tier:2, jp:"〜ほうが〜より", reading:"-hō ga -yori", gloss:"More than / Rather than",
+  desc:"Expresses comparison — A is more [adjective] than B.",
+  form:"[A] + のほうが + [B] + より + [Adjective]",
+  ex:[
+    ["電車(でんしゃ)のほうがバスより速(はや)いです。","The train is faster than the bus."],
+    ["夏(なつ)より冬(ふゆ)のほうが好(す)きです。","I prefer winter to summer."],
+    ["やらないよりやったほうがいい。","It's better to do it than not."],
+  ]},
+{ tier:2, jp:"いちばん", reading:"ichiban", gloss:"The Most / Number One",
+  desc:"Expresses the superlative — “the most” or “the best / worst, etc.”",
+  form:"いちばん + [Adjective / Verb]",
+  ex:[
+    ["日本語(にほんご)がいちばん難(むずか)しいです。","Japanese is the most difficult."],
+    ["何(なに)がいちばん好(す)きですか。","What do you like most?"],
+    ["クラスでいちばん背(せ)が高(たか)い。","(He/She is) the tallest in the class."],
+  ]},
+{ tier:2, jp:"くらい・ぐらい", reading:"kurai / gurai", gloss:"About / Approximately",
+  desc:"Expresses approximation of degree, quantity, or extent.",
+  form:"[Quantity / Degree] + くらい",
+  ex:[
+    ["三十分(さんじゅっぷん)くらいかかります。","It takes about 30 minutes."],
+    ["このくらいでいいですか。","Is about this much okay?"],
+    ["死(し)ぬくらい疲(つか)れた。","I'm so tired I could die."],
+  ]},
+{ tier:2, jp:"ごろ", reading:"goro", gloss:"Around / About (Time)",
+  desc:"Expresses an approximate point in time.",
+  form:"[Time expression] + ごろ",
+  ex:[
+    ["七時(しちじ)ごろ起(お)きます。","I wake up around 7 o'clock."],
+    ["来月(らいげつ)ごろ引(ひ)っ越(こ)す予定(よてい)です。","I plan to move around next month."],
+    ["夕方(ゆうがた)ごろ戻(もど)ります。","I'll be back around evening."],
+  ]},
+{ tier:2, jp:"だけ", reading:"dake", gloss:"Only / Just",
+  desc:"Limits something to that amount or extent. Less strong than しか (which requires a negative verb).",
+  form:"[Noun / Verb plain] + だけ",
+  ex:[
+    ["少(すこ)しだけ食(た)べました。","I ate just a little."],
+    ["あなただけが知(し)っている。","Only you know."],
+    ["見(み)るだけで買(か)いません。","I'll just look; I won't buy."],
+  ]},
+{ tier:2, jp:"しか", reading:"shika", gloss:"Only (Exclusive · Negative)",
+  desc:"Means “nothing but / only”, but <b>requires a negative verb</b>. Emphasises insufficiency or limitation.",
+  form:"[Noun / Quantity] + しか + [Negative verb]",
+  ex:[
+    ["百円(ひゃくえん)しかない。","I only have 100 yen (and it's not enough)."],
+    ["彼女(かのじょ)しか信(しん)じられない。","I can only trust her."],
+    ["一度(いちど)しか会(あ)ったことがない。","I've only met them once."],
+  ]},
+{ tier:2, jp:"ばかり", reading:"bakari", gloss:"Only / Nothing But / Just",
+  desc:"Indicates exclusivity (like しか, but with affirmative verb) or that something has just been done.",
+  form:"[Noun / Verb plain] + ばかり  ·  [Verb ta-form] + ばかり",
+  ex:[
+    ["甘(あま)いものばかり食(た)べている。","He/She is eating nothing but sweets."],
+    ["生(う)まれたばかりの赤(あか)ちゃんです。","It's a newborn baby."],
+    ["文句(もんく)ばかり言(い)わないで。","Stop complaining all the time."],
+  ]},
+{ tier:2, jp:"など", reading:"nado", gloss:"And So On / For Example / Etc.",
+  desc:"Adds “and so on” or gives examples without making the list exhaustive. Can also express humility.",
+  form:"[Noun / Verb] + など",
+  ex:[
+    ["野菜(やさい)や果物(くだもの)などを食(た)べてください。","Please eat things like vegetables and fruit."],
+    ["映画(えいが)や音楽(おんがく)などが好(す)きです。","I like things like movies and music."],
+    ["私(わたし)などにはわかりません。","The likes of me wouldn't understand."],
+  ]},
+{ tier:2, jp:"でも", reading:"demo", gloss:"Even / Or Something / But",
+  desc:"(1) “Even” — with a surprising or extreme case. (2) “But / however” — sentence-initial. (3) “Or something like” — casual suggestion.",
+  form:"[Noun] + でも  ·  sentence-initial でも",
+  ex:[
+    ["子供(こども)でもできる問題(もんだい)だ。","It's a problem even a child can solve."],
+    ["でも、それは違(ちが)うと思(おも)います。","But, I think that's wrong."],
+    ["お茶(ちゃ)でも飲(の)みませんか。","Why don't we have some tea or something?"],
+  ]},
+{ tier:2, jp:"〜ても", reading:"-te mo", gloss:"Even If / Even Though",
+  desc:"Expresses concession: “even if [A], [B]” — the result holds regardless.",
+  form:"[Verb / Adj te-form] + も  ·  [Noun / Na-adj] + でも",
+  ex:[
+    ["たくさん食(た)べても太(ふと)らない。","Even if I eat a lot, I don't gain weight."],
+    ["高(たか)くても、この時計(とけい)が欲(ほ)しい。","Even if it's expensive, I want this watch."],
+    ["雨(あめ)でも試合(しあい)は続(つづ)きます。","Even in the rain, the game continues."],
+  ]},
+
+/* ============ TIER 3 ============ */
+{ tier:3, jp:"〜てしまう", reading:"-te shimau", gloss:"End Up Doing / Unfortunately Did",
+  desc:"Expresses (1) completion of an action — often with a nuance of regret or finality, or (2) doing something unintentionally / unfortunately. Colloquial: 〜ちゃう.",
+  form:"[Verb te-form] + しまう",
+  ex:[
+    ["宿題(しゅくだい)を全部(ぜんぶ)やってしまった。","I finished all my homework."],
+    ["財布(さいふ)を忘(わす)れてしまった！","I accidentally left my wallet behind!"],
+    ["ケーキを全部(ぜんぶ)食(た)べちゃった。","I went and ate all the cake."],
+  ]},
+{ tier:3, jp:"〜ておく", reading:"-te oku", gloss:"Do in Advance / Leave as Is",
+  desc:"Expresses doing something in preparation for a later purpose, or leaving a state as it is. Colloquial: 〜とく.",
+  form:"[Verb te-form] + おく",
+  ex:[
+    ["旅行(りょこう)の前(まえ)にホテルを予約(よやく)しておきます。","I'll book the hotel in advance."],
+    ["資料(しりょう)を読(よ)んでおいてください。","Please read through the materials beforehand."],
+    ["窓(まど)を開(あ)けておこう。","Let's leave the window open."],
+  ]},
+{ tier:3, jp:"〜てみる", reading:"-te miru", gloss:"Try Doing",
+  desc:"Expresses trying something out to see what happens.",
+  form:"[Verb te-form] + みる",
+  ex:[
+    ["このレストランに行(い)ってみましょう。","Let's try going to this restaurant."],
+    ["新(あたら)しいレシピを作(つく)ってみた。","I tried making a new recipe."],
+    ["彼(かれ)に聞(き)いてみたらどうですか。","How about trying to ask him?"],
+  ]},
+{ tier:3, jp:"〜だす", reading:"-dasu", gloss:"Suddenly Start / Begin (Outward)",
+  desc:"A compound verb suffix meaning to <b>suddenly</b> begin doing something, often with an outward or explosive nuance.",
+  form:"[Verb masu-stem] + だす",
+  ex:[
+    ["突然(とつぜん)、子供(こども)が泣(な)きだした。","Suddenly the child burst into tears."],
+    ["雨(あめ)が降(ふ)りだした。","It started to rain."],
+    ["彼(かれ)は急(きゅう)に走(はし)りだした。","He suddenly started running."],
+  ]},
+{ tier:3, jp:"〜はじめる", reading:"-hajimeru", gloss:"Begin to / Start to",
+  desc:"Expresses the beginning of an action. More neutral than 〜だす (no sudden/explosive nuance).",
+  form:"[Verb masu-stem] + はじめる",
+  ex:[
+    ["日本語(にほんご)を勉強(べんきょう)しはじめました。","I started studying Japanese."],
+    ["春(はる)になって、花(はな)が咲(さ)きはじめた。","As spring came, the flowers began to bloom."],
+    ["赤(あか)ちゃんが歩(ある)きはじめた。","The baby started to walk."],
+  ]},
+{ tier:3, jp:"〜おわる", reading:"-owaru", gloss:"Finish Doing",
+  desc:"Expresses completion of an action.",
+  form:"[Verb masu-stem] + おわる",
+  ex:[
+    ["本(ほん)を読(よ)みおわりました。","I finished reading the book."],
+    ["食(た)べおわったら片付(かたづ)けてください。","Please clean up after you finish eating."],
+    ["レポートを書(か)きおわった。","I finished writing the report."],
+  ]},
+{ tier:3, jp:"〜すぎる", reading:"-sugiru", gloss:"Too Much / Excessively",
+  desc:"Expresses that something is done to an excessive degree.",
+  form:"[Verb masu-stem / i-adj stem / na-adj stem] + すぎる",
+  ex:[
+    ["食(た)べすぎて気持(きも)ち悪(わる)い。","I feel sick from eating too much."],
+    ["この鞄(かばん)は高(たか)すぎる。","This bag is too expensive."],
+    ["静(しず)かすぎて逆(ぎゃく)に不安(ふあん)だ。","It's so quiet it's actually unsettling."],
+  ]},
+{ tier:3, jp:"〜にくい", reading:"-nikui", gloss:"Hard to / Difficult to",
+  desc:"Expresses that an action is difficult to perform.",
+  form:"[Verb masu-stem] + にくい",
+  ex:[
+    ["この字(じ)は読(よ)みにくい。","This character is hard to read."],
+    ["新(あたら)しい靴(くつ)は歩(ある)きにくい。","These new shoes are hard to walk in."],
+    ["彼(かれ)は話(はな)しにくい人(ひと)だ。","He's a difficult person to talk to."],
+  ]},
+{ tier:3, jp:"〜やすい", reading:"-yasui", gloss:"Easy to / Tends to",
+  desc:"Expresses that an action is easy to perform, or that something tends to happen.",
+  form:"[Verb masu-stem] + やすい",
+  ex:[
+    ["このペンは書(か)きやすい。","This pen is easy to write with."],
+    ["彼女(かのじょ)の説明(せつめい)はわかりやすい。","Her explanations are easy to understand."],
+    ["梅雨(つゆ)の時期(じき)は風邪(かぜ)をひきやすい。","It's easy to catch a cold during the rainy season."],
+  ]},
+{ tier:3, jp:"〜ようになる", reading:"-yō ni naru", gloss:"Come to / Reach the Point Where",
+  desc:"Expresses a change in state, ability, or habit — something became possible or started happening.",
+  form:"[Verb plain / potential] + ようになる",
+  ex:[
+    ["毎日(まいにち)練習(れんしゅう)したら、泳(およ)げるようになった。","After practicing every day, I became able to swim."],
+    ["最近(さいきん)、野菜(やさい)を食(た)べるようになった。","I've recently started eating vegetables."],
+    ["日本語(にほんご)で夢(ゆめ)を見(み)るようになりました。","I've started dreaming in Japanese."],
+  ]},
+{ tier:3, jp:"〜ようにする", reading:"-yō ni suru", gloss:"Make an Effort to / Try to",
+  desc:"Expresses making a conscious effort to do or not do something regularly.",
+  form:"[Verb plain / negative] + ようにする",
+  ex:[
+    ["毎朝(まいあさ)運動(うんどう)するようにしています。","I make it a point to exercise every morning."],
+    ["夜(よる)遅(おそ)く食(た)べないようにしている。","I try not to eat late at night."],
+    ["時間(じかん)を守(まも)るようにしてください。","Please make an effort to be punctual."],
+  ]},
+{ tier:3, jp:"〜ようにいう", reading:"-yō ni iu", gloss:"Tell / Ask Someone to Do",
+  desc:"Used when relaying an instruction or request — to tell or ask someone to do something.",
+  form:"[Verb plain / negative] + ように + 言(い)う / 頼(たの)む",
+  ex:[
+    ["先生(せんせい)は静(しず)かにするように言(い)いました。","The teacher told us to be quiet."],
+    ["医者(いしゃ)に安静(あんせい)にするように言(い)われた。","The doctor told me to rest."],
+    ["早(はや)く来(く)るように伝(つた)えてください。","Please tell them to come early."],
+  ]},
+{ tier:3, jp:"〜ことになる", reading:"koto ni naru", gloss:"It Has Been Decided / It Turns Out",
+  desc:"Expresses that a decision has been made or a situation has come about, often through external or general circumstances — not the speaker's own decision.",
+  form:"[Verb plain / nai] + ことになる",
+  ex:[
+    ["来月(らいげつ)、転勤(てんきん)することになりました。","It has been decided that I will be transferred next month."],
+    ["結局(けっきょく)、彼女(かのじょ)が発表(はっぴょう)することになった。","It turned out she would be the one to present."],
+    ["試合(しあい)は中止(ちゅうし)になることになった。","It was decided that the game would be cancelled."],
+  ]},
+{ tier:3, jp:"〜ことにする", reading:"koto ni suru", gloss:"Decide to",
+  desc:"Expresses the speaker's own decision to do something.",
+  form:"[Verb plain] + ことにする",
+  ex:[
+    ["毎日(まいにち)日記(にっき)を書(か)くことにした。","I decided to write in my diary every day."],
+    ["肉(にく)を食(た)べないことにしています。","I've made it a personal rule not to eat meat."],
+    ["留学(りゅうがく)することにしました。","I've decided to study abroad."],
+  ]},
+{ tier:3, jp:"〜ことができる", reading:"koto ga dekiru", gloss:"Can / Be Able to",
+  desc:"Expresses ability or possibility. More formal than the potential verb form.",
+  form:"[Verb plain] + ことができる",
+  ex:[
+    ["日本語(にほんご)で話(はな)すことができます。","I can speak in Japanese."],
+    ["ここで写真(しゃしん)を撮(と)ることができません。","You cannot take photos here."],
+    ["彼(かれ)は何(なん)でも食(た)べることができる。","He can eat anything."],
+  ]},
+{ tier:3, jp:"〜ことがある", reading:"koto ga aru¹", gloss:"Have Ever / Past Experience",
+  desc:"Expresses a past experience — that something has happened at least once.",
+  form:"[Verb ta-form] + ことがある",
+  ex:[
+    ["富士山(ふじさん)に登(のぼ)ったことがあります。","I have climbed Mt. Fuji before."],
+    ["歌舞伎(かぶき)を見(み)たことがありますか。","Have you ever seen Kabuki?"],
+    ["一度(いちど)だけ外国(がいこく)に行(い)ったことがある。","I've been abroad just once."],
+  ]},
+{ tier:3, jp:"〜ことがある", reading:"koto ga aru²", gloss:"There Are Times When",
+  desc:"Expresses that something occasionally happens (not past experience, but occasional occurrence).",
+  form:"[Verb plain non-past] + ことがある",
+  ex:[
+    ["疲(つか)れているとき、授業中(じゅぎょうちゅう)に眠(ねむ)くなることがある。","There are times when I get sleepy during class when I'm tired."],
+    ["一人(ひとり)で映画(えいが)を見(み)に行(い)くことがあります。","I sometimes go to the movies alone."],
+    ["彼女(かのじょ)は急(きゅう)に怒(おこ)ることがある。","She sometimes suddenly gets angry."],
+  ]},
+{ tier:3, jp:"〜ことは〜が", reading:"koto wa … ga", gloss:"Indeed … But",
+  desc:"Acknowledges one point but introduces a contrast. Equivalent to “I admit … but” or “it is true … however”.",
+  form:"[Verb plain] + ことは + [same verb] + が / けど + [contrast]",
+  ex:[
+    ["行(い)くことは行(い)くけど、あまり気(き)が乗(の)らない。","I will go, but I'm not really feeling up to it."],
+    ["食(た)べることは食(た)べたが、おいしくなかった。","I did eat it, but it wasn't good."],
+    ["知(し)っていることは知(し)っているが、詳(くわ)しくはない。","I do know about it, but I'm not familiar with the details."],
+  ]},
+{ tier:3, jp:"〜らしい", reading:"rashii", gloss:"Seems / Apparently / -like",
+  desc:"(1) Hearsay / inference: “apparently” (indirect information). (2) Typicality: “typical of / -like” as a suffix.",
+  form:"[Verb / Adj plain / Noun] + らしい  ·  [Noun] + らしい (typicality)",
+  ex:[
+    ["明日(あした)は台風(たいふう)が来(く)るらしい。","Apparently a typhoon is coming tomorrow."],
+    ["彼(かれ)は辞(や)めるらしいですよ。","I hear he's going to quit."],
+    ["彼女(かのじょ)は本当(ほんとう)に女(おんな)らしい人(ひと)だ。","She is a truly feminine person."],
+  ]},
+{ tier:3, jp:"〜そうだ", reading:"sōda¹ — Hearsay", gloss:"I Hear That / Apparently",
+  desc:"Expresses information received from an external source (hearsay). Attaches to <b>plain form</b>.",
+  form:"[Clause (plain)] + そうだ",
+  ex:[
+    ["来年(らいねん)、会社(かいしゃ)が移転(いてん)するそうです。","I hear the company will relocate next year."],
+    ["彼女(かのじょ)は結婚(けっこん)したそうだ。","Apparently she got married."],
+    ["この店(みせ)は有名(ゆうめい)だそうですよ。","I've heard this shop is famous."],
+  ]},
+{ tier:3, jp:"〜そうだ", reading:"sōda² — Looks / Seems", gloss:"Looks Like / About to",
+  desc:"Expresses the speaker's visual or sensory impression — something <b>looks</b> a certain way. Attaches to verb / adjective stem.",
+  form:"[Verb masu-stem / i-adj stem / na-adj] + そうだ  ·  neg: 〜なさそうだ",
+  ex:[
+    ["この料理(りょうり)はおいしそうですね。","This dish looks delicious, doesn't it?"],
+    ["雨(あめ)が降(ふ)りそうだ。","It looks like it's going to rain."],
+    ["彼(かれ)は眠(ねむ)そうだ。","He looks sleepy."],
+  ]},
+{ tier:3, jp:"〜ようだ", reading:"yōda", gloss:"Seems Like / Looks Like",
+  desc:"Expresses inference based on direct observation or evidence. More objective than 〜らしい; more certain than 〜かもしれない.",
+  form:"[Verb / Adj plain / Noun + の] + ようだ",
+  ex:[
+    ["外(そと)は寒(さむ)いようです。","It seems cold outside."],
+    ["彼女(かのじょ)はもう帰(かえ)ったようだ。","It seems she has already gone home."],
+    ["夢(ゆめ)を見(み)ているようです。","It feels like I'm dreaming."],
+  ]},
+{ tier:3, jp:"〜にちがいない", reading:"ni chigainai", gloss:"Must Be / No Doubt",
+  desc:"Expresses strong conviction — “there is no doubt that …”.",
+  form:"[Verb / Adj plain / Noun] + にちがいない",
+  ex:[
+    ["彼(かれ)が犯人(はんにん)にちがいない。","He must be the culprit."],
+    ["あの音(おと)は地震(じしん)にちがいない。","That sound must be an earthquake."],
+    ["彼女(かのじょ)は喜(よろこ)んでくれるにちがいない。","She will surely be pleased."],
+  ]},
+{ tier:3, jp:"わけだ", reading:"wake da", gloss:"It Means That / No Wonder",
+  desc:"Expresses a logical conclusion — the natural result of what has been said. Also confirms a logical deduction.",
+  form:"[Clause plain] + わけだ",
+  ex:[
+    ["毎日(まいにち)練習(れんしゅう)したから、上手(じょうず)になったわけだ。","So that's why he got good — he practiced every day."],
+    ["彼女(かのじょ)は十年(じゅうねん)住(す)んでいるから、詳(くわ)しいわけだ。","No wonder she knows the area — she's lived here for ten years."],
+    ["つまり、行(い)けないというわけですね。","So, in other words, you can't go, right?"],
+  ]},
+{ tier:3, jp:"〜のは〜だ", reading:"no wa … da", gloss:"Cleft Sentence (It is … that …)",
+  desc:"Focuses on a particular element of a sentence by “clefting” it. Equivalent to “it is [X] that [Y]”.",
+  form:"[Verb / Adj clause] + のは + [Focus] + だ",
+  ex:[
+    ["私(わたし)が一番(いちばん)好(す)きなのはすしです。","What I like best is sushi."],
+    ["彼(かれ)が遅(おく)れた理由(りゆう)がわかったのは後(あと)になってからだ。","It was only later that I understood why he was late."],
+    ["問題(もんだい)なのは費用(ひよう)ではなく時間(じかん)だ。","What's problematic is not the cost but the time."],
+  ]},
+{ tier:3, jp:"〜は〜が", reading:"wa … ga", gloss:"Topic–Subject Contrast",
+  desc:"The topic (は) is the overall frame; the subject (が) is what the comment is about within that frame. Common with feelings, abilities, physical states.",
+  form:"[Topic] + は + [Subject] + が + [Predicate]",
+  ex:[
+    ["象(ぞう)は鼻(はな)が長(なが)い。","As for elephants, their trunks are long."],
+    ["私(わたし)はピアノが弾(ひ)けます。","As for me, I can play the piano."],
+    ["あの映画(えいが)はストーリーがいい。","As for that movie, the story is good."],
+  ]},
+{ tier:3, jp:"なら", reading:"nara", gloss:"If / In That Case",
+  desc:"A conditional that often reacts to something just said or known. Means “if it's the case that …” or “speaking of …”. The condition is assumed.",
+  form:"[Noun / Verb plain] + なら",
+  ex:[
+    ["時間(じかん)があるなら、一緒(いっしょ)に行(い)こう。","If you have time, let's go together."],
+    ["東京(とうきょう)に行(い)くなら、浅草(あさくさ)に寄(よ)ってみて。","If you're going to Tokyo, try stopping by Asakusa."],
+    ["彼女(かのじょ)が来(こ)ないなら、私(わたし)も行(い)きません。","If she's not coming, I won't go either."],
+  ]},
+{ tier:3, jp:"〜たって・〜だって", reading:"-tatte / -datte", gloss:"Even If / No Matter (Casual)",
+  desc:"Expresses a concession, like 〜ても but slightly more colloquial or emphatic.",
+  form:"[Verb ta-form] + って  ·  [Noun / Na-adj] + だって",
+  ex:[
+    ["急(いそ)いだって、もう間(ま)に合(あ)わない。","Even if you hurry, it's already too late."],
+    ["子供(こども)だって、そのくらいはわかる。","Even a child would understand that much."],
+    ["謝(あやま)ったって、許(ゆる)してもらえないかもしれない。","Even if you apologize, you might not be forgiven."],
+  ]},
+{ tier:3, jp:"うちに", reading:"uchi ni", gloss:"While / Before It's Too Late",
+  desc:"Expresses doing something <b>while</b> a condition still holds, often with urgency that the condition will change.",
+  form:"[Verb plain / Adj / Noun + の] + うちに",
+  ex:[
+    ["若(わか)いうちにたくさん旅行(りょこう)しなさい。","Travel a lot while you're young."],
+    ["熱(あつ)いうちに食(た)べてください。","Please eat it while it's hot."],
+    ["忘(わす)れないうちにメモしておいた。","I made a note of it while I hadn't forgotten."],
+  ]},
+{ tier:3, jp:"まま", reading:"mama", gloss:"As Is / Leaving in a State",
+  desc:"Expresses that a state is maintained or something is left unchanged.",
+  form:"[Verb ta-form / Noun + の] + まま",
+  ex:[
+    ["靴(くつ)を履(は)いたまま入(はい)ってしまった。","I entered with my shoes on."],
+    ["電気(でんき)をつけたまま寝(ね)てしまった。","I fell asleep with the lights on."],
+    ["ありのままの自分(じぶん)でいいんだ。","It's okay to be yourself just as you are."],
+  ]},
+{ tier:3, jp:"ほど", reading:"hodo", gloss:"To the Extent That / The More …",
+  desc:"Expresses degree or extent. Can also set up a proportional relationship (“the more X, the more Y”).",
+  form:"[Noun / Verb plain] + ほど + [comparative / extent]",
+  ex:[
+    ["死(し)ぬほど疲(つか)れた。","I'm tired to the point of dying."],
+    ["練習(れんしゅう)すればするほど上手(じょうず)になる。","The more you practice, the better you get."],
+    ["それほど難(むずか)しくはないです。","It's not that difficult."],
+  ]},
+{ tier:3, jp:"〜も〜も", reading:"-mo -mo", gloss:"Both … and / Neither … nor",
+  desc:"Combines two items, either both affirmative (“both A and B”) or both negative (“neither A nor B”).",
+  form:"[A] + も + [B] + も + [Predicate]",
+  ex:[
+    ["コーヒーも紅茶(こうちゃ)も好(す)きです。","I like both coffee and tea."],
+    ["時間(じかん)もお金(かね)もない。","I have neither time nor money."],
+    ["彼(かれ)も彼女(かのじょ)も来(こ)なかった。","Neither he nor she came."],
+  ]},
+{ tier:3, jp:"とか", reading:"toka", gloss:"Things Like / Or Something",
+  desc:"(1) Lists examples non-exhaustively (like や). (2) Conveys vagueness or hedging. (3) Casual quotation (colloquial).",
+  form:"[Noun / Verb] + とか (+ とか)",
+  ex:[
+    ["週末(しゅうまつ)は映画(えいが)とかショッピングとかをします。","On weekends I do things like watch movies and shop."],
+    ["明日(あした)行(い)くとか言(い)ってたよね？","You were saying something about going tomorrow, right?"],
+    ["ラーメンとかどう？","How about ramen or something?"],
+  ]},
+{ tier:3, jp:"ために", reading:"tame ni", gloss:"For the Purpose of / Because of",
+  desc:"(1) Purpose: “in order to do”. (2) Cause / reason: “because of, due to”.",
+  form:"[Verb plain / Noun + の] + ために",
+  ex:[
+    ["健康(けんこう)のために運動(うんどう)しています。","I exercise for my health."],
+    ["日本語(にほんご)を上達(じょうたつ)させるために、毎日(まいにち)練習(れんしゅう)する。","I practice every day in order to improve my Japanese."],
+    ["台風(たいふう)のために電車(でんしゃ)が止(と)まった。","The trains stopped because of the typhoon."],
+  ]},
+{ tier:3, jp:"〜として", reading:"-to shite", gloss:"As / In the Role of",
+  desc:"Expresses a role, capacity, or standpoint — “as [X]”, “in the capacity of [X]”.",
+  form:"[Noun] + として",
+  ex:[
+    ["彼(かれ)は医者(いしゃ)として働(はたら)いている。","He works as a doctor."],
+    ["友達(ともだち)として言(い)うけど…","Speaking as your friend…"],
+    ["観光地(かんこうち)として有名(ゆうめい)です。","It is famous as a tourist destination."],
+  ]},
+{ tier:3, jp:"〜としては", reading:"-to shite wa", gloss:"For / Considering That One Is",
+  desc:"Expresses a standard or expectation based on one's role — “for a [X]”, “considering that one is [X]”.",
+  form:"[Noun] + としては",
+  ex:[
+    ["初心者(しょしんしゃ)としてはよくできています。","For a beginner, this is well done."],
+    ["学生(がくせい)としてはかなり稼(かせ)いでいる。","As a student, he earns quite a lot."],
+    ["外国人(がいこくじん)としては日本語(にほんご)が上手(じょうず)ですね。","For a foreigner, your Japanese is excellent."],
+  ]},
+{ tier:3, jp:"〜という", reading:"-to iu", gloss:"Called / Known As / The Fact That",
+  desc:"Connects a word, name, or concept to what it refers to or contains. Also used to embed a clause.",
+  form:"[Clause / Name / Word] + という + [Noun]",
+  ex:[
+    ["「侘(わ)び寂(さ)び」という概念(がいねん)はユニークだ。","The concept called “wabi-sabi” is unique."],
+    ["彼(かれ)が来(こ)ないという連絡(れんらく)があった。","There was a message that he wouldn't come."],
+    ["田中(たなか)という方(かた)からお電話(でんわ)です。","There's a call from someone named Tanaka."],
+  ]},
+{ tier:3, jp:"〜といえば", reading:"-to ieba", gloss:"Speaking of / When It Comes to",
+  desc:"Introduces a topic brought to mind by what was just said. Like “speaking of [X]”.",
+  form:"[Noun / Clause] + といえば",
+  ex:[
+    ["日本(にほん)といえば、富士山(ふじさん)ですね。","Speaking of Japan, it's Mt. Fuji, isn't it."],
+    ["夏(なつ)といえば花火(はなび)だ。","When you think of summer, it's fireworks."],
+    ["そういえば、昨日(きのう)メールが届(とど)いた。","Now that you mention it, I got an email yesterday."],
+  ]},
+{ tier:3, jp:"〜ばよかった", reading:"-ba yokatta", gloss:"Should Have / Wish I Had",
+  desc:"Expresses regret about something not done — “I wish I had done [X]”.",
+  form:"[Verb ba-form] + よかった  ·  [Verb nai → nakereba] + よかった",
+  ex:[
+    ["もっと早(はや)く起(お)きればよかった。","I should have woken up earlier."],
+    ["傘(かさ)を持(も)ってくればよかった。","I should have brought an umbrella."],
+    ["あんなことを言(い)わなければよかった。","I should not have said that."],
+  ]},
+{ tier:3, jp:"〜たらどうですか", reading:"-tara dō desu ka", gloss:"How About / Why Don't You",
+  desc:"Gives advice or a suggestion politely. Like “why don't you try [X]?”",
+  form:"[Verb ta-form] + らどうですか",
+  ex:[
+    ["先生(せんせい)に相談(そうだん)したらどうですか。","Why don't you consult the teacher?"],
+    ["少(すこ)し休(やす)んだらどうですか。","How about taking a little rest?"],
+    ["早(はや)く謝(あやま)ったらどうですか。","Why don't you apologize quickly?"],
+  ]},
+{ tier:3, jp:"〜なくなる", reading:"-naku naru", gloss:"Stop Being / No Longer",
+  desc:"Expresses a change to a state of absence or cessation — “come to not be, stop doing”.",
+  form:"[Verb nai-stem] + なくなる  ·  i-adj nai → くなくなる  ·  Noun → でなくなる",
+  ex:[
+    ["薬(くすり)を飲(の)んだら痛(いた)みがなくなった。","After taking the medicine, the pain went away."],
+    ["年(とし)を取(と)ると、眠(ねむ)れなくなる。","As you age, you become unable to sleep."],
+    ["だんだん興味(きょうみ)がなくなってきた。","I've gradually lost interest."],
+  ]},
+{ tier:3, jp:"〜ようとおもう", reading:"-yō to omou", gloss:"I'm Thinking of Doing",
+  desc:"Expresses a plan or intention, especially one not yet fully decided. Softer than つもり.",
+  form:"[Verb volitional] + と思(おも)う",
+  ex:[
+    ["来年(らいねん)、留学(りゅうがく)しようと思(おも)っています。","I'm thinking of studying abroad next year."],
+    ["新(あたら)しいことに挑戦(ちょうせん)しようと思(おも)った。","I thought I'd try something new."],
+    ["もっと早(はや)く起(お)きようと思(おも)う。","I'm thinking I'll wake up earlier."],
+  ]},
+
+/* ============ TIER 4 ============ */
+{ tier:4, jp:"〜られる・〜れる", reading:"rareru¹ — Passive", gloss:"Passive Voice",
+  desc:"Expresses that the subject is the <b>receiver</b> of an action (direct passive) or that an action affects the subject adversely (indirect / suffering passive).",
+  form:"Gr.1 -reru · Gr.2 -rareru · する → される · 来る → こられる",
+  ex:[
+    ["先生(せんせい)に褒(ほ)められた。","I was praised by the teacher."],
+    ["雨(あめ)に降(ふ)られて濡(ぬ)れた。","I got wet because rain fell on me."],
+    ["この小説(しょうせつ)は世界中(せかいじゅう)で読(よ)まれている。","This novel is read throughout the world."],
+  ]},
+{ tier:4, jp:"〜られる・〜れる", reading:"rareru² — Potential", gloss:"Can / Be Able to",
+  desc:"Expresses ability or possibility. Formed the same way as the passive — context distinguishes the meaning.",
+  form:"Same morphology as passive · する → できる",
+  ex:[
+    ["辛(から)いものが食(た)べられますか。","Can you eat spicy food?"],
+    ["最近(さいきん)あまり眠(ねむ)れない。","Lately I can't sleep very well."],
+    ["一人(ひとり)でできます。","I can do it alone."],
+  ]},
+{ tier:4, jp:"〜させる", reading:"saseru — Causative", gloss:"Make / Let Someone Do",
+  desc:"Expresses causing or allowing someone to do something. Nuance (make vs. let) depends on context.",
+  form:"Gr.1 -aseru · Gr.2 -saseru · する → させる · 来る → こさせる",
+  ex:[
+    ["先生(せんせい)は生徒(せいと)に本(ほん)を読(よ)ませた。","The teacher had the students read a book."],
+    ["子供(こども)を自由(じゆう)に遊(あそ)ばせました。","I let the children play freely."],
+    ["もっと早(はや)く始(はじ)めさせればよかった。","I should have made them start earlier."],
+  ]},
+{ tier:4, jp:"〜ていく", reading:"-te iku", gloss:"Go On / Continue Into the Future",
+  desc:"Expresses an action or change that moves <b>away</b> from the present moment or continues forward in time.",
+  form:"[Verb te-form] + いく",
+  ex:[
+    ["これからも練習(れんしゅう)を続(つづ)けていきます。","I will continue to practice from now on."],
+    ["少(すこ)しずつ暖(あたた)かくなっていく。","It will gradually become warmer."],
+    ["彼(かれ)は振(ふ)り返(かえ)らずに走(はし)っていった。","He ran away without looking back."],
+  ]},
+{ tier:4, jp:"〜てくる", reading:"-te kuru", gloss:"Come to Be / Change Toward Now",
+  desc:"Expresses a change or action that has happened up to the present, or action directed toward the speaker.",
+  form:"[Verb te-form] + くる",
+  ex:[
+    ["だんだん日本語(にほんご)が上手(じょうず)になってきた。","My Japanese has gradually been improving."],
+    ["暗(くら)くなってきた。","It has gotten dark."],
+    ["走(はし)って来(き)たから疲(つか)れた。","I'm tired because I came running."],
+  ]},
+{ tier:4, jp:"〜がる", reading:"-garu", gloss:"Shows Signs of / Seems to Feel",
+  desc:"Used for third-person emotions or desires — replaces adjectives like 怖い or 欲しい when describing someone else's feelings observed outwardly.",
+  form:"[i-adj stem / -tai stem / 欲し-] + がる",
+  ex:[
+    ["子供(こども)は注射(ちゅうしゃ)を怖(こわ)がっている。","The child is scared of the injection."],
+    ["彼(かれ)は新(あたら)しいゲームを欲(ほ)しがっている。","He seems to want the new game."],
+    ["彼女(かのじょ)は人前(ひとまえ)で話(はな)すのを嫌(いや)がる。","She shows reluctance to speak in public."],
+  ]},
+{ tier:4, jp:"せっかく", reading:"sekkaku", gloss:"Specially / Taking the Trouble to",
+  desc:"Expresses that something was done with special effort or care, often with an implied feeling of not wanting to waste it.",
+  form:"せっかく + [Clause]",
+  ex:[
+    ["せっかく作(つく)ったのに、食(た)べてくれなかった。","I took the trouble to make it, but they didn't eat it."],
+    ["せっかく日本(にほん)に来(き)たんだから、温泉(おんせん)に行(い)こう。","Since we've come all the way to Japan, let's go to a hot spring."],
+    ["せっかくのチャンスを逃(のが)してしまった。","I wasted the special opportunity I had."],
+  ]},
+{ tier:4, jp:"かわりに", reading:"kawari ni", gloss:"Instead of / In Return For",
+  desc:"(1) Substitution: “instead of [X], [Y]”. (2) Exchange / compensation: “in return for [X]”.",
+  form:"[Verb plain / Noun + の] + かわりに",
+  ex:[
+    ["父(ちち)のかわりに私(わたし)が出席(しゅっせき)します。","I will attend in place of my father."],
+    ["バスのかわりに歩(ある)いて行(い)った。","I walked instead of taking the bus."],
+    ["手伝(てつだ)ってあげるかわりに、今度(こんど)ご飯(はん)をおごってね。","I'll help you, but in return treat me to a meal next time."],
+  ]},
+{ tier:4, jp:"〜にしては", reading:"-ni shite wa", gloss:"For / Considering",
+  desc:"Expresses that the result is unexpected given the stated standard.",
+  form:"[Noun / Verb plain] + にしては",
+  ex:[
+    ["初(はじ)めてにしては上手(じょうず)ですね。","For a first time, this is impressive."],
+    ["値段(ねだん)にしてはおいしい。","It's tasty considering the price."],
+    ["子供(こども)にしては難(むずか)しいことを言(い)う。","For a child, (he/she) says difficult things."],
+  ]},
+{ tier:4, jp:"〜にする", reading:"-ni suru", gloss:"Decide on / Make It",
+  desc:"(1) Deciding on a choice. (2) Changing something into a state.",
+  form:"[Noun] + にする  ·  [Verb / Adj] + ように + する",
+  ex:[
+    ["飲(の)み物(もの)はお茶(ちゃ)にします。","I'll go with tea for my drink."],
+    ["部屋(へや)をきれいにしなさい。","Make your room clean."],
+    ["待(ま)ち合(あ)わせは三時(さんじ)にしましょう。","Let's make the meeting time 3 o'clock."],
+  ]},
+{ tier:4, jp:"すると", reading:"suruto", gloss:"And Then / Thereupon",
+  desc:"Expresses that immediately following one event, another occurs. Often used in storytelling.",
+  form:"[Sentence A]。すると + [Sentence B]",
+  ex:[
+    ["ドアを開(あ)けた。すると、見知(みし)らぬ人(ひと)が立(た)っていた。","I opened the door. And then, a stranger was standing there."],
+    ["試(ため)しにボタンを押(お)した。すると機械(きかい)が動(うご)きだした。","I tried pressing the button. Then the machine started moving."],
+    ["外(そと)に出(で)た。すると雪(ゆき)が降(ふ)っていた。","I went outside. And then, it was snowing."],
+  ]},
+{ tier:4, jp:"〜し", reading:"-shi", gloss:"And What's More / For One Thing",
+  desc:"Lists multiple reasons or circumstances supporting the same conclusion. Like “and also, besides, what's more”.",
+  form:"[Clause plain] + し (+ Clause + し …) + [Conclusion]",
+  ex:[
+    ["安(やす)いし、おいしいし、このお店(みせ)が大好(だいす)きです。","This shop is cheap and delicious — I love it."],
+    ["疲(つか)れているし、気分(きぶん)も悪(わる)いし、今日(きょう)は帰(かえ)りたい。","I'm tired, I'm not feeling well, so I want to go home."],
+    ["彼(かれ)は頭(あたま)もいいし、優(やさ)しいし、人気(にんき)があるのは当然(とうぜん)だ。","He's smart and kind — naturally he's popular."],
+  ]},
+{ tier:4, jp:"たまらない", reading:"tamaranai", gloss:"Unbearable / Can't Stand / Extremely",
+  desc:"Expresses a feeling or condition so strong it is unbearable — or, positively, that one wants / loves something intensely.",
+  form:"[Verb te-form / i-adj te-form / na-adj] + たまらない",
+  ex:[
+    ["暑(あつ)くてたまらない。","It's unbearably hot."],
+    ["故郷(こきょう)が恋(こい)しくてたまらない。","I miss my hometown so much I can't bear it."],
+    ["甘(あま)いものが食(た)べたくてたまらない。","I'm dying to eat something sweet."],
+  ]},
+{ tier:4, jp:"〜ないで", reading:"-nai de", gloss:"Without Doing / Instead of",
+  desc:"Expresses doing something <b>without</b> doing [X], or not doing [X] instead.",
+  form:"[Verb nai-form] + で",
+  ex:[
+    ["傘(かさ)を持(も)たないで出(で)かけた。","I went out without taking an umbrella."],
+    ["朝(あさ)ご飯(はん)を食(た)べないで学校(がっこう)に来(き)た。","I came to school without eating breakfast."],
+    ["迷(まよ)わないで選(えら)んでください。","Please choose without hesitating."],
+  ]},
+{ tier:4, jp:"〜ずに", reading:"-zu ni", gloss:"Without Doing (Formal)",
+  desc:"Equivalent to 〜ないで but more formal or literary.",
+  form:"[Verb nai-stem] + ずに · する → せずに",
+  ex:[
+    ["何(なに)も言(い)わずに去(さ)っていった。","(He/She) left without saying anything."],
+    ["寝(ね)ずに一晩中(ひとばんじゅう)働(はたら)いた。","I worked through the night without sleeping."],
+    ["確認(かくにん)せずに提出(ていしゅつ)してしまった。","I submitted it without checking."],
+  ]},
+{ tier:4, jp:"〜なくて", reading:"-nakute", gloss:"Not Doing / Not Being (Reason)",
+  desc:"The negative te-form. Connects to another clause, often expressing the reason for a negative state or feeling.",
+  form:"Verb nai → なくて · i-adj → くなくて · Noun → じゃなくて",
+  ex:[
+    ["時間(じかん)がなくて、行(い)けませんでした。","I couldn't go because I didn't have time."],
+    ["うまくできなくて、悔(くや)しい。","I couldn't do it well and I'm frustrated."],
+    ["彼女(かのじょ)は学生(がくせい)じゃなくて、社会人(しゃかいじん)です。","She's not a student but a working adult."],
+  ]},
+{ tier:4, jp:"〜ものだ", reading:"mono da", gloss:"Is the Nature of / Used to / One Should",
+  desc:"(1) What is generally or naturally the case. (2) Recalling past habits (with past tense). (3) What one ought to do.",
+  form:"[Verb plain / Adj] + ものだ",
+  ex:[
+    ["若(わか)い頃(ころ)は元気(げんき)なものだ。","When one is young, one naturally has energy."],
+    ["子供(こども)のころ、よくここで遊(あそ)んだものだ。","I used to play here often as a child."],
+    ["人(ひと)に迷惑(めいわく)をかけてはいけないものだ。","One should not cause trouble for others."],
+  ]},
+{ tier:4, jp:"〜かた", reading:"-kata", gloss:"Way of / How to Do",
+  desc:"Expresses the manner or method of doing something — “how to [verb]” or “the way of doing [verb]”.",
+  form:"[Verb masu-stem] + かた",
+  ex:[
+    ["正(ただ)しい箸(はし)の持(も)ちかたを教(おし)えてください。","Please teach me the correct way to hold chopsticks."],
+    ["この漢字(かんじ)の読(よ)みかたがわからない。","I don't know how to read this kanji."],
+    ["人(ひと)との話(はな)しかたが上手(じょうず)ですね。","You're good at the way you talk to people."],
+  ]},
+{ tier:4, jp:"〜さ", reading:"-sa", gloss:"Noun Suffix (Degree / Quality)",
+  desc:"Turns an adjective into a noun denoting its degree or quality (like “-ness” in English).",
+  form:"[i-adj stem / na-adj stem] + さ",
+  ex:[
+    ["この部屋(へや)の広(ひろ)さに驚(おどろ)いた。","I was surprised at the spaciousness of this room."],
+    ["冬(ふゆ)の寒(さむ)さが苦手(にがて)です。","I am not good with the coldness of winter."],
+    ["彼(かれ)の優(やさ)しさに感動(かんどう)した。","I was moved by his kindness."],
+  ]},
+{ tier:4, jp:"多い・少ない", reading:"ōi / sukunai", gloss:"Many / Few",
+  desc:"Adjectives expressing large or small quantity. Note: cannot directly modify nouns (use 多くの or 少ない as predicate).",
+  form:"[Noun] + が + 多(おお)い / 少(すく)ない",
+  ex:[
+    ["最近(さいきん)は外国人(がいこくじん)の観光客(かんこうきゃく)が多(おお)い。","There are many foreign tourists recently."],
+    ["宿題(しゅくだい)が少(すく)なくて助(たす)かった。","It was a relief that there was little homework."],
+    ["この地域(ちいき)は雨(あめ)が多(おお)いです。","This area gets a lot of rain."],
+  ]},
+{ tier:4, jp:"ごとに", reading:"goto ni", gloss:"Every / Each",
+  desc:"Expresses regularity — “every [time / place / thing]”.",
+  form:"[Time / Noun] + ごとに",
+  ex:[
+    ["一時間(いちじかん)ごとに休憩(きゅうけい)を取(と)る。","Take a break every hour."],
+    ["駅(えき)ごとに降(お)りてみた。","I got off at every station."],
+    ["季節(きせつ)ごとに景色(けしき)が変(か)わる。","The scenery changes with each season."],
+  ]},
+{ tier:4, jp:"〜まい", reading:"-mai", gloss:"Probably Won't (Negative Volitional)",
+  desc:"Expresses negative intention or supposition — “I will not, probably won't”. Formal / literary.",
+  form:"[Verb plain / masu-stem] + まい  ·  する → すまい  ·  来る → くるまい",
+  ex:[
+    ["もう二度(にど)とあそこには行(い)くまい。","I will never go there again."],
+    ["彼(かれ)は来(く)るまい。","He probably won't come."],
+    ["こんな失敗(しっぱい)は二度(にど)とすまい。","I will not make such a mistake again."],
+  ]},
+{ tier:4, jp:"〜ていただく", reading:"-te itadaku", gloss:"Humbly Receive (Honorific)",
+  desc:"The humble equivalent of もらう. Used to humbly say you received something — including a favor — from someone of higher status.",
+  form:"[Verb te-form] + いただく  ·  [Object] + を + いただく",
+  ex:[
+    ["先生(せんせい)に確認(かくにん)していただきました。","I had the teacher check it for me."],
+    ["素晴(すば)らしいプレゼントをいただきました。","I humbly received a wonderful present."],
+    ["ご説明(せつめい)いただけますか。","Could you please explain?"],
+  ]},
+{ tier:4, jp:"くださる・さしあげる・いただく", reading:"kudasaru / sashiageru / itadaku", gloss:"Giving & Receiving Hierarchy",
+  desc:"The honorific / humble system for giving and receiving. <b>さしあげる</b> = humble for あげる (I give to superior). <b>くださる</b> = honorific for くれる (superior gives to me). <b>いただく</b> = humble for もらう (I humbly receive).",
+  form:"(see related entries)",
+  ex:[
+    ["お土産(みやげ)をさしあげます。","I will humbly give you a souvenir."],
+    ["先生(せんせい)がアドバイスをくださった。","The teacher kindly gave me advice."],
+    ["社長(しゃちょう)にサインをいただいた。","I humbly received a signature from the president."],
+  ]},
+{ tier:4, jp:"お〜になる・ご〜になる", reading:"o- ni naru", gloss:"Honorific for Another's Action",
+  desc:"Used to express another person's action respectfully. For verbs of social superiors.",
+  form:"お + [Verb masu-stem] + になる  ·  ご + [Sino-Japanese noun] + になる",
+  ex:[
+    ["社長(しゃちょう)はもうお帰(かえ)りになりました。","The president has already gone home."],
+    ["先生(せんせい)はこの本(ほん)をお読(よ)みになりましたか。","Have you read this book, teacher?"],
+    ["いつご出発(しゅっぱつ)になりますか。","When will you be departing?"],
+  ]},
+{ tier:4, jp:"お〜する・ご〜する", reading:"o- suru", gloss:"Humble for One's Own Action",
+  desc:"Expresses the speaker's own action humbly, showing respect to the person it affects.",
+  form:"お + [Verb masu-stem] + する  ·  ご + [Sino-Japanese noun] + する",
+  ex:[
+    ["お荷物(にもつ)をお持(も)ちします。","Allow me to carry your luggage."],
+    ["ご案内(あんない)します。","I will guide you."],
+    ["後(あと)でお電話(でんわ)します。","I will call you later."],
+  ]},
+{ tier:4, jp:"お〜・ご〜", reading:"o- / go-", gloss:"Honorific Prefix",
+  desc:"Attached to nouns (and some adjectives / verbs) to make them polite or to show respect for the listener's possessions or situation. <b>お</b> for native Japanese words; <b>ご</b> for Sino-Japanese.",
+  form:"お / ご + [Noun / Adjective]",
+  ex:[
+    ["お名前(なまえ)を教(おし)えていただけますか。","Could you please tell me your name?"],
+    ["ご家族(かぞく)はお元気(げんき)ですか。","Is your family well?"],
+    ["お待(ま)たせしました。","Sorry to have kept you waiting."],
+  ]},
+{ tier:4, jp:"〜さま・〜さん・〜くん・〜ちゃん", reading:"-sama / -san / -kun / -chan", gloss:"Honorific Suffixes",
+  desc:"Suffixes added to names or titles to show respect or familiarity. <b>さま</b>: very formal · <b>さん</b>: standard polite · <b>くん</b>: younger males / subordinates · <b>ちゃん</b>: affectionate, for children or close friends.",
+  form:"[Name / Title] + suffix",
+  ex:[
+    ["お客様(きゃくさま)、こちらへどうぞ。","This way please, dear guest."],
+    ["田中(たなか)さん、いらっしゃいますか。","Is Ms. / Mr. Tanaka in?"],
+    ["鈴木(すずき)くん、ちょっとここに来(き)て。","Hey Suzuki, come here a moment."],
+  ]},
+{ tier:4, jp:"〜たち・〜ら・〜がた・〜ども", reading:"-tachi / -ra / -gata / -domo", gloss:"Plural Suffixes",
+  desc:"Suffixes indicating plurality. <b>たち</b>: common, neutral · <b>ら</b>: informal, can be rough · <b>がた</b>: respectful · <b>ども</b>: humble or pejorative.",
+  form:"[Person] + suffix",
+  ex:[
+    ["子供(こども)たちが公園(こうえん)で遊(あそ)んでいます。","The children are playing in the park."],
+    ["あの人(ひと)たちは誰(だれ)ですか。","Who are those people?"],
+    ["先生(せんせい)がたにお礼(れい)を申(もう)し上(あ)げます。","I express my gratitude to the teachers."],
+  ]},
+{ tier:4, jp:"自分", reading:"jibun¹ — Empathy Marker", gloss:"Oneself (Reflexive)",
+  desc:"Used as a reflexive pronoun (“oneself”) to refer back to the topic / subject, often expressing empathy with the subject's viewpoint.",
+  form:"[Subject] + は + 自分(じぶん) + で / の / が + …",
+  ex:[
+    ["彼(かれ)は自分(じぶん)で料理(りょうり)を作(つく)る。","He cooks for himself."],
+    ["子供(こども)は自分(じぶん)の名前(なまえ)が書(か)けますか。","Can the child write their own name?"],
+    ["自分(じぶん)のことは自分(じぶん)でしなさい。","Do your own things by yourself."],
+  ]},
+{ tier:4, jp:"自分", reading:"jibun² — Contrast", gloss:"I / Me (Dialectal · Emphatic)",
+  desc:"In some dialects (Kansai etc.) and certain usages, 自分 functions as a first-person pronoun, often contrasting the speaker's situation with others.",
+  form:"自分 + は / が",
+  ex:[
+    ["自分(じぶん)は全然(ぜんぜん)知(し)らんかった。","I didn't know at all. (dialect)"],
+    ["自分(じぶん)は違(ちが)うと思(おも)うんですけど。","I think it's different, myself."],
+    ["自分(じぶん)のことを棚(たな)に上(あ)げないで。","Don't put your own faults on the shelf."],
+  ]},
+
+/* ============ TIER 5 ============ */
+{ tier:5, jp:"〜のに", reading:"noni¹", gloss:"Even Though (Surprise · Reproach)",
+  desc:"Expresses disappointment, surprise, or reproach — “even though [A], [B] (unexpectedly)”. Carries emotional nuance.",
+  form:"[Verb / Adj plain] + のに  ·  [Noun / Na-adj] + な + のに",
+  ex:[
+    ["頑張(がんば)ったのに、負(ま)けてしまった。","Even though I tried hard, I lost."],
+    ["晴(は)れているのに、寒(さむ)い。","Even though it's clear, it's cold."],
+    ["誘(さそ)ったのに、来(き)てくれなかった。","Even though I invited them, they didn't come."],
+  ]},
+{ tier:5, jp:"〜のに", reading:"noni²", gloss:"For the Purpose of / In Doing",
+  desc:"Expresses a purpose or the use to which something is put. Like “for the purpose of” or “in doing [X]”.",
+  form:"[Verb plain / Noun + の] + のに",
+  ex:[
+    ["この薬(くすり)は熱(ねつ)を下(さ)げるのに使(つか)います。","This medicine is used for lowering fever."],
+    ["荷物(にもつ)を運(はこ)ぶのに車(くるま)が要(い)る。","You need a car for carrying luggage."],
+    ["時間(じかん)をかけるのに意味(いみ)がある。","There is meaning in taking time for it."],
+  ]},
+{ tier:5, jp:"〜ようとする", reading:"-yō to suru", gloss:"Try to / Be About to",
+  desc:"Expresses an attempt to do something, or being on the verge of doing it.",
+  form:"[Verb volitional] + とする",
+  ex:[
+    ["ドアを開(あ)けようとしたが、鍵(かぎ)がかかっていた。","I tried to open the door, but it was locked."],
+    ["眠(ねむ)ろうとしても眠(ねむ)れない。","Even when I try to sleep, I can't."],
+    ["立(た)ち上(あ)がろうとしたとき、電話(でんわ)が鳴(な)った。","Just as I was about to stand up, the phone rang."],
+  ]},
+{ tier:5, jp:"かい", reading:"kai", gloss:"Question (Casual · Male)",
+  desc:"A casual question particle, primarily used by male speakers. Less formal than か.",
+  form:"[Sentence plain] + かい",
+  ex:[
+    ["もう食(た)べたかい？","Have you eaten already?"],
+    ["元気(げんき)かい？","How are you doing?"],
+    ["それは本当(ほんとう)かい？","Is that really true?"],
+  ]},
+{ tier:5, jp:"だい", reading:"dai", gloss:"Question / Statement (Casual)",
+  desc:"A casual particle used mostly in male casual speech for questions (like かい but broader) or emphatic statements.",
+  form:"[Sentence plain] + だい",
+  ex:[
+    ["どこへ行(い)くんだい？","Where are you going?"],
+    ["何(なに)が食(た)べたいんだい？","What is it you want to eat?"],
+    ["それはいったい何(なに)だい？","Just what on earth is that?"],
+  ]},
+{ tier:5, jp:"かな・かしら", reading:"kana / kashira", gloss:"I Wonder",
+  desc:"Expresses wondering or self-questioning. <b>かな</b> is gender-neutral; <b>かしら</b> is primarily feminine.",
+  form:"[Sentence plain] + かな / かしら",
+  ex:[
+    ["明日(あした)は晴(は)れるかな。","I wonder if it'll be sunny tomorrow."],
+    ["彼(かれ)は来(く)るかしら。","I wonder if he'll come."],
+    ["これでよかったかな。","I wonder if this was alright."],
+  ]},
+{ tier:5, jp:"〜わ", reading:"wa² — Feminine", gloss:"Female Speech Marker",
+  desc:"A sentence-final particle associated with feminine speech, adding a soft, gentle, or slightly surprised tone.",
+  form:"[Sentence] + わ",
+  ex:[
+    ["これ、とてもきれいだわ。","This is very beautiful."],
+    ["私(わたし)にはわからないわ。","I don't understand."],
+    ["もう行(い)かなくちゃだわ。","I have to go now."],
+  ]},
+{ tier:5, jp:"〜って", reading:"-tte¹", gloss:"Casual Topic / “As For”",
+  desc:"Casual topic marker, equivalent to は in informal speech. Also used to call someone's name or introduce a topic.",
+  form:"[Noun] + って + [Comment]",
+  ex:[
+    ["田中(たなか)さんって、もう来(き)た？","Has Tanaka-san come yet?"],
+    ["あの映画(えいが)って、おもしろいよね。","That movie — it's interesting, isn't it."],
+    ["愛(あい)って何(なん)だろう。","What is love, I wonder."],
+  ]},
+{ tier:5, jp:"〜って", reading:"-tte²", gloss:"Casual Quotation Marker",
+  desc:"Casual equivalent of と³ (quotation marker). Used in informal speech to quote or report.",
+  form:"[Quoted content] + って + 言(い)う / 聞(き)く …",
+  ex:[
+    ["明日(あした)休(やす)むって言(い)ってたよ。","(He/She) said they'd be off tomorrow."],
+    ["試験(しけん)が難(むずか)しかったって？","I hear the exam was hard?"],
+    ["先生(せんせい)が静(しず)かにしろって。","The teacher said to be quiet."],
+  ]},
+{ tier:5, jp:"やはり・やっぱり", reading:"yahari / yappari", gloss:"As Expected / Sure Enough / After All",
+  desc:"Expresses that something turned out as expected, or that the speaker has returned to a previous conclusion.",
+  form:"やはり / やっぱり + [Statement]",
+  ex:[
+    ["やっぱりこの店(みせ)がいちばんおいしい。","Just as I expected, this shop is the most delicious."],
+    ["やはり彼(かれ)が正(ただ)しかった。","Sure enough, he was right."],
+    ["やっぱり行(い)くのはやめる。","I've decided after all not to go."],
+  ]},
+{ tier:5, jp:"わかる", reading:"wakaru", gloss:"Understand / Become Clear",
+  desc:"Expresses understanding or comprehension. Unlike 知(し)る (to know a fact), わかる means to grasp or comprehend. Takes が for the object understood.",
+  form:"[Object] + が + わかる",
+  ex:[
+    ["意味(いみ)がわかりません。","I don't understand the meaning."],
+    ["地図(ちず)を見(み)て、場所(ばしょ)がわかった。","I looked at the map and understood where the place was."],
+    ["彼(かれ)の気持(きも)ちがよくわかる。","I understand his feelings well."],
+  ]},
+{ tier:5, jp:"知る", reading:"shiru", gloss:"Know / Come to Know",
+  desc:"Expresses knowing a fact (cognitive knowledge). The te-form 知(し)っている means “to currently know” (resultant state).",
+  form:"[Object] + を + 知(し)る / 知(し)っている",
+  ex:[
+    ["彼女(かのじょ)の電話番号(でんわばんごう)を知(し)っていますか。","Do you know her phone number?"],
+    ["そんなことは知(し)らなかった。","I didn't know such a thing."],
+    ["知(し)らなかったことを知(し)ることが大切(たいせつ)だ。","It is important to learn what you do not know."],
+  ]},
+{ tier:5, jp:"見える", reading:"mieru", gloss:"Can Be Seen / Appears",
+  desc:"Expresses natural or involuntary visibility — something <b>can</b> be seen. Also used for appearance.",
+  form:"[Object] + が + 見(み)える",
+  ex:[
+    ["窓(まど)から山(やま)が見(み)えます。","Mountains can be seen from the window."],
+    ["彼女(かのじょ)は若(わか)く見(み)える。","She appears young."],
+    ["霧(きり)で何(なに)も見(み)えない。","I can't see anything because of the fog."],
+  ]},
+{ tier:5, jp:"聞こえる", reading:"kikoeru", gloss:"Can Be Heard / Sounds Like",
+  desc:"Expresses natural or involuntary audibility — something <b>can</b> be heard. Also used for how something sounds.",
+  form:"[Subject] + が + 聞(き)こえる",
+  ex:[
+    ["外(そと)から子供(こども)の笑(わら)い声(ごえ)が聞(き)こえる。","I can hear children laughing from outside."],
+    ["音楽(おんがく)が聞(き)こえてきた。","Music became audible."],
+    ["彼(かれ)の声(こえ)は聞(き)こえにくい。","His voice is hard to hear."],
+  ]},
+{ tier:5, jp:"好きだ", reading:"suki da", gloss:"Like / Love",
+  desc:"Expresses liking or love for something. Takes が for the object liked.",
+  form:"[Object] + が + 好(す)きだ",
+  ex:[
+    ["猫(ねこ)が大好(だいす)きです。","I love cats."],
+    ["彼女(かのじょ)はスポーツが好(す)きじゃない。","She doesn't like sports."],
+    ["どんな音楽(おんがく)が好(す)きですか。","What kind of music do you like?"],
+  ]},
+{ tier:5, jp:"嫌いだ", reading:"kirai da", gloss:"Dislike / Hate",
+  desc:"Expresses disliking something. Opposite of 好(す)きだ. Takes が.",
+  form:"[Object] + が + 嫌(きら)いだ",
+  ex:[
+    ["虫(むし)が大嫌(だいきら)いです。","I hate bugs."],
+    ["彼(かれ)は嘘(うそ)が嫌(きら)いだ。","He hates lies."],
+    ["嫌(きら)いなものは食(た)べなくていいよ。","You don't have to eat things you dislike."],
+  ]},
+{ tier:5, jp:"〜みたいだ", reading:"mitai da", gloss:"Looks Like (Casual)",
+  desc:"Casual equivalent of 〜ようだ. Expresses resemblance or inference based on observation.",
+  form:"[Verb / Adj plain / Noun] + みたいだ",
+  ex:[
+    ["彼(かれ)は疲(つか)れているみたいです。","He seems to be tired."],
+    ["外(そと)は雪(ゆき)みたいだ。","It looks like it's snowing outside."],
+    ["まるで夢(ゆめ)みたいな話(はなし)だ。","It's a story that's like a dream."],
+  ]},
+{ tier:5, jp:"どう", reading:"dō", gloss:"How / What",
+  desc:"An interrogative word asking about manner, condition, or opinion.",
+  form:"どう + [verb / copula]",
+  ex:[
+    ["最近(さいきん)はどうですか。","How are things lately?"],
+    ["この料理(りょうり)はどう作(つく)るんですか。","How do you make this dish?"],
+    ["どうすればいいですか。","What should I do?"],
+  ]},
+{ tier:5, jp:"いかが", reading:"ikaga", gloss:"How (Polite)",
+  desc:"The polite / formal version of どう.",
+  form:"[Noun] + はいかがですか",
+  ex:[
+    ["お茶(ちゃ)はいかがですか。","How about some tea?"],
+    ["お体(からだ)のぐあいはいかがですか。","How is your physical condition?"],
+    ["こちらの商品(しょうひん)はいかがでしょうか。","How about this product here?"],
+  ]},
+{ tier:5, jp:"それで・それから・それでは・それなら・それとも・そして", reading:"sore de / kara / dewa / nara / tomo · soshite", gloss:"Connective Words",
+  desc:"<b>それで</b> So / Therefore. <b>それから</b> And then. <b>それでは</b> Well then. <b>それなら</b> In that case. <b>それとも</b> Or (alternatives). <b>そして</b> And then (written).",
+  form:"Sentence-initial connectives",
+  ex:[
+    ["電車(でんしゃ)が止(と)まった。それで遅(おく)れました。","The train stopped. So I was late."],
+    ["買(か)い物(もの)をした。それから映画(えいが)を見(み)た。","I went shopping. After that, I watched a movie."],
+    ["それでは、始(はじ)めましょう。","Well then, let's begin."],
+    ["疲(つか)れているの？それなら休(やす)んだほうがいい。","You're tired? In that case, you should rest."],
+    ["コーヒーにしますか、それともお茶(ちゃ)にしますか。","Coffee, or tea?"],
+    ["彼女(かのじょ)は歌(うた)った。そして踊(おど)った。","She sang. And then she danced."],
+  ]},
+{ tier:5, jp:"〜屋", reading:"-ya", gloss:"Store / Shop / Seller",
+  desc:"A suffix meaning “store, shop, or seller of [X]”.",
+  form:"[Product / Service] + 屋(や)",
+  ex:[
+    ["八百屋(やおや)で野菜(やさい)を買(か)った。","I bought vegetables at the greengrocer."],
+    ["パン屋(や)のパンはおいしい。","The bread from the bakery is delicious."],
+    ["本屋(ほんや)に行(い)って来(き)ます。","I'll go to the bookstore."],
+  ]},
+{ tier:5, jp:"持っている", reading:"motte iru", gloss:"Have / Possess",
+  desc:"The te-form of 持(も)つ + いる expresses “having” or “possessing” something — a sustained possession state.",
+  form:"[Object] + を + 持(も)っている",
+  ex:[
+    ["車(くるま)を持(も)っていますか。","Do you have a car?"],
+    ["彼女(かのじょ)は才能(さいのう)を持(も)っている。","She has talent."],
+    ["傘(かさ)を持(も)っていなかった。","I didn't have an umbrella."],
+  ]},
+{ tier:5, jp:"〜ところだ", reading:"tokoro da", gloss:"Just About to / In the Middle / Just Finished",
+  desc:"Expresses the moment or stage of an action: “just about to”, “in the middle of”, or “just finished”.",
+  form:"[Verb plain non-past] + ところだ (about to) · [Verb te-iru] + ところだ (in the middle) · [Verb ta-form] + ところだ (just done)",
+  ex:[
+    ["ちょうど食(た)べているところです。","I am in the middle of eating right now."],
+    ["今(いま)、出(で)かけるところでした。","I was just about to go out."],
+    ["宿題(しゅくだい)を終(お)えたところだ。","I have just finished my homework."],
+  ]},
+{ tier:5, jp:"〜ないと", reading:"-nai to", gloss:"Must / If Not (Casual)",
+  desc:"Casual form of 〜なければならない, expressing mild obligation: “I have to …”.",
+  form:"[Verb nai-form] + と  (colloquial shortened form)",
+  ex:[
+    ["早(はや)く帰(かえ)らないと。","I have to go home soon."],
+    ["勉強(べんきょう)しないとまずい。","If I don't study, it'll be bad."],
+    ["起(お)きないと遅(おく)れるよ！","If you don't get up, you'll be late!"],
+  ]},
+{ tier:5, jp:"〜ていられない", reading:"-te irarenai", gloss:"Can't Keep Doing",
+  desc:"Expresses that one cannot continue a state because of external circumstances.",
+  form:"[Verb te-form] + いられない",
+  ex:[
+    ["のんびりしていられない。","I can't afford to be relaxing like this."],
+    ["悲(かな)しんでいられないよ。","I can't keep being sad."],
+    ["待(ま)っていられなかった。","I couldn't keep waiting."],
+  ]},
+{ tier:5, jp:"〜ほど〜ない", reading:"-hodo -nai", gloss:"Not as … as",
+  desc:"Expresses that A is not as [adjective] as B. Literally “not to the degree of”.",
+  form:"[B] + ほど + [A + negative adjective]",
+  ex:[
+    ["東京(とうきょう)ほど大(おお)きくない。","It's not as big as Tokyo."],
+    ["思(おも)ったほど難(むずか)しくなかった。","It wasn't as difficult as I thought."],
+    ["彼女(かのじょ)ほど歌(うた)が上手(じょうず)な人(ひと)はいない。","There is no one who sings as well as she does."],
+  ]},
+{ tier:5, jp:"〜について・〜に関して", reading:"-ni tsuite / -ni kanshite", gloss:"Regarding / About",
+  desc:"Expresses the topic of discussion — “about, regarding, concerning [X]”.",
+  form:"[Noun] + について / に関(かん)して",
+  ex:[
+    ["環境(かんきょう)問題(もんだい)について話(はな)しましょう。","Let's talk about environmental issues."],
+    ["この件(けん)に関(かん)して意見(いけん)があります。","I have an opinion regarding this matter."],
+    ["日本(にほん)の文化(ぶんか)について学(まな)んでいます。","I am studying about Japanese culture."],
+  ]},
+];
+
+/* ============ RENDER ============ */
+
+// Convert "漢字(かんじ)" to <ruby>漢字<rt>かんじ</rt></ruby>
+function furigana(text) {
+  return text.replace(/([一-龯々〇〻ヶ]+)\(([^)]+)\)/g,
+    '<ruby>$1<rt>$2</rt></ruby>');
+}
+
+function slug(p, idx) {
+  const base = p.reading.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g,'').toLowerCase();
+  return base ? `${base}-${idx}` : `p-${idx}`;
+}
+
+function renderLegend() {
+  const el = document.getElementById('legend');
+  el.innerHTML = TIERS.map(t => {
+    const count = PATTERNS.filter(p => p.tier === t.n).length;
+    return `<button class="tier-card" data-tier="${t.n}" data-jump="${t.n}">
+      <span class="count">${count}</span>
+      <div class="stars">${t.stars}</div>
+      <div class="name">Tier ${t.n} — ${t.name}<span class="n">${t.jlpt}</span></div>
+      <div class="desc">${t.desc}</div>
+    </button>`;
+  }).join('');
+  el.querySelectorAll('[data-jump]').forEach(b => {
+    b.addEventListener('click', () => {
+      const t = b.dataset.jump;
+      document.getElementById('tier-' + t).scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+}
+
+function renderMain() {
+  const main = document.getElementById('main');
+  let html = '';
+  PATTERNS.forEach((p, i) => p._id = slug(p, i));
+
+  TIERS.forEach(t => {
+    const tierPatterns = PATTERNS.filter(p => p.tier === t.n);
+    html += `<section class="tier-section" id="tier-${t.n}" data-tier="${t.n}">
+      <header class="tier-header">
+        <span class="stars">${t.stars}</span>
+        <h2 class="title">Tier ${t.n}: ${t.name}</h2>
+        <span class="level">${t.jlpt}</span>
+        <span class="pill">${tierPatterns.length} patterns</span>
+      </header>`;
+
+    tierPatterns.forEach(p => {
+      html += `<article class="entry" data-tier="${p.tier}" id="${p._id}">
+        <div class="entry-head">
+          <h3 class="entry-title">${furigana(p.jp)}</h3>
+          <span class="entry-reading">${p.reading}</span>
+          <span class="entry-gloss">${p.gloss}</span>
+        </div>
+        <p class="entry-desc">${p.desc}</p>
+        <div class="entry-form"><b>Form</b>${furigana(p.form)}</div>
+        <ol class="examples">
+          ${p.ex.map(([jp, en]) => `
+            <li>
+              <span class="jp">${furigana(jp)}</span>
+              <span class="en">${en}</span>
+            </li>`).join('')}
+        </ol>
+      </article>`;
+    });
+
+    html += `</section>`;
+  });
+
+  main.insertAdjacentHTML('afterbegin', html);
+}
+
+function renderSidebar() {
+  const el = document.getElementById('sidebar');
+  let html = '';
+  TIERS.forEach(t => {
+    html += `<div class="group"><h3>Tier ${t.n} · ${t.jlpt}</h3>`;
+    PATTERNS.filter(p => p.tier === t.n).forEach(p => {
+      const stripped = p.jp.replace(/\([^)]+\)/g,'');
+      html += `<a href="#${p._id}" data-id="${p._id}"><span class="jp">${stripped}</span><span class="en">${p.gloss}</span></a>`;
+    });
+    html += `</div>`;
+  });
+  el.innerHTML = html;
+}
+
+/* ============ FILTER ============ */
+let currentTier = 'all';
+let currentQuery = '';
+
+function applyFilter() {
+  const q = currentQuery.trim().toLowerCase();
+  let visible = 0;
+
+  PATTERNS.forEach(p => {
+    const tierMatch = currentTier === 'all' || p.tier === Number(currentTier);
+    let textMatch = true;
+    if (q) {
+      const haystack = (p.jp + ' ' + p.reading + ' ' + p.gloss + ' ' + p.desc + ' ' + p.form
+                      + ' ' + p.ex.map(e => e.join(' ')).join(' ')).toLowerCase();
+      textMatch = haystack.includes(q);
+    }
+    const node = document.getElementById(p._id);
+    if (!node) return;
+    node.classList.toggle('hidden', !(tierMatch && textMatch));
+    if (tierMatch && textMatch) visible++;
+  });
+
+  // Hide tier sections whose entries are all hidden
+  document.querySelectorAll('.tier-section').forEach(sec => {
+    const anyVisible = sec.querySelector('.entry:not(.hidden)');
+    sec.classList.toggle('hidden', !anyVisible);
+  });
+
+  // Highlight
+  document.querySelectorAll('.entry mark').forEach(m => {
+    m.replaceWith(...m.childNodes);
+  });
+  if (q) {
+    const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    document.querySelectorAll('.entry:not(.hidden) .entry-desc, .entry:not(.hidden) .entry-gloss, .entry:not(.hidden) .en, .entry:not(.hidden) .entry-reading').forEach(el => {
+      const html = el.innerHTML;
+      // skip if contains tags only meant for ruby
+      el.innerHTML = html.replace(re, m => `<mark>${m}</mark>`);
+    });
+  }
+
+  document.getElementById('empty').classList.toggle('visible', visible === 0);
+  document.getElementById('result-info').textContent =
+    visible === PATTERNS.length ? `${PATTERNS.length} patterns` : `${visible} of ${PATTERNS.length} patterns`;
+}
+
+/* ============ INIT ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('stat-patterns').textContent = PATTERNS.length;
+  document.getElementById('stat-examples').textContent = PATTERNS.reduce((s,p) => s + p.ex.length, 0);
+
+  renderLegend();
+  renderMain();
+  renderSidebar();
+  applyFilter();
+
+  // Tier chips
+  document.querySelectorAll('.chip[data-filter]').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+      currentTier = c.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  // Search
+  const search = document.getElementById('search');
+  search.addEventListener('input', e => {
+    currentQuery = e.target.value;
+    applyFilter();
+  });
+
+  // "/" shortcut to focus search
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== search) {
+      e.preventDefault();
+      search.focus();
+    } else if (e.key === 'Escape' && document.activeElement === search) {
+      search.value = '';
+      currentQuery = '';
+      applyFilter();
+      search.blur();
+    }
+  });
+
+  // Theme
+  const themeBtn = document.getElementById('theme-toggle');
+  const stored = localStorage.getItem('theme');
+  if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  themeBtn.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    if (next === 'light') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', next);
+  });
+});
+</script>
+</body>
+</html>

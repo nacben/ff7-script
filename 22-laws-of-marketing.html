@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 22 Immutable Laws of Marketing — Complete Educational Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;--surface:#0d1117;--card:#131b2e;--card2:#192238;
+  --text:#dde4f0;--muted:#8496b4;--faint:#3a4a66;--border:#1a2540;
+  --nav-w:272px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+/* ── Progress bar ── */
+#prog{position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899,#f59e0b);
+  z-index:999;width:0;transition:width .1s linear}
+
+/* ── Sidebar nav ── */
+#nav{position:fixed;top:0;left:0;width:var(--nav-w);height:100vh;
+  background:var(--surface);border-right:1px solid var(--border);
+  overflow-y:auto;z-index:100;padding:0 0 2rem;
+  transition:transform .3s ease}
+#nav::-webkit-scrollbar{width:3px}
+#nav::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.nav-hd{padding:1.25rem 1.5rem;font-size:.7rem;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);margin-bottom:.5rem}
+.nav-search{padding:.6rem 1.25rem .75rem}
+.nav-search input{width:100%;background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:.45rem .75rem;color:var(--text);font-size:.82rem;outline:none}
+.nav-search input:focus{border-color:#3b82f6}
+.nav-search input::placeholder{color:var(--faint)}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.45rem 1.25rem;
+  text-decoration:none;color:var(--muted);font-size:.82rem;
+  border-left:3px solid transparent;cursor:pointer;transition:all .15s}
+.nav-item:hover{color:var(--text);background:var(--card)}
+.nav-item.active{color:var(--text);background:var(--card)}
+.nav-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:.65rem;font-weight:800;flex-shrink:0}
+.nav-warn{display:flex;align-items:center;gap:.65rem;padding:.5rem 1.25rem;
+  color:var(--muted);font-size:.82rem;cursor:pointer;border-left:3px solid transparent;
+  transition:all .15s;margin-top:.5rem;border-top:1px solid var(--border)}
+.nav-warn:hover{color:var(--text);background:var(--card)}
+
+/* ── Main ── */
+#main{margin-left:var(--nav-w);min-height:100vh}
+
+/* ── Hero ── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:4rem 3rem;text-align:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(59,130,246,.12) 0%,transparent 70%)}
+#hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle at 15% 85%,rgba(139,92,246,.08) 0%,transparent 50%),
+    radial-gradient(circle at 85% 15%,rgba(236,72,153,.07) 0%,transparent 50%)}
+.hero-inner{position:relative;max-width:820px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);
+  border-radius:100px;padding:.35rem 1rem;font-size:.78rem;font-weight:700;
+  color:#93c5fd;letter-spacing:.06em;margin-bottom:2rem}
+h1.hero-title{font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:900;line-height:1.08;
+  margin-bottom:1.5rem;
+  background:linear-gradient(140deg,#f1f5f9 0%,#94a3b8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h1.hero-title span{
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.1rem;color:var(--muted);max-width:620px;margin:0 auto 2.75rem;line-height:1.85}
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-bottom:2.75rem;flex-wrap:wrap}
+.stat-num{font-size:2.8rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:.72rem;color:var(--faint);text-transform:uppercase;
+  letter-spacing:.12em;font-weight:700;margin-top:.2rem}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;
+  text-decoration:none;padding:.85rem 2rem;border-radius:8px;
+  font-weight:700;font-size:.95rem;cursor:pointer;border:none;
+  transition:all .2s}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(59,130,246,.35)}
+
+/* ── Overview grid ── */
+#overview{padding:3.5rem 4rem;background:var(--surface);border-bottom:1px solid var(--border)}
+#overview h2{font-size:1.4rem;font-weight:800;color:#f1f5f9;margin-bottom:.35rem}
+#overview p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.75rem}
+.ov-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.1rem;cursor:pointer;transition:all .18s;text-decoration:none;display:block}
+.ov-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.ov-num{font-size:.68rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:.3rem}
+.ov-name{font-size:.9rem;font-weight:700;color:#f1f5f9;margin-bottom:.2rem}
+.ov-hint{font-size:.72rem;color:var(--faint);line-height:1.4}
+
+/* ── Law sections ── */
+.law-section{padding:5rem 4rem;border-bottom:1px solid var(--border);
+  position:relative;opacity:0;transform:translateY(18px);
+  transition:opacity .55s ease,transform .55s ease}
+.law-section.vis{opacity:1;transform:translateY(0)}
+.law-section::before{content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--lc);opacity:.5}
+
+.law-hdr{display:flex;align-items:flex-start;gap:2rem;margin-bottom:2.75rem}
+.law-big-num{font-size:5.5rem;font-weight:900;line-height:1;color:var(--lc);
+  opacity:.13;flex-shrink:0;min-width:110px;text-align:center;font-variant-numeric:tabular-nums}
+.law-hdr-text{flex:1}
+.law-lbl{font-size:.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--lc);margin-bottom:.45rem}
+.law-name{font-size:clamp(1.7rem,2.8vw,2.4rem);font-weight:900;color:#f1f5f9;
+  margin-bottom:.7rem;line-height:1.15}
+.law-tagline{font-size:1.05rem;color:var(--muted);font-style:italic;
+  line-height:1.55;border-left:3px solid var(--lc);padding-left:.9rem}
+
+/* Principle card */
+.principle{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.85rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
+.principle::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--lc),transparent)}
+.principle h3{font-size:.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--lc);margin-bottom:.9rem}
+.principle p{color:var(--muted);line-height:1.82;font-size:.95rem}
+.principle p+p{margin-top:.7rem}
+
+/* Examples */
+.ex-hd{font-size:.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--faint);margin-bottom:.85rem}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:.85rem;margin-bottom:1.75rem}
+.ex-card{background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:1.4rem;transition:border-color .18s}
+.ex-card:hover{border-color:var(--lc)}
+.ex-tag{display:inline-block;background:rgba(255,255,255,.05);border-radius:4px;
+  padding:.18rem .5rem;font-size:.67rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--lc);margin-bottom:.55rem}
+.ex-co{font-weight:700;font-size:.95rem;color:#f1f5f9;margin-bottom:.4rem}
+.ex-txt{font-size:.85rem;color:var(--muted);line-height:1.65}
+
+/* Insight */
+.insight{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;padding:1.4rem 1.5rem;margin-bottom:1.5rem;
+  display:flex;gap:.9rem;align-items:flex-start}
+.insight-ico{font-size:1.35rem;line-height:1;flex-shrink:0;margin-top:.1rem}
+.insight h4{font-size:.7rem;font-weight:800;color:var(--lc);margin-bottom:.4rem;
+  text-transform:uppercase;letter-spacing:.1em}
+.insight p{font-size:.88rem;color:var(--muted);line-height:1.72}
+
+/* Violation */
+.viol{display:flex;align-items:flex-start;gap:.7rem;padding:.95rem 1.4rem;
+  background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.14);
+  border-radius:8px;margin-bottom:1.4rem}
+.viol-ico{font-size:1.1rem;flex-shrink:0;line-height:1.5}
+.viol p{font-size:.85rem;color:#fca5a5;line-height:1.6}
+
+/* Question */
+.qbox{display:flex;align-items:center;gap:.85rem;padding:1.1rem 1.4rem;
+  background:linear-gradient(135deg,rgba(59,130,246,.05),rgba(139,92,246,.05));
+  border:1px solid rgba(99,102,241,.18);border-radius:10px}
+.qmark{font-size:1.4rem;font-weight:900;color:#6366f1;flex-shrink:0}
+.qbox p{font-size:.88rem;color:var(--muted);line-height:1.65;font-style:italic}
+
+/* Warning */
+#warn-sec{padding:5rem 4rem;background:linear-gradient(135deg,
+  rgba(239,68,68,.04),rgba(251,146,60,.03));border-bottom:1px solid var(--border)}
+#warn-sec h2{font-size:2rem;font-weight:900;color:#fca5a5;margin-bottom:1rem}
+#warn-sec>.lead{color:var(--muted);line-height:1.8;max-width:680px;margin-bottom:2rem}
+.warn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem;margin-bottom:2rem}
+.warn-card{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.12);
+  border-radius:10px;padding:1.4rem}
+.warn-card h4{color:#fca5a5;font-weight:700;margin-bottom:.45rem;font-size:.92rem}
+.warn-card p{color:var(--muted);font-size:.85rem;line-height:1.65}
+.warn-close{padding:1.4rem 1.75rem;background:rgba(239,68,68,.07);
+  border-radius:10px;border:1px solid rgba(239,68,68,.15);max-width:680px}
+.warn-close p{color:#fca5a5;font-size:.92rem;line-height:1.82}
+
+/* Footer */
+footer{padding:2.5rem 4rem;text-align:center;color:var(--faint);
+  font-size:.82rem;border-top:1px solid var(--border)}
+footer p+p{margin-top:.3rem}
+
+/* Mobile toggle */
+#tog{display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;
+  background:#3b82f6;color:#fff;border:none;width:52px;height:52px;
+  border-radius:50%;font-size:1.3rem;cursor:pointer;
+  box-shadow:0 6px 24px rgba(59,130,246,.4);
+  align-items:center;justify-content:center;transition:all .2s}
+
+/* Responsive */
+@media(max-width:1024px){
+  :root{--nav-w:0px}
+  #nav{transform:translateX(-272px);width:272px}
+  #nav.open{transform:translateX(0)}
+  #main{margin-left:0}
+  #tog{display:flex}
+  .law-section{padding:3rem 1.5rem}
+  #hero{padding:3rem 1.5rem}
+  #overview{padding:3rem 1.5rem}
+  #warn-sec{padding:3rem 1.5rem}
+  footer{padding:2rem 1.5rem}
+  .law-hdr{flex-direction:column;gap:.75rem}
+  .law-big-num{font-size:3.5rem;min-width:auto}
+  .hero-stats{gap:2rem}
+}
+@media(max-width:600px){
+  .ex-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+  .ov-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{animation:fadeUp .6s ease both}
+.hero-inner>*:nth-child(1){animation-delay:.1s}
+.hero-inner>*:nth-child(2){animation-delay:.2s}
+.hero-inner>*:nth-child(3){animation-delay:.3s}
+.hero-inner>*:nth-child(4){animation-delay:.4s}
+.hero-inner>*:nth-child(5){animation-delay:.5s}
+
+@media print{
+  #nav,#tog,#prog{display:none}
+  #main{margin-left:0}
+  .law-section{opacity:1;transform:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav id="nav">
+  <div class="nav-hd">22 Immutable Laws</div>
+  <div class="nav-search"><input type="text" id="srch" placeholder="Search laws…" autocomplete="off"></div>
+  <div id="nav-links"></div>
+  <div class="nav-warn" onclick="scrollTo('#warn-sec')">⚠ &nbsp;Warning</div>
+</nav>
+
+<main id="main">
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">📚 Al Ries &amp; Jack Trout &nbsp;·&nbsp; 1993</div>
+    <h1 class="hero-title">The <span>22 Immutable Laws</span><br>of Marketing</h1>
+    <p class="hero-sub">The fundamental principles that govern success and failure in the marketplace. Built from over 25 years of studying what works in marketing — and what doesn't. Violate them at your own risk.</p>
+    <div class="hero-stats">
+      <div><div class="stat-num">22</div><div class="stat-lbl">Immutable Laws</div></div>
+      <div><div class="stat-num">25+</div><div class="stat-lbl">Years of Research</div></div>
+      <div><div class="stat-num">15</div><div class="stat-lbl">Languages</div></div>
+    </div>
+    <button class="hero-cta" onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})">Explore All 22 Laws ↓</button>
+  </div>
+</section>
+
+<!-- ── Overview grid ── -->
+<section id="overview">
+  <h2>All 22 Laws at a Glance</h2>
+  <p>Click any card to jump directly to that law.</p>
+  <div class="ov-grid" id="ov-grid"></div>
+</section>
+
+<!-- ── Laws container ── -->
+<div id="laws-wrap"></div>
+
+<!-- ── Warning ── -->
+<section id="warn-sec">
+  <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#f87171;margin-bottom:.85rem">⚠ Critical Warning</div>
+  <h2>Applying These Laws Inside an Organization</h2>
+  <p class="lead">These laws frequently conflict with corporate ego, conventional wisdom, and internal politics. Knowing them is the easy part. Getting an organization to act on them is another matter entirely.</p>
+  <div class="warn-grid">
+    <div class="warn-card">
+      <h4>The Perception Problem</h4>
+      <p>The Law of Perception runs counter to most corporate cultures where "being better" through benchmarking and quality programs is deeply ingrained. Management rarely welcomes any suggestion that challenges the better-product strategy.</p>
+    </div>
+    <div class="warn-card">
+      <h4>The Focus Resistance</h4>
+      <p>Organizations instinctively resist narrowing focus. Bright marketing teams feel compelled to expand and tinker. Proposing pruning is extremely difficult to sell to leadership who equate bigger with better.</p>
+    </div>
+    <div class="warn-card">
+      <h4>The Sacrifice Paradox</h4>
+      <p>Offering everything to everybody is deeply wired into most companies. Nobody wants to give up any customer segment, product line, or market opportunity — even when doing so would make them dramatically stronger.</p>
+    </div>
+    <div class="warn-card">
+      <h4>The Line Extension Trap</h4>
+      <p>The most dangerous law to challenge internally. Management believes successful brands have equity that can be stretched to cover any product. You won't find one board director in twelve willing to challenge this "basic truth."</p>
+    </div>
+  </div>
+  <div class="warn-close">
+    <p><strong>The bottom line:</strong> If you violate the immutable laws, you risk failure in the marketplace. If you apply them, you risk being ignored or ostracized within your organization. Have patience — management changes, but the laws of marketing do not. Success is the best revenge.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Based on <em>The 22 Immutable Laws of Marketing</em> by Al Ries &amp; Jack Trout (HarperCollins, 1993)</p>
+  <p>This educational summary is provided for study and reference purposes.</p>
+</footer>
+
+</main>
+
+<button id="tog" onclick="toggleNav()" title="Toggle menu">☰</button>
+
+<script>
+const LAWS = [
+  {
+    n:1, name:"Leadership",
+    tagline:"It's better to be first than it is to be better.",
+    color:"hsl(220,78%,62%)",
+    p1:`The fundamental issue in marketing is not convincing prospects you have a superior product — it is creating a category you can be first in. Getting into the prospect's mind first is vastly easier than persuading someone to abandon what's already there. The leading brand in almost every category is the one that arrived first, not necessarily the one with the best offering.`,
+    p2:`Timing matters enormously. First-mover advantage compounds over time because people stick with what they know. First brands frequently become generic — people say "Xerox this" at a Ricoh machine, ask for a "Band-Aid" regardless of the maker. The sales ranking of later entrants often mirrors the order in which they entered the market.`,
+    examples:[
+      {tag:"Aviation",co:"Lindbergh vs. Hinkler",txt:"Charles Lindbergh was the first to fly the Atlantic solo — everyone knows his name. Bert Hinkler flew it second, and faster, yet almost no one recognizes his name. Being first mattered more than being better."},
+      {tag:"Imported Beer",co:"Heineken",txt:"The first imported beer to establish itself in America. Decades later, with 425 competing imports, Heineken still commands ~30% of the imported beer market. Not because it necessarily tastes best — because it arrived first and claimed the category."},
+      {tag:"Pain Relief",co:"Advil (Ibuprofen)",txt:"Advil entered the ibuprofen market first with 51% share. Nuprin entered second with 10%. Medipren was third with 1%. The sales ranking mirrors the introduction order almost exactly — a pattern that repeats across categories."}
+    ],
+    viol:`Companies spend billions trying to convince prospects their product is superior to an entrenched leader. Most of that money reinforces the leader's dominance rather than displacing it.`,
+    insight:`When you're first into a new category, the brand name often becomes generic for the whole category. Pick a name that can work generically. If your brand becomes the word people use for the category itself, no competitor can fully displace you.`,
+    q:`Are we fighting to be "better" in an established category — or could we create a new, more specific category where we'd be first?`
+  },
+  {
+    n:2, name:"Category",
+    tagline:"If you can't be first in a category, set up a new category you can be first in.",
+    color:"hsl(196,75%,58%)",
+    p1:`When you cannot win in an existing category, the answer is not to fight harder — it is to create a new category where you can be first. Amelia Earhart was not famous as the third person to fly the Atlantic solo. She became the first woman to do so — a self-defined category she could own completely.`,
+    p2:`This is fundamentally different from classic brand-oriented thinking. Instead of asking "How do I get people to prefer my brand?" ask "What category is this product first in?" Prospects are defensive about brands but genuinely curious about new categories. Everyone wants to know what's new.`,
+    examples:[
+      {tag:"Beer",co:"Michelob",txt:"After Heineken dominated imported beer, Anheuser-Busch didn't try to out-import them. They asked: 'If there's a market for expensive imported beer, maybe there's a market for expensive domestic beer?' Michelob became the first premium domestic beer — and now outsells Heineken two to one."},
+      {tag:"Computers",co:"Digital Equipment Corp.",txt:"IBM dominated computers. DEC didn't fight on IBM's terms — they invented the minicomputer category. DEC grew into a $14 billion company with 126,000 employees. Others followed: Tandem (fault-tolerant), Cray (supercomputers), Dell (phone-order PCs) — each first in a new category."},
+      {tag:"Brokerage",co:"Charles Schwab",txt:"Schwab didn't open a better brokerage firm. He opened the first discount brokerage — a new category entirely. Today Schwab is America's largest discount broker. The category framing created a position that no competitor could claim, because they had all been first elsewhere."}
+    ],
+    viol:`Companies default to incremental improvement within established categories instead of identifying adjacent white space where they could be first and unchallenged.`,
+    insight:`When you're first in a new category, promote the category — not just your brand. You effectively have no competition yet. Early Hertz sold the idea of rent-a-car service. Early Coca-Cola sold refreshment. Promoting the category builds the market; your brand benefits as market leader.`,
+    q:`Can we reframe our offering as the first in a more specific sub-category, rather than competing as yet another entrant in a crowded established one?`
+  },
+  {
+    n:3, name:"Mind",
+    tagline:"It's better to be first in the mind than first in the marketplace.",
+    color:"hsl(172,70%,54%)",
+    p1:`Being first in the marketplace only matters to the extent it allows you to get into the prospect's mind first. History is full of market pioneers that failed because a better-marketed follower seized the mental position first. The world's first personal computer (MITS Altair 8800) is gone. Du Mont invented the first commercial television — also gone.`,
+    p2:`IBM was not the first mainframe computer maker. Remington Rand was, with UNIVAC. But IBM's aggressive marketing effort got into prospects' minds first and won the category decisively. Once a mind is made up, it almost never changes — Wang spent millions promoting computers but could never escape its word-processor perception.`,
+    examples:[
+      {tag:"Early PCs",co:"Apple vs. the Field",txt:"Five personal computers launched around the same time: Apple II, Commodore Pet, IMSAI 8080, MITS Altair 8800, and Radio Shack TRS-80. Only one had a simple, human, memorable name. Apple got into the mind first — funded with $91,000 from investor Mike Markkula — and the rest is history."},
+      {tag:"Word Processing",co:"Wang",txt:"Wang owned the word-processor category and was deeply embedded in that mental position. When the world shifted to computers, Wang spent millions promoting PCs and minicomputers. The mind never updated. Wang remained a word-processor company even as it tried desperately to be a computer company."},
+      {tag:"Mainframes",co:"IBM vs. UNIVAC",txt:"Remington Rand had UNIVAC — the first commercial mainframe. IBM came second but won through marketing force. They blasted their way into the mind before UNIVAC could entrench. The lesson: being second to market with superior marketing beats being first to market with insufficient marketing."}
+    ],
+    viol:`Companies assume that product innovation automatically translates to mindshare. They build excellent products but under-invest in getting into the mind — allowing a better-marketed competitor to capture the position permanently.`,
+    insight:`You cannot change a mind once it's made up. The implication is stark: spend on getting in first, decisively. One-time marketing investment to capture the position early outperforms sustained campaigns trying to dislodge an entrenched competitor.`,
+    q:`Have we actually gotten into our prospects' minds yet? If not, do we have the resources to do it quickly — before a competitor establishes that position permanently?`
+  },
+  {
+    n:4, name:"Perception",
+    tagline:"Marketing is not a battle of products, it's a battle of perception.",
+    color:"hsl(148,65%,52%)",
+    p1:`There is no objective reality in marketing. All that exists in the marketplace is perceptions in the minds of customers. The perception is the reality — and everything else is an illusion. Companies that build marketing strategy on the assumption that "the best product will win" are building on a flawed foundation.`,
+    p2:`People often make buying decisions based on second-hand perceptions — what "everybody knows." Everybody knows Japanese cars are higher quality. Everybody knows certain brands are more reliable. These perceptions persist even when individual experience contradicts them — the experience is explained away as an exception.`,
+    examples:[
+      {tag:"Automotive",co:"Honda: USA vs. Japan",txt:"In America, Honda means cars (Civic, Accord, Prelude). In Japan, ask someone what Honda they bought and they might ask which motorcycle. Honda entered Japanese minds as a motorcycle company. That perception suppresses Japanese car sales — the products are identical; the minds are not."},
+      {tag:"Cola",co:"New Coke",txt:"Coca-Cola conducted 200,000 taste tests proving New Coke tasted better than Pepsi, and Pepsi tasted better than Classic Coke. The marketing result: New Coke finished last. Classic Coke — the 'worst tasting' — finished first. Marketing is a battle of perceptions, not a battle of taste tests."},
+      {tag:"Soup",co:"Campbell's vs. Heinz",txt:"Campbell's dominates American soup. Heinz fails in American soup. In the UK, Heinz dominates and Campbell's fails. Same products, similar quality, radically different results — because the minds of American and British consumers contain completely different soup perceptions."}
+    ],
+    viol:`Companies invest in product improvement assuming quality will eventually win customer minds. They fight perceptions with facts — a battle that marketing almost always loses, because people selectively interpret facts through their existing perceptions.`,
+    insight:`The "everybody knows" principle is more powerful than direct experience. When someone has a bad experience with a product they perceive as excellent, they call it an exception. When they have a good experience with a product they perceive as poor, they call it luck. Perceptions self-reinforce relentlessly.`,
+    q:`How do our target customers actually perceive our brand — not what we tell them, but what they believe independently? Is our marketing aligned with existing perceptions or fighting against them?`
+  },
+  {
+    n:5, name:"Focus",
+    tagline:"The most powerful concept in marketing is owning a word in the prospect's mind.",
+    color:"hsl(48,85%,58%)",
+    p1:`A company becomes extraordinarily powerful when it can own a single word in the prospect's mind. Not a complicated word — simple dictionary words work best. You "burn" into the mind by narrowing focus to a single concept. This is the ultimate marketing sacrifice: giving up everything else to own one powerful idea.`,
+    p2:`The word can describe a benefit (cavity prevention), a service attribute (overnight), a differentiating characteristic (safe), or an audience (youth). The critical requirement is that the word must be genuinely available — not already owned by a competitor. And once you own it, you must protect it fiercely.`,
+    examples:[
+      {tag:"Logistics",co:"FedEx = Overnight",txt:"Federal Express sacrificed its entire product line to focus on one thing: small packages, delivered overnight. This sacrifice enabled ownership of the word 'overnight.' When FedEx later abandoned that focus by acquiring Flying Tiger and going global without a clear global word, it lost $1.1 billion in 21 months."},
+      {tag:"Safety",co:"Volvo",txt:"Volvo owns 'safety.' Mercedes-Benz and General Motors have both run major safety-based marketing campaigns. Neither displaced Volvo's ownership of the concept. Every safety claim by a competitor effectively reinforces why Volvo is the safety leader — the word is simply not available to be claimed."},
+      {tag:"Condiments",co:"Heinz Ketchup",txt:"After owning 'ketchup,' Heinz went further by preempting the most important ketchup attribute: thickness. 'Slowest ketchup in the West' — owning 'slow' as a proxy for 'thick' helps Heinz maintain a 50% market share. Attribute ownership within a category creates durable sub-category dominance."}
+    ],
+    viol:`Companies try to own 'quality' — a word nobody can own because every company claims it and no company can monopolize it. Without an opposing view available, the word conveys nothing and convinces nobody.`,
+    insight:`When BMW expanded into large luxury sedans — a "living room on wheels" — they undermined their own word, "driving." You can't be the ultimate driving machine and also be a comfortable sofa on wheels. BMW suffered until they reintroduced small performance cars and returned to their word. Focus is fragile: once established, every decision must be measured against it.`,
+    q:`What single word does our company own in our prospects' minds right now? If the answer is unclear, what unclaimed word could we credibly own — and what would we have to sacrifice to own it?`
+  },
+  {
+    n:6, name:"Exclusivity",
+    tagline:"Two companies cannot own the same word in the prospect's mind.",
+    color:"hsl(28,80%,58%)",
+    p1:`When a competitor owns a word in the prospect's mind, attempting to claim the same word is futile. Worse, it often reinforces the competitor's position by making the concept more important in the category. The mind is not a board you can erase — it has already filed the concept under someone else's name.`,
+    p2:`Market research is often the culprit. Research identifies what attributes customers value most. The company concludes they should advertise those attributes. What the research fails to reveal is that another company already owns the top attribute. Researchers would rather encourage a campaign than deliver the career-limiting message that the opportunity is already taken.`,
+    examples:[
+      {tag:"Safety",co:"Mercedes & GM vs. Volvo",txt:"Volvo owns 'safety' in automotive. Mercedes-Benz and GM both ran substantial safety campaigns. Neither moved the needle on safety perception — and both reinforced why Volvo exists. The word was already filed in the prospect's mind under 'Volvo' and wouldn't be moved."},
+      {tag:"Batteries",co:"Energizer vs. Duracell",txt:"Duracell captured 'long-lasting' by focusing exclusively on alkaline batteries. The very name 'Dura' communicates durability. Eveready's Energizer bunny campaign spent enormous sums trying to reclaim 'long-lasting' — but Duracell had preempted the concept and wouldn't let go of it."},
+      {tag:"Shipping",co:"FedEx vs. DHL",txt:"DHL owns 'worldwide' with DHL Worldwide Express. When FedEx expanded globally and began promoting 'worldwide,' they were claiming occupied territory. The result was $1.1 billion in losses over 21 months in international operations — a direct cost of violating the law of exclusivity."}
+    ],
+    viol:`Burger King tried to claim 'fast' from McDonald's — despite McDonald's already owning that perception. The campaign strengthened McDonald's association with speed while achieving nothing for Burger King. The agency was fired, management was fired, and the company was sold.`,
+    insight:`The solution is never to fight harder for an owned word — it is to find a word that is genuinely unclaimed. The Law of Attributes (Law 14) provides the framework: every owned attribute has an opposite attribute that is equally powerful and remains available.`,
+    q:`What words do our key competitors currently own? Are any of our marketing claims trying to take an already-occupied position? What unclaimed words still exist in our category?`
+  },
+  {
+    n:7, name:"Ladder",
+    tagline:"The strategy to use depends on which rung you occupy on the ladder.",
+    color:"hsl(8,72%,60%)",
+    p1:`Every product category contains a hierarchy in the prospect's mind — a ladder, with brand names on each rung. Marketing strategy must be calibrated to which rung you occupy. The mind is selective: it only accepts new information that is consistent with a brand's existing ladder position. Claims above your rung are dismissed. Claims at or below your rung are believed.`,
+    p2:`There's a rough mathematical relationship between market share and ladder position. The brand on the top rung tends to have twice the share of the brand on the second rung, which has twice the share of the third. This 4-2-1 ratio reflects how the mind allocates attention and trust. The mind rarely maintains more than seven rungs in any given category.`,
+    examples:[
+      {tag:"Rent-a-Car",co:"Avis 'We Try Harder'",txt:"Avis lost money for 13 consecutive years trying to claim the best rent-a-car service while sitting on rung 2 behind Hertz. When they finally acknowledged their position — 'Avis is only No. 2 in rent-a-cars. So why go with us? We try harder' — they became profitable almost immediately. Acknowledging your rung makes you credible."},
+      {tag:"Education",co:"Harvard",txt:"Harvard was the first college founded in America and sits on the top rung of the higher-education ladder. Both the 'first' and 'leading' designations belong to the same institution — the law of leadership and the ladder reinforce each other when you arrive first."},
+      {tag:"Soft Drinks",co:"7-Up as 'The Uncola'",txt:"7-Up led the lemon-lime ladder but that ladder was tiny. By positioning as 'The Uncola,' 7-Up climbed onto the massive cola ladder as the primary alternative. This made it the third-largest-selling soft drink in America — it's sometimes better to be No. 3 on a large ladder than No. 1 on a small one."}
+    ],
+    viol:`When Avis was acquired and changed its campaign to 'Avis is going to be No. 1,' customers simply called Hertz. Claiming a rung you don't occupy doesn't create belief — it destroys the credibility you previously earned.`,
+    insight:`Adelphi University tried to compare itself favorably with Harvard in its marketing. But Adelphi wasn't on the prospect's college ladder at all, so the comparison was meaningless — or worse, it implied Adelphi was far below Harvard in a direct comparison that invited exactly the unfavorable conclusion they were trying to avoid.`,
+    q:`What rung do we actually occupy on our category's ladder in the prospect's mind? Is our marketing strategy consistent with that position — or are we making claims that contradict where we actually sit?`
+  },
+  {
+    n:8, name:"Duality",
+    tagline:"In the long run, every market becomes a two-horse race.",
+    color:"hsl(345,72%,62%)",
+    p1:`Early in a category's development, the ladder has many rungs. As the market matures, it inevitably contracts toward two dominant players — typically the established leader and one energetic challenger. Third place and below become structurally difficult positions to sustain and grow from.`,
+    p2:`The pattern is consistent across industries and time horizons. It plays out over two or three seasons in video games; it takes two or three decades in long-distance telephone service. The underlying dynamic is the same: customers in maturing markets develop preferences for the established leader or the credible alternative, leaving little room for anything else.`,
+    examples:[
+      {tag:"Cola",co:"Coke / Pepsi / Royal Crown",txt:"In 1969: Coke 60%, Pepsi 25%, Royal Crown 6%. Twenty-two years later: Coke 45%, Pepsi 40%, Royal Crown 3%. Despite major investment, new management, and aggressive agency work, Royal Crown continued to decline. The law of duality predicted the convergence almost exactly."},
+      {tag:"Hamburgers",co:"McDonald's / Burger King",txt:"The hamburger market has resolved to two dominant brands decade after decade. Every other chain fights for survival at the margins. Despite repeated attempts by third-place chains to break in, the two-brand structure of the market reasserts itself."},
+      {tag:"Automobiles",co:"Industry History",txt:"The American auto industry had 195 different car makers in 1904. By 1923, 108. By 1927, 44. The industry compressed toward a two-brand domestic dominance (Ford and GM) over decades — following the exact pattern the law describes for every maturing market."}
+    ],
+    viol:`Companies in comfortable third-place positions invest in growth without recognizing that the market structure itself will make their position untenable. Royal Crown Cola felt comfortable at 6% — until it didn't.`,
+    insight:`Sprint held 10% of the long-distance market and billions in revenue. Felt comfortable. But the same market dynamics that eliminated Royal Crown Cola were at work. In a maturing two-horse market, being a profitable No. 3 today is not a guarantee of survival tomorrow — it is a warning sign.`,
+    q:`In the long run, will our market converge to a two-brand race? If so, are we positioned to be one of those two brands — and what do we need to do now to ensure that outcome?`
+  },
+  {
+    n:9, name:"Opposite",
+    tagline:"If you're shooting for second place, your strategy is determined by the leader.",
+    color:"hsl(316,68%,60%)",
+    p1:`In every leader's strength there is a weakness. Wherever the leader is strong, an opportunity exists to turn that strength into a weakness. To establish a firm second position, study the leader — find the essence of their strength, then present the prospect with the exact opposite. The goal is not to be better — it is to be different.`,
+    p2:`Every category contains two types of customers: those who want the leader, and those who specifically don't want the leader. A successful No. 2 targets the latter. By positioning against the leader, you absorb business from all other alternatives to No. 1, creating a true two-brand dynamic rather than a scattered multi-brand competition.`,
+    examples:[
+      {tag:"Cola",co:"Pepsi vs. Coca-Cola",txt:"Coca-Cola is the original — 100-year-old formula, the choice of previous generations. Pepsi used this as a weakness by becoming 'the choice of a new generation.' Young people who didn't want their parents' drink became Pepsi's market. Over one generation, Pepsi closed a five-to-one deficit to near parity."},
+      {tag:"Beer",co:"Beck's vs. Lowenbrau",txt:"Beck's couldn't be the first imported beer (Heineken) or the first German beer (Lowenbrau). Solution: reposition Lowenbrau as 'the German beer most popular in America,' making Beck's 'the German beer most popular in Germany.' Authenticity transferred to Beck's. Today Beck's is the second-largest-selling European beer in America."},
+      {tag:"Pain Relief",co:"Tylenol vs. Aspirin",txt:"As aspirin aged, studies surfaced linking it to stomach bleeding. Tylenol launched with 'For the millions who should not take aspirin.' It didn't claim to be better — it positioned as the alternative for people aspirin had harmed. Today Tylenol outsells aspirin and is the top-selling single product in American drugstores."}
+    ],
+    viol:`Burger King's most successful years came from direct opposition to McDonald's: 'Have it your way,' 'Broiling not frying,' 'The Whopper beats the Big Mac.' When Burger King went soft and launched 'Herb the Nerd' and 'We do it the way you do it,' its market share collapsed. Timidity ended the strategy.`,
+    insight:`A good No. 2 cannot afford to be cautious. When you stop pressing the leader, you become vulnerable not just to the leader but to every other brand below you. The law of the opposite requires sustained, specific, focused aggression — not a one-time campaign.`,
+    q:`What is the leader's core strength in our category? How can we turn that strength into a weakness — and present ourselves as the genuine alternative for the customers the leader doesn't fully serve?`
+  },
+  {
+    n:10, name:"Division",
+    tagline:"Over time, a category will divide and become two or more categories.",
+    color:"hsl(285,65%,62%)",
+    p1:`The marketing arena is an ever-expanding sea of categories. What begins as a single category breaks into multiple distinct segments, each with its own customers, economics, dynamics, and leader. The leader of the original category rarely leads all the resulting sub-categories — each new division creates an opening for a new leader.`,
+    p2:`Corporate leaders frequently believe the opposite — that categories are converging into larger combined markets. Financial services, convergence of TV and computing, the "one device" future. These convergence predictions are almost always wrong. Categories divide; they rarely combine. And each divided category demands a separate brand to lead it effectively.`,
+    examples:[
+      {tag:"Computing",co:"The Computer Category Split",txt:"Computers started as one category (IBM). The category divided: mainframes (IBM), minicomputers (DEC), workstations (Sun), personal computers (Apple), laptops (Toshiba), notebooks, pen computers. IBM led mainframes but lost ground in every sub-category because one brand cannot effectively lead multiple divided categories."},
+      {tag:"Beer",co:"Beer Sub-Categories",txt:"Beer was beer. Then it divided: domestic/imported, premium/popular, light/regular/draft/dry, non-alcoholic. Each division created a new market and a new leader. Amstel Light became the imported light beer leader — a position that literally didn't exist before the category divided."},
+      {tag:"Automotive",co:"Honda → Acura",txt:"Honda understood division. When the luxury car segment emerged, Honda didn't stretch the Honda name — it created Acura with separate dealerships. Volkswagen, by contrast, tried to use one brand across all price points and segments, collapsing from 67% of the imported car market to under 4%."}
+    ],
+    viol:`IBM tried to remain the one-stop computer company as the category fractured into mainframes, minis, workstations, PCs, and laptops. With one brand trying to represent everything, IBM became the clear leader of nothing and the struggling competitor of everything.`,
+    insight:`The right response to category division is to create a new brand for each new segment — as General Motors originally did with Chevrolet, Pontiac, Oldsmobile, Buick, and Cadillac. The mistake is using one successful brand name in a new category where it carries the wrong meaning or creates confusion about what you stand for.`,
+    q:`Are new sub-categories forming within our market? Do we have separate brands positioned for each emerging segment — or are we extending one brand across divisions that need different identities?`
+  },
+  {
+    n:11, name:"Perspective",
+    tagline:"Marketing effects take place over an extended period of time.",
+    color:"hsl(254,68%,65%)",
+    p1:`The long-term effects of marketing actions are frequently the exact opposite of the short-term effects. What looks like a win today can be a slow-moving catastrophe. This is especially true of tactics that generate immediate sales: discounts, coupons, sales events, and line extensions all produce short-term gains while creating long-term damage.`,
+    p2:`Sales and price promotions increase business in the short term. But they also teach customers that the regular price is too high — and that waiting for a deal is a smart strategy. Over time, companies find they must run near-continuous promotions just to maintain volume, not to grow it. Promotional pricing becomes a drug: stopping causes immediate, painful withdrawal.`,
+    examples:[
+      {tag:"Beer",co:"Miller High Life & Lite",txt:"Miller Lite launched in 1974. For five years, both brands grew together. Miller High Life peaked in 1979 — five years after Lite launched — at 23.6 million barrels. Then High Life declined for 13 consecutive years, falling to 5.8 million barrels by 1991. The short-term gain (Lite added sales) masked the long-term destruction (Lite cannibalized High Life)."},
+      {tag:"Beer",co:"Michelob & Coors",txt:"Three years after Michelob Light launched, regular Michelob peaked — then declined for 11 straight years. All four Michelob variants combined today sell 25% fewer barrels than regular Michelob alone sold in 1978. Coors Light caused regular Coors to fall to one-fourth of its former volume. The pattern is relentless across brands."},
+      {tag:"Retail",co:"Everyday Low Prices",txt:"Companies practicing 'everyday low prices' — Walmart, Kmart, warehouse clubs — avoid training customers to wait for sales. The evidence is decisive: yo-yo pricing (airlines, supermarkets) trains customers to game the system, while consistent pricing builds loyalty, simplifies operations, and avoids the promotional treadmill."}
+    ],
+    viol:`Managers evaluated on quarterly earnings consistently choose short-term tactics that feel like victories but create long-term brand erosion. The 'bullet that takes five years to reach its target' is invisible on a quarterly dashboard — which is exactly why the damage compounds undetected.`,
+    insight:`Procter & Gamble eventually made a bold move toward uniform pricing, recognizing that years of couponing had trained their entire customer base to wait for deals. Breaking the promotional drug habit required real courage — because the withdrawal symptoms (short-term sales drops) are real, even when the long-term direction is correct.`,
+    q:`Which of our current marketing tactics are trading long-term brand equity for short-term revenue? Are we training customers to only engage with us when there's a discount or promotion?`
+  },
+  {
+    n:12, name:"Line Extension",
+    tagline:"There's an irresistible pressure to extend the equity of a brand.",
+    color:"hsl(222,72%,62%)",
+    p1:`Line extension is the most violated law in marketing — and the most insidious, because it happens continuously with almost no conscious deliberate choice. Each individual extension seems logical. The cumulative effect is a brand that means everything in theory and nothing in practice.`,
+    p2:`The logic seems unassailable: "We have a successful brand — let's apply it to new products." But a brand name is not a container that holds transferable equity. It is a word in the prospect's mind that means something specific. When that word is applied to different products, it stops meaning anything — and then it means nothing. The brand becomes a generic qualifier, not a meaningful differentiator.`,
+    examples:[
+      {tag:"Computing",co:"IBM",txt:"When IBM focused on mainframes, it made enormous profits. Then it expanded into personal computers, pen computers, workstations, midrange systems, software, networks, telephones, satellite services, online services. In 1991, IBM had $65 billion in revenue and lost $2.8 billion — nearly $8 million every day. Focused IBM minted money; extended IBM burned it."},
+      {tag:"Condiments",co:"A-1 Steak Sauce → Poultry",txt:"A-1 dominated steak sauce. As people shifted from beef to chicken, the logical move seemed obvious: introduce A-1 poultry sauce. The result was a complete failure despite an $18 million advertising budget. In the prospect's mind, 'A-1' is the steak sauce itself. Applying it to poultry carried the wrong meaning and the name fought the product."},
+      {tag:"Soft Drinks",co:"7-Up",txt:"In 1978, 7-Up was simply the lemon-lime uncola and held 5.7% of the soft drink market. Then came 7-Up Gold, Cherry 7-Up, and multiple diet versions. By the 1990s, 7-Up's share had fallen to 2.5% — less than half of what a focused 7-Up commanded. More products produced less market."}
+    ],
+    viol:`The clearest indicator of line extension's failure rate: the leader in virtually every category is the brand that is not line-extended. Gerber has 72% of baby food (not extended). Smucker's has 35% of jams (focused). Hellmann's has 42% of mayonnaise (focused). Diversified Kraft has 9% of jams and 18% of mayonnaise. Specialists consistently beat generalists.`,
+    insight:`Top management continues to believe in line extension because it produces short-term gains (Law 11: Perspective). Each extension looks like a success for the first year or two — the real damage takes 3–5 years to appear. By then, the executive who approved the extension has often moved on, and the damage is inherited by a successor.`,
+    q:`What does our brand name specifically mean in the prospect's mind today? If we added a new product under that name, would it reinforce that meaning or dilute it — and how would we honestly know?`
+  },
+  {
+    n:13, name:"Sacrifice",
+    tagline:"You have to give up something in order to get something.",
+    color:"hsl(190,70%,54%)",
+    p1:`The law of sacrifice is the direct inverse of line extension. To build marketing power today, you must be willing to give up: to narrow the product line, to constrain the target market, to maintain a consistent strategy even as competitors and internal pressure demand change. The full product line is not a competitive advantage — it is a luxury reserved for losers.`,
+    p2:`Three things to sacrifice, in order of importance: (1) Product line — stop trying to sell everything to everyone; (2) Target market — stop trying to reach all possible buyers simultaneously; (3) Constant strategic change — stop reinventing positioning at every budget review. Each sacrifice that feels like a loss is actually a concentration of power.`,
+    examples:[
+      {tag:"Logistics",co:"Federal Express",txt:"Emery Air Freight shipped anything — small packages, large packages, overnight, delayed. FedEx sacrificed everything except small packages overnight. The sacrifice enabled complete ownership of 'overnight.' When FedEx later abandoned that focus by buying Flying Tiger and going global, it lost $1.1 billion in 21 months — paying directly for abandoning the sacrifice."},
+      {tag:"Cola",co:"Pepsi's Teen Market",txt:"In the late 1950s, Coke outsold Pepsi five to one. Pepsi's strategy: sacrifice every customer segment except teenagers. Focus all resources on the Pepsi Generation. Within one generation, Pepsi closed the gap to near parity. The target (teens) was not the entire market — but targeting teens exclusively made the brand aspirational for everyone who wanted to feel young."},
+      {tag:"Retail",co:"Toys \"R\" Us",txt:"Interstate Department Stores went bankrupt. Analyzing the wreckage, they found toys was the only profitable business. They renamed it Toys 'R' Us and focused on toys exclusively. Result: 20% of all American retail toy sales, done very profitably. Deep focus in a single category beat broad coverage across many categories."}
+    ],
+    viol:`People Express was brilliantly focused: cheap flights to unfashionable cities, no frills. After initial success, it expanded to major hub cities, purchased Frontier Airlines, added first class, and tried to compete everywhere. It sold itself to Texas Air to avoid bankruptcy. Success from focus, death from abandoning it.`,
+    insight:`The target is not the market. Marlboro targeted the cowboy — a nearly extinct demographic. But the market was everyone who wanted to identify with rugged independence. By narrowing the target to an extreme, Marlboro became the world's largest-selling cigarette brand. Giving up reach paradoxically creates more reach.`,
+    q:`What are we holding onto that dilutes our focus? What could we sacrifice — product lines, customer segments, geographies — that would make us dramatically more powerful in the areas that actually define our brand?`
+  },
+  {
+    n:14, name:"Attributes",
+    tagline:"For every attribute, there is an opposite, effective attribute.",
+    color:"hsl(155,65%,52%)",
+    p1:`When a competitor owns an important attribute, the instinct is to claim the same attribute — to be the better version of what already works. This almost never succeeds. Instead, identify an opposite attribute that creates a different kind of value, one that your competitor's ownership of the original makes impossible for them to claim simultaneously.`,
+    p2:`Marketing is fundamentally a battle of ideas. Without an ownable idea or attribute, the only remaining option is price — a race to the bottom. Some attributes are more important than others. Claim the most important available attribute. The law of exclusivity means the most critical attributes may already be taken — but every claimed attribute generates an unclaimed opposite.`,
+    examples:[
+      {tag:"Toothpaste",co:"Crest → the Rest",txt:"Crest owns 'cavity prevention' — the most important toothpaste attribute. So every other brand owns something else: Colgate takes whitening and taste, Arm & Hammer takes baking soda, Scope takes breath freshness. Each found an opposite or adjacent attribute to own rather than fighting Crest for cavities."},
+      {tag:"Computing",co:"IBM 'Big' → DEC 'Small'",txt:"IBM owned 'big and powerful' mainframe computing. DEC found the exact opposite — 'small' — and invented the minicomputer category. Every major company that tried to compete with IBM on 'big and powerful' (RCA, GE, UNIVAC, Burroughs, Honeywell) lost enormous sums. The opposite attribute created an entirely new market."},
+      {tag:"Razors",co:"Gillette & Good News",txt:"Gillette owned premium high-technology razor systems. When a French company introduced the 'disposable' razor — the exact opposite attribute — Gillette launched Good News disposable razors rather than dismissing the concept. Today disposables dominate the category. Gillette chose to lead the opposite attribute rather than be displaced by it."}
+    ],
+    viol:`Every toothpaste brand that claims 'fights cavities' when Crest owns that ground is spending marketing money to reinforce Crest's superiority while gaining nothing. They're not claiming an attribute — they're donating to a competitor's campaign.`,
+    insight:`Burger King should have owned 'grown up' as the exact opposite of McDonald's 'kids.' McDonald's has the playgrounds and Happy Meals — Burger King could have owned everyone over 10 who didn't want to be seen in a kids' place. The move would require sacrificing the children's market entirely to McDonald's — but in return, a powerful, defensible, unclaimed position.`,
+    q:`What attribute does our key competitor own most completely? What is its natural opposite — and is that opposite attribute genuinely unclaimed and available for us?`
+  },
+  {
+    n:15, name:"Candor",
+    tagline:"When you admit a negative, the prospect will give you a positive.",
+    color:"hsl(38,82%,58%)",
+    p1:`Candor is disarming. Every negative statement you make about yourself is instantly accepted as truth — no proof required. Positive statements, by contrast, are viewed with skepticism and require proof before anyone believes them. Acknowledging a weakness establishes credibility that makes your subsequent positive claim dramatically more persuasive.`,
+    p2:`This is not an apology strategy. The purpose of candor is to set up a positive selling proposition. The negative must be something the prospect already believes — triggering immediate agreement — and it must be quickly pivoted into a compelling positive. The sequence is critical: acknowledge the known negative, then redirect immediately to the benefit.`,
+    examples:[
+      {tag:"Rent-a-Car",co:"Avis 'Only No. 2'",txt:"Avis lost money for 13 consecutive years. When they finally said the obvious — 'Avis is only No. 2 in rent-a-cars. So why go with us? We try harder' — they became profitable immediately. Everybody already knew Avis was No. 2. Saying it established credibility. The pivot ('we try harder') gave prospects a compelling reason to act on that credibility."},
+      {tag:"Jam",co:"Smucker's Name",txt:"'With a name like Smucker's, it has to be good.' Most family companies would never make fun of their own name. The Smucker family did — and the willingness to acknowledge the unusual name made everything else about the brand credible. Smucker's is now the No. 1 jam and jelly brand in America."},
+      {tag:"Mouthwash",co:"Listerine 'Taste You Hate'",txt:"When Scope launched as the good-tasting mouthwash, Listerine faced a real threat. Their response: 'The taste you hate twice a day.' They didn't just admit the product tasted bad — they admitted people actively hated it. Then the pivot: Listerine kills germs. Something that tastes like disinfectant must be eliminating something. The candor preserved their market leadership."}
+    ],
+    viol:`Companies claiming to be 'the best' in areas where they clearly aren't — prospects immediately tune out all subsequent claims, including the ones that happen to be true. Unbelievable positive claims make everything that follows unbelievable.`,
+    insight:`Marketing is often a search for the obvious. Everyone already knows Avis is No. 2. Saying it aloud doesn't reveal anything new — it stops the pretense. When a company stops pretending, customers stop being defensive. An open mind is a receptive mind — and a receptive mind can be given a compelling reason to act.`,
+    q:`What negative truth about our brand do prospects already believe independently? Could we acknowledge that truth directly — and immediately pivot to a compelling positive that flows from the very same acknowledgment?`
+  },
+  {
+    n:16, name:"Singularity",
+    tagline:"In each situation, only one move will produce substantial results.",
+    color:"hsl(265,68%,64%)",
+    p1:`Marketing success does not accumulate from many good moves executed well — it comes from finding and executing the one bold, unexpected stroke that changes the competitive dynamic. In any given situation, there is only one move that will produce substantial results. Finding it is difficult. Finding more than one is nearly impossible.`,
+    p2:`Military strategists call it the 'line of least expectation' — the move your opponent believes you cannot or will not make. The Allied invasion succeeded at Normandy because of its unexpected location. Frontal assaults on well-defended positions fail at enormous cost regardless of resources. In marketing, the same principle applies with the same consistency.`,
+    examples:[
+      {tag:"Automotive",co:"Japan & Germany vs. GM",txt:"GM dominated the profitable middle of the American auto market, easily defending against frontal assaults from Ford and Chrysler. The Japanese attacked the low end with small affordable cars — unexpected. The Germans attacked the high end with super-premium cars — also unexpected. Both flanking moves succeeded. GM, trying to defend everywhere, made its middle-market cars look identical and weakened itself across the board."},
+      {tag:"Cola",co:"Coke's Available Move",txt:"Coca-Cola rotated slogans for years without moving the needle. The singular available move: drop New Coke (which blocks every strategy), then own 'The Real Thing' directly against the Pepsi Generation. Everything Coke has — heritage, original formula, authenticity — flows from those three words. One focused move beats ten campaigns built on different messages."},
+      {tag:"Military History",co:"Hannibal & Normandy",txt:"Hannibal crossed the Alps — deemed impossible — to attack Rome from an unexpected direction. Allied planners chose Normandy because German commanders believed the tides and rocky shore made it an unlikely invasion point. Both moves worked precisely because they exploited the line of least expectation. The impossible route is often the most effective one."}
+    ],
+    viol:`Running multiple simultaneous campaigns — one for quality, one for innovation, one for customer service — dilutes every message and achieves nothing memorable. Effort spread evenly across many directions produces average results in all directions.`,
+    insight:`To find the singular move, marketing leaders must be close to the front — in the actual market, knowing what competitors are doing, what customers believe, what gaps exist. Executives who delegate marketing decisions lose the ability to perceive the singular move even when it's directly visible. Financial focus and marketing clarity are structurally at odds.`,
+    q:`In our current competitive situation, what is the one unexpected move that would produce disproportionate results? Are we diluting our resources across multiple 'good' initiatives when we should be concentrating everything on one great one?`
+  },
+  {
+    n:17, name:"Unpredictability",
+    tagline:"Unless you write your competitors' plans, you can't predict the future.",
+    color:"hsl(335,70%,62%)",
+    p1:`Most marketing plans contain implicit assumptions about what competitors will and won't do, what technology will and won't develop, and how consumer behavior will evolve. These assumptions are almost always wrong. Competitors act in unexpected ways. Technology changes in unforeseen directions. Markets shift for reasons that only become obvious in retrospect.`,
+    p2:`The answer is not a better prediction — it is building organizational flexibility. A long-term direction is not the same as a long-term plan. A direction provides a coherent orientation for all decisions without requiring accurate forecasting of specific events. A plan becomes a liability the moment reality diverges from its assumptions.`,
+    examples:[
+      {tag:"Computing",co:"IBM's OfficeVision",txt:"IBM built a detailed, expensive plan to connect all PCs to IBM mainframes — called OfficeVision. Sun Microsystems, Microsoft, and others rendered it obsolete before it fully launched. IBM had foreseen everything except the competition — which turned out to be the only thing that mattered."},
+      {tag:"Copiers",co:"Xerox Research",txt:"Before launching the plain-paper copier, Xerox commissioned research. Finding: no one would pay five cents per copy when Thermofax cost one and a half cents. Xerox ignored the research and launched anyway. Research measures past behavior — it cannot measure willingness to pay for a product that doesn't yet exist."},
+      {tag:"Food",co:"Healthy Choice",txt:"The trend toward health-conscious eating had been building for years. Dozens of 'healthy' products existed under line-extended names — and failed. ConAgra used a clear standalone name (Healthy Choice) to ride a trend already in motion. The trend was trackable; its endpoint was not. They didn't predict the future — they responded to a visible present."}
+    ],
+    viol:`Companies that write 5- and 10-year marketing plans often find that competitors have redrawn the market by year 2. The detailed plan becomes a constraint rather than a guide — people feel obligated to execute the plan rather than respond to changed reality.`,
+    insight:`There is a crucial difference between predicting the future and tracking a trend. A trend is already happening — you're positioning to benefit from its continuation. A prediction assumes something will happen that shows little current evidence. Build strategy on trackable trends. Avoid building it on predictions about competitor behavior, technology timing, or regulatory outcomes.`,
+    q:`Which of our strategic assumptions are based on trackable trends — and which are predictions about events we cannot actually know? How quickly can we change direction if our assumptions prove wrong?`
+  },
+  {
+    n:18, name:"Success",
+    tagline:"Success often leads to arrogance, and arrogance to failure.",
+    color:"hsl(50,82%,56%)",
+    p1:`Ego is the enemy of effective marketing. When companies and leaders become successful, they tend to substitute their own judgment for market reality. They stop thinking like prospects and start thinking like successful executives. The objectivity that created the success erodes — and without objectivity, the right decisions become nearly impossible.`,
+    p2:`Success also creates the conditions for the line extension trap. When a brand succeeds, management assumes the name is the primary reason — and then puts that name on everything. In reality, the name didn't make the brand famous. The right marketing moves made the brand famous. The name simply came along for the ride.`,
+    examples:[
+      {tag:"Technology",co:"DEC / Ken Olsen",txt:"Kenneth Olsen built DEC from scratch into a $14 billion company. His success gave him absolute confidence in his vision of computing. He dismissed personal computers, then open systems, then RISC — three of the three biggest developments in the industry. Each dismissal flowed from conviction, not analysis. DEC collapsed. Olsen was removed."},
+      {tag:"Automotive",co:"GM's Financial Takeover",txt:"General Motors built legendary dominance through differentiated brands: Chevrolet, Pontiac, Oldsmobile, Buick, Cadillac. When financial executives took over, they focused on quarterly numbers rather than brand identity. Every division chased the same profitable middle market. GM cars became indistinguishable. Ten share points evaporated — roughly $10 billion in annual sales."},
+      {tag:"Retail",co:"Sears, Roebuck",txt:"Sears dominated hard goods and decided to expand — soft goods, fashion, financial services. The company tried to be everything to everyone, including hiring fashion models to sell products in stores primarily known for tools and appliances. The customer Sears had built its brand around was systematically confused and eventually alienated."}
+    ],
+    viol:`Donald Trump put his name on hotels, casinos, condominiums, an airline, and a shopping center. Fortune celebrated him on the cover. Then came $1.4 billion in debt. The concentrated real estate brand that built him was destroyed by spreading the name across incompatible categories.`,
+    insight:`Large company CEOs are systematically insulated from market reality. Information is filtered by subordinates delivering what they think the boss wants to hear. The solution is deliberate contact with the front: unannounced dealer visits, direct customer conversations, retail floor time without the entourage. The king who dresses as a commoner gets honest answers.`,
+    q:`Are we making marketing decisions based on what the market is actually telling us — or based on what we believe the market should think? Have we mistaken confidence for objectivity?`
+  },
+  {
+    n:19, name:"Failure",
+    tagline:"Failure is to be expected and accepted.",
+    color:"hsl(16,75%,58%)",
+    p1:`Most companies respond to failure by trying to fix failing situations rather than exiting them. Admitting a mistake is bad for careers — so managers reorganize, rebrand, and reinvest in products that should be cut. The result is wasted resources defending the indefensible while better opportunities go unfunded.`,
+    p2:`The deeper problem is the personal agenda — decisions are made first with the decision-maker's career in mind, second with competitive impact in mind. Safe decisions protect careers. Bold decisions risk them. The structural result is systematic organizational bias toward mediocrity: no one was ever fired for a bold move they didn't make.`,
+    examples:[
+      {tag:"Japanese Management",co:"Consensus Culture",txt:"Japanese consensus management distributes decision ownership across many people, reducing individual ego investment in any single outcome. Since a large group decided together, there's no individual stigma when it fails — 'We were all wrong' is far easier to accept than 'I was wrong.' Failure recognition happens faster; correction comes earlier."},
+      {tag:"Retail",co:"Walmart's Culture",txt:"Sam Walton institutionalized a culture around experimental failure. People aren't punished for experiments that fail — they're punished for making the same mistake twice. This 'ready, fire, aim' approach means Walmart tries many things quickly, learns from failures rapidly, and doubles down on what works. Most competitors 'aim, aim, aim' and never fire."},
+      {tag:"Innovation",co:"3M's Champion System",txt:"3M publicly identifies the 'champion' — the person who will personally benefit from a new product's success. Art Fry championed Post-it Notes for nearly twelve years before launch. By making the champion's stake explicit and public, 3M aligns personal career interests with product success rather than allowing career self-interest to quietly kill promising initiatives."}
+    ],
+    viol:`American Motors should have abandoned passenger cars and focused on Jeep years before it did. IBM should have dropped copiers and Xerox should have dropped computers far earlier than they finally acknowledged those mistakes. The delay between recognizing failure and acting on it is where most of the damage occurs.`,
+    insight:`The ability to recognize failure early and cut losses is a genuine competitive advantage — not just financially, but in the organizational attention and energy it frees for efforts that can actually win. Companies that cannot exit failures are perpetually underinvesting in successes.`,
+    q:`Which of our current products, programs, or market positions are we defending out of career protection or organizational inertia rather than genuine strategic merit?`
+  },
+  {
+    n:20, name:"Hype",
+    tagline:"The situation is often the opposite of the way it appears in the press.",
+    color:"hsl(180,68%,52%)",
+    p1:`When a company is genuinely thriving, it says very little. When it needs the hype, it usually means it's in trouble. Large-scale press coverage of a product launch, a company's future, or an industry transformation is often a signal of desperation — or of a phenomenon that will not materialize as described.`,
+    p2:`Real revolutions don't announce themselves with marching bands. They arrive quietly, in the back pages, and are often dismissed or ignored initially. The truly transformative developments received little coverage at launch. The massively hyped developments rarely materialized as predicted.`,
+    examples:[
+      {tag:"Cola",co:"New Coke",txt:"New Coke received an estimated $1 billion in free publicity plus hundreds of millions in paid launch spending — the most publicized product launch in history. Less than 60 days after launch, Coca-Cola was forced to restore the original formula. Today Classic Coke outsells New Coke 15 to 1. The hype-to-reality ratio was catastrophic."},
+      {tag:"Technology",co:"NeXT Computer",txt:"Steve Jobs's NeXT launch was so heavily anticipated that press credentials had to be rationed even for an auditorium holding several thousand people. IBM, Ross Perot, and Canon invested $130 million. The coverage was extraordinary. NeXT failed as a hardware company. Its software eventually mattered — but the hardware hype was entirely empty."},
+      {tag:"Hidden Revolutions",co:"MCI & Sun Microsystems",txt:"When MCI launched microwave service between Chicago and St. Louis, the press largely ignored it. When Sun shipped its first workstation, no one noted the significance. Yet both launches fundamentally changed their industries. Real revolutions don't get front-page coverage — they get the small story buried in the business section that nobody reads."}
+    ],
+    viol:`Companies confuse 'capturing the imagination of the public' with 'revolutionizing a market.' They invest heavily in launch events, press conferences, and media coverage — mistaking noise for momentum. The noise generates expectations that the product cannot fulfill.`,
+    insight:`If you're looking for clues to the future, don't read the front page. Read the back of the business section — the small stories about companies doing things nobody thinks will matter. Neither the personal computer nor the fax machine launched as a spectacular front-page event. Both took years to develop momentum that the press initially ignored completely.`,
+    q:`When we see massive press coverage of a competitor's new product, should we be worried — or should we be looking for the small, unnoticed story that will matter more in five years?`
+  },
+  {
+    n:21, name:"Acceleration",
+    tagline:"Successful programs are not built on fads, they're built on trends.",
+    color:"hsl(145,65%,52%)",
+    p1:`A fad is a wave in the ocean; a trend is the tide. A fad is highly visible, dramatic in its rise — and collapses just as quickly. A trend is nearly invisible but enormously powerful over time. Companies that build on fads must survive the collapse. Companies that build on trends benefit from compounding momentum that is nearly invisible until it's unstoppable.`,
+    p2:`Paradoxically, the best response to a fad is to dampen it — to restrain growth rather than maximize it. By restricting supply and managing demand, a fad can be converted into a sustained trend. By maximizing a fad aggressively, you accelerate its collapse. The instinct to capitalize on momentum as quickly as possible is exactly backward.`,
+    examples:[
+      {tag:"Toys",co:"Cabbage Patch Kids (Fad)",txt:"Cabbage Patch Kids exploded in 1983. Coleco's response: license the name to everything — pens, pencils, games, clothing, novelties. Sales peaked at $776 million with $83 million in profit. Then the bottom fell out. By 1988 Coleco was in Chapter 11. The brand survived under new, more conservative owners — but Coleco itself did not."},
+      {tag:"Toys",co:"Barbie (Trend)",txt:"Barbie was never heavily merchandised into every possible product extension. The brand was managed conservatively, licensing was controlled, scarcity was maintained. The result: Barbie is a decades-long trend, not a two-year fad. The difference between Barbie and Cabbage Patch Kids was not the product — it was the restraint applied to its exploitation."},
+      {tag:"Entertainment",co:"Managed Appearances",txt:"The most successful entertainers are those who control their appearances and don't overextend. When every performance is an event rather than a routine occurrence, the audience remains eager. When every possible opportunity is maximized, the audience becomes fatigued. Scarcity sustains desire; ubiquity destroys it."}
+    ],
+    viol:`Atari owned the video game category — a genuine, lasting trend. But they treated it as a fad by trying to pivot to computers simultaneously. They lost the video game trend and failed to establish a computer position. Nintendo arrived in 1986, recaptured the category Atari had abandoned, and quickly reached 75% market share.`,
+    insight:`The paradox of acceleration: the more aggressively you exploit a rapidly growing business, the faster you accelerate its eventual collapse. Long-lasting brands manage demand carefully, never fully satisfying it. 'Never totally satisfy the demand' is counterintuitive — but it explains why some brands remain desirable for decades while others burn brilliantly for a single season.`,
+    q:`Are we building our business on a genuine trend — a sustained underlying shift in values or behavior — or on a fad that will exhaust itself? How would we distinguish between them, and are we managing our growth accordingly?`
+  },
+  {
+    n:22, name:"Resources",
+    tagline:"Without adequate funding, an idea won't get off the ground.",
+    color:"hsl(25,78%,58%)",
+    p1:`Marketing is fought in the mind of the prospect. Getting into a mind requires money. Staying in the mind requires more money. A mediocre idea with adequate funding will outperform a brilliant idea that is underfunded. The right sequence: get the idea first, then find the money required to execute it.`,
+    p2:`This is not a comfortable law for inventors and entrepreneurs. The belief that a sufficiently brilliant idea will find its own way to success is widespread and almost always wrong. Marketing is expensive at every level — PR agencies cost thousands per month, advertising costs more, and competitors are usually better funded. The companies that win front-load their investment rather than conserving cash and hoping momentum develops organically.`,
+    examples:[
+      {tag:"Computing",co:"Apple / Mike Markkula",txt:"Steve Jobs and Steve Wozniak had a great idea — arguably the best product concept of the early PC era. But Apple Computer launched with $91,000 from investor Mike Markkula. For $91,000, Markkula received one-third of Apple. The idea needed money to become real; the money needed an idea worth funding. Neither alone was sufficient."},
+      {tag:"Cat Litter",co:"Scoop Away vs. Tidy Scoop",txt:"A&M Pet Products invented 'clumping' cat litter — a genuine breakthrough. When it took off, Golden Cat Corporation (makers of market leader Tidy Cat) introduced their own version and borrowed part of A&M's brand name. The winner of this category battle would be determined by marketing resources — not by who had the better innovation."},
+      {tag:"Publishing",co:"Lear's Magazine",txt:"Frances Lear arrived in New York at 61 with a clear concept: a magazine for women over 40. She was prepared to invest $25 million of her own capital. By the fifth issue, she had 350,000 readers. The concept was good — but the capital made it real. Without the willingness to invest at scale, the concept would have remained a concept."}
+    ],
+    viol:`Companies launch new products with minimum viable budgets, assuming product merit will generate organic momentum. The product fails. They conclude the idea was bad — when often the idea was sound but the investment was insufficient to break through in a noisy, well-funded competitive market.`,
+    insight:`In marketing, the rich tend to get richer because they have the resources to drive ideas into the mind and keep them there. Procter & Gamble and Philip Morris each spent over $2 billion annually on advertising. General Motors spent $1.5 billion. For smaller marketers, the implication is to concentrate resources in one area rather than spreading them across many — concentrated fire beats scattered fire at every scale.`,
+    q:`Do we have adequate resources to get our marketing idea into prospects' minds — and sustain it against well-funded competitors? If not, what can we sacrifice to concentrate what we have in the area that matters most?`
+  }
+];
+
+function getLawColor(i) {
+  const hue = Math.round((i / 22) * 360);
+  return `hsl(${hue}, 72%, 62%)`;
+}
+
+// Build nav
+function buildNav() {
+  const wrap = document.getElementById('nav-links');
+  LAWS.forEach((law, i) => {
+    const c = getLawColor(i);
+    const a = document.createElement('a');
+    a.className = 'nav-item';
+    a.dataset.n = law.n;
+    a.innerHTML = `<span class="nav-num" style="background:${c}18;color:${c}">${law.n}</span><span>${law.name}</span>`;
+    a.onclick = e => { e.preventDefault(); jumpTo(law.n); };
+    wrap.appendChild(a);
+  });
+}
+
+// Build overview grid
+function buildOverview() {
+  const g = document.getElementById('ov-grid');
+  LAWS.forEach((law, i) => {
+    const c = getLawColor(i);
+    const a = document.createElement('a');
+    a.className = 'ov-card';
+    a.style.borderColor = 'var(--border)';
+    a.innerHTML = `
+      <div class="ov-num" style="color:${c}">Law ${law.n}</div>
+      <div class="ov-name">${law.name}</div>
+      <div class="ov-hint">${law.tagline.slice(0,55)}${law.tagline.length>55?'…':''}</div>`;
+    a.onmouseenter = () => a.style.borderColor = c;
+    a.onmouseleave = () => a.style.borderColor = 'var(--border)';
+    a.onclick = e => { e.preventDefault(); jumpTo(law.n); };
+    g.appendChild(a);
+  });
+}
+
+// Build law sections
+function buildLaws() {
+  const wrap = document.getElementById('laws-wrap');
+  LAWS.forEach((law, i) => {
+    const c = getLawColor(i);
+    const sec = document.createElement('section');
+    sec.className = 'law-section';
+    sec.id = 'law-' + law.n;
+    sec.style.setProperty('--lc', c);
+
+    const exHtml = law.examples.map(ex => `
+      <div class="ex-card">
+        <div class="ex-tag">${ex.tag}</div>
+        <div class="ex-co">${ex.co}</div>
+        <div class="ex-txt">${ex.txt}</div>
+      </div>`).join('');
+
+    sec.innerHTML = `
+      <div class="law-hdr">
+        <div class="law-big-num">${String(law.n).padStart(2,'0')}</div>
+        <div class="law-hdr-text">
+          <div class="law-lbl">Law ${law.n} of 22</div>
+          <h2 class="law-name">The Law of ${law.name}</h2>
+          <div class="law-tagline">${law.tagline}</div>
+        </div>
+      </div>
+      <div class="principle">
+        <h3>Core Principle</h3>
+        <p>${law.p1}</p>
+        ${law.p2 ? `<p>${law.p2}</p>` : ''}
+      </div>
+      <div class="ex-hd">Real-World Examples</div>
+      <div class="ex-grid">${exHtml}</div>
+      ${law.viol ? `<div class="viol"><span class="viol-ico">⚠</span><p><strong>When violated:</strong> ${law.viol}</p></div>` : ''}
+      <div class="insight">
+        <div class="insight-ico">💡</div>
+        <div>
+          <h4>Key Insight</h4>
+          <p>${law.insight}</p>
+        </div>
+      </div>
+      <div class="qbox">
+        <div class="qmark">?</div>
+        <p>${law.q}</p>
+      </div>`;
+    wrap.appendChild(sec);
+  });
+}
+
+// Jump to section
+function jumpTo(n) {
+  const el = document.getElementById('law-' + n);
+  if (el) el.scrollIntoView({behavior:'smooth'});
+  if (window.innerWidth < 1024) toggleNav(false);
+}
+
+function scrollTo(id) {
+  const el = document.querySelector(id);
+  if (el) el.scrollIntoView({behavior:'smooth'});
+  if (window.innerWidth < 1024) toggleNav(false);
+}
+
+// Progress bar
+function updateProg() {
+  const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('prog').style.width = (t > 0 ? (s/t)*100 : 0) + '%';
+}
+
+// Scrollspy
+function updateSpy() {
+  const secs = document.querySelectorAll('.law-section');
+  const items = document.querySelectorAll('.nav-item');
+  let cur = '';
+  secs.forEach(s => { if (s.getBoundingClientRect().top <= 140) cur = s.id; });
+  items.forEach(item => {
+    const active = 'law-' + item.dataset.n === cur;
+    item.classList.toggle('active', active);
+    item.style.borderLeftColor = active
+      ? item.querySelector('.nav-num').style.color
+      : 'transparent';
+  });
+}
+
+// Scroll animations
+function setupObserver() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, {threshold: 0.07});
+  document.querySelectorAll('.law-section').forEach(el => obs.observe(el));
+}
+
+// Search
+document.getElementById('srch').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.style.display = (!q || item.textContent.toLowerCase().includes(q)) ? '' : 'none';
+  });
+});
+
+// Mobile nav toggle
+let navOpen = false;
+function toggleNav(force) {
+  navOpen = force !== undefined ? force : !navOpen;
+  document.getElementById('nav').classList.toggle('open', navOpen);
+  document.getElementById('tog').textContent = navOpen ? '✕' : '☰';
+}
+
+document.addEventListener('click', e => {
+  if (navOpen
+    && !document.getElementById('nav').contains(e.target)
+    && e.target.id !== 'tog') toggleNav(false);
+});
+
+window.addEventListener('scroll', () => { updateProg(); updateSpy(); }, {passive:true});
+
+// Init
+buildNav();
+buildOverview();
+buildLaws();
+setupObserver();
+</script>
+</body>
+</html>

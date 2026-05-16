@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning: The Battle for Your Mind | Al Ries & Jack Trout</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg: #080c16;
+            --surface: #0f1420;
+            --card: #161d2e;
+            --card-hover: #1c2540;
+            --border: #1f2a42;
+            --gold: #d4a830;
+            --gold-light: #f0c84a;
+            --text: #dce4f0;
+            --text-muted: #7a8899;
+            --text-dim: #4a5568;
+            --accent-blue: #4a90d9;
+            --accent-red: #e06060;
+            --accent-green: #50c878;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0;
+            width: 260px;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 100;
+            padding: 1.5rem 0;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-logo {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+        .sidebar-logo h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--gold);
+            line-height: 1.35;
+        }
+        .sidebar-logo p { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; }
+        .nav-section { padding: 0 0.5rem; }
+        .nav-section-title {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            padding: 0.75rem 1rem 0.35rem;
+        }
+        .nav-link {
+            display: block;
+            padding: 0.42rem 1rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+            margin: 1px 0;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--text);
+            background: var(--card);
+            border-left-color: var(--gold);
+        }
+
+        /* ── Layout ── */
+        .main { margin-left: 260px; min-height: 100vh; }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 55%, #091020 100%);
+            padding: 5rem 4rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%; right: -15%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(212,168,48,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--gold);
+            margin-bottom: 1.1rem;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.6rem;
+            font-weight: 700;
+            line-height: 1.12;
+            max-width: 720px;
+            margin-bottom: 1.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin-bottom: 1.75rem;
+        }
+        .hero-authors { font-size: 0.82rem; color: var(--text-dim); }
+        .hero-authors span { color: var(--gold); }
+        .hero-core-idea {
+            margin-top: 3rem;
+            padding: 2rem 2.25rem;
+            background: rgba(212,168,48,0.055);
+            border: 1px solid rgba(212,168,48,0.22);
+            border-radius: 14px;
+            max-width: 780px;
+        }
+        .hero-core-idea h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+        }
+        .hero-core-idea p { font-size: 1rem; line-height: 1.8; }
+
+        /* ── Sections ── */
+        .section {
+            padding: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-eyebrow {
+            font-size: 0.67rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 0.7rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.22;
+        }
+        .section-intro {
+            font-size: 1.02rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin-bottom: 2.5rem;
+            line-height: 1.85;
+        }
+
+        /* ── Cards ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: all 0.25s;
+        }
+        .card:hover {
+            background: var(--card-hover);
+            border-color: rgba(212,168,48,0.28);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .card-number {
+            font-size: 0.67rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.12rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            line-height: 1.3;
+        }
+        .card-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.78; }
+        .card-example {
+            margin-top: 1rem;
+            padding: 0.7rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border-left: 2px solid var(--gold);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .card-example strong { color: var(--gold); }
+
+        /* ── Pull Quote ── */
+        .pull-quote {
+            margin: 2.5rem 0;
+            padding: 1.75rem 2.25rem;
+            border-left: 4px solid var(--gold);
+            background: var(--card);
+            border-radius: 0 12px 12px 0;
+        }
+        .pull-quote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            line-height: 1.65;
+        }
+        .pull-quote cite {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-style: normal;
+        }
+
+        /* ── Principle / Warning Boxes ── */
+        .principle-box {
+            background: linear-gradient(135deg, rgba(212,168,48,0.07), rgba(212,168,48,0.02));
+            border: 1px solid rgba(212,168,48,0.22);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin: 1.5rem 0;
+        }
+        .principle-box h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        .principle-box p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.78; }
+        .principle-box ul {
+            list-style: none;
+            margin-top: 0.75rem;
+        }
+        .principle-box ul li {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 0.25rem 0 0.25rem 1.1rem;
+            position: relative;
+        }
+        .principle-box ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+        .principle-box ul li strong { color: var(--text); }
+
+        .warning-box {
+            background: rgba(224,96,96,0.065);
+            border: 1px solid rgba(224,96,96,0.2);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin: 1.5rem 0;
+        }
+        .warning-box h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-red);
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        .warning-box p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.78; }
+
+        /* ── Stats ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .stat-block {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; line-height: 1.4; }
+
+        /* ── Timeline ── */
+        .timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.45rem; top: 0; bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item { position: relative; padding-bottom: 2rem; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.63rem; top: 0.35rem;
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--bg);
+        }
+        .timeline-period { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 0.2rem; }
+        .timeline-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .timeline-body { font-size: 0.855rem; color: var(--text-muted); }
+
+        /* ── Product Ladder ── */
+        .ladder { display: inline-flex; flex-direction: column; min-width: 260px; }
+        .ladder-rung {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.78rem 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-top: none;
+        }
+        .ladder-rung:first-child {
+            border-top: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            background: linear-gradient(135deg, rgba(212,168,48,0.13), rgba(212,168,48,0.04));
+            border-color: rgba(212,168,48,0.3);
+        }
+        .ladder-rung:last-child { border-radius: 0 0 8px 8px; }
+        .ladder-rank { font-size: 0.67rem; color: var(--gold); font-weight: 700; min-width: 28px; }
+        .ladder-brand { font-weight: 500; font-size: 0.88rem; }
+        .ladder-badge { margin-left: auto; font-size: 0.67rem; color: var(--text-muted); }
+
+        /* ── Two-Column ── */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin: 2rem 0; }
+        .two-col h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 1rem; }
+        .two-col p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+
+        /* ── Comparison ── */
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+        .comparison-col { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .comparison-header { padding: 0.9rem 1.25rem; font-weight: 600; font-size: 0.875rem; border-bottom: 1px solid var(--border); }
+        .comparison-header.good { background: rgba(80,200,120,0.09); color: var(--accent-green); }
+        .comparison-header.bad { background: rgba(224,96,96,0.09); color: var(--accent-red); }
+        .comparison-items { padding: 0.75rem 1.25rem; }
+        .comparison-item { font-size: 0.82rem; color: var(--text-muted); padding: 0.42rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); line-height: 1.5; }
+        .comparison-item:last-child { border-bottom: none; }
+
+        /* ── Steps ── */
+        .steps { display: flex; flex-direction: column; gap: 1.25rem; margin: 2rem 0; }
+        .step { display: flex; gap: 1.25rem; align-items: flex-start; }
+        .step-num {
+            width: 2.4rem; height: 2.4rem;
+            min-width: 2.4rem;
+            background: linear-gradient(135deg, var(--gold), #b8860b);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.88rem; color: #000;
+        }
+        .step-content h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.3rem; }
+        .step-content p { font-size: 0.865rem; color: var(--text-muted); line-height: 1.75; }
+
+        /* ── Tags ── */
+        .tag {
+            display: inline-block;
+            padding: 0.18rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .tag-gold { background: rgba(212,168,48,0.14); color: var(--gold); }
+        .tag-red { background: rgba(224,96,96,0.14); color: var(--accent-red); }
+        .tag-blue { background: rgba(74,144,217,0.14); color: var(--accent-blue); }
+        .tag-green { background: rgba(80,200,120,0.14); color: var(--accent-green); }
+
+        /* ── Examples Grid ── */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .example-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem;
+        }
+        .example-card h5 { font-weight: 600; margin-bottom: 0.4rem; font-size: 0.88rem; }
+        .example-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+
+        /* ── Case Studies ── */
+        .case-study {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .case-study-tag { margin-bottom: 0.9rem; }
+        .case-study-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.8rem; }
+        .case-study-body { font-size: 0.885rem; color: var(--text-muted); line-height: 1.82; }
+        .case-study-insight {
+            margin-top: 1.25rem;
+            padding: 0.9rem 1.1rem;
+            background: rgba(212,168,48,0.055);
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            font-size: 0.84rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ── Principles List ── */
+        .principles-list { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.5rem 0; }
+        .principle-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.2s;
+        }
+        .principle-item:hover { border-color: rgba(212,168,48,0.25); }
+        .principle-icon {
+            min-width: 2rem; height: 2rem;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(212,168,48,0.1);
+            border-radius: 50%;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .principle-text strong { display: block; margin-bottom: 0.2rem; font-size: 0.88rem; }
+        .principle-text p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* ── Styled List ── */
+        ul.styled-list { list-style: none; padding: 0; margin: 1rem 0; }
+        ul.styled-list li {
+            padding: 0.38rem 0 0.38rem 1.3rem;
+            position: relative;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        ul.styled-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 0.75rem; top: 0.48rem; }
+        ul.styled-list li strong { color: var(--text); }
+
+        /* ── Separator ── */
+        hr.sep { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            line-height: 1.8;
+        }
+
+        /* ── Fade-in animation ── */
+        .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Mobile ── */
+        .mobile-toggle {
+            display: none;
+            position: fixed; top: 1rem; left: 1rem;
+            z-index: 200;
+            background: var(--gold);
+            border: none; border-radius: 7px;
+            padding: 0.45rem 0.8rem;
+            color: #000; cursor: pointer;
+            font-weight: 700; font-size: 0.82rem;
+        }
+        .overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.72); z-index: 99;
+        }
+
+        @media (max-width: 840px) {
+            .sidebar { transform: translateX(-260px); }
+            .main { margin-left: 0; }
+            .hero, .section { padding: 2.5rem 1.5rem; }
+            .hero-title { font-size: 2.1rem; }
+            .two-col, .comparison { grid-template-columns: 1fr; }
+            .cards-grid, .examples-grid { grid-template-columns: 1fr; }
+            .mobile-toggle { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="mobile-toggle" id="toggleBtn" onclick="toggleSidebar()">☰ Menu</button>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ────────────── SIDEBAR ────────────── -->
+<nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <h3>Positioning:<br>The Battle for Your Mind</h3>
+        <p>Al Ries &amp; Jack Trout · 1981 / 2001</p>
+    </div>
+    <div class="nav-section">
+        <div class="nav-section-title">Introduction</div>
+        <a href="#what-is" class="nav-link">What Is Positioning?</a>
+        <a href="#overcommunicated" class="nav-link">The Overcommunicated Society</a>
+        <a href="#getting-in" class="nav-link">Getting Into the Mind</a>
+        <a href="#ladders" class="nav-link">Mental Ladders</a>
+
+        <div class="nav-section-title">Core Strategy</div>
+        <a href="#cant-get-there" class="nav-link">You Can't Get There From Here</a>
+        <a href="#leader" class="nav-link">Positioning a Leader</a>
+        <a href="#follower" class="nav-link">Positioning a Follower</a>
+        <a href="#repositioning" class="nav-link">Repositioning the Competition</a>
+
+        <div class="nav-section-title">The Name Game</div>
+        <a href="#naming" class="nav-link">The Power of the Name</a>
+        <a href="#no-name" class="nav-link">The No-Name Trap</a>
+
+        <div class="nav-section-title">The Traps</div>
+        <a href="#free-ride" class="nav-link">The Free-Ride Trap</a>
+        <a href="#line-extension" class="nav-link">The Line-Extension Trap</a>
+        <a href="#when-works" class="nav-link">When Line Extension Works</a>
+
+        <div class="nav-section-title">Case Studies</div>
+        <a href="#case-studies" class="nav-link">6 Real-World Programs</a>
+
+        <div class="nav-section-title">Application</div>
+        <a href="#personal" class="nav-link">Positioning Yourself</a>
+        <a href="#six-steps" class="nav-link">Six Steps to Success</a>
+        <a href="#mindset" class="nav-link">Playing the Game</a>
+        <a href="#principles" class="nav-link">20 Core Principles</a>
+    </div>
+</nav>
+
+<!-- ────────────── MAIN ────────────── -->
+<main class="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+    <div class="hero-eyebrow">The Definitive Guide to Marketing Strategy</div>
+    <h1 class="hero-title">Positioning:<br>The Battle for Your Mind</h1>
+    <p class="hero-subtitle">How to be seen and heard in the overcommunicated society — the classic framework that changed marketing forever.</p>
+    <p class="hero-authors">By <span>Al Ries</span> &amp; <span>Jack Trout</span> &nbsp;·&nbsp; Originally published 1981, updated 2001</p>
+
+    <div class="hero-core-idea">
+        <h3>The Central Insight</h3>
+        <p>Positioning is not what you do to a product. <strong>Positioning is what you do to the mind of the prospect.</strong> In our overcommunicated society, the only way to cut through the noise is to create a simple, compelling position that sticks in the mind — and to own that position before anyone else does. The battlefield is between six inches of gray matter, not on a shelf.</p>
+    </div>
+</section>
+
+<!-- ── 1. WHAT IS POSITIONING ── -->
+<section class="section fade-in" id="what-is">
+    <div class="section-eyebrow">Chapter 1 · Foundation</div>
+    <h2 class="section-title">What Is Positioning?</h2>
+    <p class="section-intro">Positioning starts with a product but its real work happens entirely in the mind. The concept shattered advertising's self-centered creative tradition, replacing "product talk" with prospect-centered reality.</p>
+
+    <div class="pull-quote">
+        <p>"Positioning is the first body of thought that comes to grips with the problems of getting heard in our overcommunicated society."</p>
+        <cite>— Al Ries &amp; Jack Trout</cite>
+    </div>
+
+    <div class="two-col">
+        <div>
+            <h3>The Definition</h3>
+            <p>Positioning starts with a product — a piece of merchandise, a service, a company, an institution, or even a person. But positioning is <em>not</em> what you do to a product.</p>
+            <p>Positioning is what you do to the mind of the prospect. Changes made in the name, the price, and the package are not changes in the product — they are cosmetic changes done to secure a position in the prospect's mind.</p>
+            <p>A newer definition: <strong>"How you differentiate yourself in the mind of your prospect."</strong></p>
+        </div>
+        <div>
+            <h3>The Three Eras of Advertising</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-period">1950s — Product Era</div>
+                    <div class="timeline-title">The Unique Selling Proposition</div>
+                    <div class="timeline-body">Ads focused on the product's one differentiating feature (Rosser Reeves's USP). Worked until me-too products made features indistinguishable.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-period">1960s — Image Era</div>
+                    <div class="timeline-title">Reputation Over Features</div>
+                    <div class="timeline-body">David Ogilvy's era: "Every ad is a long-term investment in the image of a brand." But as every company fought for image, noise overwhelmed each voice.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-period">1970s → Today — Positioning Era</div>
+                    <div class="timeline-title">Strategy Is King</div>
+                    <div class="timeline-body">In an overcommunicated world, a company must create a position in the prospect's mind that accounts for its own strengths, weaknesses, and competitors.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="principle-box">
+        <h4>The Basic Approach</h4>
+        <p>The basic approach of positioning is <strong>not</strong> to create something new and different, but to manipulate what's already in the mind — to retie the connections that already exist. The mind accepts only new information that matches its current state. Everything else is filtered out. You don't create a position. You find one.</p>
+    </div>
+</section>
+
+<!-- ── 2. OVERCOMMUNICATED SOCIETY ── -->
+<section class="section fade-in" id="overcommunicated">
+    <div class="section-eyebrow">Chapters 1–2 · The Problem</div>
+    <h2 class="section-title">The Overcommunicated Society</h2>
+    <p class="section-intro">Why does communication fail so spectacularly? Because we live in a world drowning in messages. The mind has built its own defense system — and most advertising never gets past the gate.</p>
+
+    <div class="stats-row">
+        <div class="stat-block">
+            <div class="stat-number">$880</div>
+            <div class="stat-label">Per capita annual ad exposure in the US (2001 figure)</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">40,000</div>
+            <div class="stat-label">Products in the average supermarket</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">200,000</div>
+            <div class="stat-label">Advertising messages a person encounters per year</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">7</div>
+            <div class="stat-label">Max brands the average person recalls per product category</div>
+        </div>
+    </div>
+
+    <div class="pull-quote">
+        <p>"The average mind is a dripping sponge that can only soak up more information at the expense of what's already there."</p>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">Problem 1</div>
+            <h3 class="card-title">The Media Explosion</h3>
+            <p class="card-body">Television, radio, magazines, newspapers, outdoor, digital — each new medium added without replacing old ones. Every new channel created more noise without increasing the mind's capacity to receive it.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Problem 2</div>
+            <h3 class="card-title">The Product Explosion</h3>
+            <p class="card-body">The average person's speaking vocabulary is 8,000 words. They must also track 40,000 supermarket products, 450,000 active trademarks, and millions of company names. The mind simply cannot cope.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Problem 3</div>
+            <h3 class="card-title">The Mind's Defense</h3>
+            <p class="card-body">To protect itself, the mind rejects information that doesn't "compute." It accepts only that which matches prior knowledge or experience. Attempting to change a made-up mind is the road to advertising disaster.</p>
+        </div>
+    </div>
+
+    <hr class="sep">
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:1rem;">The Solution: Oversimplify</h3>
+    <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;">In communication, as in architecture, <strong style="color:var(--text);">less is more</strong>. You must sharpen your message to cut into the mind — jettison the ambiguities, simplify, and then simplify some more.</p>
+
+    <div class="principle-box">
+        <h4>Own a Word in the Mind</h4>
+        <p>The best positioning leads to owning a single word in the prospect's mind:</p>
+        <ul>
+            <li><strong>Volvo</strong> owns "safety"</li>
+            <li><strong>BMW</strong> owns "driving"</li>
+            <li><strong>FedEx</strong> owns "overnight"</li>
+            <li><strong>Crest</strong> owns "cavities"</li>
+            <li><strong>Coca-Cola</strong> owns "real thing"</li>
+        </ul>
+        <p style="margin-top:0.75rem;font-style:italic;">Once you own a word in the mind, you have to use it or lose it.</p>
+    </div>
+</section>
+
+<!-- ── 3. GETTING INTO THE MIND ── -->
+<section class="section fade-in" id="getting-in">
+    <div class="section-eyebrow">Chapter 3 · Strategy</div>
+    <h2 class="section-title">Getting Into the Mind</h2>
+    <p class="section-intro">There is an easy way and a hard way. Most companies choose the hard way — or give up entirely — because they don't understand the fundamental law of mental real estate.</p>
+
+    <div class="comparison">
+        <div class="comparison-col">
+            <div class="comparison-header good">✓ The Easy Way: Be First</div>
+            <div class="comparison-items">
+                <div class="comparison-item">Charles Lindbergh — first to fly solo across the Atlantic (everyone knows)</div>
+                <div class="comparison-item">Neil Armstrong — first to walk on the moon (everyone knows)</div>
+                <div class="comparison-item">Your first love (everyone remembers)</div>
+                <div class="comparison-item">Kodak, IBM, Xerox, Hertz — all first in their categories</div>
+                <div class="comparison-item">The first brand earns 2× the long-term share of #2</div>
+            </div>
+        </div>
+        <div class="comparison-col">
+            <div class="comparison-header bad">✗ The Hard Way: Being Second</div>
+            <div class="comparison-items">
+                <div class="comparison-item">Bert Hinkler — second to fly solo across the Atlantic (who?)</div>
+                <div class="comparison-item">Second person on the moon (can you name them?)</div>
+                <div class="comparison-item">Second-largest cargo port in the US: Hampton Roads, VA (did you know?)</div>
+                <div class="comparison-item">Second can survive, but #3 and #4 have the most serious problems</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-quote">
+        <p>"It's better to be first than to be better. If you can't be first in a category, set up a new category you can be first in."</p>
+        <cite>— The two most powerful positioning ideas in the book</cite>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">The Amelia Earhart Strategy</div>
+            <h3 class="card-title">Create a New Category</h3>
+            <p class="card-body">Amelia Earhart got famous not for being the third person to fly the Atlantic solo — but for being the <em>first woman</em>. She created a new category she could be first in. You don't have to be first in the market. You have to be first in the mind.</p>
+            <div class="card-example"><strong>Michelob:</strong> Not the first high-priced beer (Heineken was), but the first high-priced <em>domestic</em> beer. New category, first position, massive success.</div>
+        </div>
+        <div class="card">
+            <div class="card-number">The Amerigo Principle</div>
+            <h3 class="card-title">Position It, Then Publicize It</h3>
+            <p class="card-body">Columbus discovered America but Amerigo Vespucci got the continent named after him. He positioned the New World as a separate continent (not Asia) and wrote five widely-translated letters about his discoveries. Columbus died in jail.</p>
+            <div class="card-example"><strong>Lesson:</strong> Discovery means nothing without clear positioning and relentless communication. The credit goes to whoever frames the story.</div>
+        </div>
+        <div class="card">
+            <div class="card-number">The Imprinting Analogy</div>
+            <h3 class="card-title">First Impressions Are Indelible</h3>
+            <p class="card-body">Animal biologists call it "imprinting" — a newborn duck bonds permanently with the first creature it sees. In business, the first brand to occupy a position gets imprinted in the prospect's mind and holds that position against enormous competitive pressure for years.</p>
+        </div>
+    </div>
+
+    <div class="principle-box">
+        <h4>What Made the Great Brands Great</h4>
+        <p>In 1923, researchers identified the leading brands across 25 product categories. By 2000, 77 years later, 19 of those 25 brands were still the leaders. Leadership is not a product of great marketing skill so much as being first in the mind and then defending that position consistently.</p>
+    </div>
+</section>
+
+<!-- ── 4. MENTAL LADDERS ── -->
+<section class="section fade-in" id="ladders">
+    <div class="section-eyebrow">Chapter 4 · The Framework</div>
+    <h2 class="section-title">Those Little Ladders in Your Head</h2>
+    <p class="section-intro">The mind copes with complexity by ranking everything on mental ladders. Each product category has its own ladder. The brand on the top rung wins disproportionately. Understanding this structure is the key to all positioning strategy.</p>
+
+    <div class="two-col">
+        <div>
+            <h3>The Rent-A-Car Ladder</h3>
+            <div class="ladder">
+                <div class="ladder-rung">
+                    <span class="ladder-rank">#1</span>
+                    <span class="ladder-brand">Hertz</span>
+                    <span class="ladder-badge" style="color:var(--gold);">THE LEADER</span>
+                </div>
+                <div class="ladder-rung">
+                    <span class="ladder-rank">#2</span>
+                    <span class="ladder-brand">Avis</span>
+                    <span class="ladder-badge">"We try harder"</span>
+                </div>
+                <div class="ladder-rung">
+                    <span class="ladder-rank">#3</span>
+                    <span class="ladder-brand">National</span>
+                </div>
+            </div>
+            <p style="margin-top:1rem;font-size:0.82rem;color:var(--text-muted);">Most prospects have this exact ladder — even customers who regularly rent from Avis. Understanding where your brand sits on the ladder is the first step in any positioning program.</p>
+        </div>
+        <div>
+            <h3>The Cola Ladder (with "Uncola")</h3>
+            <div class="ladder">
+                <div class="ladder-rung">
+                    <span class="ladder-rank">#1</span>
+                    <span class="ladder-brand">Coke</span>
+                </div>
+                <div class="ladder-rung">
+                    <span class="ladder-rank">#2</span>
+                    <span class="ladder-brand">Pepsi</span>
+                </div>
+                <div class="ladder-rung">
+                    <span class="ladder-rank">#3</span>
+                    <span class="ladder-brand">7-Up</span>
+                    <span class="ladder-badge" style="color:var(--accent-blue);">The Uncola</span>
+                </div>
+            </div>
+            <p style="margin-top:1rem;font-size:0.82rem;color:var(--text-muted);">7-Up positioned itself on the cola ladder by acknowledging what it wasn't. Sales rose from $87.7M to $190M+ after the "uncola" campaign — by relating to what was already in the mind rather than fighting it.</p>
+        </div>
+    </div>
+
+    <div class="principle-box">
+        <h4>The Rule of Seven</h4>
+        <p>Harvard psychologist Dr. George A. Miller found the average human mind cannot deal with more than seven units at once. Ask someone to name brands in a category — rarely more than seven. For low-interest products, one or two. This is why the top rung is so valuable, and why positions 4–7 are so precarious. There is no room for everyone.</p>
+    </div>
+
+    <div class="principle-box">
+        <h4>Position New Products Against the Old</h4>
+        <p>The mind has no room for what's new and different unless it's related to the old. The first automobile was called a "horseless carriage" — this let the public position the concept against the existing mode of transportation. "Offtrack" betting, "lead-free" gasoline, "tubeless" tires — all new concepts positioned against familiar ones.</p>
+    </div>
+
+    <hr class="sep">
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">The F.W.M.T.S. Trap</h3>
+    <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">"Forgot What Made Them Successful" — the most common failure mode for brands that once had brilliant positioning:</p>
+    <ul class="styled-list">
+        <li>Avis abandoned "We're No. 2, we try harder" and ran ads saying "Avis is going to be No. 1" — advertising aspirations instead of a real position</li>
+        <li>7-Up replaced "The Uncola" with "America is turning 7-Up" — the same mistake. America was not turning 7-Up.</li>
+        <li>A position is built on long-term commitment. Walking away from what made you successful is almost always a fatal error.</li>
+    </ul>
+</section>
+
+<!-- ── 5. CAN'T GET THERE ── -->
+<section class="section fade-in" id="cant-get-there">
+    <div class="section-eyebrow">Chapter 5 · Reality Check</div>
+    <h2 class="section-title">You Can't Get There From Here</h2>
+    <p class="section-intro">Some positions simply cannot be taken, no matter how much money you pour in. Recognizing this is not failure — it is wisdom. The story of IBM vs. RCA is the defining lesson.</p>
+
+    <div class="pull-quote">
+        <p>"A company has no hope of making progress head-on against the position IBM has established in computers."</p>
+        <cite>— Written in 1969. Proven dramatically right in 1971 when RCA wrote off $250 million.</cite>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-red">Warning Story</span></div>
+        <h3 class="case-study-title">RCA vs. IBM: The $250 Million Lesson</h3>
+        <p class="case-study-body">In 1969, Ries and Trout wrote that no company could take on IBM head-on in computers. RCA ignored this and launched a full-speed assault — their chairman predicting a "firm No. 2 position" by year's end. Headlines at the time: "RCA fires a broadside at No. 1." "RCA goes head-to-head with IBM." One year later: "$250 million disaster hits RCA." GE had already sold its computer operations to Honeywell for the same reason. Two major companies destroyed billions of dollars of shareholder value learning a lesson that should have been obvious.</p>
+        <div class="case-study-insight">The lesson: "Fight fire with fire" is poor strategy. As Howard Gossage said, "That's silly. You fight fire with water." Find the positions that are actually available rather than attacking positions that aren't.</div>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">What Worked Instead</div>
+            <h3 class="card-title">Digital Equipment Corporation</h3>
+            <p class="card-body">While the "Seven Dwarfs" fought IBM head-on in mainframes, DEC created an entirely new category: the minicomputer. They became the second-largest computer company in the world by being first in a category IBM didn't own. The Amelia Earhart strategy in action.</p>
+            <div class="card-example"><strong>Principle:</strong> It's better to be a big fish in a small pond — then grow the pond.</div>
+        </div>
+        <div class="card">
+            <div class="card-number">The Leadership Lesson</div>
+            <h3 class="card-title">Jones vs. Smith at General Electric</h3>
+            <p class="card-body">Two executives competed for GE's top job. Smith fought to make GE's computer division work. Jones recognized it was a losing battle and recommended exiting entirely. Jones became CEO. Smith wound up at International Paper.</p>
+            <div class="card-example"><strong>Principle:</strong> Knowing when "you can't get there from here" is itself a leadership quality — not a failure of nerve.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── 6. LEADER ── -->
+<section class="section fade-in" id="leader">
+    <div class="section-eyebrow">Chapter 6 · Strategy for the Top</div>
+    <h2 class="section-title">Positioning of a Leader</h2>
+    <p class="section-intro">Being first is the best way to become a leader. Staying first requires specific strategies that are different from what followers must do. Leaders have tools unavailable to everyone else.</p>
+
+    <div class="stats-row">
+        <div class="stat-block">
+            <div class="stat-number">2×</div>
+            <div class="stat-label">Long-term market share vs. the #2 brand (historical average)</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">19 of 25</div>
+            <div class="stat-label">Leading brands from 1923 still leading in 2000 — 77 years later</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">6:4</div>
+            <div class="stat-label">Coca-Cola vs. Pepsi bottles sold — despite Pepsi's decades of attacks</div>
+        </div>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">Strategy 1</div>
+            <h3 class="card-title">"The Real Thing"</h3>
+            <p class="card-body">Every product that gets into the mind first is perceived as the real thing. Reinforce this constantly. Coca-Cola's "It's the real thing" simultaneously positioned every competitor as an imitation — perhaps the most powerful advertising slogan ever invented. Use it or lose it.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Strategy 2</div>
+            <h3 class="card-title">Cover All Bets</h3>
+            <p class="card-body">When a competitor introduces a promising new concept, cover it immediately. Don't wait. GM bought a Wankel engine license as "$50M cheap insurance" on a $66B business. J&amp;J cut Tylenol's price before Datril's attack advertising even ran — and crushed the threat.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Strategy 3</div>
+            <h3 class="card-title">Multibrand Strategy</h3>
+            <p class="card-body">P&amp;G's genius: each brand uniquely positioned for one specific position. Tide, Cheer, Bold, Ivory. When new categories emerge, launch new brands. With fewer brands (51 vs. Colgate's 65), P&amp;G does twice the business and three times the profit.</p>
+        </div>
+    </div>
+
+    <div class="warning-box">
+        <h4>What Leaders Should NOT Do</h4>
+        <p>Don't run ads that say "We're No. 1." Either the prospect knows it (and wonders why you're insecure enough to say it), or they don't (and wonder why they don't know). The power of a product comes from the position it holds in the prospect's mind — not from the size of the company. Coca-Cola's power is in the cola position. Outside that position, the Coca-Cola Company starts at zero like everyone else.</p>
+    </div>
+
+    <div class="principle-box">
+        <h4>The Instability of Equality</h4>
+        <p>When two brands are running neck-and-neck, that situation is inherently unstable. Consumers are like chickens — they are much more comfortable with a clear pecking order. Sooner or later one brand gets the upper hand and opens a lead that reaches a stable ratio. The critical time to pour in resources is when the battle is still undecided. Winning the sales leadership in a single year often clinches the victory for decades.</p>
+    </div>
+</section>
+
+<!-- ── 7. FOLLOWER ── -->
+<section class="section fade-in" id="follower">
+    <div class="section-eyebrow">Chapter 7 · Strategy for #2 and Beyond</div>
+    <h2 class="section-title">Positioning of a Follower</h2>
+    <p class="section-intro">What works for a leader does not work for a follower. The follower's challenge is to find a hole in the mind — a "creneau" — that the leader hasn't occupied. This requires going against conventional wisdom.</p>
+
+    <div class="pull-quote">
+        <p>"Cherchez le creneau. Look for the hole — and then fill it. That advice goes against the 'bigger and better' philosophy ingrained in the American spirit."</p>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1.25rem;">Types of Creneaus (Holes in the Mind)</h3>
+
+    <div class="examples-grid">
+        <div class="example-card">
+            <h5>🔵 Size Creneau</h5>
+            <p>Volkswagen found an open position in "small" when Detroit was fixated on bigger. "Think small" — the most famous ad ever. Sony used the same approach in television.</p>
+        </div>
+        <div class="example-card">
+            <h5>💰 High-Price Creneau</h5>
+            <p>Michelob ("First class is Michelob"), Chivas Regal, Joy perfume ("costliest in the world"), Piaget watches. Works when you get there first with a valid product story.</p>
+        </div>
+        <div class="example-card">
+            <h5>🏷️ Low-Price Creneau</h5>
+            <p>Often right for new product categories where consumers are uncertain. Works especially well when established leaders charge premium prices for products people are unfamiliar with.</p>
+        </div>
+        <div class="example-card">
+            <h5>♂ Sex / Gender Creneau</h5>
+            <p>Marlboro found the masculine creneau in a sea of unisex cigarettes. Virginia Slims went feminine. Charlie perfume used a masculine name — and became the world's largest-selling perfume.</p>
+        </div>
+        <div class="example-card">
+            <h5>🕐 Time-of-Day Creneau</h5>
+            <p>Nyquil: the first nighttime cold remedy. By owning a specific time of use, it sidestepped direct competition with every daytime remedy and built a dominant position.</p>
+        </div>
+        <div class="example-card">
+            <h5>📦 Distribution Creneau</h5>
+            <p>L'eggs positioned itself as the first hosiery brand in supermarkets. A distribution channel no hosiery company owned. It became the market leader.</p>
+        </div>
+        <div class="example-card">
+            <h5>👤 Heavy-User Creneau</h5>
+            <p>Schaefer beer: "The one beer to have when you're having more than one" — owned the heavy drinker position in NYC when five major breweries competed there.</p>
+        </div>
+        <div class="example-card">
+            <h5>⬆ Against Position</h5>
+            <p>Avis's immortal "We try harder" — the most famous example of the "against" position. Not #1, but explicitly #2, which generated enormous sympathy and credibility.</p>
+        </div>
+    </div>
+
+    <div class="warning-box">
+        <h4>Beware: The Everybody Trap</h4>
+        <p>Some companies reject the creneau concept because they don't want to "limit" their appeal. But in today's marketplace, trying to be everything to everyone means you end up being nothing to no one. Rheingold beer tried to appeal to every ethnic group in New York with separate commercials — and alienated all of them. Meanwhile, Schaefer owned one specific position and dominated.</p>
+    </div>
+
+    <div class="warning-box">
+        <h4>Beware: The Me-Too Trap</h4>
+        <p>Don't copy the leader and just claim to be "better." The prospect won't believe you. Most me-too products fail because they accent "better" rather than "speed" — they spend time improving the product instead of being first to establish a distinctive position. Being better than the competition is not enough. Being first in the mind is everything.</p>
+    </div>
+</section>
+
+<!-- ── 8. REPOSITIONING ── -->
+<section class="section fade-in" id="repositioning">
+    <div class="section-eyebrow">Chapter 8 · Offensive Strategy</div>
+    <h2 class="section-title">Repositioning the Competition</h2>
+    <p class="section-intro">When there are no open creneaus, create one — by repositioning the brands that currently occupy positions in the mind. This is not comparative advertising. It's a surgical strike on a competitor's position.</p>
+
+    <div class="pull-quote">
+        <p>"To move a new idea into the mind, you must first move an old one out. Once an old idea is overturned, selling the new one is often ludicrously simple. People will actively search for the new idea to fill the void."</p>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-gold">Classic Example</span></div>
+        <h3 class="case-study-title">Tylenol Repositions Aspirin</h3>
+        <p class="case-study-body">"For the millions who should not take aspirin… If your stomach is easily upset, or you have an ulcer, or you suffer from asthma, allergies or iron-deficiency anemia, it would make good sense to check with your doctor before you take aspirin. Aspirin can irritate the stomach lining, trigger asthmatic or allergic reactions, cause small amounts of hidden gastrointestinal bleeding. Fortunately, there is Tylenol." — Sixty words of copy before any mention of the advertiser's own product. Tylenol went on to become the #1 analgesic brand. Against aspirin. Against an institution. Amazing.</p>
+        <div class="case-study-insight">Key insight: A repositioning campaign changes what the prospect thinks about the <em>competitor</em>, not about you. Once the old idea is unseated, prospects will search for a new idea to fill the void — and you're right there.</div>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">Example 2</div>
+            <h3 class="card-title">Stolichnaya vs. American Vodkas</h3>
+            <p class="card-body">"Most American vodkas seem Russian. Samovar: Made in Schenley, PA. Smirnoff: Made in Hartford, CT. Wolfschmidt: Made in Lawrenceburg, IN. Stolichnaya is different. It is Russian." Not a claim about quality — just a reality check on competitors. Sales soared.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Example 3</div>
+            <h3 class="card-title">Royal Doulton vs. Lenox China</h3>
+            <p class="card-body">"The china of Stoke-on-Trent, England vs. Lenox. The china of Pomona, New Jersey." Prospects thought Lenox was English — the name sounded it. One ad revealing its New Jersey origin shifted perception and gained Royal Doulton 6 points of market share.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Example 4</div>
+            <h3 class="card-title">Scope vs. Listerine</h3>
+            <p class="card-body">Two words repositioned the category leader: "Medicine breath." Listerine's own theme — "the taste you hate, twice a day" — was turned against it. Scope carved position #2 out of the mouthwash market and held it firmly.</p>
+        </div>
+    </div>
+
+    <div class="principle-box">
+        <h4>Repositioning vs. Comparative Advertising</h4>
+        <p>These are not the same thing. Comparative advertising ("We're better than our competitors") isn't repositioning — it's just boasting. The prospect's reaction: "If you're so smart, how come you're not rich?" Effective repositioning requires changing what the prospect thinks about the competitor. Simply claiming superiority reinforces the existing order rather than disrupting it.</p>
+    </div>
+</section>
+
+<!-- ── 9. NAMING ── -->
+<section class="section fade-in" id="naming">
+    <div class="section-eyebrow">Chapter 9 · The Name Game</div>
+    <h2 class="section-title">The Power of the Name</h2>
+    <p class="section-intro">The name is the hook that hangs the brand on the product ladder in the prospect's mind. In the positioning era, the single most important marketing decision is what to name the product. Shakespeare was wrong: a rose by any other name would not smell as sweet.</p>
+
+    <div class="pull-quote">
+        <p>"Would 'Alfred' have sold as well as 'Charlie' (the perfume)? Don't bet on it. Hog Island in the Caribbean was going nowhere until they changed its name to Paradise Island."</p>
+    </div>
+
+    <div class="two-col">
+        <div>
+            <h3>Names That Begin the Positioning</h3>
+            <ul class="styled-list">
+                <li><strong>Head &amp; Shoulders</strong> — shampoo: communicates the benefit immediately</li>
+                <li><strong>DieHard</strong> — battery: implies longevity and toughness</li>
+                <li><strong>Intensive Care</strong> — hand lotion: medical authority and urgency</li>
+                <li><strong>Close-Up</strong> — toothpaste: implies fresh breath and intimacy</li>
+                <li><strong>Shake 'n Bake</strong> — cooking product: describes the process itself</li>
+                <li><strong>Edge</strong> — shaving cream: precision and performance</li>
+                <li><strong>People</strong> — magazine: so obviously right it's brilliant</li>
+                <li><strong>Bubble Yum</strong> — bubble gum: sensory delight in two words</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Names That Failed and Why</h3>
+            <ul class="styled-list">
+                <li><strong>Edsel</strong> — perceived as a "loser" name before the car launched; contributed to disaster</li>
+                <li><strong>Lite beer</strong> — too generic; became industry-wide rather than ownable by Miller</li>
+                <li><strong>Frost 8/80</strong> — "dry white whisky" positioned against itself (competing with vodka, gin, rum)</li>
+                <li><strong>Mennen E</strong> — vitamin E as deodorant? Sounds bizarre and unbelievable</li>
+                <li><strong>Maxim</strong> — missed the freeze-dried coffee category it invented (lost to Taster's Choice)</li>
+                <li><strong>XD-12</strong> — inside engineering joke with zero prospect meaning</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="principle-box">
+        <h4>The Generic Sweet Spot</h4>
+        <p>Choosing a name is like driving a racing car — you must take names that are almost, but not quite, generic. Too generic and you lose trademark protection. Too abstract and you lose communicative power. The goal: a name strong enough to block competitors from muscling into your territory. <em>People</em> magazine is nearly generic for gossip — and it's a runaway success. <em>Us</em>, the copycat, always struggled.</p>
+    </div>
+
+    <div class="principle-box">
+        <h4>The Mind Works by Ear, Not by Eye</h4>
+        <p>Business executives swim in paper, but the mind works aurally. Before you can file a word in the mind, you must hear it. This is why names, headlines, slogans, and themes should all be evaluated for their sound — even when used only in print. Hubert and Elmer don't look bad on a page. They only sound bad. That's the filter that matters.</p>
+    </div>
+
+    <div class="principle-box">
+        <h4>When a Meaningless Name Works</h4>
+        <p>Coca-Cola, Kodak, and Xerox are all "meaningless" names that became enormously powerful. But here's the key: they were <em>first</em>. The first company into the mind with a truly new product will become famous regardless of the name. Only when you are first with a product millions will want can you afford the luxury of a coinaged, meaningless name. Otherwise, use descriptive names that do positioning work from day one.</p>
+    </div>
+</section>
+
+<!-- ── 10. NO-NAME TRAP ── -->
+<section class="section fade-in" id="no-name">
+    <div class="section-eyebrow">Chapter 10 · The Initials Trap</div>
+    <h2 class="section-title">The No-Name Trap</h2>
+    <p class="section-intro">Companies fall in love with their initials. They see IBM and think: "That could be us." But IBM became famous as International Business Machines first — the initials only work because the name is already burned into millions of minds. The shortcut destroys the bridge that makes the shortcut work.</p>
+
+    <div class="pull-quote">
+        <p>"The mind works by ear. Initials that look shorter often aren't shorter in syllables — and the shortcut destroys the meaning that drives recognition."</p>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">The Phonetic Test</div>
+            <h3 class="card-title">When Initials Work</h3>
+            <p class="card-body">Initials work only when there's a phonetic advantage AND the full name is already famous. "GE" is two syllables vs. "General Electric" at six. But "WU" for Western Union? Both are three syllables — no advantage. Los Angeles → "L.A." (four syllables → two). But New York → "N.Y." (two syllables → two) — so people say New York.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">The Cause/Effect Error</div>
+            <h3 class="card-title">The Classic Confusion</h3>
+            <p class="card-body">IBM became rich and famous (the cause) — so everyone recognizes its initials (the effect). Companies try to reverse this: "If we use initials like IBM, we'll become famous like IBM." It doesn't work. You can't become rich by buying corporate jets first. Success must precede the symbols of success.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">The Survey Result</div>
+            <h3 class="card-title">The Numbers</h3>
+            <p class="card-body">Survey of Business Week subscribers: average awareness of "initial" companies was 49%. Average awareness of matched "name" companies was 68% — 19 percentage points higher. And the initial companies in the sample include well-known ones like RCA and CBS that earned their fame under their full names first.</p>
+        </div>
+    </div>
+
+    <div class="warning-box">
+        <h4>Corporate Suicide by Initials — Real Examples</h4>
+        <p><strong>General Aniline &amp; Film → GAF</strong> (the acronym literally means "clumsy error" — a gaffe in more ways than one). <strong>Trans World Airlines → TWA</strong> (phonetically longer than "Trans World" — two syllables — yet they abandoned the better name). <strong>Corn Products Company → CPC International</strong> (no phonetic advantage; people still said "Corn Products"). <strong>United Shoe Machinery → USM Corporation</strong> (nobody knew what USM stood for). Every one of these companies weakened their market position by abandoning communicative names for anonymous letters.</p>
+    </div>
+</section>
+
+<!-- ── 11. FREE-RIDE TRAP ── -->
+<section class="section fade-in" id="free-ride">
+    <div class="section-eyebrow">Chapter 11 · The Brand Piggyback Trap</div>
+    <h2 class="section-title">The Free-Ride Trap</h2>
+    <p class="section-intro">The logic seems airtight: "We already spend $20 million a year on the Alka-Seltzer name — let's put that on our new cold remedy." The money looks free. But the ride usually goes off a cliff.</p>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-red">Failure Case</span></div>
+        <h3 class="case-study-title">Alka-Seltzer Plus</h3>
+        <p class="case-study-body">The logic was perfect: leverage $20M/year already spent on the Alka-Seltzer name. But instead of eating into Dristan and Contac's market, Alka-Seltzer Plus turned around and cannibalized Alka-Seltzer's own antacid business. Consumers thought it was an improved form of Alka-Seltzer rather than a new cold remedy. Every redesign made the "Plus" bigger and the "Alka-Seltzer" smaller — an admission that the name was the problem all along.</p>
+        <div class="case-study-insight">Key insight: When a product shares a name with an established brand, it inherits that brand's position — including all its limitations. It does not create a new position; it muddies the old one.</div>
+    </div>
+
+    <div class="comparison">
+        <div class="comparison-col">
+            <div class="comparison-header good">✓ Procter &amp; Gamble's Approach</div>
+            <div class="comparison-items">
+                <div class="comparison-item">Tide, Cheer, Bold — separately positioned laundry brands</div>
+                <div class="comparison-item">Joy, Cascade — dish products with their own identities</div>
+                <div class="comparison-item">Pampers — not "Ivory Baby Diapers"</div>
+                <div class="comparison-item">51 brands, 2× Colgate's business volume</div>
+                <div class="comparison-item">3× Colgate's profit margin</div>
+            </div>
+        </div>
+        <div class="comparison-col">
+            <div class="comparison-header bad">✗ The House-Name Approach</div>
+            <div class="comparison-items">
+                <div class="comparison-item">Colgate Dental Cream, Colgate 100, Colgate Instant Shave...</div>
+                <div class="comparison-item">Palmolive Liquid, Palmolive Shaving, Palmolive Soap...</div>
+                <div class="comparison-item">65 brands, half the business, one-third the profit</div>
+                <div class="comparison-item">Each new product dilutes the original position</div>
+                <div class="comparison-item">One name carrying incompatible positions = confusion</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── 12. LINE EXTENSION TRAP ── -->
+<section class="section fade-in" id="line-extension">
+    <div class="section-eyebrow">Chapter 12 · The Marketing Disease of the Decade</div>
+    <h2 class="section-title">The Line-Extension Trap</h2>
+    <p class="section-intro">Line extension — taking an established brand name and putting it on a new product — has swept through the marketing world like Sherman through Georgia. The logic is overwhelming. The results are not.</p>
+
+    <div class="pull-quote">
+        <p>"Line extension is the marketing sickness of the past decade. The logic is on the side of line extension. Truth, unfortunately, is not."</p>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1.25rem;">Classic Line-Extension Failures</h3>
+
+    <div class="examples-grid">
+        <div class="example-card">
+            <h5>Protein 21 Shampoo</h5>
+            <p>Built to 13% market share. Then: hairspray (regular, extra hold, scented, unscented), conditioner, concentrate, Protein 29 for men. Market share collapsed from 13% to 2%.</p>
+        </div>
+        <div class="example-card">
+            <h5>Scott Paper Products</h5>
+            <p>ScotTowels, ScotTissue, Scotties, Scotkins, BabyScott. On a shopping list, "Scott" means nothing specific. Meanwhile Charmin, Kleenex, and Bounty dominated by meaning one clear thing.</p>
+        </div>
+        <div class="example-card">
+            <h5>Bayer → Non-Aspirin</h5>
+            <p>If Bayer IS aspirin in the mind, how can it also be non-aspirin? Each extension undercuts the brand's aspirin position. Total Bayer market share declined year after year.</p>
+        </div>
+        <div class="example-card">
+            <h5>Life Savers Gum</h5>
+            <p>Life Savers means "the candy with the hole." Gum never exceeded a few percent of the market. Quietly killed in 1978. Meanwhile Life Savers' own Bubble Yum — a new, separate brand — became a runaway success.</p>
+        </div>
+        <div class="example-card">
+            <h5>Eveready Alkaline</h5>
+            <p>Duracell introduced the alkaline category with a new name. Eveready extended their existing brand onto it. Duracell dominates. Eveready wound up copying Duracell's packaging to survive.</p>
+        </div>
+        <div class="example-card">
+            <h5>Pall Mall's Fatal Extension</h5>
+            <p>Pall Mall was first with 100mm cigarettes — but called them "Pall Mall Gold." Benson &amp; Hedges launched with a pure 100mm identity and owned the position. Pall Mall fell from #1 to irrelevance.</p>
+        </div>
+    </div>
+
+    <hr class="sep">
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">The Teeter-Totter Principle</h3>
+    <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">One name cannot stand for two distinctly different products. When one rises, the other falls:</p>
+    <ul class="styled-list">
+        <li>Xerox meant "copier." When Xerox meant "computer" too, it meant neither very convincingly. They wrote off $84.4 million.</li>
+        <li>Heinz owned pickles. Then Heinz conquered ketchup. Vlasic took the pickle position. The teeter-totter moved.</li>
+        <li>The stronger the original brand position, the more line extension damages it — the exact opposite of what companies expect.</li>
+    </ul>
+
+    <div class="warning-box">
+        <h4>The Shopping List Test</h4>
+        <p>Write on a shopping list: "Kleenex, Crest, Listerine, Life Savers, Bayer, Dial." Your spouse returns with tissue, toothpaste, mouthwash, candy, aspirin, soap — every time. Now write: "Heinz, Scott, Protein 21, Kraft." Which Heinz? Which Scott? Which Kraft? Line extension has turned names that should be specific hooks into vague labels that could mean anything.</p>
+    </div>
+</section>
+
+<!-- ── 13. WHEN LINE EXTENSION WORKS ── -->
+<section class="section fade-in" id="when-works">
+    <div class="section-eyebrow">Chapter 13 · The Exceptions</div>
+    <h2 class="section-title">When Line Extension Can Work</h2>
+    <p class="section-intro">Line extension isn't always fatal — it's a trap, not an absolute prohibition. Understanding the conditions where it works is as important as understanding the dangers.</p>
+
+    <div class="principle-box">
+        <h4>Short-Term vs. Long-Term</h4>
+        <p>Line extension works like alcohol: stimulant in the short term, depressant in the long term. Initial recognition generates quick sales as retailers stock up. But when reorders don't materialize, the pipeline empties fast. The real damage accumulates silently over years as the brand loses focus and mental position erodes. By the time the damage is visible, it's too late.</p>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin:1.5rem 0 1rem;">The Five Rules: When to Use the House Name</h3>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Expected Volume</h4>
+                <p>Potential major winners should NOT bear the house name — they deserve their own identity to build a separate position. Small-volume products should use the house name (the economics don't support a new name launch).</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Competition</h4>
+                <p>In a vacuum with no strong competition, the house name is fine. In a crowded field with established leaders, you need a new name with a distinct position that can be defended.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Advertising Support</h4>
+                <p>Big-budget brands should NOT bear the house name — you have resources to build a new position. Small-budget brands should — you can't afford to establish a new identity anyway.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Significance</h4>
+                <p>Breakthrough or innovative products should NOT bear the house name — they merit their own identity. Commodity products sold on relationships (chemicals, industrial goods) should use the house name.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Distribution</h4>
+                <p>Off-the-shelf consumer items should NOT bear the house name. Products sold by sales representatives (where the company relationship matters more than the brand) should use it.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="principle-box">
+        <h4>Successful Reverse Extension: Broaden the Concept, Not the Name</h4>
+        <p>Johnson's Baby Shampoo broadened to adult users successfully — same product, same name, same package, only the application changed. Blue Nun white wine expanded beyond fish to meat courses. Arm &amp; Hammer baking soda expanded to refrigerators. The key difference: same product, same core position, expanded application — rather than a diluted name draped over different products.</p>
+    </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section class="section fade-in" id="case-studies">
+    <div class="section-eyebrow">Chapters 14–19 · Real-World Application</div>
+    <h2 class="section-title">Six Real-World Positioning Programs</h2>
+    <p class="section-intro">Positioning strategy is universally applicable — to any entity: a company, a country, a product, a service, a bank, an institution. These six cases demonstrate the framework in practice.</p>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-blue">Company · Chapter 14</span></div>
+        <h3 class="case-study-title">Monsanto: Speaking for the Chemical Industry</h3>
+        <p class="case-study-body">In the 1970s, chemicals were under relentless public attack: "chemicals cause cancer" was the prevailing narrative, driven by daily news coverage. Monsanto had three options: fight defensively, ignore the attack, or do something entirely different. They chose to become the industry leader by being first to speak up. "Without chemicals, life itself would be impossible" — positioning Monsanto as the industry's voice, not a defender. Public approval of chemicals rose from 36% to 42% in under two years. Business Week credited Monsanto with "spearheading" the chemical industry's image recovery, noting that even DuPont followed their lead.</p>
+        <div class="case-study-insight">Principle: To be recognized as the leader of an industry, do what a leader does — speak for the industry. Being first to take a position costs you the role of follower but earns you the role of spokesperson. DuPont spent $4M following Monsanto's lead. Monsanto got the credit.</div>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-blue">Country · Chapter 15</span></div>
+        <h3 class="case-study-title">Belgium: "Five Amsterdams"</h3>
+        <p class="case-study-body">Sabena Belgian World Airlines faced an existential problem: few tourists wanted to visit Belgium. The key insight shifted the frame entirely — don't position the airline, position the country. And don't compare Belgium to Paris or Rome (already top-of-mind for first-time European travelers). Compare it to something seasoned travelers already knew and wanted: Amsterdam. The Michelin Guide listed five three-star Belgian cities vs. one Dutch three-star city (Amsterdam). The resulting ad: "In beautiful Belgium, there are five Amsterdams." It generated an enormous inquiry response and an angry phone call from the Dutch Minister of Tourism.</p>
+        <div class="case-study-insight">Principle: Start with a strongly held perception that already exists — in this case Amsterdam's reputation — then relate your position to it. Credibility borrowed from a trusted third party (Michelin) makes the claim bulletproof. The prospect doesn't need to be convinced; the proof already exists in their minds.</div>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-blue">Product · Chapter 16</span></div>
+        <h3 class="case-study-title">Milk Duds: The Long-Lasting Candy Bar</h3>
+        <p class="case-study-body">Milk Duds had almost no advertising budget compared to Hershey, Nestlé, Mounds, and Snickers. Fighting them head-on was not just difficult — it was impossible. The insight came from listening to 10-year-olds: "A candy bar just doesn't last very long." Kids felt ripped off by shrinking candy bars. Milk Duds' 15 individual chocolate-covered caramels could last far longer than any bar — and the caramel would cement your jaw shut if you tried to rush it. The campaign: "America's long-lasting alternative to the candy bar." Sales reversed a downward trend, and the company sold more Milk Duds than ever in its history.</p>
+        <div class="case-study-insight">Principle: The solution to a positioning problem is found in the prospect's mind, not in the product. The millions of dollars competitors spent advertising candy bars became the foundation that made Milk Duds' repositioning possible.</div>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-blue">Service · Chapter 17</span></div>
+        <h3 class="case-study-title">Mailgram: The Low-Cost Telegram</h3>
+        <p class="case-study-body">Western Union's new electronic mail service had to be positioned. Option A: "The high-speed letter" (vs. postal service). Option B: "The low-cost telegram" (vs. Western Union's own telegram, at 3× the price). Logic said avoid Option B — why cannibalize your own business? The test results were stark. "Low-cost Telegram" cities: awareness doubled from 23% to 47%, and volume increased sharply. "High-speed letter" cities: awareness actually declined from 27% to 25%. The conclusion: you cannot walk away from what's already in the prospect's mind. "Western Union" meant telegram. Mailgram needed to hook into that reality, not fight it.</p>
+        <div class="case-study-insight">Principle: Position new services against the existing mental model, even when that feels counterintuitive. The data resolved the debate decisively — not because the "low-cost telegram" logic was superior, but because the prospect's mind determined the winner.</div>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-blue">Bank · Chapter 18</span></div>
+        <h3 class="case-study-title">Long Island Trust: The Local Bank</h3>
+        <p class="case-study-body">When Citibank, Chase, and Chemical invaded Long Island, research showed Long Island Trust ranked last in every traditional banking attribute — branches, services, quality, capital. But first in everything "Long Island." Conventional wisdom said: address the weaknesses. Positioning said: start with what the prospect is already willing to give you. The campaign: "Why send your money to the city if you live on the Island?" After 15 months, Long Island Trust moved from last to first in perceived "large capital" and from sixth to fourth in service quality — without actually changing a single service.</p>
+        <div class="case-study-insight">Principle: Perception creates reality. You don't have to change the product to change the position. Changing how prospects think about your relationship to them can shift every metric — even ones you've done nothing to improve.</div>
+    </div>
+
+    <div class="case-study">
+        <div class="case-study-tag"><span class="tag tag-blue">Institution · Chapter 19</span></div>
+        <h3 class="case-study-title">The Catholic Church: Teacher of the Word</h3>
+        <p class="case-study-body">Post-Vatican II, the Catholic Church had moved away from its old position as "teacher of the law" but had no clear new identity. Regular Mass attendance dropped below 50%, vocations fell 60%, and the Church ranked dead last in perceived influence despite being "the largest community of moral authority in America." The positioning analysis led back to Scripture: Christ's mandate was to go and teach all nations what they had heard. The proposed position: "teacher of the word" — returning to a clear, scripturally grounded role while differentiating from the pre-Vatican II "teacher of the law" identity. Implementation required pulpit training, film, and integrated communication programs built around this single central theme.</p>
+        <div class="case-study-insight">Principle: Any institution — no matter how ancient, complex, or large — benefits from positioning thinking. A positioning exercise is always a search for the obvious: the simplest, clearest answer to "What is our fundamental role?"</div>
+    </div>
+</section>
+
+<!-- ── PERSONAL POSITIONING ── -->
+<section class="section fade-in" id="personal">
+    <div class="section-eyebrow">Chapter 20 · Personal Strategy</div>
+    <h2 class="section-title">Positioning Yourself and Your Career</h2>
+    <p class="section-intro">The same principles that apply to products and companies apply directly to your career. The path to success is rarely found within yourself — it's found by finding a horse to ride.</p>
+
+    <div class="principle-box">
+        <h4>The Central Insight</h4>
+        <p>"The road to fame and fortune is rarely found within yourself. The only sure way to success is to find yourself a horse to ride. Success in life is based more on what others can do for you than on what you can do for yourself." This is not passivity — it is strategic positioning within systems that are already in motion. Trying harder is rarely the pathway to success. Trying smarter is.</p>
+    </div>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">Personal Trap 1</div>
+            <h3 class="card-title">The No-Name Trap</h3>
+            <p class="card-body">Using initials on memos — "J. S. Smith from GMC" — seems professional. But it only works when everyone already knows who you are. On the way up, you need to burn your full name into management's mind. Use a name, not initials. Write it out.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Personal Trap 2</div>
+            <h3 class="card-title">The Line-Extension Trap</h3>
+            <p class="card-body">Frank Sinatra Jr. started with two strikes — before any audience heard him, they'd already decided he wasn't as good as his father. Define one specific position for yourself. Specialist, not generalist. The job market belongs to people who can precisely define and position themselves.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Personal Trap 3</div>
+            <h3 class="card-title">The Everybody Trap</h3>
+            <p class="card-body">Trying to be all things to all people means ending up with nothing. This is just as true for a career as for a product. Pick a lane. Establish a position. The best positioning programs are built on a single, clear concept that can be stated in one sentence.</p>
+        </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;margin:2rem 0 1rem;">Six Horses to Ride</h3>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Your Company</h4>
+                <p>Is it going anywhere? No matter how brilliant you are, it never pays to cast your lot with a loser. Even the best officer on the Titanic wound up in the same lifeboat as the worst. Choose growth industries; avoid dead-end situations.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Your Boss</h4>
+                <p>"Hitch your wagon to a star," said Ralph Waldo Emerson. Always try to work for the smartest, most competent person you can find. Many successful people crawled up the ladder right behind someone else. If your boss is going places, you probably are too.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>A Friend</h4>
+                <p>Most big breaks happen because a business friend recommended you. But you must exercise the friendship regularly — send articles, congratulatory notes, stay in touch. When you need the horse, it needs to be in shape to ride.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>An Idea</h4>
+                <p>An idea can take you to the top faster than anything else — but you must be willing to expose yourself to ridicule and controversy. You cannot be first with a new idea without sticking your neck out. Never be afraid of conflict. Where would Churchill have been without Hitler?</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Faith in Others</h4>
+                <p>Ray Kroc bought the McDonald brothers' idea when they had no faith in it themselves. The brothers sold for relatively little. Kroc built a global empire. Finding people with great ideas and no execution — and having the conviction to run with those ideas — is one of the great horses available.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <h4>Yourself</h4>
+                <p>It is possible to succeed entirely on your own — but it's the hardest horse to ride. Business is a social activity. The jockey who wins is usually the one with the best horse. Pick the best horse available and ride it for all it's worth.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── SIX STEPS ── -->
+<section class="section fade-in" id="six-steps">
+    <div class="section-eyebrow">Chapter 21 · The Process</div>
+    <h2 class="section-title">Six Steps to a Positioning Program</h2>
+    <p class="section-intro">Positioning is a disciplined thinking process, not intuition. It starts with the prospect's mind, not the product. These six questions reveal both the problem and the solution.</p>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>What Position Do You Currently Own?</h4>
+                <p>Start with the mind of the prospect, not the product. Don't let corporate ego distort the answer — get it from the marketplace. Sabena's problem wasn't the airline; it was Belgium's weak tourist image. Seven-Up's problem wasn't its flavor; it was Coke and Pepsi's two-thirds stranglehold on soft drinks. If this requires research, spend the money. It's better to know exactly what you're up against now than to discover it later when nothing can be done.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>What Position Do You Want to Own?</h4>
+                <p>What position is actually available — not just desirable? Ford failed with the Edsel because the "medium-priced car" position was hopelessly overcrowded. Nyquil succeeded by targeting the specific, unclaimed "nighttime cold remedy" position that Contac and Dristan had left open. Sometimes you can want too much — a position too broad to establish and too broad to defend.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Whom Must You Outgun?</h4>
+                <p>Think as much from your competitor's perspective as from your own. Football is easy when you only think about the goal line — what makes it hard is the eleven players in between. If your proposed position requires head-to-head battle against a strong established leader, find a different angle. Going around, under, or over is almost always better than going head-on.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>Do You Have Enough Money?</h4>
+                <p>It takes money to build a position in the mind, money to hold it once established, and money to fight off competitive challenges. A better approach than underspending nationally: overspend in one city first, build a solid position, then roll out market by market. In a world where 200,000 ad messages hit one person each year, being present but weak is often worse than not being present at all.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+                <h4>Can You Stick It Out?</h4>
+                <p>Positioning is cumulative. You must hang in there year after year. Most successful companies rarely change a winning formula — Marlboro's cowboy has been riding into sunsets for decades. Don't change the strategy; only adjust the tactics. A position is like valuable real estate: once you give it up, getting it back may be impossible.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+                <h4>Do You Match Your Position?</h4>
+                <p>Creative people resist positioning thinking because it restricts their creativity — and it does. That restriction is the point. "Avis is only No. 2 in rent-a-cars, so why go with us? We try harder" doesn't sound like an ad. It sounds like the strategy presentation. In truth, it's both. The best advertisements ARE the strategy, not a creative interpretation of it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── MINDSET ── -->
+<section class="section fade-in" id="mindset">
+    <div class="section-eyebrow">Chapter 22 · The Mindset</div>
+    <h2 class="section-title">Playing the Positioning Game</h2>
+    <p class="section-intro">Successful positioning requires a specific kind of thinking. Outside-in rather than inside-out. "They" thinking rather than "we" thinking. And an understanding that words are not meanings — they are empty containers that the mind fills.</p>
+
+    <div class="two-col">
+        <div>
+            <h3>"We" vs. "They" Thinkers</h3>
+            <p>"We" people are convinced that with proper motivation, anything is possible. They make dynamic speeches about will and determination.</p>
+            <p>"They" people focus on the competition. They scan the battlefield, seek competitive weaknesses to exploit, avoid competitive strengths.</p>
+            <p>The outcome of any market battle depends on which side has the better strategy — not better individuals. The differences in fighting abilities of individual employees across competing companies tend to average out. Strategy is what wins.</p>
+        </div>
+        <div>
+            <h3>Words Are Empty Containers</h3>
+            <p>Words don't have meanings. The meanings are in the people using the words. Like a sugar bowl — empty until someone fills it.</p>
+            <p>The word "Volkswagen" won't hold the concept of a luxury car — so "Audi" holds it instead. "Margarine" hides the product's soy origin — "soy butter" would have communicated it honestly and allowed a different position.</p>
+            <p>To reposition something, change the container first. The name IS the position, for better or worse.</p>
+        </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin:2rem 0 1rem;">Six Qualities You Need to Play the Game</h3>
+
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-number">Quality 1</div>
+            <h3 class="card-title">Vision</h3>
+            <p class="card-body">Change is a wave on the ocean of time. Short-term the waves create agitation; long-term the underlying currents matter more. Make decisions about where your company will be in five to ten years. Changing the direction of a large company takes a mile before anything happens — so point yourself in the right direction now.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Quality 2</div>
+            <h3 class="card-title">Courage</h3>
+            <p class="card-body">The common thread in how every leadership position was established — from Hershey to Hertz — is seizing the initiative before the competition establishes itself. The leader poured in resources while the situation was still fluid. Hershey didn't advertise for decades, feeling too secure — and paid the price when competitors surged past.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Quality 3</div>
+            <h3 class="card-title">Objectivity</h3>
+            <p class="card-body">Eliminate ego from the decision-making process. You lose your objectivity the moment you think you've found the solution. You need someone to bounce ideas off. Like Ping-Pong, positioning is a game best played by two people — which is why this book was written by two people.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Quality 4</div>
+            <h3 class="card-title">Simplicity</h3>
+            <p class="card-body">Only an obvious idea will work today. "This problem when solved will be simple" — Boss Kettering's sign at GM Research. If an idea is clever or complicated, be suspicious. The solution to most positioning problems is so simple that thousands of people have looked right at it without seeing it.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Quality 5</div>
+            <h3 class="card-title">Patience</h3>
+            <p class="card-body">Very few companies can afford to launch nationally. Build the brand in one market, then roll out. Geographic, demographic, and chronological roll-outs all work. Philip Morris built Marlboro into the #1 campus cigarette long before it was #1 nationwide. "The Pepsi Generation" built first among youth, then reaped benefits as they grew up.</p>
+        </div>
+        <div class="card">
+            <div class="card-number">Quality 6</div>
+            <h3 class="card-title">Subtlety</h3>
+            <p class="card-body">The winning position is rarely at the edge of the spectrum — it's near the center. Far right or far left, you'll preempt the position and also lose. The big winners find open positions near the center: unique enough to be distinctive, broad enough to appeal. Both in balance simultaneously.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── PRINCIPLES SUMMARY ── -->
+<section class="section fade-in" id="principles">
+    <div class="section-eyebrow">Summary · The Core Framework</div>
+    <h2 class="section-title">The 20 Core Principles of Positioning</h2>
+    <p class="section-intro">Everything in the book distills to these principles. Internalize them and you will think about marketing — and communication — differently forever.</p>
+
+    <div class="principles-list">
+        <div class="principle-item">
+            <div class="principle-icon">1</div>
+            <div class="principle-text">
+                <strong>Positioning happens in the mind, not the product</strong>
+                <p>It's not what you do to a product — it's what you do to the mind of the prospect. All else is cosmetic.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">2</div>
+            <div class="principle-text">
+                <strong>It's better to be first than to be better</strong>
+                <p>The first brand in the mind earns twice the long-term market share of #2 — on average — and four times that of #3.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">3</div>
+            <div class="principle-text">
+                <strong>If you can't be first, create a new category</strong>
+                <p>Amelia Earhart wasn't the first to fly the Atlantic solo — but she was the first woman. New category, first position.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">4</div>
+            <div class="principle-text">
+                <strong>The mind rejects information that doesn't match its prior state</strong>
+                <p>Changing minds with advertising is nearly impossible. Work with existing perceptions, not against them.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">5</div>
+            <div class="principle-text">
+                <strong>Perceptions are reality</strong>
+                <p>"In politics, the perception is the reality." This applies equally to advertising, business, and every human activity.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">6</div>
+            <div class="principle-text">
+                <strong>Simplify ruthlessly — less is more</strong>
+                <p>In communication, as in architecture, less is more. The best advertisement IS the strategy — nothing more, nothing less.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">7</div>
+            <div class="principle-text">
+                <strong>Own a word in the mind</strong>
+                <p>Volvo: safety. BMW: driving. FedEx: overnight. Crest: cavities. One word per brand — and use it or lose it.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">8</div>
+            <div class="principle-text">
+                <strong>Look for the creneau — the hole in the mind</strong>
+                <p>The follower's strategy: find what position no one owns. Size, price, age, sex, time of day, distribution channel.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">9</div>
+            <div class="principle-text">
+                <strong>Relate your brand to what's already in the mind</strong>
+                <p>New concepts need context. The first automobile was a "horseless carriage." 7-Up was "the uncola." Both hooked the new into the old.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">10</div>
+            <div class="principle-text">
+                <strong>Never go head-on against an established leader</strong>
+                <p>RCA lost $250M learning this lesson. GE lost more. Go around, under, or over — never head-to-head against an entrenched position.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">11</div>
+            <div class="principle-text">
+                <strong>Repositioning the competition creates new positions</strong>
+                <p>Move the old idea out first, then fill the void. Tylenol repositioned aspirin and owned analgesics. Scope repositioned Listerine with two words.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">12</div>
+            <div class="principle-text">
+                <strong>The name is the most important single positioning decision</strong>
+                <p>Head &amp; Shoulders, DieHard, Close-Up, Intensive Care — names that begin positioning work from the first moment they're heard.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">13</div>
+            <div class="principle-text">
+                <strong>Avoid the no-name trap — initials come after fame, not before</strong>
+                <p>IBM → initials (earned). GAF, USM, CPC → obscurity (chosen). The cause and effect cannot be reversed.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">14</div>
+            <div class="principle-text">
+                <strong>Line extension almost always destroys major brand positions</strong>
+                <p>One name cannot stand for two different products. When one rises on the teeter-totter, the other falls. The teeter-totter never stops.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">15</div>
+            <div class="principle-text">
+                <strong>New breakthrough products need new names</strong>
+                <p>Xerox Data Systems failed. Taster's Choice beat Maxim. DieHard outsells JCPenney battery. New positions require new hooks in the mind.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">16</div>
+            <div class="principle-text">
+                <strong>The power is in the position, not the company</strong>
+                <p>Coca-Cola has power. The Coca-Cola Company merely reflects that power. Outside the cola position, the company earns its way like everyone else.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">17</div>
+            <div class="principle-text">
+                <strong>Leaders must cover competitive moves rapidly</strong>
+                <p>J&amp;J cut Tylenol prices before Datril's ads ran. Gillette launched Good News before BIC established itself. Speed of coverage is everything.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">18</div>
+            <div class="principle-text">
+                <strong>Consistency wins; changing positions loses</strong>
+                <p>Positioning is cumulative. The F.W.M.T.S. trap (Forgot What Made Them Successful) has destroyed more great brands than competition ever has.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">19</div>
+            <div class="principle-text">
+                <strong>Think outside-in, not inside-out</strong>
+                <p>Don't look for the solution inside the product or inside your own head. Look inside the prospect's mind. That's where the battle is fought.</p>
+            </div>
+        </div>
+        <div class="principle-item">
+            <div class="principle-icon">20</div>
+            <div class="principle-text">
+                <strong>Find the horse and ride it — trying harder is rarely the answer</strong>
+                <p>Success comes more from what others can do for you than from what you can do for yourself. Pick the best horse available and ride it for all it's worth.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top:3rem;">
+        <p>"In our overcommunicated society, the name of the game today is positioning. And only the better players are going to survive."</p>
+        <cite>— Al Ries &amp; Jack Trout, final words of Positioning: The Battle for Your Mind</cite>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p><em>Positioning: The Battle for Your Mind</em> &nbsp;by Al Ries &amp; Jack Trout</p>
+    <p>Originally published 1981 · Revised and updated 2001 · McGraw-Hill</p>
+    <p style="margin-top:0.5rem;color:var(--text-dim);">This educational summary presents the key concepts and frameworks from the book for study and reference.</p>
+</footer>
+
+</main>
+
+<script>
+    // Fade-in on scroll
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+    // Active nav link tracking
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                navLinks.forEach(l => {
+                    l.classList.remove('active');
+                    if (l.getAttribute('href') === '#' + e.target.id) l.classList.add('active');
+                });
+            }
+        });
+    }, { threshold: 0.25 });
+    sections.forEach(s => navObserver.observe(s));
+
+    // Mobile sidebar
+    function toggleSidebar() {
+        const sb = document.getElementById('sidebar');
+        const ov = document.getElementById('overlay');
+        const open = sb.style.transform === 'translateX(0px)';
+        sb.style.transform = open ? 'translateX(-260px)' : 'translateX(0px)';
+        ov.style.display = open ? 'none' : 'block';
+    }
+    function closeSidebar() {
+        document.getElementById('sidebar').style.transform = 'translateX(-260px)';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
+    // Initialize mobile
+    if (window.innerWidth <= 840) {
+        document.getElementById('sidebar').style.transform = 'translateX(-260px)';
+    }
+
+    // Close sidebar on nav link click (mobile)
+    navLinks.forEach(l => l.addEventListener('click', () => {
+        if (window.innerWidth <= 840) closeSidebar();
+    }));
+</script>
+</body>
+</html>

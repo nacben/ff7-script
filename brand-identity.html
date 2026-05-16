@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designing Brand Identity — 6th Edition</title>
+<style>
+:root {
+  --ink: #0d1117;
+  --navy: #0d1b2a;
+  --navy-2: #162032;
+  --red: #e63946;
+  --orange: #f4a261;
+  --teal: #2ec4b6;
+  --gold: #e9c46a;
+  --light: #f8f7f4;
+  --white: #ffffff;
+  --muted: #6c757d;
+  --border: #dee2e6;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--light); color: var(--ink); line-height: 1.6; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem; background: rgba(13,27,42,0.92);
+  backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.1rem; color: var(--white); font-weight: 700; letter-spacing: 0.03em; }
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 4px; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--white); transition: 0.3s; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding-top: 64px; display: grid;
+  grid-template-columns: 1fr 1fr; align-items: center;
+  background: var(--navy);
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.04) 59px, rgba(255,255,255,0.04) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.04) 59px, rgba(255,255,255,0.04) 60px),
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(230,57,70,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 20% 30%, rgba(46,196,182,0.12) 0%, transparent 60%);
+}
+.hero-left { padding: 5rem 3rem 5rem 5rem; }
+.hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 1.2rem; font-weight: 600; }
+.hero-title { font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4.5rem); color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+.hero-title em { color: var(--red); font-style: normal; }
+.hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-authors { font-size: 0.85rem; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
+.hero-right { padding: 5rem 5rem 5rem 3rem; display: flex; flex-direction: column; gap: 2rem; }
+.hero-stat { border-left: 3px solid var(--red); padding-left: 1.2rem; }
+.hero-stat-num { font-family: var(--serif); font-size: 2.8rem; color: var(--white); font-weight: 700; line-height: 1; }
+.hero-stat-num span { color: var(--red); }
+.hero-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; }
+.hero-quote { border-left: 3px solid var(--teal); padding-left: 1.2rem; }
+.hero-quote p { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,0.8); font-style: italic; line-height: 1.6; }
+.hero-quote cite { font-size: 0.78rem; color: rgba(255,255,255,0.4); display: block; margin-top: 0.5rem; }
+
+/* MARQUEE */
+.marquee-wrap { background: var(--red); overflow: hidden; padding: 0.9rem 0; }
+.marquee-track { display: flex; gap: 3rem; white-space: nowrap; animation: marquee 28s linear infinite; }
+.marquee-track span { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); font-weight: 600; }
+.marquee-track span::after { content: '◆'; margin-left: 3rem; color: rgba(255,255,255,0.5); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTION SHELLS */
+section { padding: 6rem 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 0.8rem; }
+.section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 1.2rem; }
+.section-sub { font-size: 1.05rem; color: var(--muted); max-width: 640px; line-height: 1.7; margin-bottom: 3rem; }
+.dark-section { background: var(--navy); }
+.dark-section .section-title { color: var(--white); }
+.dark-section .section-sub { color: rgba(255,255,255,0.55); }
+.alt-section { background: var(--white); }
+
+/* REVEAL ANIMATION */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.shown { opacity: 1; transform: translateY(0); }
+
+/* BRAND BASICS CARDS */
+.basics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+.basic-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 2rem; position: relative; overflow: hidden; transition: box-shadow 0.3s, transform 0.3s;
+}
+.basic-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--orange));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.basic-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.1); transform: translateY(-4px); }
+.basic-card:hover::after { transform: scaleX(1); }
+.basic-icon { font-size: 2rem; margin-bottom: 1rem; }
+.basic-card h3 { font-family: var(--serif); font-size: 1.25rem; margin-bottom: 0.6rem; }
+.basic-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+/* WHY INVEST */
+.impact-flow { display: flex; align-items: center; gap: 0; margin: 3rem 0; flex-wrap: wrap; }
+.impact-node {
+  flex: 1; min-width: 140px; text-align: center; padding: 2rem 1rem;
+  background: var(--navy-2); border-radius: 12px; color: var(--white);
+}
+.impact-node .i-icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+.impact-node h4 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.3rem; }
+.impact-node p { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+.impact-arrow { font-size: 1.5rem; color: var(--red); padding: 0 0.5rem; }
+.benefit-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+.benefit-item { display: flex; gap: 0.8rem; align-items: flex-start; }
+.benefit-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-top: 0.5rem; flex-shrink: 0; }
+.benefit-item p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+/* STRATEGY */
+.strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.axiom-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.axiom-item { display: flex; gap: 1rem; }
+.axiom-num { font-family: var(--serif); font-size: 2rem; color: var(--red); font-weight: 700; line-height: 1; min-width: 2rem; }
+.axiom-text h4 { font-weight: 700; margin-bottom: 0.3rem; font-size: 0.95rem; }
+.axiom-text p { font-size: 0.87rem; color: var(--muted); line-height: 1.6; }
+.three-q { margin-top: 2rem; }
+.three-q h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.2rem; }
+.q-item { border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 0.8rem; }
+.q-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--red); margin-bottom: 0.3rem; }
+.q-item p { font-size: 0.87rem; color: var(--muted); }
+.aaker-box {
+  background: var(--navy); border-radius: 16px; padding: 2.5rem; color: var(--white); position: relative;
+}
+.aaker-box h3 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--gold); }
+.aaker-layers { display: flex; flex-direction: column; gap: 0.8rem; }
+.aaker-layer { border-radius: 8px; padding: 0.9rem 1.2rem; }
+.aaker-layer h4 { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.2rem; }
+.aaker-layer p { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+.layer-core { background: rgba(230,57,70,0.25); border-left: 3px solid var(--red); }
+.layer-extended { background: rgba(244,162,97,0.18); border-left: 3px solid var(--orange); }
+.layer-peripheral { background: rgba(46,196,182,0.15); border-left: 3px solid var(--teal); }
+
+/* ARCHITECTURE */
+.arch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.arch-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 2rem; transition: box-shadow 0.3s;
+}
+.arch-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
+.arch-tag { display: inline-block; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--light); border: 1px solid var(--border); border-radius: 4px; padding: 0.2rem 0.6rem; margin-bottom: 1rem; color: var(--muted); }
+.arch-card h3 { font-family: var(--serif); font-size: 1.25rem; margin-bottom: 0.6rem; }
+.arch-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+.arch-example { font-size: 0.78rem; margin-top: 0.8rem; color: var(--red); font-weight: 600; }
+
+/* VISUAL IDENTITY */
+.cognition-strip { display: flex; gap: 0; margin: 2rem 0 3rem; border-radius: 12px; overflow: hidden; }
+.cog-step { flex: 1; padding: 1.8rem 1.5rem; text-align: center; }
+.cog-step:nth-child(1) { background: #1a2a3a; }
+.cog-step:nth-child(2) { background: #1e3040; }
+.cog-step:nth-child(3) { background: #223548; }
+.cog-step:nth-child(4) { background: #263b52; }
+.cog-num { font-family: var(--serif); font-size: 2.5rem; color: var(--red); font-weight: 700; line-height: 1; }
+.cog-label { font-size: 0.78rem; color: var(--white); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem; }
+.cog-time { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+.elements-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.elem-tile {
+  background: var(--navy-2); border-radius: 10px; padding: 1.5rem 1rem; text-align: center;
+  border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.3s, transform 0.3s;
+}
+.elem-tile:hover { border-color: var(--red); transform: translateY(-3px); }
+.elem-tile .et-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+.elem-tile h4 { font-size: 0.85rem; color: var(--white); font-weight: 700; margin-bottom: 0.3rem; }
+.elem-tile p { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+
+/* BRAND IDEALS */
+.ideals-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; margin-bottom: 3rem; }
+.ideals-number { font-family: var(--serif); font-size: 8rem; color: rgba(230,57,70,0.15); font-weight: 700; line-height: 1; }
+.ideals-text h2 { font-family: var(--serif); font-size: 2rem; margin-bottom: 0.8rem; }
+.ideals-text p { color: var(--muted); font-size: 1rem; line-height: 1.7; }
+.ideals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.ideal-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+  padding: 2rem; position: relative; overflow: hidden; transition: all 0.35s;
+  cursor: default;
+}
+.ideal-num { position: absolute; top: 1rem; right: 1.5rem; font-family: var(--serif); font-size: 4rem; color: var(--border); font-weight: 700; line-height: 1; transition: color 0.35s; }
+.ideal-card:hover { background: var(--navy); border-color: var(--navy); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(13,27,42,0.25); }
+.ideal-card:hover .ideal-num { color: rgba(230,57,70,0.3); }
+.ideal-card:hover h3 { color: var(--orange); }
+.ideal-card:hover p { color: rgba(255,255,255,0.65); }
+.ideal-card:hover .ideal-tag { background: rgba(230,57,70,0.2); color: var(--red); border-color: rgba(230,57,70,0.3); }
+.ideal-tag { display: inline-block; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--light); border: 1px solid var(--border); border-radius: 4px; padding: 0.2rem 0.6rem; margin-bottom: 0.8rem; color: var(--muted); transition: all 0.35s; }
+.ideal-card h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.6rem; color: var(--ink); transition: color 0.35s; }
+.ideal-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; transition: color 0.35s; }
+
+/* MARKS / BRAND ELEMENTS */
+.marks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.mark-card {
+  background: var(--navy-2); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px;
+  padding: 2rem; transition: all 0.3s;
+}
+.mark-card:hover { background: rgba(230,57,70,0.15); border-color: var(--red); }
+.mark-card h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--white); margin-bottom: 0.6rem; }
+.mark-card p { font-size: 0.87rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+.mark-examples { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.mark-ex { font-size: 0.72rem; background: rgba(255,255,255,0.07); border-radius: 4px; padding: 0.2rem 0.6rem; color: rgba(255,255,255,0.55); }
+
+/* NAMING */
+.naming-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+.naming-table th { text-align: left; padding: 0.8rem 1rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--border); }
+.naming-table td { padding: 0.9rem 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.naming-table tr:hover td { background: var(--light); }
+.naming-table td:first-child { font-weight: 700; color: var(--red); }
+.naming-table td:last-child { color: var(--muted); font-size: 0.82rem; }
+
+/* DYNAMICS */
+.dynamics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.dyn-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+  padding: 2rem; display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start;
+  transition: box-shadow 0.3s;
+}
+.dyn-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
+.dyn-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+.dyn-body h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 0.5rem; }
+.dyn-body p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+.dyn-pills { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pill { font-size: 0.72rem; border-radius: 20px; padding: 0.2rem 0.8rem; font-weight: 600; }
+
+/* PROCESS */
+.phases-strip { display: flex; border-radius: 12px; overflow: hidden; margin-bottom: 3rem; }
+.phase-tab { flex: 1; padding: 1.2rem 1rem; text-align: center; cursor: pointer; transition: background 0.3s; }
+.phase-tab:nth-child(1) { background: #1a3a4a; }
+.phase-tab:nth-child(2) { background: #1e3d52; }
+.phase-tab:nth-child(3) { background: #224058; }
+.phase-tab:nth-child(4) { background: #264360; }
+.phase-tab:nth-child(5) { background: #2a4668; }
+.phase-tab.active, .phase-tab:hover { filter: brightness(1.3); }
+.phase-tab .ph-num { font-family: var(--serif); font-size: 1.6rem; color: var(--red); font-weight: 700; line-height: 1; }
+.phase-tab .ph-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); margin-top: 0.3rem; }
+
+.pa-item { border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; margin-bottom: 0.8rem; overflow: hidden; }
+.pa-header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.5rem; cursor: pointer; transition: background 0.2s; }
+.pa-header:hover { background: rgba(255,255,255,0.04); }
+.pa-header h3 { font-size: 1rem; color: var(--white); font-weight: 600; }
+.pa-header .pa-phase { font-size: 0.72rem; color: var(--red); letter-spacing: 0.08em; text-transform: uppercase; }
+.pa-chevron { color: rgba(255,255,255,0.4); transition: transform 0.3s; font-size: 0.8rem; }
+.pa-item.open .pa-chevron { transform: rotate(180deg); }
+.pa-body { display: none; padding: 0 1.5rem 1.5rem; }
+.pa-item.open .pa-body { display: block; }
+.pa-steps { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+.pa-steps li { font-size: 0.85rem; color: rgba(255,255,255,0.6); display: flex; gap: 0.5rem; align-items: flex-start; }
+.pa-steps li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+
+/* CASE STUDIES */
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.case-card {
+  background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; transition: box-shadow 0.3s, transform 0.3s;
+}
+.case-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.1); transform: translateY(-5px); }
+.case-header { height: 130px; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+.case-body { padding: 1.5rem; }
+.case-type { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+.case-body h3 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.5rem; }
+.case-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.case-result { margin-top: 1rem; padding: 0.6rem 0.8rem; background: var(--light); border-radius: 6px; font-size: 0.78rem; color: var(--ink); }
+.case-result strong { color: var(--red); }
+.meta-info { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
+.meta-item { font-size: 0.78rem; color: var(--muted); }
+.meta-item strong { color: var(--ink); display: block; font-size: 0.82rem; }
+
+/* QUOTES */
+.quotes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.q-pull-card {
+  background: var(--navy-2); border-radius: 14px; padding: 2.5rem;
+  position: relative; overflow: hidden;
+}
+.q-pull-card::before { content: '\201C'; position: absolute; top: -0.5rem; left: 1rem; font-family: var(--serif); font-size: 7rem; color: rgba(230,57,70,0.2); line-height: 1; }
+.q-pull-card blockquote { font-family: var(--serif); font-size: 1.15rem; color: var(--white); line-height: 1.6; font-style: italic; margin-bottom: 1rem; position: relative; z-index: 1; }
+.q-pull-card cite { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+/* BAR CHART */
+.bar-chart { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.bar-row { display: flex; align-items: center; gap: 1rem; }
+.bar-label { width: 200px; font-size: 0.85rem; color: rgba(255,255,255,0.7); text-align: right; flex-shrink: 0; }
+.bar-track { flex: 1; height: 10px; background: rgba(255,255,255,0.08); border-radius: 5px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 5px; width: 0; transition: width 1.4s cubic-bezier(0.16,1,0.3,1); }
+.bar-pct { font-size: 0.8rem; color: var(--white); font-weight: 700; width: 2.5rem; }
+
+/* HISTORY TIMELINE */
+.history-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 1rem; margin-top: 2rem; }
+.history-track::-webkit-scrollbar { height: 4px; }
+.history-track::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+.ht-item { min-width: 180px; padding: 1.5rem 1.2rem 1.5rem 0; border-right: 1px solid var(--border); }
+.ht-item:last-child { border-right: none; }
+.ht-year { font-family: var(--serif); font-size: 1.5rem; color: var(--red); font-weight: 700; }
+.ht-text { font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
+
+/* FOOTER */
+footer { background: var(--ink); color: rgba(255,255,255,0.55); padding: 4rem 0 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand p { font-size: 0.85rem; margin-top: 0.8rem; line-height: 1.7; max-width: 260px; }
+.footer-col h4 { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-col ul a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--white); }
+.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom p { font-size: 0.78rem; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 4rem 2rem 2rem; }
+  .hero-right { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; }
+  .basics-grid { grid-template-columns: repeat(2, 1fr); }
+  .ideals-grid { grid-template-columns: repeat(2, 1fr); }
+  .strategy-grid { grid-template-columns: 1fr; }
+  .arch-grid { grid-template-columns: 1fr; }
+  .cases-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .elements-grid { grid-template-columns: repeat(2, 1fr); }
+  .dynamics-grid { grid-template-columns: 1fr; }
+  .marks-grid { grid-template-columns: repeat(2, 1fr); }
+  .quotes-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--navy); padding: 1rem 2rem 2rem; gap: 1rem; }
+  .ideals-intro { grid-template-columns: 1fr; }
+  .ideals-number { font-size: 4rem; }
+  .pa-steps { grid-template-columns: 1fr; }
+  .bar-label { width: 120px; font-size: 0.78rem; }
+}
+@media (max-width: 600px) {
+  .basics-grid, .ideals-grid, .marks-grid { grid-template-columns: 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .hero-right { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .arch-grid { grid-template-columns: 1fr; }
+  .phases-strip { flex-direction: column; border-radius: 8px; }
+  .benefit-list { grid-template-columns: 1fr; }
+  .cognition-strip { flex-wrap: wrap; }
+  .cog-step { flex: 1 0 50%; }
+  .elements-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-flow { flex-direction: column; }
+  .impact-arrow { transform: rotate(90deg); }
+  .naming-table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">Brand<span>Identity</span></div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#fundamentals">Fundamentals</a></li>
+    <li><a href="#strategy">Strategy</a></li>
+    <li><a href="#ideals">Ideals</a></li>
+    <li><a href="#elements">Elements</a></li>
+    <li><a href="#dynamics">Dynamics</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Wheeler &amp; Meyerson — 6th Edition</p>
+    <h1 class="hero-title">Designing<br><em>Brand Identity</em></h1>
+    <p class="hero-sub">An essential guide for the entire branding team—from positioning and naming to visual language, launch, and lifecycle management. The definitive handbook for building brands that endure.</p>
+    <p class="hero-authors">Alina Wheeler &amp; Rob Meyerson</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <div class="hero-stat-num">5<span>-Phase</span></div>
+      <div class="hero-stat-label">Brand Identity Process</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">9</div>
+      <div class="hero-stat-label">Universal Brand Ideals</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">50<span>+</span></div>
+      <div class="hero-stat-label">Real-World Case Studies</div>
+    </div>
+    <div class="hero-quote">
+      <p>"A brand is a person's gut feeling about a product, service, or organization."</p>
+      <cite>— Marty Neumeier</cite>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Vision</span><span>Meaning</span><span>Authenticity</span><span>Differentiation</span>
+    <span>Coherence</span><span>Flexibility</span><span>Durability</span><span>Commitment</span>
+    <span>Value</span><span>Positioning</span><span>Architecture</span><span>Identity System</span>
+    <span>Visual Language</span><span>Naming</span><span>Touchpoints</span><span>Experience</span>
+    <span>Equity</span><span>Trust</span><span>Culture</span><span>Strategy</span>
+    <!-- duplicate for seamless loop -->
+    <span>Vision</span><span>Meaning</span><span>Authenticity</span><span>Differentiation</span>
+    <span>Coherence</span><span>Flexibility</span><span>Durability</span><span>Commitment</span>
+    <span>Value</span><span>Positioning</span><span>Architecture</span><span>Identity System</span>
+    <span>Visual Language</span><span>Naming</span><span>Touchpoints</span><span>Experience</span>
+    <span>Equity</span><span>Trust</span><span>Culture</span><span>Strategy</span>
+  </div>
+</div>
+
+<!-- BRAND FUNDAMENTALS -->
+<section id="fundamentals" class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">What is Brand Identity?</p>
+    <h2 class="section-title reveal">The DNA of Every Great Brand</h2>
+    <p class="section-sub reveal">A brand is not a logo. It is not a tagline. A brand is a person's <em>gut feeling</em> about a product, service, or organization — the result of deliberate signals, accumulated experiences, and cultural meaning that compounds over time.</p>
+    <div class="basics-grid">
+      <div class="basic-card reveal">
+        <div class="basic-icon">🎯</div>
+        <h3>What Brand Is</h3>
+        <p>Brand identity is the visual and verbal expression of a brand — the tangible signals that make a brand recognizable, meaningful, and differentiated. It encompasses logos, color, typography, imagery, voice, and behavior.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">🧩</div>
+        <h3>Three Core Functions</h3>
+        <p><strong>Navigation</strong> — helps consumers choose from a vast sea of alternatives. <strong>Reassurance</strong> — communicates quality and reliability, reducing purchase anxiety. <strong>Engagement</strong> — uses distinctive imagery and language to build loyalty and community.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">💡</div>
+        <h3>Why It Matters Now</h3>
+        <p>In a world of infinite choice, brand identity is the ultimate competitive advantage. Strong brands command premium pricing, weather crises, attract talent, and earn sustained loyalty — compounding value with every touchpoint interaction.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">🌐</div>
+        <h3>Touchpoint Universe</h3>
+        <p>Every interaction is a brand touchpoint: websites, packaging, customer service, signage, social media, invoices, uniforms, event booths, employee conduct. Coherence across all of these builds trust; inconsistency erodes it.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">🔄</div>
+        <h3>Identity vs. Image</h3>
+        <p><strong>Identity</strong> is what you send out — the deliberate signals you design and deploy. <strong>Image</strong> is what people receive — the perception formed in their minds. A brand strategy's goal is to close the gap between the two.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">📐</div>
+        <h3>The Design Mandate</h3>
+        <p>Good brand design is not decoration. It is strategy made visible. Every color choice, typeface, and spatial decision should serve the brand's purpose and competitive positioning — elegant, intentional, and built to last.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:4rem;">
+      <p class="section-label reveal">Brand Equity: The Business Case</p>
+      <h3 class="section-title reveal" style="font-size:1.8rem;">Brands Create Measurable Value</h3>
+      <div class="bar-chart reveal" id="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">Premium pricing power</div>
+          <div class="bar-track"><div class="bar-fill" style="background: linear-gradient(90deg, var(--red), var(--orange));" data-pct="82"></div></div>
+          <div class="bar-pct">82%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Customer loyalty retention</div>
+          <div class="bar-track"><div class="bar-fill" style="background: linear-gradient(90deg, var(--teal), #26a69a);" data-pct="76"></div></div>
+          <div class="bar-pct">76%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Talent attraction advantage</div>
+          <div class="bar-track"><div class="bar-fill" style="background: linear-gradient(90deg, var(--orange), var(--gold));" data-pct="68"></div></div>
+          <div class="bar-pct">68%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Crisis resilience buffer</div>
+          <div class="bar-track"><div class="bar-fill" style="background: linear-gradient(90deg, #7c4dff, #b47eff);" data-pct="71"></div></div>
+          <div class="bar-pct">71%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Investor/valuation uplift</div>
+          <div class="bar-track"><div class="bar-fill" style="background: linear-gradient(90deg, var(--red), #c0392b);" data-pct="59"></div></div>
+          <div class="bar-pct">59%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY INVEST -->
+<section id="why-invest" class="dark-section">
+  <div class="container">
+    <p class="section-label reveal">The Business Case</p>
+    <h2 class="section-title reveal">Why Invest in Brand Identity?</h2>
+    <p class="section-sub reveal">Brand identity is not a cost — it's an investment in competitive position, customer relationships, and long-term enterprise value. The causal chain is direct and measurable.</p>
+    <div class="impact-flow reveal">
+      <div class="impact-node">
+        <div class="i-icon">🏗️</div>
+        <h4>Brand Investment</h4>
+        <p>Strategic design &amp; communications</p>
+      </div>
+      <div class="impact-arrow">→</div>
+      <div class="impact-node">
+        <div class="i-icon">🧠</div>
+        <h4>Perception Shift</h4>
+        <p>Recognition, trust &amp; preference</p>
+      </div>
+      <div class="impact-arrow">→</div>
+      <div class="impact-node">
+        <div class="i-icon">🎬</div>
+        <h4>Changed Behavior</h4>
+        <p>Purchase, loyalty &amp; advocacy</p>
+      </div>
+      <div class="impact-arrow">→</div>
+      <div class="impact-node">
+        <div class="i-icon">📈</div>
+        <h4>Business Results</h4>
+        <p>Revenue, margin &amp; equity</p>
+      </div>
+    </div>
+    <div class="benefit-list reveal">
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Creates a more valuable company — strong brands command higher market capitalizations and acquisition multiples</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Generates new customers by building awareness, trust, and desire before the first interaction</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Retains existing customers by delivering consistent, emotionally resonant experiences across all touchpoints</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Creates loyalty and even brand evangelism that no advertising spend can replicate</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Attracts top talent — people want to work for brands they admire and believe in</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Enables premium pricing — consumers pay more for brands they trust, reducing price sensitivity</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Provides clarity and direction for internal culture, decision-making, and organizational alignment</p></div>
+      <div class="benefit-item"><div class="benefit-dot"></div><p>Builds resilience — brands with strong equity recover faster from crises and setbacks</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STRATEGY -->
+<section id="strategy" class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Positioning &amp; Strategy</p>
+    <h2 class="section-title reveal">Brand Strategy: The Foundation</h2>
+    <p class="section-sub reveal">Before a single pixel is designed, brand strategy must answer fundamental questions about who the brand is, who it serves, and why it uniquely matters. Identity without strategy is decoration.</p>
+    <div class="strategy-grid">
+      <div>
+        <div class="axiom-list reveal">
+          <div class="axiom-item">
+            <div class="axiom-num">1</div>
+            <div class="axiom-text">
+              <h4>Strategy Precedes Identity</h4>
+              <p>Brand strategy articulates vision, mission, values, and positioning. Identity brings it to life visually. You cannot design what you haven't defined — strategy is the creative brief that makes great identity possible.</p>
+            </div>
+          </div>
+          <div class="axiom-item">
+            <div class="axiom-num">2</div>
+            <div class="axiom-text">
+              <h4>Positioning Is Relational</h4>
+              <p>Position is not what you are — it's where you sit in the customer's mind relative to competitors. Effective positioning identifies a defensible, meaningful territory that the brand can own and hold over time.</p>
+            </div>
+          </div>
+          <div class="axiom-item">
+            <div class="axiom-num">3</div>
+            <div class="axiom-text">
+              <h4>Purpose Drives Authenticity</h4>
+              <p>Brands with a clear "why" — a purpose beyond profit — earn deeper loyalty and greater cultural relevance. Purpose must be genuine and embedded in behavior, not just articulated in a tagline.</p>
+            </div>
+          </div>
+        </div>
+        <div class="three-q reveal" style="margin-top:2rem;">
+          <h3>The Three Critical Questions</h3>
+          <div class="q-item">
+            <h4>Who are you?</h4>
+            <p>Mission, values, culture, history, personality — the brand's authentic character and reason for being.</p>
+          </div>
+          <div class="q-item">
+            <h4>Who needs to know?</h4>
+            <p>Target audiences, their needs, mindsets, behaviors, and the specific moments of decision you want to influence.</p>
+          </div>
+          <div class="q-item">
+            <h4>How will they find out?</h4>
+            <p>The channels, touchpoints, messages, and experiences that deliver the brand promise consistently and memorably.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="aaker-box">
+          <h3>Aaker's Brand Identity Model</h3>
+          <div class="aaker-layers">
+            <div class="aaker-layer layer-core">
+              <h4>Core Identity</h4>
+              <p>The timeless essence — what the brand always has been and always will be. Mission, fundamental values, and primary association. Should never change even as tactics evolve.</p>
+            </div>
+            <div class="aaker-layer layer-extended">
+              <h4>Extended Identity</h4>
+              <p>Brand personality, heritage, symbols, organizational values, and brand-customer relationships. Adds richness and texture to the core without compromising it.</p>
+            </div>
+            <div class="aaker-layer layer-peripheral">
+              <h4>Brand Essence</h4>
+              <p>A single thought that captures the soul of the brand — the distillation of all identity elements into one memorable, ownable idea. The "north star" for all communications.</p>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1);">
+            <p style="font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.7;">A brand is much more than a product. Brand identity includes organizational associations, user imagery, brand personality, symbols, and the emotional and self-expressive benefits a brand delivers.</p>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; background:var(--light); border-radius:12px; padding:1.5rem;">
+          <h4 style="font-family:var(--serif); font-size:1.1rem; margin-bottom:1rem;">Key Strategic Inputs</h4>
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0; border-bottom:1px solid var(--border);">
+              <span style="color:var(--muted);">Competitive audit</span><span style="font-weight:600;">Category mapping</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0; border-bottom:1px solid var(--border);">
+              <span style="color:var(--muted);">Customer research</span><span style="font-weight:600;">Need-state insights</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0; border-bottom:1px solid var(--border);">
+              <span style="color:var(--muted);">Cultural scan</span><span style="font-weight:600;">Trend forecasting</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0;">
+              <span style="color:var(--muted);">Internal audit</span><span style="font-weight:600;">Equity inventory</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND ARCHITECTURE -->
+<section id="architecture" class="dark-section">
+  <div class="container">
+    <p class="section-label reveal">Portfolio Strategy</p>
+    <h2 class="section-title reveal">Brand Architecture</h2>
+    <p class="section-sub reveal">Brand architecture defines the structure of a brand portfolio — how brands, sub-brands, and products relate to each other. The right structure aligns with business strategy, simplifies consumer navigation, and maximizes equity across the portfolio.</p>
+    <div class="arch-grid">
+      <div class="arch-card reveal">
+        <div class="arch-tag">Monolithic</div>
+        <h3>Branded House</h3>
+        <p>One master brand drives the entire portfolio. All offerings share the same name and identity. The master brand confers credibility and recognition to every product and service.</p>
+        <p class="arch-example">Examples: Apple, Virgin, FedEx, Amazon</p>
+      </div>
+      <div class="arch-card reveal">
+        <div class="arch-tag">Endorsed</div>
+        <h3>House of Brands</h3>
+        <p>Each product has its own distinct identity with minimal visible connection to the parent. Maximum flexibility for targeting different audiences; the parent acts as a silent guarantor of quality.</p>
+        <p class="arch-example">Examples: P&amp;G, Unilever, LVMH, Mars</p>
+      </div>
+      <div class="arch-card reveal">
+        <div class="arch-tag">Hybrid</div>
+        <h3>Endorsed Architecture</h3>
+        <p>Sub-brands have their own identity but carry a visible endorsement from the parent brand. The endorsement lends credibility while allowing the sub-brand to develop its own distinct personality.</p>
+        <p class="arch-example">Examples: Marriott Bonvoy, Courtyard by Marriott</p>
+      </div>
+      <div class="arch-card reveal">
+        <div class="arch-tag">Pluralistic</div>
+        <h3>Sub-brand Architecture</h3>
+        <p>The master brand is the primary driver, but sub-brands modify and extend it for specific segments, products, or price tiers. Creates meaningful distinctions while maintaining overall cohesion.</p>
+        <p class="arch-example">Examples: Microsoft Azure, Google Maps, Samsung Galaxy</p>
+      </div>
+    </div>
+    <div style="margin-top:3rem;" class="reveal">
+      <div style="background:rgba(255,255,255,0.04); border-radius:12px; padding:2rem; border:1px solid rgba(255,255,255,0.08);">
+        <h3 style="font-family:var(--serif); font-size:1.3rem; color:var(--gold); margin-bottom:1rem;">Architecture Decision Factors</h3>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;">
+          <div>
+            <h4 style="font-size:0.85rem; color:var(--white); font-weight:700; margin-bottom:0.4rem;">Business Strategy</h4>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.5);">Growth plans, acquisition strategy, category expansion, and investor narrative</p>
+          </div>
+          <div>
+            <h4 style="font-size:0.85rem; color:var(--white); font-weight:700; margin-bottom:0.4rem;">Target Audiences</h4>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.5);">Whether segments are distinct enough to require separate brand personalities and positions</p>
+          </div>
+          <div>
+            <h4 style="font-size:0.85rem; color:var(--white); font-weight:700; margin-bottom:0.4rem;">Marketing Efficiency</h4>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.5);">Resources required to build and maintain multiple brands vs. leveraging one master brand</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISUAL IDENTITY -->
+<section id="visual" class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Visual Language</p>
+    <h2 class="section-title reveal">How Identity Communicates</h2>
+    <p class="section-sub reveal">The human brain processes visual information in milliseconds. Understanding how people perceive and remember brands is the scientific foundation of great visual identity design.</p>
+    <div class="cognition-strip reveal">
+      <div class="cog-step">
+        <div class="cog-num">1</div>
+        <div class="cog-label">Shape</div>
+        <div class="cog-time">Perceived first</div>
+      </div>
+      <div class="cog-step">
+        <div class="cog-num">2</div>
+        <div class="cog-label">Color</div>
+        <div class="cog-time">Triggers emotion</div>
+      </div>
+      <div class="cog-step">
+        <div class="cog-num">3</div>
+        <div class="cog-label">Form</div>
+        <div class="cog-time">Conveys meaning</div>
+      </div>
+      <div class="cog-step">
+        <div class="cog-num">4</div>
+        <div class="cog-label">Language</div>
+        <div class="cog-time">Confirms &amp; extends</div>
+      </div>
+    </div>
+    <div class="elements-grid reveal">
+      <div class="elem-tile">
+        <div class="et-icon">🎨</div>
+        <h4>Color</h4>
+        <p>Triggers emotional associations, differentiates from competitors, and builds instant recognition across all media</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">🔤</div>
+        <h4>Typography</h4>
+        <p>Expresses brand personality and tone. Typefaces carry cultural associations — from authority to playfulness to precision</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">📐</div>
+        <h4>Form &amp; Shape</h4>
+        <p>Geometric shapes convey different meanings: circles (unity), triangles (dynamism), squares (stability), organic (warmth)</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">🖼️</div>
+        <h4>Imagery</h4>
+        <p>Photography and illustration style convey brand personality — from aspirational to authentic, editorial to documentary</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">📏</div>
+        <h4>Space &amp; Layout</h4>
+        <p>White space communicates premium, sophistication, and confidence. Density signals value, accessibility, and energy</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">🔳</div>
+        <h4>Pattern &amp; Texture</h4>
+        <p>Distinctive patterns extend the identity system across surfaces, packaging, and environments with visual richness</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">🔊</div>
+        <h4>Motion &amp; Sound</h4>
+        <p>Animation principles and sonic branding create distinctive, recognizable brand moments in digital and broadcast contexts</p>
+      </div>
+      <div class="elem-tile">
+        <div class="et-icon">✏️</div>
+        <h4>Voice &amp; Tone</h4>
+        <p>Verbal identity is as important as visual. Word choice, sentence structure, and tone of voice express brand personality</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND IDEALS -->
+<section id="ideals" style="background:var(--light);">
+  <div class="container">
+    <div class="ideals-intro">
+      <div class="ideals-number reveal">9</div>
+      <div class="ideals-text reveal">
+        <h2 class="section-title" style="margin-bottom:0.8rem;">The Nine Universal Brand Ideals</h2>
+        <p>Across industries, geographies, and time periods, the world's most enduring brands share nine fundamental characteristics. These are not aspirational platitudes — they are observable, measurable qualities that the best brand teams actively build and protect.</p>
+      </div>
+    </div>
+    <div class="ideals-grid">
+      <div class="ideal-card reveal">
+        <div class="ideal-num">01</div>
+        <div class="ideal-tag">Ideal 1</div>
+        <h3>Vision</h3>
+        <p>A compelling vision of the future creates clarity and direction. The best brands articulate not just what they do but why it matters — and where it's going. Vision aligns teams and inspires audiences far beyond functional benefits.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">02</div>
+        <div class="ideal-tag">Ideal 2</div>
+        <h3>Meaning</h3>
+        <p>Brands that stand for something beyond the transaction earn a deeper kind of loyalty. Meaning connects to human values, aspirations, and identity — making the brand a part of how people see themselves and the world.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">03</div>
+        <div class="ideal-tag">Ideal 3</div>
+        <h3>Authenticity</h3>
+        <p>In an age of radical transparency, brands cannot fake it. Authenticity means living the values you claim, being honest about who you are, and aligning your actions with your promises. Customers can sense the difference.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">04</div>
+        <div class="ideal-tag">Ideal 4</div>
+        <h3>Differentiation</h3>
+        <p>A brand that stands for everything stands for nothing. True differentiation means owning a position that is genuinely distinct from competitors — one that customers feel only this brand can fill. Clarity of difference is clarity of value.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">05</div>
+        <div class="ideal-tag">Ideal 5</div>
+        <h3>Durability</h3>
+        <p>The strongest brands endure across decades and market disruptions. Durability comes from a timeless core identity that adapts its expression without losing its essence — neither frozen in the past nor chasing every trend.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">06</div>
+        <div class="ideal-tag">Ideal 6</div>
+        <h3>Coherence</h3>
+        <p>Every touchpoint — every interaction a person has with a brand — must feel like it comes from the same source. Coherence is not uniformity; it is the consistent expression of a single identity across an infinite variety of contexts.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">07</div>
+        <div class="ideal-tag">Ideal 7</div>
+        <h3>Flexibility</h3>
+        <p>A rigid brand system breaks when reality changes. Flexibility means the identity is designed to expand, adapt, and evolve — new categories, new markets, new media — without losing its recognizable core. Structure enables freedom.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">08</div>
+        <div class="ideal-tag">Ideal 8</div>
+        <h3>Commitment</h3>
+        <p>Brand building is a long game. It requires relentless commitment from leadership — defending the brand in budget battles, holding standards under deadline pressure, investing when ROI is distant. Discipline compounds into equity.</p>
+      </div>
+      <div class="ideal-card reveal">
+        <div class="ideal-num">09</div>
+        <div class="ideal-tag">Ideal 9</div>
+        <h3>Value</h3>
+        <p>Ultimately, brand identity must deliver measurable value: premium pricing, customer acquisition and retention, talent magnetism, and enterprise valuation. A brand that can't be connected to business outcomes is decoration, not strategy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND ELEMENTS: MARKS & NAMING -->
+<section id="elements" class="dark-section">
+  <div class="container">
+    <p class="section-label reveal">Brand Elements</p>
+    <h2 class="section-title reveal">Marks, Names &amp; Language</h2>
+    <p class="section-sub reveal">Brand elements are the atoms of identity — the individual components that combine to form a distinctive, coherent brand experience. Each element must work alone and in concert with all others.</p>
+
+    <h3 class="reveal" style="font-family:var(--serif); font-size:1.5rem; color:var(--gold); margin-bottom:1.5rem;">Types of Brand Marks</h3>
+    <div class="marks-grid">
+      <div class="mark-card reveal">
+        <h3>Wordmark</h3>
+        <p>A typographic treatment of the brand name alone. Pure wordmarks rely on distinctive letterforms, customized typography, and color to create recognition. The name itself becomes the identity.</p>
+        <div class="mark-examples"><span class="mark-ex">Google</span><span class="mark-ex">Visa</span><span class="mark-ex">FedEx</span><span class="mark-ex">Coca-Cola</span></div>
+      </div>
+      <div class="mark-card reveal">
+        <h3>Lettermark</h3>
+        <p>An abbreviation or initialism treated as a mark. Works when the full name is too long or unwieldy. Requires significant brand-building investment to ensure the initials earn recognition independent of the full name.</p>
+        <div class="mark-examples"><span class="mark-ex">IBM</span><span class="mark-ex">HBO</span><span class="mark-ex">CNN</span><span class="mark-ex">NASA</span></div>
+      </div>
+      <div class="mark-card reveal">
+        <h3>Pictorial Mark</h3>
+        <p>A standalone icon or symbol that represents the brand. Works best for brands with exceptional recall — where the symbol alone carries immediate, universal recognition without the name.</p>
+        <div class="mark-examples"><span class="mark-ex">Apple ⌘</span><span class="mark-ex">Twitter/X</span><span class="mark-ex">Nike ✓</span></div>
+      </div>
+      <div class="mark-card reveal">
+        <h3>Abstract Mark</h3>
+        <p>A non-representational form that encodes brand meaning through shape, rhythm, and association. Free from literal interpretation, abstract marks transcend language and culture with remarkable flexibility.</p>
+        <div class="mark-examples"><span class="mark-ex">Pepsi</span><span class="mark-ex">Adidas</span><span class="mark-ex">Chase</span><span class="mark-ex">BP</span></div>
+      </div>
+      <div class="mark-card reveal">
+        <h3>Mascot</h3>
+        <p>A character that embodies the brand's personality — human, animal, or fictional. Mascots create emotional bonds, transcend language barriers, and are especially powerful in food, sports, and consumer categories.</p>
+        <div class="mark-examples"><span class="mark-ex">Michelin Man</span><span class="mark-ex">Geico Gecko</span><span class="mark-ex">Mr. Clean</span></div>
+      </div>
+      <div class="mark-card reveal">
+        <h3>Combination Mark</h3>
+        <p>A wordmark and symbol used together, either locked in a fixed configuration or used separately depending on context. The most versatile solution — both elements can be used independently once established.</p>
+        <div class="mark-examples"><span class="mark-ex">Lacoste</span><span class="mark-ex">Airbnb</span><span class="mark-ex">Starbucks</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:4rem;">
+      <h3 class="reveal" style="font-family:var(--serif); font-size:1.5rem; color:var(--gold); margin-bottom:0.5rem;">Brand Naming Strategies</h3>
+      <p class="reveal" style="color:rgba(255,255,255,0.55); font-size:0.9rem; margin-bottom:1.5rem;">The name is often the first and most durable brand element. A great brand name is distinctive, pronounceable, memorable, protectable, and scalable across languages and markets.</p>
+      <table class="naming-table reveal">
+        <thead>
+          <tr>
+            <th>Strategy</th>
+            <th>How It Works</th>
+            <th>Strengths</th>
+            <th>Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Descriptive</td><td>Directly describes what the brand does or offers</td><td>Immediate clarity, low explanation cost</td><td>General Motors, The Weather Channel</td></tr>
+          <tr><td>Suggestive</td><td>Implies a quality or benefit without stating it directly</td><td>Evocative, memorable, more distinctive</td><td>Amazon, Sprint, Slack, Zoom</td></tr>
+          <tr><td>Invented</td><td>Coined word with no prior meaning — owns 100% of the space</td><td>Fully ownable, no baggage, global-ready</td><td>Kodak, Xerox, Häagen-Dazs, Oreo</td></tr>
+          <tr><td>Abstract</td><td>Real word used out of category context</td><td>Rich connotation, memorable, protectable</td><td>Apple, Amazon, Jaguar, Shell</td></tr>
+          <tr><td>Founder</td><td>Named after the founder or key person</td><td>Authentic, personal, trust-conferring</td><td>Ford, Chanel, Disney, Hewlett-Packard</td></tr>
+          <tr><td>Acronym</td><td>Initials of a longer name</td><td>Professional, neutral, works globally</td><td>BMW, HSBC, IBM, AT&amp;T</td></tr>
+          <tr><td>Geographic</td><td>Named for a place of origin</td><td>Roots authenticity, origin story</td><td>Bank of America, Singapore Airlines</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:4rem;">
+      <h3 class="reveal" style="font-family:var(--serif); font-size:1.5rem; color:var(--gold); margin-bottom:1rem;">Taglines: The Verbal Hook</h3>
+      <div class="marks-grid reveal">
+        <div class="mark-card">
+          <h3>Imperative</h3>
+          <p>Commands the audience to take action or feel a certain way. Direct, energetic, motivating.</p>
+          <div class="mark-examples"><span class="mark-ex">Just Do It</span><span class="mark-ex">Think Different</span><span class="mark-ex">Be Yourself</span></div>
+        </div>
+        <div class="mark-card">
+          <h3>Descriptive</h3>
+          <p>Explains the brand's offering or experience in a compelling, condensed form.</p>
+          <div class="mark-examples"><span class="mark-ex">The Ultimate Driving Machine</span><span class="mark-ex">Finger Lickin' Good</span></div>
+        </div>
+        <div class="mark-card">
+          <h3>Superlative</h3>
+          <p>Claims a position of superiority — best, greatest, most. Memorable when backed by genuine product truth.</p>
+          <div class="mark-examples"><span class="mark-ex">The World's Local Bank</span><span class="mark-ex">America Runs on Dunkin'</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND DYNAMICS -->
+<section id="dynamics" class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Modern Context</p>
+    <h2 class="section-title reveal">Brand Dynamics Reshaping Identity</h2>
+    <p class="section-sub reveal">Seven forces are fundamentally changing how brands are built, experienced, and managed. Each creates both challenge and opportunity for brand practitioners in the 21st century.</p>
+    <div class="dynamics-grid">
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#e8f4fd;">🤖</div>
+        <div class="dyn-body">
+          <h3>AI &amp; Generative Design</h3>
+          <p>Artificial intelligence is transforming creative workflows — from logo ideation to content generation, personalized brand expression at scale, and real-time asset creation. Brand teams must decide where AI accelerates and where human judgment is irreplaceable.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#e3f2fd; color:#1565c0;">Personalization at scale</span>
+            <span class="pill" style="background:#e3f2fd; color:#1565c0;">Generative assets</span>
+            <span class="pill" style="background:#e3f2fd; color:#1565c0;">Dynamic identity</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#e8f5e9;">🌱</div>
+        <div class="dyn-body">
+          <h3>Sustainability &amp; Purpose</h3>
+          <p>Environmental and social responsibility has moved from peripheral to core. Brands are held accountable for supply chains, carbon footprints, labor practices, and community impact. Purpose without action is greenwashing — and audiences can tell.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#e8f5e9; color:#2e7d32;">B-Corp movement</span>
+            <span class="pill" style="background:#e8f5e9; color:#2e7d32;">Circular design</span>
+            <span class="pill" style="background:#e8f5e9; color:#2e7d32;">ESG reporting</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#fce4ec;">✊</div>
+        <div class="dyn-body">
+          <h3>Social Justice &amp; Inclusion</h3>
+          <p>Brands must reflect the diversity of the audiences they serve — in imagery, casting, voice, and organizational leadership. Performative allyship is rejected; structural commitment earns credibility. Inclusive design expands markets while doing what's right.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#fce4ec; color:#880e4f;">DEI by design</span>
+            <span class="pill" style="background:#fce4ec; color:#880e4f;">Accessible identity</span>
+            <span class="pill" style="background:#fce4ec; color:#880e4f;">Representation</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#f3e5f5;">📱</div>
+        <div class="dyn-body">
+          <h3>Social Media &amp; Community</h3>
+          <p>Brands no longer control the conversation — they participate in it. Social platforms have democratized brand building and criticism equally. The most successful brands cultivate genuine community, welcome co-creation, and respond authentically in real time.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#f3e5f5; color:#6a1b9a;">User-generated content</span>
+            <span class="pill" style="background:#f3e5f5; color:#6a1b9a;">Influencer economy</span>
+            <span class="pill" style="background:#f3e5f5; color:#6a1b9a;">Brand community</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#fff8e1;">🌍</div>
+        <div class="dyn-body">
+          <h3>Global &amp; Local Tension</h3>
+          <p>Global brands must feel local to earn trust — adapting without fragmenting. The challenge is maintaining a coherent global identity while enabling meaningful local adaptation in language, imagery, cultural reference, and community relevance.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#fff8e1; color:#e65100;">Glocalization</span>
+            <span class="pill" style="background:#fff8e1; color:#e65100;">Cultural adaptation</span>
+            <span class="pill" style="background:#fff8e1; color:#e65100;">Local authenticity</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#e8eaf6;">📊</div>
+        <div class="dyn-body">
+          <h3>Evidence-Based Branding</h3>
+          <p>Data is reshaping brand decision-making. A/B testing, brand tracking surveys, sentiment analysis, and econometric modeling are making brand investment more accountable. The best teams blend data-informed decision-making with creative conviction.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#e8eaf6; color:#283593;">Brand tracking</span>
+            <span class="pill" style="background:#e8eaf6; color:#283593;">Sentiment analysis</span>
+            <span class="pill" style="background:#e8eaf6; color:#283593;">Attribution modeling</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#e0f2f1;">👤</div>
+        <div class="dyn-body">
+          <h3>Personal Branding</h3>
+          <p>Individuals now build and manage their own brands — founders, executives, creators, and employees whose personal brands either amplify or complicate the organizations they represent. The boundary between personal and institutional brand is permanently blurred.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#e0f2f1; color:#004d40;">Founder brand</span>
+            <span class="pill" style="background:#e0f2f1; color:#004d40;">Employee advocacy</span>
+            <span class="pill" style="background:#e0f2f1; color:#004d40;">Creator economy</span>
+          </div>
+        </div>
+      </div>
+      <div class="dyn-card reveal">
+        <div class="dyn-icon" style="background:#fafafa;">🔮</div>
+        <div class="dyn-body">
+          <h3>Emerging Platforms &amp; Spaces</h3>
+          <p>New contexts — AR/VR, spatial computing, voice interfaces, gaming environments, and digital ownership (NFTs, web3) — require brand identity systems flexible enough to exist and feel coherent in spaces that didn't exist a decade ago.</p>
+          <div class="dyn-pills">
+            <span class="pill" style="background:#f5f5f5; color:#212121;">Spatial branding</span>
+            <span class="pill" style="background:#f5f5f5; color:#212121;">Voice identity</span>
+            <span class="pill" style="background:#f5f5f5; color:#212121;">Metaverse presence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5-PHASE PROCESS -->
+<section id="process" class="dark-section">
+  <div class="container">
+    <p class="section-label reveal">The Methodology</p>
+    <h2 class="section-title reveal">The Five-Phase Brand Identity Process</h2>
+    <p class="section-sub reveal">A rigorous, proven methodology for building brand identity — from initial discovery through strategy, design, implementation, and lifecycle management. Each phase has clear deliverables, stakeholders, and decision points.</p>
+    <div class="phases-strip reveal">
+      <div class="phase-tab">
+        <div class="ph-num">1</div>
+        <div class="ph-name">Conducting Research</div>
+      </div>
+      <div class="phase-tab">
+        <div class="ph-num">2</div>
+        <div class="ph-name">Clarifying Strategy</div>
+      </div>
+      <div class="phase-tab">
+        <div class="ph-num">3</div>
+        <div class="ph-name">Designing Identity</div>
+      </div>
+      <div class="phase-tab">
+        <div class="ph-num">4</div>
+        <div class="ph-name">Creating Touchpoints</div>
+      </div>
+      <div class="phase-tab">
+        <div class="ph-num">5</div>
+        <div class="ph-name">Managing Assets</div>
+      </div>
+    </div>
+
+    <div class="pa-item reveal" data-phase="1">
+      <div class="pa-header">
+        <div>
+          <div class="pa-phase">Phase 1</div>
+          <h3>Conducting Research</h3>
+        </div>
+        <span class="pa-chevron">▼</span>
+      </div>
+      <div class="pa-body">
+        <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:1rem;">Deep immersion in the brand's competitive context, stakeholder perspectives, and customer landscape. Research eliminates assumption and grounds strategy in reality.</p>
+        <ul class="pa-steps">
+          <li>Stakeholder interviews and internal brand audit</li>
+          <li>Competitive positioning analysis and landscape mapping</li>
+          <li>Customer research: qualitative and quantitative</li>
+          <li>Cultural scan and emerging trends identification</li>
+          <li>Marketing, sales, and communications audit</li>
+          <li>Brand performance metrics baseline</li>
+          <li>Legal trademark and domain availability assessment</li>
+          <li>Synthesis workshop with core brand team</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pa-item reveal" data-phase="2">
+      <div class="pa-header">
+        <div>
+          <div class="pa-phase">Phase 2</div>
+          <h3>Clarifying Strategy</h3>
+        </div>
+        <span class="pa-chevron">▼</span>
+      </div>
+      <div class="pa-body">
+        <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:1rem;">Transform research insights into strategic decisions: positioning, brand architecture, naming, and the brand brief that will guide creative work.</p>
+        <ul class="pa-steps">
+          <li>Develop brand positioning statement</li>
+          <li>Define brand personality and values framework</li>
+          <li>Evaluate and decide on brand architecture model</li>
+          <li>Conduct naming exploration (if applicable)</li>
+          <li>Develop messaging hierarchy and key messages</li>
+          <li>Write the brand creative brief</li>
+          <li>Stakeholder alignment session and buy-in</li>
+          <li>Strategic framework documentation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pa-item reveal" data-phase="3">
+      <div class="pa-header">
+        <div>
+          <div class="pa-phase">Phase 3</div>
+          <h3>Designing Identity</h3>
+        </div>
+        <span class="pa-chevron">▼</span>
+      </div>
+      <div class="pa-body">
+        <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:1rem;">The creative phase — translating strategy into visual and verbal identity. Multiple concepts are explored, refined, and tested before a final system is committed.</p>
+        <ul class="pa-steps">
+          <li>Visual audit of competitor and aspirational brands</li>
+          <li>Explore multiple design directions (typically 3)</li>
+          <li>Primary identity design: logo/mark, color, typography</li>
+          <li>Present design directions with strategic rationale</li>
+          <li>Refine chosen direction based on stakeholder feedback</li>
+          <li>Develop secondary identity elements and patterns</li>
+          <li>Test identity across key touchpoints and contexts</li>
+          <li>Accessibility and reproduction testing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pa-item reveal" data-phase="4">
+      <div class="pa-header">
+        <div>
+          <div class="pa-phase">Phase 4</div>
+          <h3>Creating Touchpoints</h3>
+        </div>
+        <span class="pa-chevron">▼</span>
+      </div>
+      <div class="pa-body">
+        <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:1rem;">Apply the new identity across all customer-facing touchpoints — from digital channels and packaging to environments, communications, and employee experience.</p>
+        <ul class="pa-steps">
+          <li>Prioritize touchpoints by audience impact</li>
+          <li>Develop digital identity (website, apps, social templates)</li>
+          <li>Design print and packaging applications</li>
+          <li>Environmental and signage design</li>
+          <li>Employee-facing materials and internal launch kit</li>
+          <li>Video and motion identity guidelines</li>
+          <li>Vendor briefing and production management</li>
+          <li>Pre-launch quality audit across all materials</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pa-item reveal" data-phase="5">
+      <div class="pa-header">
+        <div>
+          <div class="pa-phase">Phase 5</div>
+          <h3>Managing Assets</h3>
+        </div>
+        <span class="pa-chevron">▼</span>
+      </div>
+      <div class="pa-body">
+        <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:1rem;">Brand governance, guidelines, and ongoing stewardship — ensuring the identity is used correctly, protected legally, and evolved thoughtfully over time.</p>
+        <ul class="pa-steps">
+          <li>Develop comprehensive brand guidelines document</li>
+          <li>Build digital asset management (DAM) system</li>
+          <li>Internal brand launch and education program</li>
+          <li>Trademark registration and IP protection strategy</li>
+          <li>Brand governance structure and approval workflows</li>
+          <li>Annual brand health tracking and measurement</li>
+          <li>Create process for brand evolution and extension decisions</li>
+          <li>Ongoing brand management and stewardship</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases" class="alt-section">
+  <div class="container">
+    <p class="section-label reveal">Real-World Application</p>
+    <h2 class="section-title reveal">Featured Case Studies</h2>
+    <p class="section-sub reveal">The principles of brand identity come alive in practice. These cases demonstrate how organizations across sectors have used strategic identity work to transform perception, drive growth, and build lasting equity.</p>
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-header" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: var(--white);">CHOBANI</div>
+        <div class="case-body">
+          <div class="case-type">Food / Consumer Goods</div>
+          <h3>Humanizing Greek Yogurt</h3>
+          <p>Chobani's rebrand transformed a commodity category player into a cultural icon. The new identity — hand-drawn illustrations, warm editorial photography, and an empathetic voice — made yogurt feel like a movement for "healthier food for more people."</p>
+          <div class="case-result"><strong>Impact:</strong> From startup to category leader; brand equity now outpaces all Greek yogurt competitors combined</div>
+          <div class="meta-info">
+            <div class="meta-item"><strong>Agency</strong>Lippincott</div>
+            <div class="meta-item"><strong>Scope</strong>Full identity redesign</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-header" style="background: linear-gradient(135deg, #00539b 0%, #0072c6 100%); color: var(--white);">KIA</div>
+        <div class="case-body">
+          <div class="case-type">Automotive</div>
+          <h3>Redefining Mobility</h3>
+          <p>Kia's bold new logo — a rhythmic, calligraphic wordmark — signaled a fundamental repositioning from budget car brand to design-forward mobility company. The identity anchored a complete brand transformation and product portfolio shift.</p>
+          <div class="case-result"><strong>Impact:</strong> Record global sales; dramatically shifted brand perception from "affordable" to "aspirational design"</div>
+          <div class="meta-info">
+            <div class="meta-item"><strong>Scope</strong>Global rebrand</div>
+            <div class="meta-item"><strong>Year</strong>2021</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-header" style="background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%); color: var(--white);">WIEN</div>
+        <div class="case-body">
+          <div class="case-type">Civic / Place Branding</div>
+          <h3>City of Vienna Identity</h3>
+          <p>Vienna's city identity system created a flexible framework that could represent one of Europe's most complex cultural institutions — connecting museums, government services, tourism, and civic life under a single coherent visual language.</p>
+          <div class="case-result"><strong>Impact:</strong> Consistently ranked #1 most livable city globally; brand coherence across 1,000+ applications</div>
+          <div class="meta-info">
+            <div class="meta-item"><strong>Scope</strong>City identity system</div>
+            <div class="meta-item"><strong>Type</strong>Place branding</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-header" style="background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); color: var(--red);">AC MILAN</div>
+        <div class="case-body">
+          <div class="case-type">Sports / Entertainment</div>
+          <h3>Football Club Modernization</h3>
+          <p>AC Milan's brand evolution balanced fierce tradition — 100+ years of history and iconography — with contemporary digital expression. The refined crest and identity system works across everything from stadium to NFT without losing its legendary soul.</p>
+          <div class="case-result"><strong>Impact:</strong> Significantly increased global social following; expanded commercial partnerships across new territories</div>
+          <div class="meta-info">
+            <div class="meta-item"><strong>Scope</strong>Identity evolution</div>
+            <div class="meta-item"><strong>Type</strong>Heritage modernization</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-header" style="background: linear-gradient(135deg, #0d3b66 0%, #1a5f8e 100%); color: var(--gold);">OneTen</div>
+        <div class="case-body">
+          <div class="case-type">Nonprofit / Social Impact</div>
+          <h3>Economic Mobility Coalition</h3>
+          <p>OneTen is a coalition of major corporations committed to hiring and advancing one million Black Americans without four-year degrees. The brand had to feel credible to both corporate partners and job seekers — professional, warm, urgent, and hopeful simultaneously.</p>
+          <div class="case-result"><strong>Impact:</strong> Secured commitments from 60+ major employers; exceeded hiring targets in Year 1</div>
+          <div class="meta-info">
+            <div class="meta-item"><strong>Scope</strong>Brand launch</div>
+            <div class="meta-item"><strong>Type</strong>Coalition brand</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-card reveal">
+        <div class="case-header" style="background: linear-gradient(135deg, #191414 0%, #1db954 40%, #191414 100%); color: var(--white);">Spotify</div>
+        <div class="case-body">
+          <div class="case-type">Technology / Music</div>
+          <h3>Audio-First Identity</h3>
+          <p>Spotify built one of the world's most recognizable digital brand identities by combining a simple, flexible visual system with an expressive voice and data-driven content strategy. The brand's identity is as much about cultural commentary as visual design.</p>
+          <div class="case-result"><strong>Impact:</strong> World's largest music streaming platform; brand synonymous with music discovery culture globally</div>
+          <div class="meta-info">
+            <div class="meta-item"><strong>Scope</strong>Ongoing brand system</div>
+            <div class="meta-item"><strong>Type</strong>Digital-native brand</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:4rem;" class="reveal">
+      <h3 style="font-family:var(--serif); font-size:1.5rem; margin-bottom:1.5rem;">Brand Identity Through History</h3>
+      <div class="history-track">
+        <div class="ht-item">
+          <div class="ht-year">1870s</div>
+          <div class="ht-text">Bass &amp; Co. registers the first trademark in the UK — a red triangle, setting the legal foundation for brand protection</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">1950s</div>
+          <div class="ht-text">Paul Rand, Saul Bass &amp; others pioneer corporate identity as a strategic discipline at CBS, IBM, and ABC</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">1964</div>
+          <div class="ht-text">Landor Associates develops systematic approach to corporate identity; brand consulting emerges as a profession</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">1980s</div>
+          <div class="ht-text">David Aaker formalizes "brand equity" as a measurable business asset; brand valuation enters boardroom conversations</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">1993</div>
+          <div class="ht-text">Naomi Klein's No Logo challenges corporate branding; authenticity and purpose become competitive differentiators</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">2000s</div>
+          <div class="ht-text">Digital revolution forces brand systems to adapt: responsive logos, digital-first design, and social media expression</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">2010s</div>
+          <div class="ht-text">Motion, sound, and experience become core brand elements; brand systems replace static standards manuals</div>
+        </div>
+        <div class="ht-item">
+          <div class="ht-year">2020s</div>
+          <div class="ht-text">AI, generative design, and spatial computing open entirely new frontiers for brand expression and management</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section style="background:var(--navy); padding:6rem 0;">
+  <div class="container">
+    <p class="section-label reveal">Words Worth Keeping</p>
+    <h2 class="section-title reveal">On Brand Identity</h2>
+    <div class="quotes-grid" style="margin-top:2.5rem;">
+      <div class="q-pull-card reveal">
+        <blockquote>"A brand is not a logo. A brand is not a product. A brand is not an identity. A brand is a gut feeling — and it's your audience, not you, who ultimately decides what it means."</blockquote>
+        <cite>— Marty Neumeier, The Brand Gap</cite>
+      </div>
+      <div class="q-pull-card reveal">
+        <blockquote>"Design is the silent ambassador of your brand. Every touchpoint speaks before you do — make sure it speaks the truth."</blockquote>
+        <cite>— Paul Rand, Designer &amp; Brand Pioneer</cite>
+      </div>
+      <div class="q-pull-card reveal">
+        <blockquote>"The discipline of brand management is essentially the management of meaning — the controlled, intentional, and strategic generation of associations in the minds of your audiences."</blockquote>
+        <cite>— Alina Wheeler, Designing Brand Identity</cite>
+      </div>
+      <div class="q-pull-card reveal">
+        <blockquote>"Authenticity requires that leaders live the brand from the inside out. A brand that exists only on the surface cannot survive the scrutiny of a transparent world."</blockquote>
+        <cite>— Rob Meyerson, Designing Brand Identity 6th Ed.</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES SUMMARY -->
+<section style="background:var(--light); padding:6rem 0;">
+  <div class="container">
+    <p class="section-label reveal">Core Principles</p>
+    <h2 class="section-title reveal">What Every Brand Practitioner Must Know</h2>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:2rem;">
+      <div class="basic-card reveal">
+        <div class="basic-icon">🔭</div>
+        <h3>Brand Before Design</h3>
+        <p>Strategy must precede aesthetics. A beautiful mark built on an unclear strategy is expensive decoration. The brief determines what great looks like — do the strategic work first, then design.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">🎭</div>
+        <h3>Consistency Builds Trust</h3>
+        <p>Trust is built through repetition and reliability. Every inconsistency in how a brand shows up — however small — erodes the cumulative impression. Standards are not bureaucracy; they are trust infrastructure.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">⚡</div>
+        <h3>Simplicity Scales</h3>
+        <p>The most durable brand identities are deceptively simple. Complexity fragments under pressure — across applications, vendors, and time. A simple, elegant system applied consistently outperforms elaborate systems applied inconsistently.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">📣</div>
+        <h3>Inside-Out Authenticity</h3>
+        <p>Brand identity must reflect organizational reality, not aspiration alone. When external positioning diverges from internal culture, the gap produces cynicism in employees and broken promises to customers. Build what you are becoming, truthfully.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">🌱</div>
+        <h3>Brands Are Living Systems</h3>
+        <p>Great brand identities are not finished on launch day — they evolve. The best systems are designed for change: modular, extensible, and resilient. Plan for the brand's future, not just its present form.</p>
+      </div>
+      <div class="basic-card reveal">
+        <div class="basic-icon">🏆</div>
+        <h3>Ownership Requires Commitment</h3>
+        <p>Identity is a shared responsibility that requires sustained investment, leadership attention, and organizational commitment. Brands that lack a champion inside the organization drift toward genericness over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size:1.3rem;">Brand<span style="color:var(--red);">Identity</span></div>
+        <p>A comprehensive educational companion to <em>Designing Brand Identity, 6th Edition</em> by Alina Wheeler &amp; Rob Meyerson. Built to make the principles of brand identity accessible, vivid, and actionable.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Foundations</h4>
+        <ul>
+          <li><a href="#fundamentals">What Is Brand</a></li>
+          <li><a href="#fundamentals">Why Invest</a></li>
+          <li><a href="#strategy">Brand Strategy</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Identity</h4>
+        <ul>
+          <li><a href="#visual">Visual Language</a></li>
+          <li><a href="#ideals">9 Brand Ideals</a></li>
+          <li><a href="#elements">Marks &amp; Naming</a></li>
+          <li><a href="#dynamics">Dynamics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Practice</h4>
+        <ul>
+          <li><a href="#process">5-Phase Process</a></li>
+          <li><a href="#cases">Case Studies</a></li>
+          <li><a href="#top">Back to Top</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Educational summary of <em>Designing Brand Identity</em> 6th Edition — Wheeler &amp; Meyerson</p>
+      <p style="color:rgba(255,255,255,0.3);">Content for educational purposes only</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Intersection Observer for scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('shown');
+      }, (i % 4) * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// Accordion for process phases
+document.querySelectorAll('.pa-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const item = header.closest('.pa-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.pa-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Bar chart animation
+const barChart = document.getElementById('bar-chart');
+if (barChart) {
+  const barObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.bar-fill').forEach(fill => {
+        const pct = fill.dataset.pct;
+        fill.style.width = pct + '%';
+      });
+      barObserver.disconnect();
+    }
+  }, { threshold: 0.4 });
+  barObserver.observe(barChart);
+}
+
+// Active nav link tracking
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => navObserver.observe(s));
+
+// Mobile nav toggle
+document.getElementById('nav-toggle').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open');
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('nav-links').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>

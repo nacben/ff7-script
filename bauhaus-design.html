@@ -1,0 +1,3349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Graphic Design: The New Basics — Educational Companion</title>
+<meta name="description" content="An interactive educational companion to 'Graphic Design: The New Basics' by Ellen Lupton and Jennifer Cole Phillips. Explore 17 chapters of design fundamentals with live demos." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     ============================================================ */
+  :root {
+    --red: #CC2233;
+    --blue: #0033BB;
+    --yellow: #F5C518;
+    --black: #111111;
+    --ink: #1a1a1a;
+    --paper: #FAFAF7;
+    --paper-2: #F0EFE9;
+    --rule: rgba(17,17,17,.12);
+    --rule-dark: rgba(255,255,255,.12);
+    --muted: #6a6a66;
+
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-serif: 'Libre Baskerville', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+    --pad: clamp(1.5rem, 4vw, 4rem);
+    --max: 1280px;
+    --gap: clamp(1rem, 2vw, 2rem);
+    --radius: 2px;
+
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  img, svg, canvas { display: block; max-width: 100%; }
+
+  a { color: inherit; text-decoration: none; }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+  }
+
+  ::selection { background: var(--yellow); color: var(--black); }
+
+  /* ============================================================
+     NAVIGATION
+     ============================================================ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(17,17,17,.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule-dark);
+    color: #fff;
+  }
+  .nav__inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav__logo {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #fff;
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .nav__logo::before {
+    content: '';
+    width: 14px; height: 14px;
+    background: var(--red);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .nav__logo b { color: var(--yellow); font-weight: 700; }
+  .nav__menu-toggle {
+    display: none;
+    margin-left: auto;
+    color: #fff;
+    font-size: 14px;
+    padding: .4rem .6rem;
+    border: 1px solid var(--rule-dark);
+  }
+  .nav__links {
+    display: flex;
+    gap: .25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .nav__links::-webkit-scrollbar { display: none; }
+  .nav__links a {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .5rem .65rem;
+    color: rgba(255,255,255,.7);
+    white-space: nowrap;
+    transition: color .2s var(--ease), background .2s var(--ease);
+    border-radius: var(--radius);
+  }
+  .nav__links a:hover { color: var(--yellow); background: rgba(255,255,255,.04); }
+  .nav__links a span { color: var(--yellow); margin-right: .35rem; font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .nav__menu-toggle { display: inline-block; }
+    .nav__links {
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: var(--black);
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem var(--pad);
+      max-height: 70vh;
+      overflow-y: auto;
+      display: none;
+      border-bottom: 1px solid var(--rule-dark);
+    }
+    .nav__links.is-open { display: flex; }
+    .nav__links a { padding: .8rem 0; border-bottom: 1px solid var(--rule-dark); }
+  }
+
+  /* ============================================================
+     LAYOUT PRIMITIVES
+     ============================================================ */
+  .section {
+    padding: clamp(4rem, 8vw, 7rem) var(--pad);
+    position: relative;
+  }
+  .section--dark {
+    background: var(--black);
+    color: #fff;
+  }
+  .section--paper { background: var(--paper); }
+  .section--paper-2 { background: var(--paper-2); }
+
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+
+  .chapter-head {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+  }
+  .chapter-head__num {
+    position: absolute;
+    top: -2.5rem;
+    left: -.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(7rem, 18vw, 14rem);
+    line-height: .8;
+    color: rgba(17,17,17,.05);
+    z-index: 0;
+    pointer-events: none;
+    letter-spacing: -.04em;
+  }
+  .section--dark .chapter-head__num { color: rgba(255,255,255,.04); }
+  .chapter-head__kicker {
+    font-size: 11px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: .8rem;
+    position: relative; z-index: 1;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .chapter-head__kicker::before {
+    content: '';
+    width: 28px; height: 2px;
+    background: var(--red);
+  }
+  .chapter-head__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -.03em;
+    margin: 0 0 1rem;
+    position: relative; z-index: 1;
+  }
+  .chapter-head__rule {
+    width: 80px; height: 4px;
+    background: var(--yellow);
+    margin-top: 1.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.5;
+    padding: 1rem 0 1rem 1.5rem;
+    border-left: 4px solid var(--red);
+    margin: 2rem 0;
+    max-width: 720px;
+    color: var(--ink);
+  }
+  .section--dark .quote { color: #e8e8e8; }
+  .quote cite {
+    display: block;
+    margin-top: .6rem;
+    font-style: normal;
+    font-family: var(--font-display);
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .section--dark .quote cite { color: rgba(255,255,255,.55); }
+
+  .lede p {
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
+    line-height: 1.7;
+    max-width: 68ch;
+    margin: 0 0 1.1rem;
+  }
+  .lede p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3.2rem;
+    float: left;
+    line-height: .9;
+    padding: .3rem .6rem 0 0;
+    color: var(--red);
+  }
+
+  /* ============================================================
+     DEMO PANELS
+     ============================================================ */
+  .demo {
+    background: var(--black);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    margin: 2.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .demo--light {
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+  .demo__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .demo__label::before {
+    content: ''; width: 8px; height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(1.2); }
+  }
+  .demo--light .demo__label { color: var(--red); }
+  .demo--light .demo__label::before { background: var(--red); }
+
+  .demo__caption {
+    font-size: .85rem;
+    color: rgba(255,255,255,.6);
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    line-height: 1.5;
+  }
+  .demo--light .demo__caption { color: var(--muted); }
+
+  .demo__controls {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    margin-top: 1rem;
+  }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .65rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff;
+    transition: all .15s var(--ease);
+  }
+  .btn:hover {
+    background: var(--yellow);
+    color: var(--black);
+    border-color: var(--yellow);
+  }
+  .btn.is-active {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+  .demo--light .btn {
+    border-color: var(--rule);
+    color: var(--ink);
+  }
+  .demo--light .btn:hover {
+    background: var(--ink); color: #fff; border-color: var(--ink);
+  }
+
+  .slider {
+    -webkit-appearance: none; appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,.2);
+    outline: none;
+  }
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 18px; height: 18px;
+    background: var(--yellow);
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .slider::-moz-range-thumb {
+    width: 18px; height: 18px;
+    background: var(--yellow);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+  }
+
+  /* ============================================================
+     CONCEPT CARDS
+     ============================================================ */
+  .concepts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .concept {
+    padding: 1.2rem;
+    background: #fff;
+    border: 1px solid var(--rule);
+    transition: all .2s var(--ease);
+    position: relative;
+  }
+  .concept:hover {
+    transform: translateY(-3px);
+    border-color: var(--ink);
+    box-shadow: 6px 6px 0 var(--yellow);
+  }
+  .concept h4 {
+    font-family: var(--font-display);
+    font-size: .95rem;
+    font-weight: 600;
+    margin: 0 0 .4rem;
+    letter-spacing: -.01em;
+  }
+  .concept p {
+    margin: 0;
+    font-size: .85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .concept__dot {
+    position: absolute;
+    top: 1.2rem; right: 1.2rem;
+    width: 10px; height: 10px;
+    background: var(--red);
+  }
+  .concept:nth-child(3n) .concept__dot { background: var(--blue); border-radius: 50%; }
+  .concept:nth-child(3n+1) .concept__dot { background: var(--yellow); }
+
+  .section--dark .concept { background: #1c1c1c; border-color: var(--rule-dark); color: #fff; }
+  .section--dark .concept p { color: rgba(255,255,255,.65); }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 6rem var(--pad) 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: .85;
+  }
+  .hero__inner {
+    position: relative; z-index: 1;
+    max-width: var(--max);
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero__kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .hero__kicker::before {
+    content: ''; width: 40px; height: 1px; background: var(--yellow);
+  }
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 9vw, 7.5rem);
+    line-height: .88;
+    letter-spacing: -.04em;
+    margin: 0;
+  }
+  .hero__title em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .hero__title .yellow { color: var(--yellow); }
+  .hero__title .blue { color: var(--blue); }
+  .hero__sub {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    max-width: 60ch;
+    line-height: 1.55;
+    color: rgba(255,255,255,.78);
+    font-weight: 300;
+  }
+  .hero__meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--rule-dark);
+    padding-top: 2rem;
+    max-width: 720px;
+  }
+  .hero__meta-item h5 {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    margin: 0 0 .35rem;
+    font-weight: 400;
+  }
+  .hero__meta-item p {
+    margin: 0;
+    font-size: .95rem;
+    color: #fff;
+  }
+  .hero__scroll {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    display: flex; flex-direction: column;
+    align-items: center; gap: .6rem;
+  }
+  .hero__scroll::after {
+    content: ''; width: 1px; height: 30px;
+    background: rgba(255,255,255,.3);
+    animation: scrolldown 2s infinite;
+  }
+  @keyframes scrolldown {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ============================================================
+     INTRO SHAPES
+     ============================================================ */
+  .intro-shapes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+    max-width: 720px;
+  }
+  .intro-shape {
+    aspect-ratio: 1;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .intro-shape__icon {
+    width: 80%; height: 80%;
+    animation: rotateSlow 18s linear infinite;
+  }
+  .intro-shape:nth-child(2) .intro-shape__icon { animation-direction: reverse; animation-duration: 22s; }
+  .intro-shape:nth-child(3) .intro-shape__icon { animation-duration: 28s; }
+  @keyframes rotateSlow { to { transform: rotate(360deg); } }
+  .intro-shape__label {
+    position: absolute;
+    bottom: -1.6rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ============================================================
+     FORMSTORMING
+     ============================================================ */
+  .formstorm {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px,1fr));
+    gap: 2px;
+    background: #000;
+    padding: 2px;
+    min-height: 320px;
+  }
+  .formstorm__cell {
+    aspect-ratio: 1;
+    background: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .3s var(--ease);
+    position: relative;
+  }
+  .formstorm__cell svg { width: 60%; height: 60%; }
+
+  /* ============================================================
+     POINT LINE PLANE
+     ============================================================ */
+  .plp-canvas {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #0a0a0a;
+    cursor: crosshair;
+    display: block;
+  }
+
+  /* ============================================================
+     RHYTHM
+     ============================================================ */
+  .rhythm-stage {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 4px;
+    height: 280px;
+    padding: 1rem;
+    background: #0a0a0a;
+    position: relative;
+  }
+  .rhythm-stage::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 1px;
+    background: rgba(245,197,24,.3);
+    transition: opacity .4s var(--ease);
+  }
+  .rhythm-stage.is-asym::after { opacity: 0; }
+  .rhythm-bar {
+    background: var(--red);
+    transition: transform .6s var(--ease), background .4s var(--ease);
+    transform-origin: center;
+  }
+  .rhythm-bar:nth-child(2) { background: var(--blue); }
+  .rhythm-bar:nth-child(3) { background: var(--yellow); }
+  .rhythm-bar:nth-child(4) { background: var(--blue); }
+  .rhythm-bar:nth-child(5) { background: var(--red); }
+  /* symmetrical default: bars centered, equal */
+  .rhythm-stage.is-sym .rhythm-bar { width: 60%; margin: 0 auto; }
+  .rhythm-stage.is-sym .rhythm-bar:nth-child(1) { width: 30%; }
+  .rhythm-stage.is-sym .rhythm-bar:nth-child(2) { width: 50%; }
+  .rhythm-stage.is-sym .rhythm-bar:nth-child(3) { width: 70%; }
+  .rhythm-stage.is-sym .rhythm-bar:nth-child(4) { width: 50%; }
+  .rhythm-stage.is-sym .rhythm-bar:nth-child(5) { width: 30%; }
+  .rhythm-stage.is-asym .rhythm-bar { transform-origin: left; }
+  .rhythm-stage.is-asym .rhythm-bar:nth-child(1) { width: 80%; }
+  .rhythm-stage.is-asym .rhythm-bar:nth-child(2) { width: 25%; }
+  .rhythm-stage.is-asym .rhythm-bar:nth-child(3) { width: 60%; transform: translateX(40%); }
+  .rhythm-stage.is-asym .rhythm-bar:nth-child(4) { width: 15%; transform: translateX(20%); }
+  .rhythm-stage.is-asym .rhythm-bar:nth-child(5) { width: 50%; transform: translateX(60%); }
+
+  /* ============================================================
+     SCALE
+     ============================================================ */
+  .scale-stage {
+    height: 280px;
+    background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .scale-stage__word {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--yellow);
+    letter-spacing: -.04em;
+    line-height: .9;
+    transition: font-size .15s var(--ease);
+    user-select: none;
+  }
+  .scale-row {
+    display: flex; align-items: baseline;
+    justify-content: space-around;
+    gap: 1rem; padding: 2rem 1rem;
+    background: #0a0a0a;
+    margin-top: 1rem;
+  }
+  .scale-row span {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -.04em;
+  }
+  .scale-row span:nth-child(1) { color: rgba(255,255,255,.3); font-size: 12px; }
+  .scale-row span:nth-child(2) { color: rgba(255,255,255,.45); font-size: 22px; }
+  .scale-row span:nth-child(3) { color: rgba(255,255,255,.6); font-size: 42px; }
+  .scale-row span:nth-child(4) { color: var(--yellow); font-size: 70px; }
+  .scale-row span:nth-child(5) { color: var(--red); font-size: 110px; }
+
+  /* ============================================================
+     TEXTURE
+     ============================================================ */
+  .texture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 1rem;
+  }
+  .texture {
+    aspect-ratio: 1;
+    border: 1px solid rgba(255,255,255,.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .texture__label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: .6rem .8rem;
+    background: rgba(0,0,0,.85);
+    color: var(--yellow);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .texture--dots {
+    background-color: #fff;
+    background-image: radial-gradient(circle, #111 25%, transparent 25%);
+    background-size: 14px 14px;
+  }
+  .texture--cross {
+    background: #fff;
+    background-image:
+      linear-gradient(45deg, #111 1px, transparent 1px),
+      linear-gradient(-45deg, #111 1px, transparent 1px);
+    background-size: 10px 10px;
+  }
+  .texture--type {
+    background: #111;
+    color: rgba(255,255,255,.7);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    line-height: 1.05;
+    padding: .5rem;
+    overflow: hidden;
+    word-break: break-all;
+    letter-spacing: .04em;
+  }
+  .texture--noise {
+    background: #111;
+    background-image:
+      radial-gradient(rgba(255,255,255,.1) 1px, transparent 1px),
+      radial-gradient(rgba(245,197,24,.3) 1px, transparent 1px),
+      radial-gradient(rgba(204,34,51,.3) 1px, transparent 1px);
+    background-size: 3px 3px, 5px 5px, 7px 7px;
+    background-position: 0 0, 1px 2px, 2px 1px;
+  }
+
+  /* ============================================================
+     COLOR
+     ============================================================ */
+  .color-wheel-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (max-width: 720px) { .color-wheel-wrap { grid-template-columns: 1fr; } }
+  .color-wheel {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .color-wheel .slice {
+    cursor: pointer;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+    transform-origin: 50% 50%;
+  }
+  .color-wheel .slice.dim { opacity: .25; }
+  .color-wheel .slice.hl { transform: scale(1.04); }
+
+  .color-info {
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    line-height: 1.6;
+  }
+  .color-info b { color: var(--yellow); font-weight: 500; }
+
+  .hvs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 720px) { .hvs { grid-template-columns: 1fr; } }
+  .hvs__row {
+    height: 36px;
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  .hvs__row--hue {
+    background: linear-gradient(90deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+  }
+  .hvs__row--val {
+    background: linear-gradient(90deg, #000, var(--red), #fff);
+  }
+  .hvs__row--sat {
+    background: linear-gradient(90deg, #777, var(--red));
+  }
+  .hvs__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: .4rem;
+  }
+
+  .albers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .albers__field {
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .albers__field:nth-child(1) { background: var(--red); }
+  .albers__field:nth-child(2) { background: var(--blue); }
+  .albers__inner {
+    width: 40%; height: 50%;
+    background: #8a8a8a;
+  }
+  .albers__caption {
+    grid-column: 1/-1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(255,255,255,.6);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .cmyk-rgb {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 720px) { .cmyk-rgb { grid-template-columns: 1fr; } }
+  .color-mix {
+    position: relative;
+    aspect-ratio: 4/3;
+    background: #000;
+  }
+  .color-mix__circle {
+    position: absolute;
+    width: 55%; aspect-ratio: 1;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+  }
+  .color-mix--rgb { background: #000; }
+  .color-mix--rgb .c1 { background: #f00; top: 8%; left: 23%; }
+  .color-mix--rgb .c2 { background: #0f0; top: 38%; left: 5%; }
+  .color-mix--rgb .c3 { background: #00f; top: 38%; left: 42%; }
+  .color-mix--cmyk { background: #fff; }
+  .color-mix--cmyk .color-mix__circle { mix-blend-mode: multiply; }
+  .color-mix--cmyk .c1 { background: #0ff; top: 8%; left: 23%; }
+  .color-mix--cmyk .c2 { background: #f0f; top: 38%; left: 5%; }
+  .color-mix--cmyk .c3 { background: #ff0; top: 38%; left: 42%; }
+  .color-mix__label {
+    position: absolute;
+    bottom: 6px; right: 8px;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .color-mix--cmyk .color-mix__label { color: #111; }
+
+  /* ============================================================
+     GESTALT
+     ============================================================ */
+  .gestalt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 1rem;
+  }
+  .gestalt {
+    aspect-ratio: 1;
+    background: #1a1a1a;
+    padding: 1rem;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .gestalt__name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+  .gestalt__stage {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .g-similarity { display: grid; grid-template-columns: repeat(5,1fr); gap: 6px; width: 80%; }
+  .g-similarity span { aspect-ratio: 1; border-radius: 50%; background: var(--red); }
+  .g-similarity span:nth-child(3n) { background: var(--blue); }
+  .g-similarity span:nth-child(4n+1) { background: var(--yellow); }
+
+  .g-proximity { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; width: 90%; }
+  .g-proximity span { aspect-ratio: 1; background: #fff; }
+  .g-proximity span:nth-child(4) { margin-left: 14px; }
+  .g-proximity span:nth-child(11) { margin-left: 14px; }
+  .g-proximity span:nth-child(18) { margin-left: 14px; }
+
+  .g-closure { width: 70%; aspect-ratio: 1; position: relative; }
+  .g-closure svg { width: 100%; height: 100%; }
+
+  .g-continuity { width: 90%; height: 60%; position: relative; }
+  .g-continuity svg { width: 100%; height: 100%; }
+
+  .g-symmetry { display: flex; gap: 4px; width: 80%; height: 60%; align-items: center; justify-content: center; }
+  .g-symmetry span { background: var(--yellow); height: 100%; }
+  .g-symmetry span:nth-child(1), .g-symmetry span:nth-child(5) { width: 8px; height: 60%; }
+  .g-symmetry span:nth-child(2), .g-symmetry span:nth-child(4) { width: 16px; height: 80%; }
+  .g-symmetry span:nth-child(3) { width: 24px; }
+
+  .g-simplicity { display: flex; gap: 8px; width: 80%; justify-content: center; }
+  .g-simplicity span {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: simp 3s var(--ease) infinite;
+  }
+  .g-simplicity span:nth-child(2) { background: var(--blue); animation-delay: .2s; }
+  .g-simplicity span:nth-child(3) { background: var(--yellow); animation-delay: .4s; }
+  .g-simplicity span:nth-child(4) { background: #fff; animation-delay: .6s; }
+  @keyframes simp {
+    0%, 100% { border-radius: 50%; }
+    50% { border-radius: 2px; transform: rotate(45deg); }
+  }
+
+  .figground {
+    aspect-ratio: 2/1;
+    background: var(--yellow);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+  .figground__shape {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 50%, var(--black) 0, var(--black) 80px, transparent 80px),
+      radial-gradient(circle at 70% 50%, var(--black) 0, var(--black) 80px, transparent 80px);
+  }
+  .figground.is-inverted { background: var(--black); }
+  .figground.is-inverted .figground__shape {
+    background:
+      radial-gradient(circle at 30% 50%, var(--yellow) 0, var(--yellow) 80px, transparent 80px),
+      radial-gradient(circle at 70% 50%, var(--yellow) 0, var(--yellow) 80px, transparent 80px);
+  }
+  .figground__caption {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.6);
+  }
+  .figground.is-inverted .figground__caption { color: rgba(255,255,255,.6); }
+
+  /* ============================================================
+     FRAMING
+     ============================================================ */
+  .framing-stage {
+    height: 360px;
+    background: #2a2a2a;
+    position: relative;
+    overflow: hidden;
+    transition: padding .4s var(--ease);
+    padding: 0;
+  }
+  .framing-stage__pic {
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(circle at 20% 30%, var(--yellow), transparent 50%),
+      radial-gradient(circle at 80% 70%, var(--red), transparent 50%),
+      linear-gradient(135deg, var(--blue), #002277);
+    transition: all .5s var(--ease);
+  }
+  .framing-stage.f-margin { padding: 40px; background: #fff; }
+  .framing-stage.f-partial { padding: 0 60px 40px 0; background: #fff; }
+  .framing-stage.f-bordered { padding: 8px; background: var(--ink); border: 1px solid #fff; }
+  .framing-stage.f-bordered .framing-stage__pic { outline: 3px solid #fff; outline-offset: -3px; }
+  .framing-stage.f-cropped .framing-stage__pic { transform: scale(2) translateX(15%); }
+
+  /* ============================================================
+     HIERARCHY
+     ============================================================ */
+  .hier {
+    background: #fff;
+    color: var(--ink);
+    padding: 2rem;
+    min-height: 360px;
+    transition: all .3s var(--ease);
+  }
+  .hier h3, .hier h4, .hier p, .hier small { margin: 0 0 .8rem; }
+  .hier--0 h3, .hier--0 h4, .hier--0 p, .hier--0 small {
+    font-size: 14px; font-weight: 400; color: var(--ink);
+  }
+  .hier--1 h3 { font-size: 14px; font-weight: 700; }
+  .hier--1 h4 { font-size: 14px; font-weight: 700; }
+  .hier--1 p, .hier--1 small { font-size: 14px; }
+  .hier--2 h3 { font-size: 28px; font-weight: 700; color: var(--red); }
+  .hier--2 h4 { font-size: 18px; font-weight: 600; }
+  .hier--2 p { font-size: 14px; }
+  .hier--2 small { font-size: 12px; color: var(--muted); }
+  .hier--3 h3 {
+    font-size: 38px; font-weight: 700;
+    color: var(--red); letter-spacing: -.02em;
+    margin-bottom: .2rem;
+  }
+  .hier--3 h4 {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: .25em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 1rem;
+  }
+  .hier--3 p { font-size: 15px; line-height: 1.6; max-width: 50ch; }
+  .hier--3 small {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted);
+    display: block; margin-top: 1rem;
+    padding-top: 1rem; border-top: 1px solid var(--rule);
+  }
+
+  /* ============================================================
+     LAYERS
+     ============================================================ */
+  .layer-stage {
+    aspect-ratio: 16/10;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .layer {
+    position: absolute;
+    inset: 0;
+    transition: opacity .4s var(--ease);
+  }
+  .layer.is-off { opacity: 0; }
+  .layer--1 { background: linear-gradient(135deg, var(--blue), #001a99); }
+  .layer--2 {
+    background: radial-gradient(circle at 70% 30%, var(--yellow) 0%, var(--yellow) 22%, transparent 22%);
+  }
+  .layer--3 {
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(204,34,51,.5) 14px, rgba(204,34,51,.5) 16px);
+  }
+  .layer--4 {
+    display: flex; align-items: flex-end; padding: 2rem;
+  }
+  .layer--4::before {
+    content: 'BAUHAUS';
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem,7vw,5rem);
+    color: #fff;
+    letter-spacing: -.04em;
+    line-height: .85;
+  }
+
+  .layer-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap: .6rem;
+    margin-top: 1rem;
+  }
+  .layer-check {
+    display: flex; align-items: center; gap: .6rem;
+    padding: .6rem .8rem;
+    border: 1px solid rgba(255,255,255,.15);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+  }
+  .layer-check input { accent-color: var(--yellow); }
+
+  /* ============================================================
+     TRANSPARENCY
+     ============================================================ */
+  .trans-stage {
+    aspect-ratio: 16/9;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .trans-shape {
+    position: absolute;
+    width: 55%; height: 70%;
+    top: 15%;
+  }
+  .trans-shape--1 { left: 8%; background: var(--red); }
+  .trans-shape--2 { left: 38%; background: var(--blue); }
+  .trans-controls {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: 1rem;
+  }
+  .trans-control label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: .4rem;
+  }
+
+  /* ============================================================
+     MODULARITY
+     ============================================================ */
+  .pixel-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 1px;
+    background: #333;
+    padding: 1px;
+    max-width: 360px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+  }
+  .pixel-grid div {
+    background: #1a1a1a;
+    cursor: pointer;
+    transition: background .1s var(--ease);
+  }
+  .pixel-grid div.on { background: var(--yellow); }
+
+  /* ============================================================
+     GRID
+     ============================================================ */
+  .grid-demo {
+    background: #fff;
+    color: var(--ink);
+    padding: 1.5rem;
+    min-height: 360px;
+    display: grid;
+    gap: 12px;
+    position: relative;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 40px;
+  }
+  .grid-demo::before {
+    content: '';
+    position: absolute;
+    inset: 1.5rem;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(204,34,51,.06) 0,
+      rgba(204,34,51,.06) calc((100% - 11 * 12px) / 12),
+      transparent calc((100% - 11 * 12px) / 12),
+      transparent calc((100% - 11 * 12px) / 12 + 12px)
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .grid-block {
+    background: var(--ink);
+    color: #fff;
+    padding: .6rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    z-index: 1;
+    display: flex; align-items: flex-end;
+  }
+  .grid-block.red { background: var(--red); }
+  .grid-block.blue { background: var(--blue); }
+  .grid-block.yellow { background: var(--yellow); color: var(--ink); }
+
+  /* ============================================================
+     PATTERN / DIAGRAM / GENERATIVE share canvas style
+     ============================================================ */
+  .canvas-stage {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #0a0a0a;
+    display: block;
+  }
+  .canvas-stage--light { background: #fff; }
+
+  /* ============================================================
+     MOTION
+     ============================================================ */
+  .motion-stage {
+    aspect-ratio: 16/9;
+    background: #0a0a0a;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .motion-shape {
+    width: 80px; height: 80px;
+    background: var(--red);
+  }
+  .motion-stage.m-position .motion-shape { animation: m-pos 2s var(--ease) infinite alternate; }
+  @keyframes m-pos {
+    from { transform: translateX(-200px); }
+    to { transform: translateX(200px); }
+  }
+  .motion-stage.m-rotation .motion-shape { animation: m-rot 3s linear infinite; }
+  @keyframes m-rot { to { transform: rotate(360deg); } }
+  .motion-stage.m-scale .motion-shape { animation: m-sca 2s var(--ease) infinite alternate; }
+  @keyframes m-sca { from { transform: scale(.4); } to { transform: scale(2); } }
+  .motion-stage.m-shape .motion-shape { animation: m-shp 3s var(--ease) infinite; }
+  @keyframes m-shp {
+    0% { border-radius: 0; }
+    50% { border-radius: 50%; background: var(--blue); }
+    100% { border-radius: 0; background: var(--red); }
+  }
+  .motion-stage.m-color .motion-shape { animation: m-col 3s var(--ease) infinite; }
+  @keyframes m-col {
+    0% { background: var(--red); }
+    33% { background: var(--yellow); }
+    66% { background: var(--blue); }
+    100% { background: var(--red); }
+  }
+  .motion-stage.m-layer .motion-shape { animation: m-lay 3s var(--ease) infinite; }
+  @keyframes m-lay {
+    0%, 100% { box-shadow: 0 0 0 transparent; transform: translateZ(0); }
+    50% { box-shadow: 24px 24px 0 var(--blue), -24px -24px 0 var(--yellow); }
+  }
+  .motion-stage.m-trans .motion-shape { animation: m-tr 2s var(--ease) infinite alternate; }
+  @keyframes m-tr { from { opacity: 1; } to { opacity: .15; } }
+
+  /* ============================================================
+     GENERATIVE CONTROLS
+     ============================================================ */
+  .gen-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .gen-control label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: .5rem;
+  }
+  .gen-control output {
+    font-family: var(--font-mono);
+    color: #fff;
+    font-size: 12px;
+  }
+
+  /* ============================================================
+     INTRO + GENERAL
+     ============================================================ */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; gap: 2rem; } }
+
+  .marker {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer {
+    background: var(--black);
+    color: #fff;
+    padding: 5rem var(--pad) 2rem;
+  }
+  .footer__inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 3rem;
+  }
+  .footer h5 {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin: 0 0 1.2rem;
+    font-weight: 500;
+  }
+  .footer p, .footer li {
+    font-size: .9rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,.7);
+  }
+  .footer ul { list-style: none; padding: 0; margin: 0; }
+  .footer li { padding: .25rem 0; }
+  .footer__bottom {
+    max-width: var(--max);
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule-dark);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+  }
+  .footer__bottom a:hover { color: var(--yellow); }
+  .footer__shapes {
+    display: flex; gap: 1rem; margin-top: 1.5rem;
+  }
+  .footer__shapes span {
+    width: 28px; height: 28px;
+    background: var(--red);
+  }
+  .footer__shapes span:nth-child(2) { background: var(--blue); border-radius: 50%; }
+  .footer__shapes span:nth-child(3) {
+    background: transparent;
+    width: 0; height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-bottom: 28px solid var(--yellow);
+  }
+</style>
+</head>
+<body>
+
+<!-- ================== NAVIGATION ================== -->
+<nav class="nav" aria-label="Primary">
+  <div class="nav__inner">
+    <a href="#top" class="nav__logo">GRAPHIC DESIGN: <b>THE NEW BASICS</b></a>
+    <button class="nav__menu-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false">Menu</button>
+    <div class="nav__links" id="navLinks">
+      <a href="#ch1"><span>01</span>Formstorming</a>
+      <a href="#ch2"><span>02</span>Point</a>
+      <a href="#ch3"><span>03</span>Rhythm</a>
+      <a href="#ch4"><span>04</span>Scale</a>
+      <a href="#ch5"><span>05</span>Texture</a>
+      <a href="#ch6"><span>06</span>Color</a>
+      <a href="#ch7"><span>07</span>Gestalt</a>
+      <a href="#ch8"><span>08</span>Framing</a>
+      <a href="#ch9"><span>09</span>Hierarchy</a>
+      <a href="#ch10"><span>10</span>Layers</a>
+      <a href="#ch11"><span>11</span>Transparency</a>
+      <a href="#ch12"><span>12</span>Modularity</a>
+      <a href="#ch13"><span>13</span>Grid</a>
+      <a href="#ch14"><span>14</span>Pattern</a>
+      <a href="#ch15"><span>15</span>Diagram</a>
+      <a href="#ch16"><span>16</span>Motion</a>
+      <a href="#ch17"><span>17</span>Rules</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================== HERO ================== -->
+<header class="hero" id="top">
+  <canvas class="hero__canvas" id="heroCanvas"></canvas>
+  <div class="hero__inner">
+    <div class="hero__kicker">An Educational Companion</div>
+    <h1 class="hero__title">
+      Graphic<br>
+      Design<em>:</em><br>
+      <span class="yellow">The</span> <span class="blue">New</span> Basics
+    </h1>
+    <p class="hero__sub">
+      A chapter-by-chapter interactive guide to the foundational principles of visual design — formstorming, point and line, rhythm, color, gestalt, grids, modularity, motion, and rules-based generation. Built as a working demonstration of the very principles it teaches.
+    </p>
+    <div class="hero__meta">
+      <div class="hero__meta-item">
+        <h5>Authors</h5>
+        <p>Ellen Lupton<br>Jennifer Cole Phillips</p>
+      </div>
+      <div class="hero__meta-item">
+        <h5>Publisher</h5>
+        <p>Princeton Architectural Press</p>
+      </div>
+      <div class="hero__meta-item">
+        <h5>Institution</h5>
+        <p>MICA — Maryland Institute College of Art</p>
+      </div>
+      <div class="hero__meta-item">
+        <h5>Chapters</h5>
+        <p>17 + Introduction</p>
+      </div>
+    </div>
+  </div>
+  <a href="#intro" class="hero__scroll">Scroll</a>
+</header>
+
+<!-- ================== INTRODUCTION ================== -->
+<section class="section section--paper" id="intro">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">00</div>
+      <div class="chapter-head__kicker">Introduction</div>
+      <h2 class="chapter-head__title">Back to the Bauhaus</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="lede">
+        <p>The Bauhaus, founded in Weimar in 1919, sought to dissolve the boundaries between art, craft, and industry. Its preliminary course — the legendary Vorkurs taught by Johannes Itten, László Moholy-Nagy, and Josef Albers — asked students to confront materials, color, and form as a kind of laboratory, before any application to a "real" task. That spirit of structured experimentation, of treating the alphabet of design as a system to be understood from first principles, animates this book.</p>
+
+        <p>Wassily Kandinsky abstracted the visual world down to point, line, and plane. Moholy-Nagy used photography and light as a designable substance. Albers taught that color is never seen by itself: it is always a relationship. A century later, software has changed the tools but not the fundamentals. Pixels, vectors, layers, and timelines are simply new vehicles for the same elemental questions of composition, contrast, and order.</p>
+
+        <p>The premise of <em>The New Basics</em> is that design education must bridge two worlds: the visual thinking inherited from the modernist studio, and the screen-based, code-aware practice of contemporary work. Each chapter that follows isolates a single concept — formstorming, gestalt, modularity, motion — and gives it room to breathe, accompanied by an interactive demo that lets you handle the principle yourself.</p>
+      </div>
+
+      <div class="intro-shapes">
+        <div class="intro-shape">
+          <svg class="intro-shape__icon" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#CC2233"/></svg>
+          <div class="intro-shape__label">Circle</div>
+        </div>
+        <div class="intro-shape">
+          <svg class="intro-shape__icon" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="#0033BB"/></svg>
+          <div class="intro-shape__label">Square</div>
+        </div>
+        <div class="intro-shape">
+          <svg class="intro-shape__icon" viewBox="0 0 100 100"><polygon points="50,8 92,88 8,88" fill="#F5C518"/></svg>
+          <div class="intro-shape__label">Triangle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 1: FORMSTORMING ================== -->
+<section class="section section--paper-2" id="ch1">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">01</div>
+      <div class="chapter-head__kicker">Chapter One</div>
+      <h2 class="chapter-head__title">Formstorming</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "I like a lot the adage that for every problem there is a solution that is simple, obvious, and wrong."
+      <cite>— Malcolm Grear</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Formstorming is to visual designers what brainstorming is to writers: a structured way to outrun the obvious. The first idea is almost always a cliché — the lightbulb for "idea," the globe for "international," the handshake for "agreement." Designers move past these reflex responses by generating quantity before quality, then judging what they have made.</p>
+
+      <p>A practical method is to take a single subject and produce many small studies of it — fifty, a hundred — pushing each one into a different conceptual register. Begin with the literal (icons that resemble the subject), shift into the indexical (marks that point to it through cause and effect), and end in the symbolic (signs whose meaning is purely cultural). The grid below cycles through twenty iterations of a single form, a circle, recast each time as a different visual idea.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 01 — One hundred iterations</div>
+      <div class="formstorm" id="formstormGrid" aria-live="polite"></div>
+      <div class="demo__controls">
+        <button class="btn" id="formstormNext">Next variation set</button>
+        <button class="btn" id="formstormShuffle">Shuffle</button>
+      </div>
+      <div class="demo__caption">Each tile is a small study of "circle," reinterpreted as icon, index, or symbol. The exercise trains designers to keep producing past the obvious.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Icon</h4><p>A sign that resembles its subject. A pictogram of a chair means "chair" because it looks like one.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Index</h4><p>A sign that points to its subject through cause and effect — smoke for fire, footprints for a walker.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Symbol</h4><p>A sign whose meaning is purely cultural and conventional. A red cross or a national flag.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Exhaustive iteration</h4><p>Producing many alternatives before judging. Quantity surfaces options judgment alone cannot.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 2: POINT LINE PLANE ================== -->
+<section class="section section--paper" id="ch2">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">02</div>
+      <div class="chapter-head__kicker">Chapter Two</div>
+      <h2 class="chapter-head__title">Point, Line, Plane</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "A line is the track made by the moving point . . . it is the point's most concise form of becoming."
+      <cite>— Wassily Kandinsky</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Almost every two-dimensional design can be analyzed as some combination of three elemental units. A <strong>point</strong> marks a position — a dot, a punctuation mark, a stop. A <strong>line</strong> is the trace of a point in motion, a one-dimensional path connecting positions. A <strong>plane</strong> is a flat region with width and length: a sheet, a field of color, a paragraph of text experienced as a block.</p>
+
+      <p>These categories blur. A printed dot is, on closer inspection, a tiny plane. A long enough rectangle reads as a line. A line repeated densely becomes a plane of texture. Designers exploit this elasticity: a row of tightly set letters reads as a line of text; the same letters scaled up isolate as points of interest; a paragraph clustered tightly becomes a gray plane on the page. In digital media, this distinction is reinforced by formats — vectors describe shapes geometrically, while bitmaps describe them as a plane of pixels.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 02 — Click to place points, watch lines emerge</div>
+      <canvas class="plp-canvas" id="plpCanvas"></canvas>
+      <div class="demo__controls">
+        <button class="btn" id="plpClear">Clear</button>
+        <button class="btn" id="plpAuto">Auto-scatter</button>
+        <button class="btn" id="plpFill">Fill plane</button>
+      </div>
+      <div class="demo__caption">Click anywhere to place a point. When two points fall close enough, a line forms between them. With enough density, the lines themselves become a plane.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Point</h4><p>A mark of position. The smallest visible element on the page or screen.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Line</h4><p>The trace of a point in motion. A path, a contour, a rule, a stem of type.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Plane</h4><p>A two-dimensional surface or field — the page itself, a block of color, a paragraph as gray tone.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Halftone</h4><p>A printing technique that simulates continuous tone using arrays of tiny dots of varied size.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Vector vs. bitmap</h4><p>Vectors store geometry; bitmaps store pixels. The first scales infinitely; the second has a native resolution.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 3: RHYTHM AND BALANCE ================== -->
+<section class="section section--paper-2" id="ch3">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">03</div>
+      <div class="chapter-head__kicker">Chapter Three</div>
+      <h2 class="chapter-head__title">Rhythm &amp; Balance</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "I pay close attention to the variety of shapes and sizes; their distribution becomes the rhythm of the page."
+      <cite>— Sergei Forostovskii</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Balance is one of the deepest human responses to form. We stand upright; our bodies are bilaterally symmetrical; we feel a kind of vertigo at images that tilt without resolution. Designers manage that physical instinct on the flat surface of the page. Symmetrical balance — a centered axis with equivalent weights on either side — reads as formal, monumental, classical. Asymmetrical balance — distributing unequal elements so they still feel resolved — reads as dynamic, modern, energetic.</p>
+
+      <p>Rhythm is balance in time. A repeating element establishes a pulse; varying that element introduces syncopation. Designers create rhythm with size, color, spacing, alignment, and the implied direction of forms. Too much repetition becomes monotony; too much variation becomes noise. The challenge is to find a beat that is steady enough to register and irregular enough to keep the eye moving.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 03 — Toggle balance modes</div>
+      <div class="rhythm-stage is-sym" id="rhythmStage">
+        <div class="rhythm-bar"></div>
+        <div class="rhythm-bar"></div>
+        <div class="rhythm-bar"></div>
+        <div class="rhythm-bar"></div>
+        <div class="rhythm-bar"></div>
+      </div>
+      <div class="demo__controls">
+        <button class="btn is-active" data-rhythm="sym">Symmetrical</button>
+        <button class="btn" data-rhythm="asym">Asymmetrical</button>
+      </div>
+      <div class="demo__caption">The same five elements arranged around a central axis (symmetrical) and along an active diagonal (asymmetrical). Both compositions can feel balanced — they balance different forces.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Symmetry</h4><p>Mirror-image balance around a central axis. Conveys stability, tradition, formality.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Asymmetry</h4><p>Unequal weights resolved by counterbalance. Conveys movement, contemporaneity, energy.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Visual weight</h4><p>The relative attention a shape commands — larger, darker, more saturated elements weigh more.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Dynamic balance</h4><p>Equilibrium achieved through tension rather than mirroring. The classical asymmetric ideal.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Repetition with variation</h4><p>A consistent beat punctuated by change. The basis of all visual rhythm.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 4: SCALE ================== -->
+<section class="section section--paper" id="ch4">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">04</div>
+      <div class="chapter-head__kicker">Chapter Four</div>
+      <h2 class="chapter-head__title">Scale</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Miss Darcy was tall, and on a larger scale than Elizabeth; and, though little more than sixteen, her figure was formed."
+      <cite>— Jane Austen, Pride and Prejudice</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Scale is at once a measurable fact and a felt impression. <strong>Objective scale</strong> is the literal dimension of a thing — a billboard versus a business card, a 12-point caption versus a 96-point headline. <strong>Subjective scale</strong> is the sense of size you carry away: an image of an ant filling the screen reads as huge, even though its actual pixels may be modest.</p>
+
+      <p>Designers use scale to create hierarchy, depth, and meaning. Putting two elements at extremely different sizes — what is called scale contrast — generates tension and drama; it also clarifies importance. A composition with no scale contrast feels static. Cropping is a scale device: showing only part of an object enlarges what remains and forces the viewer to extrapolate. Whether a thing on the page feels intimate, vast, or human-sized has more to do with relationships than measurements.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 04 — Drag the slider</div>
+      <div class="scale-stage">
+        <span class="scale-stage__word" id="scaleWord" style="font-size: 80px;">SCALE</span>
+      </div>
+      <div class="demo__controls" style="margin-top:1rem;">
+        <input type="range" min="14" max="280" value="80" class="slider" id="scaleSlider" aria-label="Scale" style="flex:1;">
+      </div>
+      <div class="scale-row" aria-hidden="true">
+        <span>scale</span><span>scale</span><span>scale</span><span>SCALE</span><span>SCALE</span>
+      </div>
+      <div class="demo__caption">The same word, five sizes. Identity is preserved while meaning shifts: at small scale it whispers, at large scale it shouts. The lower row shows five fixed scale steps in one composition.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Objective scale</h4><p>The literal, measurable dimensions of an element in inches, pixels, or points.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Subjective scale</h4><p>The size something feels — affected by context, cropping, and surrounding elements.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Scale contrast</h4><p>Pairing very large and very small elements to create tension, depth, and hierarchy.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Cropping</h4><p>Cutting an image at its edge to imply that it continues beyond the frame, enlarging what remains.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 5: TEXTURE ================== -->
+<section class="section section--paper-2" id="ch5">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">05</div>
+      <div class="chapter-head__kicker">Chapter Five</div>
+      <h2 class="chapter-head__title">Texture</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "If you touch something (it is likely) someone will feel it."
+      <cite>— Rick Valicenti</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Texture exists in two registers. <strong>Physical texture</strong> is the actual surface of a thing — the tooth of uncoated paper, the burr of letterpress, the slick of a foil stamp. <strong>Optical or virtual texture</strong> is the appearance of texture on a smooth surface: halftone dots that imitate the grain of a photograph, repeated lines that simulate the warp of fabric, a digital noise filter that gives a flat field the feel of a worn poster.</p>
+
+      <p>Typography itself is a texture. A page of dense text reads as a gray field at a distance; condensed letters create a tighter weave than expanded ones; tight leading thickens the gray, loose leading thins it. Designers compose with textures the way painters compose with brushwork — pairing prickly with soft, smooth with rough, sparse with dense — to control how a surface invites the eye to enter, rest, or move on.</p>
+    </div>
+
+    <div class="demo demo--light">
+      <div class="demo__label">Demo 05 — Four textures</div>
+      <div class="texture-grid">
+        <div class="texture texture--dots"><div class="texture__label">Halftone</div></div>
+        <div class="texture texture--cross"><div class="texture__label">Crosshatch</div></div>
+        <div class="texture texture--type" id="textureType"><div class="texture__label">Typographic</div></div>
+        <div class="texture texture--noise"><div class="texture__label">Noise grain</div></div>
+      </div>
+      <div class="demo__caption">Halftone uses dot size to imitate tone. Crosshatch imitates engraving. Typographic texture treats letters as a woven gray field. Noise grain imitates the random scatter of film or print.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Physical texture</h4><p>The tactile surface of a printed or fabricated object — paper grain, embossing, varnish.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Optical texture</h4><p>The visual sensation of texture on a smooth surface, simulated by pattern, halftone, or noise.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Typographic texture</h4><p>The gray value created by a block of text, controlled by weight, size, leading, and tracking.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Texture contrast</h4><p>Pairing dissimilar textures — smooth/rough, dense/sparse — to direct attention and create rhythm.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 6: COLOR ================== -->
+<section class="section section--paper" id="ch6">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">06</div>
+      <div class="chapter-head__kicker">Chapter Six</div>
+      <h2 class="chapter-head__title">Color</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "All colors are the friends of their neighbors and the lovers of their opposites."
+      <cite>— Marc Chagall</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Color is the most emotionally charged element of design and the most context-dependent. A single swatch of gray will read as warm against a cool surround and cool against a warm one; a saturated red looks brighter against gray than against another red. Josef Albers spent decades demonstrating that "color is the most relative medium in art." Designers do not choose colors so much as they choose relationships.</p>
+
+      <p>The standard color wheel organizes hues into primaries, secondaries, and tertiaries. Pairs sitting opposite each other are <strong>complements</strong>; placed side by side they vibrate, set inside one another they neutralize. <strong>Analogous</strong> colors — neighbors on the wheel — produce harmony. Beyond hue, every color has a <strong>value</strong> (lightness) and a <strong>saturation</strong> (intensity), and most decisions in practice are decisions about those three dimensions, not about the hue alone.</p>
+
+      <p>The mechanics differ by medium. Screens emit light and mix it <strong>additively</strong> in RGB — red, green, and blue combining to white. Print absorbs light and mixes it <strong>subtractively</strong> in CMYK — cyan, magenta, yellow, and black layered to absorb everything but the color you see. A designer choosing colors for both must navigate the gap between gamuts: a vivid screen color can be unreachable in ink, and a deep printed color can look dull on screen.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 06a — Interactive color wheel</div>
+      <div class="color-wheel-wrap">
+        <svg class="color-wheel" id="colorWheel" viewBox="-110 -110 220 220" role="img" aria-label="Color wheel"></svg>
+        <div class="color-info">
+          <div id="colorWheelInfo">
+            Hover or click a slice. Complementary pairs sit directly across the wheel — red ↔ green, blue ↔ orange, yellow ↔ violet. Placed side by side, complements vibrate; layered, they neutralize.
+          </div>
+          <div class="hvs">
+            <div>
+              <div class="hvs__label">Hue</div>
+              <div class="hvs__row hvs__row--hue"></div>
+            </div>
+            <div>
+              <div class="hvs__label">Value</div>
+              <div class="hvs__row hvs__row--val"></div>
+            </div>
+            <div>
+              <div class="hvs__label">Saturation</div>
+              <div class="hvs__row hvs__row--sat"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 06b — The Albers effect</div>
+      <div class="albers">
+        <div class="albers__field"><div class="albers__inner"></div></div>
+        <div class="albers__field"><div class="albers__inner"></div></div>
+        <div class="albers__caption">Both center squares are the same gray. The surround changes everything.</div>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 06c — Additive vs subtractive</div>
+      <div class="cmyk-rgb">
+        <div class="color-mix color-mix--rgb">
+          <div class="color-mix__circle c1"></div>
+          <div class="color-mix__circle c2"></div>
+          <div class="color-mix__circle c3"></div>
+          <div class="color-mix__label">RGB · Additive · Screen</div>
+        </div>
+        <div class="color-mix color-mix--cmyk">
+          <div class="color-mix__circle c1"></div>
+          <div class="color-mix__circle c2"></div>
+          <div class="color-mix__circle c3"></div>
+          <div class="color-mix__label">CMYK · Subtractive · Print</div>
+        </div>
+      </div>
+      <div class="demo__caption">Light mixes additively: red, green, and blue combine toward white. Ink mixes subtractively: cyan, magenta, and yellow combine toward black.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Primaries</h4><p>Red, yellow, blue — colors that cannot be mixed from other colors in the traditional model.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Secondaries</h4><p>Orange, green, violet — formed by mixing pairs of primaries.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Complements</h4><p>Colors opposite on the wheel. Together they intensify; mixed they neutralize.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Hue / Value / Saturation</h4><p>The three independent dimensions of any color.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Additive (RGB)</h4><p>Light-based mixing on screens. Red + green + blue = white.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Subtractive (CMYK)</h4><p>Ink-based mixing in print. Cyan + magenta + yellow approaches black.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Bezold effect</h4><p>Changing a single color in a composition shifts the apparent color of every other element.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 7: GESTALT ================== -->
+<section class="section section--dark" id="ch7">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">07</div>
+      <div class="chapter-head__kicker">Chapter Seven</div>
+      <h2 class="chapter-head__title">Gestalt Principles</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "The form of an object is not more important than the form of the space surrounding it."
+      <cite>— Malcolm Grear</cite>
+    </blockquote>
+
+    <div class="lede" style="color:#ddd;">
+      <p>Gestalt psychology, developed in early twentieth-century Germany, proposes that perception is not passive intake but active organization. The eye does not register isolated pixels; it builds wholes. Confronted with scattered elements it groups them, with broken contours it closes them, with ambiguous figures it flips between readings. Designers exploit this constant interpretive activity by giving the eye just enough information to complete the picture itself.</p>
+
+      <p>The classical grouping principles — similarity, proximity, closure, continuity, common region, symmetry — describe the rules by which the visual system assembles parts into wholes. Equally important is the figure/ground relationship: any closed shape sits inside a surrounding field, and the eye negotiates which is which. Reversible figures (Rubin's vase, the face-or-vase paradox) demonstrate that figure and ground are not fixed properties of the image but decisions the viewer makes.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 07a — Six grouping principles</div>
+      <div class="gestalt-grid">
+        <div class="gestalt">
+          <div class="gestalt__name">Similarity</div>
+          <div class="gestalt__stage">
+            <div class="g-similarity">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="gestalt">
+          <div class="gestalt__name">Proximity</div>
+          <div class="gestalt__stage">
+            <div class="g-proximity">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="gestalt">
+          <div class="gestalt__name">Closure</div>
+          <div class="gestalt__stage">
+            <div class="g-closure">
+              <svg viewBox="0 0 100 100">
+                <path d="M 50 10 A 40 40 0 0 1 90 50" fill="none" stroke="#F5C518" stroke-width="6"/>
+                <path d="M 90 50 A 40 40 0 0 1 50 90" fill="none" stroke="#F5C518" stroke-width="6"/>
+                <path d="M 50 90 A 40 40 0 0 1 10 50" fill="none" stroke="#F5C518" stroke-width="6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gestalt">
+          <div class="gestalt__name">Continuity</div>
+          <div class="gestalt__stage">
+            <div class="g-continuity">
+              <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+                <path d="M0 50 Q 100 -30 200 50" fill="none" stroke="#CC2233" stroke-width="4"/>
+                <path d="M0 80 Q 100 120 200 20" fill="none" stroke="#0033BB" stroke-width="4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="gestalt">
+          <div class="gestalt__name">Symmetry</div>
+          <div class="gestalt__stage">
+            <div class="g-symmetry">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="gestalt">
+          <div class="gestalt__name">Simplicity</div>
+          <div class="gestalt__stage">
+            <div class="g-simplicity">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="demo__caption">The visual system groups by likeness (similarity), nearness (proximity), implied closure, smooth continuation, mirrored axes, and the simplest possible reading (simplicity).</div>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 07b — Figure / ground (click to invert)</div>
+      <div class="figground" id="figground">
+        <div class="figground__shape"></div>
+        <div class="figground__caption">Click to flip</div>
+      </div>
+      <div class="demo__caption">Two profiles facing a vase — or a vase between two profiles? The figure and the ground are not fixed properties; the viewer decides.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Active perception</h4><p>Seeing is constructive. The brain builds wholes from fragments, edges, and contrasts.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Figure / ground</h4><p>The negotiation between an object and its surrounding field. Negative space is never empty.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Grouping</h4><p>By similarity, proximity, common region, or shared motion — the rules by which parts cohere.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Closure</h4><p>The tendency to perceive incomplete forms as complete, filling in missing contour.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Continuity</h4><p>The eye prefers smooth paths. Lines that cross are read as continuing, not bouncing.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Ambiguity</h4><p>Images that admit more than one reading. A productive resource when meanings can coexist.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 8: FRAMING ================== -->
+<section class="section section--paper-2" id="ch8">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">08</div>
+      <div class="chapter-head__kicker">Chapter Eight</div>
+      <h2 class="chapter-head__title">Framing</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "The frame is in no way a background . . . but neither is its thickness as margin a figure."
+      <cite>— Jacques Derrida</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Frames are everywhere: the white margin of a page, the edge of a screen, the matte around a photograph, the caption beneath it, the meta tag around a web image. A frame announces: <em>this is the territory of the work; everything outside is something else</em>. Cropping is a kind of frame too — the decision about where an image stops shapes what it means.</p>
+
+      <p>Designers control the relationship between image and frame deliberately. A <strong>full bleed</strong> pushes the image to the very edge, creating energy and immersion — the eye has nowhere to rest. A wide <strong>margin</strong> creates breathing room and formality, treating the image as an object to be contemplated. A <strong>partial bleed</strong> lets the image escape on one or two sides while staying contained on others, creating asymmetric tension. A <strong>border</strong> closes the image off, framing it like a painting. <strong>Cropping</strong> tightens onto a detail, implying continuation beyond.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 08 — Switch framing modes</div>
+      <div class="framing-stage" id="framingStage">
+        <div class="framing-stage__pic"></div>
+      </div>
+      <div class="demo__controls">
+        <button class="btn is-active" data-frame="">Full bleed</button>
+        <button class="btn" data-frame="f-margin">Margin</button>
+        <button class="btn" data-frame="f-partial">Partial bleed</button>
+        <button class="btn" data-frame="f-bordered">Bordered</button>
+        <button class="btn" data-frame="f-cropped">Cropped</button>
+      </div>
+      <div class="demo__caption">The same image, five framings. Each one changes the rhythm of attention and the implied scale.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Cropping</h4><p>Cutting an image to reframe it. A close crop intensifies; a wide crop contextualizes.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Margins</h4><p>Empty space around content. Breathing room, formality, and a place for the eye to land.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Bleeds</h4><p>Imagery that extends past the trim edge. Creates immersion and visual energy.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Borders &amp; rules</h4><p>Lines that contain and define territory, separating one zone from another.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Captions</h4><p>Verbal frames. They tell you how to look at the image — and sometimes change what you see.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 9: HIERARCHY ================== -->
+<section class="section section--paper" id="ch9">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">09</div>
+      <div class="chapter-head__kicker">Chapter Nine</div>
+      <h2 class="chapter-head__title">Hierarchy</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Design is the conscious effort to impose a meaningful order."
+      <cite>— Victor Papanek</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Visual hierarchy is the arrangement of elements in order of importance, so the eye reads through them in a deliberate sequence. Without hierarchy a page is democratic to a fault — every word equally insistent, no path through the content. With hierarchy the designer says: <em>look here first, then here, then here</em>, releasing the reader from the burden of triage.</p>
+
+      <p>The signals are familiar but combine in countless ways. <strong>Scale</strong> declares importance loudly. <strong>Weight</strong> (bold versus regular) introduces emphasis without changing size. <strong>Color</strong> draws the eye to a single accent in an otherwise neutral field. <strong>Spacing</strong> separates groups and creates pauses. <strong>Alignment</strong> establishes a structural grammar. The strongest hierarchies use several of these signals in concert, each reinforcing the others.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 09 — Click to step through four levels</div>
+      <div class="hier hier--0" id="hierStage">
+        <h3>Graphic Design</h3>
+        <h4>The New Basics</h4>
+        <p>An introduction to the formal language of design, organized as seventeen chapters of interactive demonstrations. Each chapter isolates a single principle and gives it room to breathe — formstorming, point and line, rhythm, color, gestalt, modularity, motion.</p>
+        <small>Ellen Lupton &amp; Jennifer Cole Phillips · Princeton Architectural Press</small>
+      </div>
+      <div class="demo__controls">
+        <button class="btn is-active" data-hier="0">0 · None</button>
+        <button class="btn" data-hier="1">1 · Weight</button>
+        <button class="btn" data-hier="2">2 · Scale + color</button>
+        <button class="btn" data-hier="3">3 · Full hierarchy</button>
+      </div>
+      <div class="demo__caption">Same content, four treatments. The fourth combines scale, weight, color, spacing, and rule lines into a complete typographic order.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Scale</h4><p>Size declares importance loudly. The headline outranks the caption by sheer dimension.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Weight</h4><p>Bold against regular creates emphasis at constant size — useful inside running text.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Color</h4><p>A single accent color in a neutral field becomes the loudest element on the page.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Spacing</h4><p>White space groups and separates. A rest in the typography is as eloquent as a note.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Alignment</h4><p>A shared edge gives the eye a path. Misaligned elements either lock together or fall apart.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 10: LAYERS ================== -->
+<section class="section section--paper-2" id="ch10">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">10</div>
+      <div class="chapter-head__kicker">Chapter Ten</div>
+      <h2 class="chapter-head__title">Layers</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Under cities you always find other cities, like geological strata."
+      <cite>— Pablo Picasso</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Layers are stacks of information. In printing they are literal: a four-color separation is four sheets of acetate, each carrying one ink. In design software a layer is a transparent plane on which a single piece of content sits, freely moved and recombined. In collage the layers are torn paper. In a map they are roads on top of terrain on top of administrative boundaries. In music notation they are voices on a staff.</p>
+
+      <p>Designers reach for layers when they want to coordinate independent pieces of information in the same field without merging them. A magazine cover stacks photography, headline, masthead, and barcode. A user interface stacks content, controls, navigation, and notifications. Each layer can be edited without disturbing the rest, and the relations between them — opacity, blending, masking — are themselves part of the composition.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 10 — Toggle the layers</div>
+      <div class="layer-stage" id="layerStage">
+        <div class="layer layer--1" data-layer="1"></div>
+        <div class="layer layer--2" data-layer="2"></div>
+        <div class="layer layer--3" data-layer="3"></div>
+        <div class="layer layer--4" data-layer="4"></div>
+      </div>
+      <div class="layer-controls">
+        <label class="layer-check"><input type="checkbox" checked data-layer-toggle="1">Layer 1 · Field</label>
+        <label class="layer-check"><input type="checkbox" checked data-layer-toggle="2">Layer 2 · Sun</label>
+        <label class="layer-check"><input type="checkbox" checked data-layer-toggle="3">Layer 3 · Hatch</label>
+        <label class="layer-check"><input type="checkbox" checked data-layer-toggle="4">Layer 4 · Type</label>
+      </div>
+      <div class="demo__caption">Four independent layers — a blue field, a yellow sun, red diagonal hatching, and a word — combine into a single image. Toggle any of them off to see how the composite changes.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Physical layers</h4><p>Print separations and physical collage. Each sheet carries one piece of the final image.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Digital layers</h4><p>Independent planes in software (Photoshop, Figma, After Effects) — editable, transparent, stackable.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Collage</h4><p>The deliberate juxtaposition of fragments from different sources, layered into a new whole.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Data layers</h4><p>Maps, dashboards, and diagrams that overlay variables — roads above terrain above zoning.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Temporal layers</h4><p>In music and motion, simultaneous voices that align in time but remain distinct.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 11: TRANSPARENCY ================== -->
+<section class="section section--paper" id="ch11">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">11</div>
+      <div class="chapter-head__kicker">Chapter Eleven</div>
+      <h2 class="chapter-head__title">Transparency</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Transparency means a simultaneous perception of different spatial locations."
+      <cite>— Gyorgy Kepes</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Transparency is the property of seeing one thing through another. In physical life it lives in glass, water, vellum, and gauze; in print it is the overlap of inks, the trace of a watermark, the gradient of a screened tint. In software it is opacity, blending mode, alpha channel — the ability to set any layer to any percentage of presence and watch new colors emerge where layers cross.</p>
+
+      <p>Gyorgy Kepes, writing in <em>The Language of Vision</em>, observed that transparency creates a paradox of position: an object that is transparent occupies two places at once, both in front of and behind. Designers use that paradox to imply depth on a flat surface, to compress multiple meanings into a single image, and to dissolve sharp boundaries between layers. A logo set in 30% opacity over an image becomes a watermark; a colored shape at 50% over another creates a mixed third color that belongs to neither.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 11 — Drag the sliders</div>
+      <div class="trans-stage">
+        <div class="trans-shape trans-shape--1" id="trans1"></div>
+        <div class="trans-shape trans-shape--2" id="trans2"></div>
+      </div>
+      <div class="trans-controls">
+        <div class="trans-control">
+          <label>Red opacity · <output id="trans1Val">100%</output></label>
+          <input type="range" min="0" max="100" value="100" class="slider" id="trans1Slider">
+        </div>
+        <div class="trans-control">
+          <label>Blue opacity · <output id="trans2Val">100%</output></label>
+          <input type="range" min="0" max="100" value="100" class="slider" id="trans2Slider">
+        </div>
+      </div>
+      <div class="demo__caption">Where the two semi-transparent rectangles overlap, a third color appears — neither red nor blue, but a mixture that exists only at the intersection.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Opacity</h4><p>The degree to which a layer obscures what is beneath it, from 0% (invisible) to 100% (opaque).</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Graphic transparency</h4><p>An illusion of layering produced by overlapping lines, hatches, or shapes — without literal alpha.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Blend modes</h4><p>Mathematical rules for combining stacked layers — multiply, screen, overlay, difference.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Fades &amp; dissolves</h4><p>Animated transparency over time — a layer appearing or disappearing gradually.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 12: MODULARITY ================== -->
+<section class="section section--paper-2" id="ch12">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">12</div>
+      <div class="chapter-head__kicker">Chapter Twelve</div>
+      <h2 class="chapter-head__title">Modularity</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Two eight-stud LEGO bricks can be combined in twenty-four ways. Six bricks, in over a hundred million."
+      <cite>— LEGO Group</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>A module is a unit that combines with copies of itself to make a larger whole. The Roman alphabet is modular: twenty-six letters can spell every word in English. A LEGO brick is modular: a small number of shapes generates an effectively infinite set of structures. In design, modular systems liberate rather than constrain — the rules of combination, once fixed, free the designer to focus on what is being said with the modules rather than how each module is drawn.</p>
+
+      <p>Modular thinking underlies most contemporary design systems: corporate identity programs that compose every artifact from a fixed kit of parts; pixel typefaces, where every letter is built from on/off cells on a grid; component libraries in software, where buttons, cards, and dialogs are assembled from shared atoms. The pixel grid below is one of the simplest possible modular systems: 81 cells, each on or off. Out of those two bits per cell flow letters, ornaments, symbols, faces — anything you can draw at 9×9.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 12 — Click cells to build a letterform</div>
+      <div class="pixel-grid" id="pixelGrid"></div>
+      <div class="demo__controls">
+        <button class="btn" data-letter="A">Preset · A</button>
+        <button class="btn" data-letter="B">Preset · B</button>
+        <button class="btn" data-letter="C">Preset · C</button>
+        <button class="btn" data-letter="H">Preset · H</button>
+        <button class="btn" data-letter="clear">Clear</button>
+      </div>
+      <div class="demo__caption">A 9×9 grid of binary cells. The same 81 modules can produce every letter of an alphabet, plus icons, symbols, and ornaments — bounded creativity from a minimal kit.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Module</h4><p>A unit designed to combine with copies of itself. The atom of a modular system.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Constraint liberates</h4><p>Fixing the kit of parts removes a class of decisions and clarifies what remains.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Pixel typefaces</h4><p>Letters built from on/off grid cells. The native typography of low-resolution displays.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Design systems</h4><p>Component libraries that compose entire products from a finite vocabulary of parts.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 13: GRID ================== -->
+<section class="section section--paper" id="ch13">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">13</div>
+      <div class="chapter-head__kicker">Chapter Thirteen</div>
+      <h2 class="chapter-head__title">Grid</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Typography is mostly an act of dividing a limited surface."
+      <cite>— Willi Baumeister</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>A grid is an invisible armature of columns, rows, margins, and gutters that subdivides a page or screen into manageable units. The Swiss grid tradition, codified by Josef Müller-Brockmann in the 1950s, treats the grid as a tool of democracy: there is no privileged center, every position is equivalent, and the designer's job is to find the most legible distribution of content across a neutral field. Many of the most enduring publication and identity systems were built on such grids.</p>
+
+      <p>Grids are not cages. They are starting points from which a designer departs. The most interesting compositions tend to follow a grid for most of their content while breaking it precisely where attention is wanted. A 12-column grid is a classic default because it subdivides cleanly into 2, 3, 4, and 6 columns; a designer can begin a layout in one configuration and shift fluidly into another. Below: the same content placed inside a 12-column grid, with the option to recombine column spans.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 13 — Try different column structures</div>
+      <div class="grid-demo" id="gridDemo">
+        <div class="grid-block red" style="grid-column: 1 / 7; grid-row: 1 / 4;">Block A</div>
+        <div class="grid-block blue" style="grid-column: 7 / 13; grid-row: 1 / 3;">Block B</div>
+        <div class="grid-block yellow" style="grid-column: 7 / 10; grid-row: 3 / 5;">Block C</div>
+        <div class="grid-block" style="grid-column: 10 / 13; grid-row: 3 / 4;">Block D</div>
+        <div class="grid-block" style="grid-column: 1 / 7; grid-row: 4 / 6;">Block E</div>
+        <div class="grid-block" style="grid-column: 10 / 13; grid-row: 4 / 6;">Block F</div>
+      </div>
+      <div class="demo__controls">
+        <button class="btn is-active" data-cols="12">12 columns</button>
+        <button class="btn" data-cols="6">6 columns</button>
+        <button class="btn" data-cols="4">4 columns</button>
+        <button class="btn" data-cols="3">3 columns</button>
+        <button class="btn" data-cols="2">2 columns</button>
+      </div>
+      <div class="demo__caption">The same blocks land in different configurations as the underlying column count changes. The grid is a fluid invitation, not a fixed enclosure.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Columns</h4><p>Vertical zones that distribute content across the page. The fundamental unit of a grid.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Margins</h4><p>The outer frame of empty space that contains the live area of the page.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Hang line</h4><p>A horizontal that elements align to at the top, like type hanging from a clothesline.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Grid as democracy</h4><p>No position is privileged; every zone is equally available — a modernist ethical claim.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Breaking the grid</h4><p>A single deliberate violation of the grid draws all the energy of the page. Use sparingly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 14: PATTERN ================== -->
+<section class="section section--paper-2" id="ch14">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">14</div>
+      <div class="chapter-head__kicker">Chapter Fourteen</div>
+      <h2 class="chapter-head__title">Pattern</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "The secret to success in all ornament is the production of a broad general effect by the repetition of a few simple elements."
+      <cite>— Owen Jones, The Grammar of Ornament</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Pattern is the repetition of an element across a surface according to a rule. The simplest patterns repeat a single element on a regular interval — dots in a grid, stripes at fixed spacing, diamonds in a tessellation. More elaborate patterns combine motifs that interlock, vary in scale, or shift in color across the field. Every textile tradition, every wallpaper, every tiled floor in history is an essay in pattern.</p>
+
+      <p>The modern designer has access not only to the historical vocabulary of ornament but to algorithmic methods of pattern generation. A few lines of code can produce a randomized scatter, a Voronoi tessellation, a recursive subdivision, or a binary-tree branching. The canvas below cycles through five patterns, each generated procedurally — the same idea Owen Jones articulated in 1856, but produced by the rules of a program rather than the hand of a draftsman.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 14 — Switch pattern modes</div>
+      <canvas class="canvas-stage" id="patternCanvas"></canvas>
+      <div class="demo__controls">
+        <button class="btn is-active" data-pattern="dots">Dots grid</button>
+        <button class="btn" data-pattern="stripes">Stripes</button>
+        <button class="btn" data-pattern="diamonds">Diamonds</button>
+        <button class="btn" data-pattern="scatter">Random scatter</button>
+        <button class="btn" data-pattern="tree">Binary tree</button>
+      </div>
+      <div class="demo__caption">Five procedural patterns, each generated live from a small rule. Dots, stripes, and diamonds tile mechanically; scatter introduces randomness; the binary tree is recursive.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Dots</h4><p>Isolated points repeated across a field. The simplest pattern element.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Stripes</h4><p>Parallel lines at regular intervals — the simplest one-dimensional pattern.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Grids &amp; tessellations</h4><p>Two-dimensional tilings that fill the plane without gaps or overlaps.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Figure / ground in pattern</h4><p>Every repeating element creates an equivalent repeating space between elements.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Cultural ornament</h4><p>Pattern as a vocabulary tied to place and tradition — Persian, Maori, Yoruba, Japanese.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 15: DIAGRAM ================== -->
+<section class="section section--paper" id="ch15">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">15</div>
+      <div class="chapter-head__kicker">Chapter Fifteen</div>
+      <h2 class="chapter-head__title">Diagram</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "In emphasizing evidential quality and beauty, the design of statistical graphics should serve the reader, not the designer."
+      <cite>— Edward R. Tufte</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>A diagram makes relationships visible. Where an illustration depicts what something looks like, a diagram depicts how it works, or how its parts connect. A subway map is a diagram of stations and lines; a family tree is a diagram of descent; a network graph is a diagram of nodes and edges. The discipline of information design — codified by Edward Tufte, Otto Neurath, and the Isotype team — asks how to present data so that the structure of the data, not the cleverness of the designer, comes through.</p>
+
+      <p>Paul Baran's famous 1964 trio of diagrams contrasted three network topologies. A <strong>centralized</strong> network has one hub through which all traffic passes — fragile, since the hub is a single point of failure. A <strong>decentralized</strong> network has a spine of regional hubs — more robust, still structured. A <strong>distributed</strong> network has no privileged nodes; every point connects directly to several neighbors — the topology of the Internet. The same three nodes, in three relationships, generate three radically different systems.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 15 — Three network topologies</div>
+      <svg class="canvas-stage" id="networkSvg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet" style="aspect-ratio:2/1; background:#0a0a0a;"></svg>
+      <div class="demo__controls">
+        <button class="btn is-active" data-net="centralized">Centralized</button>
+        <button class="btn" data-net="decentralized">Decentralized</button>
+        <button class="btn" data-net="distributed">Distributed</button>
+      </div>
+      <div class="demo__caption">Three diagrams of the same set of nodes. The relationship between them — not the nodes themselves — defines the system.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Nodes and edges</h4><p>The two atoms of any network diagram — points of activity and the connections between them.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Centralized</h4><p>One hub, many spokes. Efficient but fragile — the hub is a single point of failure.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Decentralized</h4><p>Multiple regional hubs. Compromise between efficiency and resilience.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Distributed</h4><p>No privileged nodes. Maximum redundancy, the topology of the Internet.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Information vs propaganda</h4><p>Tufte's distinction: clear data presentation serves the reader; rhetorical chartjunk serves the designer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 16: TIME AND MOTION ================== -->
+<section class="section section--dark" id="ch16">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">16</div>
+      <div class="chapter-head__kicker">Chapter Sixteen</div>
+      <h2 class="chapter-head__title">Time &amp; Motion</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "Every drawing can be understood as a motion study, since it is born from movement."
+      <cite>— László Moholy-Nagy</cite>
+    </blockquote>
+
+    <div class="lede" style="color:#ddd;">
+      <p>Motion adds time to design. A static composition manages tension across the surface of the page; a moving composition manages tension across the duration of an animation. Designers working with motion think in terms of in-points and out-points, easing curves, beats, pauses, and pacing — borrowed in equal measure from film, music, and dance.</p>
+
+      <p>Even on the page, motion is often implied. A diagonal line moves the eye; a tilted figure leans into the next frame; a sequence of repeated shapes establishes a pulse. Eadweard Muybridge's nineteenth-century motion studies and the Italian Futurists' multi-exposed figures showed that drawing could record time as well as position. Today, the same instincts are exercised in animated logos, interface transitions, and scroll-driven storytelling.</p>
+
+      <p>There are roughly seven independent dimensions along which an object can change over time: its <strong>position</strong>, <strong>rotation</strong>, <strong>scale</strong>, <strong>shape</strong>, <strong>color</strong>, <strong>layer depth</strong>, and <strong>transparency</strong>. The richest animations modulate several of these at once.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 16 — Seven modes of change</div>
+      <div class="motion-stage m-position" id="motionStage">
+        <div class="motion-shape"></div>
+      </div>
+      <div class="demo__controls">
+        <button class="btn is-active" data-motion="m-position">Position</button>
+        <button class="btn" data-motion="m-rotation">Rotation</button>
+        <button class="btn" data-motion="m-scale">Scale</button>
+        <button class="btn" data-motion="m-shape">Shape</button>
+        <button class="btn" data-motion="m-color">Color</button>
+        <button class="btn" data-motion="m-layer">Layer depth</button>
+        <button class="btn" data-motion="m-trans">Transparency</button>
+      </div>
+      <div class="demo__caption">A single shape demonstrates each of the seven independent modes of change. Compound animations combine several at once.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Implied motion</h4><p>The illusion of movement in a static image — diagonals, blur, repeated forms, leaning bodies.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Easing</h4><p>The acceleration curve of an animation. Linear feels mechanical; eased curves feel natural.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Storyboards</h4><p>Sequences of frames that plan a motion piece shot by shot, beat by beat.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Style frames</h4><p>High-fidelity stills that establish the visual language of a motion piece without animating it.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Interactive motion</h4><p>Motion driven by user input — scroll, hover, click — rather than by a fixed timeline.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== CH 17: RULES AND RANDOMNESS ================== -->
+<section class="section section--paper" id="ch17">
+  <div class="container">
+    <div class="chapter-head">
+      <div class="chapter-head__num">17</div>
+      <div class="chapter-head__kicker">Chapter Seventeen</div>
+      <h2 class="chapter-head__title">Rules &amp; Randomness</h2>
+      <div class="chapter-head__rule"></div>
+    </div>
+
+    <blockquote class="quote">
+      "The idea becomes a machine that makes the art."
+      <cite>— Sol LeWitt, Paragraphs on Conceptual Art</cite>
+    </blockquote>
+
+    <div class="lede">
+      <p>Sol LeWitt's wall drawings are instructions, not images. The artist writes a rule — "ten thousand straight lines, ten thousand random lines" — and a draftsperson executes it. The output is not a single picture but a class of pictures, each one obeying the rule, each one different. This is the central insight of rule-based design: a system specified at a higher level than the artifact can generate many artifacts, and the variation between them is part of the work.</p>
+
+      <p>Digital tools take this further. A handful of variables — number of elements, range of sizes, palette, distance threshold — define a space of possible compositions. The designer adjusts the rules, the computer samples the space, and an entire identity, publication, or interface can be generated as variations on a theme. Programs like Processing, p5.js, and modern shader languages made this approach accessible to designers. Casey Reas (C.E.B. Reas), one of Processing's co-creators, has spent his career exploring how rules and randomness can collaborate.</p>
+
+      <p>The canvas below sketches the idea. A few sliders define a small generative system; pressing <em>Generate</em> samples a new artifact within those rules. Tight rules and a fixed seed would produce a stable identity. Looser rules with more randomness produce a family of related but never-repeated images.</p>
+    </div>
+
+    <div class="demo">
+      <div class="demo__label">Demo 17 — Generative system</div>
+      <canvas class="canvas-stage" id="genCanvas"></canvas>
+      <div class="gen-controls">
+        <div class="gen-control">
+          <label>Elements · <output id="genCountOut">80</output></label>
+          <input type="range" min="10" max="200" value="80" class="slider" id="genCount">
+        </div>
+        <div class="gen-control">
+          <label>Rotation rule · <output id="genRotOut">free</output></label>
+          <input type="range" min="0" max="2" value="0" step="1" class="slider" id="genRot">
+        </div>
+        <div class="gen-control">
+          <label>Palette · <output id="genPalOut">bauhaus</output></label>
+          <input type="range" min="0" max="2" value="0" step="1" class="slider" id="genPal">
+        </div>
+        <div class="gen-control">
+          <label>Connection distance · <output id="genDistOut">80</output></label>
+          <input type="range" min="0" max="200" value="80" class="slider" id="genDist">
+        </div>
+      </div>
+      <div class="demo__controls">
+        <button class="btn" id="genGo">Generate</button>
+      </div>
+      <div class="demo__caption">Four parameters define a generative system. Each press of <em>Generate</em> samples one composition from the space of all possible compositions the rules allow.</div>
+    </div>
+
+    <div class="concepts">
+      <div class="concept"><span class="concept__dot"></span><h4>Algorithmic design</h4><p>Designing the system that designs the artifact. The work is the rule, not just its output.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Processing &amp; p5.js</h4><p>Programming environments for designers, popularized by Reas and Ben Fry around 2001.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Variables</h4><p>The dials of a generative system. Adjusting them traverses the space of possible outputs.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Rules vs randomness</h4><p>Pure rules produce sameness; pure randomness produces noise. The interesting region is between.</p></div>
+      <div class="concept"><span class="concept__dot"></span><h4>Sol LeWitt</h4><p>Conceptual artist whose wall drawings demonstrated that an instruction can be a work.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <h5>The Book</h5>
+      <p><strong>Graphic Design: The New Basics</strong> is a foundational textbook by Ellen Lupton and Jennifer Cole Phillips, published by Princeton Architectural Press and developed out of the design program at the Maryland Institute College of Art (MICA). It treats the principles of design as a teachable, testable system — formstorming, point and line, color, gestalt, modularity, motion — bridging modernist visual training and contemporary software-based practice.</p>
+      <div class="footer__shapes" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div>
+      <h5>About the Authors</h5>
+      <p><strong>Ellen Lupton</strong> is a curator at Cooper Hewitt, Smithsonian Design Museum, and director of the Graphic Design MFA program at MICA. Her books include <em>Thinking with Type</em>, <em>Design Is Storytelling</em>, and <em>Type on Screen</em>.</p>
+      <p style="margin-top:1rem;"><strong>Jennifer Cole Phillips</strong> directs the Graphic Design MFA program at MICA and has been a partner in the teaching practice from which this book emerged.</p>
+    </div>
+
+    <div>
+      <h5>Further Reading · Theory</h5>
+      <ul>
+        <li>Kandinsky — <em>Point and Line to Plane</em></li>
+        <li>Albers — <em>Interaction of Color</em></li>
+        <li>Itten — <em>The Art of Color</em></li>
+        <li>Kepes — <em>The Language of Vision</em></li>
+        <li>Müller-Brockmann — <em>Grid Systems</em></li>
+        <li>Tufte — <em>The Visual Display of Quantitative Information</em></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>Further Reading · Practice</h5>
+      <ul>
+        <li>Lupton — <em>Thinking with Type</em></li>
+        <li>Bringhurst — <em>The Elements of Typographic Style</em></li>
+        <li>Hochuli — <em>Detail in Typography</em></li>
+        <li>Reas &amp; Fry — <em>Processing: A Programming Handbook</em></li>
+        <li>Maeda — <em>Design by Numbers</em></li>
+        <li>Owen Jones — <em>The Grammar of Ornament</em></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>An interactive educational companion — not affiliated with the publisher.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function(){
+  'use strict';
+
+  /* ============================================================
+     NAV TOGGLE
+     ============================================================ */
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  /* ============================================================
+     HERO CANVAS — rotating Bauhaus shapes
+     ============================================================ */
+  (function heroCanvas() {
+    const c = document.getElementById('heroCanvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let W = 0, H = 0, dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+      W = c.clientWidth; H = c.clientHeight;
+      c.width = W * dpr; c.height = H * dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener('resize', resize);
+
+    const shapes = [
+      { type:'circle',   color:'#CC2233', x:.18, y:.30, r:.10, vr:.0008, rot:0 },
+      { type:'square',   color:'#0033BB', x:.78, y:.22, r:.09, vr:-.0006, rot:0 },
+      { type:'triangle', color:'#F5C518', x:.82, y:.78, r:.11, vr:.0010, rot:0 },
+      { type:'circle',   color:'#F5C518', x:.50, y:.85, r:.06, vr:-.0005, rot:0 },
+      { type:'ring',     color:'#CC2233', x:.92, y:.55, r:.07, vr:.0007, rot:0 },
+      { type:'half',     color:'#0033BB', x:.10, y:.72, r:.10, vr:.0004, rot:0 },
+      { type:'square',   color:'#F5C518', x:.35, y:.50, r:.04, vr:.0012, rot:0 },
+      { type:'triangle', color:'#CC2233', x:.62, y:.55, r:.05, vr:-.0009, rot:0 }
+    ];
+
+    function draw(shape) {
+      const cx = shape.x * W;
+      const cy = shape.y * H;
+      const size = shape.r * Math.min(W, H);
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(shape.rot);
+      ctx.fillStyle = shape.color;
+      ctx.strokeStyle = shape.color;
+      ctx.lineWidth = Math.max(2, size * 0.07);
+      switch(shape.type) {
+        case 'circle':
+          ctx.beginPath(); ctx.arc(0,0,size,0,Math.PI*2); ctx.fill();
+          break;
+        case 'ring':
+          ctx.beginPath(); ctx.arc(0,0,size,0,Math.PI*2); ctx.stroke();
+          break;
+        case 'half':
+          ctx.beginPath(); ctx.arc(0,0,size,0,Math.PI); ctx.fill();
+          break;
+        case 'square':
+          ctx.fillRect(-size,-size, size*2, size*2);
+          break;
+        case 'triangle':
+          ctx.beginPath();
+          ctx.moveTo(0,-size);
+          ctx.lineTo(size,size*.9);
+          ctx.lineTo(-size,size*.9);
+          ctx.closePath(); ctx.fill();
+          break;
+      }
+      ctx.restore();
+    }
+
+    function frame() {
+      ctx.clearRect(0,0,W,H);
+      // subtle grid in background
+      ctx.strokeStyle = 'rgba(255,255,255,.04)';
+      ctx.lineWidth = 1;
+      const step = 80;
+      for (let x = 0; x < W; x += step) {
+        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += step) {
+        ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+      }
+      shapes.forEach(s => { s.rot += s.vr; draw(s); });
+      requestAnimationFrame(frame);
+    }
+    resize();
+    requestAnimationFrame(frame);
+  })();
+
+  /* ============================================================
+     CH 1 — FORMSTORMING
+     ============================================================ */
+  (function formstorm() {
+    const grid = document.getElementById('formstormGrid');
+    if (!grid) return;
+
+    // 24 variations on the idea of "circle"
+    const variations = [
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#CC2233"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="none" stroke="#F5C518" stroke-width="8"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#0033BB"/><circle cx="50" cy="50" r="14" fill="#F5C518"/></svg>',
+      '<svg viewBox="0 0 100 100"><path d="M50 14 a 36 36 0 0 1 0 72 Z" fill="#CC2233"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="35" cy="50" r="20" fill="#F5C518"/><circle cx="65" cy="50" r="20" fill="#0033BB"/></svg>',
+      '<svg viewBox="0 0 100 100"><g fill="#fff"><circle cx="30" cy="30" r="6"/><circle cx="50" cy="30" r="6"/><circle cx="70" cy="30" r="6"/><circle cx="30" cy="50" r="6"/><circle cx="50" cy="50" r="6"/><circle cx="70" cy="50" r="6"/><circle cx="30" cy="70" r="6"/><circle cx="50" cy="70" r="6"/><circle cx="70" cy="70" r="6"/></g></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#F5C518"/><rect x="46" y="14" width="8" height="72" fill="#111"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="4 6"/></svg>',
+      '<svg viewBox="0 0 100 100"><g stroke="#CC2233" stroke-width="3" fill="none"><circle cx="50" cy="50" r="10"/><circle cx="50" cy="50" r="20"/><circle cx="50" cy="50" r="30"/></g></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#0033BB"/><path d="M30 50 L70 50 M50 30 L50 70" stroke="#F5C518" stroke-width="6"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#fff"/><circle cx="42" cy="44" r="5" fill="#111"/><circle cx="60" cy="44" r="5" fill="#111"/><path d="M38 62 Q 50 70 62 62" stroke="#111" stroke-width="3" fill="none"/></svg>',
+      '<svg viewBox="0 0 100 100"><g fill="#CC2233"><circle cx="30" cy="50" r="14"/><circle cx="50" cy="50" r="14"/><circle cx="70" cy="50" r="14"/></g></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#F5C518" transform="scale(1.4 .6) translate(-12 36)"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#0033BB"/><circle cx="62" cy="38" r="10" fill="#fff" opacity=".6"/></svg>',
+      '<svg viewBox="0 0 100 100"><path d="M50 14 a 36 36 0 1 1 -25 62" fill="none" stroke="#CC2233" stroke-width="8" stroke-linecap="round"/></svg>',
+      '<svg viewBox="0 0 100 100"><rect x="14" y="14" width="72" height="72" fill="#111"/><circle cx="50" cy="50" r="30" fill="#F5C518"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="36" cy="50" r="24" fill="#CC2233"/><circle cx="64" cy="50" r="24" fill="#0033BB" opacity=".75"/></svg>',
+      '<svg viewBox="0 0 100 100"><g fill="none" stroke="#F5C518" stroke-width="2"><circle cx="50" cy="50" r="6"/><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="18"/><circle cx="50" cy="50" r="24"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="36"/></g></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#F5C518"/><text x="50" y="58" text-anchor="middle" font-family="Space Grotesk" font-size="32" font-weight="700" fill="#111">O</text></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#CC2233"/><path d="M50 20 v60 M20 50 h60" stroke="#fff" stroke-width="2"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="80" r="22" fill="#F5C518"/><circle cx="50" cy="42" r="18" fill="#F5C518"/><circle cx="50" cy="18" r="12" fill="#F5C518"/></svg>',
+      '<svg viewBox="0 0 100 100"><path d="M50 50 m -36 0 a 36 36 0 1 0 72 0" fill="#0033BB"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#fff"/><path d="M50 50 L 86 50 A 36 36 0 0 0 50 14 Z" fill="#CC2233"/></svg>',
+      '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="none" stroke="#F5C518" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="none" stroke="#CC2233" stroke-width="3" stroke-dasharray="60 200" transform="rotate(-30 50 50)"/></svg>'
+    ];
+
+    let idx = 0;
+    function render() {
+      grid.innerHTML = '';
+      // Show 20 cells starting at idx
+      for (let i = 0; i < 20; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'formstorm__cell';
+        cell.innerHTML = variations[(idx + i) % variations.length];
+        grid.appendChild(cell);
+      }
+    }
+    function shuffle() {
+      idx = Math.floor(Math.random() * variations.length);
+      // also randomize cell order by re-rendering with random pulls
+      grid.innerHTML = '';
+      const pool = variations.slice().sort(() => Math.random() - .5);
+      for (let i = 0; i < 20; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'formstorm__cell';
+        cell.innerHTML = pool[i % pool.length];
+        grid.appendChild(cell);
+      }
+    }
+    document.getElementById('formstormNext').addEventListener('click', () => {
+      idx = (idx + 7) % variations.length;
+      render();
+    });
+    document.getElementById('formstormShuffle').addEventListener('click', shuffle);
+    render();
+  })();
+
+  /* ============================================================
+     CH 2 — POINT LINE PLANE
+     ============================================================ */
+  (function plp() {
+    const c = document.getElementById('plpCanvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let points = [];
+    const THRESH = 130;
+    let mouse = null;
+    let filled = false;
+
+    function resize() {
+      const rect = c.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      c.width = rect.width * dpr;
+      c.height = rect.height * dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      draw();
+    }
+
+    function draw() {
+      const w = c.clientWidth, h = c.clientHeight;
+      ctx.clearRect(0,0,w,h);
+      // background subtle grid
+      ctx.strokeStyle = 'rgba(255,255,255,.05)';
+      for (let x = 0; x < w; x += 40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+      for (let y = 0; y < h; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+
+      // plane fill area (convex hull-ish: just draw a translucent polygon)
+      if (filled && points.length >= 3) {
+        ctx.fillStyle = 'rgba(245,197,24,.18)';
+        ctx.beginPath();
+        // sort points by angle around centroid for visual hull
+        const cx = points.reduce((s,p)=>s+p.x,0)/points.length;
+        const cy = points.reduce((s,p)=>s+p.y,0)/points.length;
+        const sorted = points.slice().sort((a,b) => Math.atan2(a.y-cy,a.x-cx) - Math.atan2(b.y-cy,b.x-cx));
+        ctx.moveTo(sorted[0].x, sorted[0].y);
+        for (let i = 1; i < sorted.length; i++) ctx.lineTo(sorted[i].x, sorted[i].y);
+        ctx.closePath(); ctx.fill();
+      }
+
+      // lines between nearby points
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          const dx = points[i].x - points[j].x;
+          const dy = points[i].y - points[j].y;
+          const d = Math.hypot(dx, dy);
+          if (d < THRESH) {
+            ctx.strokeStyle = `rgba(204,34,51,${1 - d/THRESH})`;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(points[i].x, points[i].y);
+            ctx.lineTo(points[j].x, points[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // line from mouse to nearby
+      if (mouse) {
+        points.forEach(p => {
+          const d = Math.hypot(mouse.x - p.x, mouse.y - p.y);
+          if (d < THRESH) {
+            ctx.strokeStyle = `rgba(245,197,24,${1 - d/THRESH})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+          }
+        });
+      }
+
+      // points themselves
+      points.forEach(p => {
+        ctx.fillStyle = '#F5C518';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 4, 0, Math.PI*2);
+        ctx.fill();
+      });
+    }
+
+    function rel(e) {
+      const r = c.getBoundingClientRect();
+      const t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX - r.left, y: t.clientY - r.top };
+    }
+
+    c.addEventListener('click', (e) => {
+      const p = rel(e);
+      points.push(p);
+      filled = false;
+      draw();
+    });
+    c.addEventListener('mousemove', (e) => {
+      mouse = rel(e);
+      draw();
+    });
+    c.addEventListener('mouseleave', () => { mouse = null; draw(); });
+
+    document.getElementById('plpClear').addEventListener('click', () => {
+      points = []; filled = false; draw();
+    });
+    document.getElementById('plpAuto').addEventListener('click', () => {
+      points = [];
+      const w = c.clientWidth, h = c.clientHeight;
+      for (let i = 0; i < 30; i++) {
+        points.push({ x: Math.random()*w, y: Math.random()*h });
+      }
+      filled = false; draw();
+    });
+    document.getElementById('plpFill').addEventListener('click', () => {
+      if (points.length < 3) {
+        const w = c.clientWidth, h = c.clientHeight;
+        for (let i = 0; i < 20; i++) points.push({ x: Math.random()*w, y: Math.random()*h });
+      }
+      filled = true; draw();
+    });
+
+    window.addEventListener('resize', resize);
+    setTimeout(resize, 50);
+  })();
+
+  /* ============================================================
+     CH 3 — RHYTHM
+     ============================================================ */
+  (function rhythm() {
+    const stage = document.getElementById('rhythmStage');
+    if (!stage) return;
+    document.querySelectorAll('[data-rhythm]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-rhythm]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const mode = btn.dataset.rhythm;
+        stage.classList.remove('is-sym','is-asym');
+        stage.classList.add(mode === 'sym' ? 'is-sym' : 'is-asym');
+      });
+    });
+  })();
+
+  /* ============================================================
+     CH 4 — SCALE
+     ============================================================ */
+  (function scale() {
+    const word = document.getElementById('scaleWord');
+    const slider = document.getElementById('scaleSlider');
+    if (!word || !slider) return;
+    slider.addEventListener('input', () => {
+      word.style.fontSize = slider.value + 'px';
+    });
+  })();
+
+  /* ============================================================
+     CH 5 — TEXTURE (fill typographic texture)
+     ============================================================ */
+  (function texture() {
+    const el = document.getElementById('textureType');
+    if (!el) return;
+    // generate a wall of letters
+    const chars = 'BAUHAUSGRAPHICDESIGNTHENEWBASICSPOINTLINEPLANE';
+    let s = '';
+    for (let i = 0; i < 400; i++) s += chars[Math.floor(Math.random()*chars.length)];
+    // insert before the label
+    const label = el.querySelector('.texture__label');
+    el.textContent = s;
+    el.appendChild(label);
+  })();
+
+  /* ============================================================
+     CH 6 — COLOR WHEEL
+     ============================================================ */
+  (function colorWheel() {
+    const svg = document.getElementById('colorWheel');
+    const info = document.getElementById('colorWheelInfo');
+    if (!svg) return;
+
+    const colors = [
+      { name: 'Red',           hex: '#E63946', deg: 0   },
+      { name: 'Red-Orange',    hex: '#F08A3E', deg: 30  },
+      { name: 'Orange',        hex: '#F3A847', deg: 60  },
+      { name: 'Yellow-Orange', hex: '#F5C518', deg: 90  },
+      { name: 'Yellow',        hex: '#F0DD2C', deg: 120 },
+      { name: 'Yellow-Green',  hex: '#A8C84A', deg: 150 },
+      { name: 'Green',         hex: '#2EA86A', deg: 180 },
+      { name: 'Blue-Green',    hex: '#2BA09E', deg: 210 },
+      { name: 'Blue',          hex: '#2D5BBE', deg: 240 },
+      { name: 'Blue-Violet',   hex: '#5B47B8', deg: 270 },
+      { name: 'Violet',        hex: '#8B3FB0', deg: 300 },
+      { name: 'Red-Violet',    hex: '#C13B73', deg: 330 }
+    ];
+
+    function arc(startDeg, endDeg, rOuter, rInner) {
+      const s1 = (startDeg-90) * Math.PI/180;
+      const s2 = (endDeg-90) * Math.PI/180;
+      const x1 = Math.cos(s1)*rOuter, y1 = Math.sin(s1)*rOuter;
+      const x2 = Math.cos(s2)*rOuter, y2 = Math.sin(s2)*rOuter;
+      const x3 = Math.cos(s2)*rInner, y3 = Math.sin(s2)*rInner;
+      const x4 = Math.cos(s1)*rInner, y4 = Math.sin(s1)*rInner;
+      const large = (endDeg - startDeg) > 180 ? 1 : 0;
+      return `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 ${large} 1 ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 ${large} 0 ${x4} ${y4} Z`;
+    }
+
+    colors.forEach((c, i) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', arc(c.deg - 15, c.deg + 15, 100, 40));
+      path.setAttribute('fill', c.hex);
+      path.classList.add('slice');
+      path.dataset.idx = i;
+      svg.appendChild(path);
+    });
+
+    // inner labels P / S
+    const primaryIdx = [0, 4, 8]; // red, yellow, blue
+    const secondaryIdx = [2, 6, 10]; // orange, green, violet
+    [...primaryIdx, ...secondaryIdx].forEach(i => {
+      const c = colors[i];
+      const a = (c.deg-90) * Math.PI/180;
+      const r = 70;
+      const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      t.setAttribute('x', Math.cos(a)*r);
+      t.setAttribute('y', Math.sin(a)*r + 4);
+      t.setAttribute('text-anchor','middle');
+      t.setAttribute('font-family','IBM Plex Mono, monospace');
+      t.setAttribute('font-size','9');
+      t.setAttribute('font-weight','600');
+      t.setAttribute('fill','#fff');
+      t.style.pointerEvents = 'none';
+      t.textContent = primaryIdx.includes(i) ? 'P' : 'S';
+      svg.appendChild(t);
+    });
+
+    function highlight(i) {
+      const slices = svg.querySelectorAll('.slice');
+      const opp = (i + 6) % 12;
+      slices.forEach((s,si) => {
+        s.classList.remove('dim','hl');
+        if (si === i || si === opp) s.classList.add('hl');
+        else s.classList.add('dim');
+      });
+      info.innerHTML = `<b>${colors[i].name}</b> · ${colors[i].hex}<br><b>Complement →</b> ${colors[opp].name} · ${colors[opp].hex}<br><br>Complements sit directly across the wheel. Side by side they vibrate; mixed in equal parts they neutralize toward gray.`;
+    }
+    function clear() {
+      svg.querySelectorAll('.slice').forEach(s => s.classList.remove('dim','hl'));
+      info.innerHTML = 'Hover or click a slice. Complementary pairs sit directly across the wheel — red ↔ green, blue ↔ orange, yellow ↔ violet. Placed side by side, complements vibrate; layered, they neutralize.';
+    }
+
+    svg.querySelectorAll('.slice').forEach(s => {
+      s.addEventListener('mouseenter', () => highlight(+s.dataset.idx));
+      s.addEventListener('mouseleave', clear);
+      s.addEventListener('click', () => highlight(+s.dataset.idx));
+    });
+  })();
+
+  /* ============================================================
+     CH 7 — FIGURE/GROUND
+     ============================================================ */
+  (function figureGround() {
+    const fg = document.getElementById('figground');
+    if (!fg) return;
+    fg.addEventListener('click', () => fg.classList.toggle('is-inverted'));
+  })();
+
+  /* ============================================================
+     CH 8 — FRAMING
+     ============================================================ */
+  (function framing() {
+    const stage = document.getElementById('framingStage');
+    if (!stage) return;
+    document.querySelectorAll('[data-frame]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-frame]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        stage.classList.remove('f-margin','f-partial','f-bordered','f-cropped');
+        if (btn.dataset.frame) stage.classList.add(btn.dataset.frame);
+      });
+    });
+  })();
+
+  /* ============================================================
+     CH 9 — HIERARCHY
+     ============================================================ */
+  (function hierarchy() {
+    const stage = document.getElementById('hierStage');
+    if (!stage) return;
+    document.querySelectorAll('[data-hier]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-hier]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        stage.className = 'hier hier--' + btn.dataset.hier;
+      });
+    });
+  })();
+
+  /* ============================================================
+     CH 10 — LAYERS
+     ============================================================ */
+  (function layers() {
+    document.querySelectorAll('[data-layer-toggle]').forEach(input => {
+      input.addEventListener('change', () => {
+        const idx = input.dataset.layerToggle;
+        const layer = document.querySelector(`[data-layer="${idx}"]`);
+        if (!layer) return;
+        layer.classList.toggle('is-off', !input.checked);
+      });
+    });
+  })();
+
+  /* ============================================================
+     CH 11 — TRANSPARENCY
+     ============================================================ */
+  (function transparency() {
+    const s1 = document.getElementById('trans1Slider');
+    const s2 = document.getElementById('trans2Slider');
+    const t1 = document.getElementById('trans1');
+    const t2 = document.getElementById('trans2');
+    const v1 = document.getElementById('trans1Val');
+    const v2 = document.getElementById('trans2Val');
+    if (!s1) return;
+    function update() {
+      t1.style.opacity = s1.value/100;
+      t2.style.opacity = s2.value/100;
+      v1.textContent = s1.value + '%';
+      v2.textContent = s2.value + '%';
+    }
+    s1.addEventListener('input', update);
+    s2.addEventListener('input', update);
+    // start at 70% each for nice overlap visible
+    s1.value = 70; s2.value = 70;
+    update();
+  })();
+
+  /* ============================================================
+     CH 12 — MODULARITY pixel grid
+     ============================================================ */
+  (function modularity() {
+    const grid = document.getElementById('pixelGrid');
+    if (!grid) return;
+    const N = 9;
+    const cells = [];
+    for (let i = 0; i < N*N; i++) {
+      const d = document.createElement('div');
+      d.addEventListener('click', () => d.classList.toggle('on'));
+      grid.appendChild(d);
+      cells.push(d);
+    }
+    function setFromPattern(p) {
+      cells.forEach((c,i) => c.classList.toggle('on', p[i] === 1));
+    }
+    // 9x9 letter patterns
+    const presets = {
+      A: [
+        0,0,0,1,1,0,0,0,0,
+        0,0,1,1,1,1,0,0,0,
+        0,1,1,0,0,1,1,0,0,
+        0,1,1,0,0,1,1,0,0,
+        0,1,1,1,1,1,1,0,0,
+        0,1,1,0,0,1,1,0,0,
+        0,1,1,0,0,1,1,0,0,
+        0,1,1,0,0,1,1,0,0,
+        0,0,0,0,0,0,0,0,0
+      ],
+      B: [
+        1,1,1,1,1,1,0,0,0,
+        1,1,0,0,0,1,1,0,0,
+        1,1,0,0,0,1,1,0,0,
+        1,1,1,1,1,1,0,0,0,
+        1,1,0,0,0,1,1,0,0,
+        1,1,0,0,0,0,1,1,0,
+        1,1,0,0,0,0,1,1,0,
+        1,1,1,1,1,1,1,0,0,
+        0,0,0,0,0,0,0,0,0
+      ],
+      C: [
+        0,0,1,1,1,1,1,0,0,
+        0,1,1,0,0,0,1,1,0,
+        1,1,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,0,0,
+        1,1,0,0,0,0,0,0,0,
+        1,1,0,0,0,0,0,0,0,
+        1,1,0,0,0,0,0,1,1,
+        0,1,1,0,0,0,1,1,0,
+        0,0,1,1,1,1,1,0,0
+      ],
+      H: [
+        1,1,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,1,1,
+        1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,
+        1,1,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,1,1,
+        0,0,0,0,0,0,0,0,0
+      ],
+      clear: new Array(81).fill(0)
+    };
+    document.querySelectorAll('[data-letter]').forEach(btn => {
+      btn.addEventListener('click', () => setFromPattern(presets[btn.dataset.letter]));
+    });
+    setFromPattern(presets.A);
+  })();
+
+  /* ============================================================
+     CH 13 — GRID
+     ============================================================ */
+  (function grid() {
+    const stage = document.getElementById('gridDemo');
+    if (!stage) return;
+    document.querySelectorAll('[data-cols]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-cols]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const cols = +btn.dataset.cols;
+        stage.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        // remap blocks to new column count proportionally
+        const blocks = stage.querySelectorAll('.grid-block');
+        // Each block has a "logical" 12-column span; remap to the current column count
+        const mappings = {
+          12: ['1/7','7/13','7/10','10/13','1/7','10/13'],
+          6:  ['1/4','4/7','4/6','6/7','1/4','6/7'],
+          4:  ['1/3','3/5','3/4','4/5','1/3','4/5'],
+          3:  ['1/3','3/4','2/4','3/4','1/3','3/4'],
+          2:  ['1/2','2/3','1/2','2/3','1/2','2/3']
+        };
+        const rows = ['1/4','1/3','3/5','3/4','4/6','4/6'];
+        const cur = mappings[cols];
+        blocks.forEach((b, i) => {
+          b.style.gridColumn = cur[i];
+          b.style.gridRow = rows[i];
+        });
+      });
+    });
+  })();
+
+  /* ============================================================
+     CH 14 — PATTERN CANVAS
+     ============================================================ */
+  (function pattern() {
+    const c = document.getElementById('patternCanvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let W=0,H=0, dpr=window.devicePixelRatio||1;
+    let mode = 'dots';
+    let t = 0;
+    let rafId = null;
+
+    function resize() {
+      W = c.clientWidth; H = c.clientHeight;
+      c.width = W*dpr; c.height = H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener('resize', resize);
+
+    function drawDots() {
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0,0,W,H);
+      const step = 28;
+      const phase = t * .02;
+      for (let x = step/2; x < W; x += step) {
+        for (let y = step/2; y < H; y += step) {
+          const r = 4 + 2*Math.sin((x+y)*.02 + phase);
+          ctx.fillStyle = (Math.floor(x/step) + Math.floor(y/step)) % 2 === 0 ? '#F5C518' : '#CC2233';
+          ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+        }
+      }
+    }
+    function drawStripes() {
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0,0,W,H);
+      const step = 14;
+      for (let i = -H; i < W; i += step) {
+        const x = i + Math.sin(t*.01)*30;
+        ctx.fillStyle = (Math.floor(i/step) % 3 === 0) ? '#F5C518'
+                      : (Math.floor(i/step) % 3 === 1) ? '#CC2233' : '#0033BB';
+        ctx.beginPath();
+        ctx.moveTo(x, 0); ctx.lineTo(x + step*.4, 0);
+        ctx.lineTo(x + step*.4 + H, H); ctx.lineTo(x + H, H);
+        ctx.closePath(); ctx.fill();
+      }
+    }
+    function drawDiamonds() {
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#fff'; ctx.fillRect(0,0,W,H);
+      const stepX = 60, stepY = 36;
+      for (let y = -stepY; y < H + stepY; y += stepY) {
+        for (let x = -stepX; x < W + stepX; x += stepX) {
+          const offset = (Math.floor(y/stepY) % 2) ? stepX/2 : 0;
+          const cx = x + offset;
+          const cy = y;
+          const palette = ['#CC2233','#0033BB','#F5C518','#111'];
+          ctx.fillStyle = palette[(Math.floor(cx/stepX) + Math.floor(cy/stepY)) % 4];
+          ctx.beginPath();
+          ctx.moveTo(cx, cy - stepY/2);
+          ctx.lineTo(cx + stepX/2, cy);
+          ctx.lineTo(cx, cy + stepY/2);
+          ctx.lineTo(cx - stepX/2, cy);
+          ctx.closePath(); ctx.fill();
+        }
+      }
+    }
+    let scatterPoints = null;
+    function drawScatter() {
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0,0,W,H);
+      if (!scatterPoints || scatterPoints.length === 0) {
+        scatterPoints = [];
+        for (let i = 0; i < 250; i++) {
+          scatterPoints.push({
+            x: Math.random()*W,
+            y: Math.random()*H,
+            r: Math.random()*8 + 2,
+            c: ['#CC2233','#0033BB','#F5C518','#fff'][Math.floor(Math.random()*4)],
+            vx: (Math.random()-.5)*.4,
+            vy: (Math.random()-.5)*.4
+          });
+        }
+      }
+      scatterPoints.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.fillStyle = p.c;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      });
+    }
+
+    function drawTreeBranch(x, y, len, angle, depth) {
+      if (depth === 0 || len < 2) return;
+      const x2 = x + Math.cos(angle) * len;
+      const y2 = y + Math.sin(angle) * len;
+      ctx.strokeStyle = depth > 4 ? '#F5C518' : depth > 2 ? '#CC2233' : '#0033BB';
+      ctx.lineWidth = depth * .6;
+      ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y2); ctx.stroke();
+      const spread = Math.PI/5 + Math.sin(t*.005)*.2;
+      drawTreeBranch(x2, y2, len*.72, angle - spread, depth - 1);
+      drawTreeBranch(x2, y2, len*.72, angle + spread, depth - 1);
+    }
+    function drawTree() {
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0,0,W,H);
+      drawTreeBranch(W/2, H, Math.min(W,H)*.22, -Math.PI/2, 8);
+    }
+
+    function frame() {
+      t++;
+      switch(mode) {
+        case 'dots': drawDots(); break;
+        case 'stripes': drawStripes(); break;
+        case 'diamonds': drawDiamonds(); break;
+        case 'scatter': drawScatter(); break;
+        case 'tree': drawTree(); break;
+      }
+      rafId = requestAnimationFrame(frame);
+    }
+
+    document.querySelectorAll('[data-pattern]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-pattern]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        mode = btn.dataset.pattern;
+        scatterPoints = null;
+      });
+    });
+
+    setTimeout(() => { resize(); frame(); }, 50);
+  })();
+
+  /* ============================================================
+     CH 15 — NETWORK DIAGRAM
+     ============================================================ */
+  (function network() {
+    const svg = document.getElementById('networkSvg');
+    if (!svg) return;
+    const W = 800, H = 400;
+
+    function nodesCentralized() {
+      const nodes = [{ x: W/2, y: H/2, r: 12, hub: true }];
+      const N = 12;
+      for (let i = 0; i < N; i++) {
+        const a = (i / N) * Math.PI * 2;
+        nodes.push({ x: W/2 + Math.cos(a)*150, y: H/2 + Math.sin(a)*150, r: 7 });
+      }
+      const edges = [];
+      for (let i = 1; i < nodes.length; i++) edges.push([0, i]);
+      return { nodes, edges };
+    }
+    function nodesDecentralized() {
+      const hubs = [];
+      const hubCount = 4;
+      for (let i = 0; i < hubCount; i++) {
+        const a = (i/hubCount)*Math.PI*2;
+        hubs.push({ x: W/2 + Math.cos(a)*130, y: H/2 + Math.sin(a)*100, r: 11, hub: true });
+      }
+      const nodes = hubs.slice();
+      const edges = [];
+      // connect hubs in a ring
+      for (let i = 0; i < hubCount; i++) edges.push([i, (i+1)%hubCount]);
+      // leaves
+      hubs.forEach((h, i) => {
+        for (let k = 0; k < 4; k++) {
+          const a = Math.random()*Math.PI*2;
+          const r = 60 + Math.random()*30;
+          const idx = nodes.length;
+          nodes.push({ x: h.x + Math.cos(a)*r, y: h.y + Math.sin(a)*r, r: 5 });
+          edges.push([i, idx]);
+        }
+      });
+      return { nodes, edges };
+    }
+    function nodesDistributed() {
+      const N = 22;
+      const nodes = [];
+      // grid-ish jitter
+      const cols = 6, rows = 4;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          if (nodes.length >= N) break;
+          nodes.push({
+            x: 100 + c*120 + (Math.random()-.5)*40,
+            y: 80 + r*80 + (Math.random()-.5)*30,
+            r: 7
+          });
+        }
+      }
+      const edges = [];
+      // connect each node to nearest 2-3 others
+      nodes.forEach((n, i) => {
+        const dists = nodes.map((m,j) => ({ j, d: Math.hypot(n.x-m.x, n.y-m.y) }))
+          .filter(o => o.j !== i)
+          .sort((a,b) => a.d - b.d);
+        for (let k = 0; k < 3; k++) edges.push([i, dists[k].j]);
+      });
+      return { nodes, edges };
+    }
+
+    function render({ nodes, edges }) {
+      svg.innerHTML = '';
+      // edges
+      edges.forEach(([a,b]) => {
+        const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1', nodes[a].x);
+        line.setAttribute('y1', nodes[a].y);
+        line.setAttribute('x2', nodes[b].x);
+        line.setAttribute('y2', nodes[b].y);
+        line.setAttribute('stroke','#F5C518');
+        line.setAttribute('stroke-width','1');
+        line.setAttribute('opacity','0');
+        svg.appendChild(line);
+        // animate
+        requestAnimationFrame(() => {
+          line.style.transition = 'opacity .6s ease';
+          line.setAttribute('opacity','.45');
+        });
+      });
+      // nodes
+      nodes.forEach((n,i) => {
+        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx', n.x);
+        c.setAttribute('cy', n.y);
+        c.setAttribute('r', 0);
+        c.setAttribute('fill', n.hub ? '#CC2233' : '#fff');
+        svg.appendChild(c);
+        setTimeout(() => {
+          c.style.transition = 'r .4s cubic-bezier(.2,.7,.2,1)';
+          c.setAttribute('r', n.r);
+        }, i * 12);
+      });
+    }
+
+    document.querySelectorAll('[data-net]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-net]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const mode = btn.dataset.net;
+        if (mode === 'centralized') render(nodesCentralized());
+        else if (mode === 'decentralized') render(nodesDecentralized());
+        else render(nodesDistributed());
+      });
+    });
+    render(nodesCentralized());
+  })();
+
+  /* ============================================================
+     CH 16 — MOTION
+     ============================================================ */
+  (function motion() {
+    const stage = document.getElementById('motionStage');
+    if (!stage) return;
+    document.querySelectorAll('[data-motion]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-motion]').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        stage.className = 'motion-stage ' + btn.dataset.motion;
+      });
+    });
+  })();
+
+  /* ============================================================
+     CH 17 — GENERATIVE
+     ============================================================ */
+  (function generative() {
+    const c = document.getElementById('genCanvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let W=0,H=0, dpr=window.devicePixelRatio||1;
+
+    const inputs = {
+      count: document.getElementById('genCount'),
+      rot:   document.getElementById('genRot'),
+      pal:   document.getElementById('genPal'),
+      dist:  document.getElementById('genDist')
+    };
+    const outs = {
+      count: document.getElementById('genCountOut'),
+      rot:   document.getElementById('genRotOut'),
+      pal:   document.getElementById('genPalOut'),
+      dist:  document.getElementById('genDistOut')
+    };
+
+    const palettes = [
+      ['#CC2233','#0033BB','#F5C518','#fff'],
+      ['#0033BB','#F5C518'],
+      ['#CC2233','#fff']
+    ];
+    const palNames = ['bauhaus','duotone','red+white'];
+    const rotNames = ['free','snap-90','none'];
+
+    function resize() {
+      W = c.clientWidth; H = c.clientHeight;
+      c.width = W*dpr; c.height = H*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener('resize', resize);
+
+    function generate() {
+      const count = +inputs.count.value;
+      const rotMode = +inputs.rot.value;
+      const palMode = +inputs.pal.value;
+      const dist = +inputs.dist.value;
+      outs.count.textContent = count;
+      outs.rot.textContent = rotNames[rotMode];
+      outs.pal.textContent = palNames[palMode];
+      outs.dist.textContent = dist;
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0,0,W,H);
+
+      const palette = palettes[palMode];
+      const items = [];
+      for (let i = 0; i < count; i++) {
+        let rot = 0;
+        if (rotMode === 0) rot = Math.random()*Math.PI*2;
+        else if (rotMode === 1) rot = Math.floor(Math.random()*4) * Math.PI/2;
+        items.push({
+          x: Math.random()*W,
+          y: Math.random()*H,
+          s: 10 + Math.random()*40,
+          rot,
+          col: palette[Math.floor(Math.random()*palette.length)],
+          type: Math.floor(Math.random()*3)
+        });
+      }
+
+      // draw connections first
+      if (dist > 0) {
+        for (let i = 0; i < items.length; i++) {
+          for (let j = i+1; j < items.length; j++) {
+            const d = Math.hypot(items[i].x-items[j].x, items[i].y-items[j].y);
+            if (d < dist) {
+              ctx.strokeStyle = 'rgba(245,197,24,' + (1 - d/dist)*.4 + ')';
+              ctx.lineWidth = .8;
+              ctx.beginPath();
+              ctx.moveTo(items[i].x, items[i].y);
+              ctx.lineTo(items[j].x, items[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      // draw shapes
+      items.forEach(it => {
+        ctx.save();
+        ctx.translate(it.x, it.y);
+        ctx.rotate(it.rot);
+        ctx.fillStyle = it.col;
+        ctx.strokeStyle = it.col;
+        if (it.type === 0) {
+          ctx.beginPath(); ctx.arc(0,0,it.s/2,0,Math.PI*2); ctx.fill();
+        } else if (it.type === 1) {
+          ctx.fillRect(-it.s/2,-it.s/2,it.s,it.s);
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(0,-it.s/2);
+          ctx.lineTo(it.s/2,it.s/2);
+          ctx.lineTo(-it.s/2,it.s/2);
+          ctx.closePath(); ctx.fill();
+        }
+        ctx.restore();
+      });
+    }
+
+    Object.values(inputs).forEach(i => i.addEventListener('input', generate));
+    document.getElementById('genGo').addEventListener('click', generate);
+
+    setTimeout(() => { resize(); generate(); }, 50);
+  })();
+
+})();
+</script>
+
+</body>
+</html>

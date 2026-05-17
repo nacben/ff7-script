@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interaction of Color — Josef Albers</title>
+<style>
+:root {
+  --cream: #f5f0e8;
+  --ink: #1a1612;
+  --warm: #8b4513;
+  --accent: #c8a96e;
+  --muted: #6b5d52;
+  --border: #d4c4a8;
+  --section-gap: 6rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245,240,232,0.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+nav .nav-title {
+  font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+nav ul {
+  list-style: none; display: flex; gap: 1.5rem;
+}
+nav a {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+nav a:hover { color: var(--ink); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero-color-strip {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 8px;
+  display: flex;
+}
+.hero-color-strip span {
+  flex: 1;
+}
+.hero-anno {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 2rem;
+}
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: normal; line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+.hero h1 em {
+  font-style: italic; color: var(--warm);
+}
+.hero-sub {
+  font-size: 1.15rem; color: var(--muted);
+  max-width: 520px; margin: 0 auto 3rem;
+  font-style: italic;
+}
+.hero-author {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* COLOR GRID HERO DEMO */
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  width: 100%; max-width: 640px;
+  margin: 3rem auto 0;
+  border-radius: 4px; overflow: hidden;
+}
+.hero-grid div {
+  height: 48px;
+}
+
+/* SECTIONS */
+section {
+  padding: var(--section-gap) 2rem;
+  max-width: 900px; margin: 0 auto;
+}
+section.full-width {
+  max-width: none; padding-left: 0; padding-right: 0;
+}
+
+.chapter-label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.75rem; display: block;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: normal; line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+h3 {
+  font-size: 1.2rem; font-weight: normal;
+  margin-bottom: 1rem; color: var(--muted);
+  font-style: italic;
+}
+p { margin-bottom: 1.25rem; max-width: 680px; }
+p.wide { max-width: 100%; }
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 0 0.5rem 2rem;
+  margin: 2rem 0;
+  font-size: 1.15rem; font-style: italic; color: var(--muted);
+}
+
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; align-items: start;
+}
+@media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+
+.divider {
+  width: 60px; height: 2px;
+  background: var(--accent);
+  margin: 0 auto var(--section-gap);
+}
+
+/* DEMO BOXES */
+.demo-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2.5rem 0;
+  background: #fff;
+}
+.demo-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.demo-body { padding: 2rem 1.5rem; }
+.demo-caption {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem; color: var(--muted);
+  font-style: italic;
+}
+
+/* INTERACTIVE BUTTON */
+.btn {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--border);
+  background: transparent; color: var(--muted);
+  cursor: pointer; border-radius: 2px;
+  transition: all 0.2s;
+}
+.btn:hover { border-color: var(--ink); color: var(--ink); }
+.btn.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+/* ──── CHAPTER-SPECIFIC DEMOS ──── */
+
+/* CH IV: Color Relativity */
+.relativity-demo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; height: 240px;
+}
+.relativity-panel {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.relativity-center {
+  width: 80px; height: 80px;
+  border-radius: 4px;
+  position: relative; z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* CH VI: 1 color looks like 2 */
+.one-looks-two {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; height: 220px;
+}
+.one-looks-two-panel {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 4px;
+}
+.one-looks-two-inner {
+  width: 60px; height: 140px;
+  border-radius: 3px;
+}
+
+/* CH VII: 2 colors look alike */
+.subtraction-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; height: 220px;
+}
+.subtraction-panel {
+  position: relative; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+.subtraction-center {
+  width: 70px; height: 70px; border-radius: 3px;
+}
+
+/* CH VIII: After-image */
+.afterimage-demo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; height: 260px;
+}
+.afterimage-panel {
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; cursor: pointer;
+}
+.afterimage-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.4);
+}
+.afterimage-instruction {
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  text-align: center; font-size: 0.72rem;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: rgba(255,255,255,0.7); letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.afterimage-instruction.dark { color: rgba(0,0,0,0.4); }
+
+/* CH IX: Transparence */
+.transparence-demo {
+  display: flex; justify-content: center; align-items: center;
+  height: 260px; gap: 0;
+}
+.transp-wrapper {
+  position: relative; width: 360px; height: 180px;
+}
+.transp-rect {
+  position: absolute;
+  height: 120px; width: 160px;
+  border-radius: 3px;
+}
+.transp-mix {
+  position: absolute;
+  border-radius: 3px;
+}
+
+/* CH XIII: Bezold Effect */
+.bezold-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; padding: 1rem;
+}
+.bezold-canvas-wrap { border-radius: 4px; overflow: hidden; }
+canvas { display: block; }
+
+/* CH XIV: Transformation */
+.transform-demo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.transform-group {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.transform-swatch {
+  height: 80px; border-radius: 2px;
+}
+
+/* CH XX: Weber-Fechner */
+.wf-demo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.wf-scale {
+  display: flex; gap: 3px; align-items: flex-end; height: 100px;
+}
+.wf-scale-label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-align: center; margin-top: 0.75rem;
+}
+.wf-step {
+  flex: 1; border-radius: 2px 2px 0 0;
+  transition: height 0.3s;
+}
+
+/* CH XXII: Vibrating Boundaries */
+.vibrate-demo {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; height: 180px;
+}
+.vibrate-stripe {
+  height: 100%;
+}
+
+/* CH XXIII: Vanishing Boundaries */
+.vanish-demo {
+  height: 200px;
+  display: flex;
+}
+.vanish-panel {
+  flex: 1;
+}
+
+/* SPECTRUM BAR */
+.spectrum-bar {
+  height: 12px;
+  background: linear-gradient(to right,
+    #ff0000, #ff4000, #ff8000, #ffbf00, #ffff00,
+    #80ff00, #00ff00, #00ff80, #00ffff,
+    #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+  border-radius: 2px;
+  margin: 2rem 0;
+}
+
+/* QUOTE BLOCK */
+.pull-quote {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--ink);
+  color: var(--cream);
+}
+.pull-quote blockquote {
+  border-left: none; padding: 0;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  max-width: 800px; margin: 0 auto;
+  color: var(--cream);
+}
+.pull-quote cite {
+  display: block; margin-top: 1.5rem;
+  font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+  font-style: normal; font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--accent);
+}
+
+/* TOC */
+.toc-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px; border: 1px solid var(--border);
+  margin: 2rem 0;
+}
+.toc-item {
+  padding: 1.25rem 1.5rem;
+  border: none; background: none;
+  text-align: left; cursor: pointer;
+  font-family: Georgia, serif; font-size: 0.9rem;
+  color: var(--muted); transition: all 0.2s;
+  text-decoration: none; display: block;
+  border-bottom: 1px solid var(--border);
+}
+.toc-item:hover { background: var(--ink); color: var(--cream); }
+.toc-num {
+  display: block; font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.25rem;
+}
+.toc-item:hover .toc-num { color: var(--accent); }
+
+/* ALBERS PORTRAIT SECTION */
+.bio-section {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 3rem; align-items: start; padding: 4rem 2rem;
+  max-width: 900px; margin: 0 auto;
+}
+@media (max-width: 600px) { .bio-section { grid-template-columns: 1fr; } }
+.bio-portrait {
+  background: var(--ink);
+  height: 260px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem; color: var(--cream);
+}
+
+/* PRINCIPLE CARDS */
+.principle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem; margin: 2rem 0;
+}
+.principle-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.principle-card:hover {
+  border-color: var(--ink);
+  box-shadow: 0 4px 20px rgba(26,22,18,0.1);
+}
+.principle-number {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 2rem; font-weight: 700;
+  color: var(--border); line-height: 1; margin-bottom: 1rem;
+}
+.principle-card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+.principle-card p {
+  font-size: 0.88rem; color: var(--muted); margin: 0; max-width: 100%;
+}
+
+/* COLOR TEMP DEMO */
+.temp-demo {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  height: 160px; gap: 0;
+}
+.temp-swatch {
+  display: flex; align-items: flex-end; padding: 8px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em;
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: var(--cream);
+  padding: 4rem 2rem; text-align: center;
+}
+footer p { color: rgba(245,240,232,0.6); font-size: 0.85rem; max-width: 100%; }
+footer .footer-title { font-size: 1.4rem; margin-bottom: 1rem; }
+
+/* PROGRESS BAR */
+#progress {
+  position: fixed; top: 56px; left: 0; right: 0; height: 2px;
+  background: var(--accent); transform-origin: left;
+  transform: scaleX(0); z-index: 99; transition: transform 0.1s;
+}
+
+/* LABEL TAGS */
+.tag {
+  display: inline-block;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.2rem 0.6rem; border: 1px solid var(--border);
+  border-radius: 2px; color: var(--muted); margin-right: 0.5rem;
+}
+
+/* STEP INDICATOR */
+.steps {
+  display: flex; gap: 0; margin: 2rem 0;
+}
+.step-item {
+  flex: 1; padding: 1rem 0.75rem;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.82rem; color: var(--muted);
+  position: relative;
+}
+.step-item.active {
+  border-bottom-color: var(--ink);
+  color: var(--ink);
+}
+.step-num {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  color: var(--accent); display: block; margin-bottom: 0.25rem;
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <span class="nav-title">Interaction of Color · Josef Albers</span>
+  <ul>
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#relativity">Relativity</a></li>
+    <li><a href="#deception">Deception</a></li>
+    <li><a href="#mixture">Mixture</a></li>
+    <li><a href="#phenomena">Phenomena</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-anno">50th Anniversary Edition · Yale University Press · 1963 / 2013</span>
+  <h1><em>Interaction</em><br>of Color</h1>
+  <p class="hero-sub">
+    "In visual perception a color is almost never seen as it really is — as it physically is. This fact makes color the most relative medium in art."
+  </p>
+  <span class="hero-author">Josef Albers</span>
+
+  <div class="hero-grid">
+    <div style="background:#c41e3a"></div>
+    <div style="background:#e8612a"></div>
+    <div style="background:#f4a622"></div>
+    <div style="background:#f7d94c"></div>
+    <div style="background:#5ba858"></div>
+    <div style="background:#2e86ab"></div>
+    <div style="background:#3b4fd9"></div>
+    <div style="background:#8e3abf"></div>
+    <div style="background:#bf3a8e"></div>
+    <div style="background:#d95b5b"></div>
+    <div style="background:#d98c3a"></div>
+    <div style="background:#b8d94c"></div>
+    <div style="background:#4cd9a8"></div>
+    <div style="background:#4c8ed9"></div>
+    <div style="background:#8e4cd9"></div>
+    <div style="background:#d94c8e"></div>
+  </div>
+
+  <div class="hero-color-strip">
+    <span style="background:#c41e3a"></span>
+    <span style="background:#e8612a"></span>
+    <span style="background:#f4a622"></span>
+    <span style="background:#f7d94c"></span>
+    <span style="background:#a8d050"></span>
+    <span style="background:#5ba858"></span>
+    <span style="background:#2e86ab"></span>
+    <span style="background:#3b4fd9"></span>
+    <span style="background:#8e3abf"></span>
+    <span style="background:#bf3a8e"></span>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section id="intro">
+  <span class="chapter-label">Introduction</span>
+  <h2>Practice Before Theory</h2>
+  <div class="two-col">
+    <div>
+      <p>
+        "Interaction of Color" is a record of an experimental way of studying and teaching color. It reverses the conventional academic order — placing practice before theory, which, after all, is the <em>conclusion</em> of practice.
+      </p>
+      <p>
+        The book does not begin with optics or physiology, nor with physics of light and wavelength. Just as knowledge of acoustics does not make one musical, no color system by itself can develop one's sensitivity for color.
+      </p>
+      <blockquote>
+        "What counts here — first and last — is not so-called knowledge of so-called facts, but vision — seeing."
+      </blockquote>
+    </div>
+    <div>
+      <p>
+        The aim of study is to develop — through experience, by trial and error — <em>an eye for color</em>. This means seeing color action as well as feeling color relatedness.
+      </p>
+      <p>
+        Practical exercises demonstrate through color deception (illusion) the relativity and instability of color. Experience teaches that in visual perception there is a discrepancy between <strong>physical fact</strong> and <strong>psychic effect</strong>.
+      </p>
+      <div class="principle-grid" style="grid-template-columns: 1fr;">
+        <div class="principle-card" style="padding: 1.25rem;">
+          <p style="margin:0; font-size: 0.9rem;">
+            <strong>The central insight:</strong> Color deceives continually. To use color effectively, we must recognize this — and learn to see it, feel it, exploit it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <h3 style="margin-top: 3rem;">What we will explore</h3>
+  <div class="toc-grid">
+    <a href="#memory" class="toc-item"><span class="toc-num">I</span>Color Memory</a>
+    <a href="#relativity" class="toc-item"><span class="toc-num">IV</span>Relativity of Color</a>
+    <a href="#lighter" class="toc-item"><span class="toc-num">V</span>Lighter or Darker</a>
+    <a href="#one-as-two" class="toc-item"><span class="toc-num">VI</span>1 Color as 2</a>
+    <a href="#subtraction" class="toc-item"><span class="toc-num">VII</span>Subtraction of Color</a>
+    <a href="#afterimage" class="toc-item"><span class="toc-num">VIII</span>After-image</a>
+    <a href="#transparence" class="toc-item"><span class="toc-num">IX</span>Transparence Illusion</a>
+    <a href="#bezold" class="toc-item"><span class="toc-num">XIII</span>The Bezold Effect</a>
+    <a href="#transformation" class="toc-item"><span class="toc-num">XIV</span>Intervals & Transformation</a>
+    <a href="#harmony" class="toc-item"><span class="toc-num">XVI</span>Harmony & Quantity</a>
+    <a href="#filmcolor" class="toc-item"><span class="toc-num">XVII</span>Film & Volume Color</a>
+    <a href="#weber" class="toc-item"><span class="toc-num">XX</span>Weber-Fechner Law</a>
+    <a href="#temperature" class="toc-item"><span class="toc-num">XXI</span>Color Temperature</a>
+    <a href="#vibrating" class="toc-item"><span class="toc-num">XXII</span>Vibrating Boundaries</a>
+    <a href="#vanishing" class="toc-item"><span class="toc-num">XXIII</span>Vanishing Boundaries</a>
+    <a href="#teaching" class="toc-item"><span class="toc-num">XXV</span>On Teaching Color</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH I: MEMORY -->
+<section id="memory">
+  <span class="chapter-label">Chapter I</span>
+  <h2>Color Recollection &amp; Visual Memory</h2>
+  <p>
+    If one says <em>"Red"</em> and there are 50 people listening, one can expect there will be 50 reds in their minds. And one can be sure all these reds will be very different — even when a specific red they've all seen countless times is named.
+  </p>
+  <p>
+    This reveals two important facts. First: <strong>it is hard, if not impossible, to remember distinct colors</strong>. Visual memory is very poor compared to auditory memory — which can often repeat a melody heard only once or twice.
+  </p>
+  <p>
+    Second: <strong>the nomenclature of color is most inadequate</strong>. Though there are innumerable colors — shades and tones — daily vocabulary contains only about 30 color names.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>The Memory Test — Pick "Your" Red</span>
+      <span>Interactive</span>
+    </div>
+    <div class="demo-body">
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem;">
+        Before looking at these swatches, picture "Coca-Cola red" in your mind. Now — which is it?
+      </p>
+      <div id="memory-swatches" style="display: flex; gap: 6px; flex-wrap: wrap;">
+      </div>
+      <div id="memory-result" style="margin-top: 1rem; font-style: italic; color: var(--muted); font-size: 0.88rem; min-height: 1.5rem;"></div>
+    </div>
+    <div class="demo-caption">
+      Albers: "Even if all listeners have hundreds of reds in front of them to choose from, they will select quite different colors."
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH IV: RELATIVITY -->
+<section id="relativity">
+  <span class="chapter-label">Chapter IV</span>
+  <h2>A Color Has Many Faces — The Relativity of Color</h2>
+  <p>
+    Albers opens this chapter with a haptic thought experiment: dip both hands into warm and cold water, then both into lukewarm. The lukewarm feels simultaneously cold <em>and</em> warm — a discrepancy between physical fact and psychic effect, a "haptic illusion."
+  </p>
+  <p>
+    The same principle governs color. The identical color, placed on different grounds, will be perceived as two entirely different colors. The influencing color is the ground; the influenced color is the figure.
+  </p>
+
+  <div class="demo-box" id="relativity">
+    <div class="demo-header">
+      <span>The Same Color — Two Completely Different Appearances</span>
+      <div>
+        <button class="btn active" id="rel-btn-1" onclick="setRelativityMode(1)">Dark / Light</button>
+        <button class="btn" id="rel-btn-2" onclick="setRelativityMode(2)">Warm / Cool</button>
+        <button class="btn" id="rel-btn-3" onclick="setRelativityMode(3)">Hue Shift</button>
+      </div>
+    </div>
+    <div class="relativity-demo" id="rel-demo">
+      <div class="relativity-panel" id="rel-left">
+        <div class="relativity-center" id="rel-center-l"></div>
+      </div>
+      <div class="relativity-panel" id="rel-right">
+        <div class="relativity-center" id="rel-center-r"></div>
+      </div>
+    </div>
+    <div class="demo-caption" id="rel-caption">
+      The two center squares are <strong>identical</strong> — the same color of paper. Yet one appears markedly different from the other due solely to its ground.
+    </div>
+  </div>
+
+  <p>
+    <strong>The first exercise</strong> in Albers's class: make one and the same color look different. Students place two small rectangles of the same color on two very different grounds. The class then observes that:
+  </p>
+  <ul style="padding-left: 2rem; margin-bottom: 1.25rem;">
+    <li>Certain colors are hard to change</li>
+    <li>Others are highly susceptible to influence</li>
+    <li>Change is a result of influence — from <em>both</em> hue and light, simultaneously</li>
+  </ul>
+  <blockquote>
+    "Color is the most relative medium in art."
+  </blockquote>
+</section>
+
+<div class="pull-quote">
+  <blockquote>
+    "In order to use color effectively it is necessary to recognize that color deceives continually."
+    <cite>Josef Albers, Interaction of Color</cite>
+  </blockquote>
+</div>
+
+<!-- CH V: LIGHTER / DARKER -->
+<section id="lighter" style="padding-top: var(--section-gap);">
+  <span class="chapter-label">Chapter V</span>
+  <h2>Lighter and/or Darker — Light Intensity</h2>
+  <p>
+    "If one is not able to distinguish the difference between a higher tone and a lower tone, one probably should not make music." Applied to color: almost everyone would prove incompetent. Very few can reliably distinguish higher and lower light intensity between different hues.
+  </p>
+  <p>
+    Albers tested his painting students repeatedly. The constant result: <strong>60% of answers were wrong</strong>, only 40% correct — a disillusioning and revealing fact that should inspire humility in any colorist.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Which is Lighter? — Test Yourself</span>
+      <button class="btn" onclick="revealLighter()">Reveal Answer</button>
+    </div>
+    <div class="demo-body">
+      <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem;">
+        For each pair, decide which color is lighter (contains more white / less black). Then reveal.
+      </p>
+      <div id="lighter-pairs" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem;"></div>
+      <div id="lighter-reveal" style="margin-top: 1.5rem; display: none;">
+        <p style="font-size: 0.88rem; font-style: italic; color: var(--warm);">
+          The answers — check your intuitions. Counterintuitive? That's Albers's point. A saturated hue can make a darker color appear lighter than a lighter one of low saturation.
+        </p>
+      </div>
+    </div>
+    <div class="demo-caption">
+      Gradation studies — collecting grey scales from magazine photographs — train a more discriminating sensitivity to light steps.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH VI: 1 COLOR AS 2 -->
+<section id="one-as-two">
+  <span class="chapter-label">Chapter VI</span>
+  <h2>1 Color Appears as 2 — Reversed Grounds</h2>
+  <p>
+    The first exercise was making one color look different. The next step goes further: make <strong>one color look like two</strong> — specifically, make it echo the two <em>reversed</em> grounds it sits upon simultaneously.
+  </p>
+  <p>
+    The task: find a single color that, placed on two contrasting grounds, appears to take on the character of each of those grounds in turn. The "chameleon color" must be topologically the <em>middle</em> between the two grounds.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>3 Colors — Appearing as 4</span>
+      <button class="btn" onclick="shuffle12()">Shuffle Colors</button>
+    </div>
+    <div class="demo-body">
+      <div class="one-looks-two" id="one-two-demo">
+        <div class="one-looks-two-panel" id="ot-left" style="background:#8B4513;">
+          <div class="one-looks-two-inner" id="ot-center-l" style="background:#c8956c;"></div>
+        </div>
+        <div class="one-looks-two-panel" id="ot-right" style="background:#d4a574;">
+          <div class="one-looks-two-inner" id="ot-center-r" style="background:#c8956c;"></div>
+        </div>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--muted); margin-top: 1rem; margin-bottom: 0;">
+        The inner rectangles are <strong>identical</strong>. The ground shifts perception so dramatically that the middle color appears to "belong" to each opposite ground.
+      </p>
+    </div>
+    <div class="demo-caption">
+      "1 color is to show 2 faces which refer to the 2 colors of the reversed grounds."
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH VII: SUBTRACTION -->
+<section id="subtraction">
+  <span class="chapter-label">Chapter VII</span>
+  <h2>2 Different Colors Look Alike — Subtraction of Color</h2>
+  <p>
+    The reverse task: where Chapter VI made one color look like two, Chapter VII makes <strong>two different colors look alike</strong>. The underlying mechanism is "subtraction" — any ground subtracts its own hue from colors it carries.
+  </p>
+  <p>
+    Place a red on a red ground: the red is absorbed — subtracted. Its distinguishing character disappears. The same subtractive logic applies to light: light grounds subtract light from colors placed upon them.
+  </p>
+  <blockquote>
+    "Any ground subtracts its own hue from colors which it carries and therefore influences."
+  </blockquote>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>2 Very Different Colors — Made to Look Alike</span>
+      <button class="btn" onclick="shuffleSubtraction()">New Example</button>
+    </div>
+    <div class="demo-body">
+      <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem;">
+        Cover the side margin swatches. Focus on the centered small squares. Then uncover and see how different they actually are.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; height: 200px;">
+        <div id="sub-left" style="border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative;">
+          <div id="sub-center-l" style="width: 70px; height: 70px; border-radius: 3px;"></div>
+          <div id="sub-swatch-l" style="position: absolute; bottom: 8px; right: 8px; width: 28px; height: 28px; border-radius: 2px; border: 2px solid rgba(255,255,255,0.6);"></div>
+        </div>
+        <div id="sub-right" style="border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative;">
+          <div id="sub-center-r" style="width: 70px; height: 70px; border-radius: 3px;"></div>
+          <div id="sub-swatch-r" style="position: absolute; bottom: 8px; right: 8px; width: 28px; height: 28px; border-radius: 2px; border: 2px solid rgba(255,255,255,0.6);"></div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-caption">
+      "2 different colors look alike" — 4 colors appear as 3. The factual difference is obliterated by the ground's subtractive action.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH VIII: AFTER-IMAGE -->
+<section id="afterimage" style="padding-top: var(--section-gap);">
+  <span class="chapter-label">Chapter VIII</span>
+  <h2>Why Color Deception? — After-Image &amp; Simultaneous Contrast</h2>
+  <p>
+    Here is the <em>cause</em> of most color illusions. The nerve ends on the human retina (rods and cones) are tuned to receive any of three primary colors. Staring at red fatigues the red-sensitive parts, so when shifting to white (which contains red + yellow + blue), only yellow and blue remain active — producing green, the complement of red.
+  </p>
+  <p>
+    This psycho-physiological phenomenon proves that <strong>no normal eye, not even the most trained one, is foolproof against color deception.</strong>
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>After-Image Demonstration</span>
+      <span style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.72rem; color: var(--muted);">Stare at the dot — then shift gaze</span>
+    </div>
+    <div class="demo-body" style="padding: 1rem;">
+      <div class="afterimage-demo">
+        <div class="afterimage-panel" id="ai-left" style="background:#c41e3a;">
+          <div class="afterimage-dot"></div>
+          <div class="afterimage-instruction">Stare here for 30 seconds</div>
+        </div>
+        <div class="afterimage-panel" id="ai-right" style="background:#f0ede8;">
+          <div class="afterimage-dot" style="background: rgba(0,0,0,0.25);"></div>
+          <div class="afterimage-instruction dark">Then shift focus here</div>
+        </div>
+      </div>
+      <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button class="btn active" onclick="setAIColor('#c41e3a','red')">Red → Green</button>
+        <button class="btn" onclick="setAIColor('#f4a622','orange')">Orange → Blue</button>
+        <button class="btn" onclick="setAIColor('#3b4fd9','blue')">Blue → Orange</button>
+        <button class="btn" onclick="setAIColor('#5ba858','green')">Green → Red</button>
+        <button class="btn" onclick="setAIColor('#f7d94c','yellow')">Yellow → Violet</button>
+      </div>
+    </div>
+    <div class="demo-caption">
+      "He who claims to see colors independent of their illusionary changes fools only himself, and no one else."
+    </div>
+  </div>
+
+  <div class="principle-grid" style="margin-top: 2rem;">
+    <div class="principle-card">
+      <div class="principle-number">01</div>
+      <h4>Fatigue</h4>
+      <p>Sustained viewing of one hue fatigues retinal cells tuned to that wavelength.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-number">02</div>
+      <h4>Complement</h4>
+      <p>The after-image is always the complementary color — opposite on the color wheel.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-number">03</div>
+      <h4>Simultaneity</h4>
+      <p>The effect operates even without sustained staring — colors influence neighbors instantly.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH IX: TRANSPARENCE -->
+<section id="transparence">
+  <span class="chapter-label">Chapter IX</span>
+  <h2>Color Mixture in Paper — Illusion of Transparence</h2>
+  <p>
+    Color papers cannot be mixed mechanically. Instead, Albers taught students to imagine mixtures — to find, from a collection of papers, a "descendant" that convincingly sits between two "parents." When arranged in overlapping shapes, a remarkable double deception appears:
+  </p>
+  <ol style="padding-left: 2rem; margin-bottom: 1.25rem;">
+    <li>The <em>mixture</em> appears in the overlap zone</li>
+    <li>The "mixture" paper <em>loses its opacity</em> — appears transparent or translucent</li>
+  </ol>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Illusory Transparence — Overlapping Color Papers</span>
+      <button class="btn" onclick="shuffleTransparence()">New Combination</button>
+    </div>
+    <div class="demo-body" style="display: flex; justify-content: center; padding: 2rem;">
+      <div style="position: relative; width: 400px; height: 200px;">
+        <div id="tp-left" style="position:absolute; left:0; top:10px; width:200px; height:160px; border-radius:4px; z-index:1;"></div>
+        <div id="tp-right" style="position:absolute; right:0; top:10px; width:200px; height:160px; border-radius:4px; z-index:1;"></div>
+        <div id="tp-mix" style="position:absolute; left:100px; top:10px; width:200px; height:160px; border-radius:4px; z-index:2;"></div>
+      </div>
+    </div>
+    <div class="demo-caption" id="tp-caption">
+      The center strip is a single, flat, opaque color — yet it appears to be a transparent overlay showing both parent colors through it.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH X: ADDITIVE/SUBTRACTIVE -->
+<section id="mixture">
+  <span class="chapter-label">Chapter X</span>
+  <h2>Factual Mixtures — Additive and Subtractive</h2>
+  <div class="two-col">
+    <div>
+      <h3>Additive — Light</h3>
+      <p>
+        When light is projected and mixed (as in theater, screens, physics), every overlap is <em>lighter</em> than either parent. The sum of all colors in light is <strong>white</strong>.
+      </p>
+      <div style="height: 120px; border-radius: 6px; overflow: hidden; position: relative; background: #111; margin: 1rem 0;">
+        <div style="position:absolute; top:20px; left:30px; width:80px; height:80px; border-radius:50%; background:rgba(255,0,0,0.85);"></div>
+        <div style="position:absolute; top:20px; left:80px; width:80px; height:80px; border-radius:50%; background:rgba(0,255,0,0.85); mix-blend-mode: screen;"></div>
+        <div style="position:absolute; top:20px; left:130px; width:80px; height:80px; border-radius:50%; background:rgba(0,0,255,0.85); mix-blend-mode: screen;"></div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--muted);">
+        <strong>Additive mixture:</strong> RGB light. Overlaps become brighter. Sum → white.
+      </p>
+    </div>
+    <div>
+      <h3>Subtractive — Pigment</h3>
+      <p>
+        When pigments are mixed on a palette, every mixture absorbs more light. The more colors mixed, the darker the result. The sum approaches <strong>black</strong>.
+      </p>
+      <div style="height: 120px; border-radius: 6px; overflow: hidden; position: relative; background: #fff; margin: 1rem 0;">
+        <div style="position:absolute; top:20px; left:30px; width:80px; height:80px; border-radius:50%; background:rgba(255,255,0,0.9);"></div>
+        <div style="position:absolute; top:20px; left:80px; width:80px; height:80px; border-radius:50%; background:rgba(255,0,128,0.9); mix-blend-mode: multiply;"></div>
+        <div style="position:absolute; top:20px; left:130px; width:80px; height:80px; border-radius:50%; background:rgba(0,200,255,0.9); mix-blend-mode: multiply;"></div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--muted);">
+        <strong>Subtractive mixture:</strong> CMY pigments. Overlaps become darker. Sum → black.
+      </p>
+    </div>
+  </div>
+  <blockquote>
+    "Mixtures gain light only in direct color, whereas mixtures of reflected colors lose light."
+  </blockquote>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XIII: BEZOLD EFFECT -->
+<section id="bezold">
+  <span class="chapter-label">Chapter XIII</span>
+  <h2>The Bezold Effect</h2>
+  <p>
+    Wilhelm von Bezold (1837–1907), a meteorologist, discovered this effect while searching for a way to change his rug designs entirely by adding or changing <em>just one color</em>. When a strong color is distributed evenly as an element (like mortar in brickwork), it changes the visual effect of the entire design.
+  </p>
+  <p>
+    The same red bricks laid with <strong>white</strong> mortar look light, airy, and warm. The same bricks with <strong>black</strong> mortar look heavy, cool, and completely different in character — as if a different color of brick.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Bezold Effect — Change One Color, Change Everything</span>
+      <div id="bezold-btns">
+        <button class="btn active" onclick="setBezoldMortar('white', this)">White Mortar</button>
+        <button class="btn" onclick="setBezoldMortar('black', this)">Black Mortar</button>
+        <button class="btn" onclick="setBezoldMortar('blue', this)">Blue Mortar</button>
+      </div>
+    </div>
+    <div class="demo-body" style="display: flex; justify-content: center;">
+      <canvas id="bezold-canvas" width="480" height="200" style="border-radius: 4px;"></canvas>
+    </div>
+    <div class="demo-caption">
+      The brick color is constant. Only the mortar changes. The entire perceived character — warmth, weight, light — shifts dramatically.
+    </div>
+  </div>
+
+  <p style="margin-top: 1.5rem;">
+    This same principle underlies the Impressionists' technique and modern 4-color printing, where tiny dots of a few base colors create the illusion of unlimited color through optical mixture.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XIV: TRANSFORMATION -->
+<section id="transformation">
+  <span class="chapter-label">Chapter XIV</span>
+  <h2>Color Intervals and Transformation</h2>
+  <p>
+    "Good morning to you" can be sung in any key, by any voice, on any instrument — and remains instantly recognizable because the <em>intervals</em> between the four notes remain constant. The same principle applies to color.
+  </p>
+  <p>
+    Colors have a "distance" from each other in both <strong>light intensity</strong> and <strong>hue</strong>. A tetrachord of four colors can be "transposed" to a higher or lower key — just as a musical phrase is transposed — while preserving the relational intervals.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Color Tetrachord — Same Intervals, Different Keys</span>
+      <button class="btn" onclick="newTransformation()">New Tetrachord</button>
+    </div>
+    <div class="demo-body">
+      <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center;">
+        <div>
+          <div style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Lower Key</div>
+          <div id="trans-low" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;"></div>
+        </div>
+        <div style="text-align: center; color: var(--muted);">
+          <div style="font-size: 1.5rem;">→</div>
+          <div style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.25rem;">Same<br>Intervals</div>
+        </div>
+        <div>
+          <div style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Higher Key</div>
+          <div id="trans-high" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;"></div>
+        </div>
+      </div>
+      <p style="margin-top: 1.25rem; font-size: 0.82rem; color: var(--muted); margin-bottom: 0;">
+        Boundaries between rectangles reveal the interval distances. Both groups should show <em>equal boundary qualities</em> — the same relative contrast between neighbors.
+      </p>
+    </div>
+    <div class="demo-caption">
+      The test: cut a small window from one group and superimpose it on the other. If the stepping corresponds, the transformation is successful.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XVI: HARMONY & QUANTITY -->
+<section id="harmony">
+  <span class="chapter-label">Chapter XVI</span>
+  <h2>Color Juxtaposition — Harmony — Quantity</h2>
+  <p>
+    Color systems promise harmony through "correct" combinations — complementaries, triads, tetrads. Albers challenges this orthodoxy directly. Such rules are "worn out." No mechanical system is flexible enough to precalculate the manifold changing factors of real application.
+  </p>
+  <blockquote>
+    "Good painting, good coloring, is comparable to good cooking. Even a good cooking recipe demands tasting and repeated tasting while it is being followed. And the best tasting still depends on a cook with taste."
+  </blockquote>
+  <p>
+    What Albers proposes instead: study <strong>quantity</strong>. The same four colors, distributed in different amounts and frequencies, create entirely different moods, climates, temperatures — so different that the same cast appears as four different performances.
+  </p>
+  <div class="two-col">
+    <div>
+      <h3>Schopenhauer's insight</h3>
+      <p>
+        Schopenhauer improved Goethe's color circle by assigning different quantities to different hues — proportional to their light intensity. Yellow (lightest) receives the <em>smallest</em> area; violet (darkest) the <em>largest</em>. Balance through weight, not through equality.
+      </p>
+      <div style="display: flex; align-items: flex-end; gap: 4px; height: 80px; margin-top: 1rem;">
+        <div style="flex:3; height:25%; background:#f7d94c; border-radius: 2px 2px 0 0;" title="Yellow - smallest"></div>
+        <div style="flex:4; height:33%; background:#e8612a; border-radius: 2px 2px 0 0;" title="Orange"></div>
+        <div style="flex:6; height:50%; background:#c41e3a; border-radius: 2px 2px 0 0;" title="Red"></div>
+        <div style="flex:6; height:50%; background:#5ba858; border-radius: 2px 2px 0 0;" title="Green"></div>
+        <div style="flex:8; height:67%; background:#2e86ab; border-radius: 2px 2px 0 0;" title="Blue"></div>
+        <div style="flex:9; height:75%; background:#5b2d8e; border-radius: 2px 2px 0 0;" title="Violet - largest"></div>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem;">Quantity proportional to darkness — visual weight balance</p>
+    </div>
+    <div>
+      <h3>Quantity as quality</h3>
+      <p>
+        Albers believed any color "goes" with any other color — if their quantities are appropriate. There are no inherently bad color combinations, only inappropriate proportions and insensitive handling.
+      </p>
+      <div class="principle-card" style="margin-top: 1rem;">
+        <p style="margin:0; font-size: 0.88rem;">
+          <strong>The theatrical parallel:</strong> A set of 4 colors is a "cast." Varying their areas and recurrence creates 4 different "performances" — different scenes, different moods — with the identical cast.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-box" style="margin-top: 2rem;">
+    <div class="demo-header">
+      <span>Quantity Study — Same 4 Colors, 4 Different Climates</span>
+      <button class="btn" onclick="newQuantity()">Randomize Quantities</button>
+    </div>
+    <div class="demo-body">
+      <div id="quantity-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 220px;"></div>
+    </div>
+    <div class="demo-caption">
+      Same colors throughout. Only area and placement shift. "Changes in climate or temperature, in tempo or rhythm."
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XVII: FILM COLOR -->
+<section id="filmcolor">
+  <span class="chapter-label">Chapter XVII</span>
+  <h2>Film Color and Volume Color — 2 Natural Effects</h2>
+  <div class="two-col">
+    <div>
+      <h3>Film Color</h3>
+      <p>
+        Distant mountains appear uniformly blue — regardless of whether covered with green trees or bare rock. The sky at sunset turns the sun full red. A white ceiling near a green lawn appears bright green from reflected light.
+      </p>
+      <p>
+        Film color appears as a thin, transparent, translucent layer between eye and object — independent of the object's actual surface color. It is a <em>physical</em> phenomenon, not psychological.
+      </p>
+    </div>
+    <div>
+      <h3>Volume Color</h3>
+      <p>
+        Coffee in a thin glass stem looks lighter than coffee in a cup, which looks lighter than coffee in a silex glass — though all hold the same liquid. Tea appears lighter in a spoon than in a cup.
+      </p>
+      <p>
+        Volume color exists in 3-dimensional transparent fluids. The more fluid, the darker the color. Milk — being opaque — does not behave this way. Many watercolors behave as volume colors; oil paint, gouache, pastel produce surface color.
+      </p>
+    </div>
+  </div>
+  <div class="demo-box">
+    <div class="demo-header"><span>Film Color — Swimming Pool Effect</span></div>
+    <div class="demo-body" style="display: flex; justify-content: center;">
+      <div style="position: relative; width: 360px; height: 200px; border-radius: 8px; overflow: hidden; background: #6aace4;">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: rgba(30,80,160,0.3);"></div>
+        <div style="position: absolute; bottom: 30px; left: 0; right: 0; height: 30px; background: rgba(30,80,160,0.22);"></div>
+        <div style="position: absolute; bottom: 60px; left: 0; right: 0; height: 30px; background: rgba(30,80,160,0.15);"></div>
+        <div style="position: absolute; bottom: 90px; left: 0; right: 0; height: 30px; background: rgba(30,80,160,0.09);"></div>
+        <div style="position: absolute; bottom: 120px; left: 0; right: 0; height: 30px; background: rgba(30,80,160,0.04);"></div>
+        <!-- step lines -->
+        <div style="position: absolute; left: 0; right: 0; bottom: 30px; height: 1px; background: rgba(255,255,255,0.4);"></div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 60px; height: 1px; background: rgba(255,255,255,0.4);"></div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 90px; height: 1px; background: rgba(255,255,255,0.4);"></div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 120px; height: 1px; background: rgba(255,255,255,0.4);"></div>
+        <div style="position: absolute; top: 12px; left: 12px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.08em;">↓ Deeper = More Blue</div>
+      </div>
+    </div>
+    <div class="demo-caption">
+      Equal step depth → the equal amounts of blue added appear in decreasing perceptual increments, following the Weber-Fechner Law.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XX: WEBER-FECHNER -->
+<section id="weber">
+  <span class="chapter-label">Chapter XX</span>
+  <h2>The Weber-Fechner Law — The Measure in Mixture</h2>
+  <p>
+    M. E. Chevreul instructed: add equal amounts of black ink layer by layer to produce a graduated grey scale. The result seems obvious — but it fails to produce <em>visually equal</em> steps. The surprise is that physical arithmetic does not translate to perceptual arithmetic.
+  </p>
+  <p>
+    Weber (1804–1891) and Fechner (1801–1887) formulated the law:
+  </p>
+  <blockquote>
+    "The visual perception of an arithmetical progression depends upon a physical geometric progression."
+  </blockquote>
+  <p>
+    To see steps of <em>equal apparent height</em>, each successive step must be <em>twice</em> the previous physical quantity. The mind "straightens" the geometric curve into the appearance of even steps.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Arithmetical vs. Geometric Progression</span>
+      <span style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.72rem; color: var(--muted);">Which looks more even?</span>
+    </div>
+    <div class="demo-body">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+        <div>
+          <div style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem;">Arithmetical (+1 each step)</div>
+          <div id="wf-arithmetic" style="display: flex; gap: 3px; height: 80px; align-items: flex-end;"></div>
+          <div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted);">Layers: 1, 2, 3, 4, 5, 6, 7</div>
+          <div style="margin-top: 0.25rem; font-size: 0.72rem; color: #c41e3a;">Steps appear decreasing — the scale compresses</div>
+        </div>
+        <div>
+          <div style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem;">Geometric (×2 each step)</div>
+          <div id="wf-geometric" style="display: flex; gap: 3px; height: 80px; align-items: flex-end;"></div>
+          <div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted);">Layers: 1, 2, 4, 8, 16, 32, 64</div>
+          <div style="margin-top: 0.25rem; font-size: 0.72rem; color: #5ba858;">Steps appear equal — perceptually even</div>
+        </div>
+      </div>
+      <div style="margin-top: 2rem; background: var(--cream); border-radius: 4px; padding: 1rem;">
+        <div style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Color Gradation — Arithmetic (top) vs. Geometric (bottom)</div>
+        <div id="wf-color-arith" style="display: flex; height: 30px; margin-bottom: 4px;"></div>
+        <div id="wf-color-geo" style="display: flex; height: 30px;"></div>
+      </div>
+    </div>
+    <div class="demo-caption">
+      This law operates across all perception: sound, weight, temperature, light. It is why a candle in daylight is barely noticed, but one candle in darkness is brilliant.
+    </div>
+  </div>
+
+  <p>
+    The Weber-Fechner Law is almost unknown among colorists — yet it is crucial in astronomy, acoustics, and psychology. It explains why equal physical additions produce diminishing perceptual returns, and why the swimming pool steps appear to become softer as they deepen.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XXI: TEMPERATURE -->
+<section id="temperature">
+  <span class="chapter-label">Chapter XXI</span>
+  <h2>From Color Temperature to Humidity in Color</h2>
+  <p>
+    In Western tradition, blue is cool and the yellow-orange-red group is warm. But these are <em>relative</em> — not absolute. There are warm blues and cool reds within their own hue families. And when temperature indicators are combined with neutrals and intermediate hues, personal interpretations diverge wildly.
+  </p>
+  <p>
+    Color temperature chains through a remarkable set of perceptual associations: light-dark → light-heavy → soft-hard → quick-slow → young-old → warm-cool → wet-dry → here-there.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header"><span>Color Temperature Spectrum</span></div>
+    <div class="demo-body" style="padding: 1rem;">
+      <div class="temp-demo">
+        <div class="temp-swatch" style="background:#2e5fa3; color: rgba(255,255,255,0.8);">Cool Blue</div>
+        <div class="temp-swatch" style="background:#5ba858; color: rgba(255,255,255,0.8);">Neutral Green</div>
+        <div class="temp-swatch" style="background:#f7d94c; color: rgba(0,0,0,0.6);">Warm Yellow</div>
+        <div class="temp-swatch" style="background:#f4a622; color: rgba(0,0,0,0.6);">Warm Orange</div>
+        <div class="temp-swatch" style="background:#c41e3a; color: rgba(255,255,255,0.8);">Hot Red</div>
+        <div class="temp-swatch" style="background:#5b2d8e; color: rgba(255,255,255,0.8);">Cool Violet</div>
+      </div>
+      <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="background:#2e5fa3; padding: 0.75rem; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+          <div style="background: rgba(255,255,255,0.9); width: 50px; height: 50px; border-radius: 3px;"></div>
+        </div>
+        <div style="background:#c41e3a; padding: 0.75rem; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+          <div style="background: rgba(255,255,255,0.9); width: 50px; height: 50px; border-radius: 3px;"></div>
+        </div>
+      </div>
+      <p style="font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem; margin-bottom: 0;">
+        The same white square — on cool blue it feels warm; on hot red it feels cool. Temperature is always relative.
+      </p>
+    </div>
+    <div class="demo-caption">
+      "Any temperature can be read higher or lower in comparison with other temperatures. These qualifications are only relative."
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XXII: VIBRATING -->
+<section id="vibrating">
+  <span class="chapter-label">Chapter XXII</span>
+  <h2>Vibrating Boundaries — Enforced Contours</h2>
+  <p>
+    When two colors are contrasting in hue but <em>similar</em> in light intensity, a disturbing phenomenon occurs: the boundary between them appears to vibrate, duplicate, or glow. Shadow appears on one side, a reflected light on the other.
+  </p>
+  <p>
+    This effect is felt as <em>aggressive</em> and uncomfortable. It is rarely used except in advertising seeking a screaming effect — hence its association with discomfort and dislike.
+  </p>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Vibrating Boundaries — Contrasting Hue, Similar Lightness</span>
+      <div>
+        <button class="btn active" id="vib-btn-1" onclick="setVibrating(1)">Intense</button>
+        <button class="btn" id="vib-btn-2" onclick="setVibrating(2)">Moderate</button>
+        <button class="btn" id="vib-btn-3" onclick="setVibrating(3)">Subtle</button>
+      </div>
+    </div>
+    <div class="demo-body" style="padding: 1.5rem 1rem;">
+      <div id="vibrating-demo" style="height: 140px; display: grid; border-radius: 4px; overflow: hidden;"></div>
+      <p style="font-size: 0.78rem; color: var(--muted); margin-top: 1rem; margin-bottom: 0;">
+        If you wear glasses, try with and without. Try close focus and far focus. The vibration may appear differently. Some people perceive it strongly; others less so.
+      </p>
+    </div>
+    <div class="demo-caption">
+      The physio-psychological function of this effect has not been fully clarified — it is perceived differently by different people, with or without glasses, near and far.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XXIII: VANISHING -->
+<section id="vanishing">
+  <span class="chapter-label">Chapter XXIII</span>
+  <h2>Equal Light Intensity — Vanishing Boundaries</h2>
+  <p>
+    The opposite of vibrating boundaries: when two adjacent colors share <em>exactly equal light intensity</em>, the boundary between them nearly vanishes. This is among the most surprising, delicate, and difficult effects in color — and the last exercise in Albers's course.
+  </p>
+  <p>
+    Albers describes finding this effect in nature: cumulus clouds seen against blue sky. The shaded grey undersides of the clouds — exactly matching the blue's light level — merge seamlessly: "we do not see where clouds end and where sky begins."
+  </p>
+  <blockquote>
+    "Very few people — including many colorists and painters — have ever seen 2 adjacent colors of true equal light value."
+  </blockquote>
+
+  <div class="demo-box">
+    <div class="demo-header">
+      <span>Vanishing Boundary — Equal Light Intensity</span>
+      <button class="btn" onclick="toggleVanishBoundary()">Toggle Contrast</button>
+    </div>
+    <div class="demo-body" style="padding: 1rem;">
+      <div id="vanish-demo" style="height: 160px; display: flex; border-radius: 4px; overflow: hidden;">
+        <div id="v-left" style="flex: 1; background: hsl(200, 40%, 55%);"></div>
+        <div id="v-right" style="flex: 1; background: hsl(30, 35%, 55%);"></div>
+      </div>
+      <div style="margin-top: 0.5rem; display: flex; gap: 1rem; align-items: center; font-size: 0.78rem; color: var(--muted);">
+        <div>Adjust lightness balance:</div>
+        <input type="range" id="vanish-slider" min="0" max="100" value="55"
+          oninput="adjustVanish(this.value)"
+          style="flex: 1; accent-color: var(--ink);">
+        <div id="vanish-label" style="min-width: 60px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 0.65rem;">L: 55%</div>
+      </div>
+    </div>
+    <div class="demo-caption">
+      The technical requirement: papers must be mounted as "intarsia" (inlaid rather than overlapping) to eliminate the shadow of paper thickness — any disruption destroys the effect.
+    </div>
+  </div>
+
+  <p style="margin-top: 1.5rem;">
+    Because several of Albers's color classes could not produce even one convincing color couple of equal light intensity, this exercise demonstrated most powerfully: "the personal example is the strongest incentive."
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CH XXV: TEACHING -->
+<section id="teaching">
+  <span class="chapter-label">Chapter XXV</span>
+  <h2>On Teaching Color</h2>
+  <p>
+    Albers's pedagogical philosophy was radical: not "theory, then practice" — but practice leading to theory. The color studies are "admission tickets" to class: homework tried, brought in, compared, evaluated by all. The best examples are praised for "psychological engineering" — convincing presentation that eliminates misleading reading.
+  </p>
+
+  <div class="principle-grid">
+    <div class="principle-card">
+      <div class="principle-number">→</div>
+      <h4>Trial and Error</h4>
+      <p>Students are given a task without being told how to do it. Failure is productive — it reveals what doesn't work and why.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-number">→</div>
+      <h4>Comparison</h4>
+      <p>Seeing means comparing. Studies exhibited together allow the whole class to see differences that individual work cannot reveal.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-number">→</div>
+      <h4>Disliked Colors</h4>
+      <p>"A special effort in using disliked colors ends with our falling in love with them." Prejudice dissolves through experience.</p>
+    </div>
+    <div class="principle-card">
+      <div class="principle-number">→</div>
+      <h4>Self-Education</h4>
+      <p>"All thorough study is basic, and all education is self-education." The teacher's enthusiasm counts more than their knowledge.</p>
+    </div>
+  </div>
+
+  <blockquote style="margin-top: 2rem;">
+    "Besides, good teaching is more a giving of right questions than a giving of right answers."
+  </blockquote>
+
+  <div class="two-col" style="margin-top: 2rem;">
+    <div>
+      <h3>Gestaltungstrieb</h3>
+      <p>
+        Albers distinguished the primitive drive to be <em>occupied</em> (Beschäftigungstrieb) from the more evolved drive to be <em>productive and creative</em> (Gestaltungstrieb). Education means moving students from the first to the second.
+      </p>
+    </div>
+    <div>
+      <h3>Variants vs. Variety</h3>
+      <p>
+        Albers distrusted "variety" as a lazy excuse for random change. He preferred "variant" — a thorough re-doing within a given scheme. "There is no final solution in form; form demands unending performance and invites constant reconsideration."
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="pull-quote">
+  <blockquote>
+    "In an age in which increased human sensibility has become such an obvious need in all areas of human involvement, color sensitivity and awareness can constitute a major weapon against forces of insensitivity and brutalization."
+    <cite>University of Nevada reviewer, 1963</cite>
+  </blockquote>
+</div>
+
+<!-- ABOUT -->
+<section style="padding-top: var(--section-gap);">
+  <span class="chapter-label">About</span>
+  <h2>Josef Albers</h2>
+  <div class="bio-section" style="padding: 0;">
+    <div class="bio-portrait">JA</div>
+    <div>
+      <p>
+        <strong>Josef Albers (1888–1976)</strong> was one of the most influential artist-educators of the twentieth century. Born in Bottrop, Westphalia, he studied in Berlin and Munich before joining the Bauhaus in the 1920s — first as a student, then as a master.
+      </p>
+      <p>
+        When the Bauhaus closed in 1933 under Nazi pressure, Albers emigrated to the United States, joining Black Mountain College in North Carolina — where he taught for sixteen years. In 1950 he became chairman of Design at Yale University, where "Interaction of Color" was developed and refined.
+      </p>
+      <p>
+        His paintings, the "Homages to the Square" — begun in 1950 — appear deceptively simple: nested squares of flat color. They are, in fact, sophisticated demonstrations of color interaction in action. Initially mocked, they were given a solo retrospective at The Metropolitan Museum of Art in 1971, making Albers the first living artist so honored.
+      </p>
+      <p>
+        "Interaction of Color," first published by Yale University Press in 1963, immediately became a landmark. The present 50th Anniversary Edition (2013) adds new plates and refines the presentation — while preserving every word of Albers's radical, practical, humane vision.
+      </p>
+      <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="tag">Bauhaus</span>
+        <span class="tag">Black Mountain College</span>
+        <span class="tag">Yale University</span>
+        <span class="tag">1888–1976</span>
+        <span class="tag">Homages to the Square</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECTRUM -->
+<div style="max-width: 900px; margin: 0 auto 4rem; padding: 0 2rem;">
+  <div class="spectrum-bar"></div>
+  <p style="font-size: 0.78rem; color: var(--muted); font-family: 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.05em; text-align: center; margin-top: 0.5rem;">
+    The visible spectrum — the physicist's color, measured by wavelength. The colorist's task: work with <em>reflected</em> color, which is far more complex than this.
+  </p>
+</div>
+
+<footer>
+  <div class="footer-title">Interaction of Color</div>
+  <p>Josef Albers · Yale University Press · First published 1963 · 50th Anniversary Edition 2013</p>
+  <p style="margin-top: 0.5rem;">"Color is the most relative medium in art."</p>
+  <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap;">
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #c41e3a;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #e8612a;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #f4a622;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #f7d94c;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #5ba858;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #2e86ab;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #3b4fd9;"></div>
+    <div style="width: 24px; height: 24px; border-radius: 50%; background: #8e3abf;"></div>
+  </div>
+</footer>
+
+<script>
+// ── PROGRESS BAR ──
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  document.getElementById('progress').style.transform = `scaleX(${pct})`;
+});
+
+// ── MEMORY SWATCHES ──
+const reds = [
+  '#ff0000','#cc0000','#b22222','#c41e3a','#dc143c','#e34234',
+  '#8b0000','#d2042d','#ff3333','#a50021','#e63946','#c0392b'
+];
+const memSwatches = document.getElementById('memory-swatches');
+const cocaRed = '#c41e3a';
+reds.forEach((r,i) => {
+  const d = document.createElement('div');
+  d.style.cssText = `width:60px;height:60px;background:${r};border-radius:4px;cursor:pointer;transition:transform 0.15s;`;
+  d.title = r;
+  d.addEventListener('click', () => {
+    memSwatches.querySelectorAll('div').forEach(x => x.style.transform = '');
+    d.style.transform = 'scale(1.15)';
+    const dist = colorDistance(r, cocaRed);
+    const msg = dist < 20 ? `✓ Very close! (Actual Coca-Cola red is ${cocaRed})` :
+                 dist < 50 ? `Close-ish. Actual: ${cocaRed}` : `Interesting choice. Actual: ${cocaRed}`;
+    document.getElementById('memory-result').textContent = msg;
+  });
+  memSwatches.appendChild(d);
+});
+
+function colorDistance(a, b) {
+  const [r1,g1,b1] = hexToRgb(a), [r2,g2,b2] = hexToRgb(b);
+  return Math.sqrt((r1-r2)**2+(g1-g2)**2+(b1-b2)**2);
+}
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return [r,g,b];
+}
+
+// ── RELATIVITY DEMO ──
+const relModes = [
+  { left:'#1a1a1a', right:'#e8e2d9', center:'#888880', label:'Center squares are identical — a medium grey. On dark ground it appears light; on light ground it appears dark.' },
+  { left:'#4a2e00', right:'#004a4a', center:'#8b7355', label:'Same warm ochre-brown on a warm dark ground vs. a cool dark ground. The cool ground pushes the center warmer; the warm ground pulls it cooler.' },
+  { left:'#5b2d8e', right:'#2d8e5b', center:'#8e7a3a', label:'Same olive-gold on violet vs. on green. Violet ground pushes it greener; green ground pulls it more orange.' }
+];
+let relMode = 0;
+function setRelativityMode(m) {
+  relMode = m - 1;
+  const mode = relModes[relMode];
+  document.getElementById('rel-left').style.background = mode.left;
+  document.getElementById('rel-right').style.background = mode.right;
+  document.getElementById('rel-center-l').style.background = mode.center;
+  document.getElementById('rel-center-r').style.background = mode.center;
+  document.getElementById('rel-caption').innerHTML = mode.label;
+  document.querySelectorAll('#rel-demo ~ * button, .demo-header button').forEach(b => b.classList.remove('active'));
+  document.getElementById(`rel-btn-${m}`).classList.add('active');
+}
+setRelativityMode(1);
+
+// ── LIGHTER / DARKER ──
+const lighterPairs = [
+  { a:'#c8a96e', b:'#6b8e6b', aLighter: false, note: 'Saturated green can appear brighter than muted yellow-gold even when lighter.' },
+  { a:'#e8612a', b:'#8b6f5e', aLighter: true, note: 'Vivid orange vs. muted brown.' },
+  { a:'#3b4fd9', b:'#b8a090', aLighter: false, note: 'Intense blue often "feels" darker but may be lighter than muted beige.' },
+  { a:'#f7d94c', b:'#c8d9c8', aLighter: true, note: 'Yellow is almost always the lightest hue — lighter than pale green.' },
+];
+const lighterDiv = document.getElementById('lighter-pairs');
+lighterPairs.forEach((p,i) => {
+  const d = document.createElement('div');
+  d.innerHTML = `<div style="display:flex;gap:4px;margin-bottom:4px;">
+    <div data-idx="${i}" data-choice="a" style="flex:1;height:60px;background:${p.a};border-radius:3px;cursor:pointer;border:2px solid transparent;transition:border 0.2s;" onclick="pickLighter(${i},'a')"></div>
+    <div data-idx="${i}" data-choice="b" style="flex:1;height:60px;background:${p.b};border-radius:3px;cursor:pointer;border:2px solid transparent;transition:border 0.2s;" onclick="pickLighter(${i},'b')"></div>
+  </div>
+  <div id="lp-note-${i}" style="font-size:0.72rem;color:var(--muted);font-style:italic;min-height:1.5rem;"></div>`;
+  lighterDiv.appendChild(d);
+});
+
+function pickLighter(idx, choice) {
+  document.querySelectorAll(`[data-idx="${idx}"]`).forEach(el => {
+    const isRight = (el.dataset.choice === 'a') === lighterPairs[idx].aLighter;
+    el.style.border = el.dataset.choice === choice ? '2px solid var(--ink)' : '2px solid transparent';
+  });
+}
+let lighterRevealed = false;
+function revealLighter() {
+  lighterRevealed = !lighterRevealed;
+  lighterPairs.forEach((p,i) => {
+    const note = document.getElementById(`lp-note-${i}`);
+    note.textContent = lighterRevealed ? `${p.aLighter ? 'Left' : 'Right'} is lighter. ${p.note}` : '';
+    document.querySelectorAll(`[data-idx="${i}"]`).forEach(el => {
+      const isRight = (el.dataset.choice === 'a') === p.aLighter;
+      if (lighterRevealed) {
+        el.style.border = isRight ? '2px solid #5ba858' : '2px solid #c41e3a';
+      } else {
+        el.style.border = '2px solid transparent';
+      }
+    });
+  });
+}
+
+// ── 1 COLOR AS 2 ──
+const oneAsTwoSets = [
+  { leftGnd:'#8B4513', rightGnd:'#d4a574', center:'#c8956c' },
+  { leftGnd:'#5b2d8e', rightGnd:'#2d8e5b', center:'#8e6888' },
+  { leftGnd:'#1a3a4a', rightGnd:'#c8a060', center:'#6a8060' },
+  { leftGnd:'#c41e3a', rightGnd:'#e8e0b0', center:'#d4a080' },
+];
+let ott = 0;
+function shuffle12() {
+  ott = (ott + 1) % oneAsTwoSets.length;
+  const s = oneAsTwoSets[ott];
+  document.getElementById('ot-left').style.background = s.leftGnd;
+  document.getElementById('ot-right').style.background = s.rightGnd;
+  document.getElementById('ot-center-l').style.background = s.center;
+  document.getElementById('ot-center-r').style.background = s.center;
+}
+
+// ── SUBTRACTION ──
+const subSets = [
+  { lgnd:'#c41e3a', rgnd:'#e8a050', lc:'#d46030', rc:'#d07040' },
+  { lgnd:'#2e5fa3', rgnd:'#5ba858', lc:'#4a8060', rc:'#4a8868' },
+  { lgnd:'#5b2d8e', rgnd:'#c41e3a', lc:'#8e3a60', rc:'#8e4050' },
+];
+let si = 0;
+function shuffleSubtraction() {
+  si = (si + 1) % subSets.length;
+  const s = subSets[si];
+  document.getElementById('sub-left').style.background = s.lgnd;
+  document.getElementById('sub-right').style.background = s.rgnd;
+  document.getElementById('sub-center-l').style.background = s.lc;
+  document.getElementById('sub-center-r').style.background = s.rc;
+  document.getElementById('sub-swatch-l').style.background = s.lc;
+  document.getElementById('sub-swatch-r').style.background = s.rc;
+}
+shuffleSubtraction(); si = 0; shuffleSubtraction();
+
+// ── AFTER-IMAGE ──
+function setAIColor(color, name) {
+  document.getElementById('ai-left').style.background = color;
+  document.querySelectorAll('.demo-body .btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ── TRANSPARENCE ──
+const tpSets = [
+  { l:'#2e5fa3', r:'#c41e3a', m:'#7a4070' },
+  { l:'#f4a622', r:'#5ba858', m:'#8a9a20' },
+  { l:'#5b2d8e', r:'#e8612a', m:'#8e4a60' },
+  { l:'#2e86ab', r:'#8e3abf', m:'#4a5aab' },
+  { l:'#c8a96e', r:'#3b4fd9', m:'#7a7aaa' },
+];
+let tpi = 0;
+function shuffleTransparence() {
+  tpi = (tpi + 1) % tpSets.length;
+  const s = tpSets[tpi];
+  document.getElementById('tp-left').style.background = s.l;
+  document.getElementById('tp-right').style.background = s.r;
+  document.getElementById('tp-mix').style.background = s.m;
+}
+shuffleTransparence(); tpi = 0; shuffleTransparence();
+
+// ── BEZOLD EFFECT ──
+function drawBezold(mortarColor) {
+  const canvas = document.getElementById('bezold-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const bw = 40, bh = 18, gap = 4;
+  const brick = '#b55a3a';
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = mortarColor === 'white' ? '#f0ece4' :
+                  mortarColor === 'black' ? '#1a1612' : '#2e5fa3';
+  ctx.fillRect(0,0,W,H);
+
+  let row = 0;
+  for (let y = gap; y < H - bh; y += bh + gap) {
+    const offset = (row % 2 === 0) ? 0 : (bw + gap) / 2;
+    for (let x = -offset + gap; x < W; x += bw + gap) {
+      ctx.fillStyle = brick;
+      ctx.beginPath();
+      ctx.roundRect(x, y, bw, bh, 2);
+      ctx.fill();
+    }
+    row++;
+  }
+}
+drawBezold('white');
+
+function setBezoldMortar(color, btn) {
+  drawBezold(color);
+  document.querySelectorAll('#bezold-btns .btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── TRANSFORMATION ──
+function hsl(h,s,l) { return `hsl(${h},${s}%,${l}%)`; }
+function newTransformation() {
+  const h = Math.floor(Math.random()*360);
+  const s = 50 + Math.floor(Math.random()*30);
+  const steps = [20,30,45,60];
+  const higherSteps = steps.map(l => Math.min(l+25,88));
+  const low = document.getElementById('trans-low');
+  const high = document.getElementById('trans-high');
+  low.innerHTML = '';
+  high.innerHTML = '';
+  steps.forEach(l => {
+    const d = document.createElement('div');
+    d.style.cssText = `height:80px;border-radius:2px;background:${hsl(h,s,l)};`;
+    low.appendChild(d);
+  });
+  higherSteps.forEach(l => {
+    const d = document.createElement('div');
+    d.style.cssText = `height:80px;border-radius:2px;background:${hsl(h,s,l)};`;
+    high.appendChild(d);
+  });
+}
+newTransformation();
+
+// ── QUANTITY ──
+let qColors = ['#c41e3a','#f4a622','#2e5fa3','#f7d94c'];
+function newQuantity() {
+  const grid = document.getElementById('quantity-grid');
+  grid.innerHTML = '';
+  for (let panel = 0; panel < 4; panel++) {
+    const div = document.createElement('div');
+    div.style.cssText = `border-radius:4px;overflow:hidden;display:flex;flex-wrap:wrap;`;
+    const weights = qColors.map(() => Math.random()*3 + 0.2);
+    const total = weights.reduce((a,b)=>a+b,0);
+    // Simple striped layout
+    const stripes = document.createElement('div');
+    stripes.style.cssText = `width:100%;height:100%;display:flex;flex-direction:${Math.random()>0.5?'row':'column'};`;
+    qColors.forEach((c, ci) => {
+      const s = document.createElement('div');
+      s.style.cssText = `flex:${weights[ci].toFixed(2)};background:${c};`;
+      stripes.appendChild(s);
+    });
+    div.appendChild(stripes);
+    grid.appendChild(div);
+  }
+}
+newQuantity();
+
+// ── WEBER-FECHNER ──
+function buildWF() {
+  const arith = document.getElementById('wf-arithmetic');
+  const geo = document.getElementById('wf-geometric');
+  const ca = document.getElementById('wf-color-arith');
+  const cg = document.getElementById('wf-color-geo');
+  arith.innerHTML = geo.innerHTML = ca.innerHTML = cg.innerHTML = '';
+
+  const steps = 7;
+  for (let i = 1; i <= steps; i++) {
+    const physA = i / steps;
+    const physG = (Math.pow(2, i-1)) / Math.pow(2, steps-1);
+
+    [arith, geo].forEach((el, isGeo) => {
+      const d = document.createElement('div');
+      const height = isGeo ? Math.min(physG * 80, 80) : (i/steps) * 80;
+      const darkness = isGeo ? Math.min(physG, 1) : physA;
+      const shade = Math.round((1 - darkness) * 220);
+      d.style.cssText = `flex:1;height:${height}px;background:rgb(${shade},${shade},${shade});border-radius:2px 2px 0 0;`;
+      el.appendChild(d);
+    });
+
+    // Color scales
+    [ca, cg].forEach((el, isGeo) => {
+      const d = document.createElement('div');
+      const physVal = isGeo ? Math.min((Math.pow(2, i-1)) / Math.pow(2, steps-1), 1) : i/steps;
+      const r = Math.round(180 - physVal * 160);
+      const g = Math.round(40 - physVal * 30);
+      const b = Math.round(40 - physVal * 30);
+      d.style.cssText = `flex:1;background:rgb(${Math.max(r,0)},${Math.max(g,0)},${Math.max(b,0)});`;
+      el.appendChild(d);
+    });
+  }
+}
+buildWF();
+
+// ── VIBRATING BOUNDARIES ──
+const vibSets = [
+  ['#ff3300','#00cc44','#ff3300','#00cc44','#ff3300','#00cc44','#ff3300','#00cc44'],
+  ['#cc4400','#0044cc','#cc4400','#0044cc','#cc4400','#0044cc'],
+  ['#aa6600','#006699','#aa6600','#006699','#aa6600','#006699'],
+];
+function setVibrating(n) {
+  const demo = document.getElementById('vibrating-demo');
+  const colors = vibSets[n-1];
+  demo.style.gridTemplateColumns = `repeat(${colors.length}, 1fr)`;
+  demo.innerHTML = colors.map(c => `<div style="background:${c};"></div>`).join('');
+  document.querySelectorAll('[id^=vib-btn]').forEach(b => b.classList.remove('active'));
+  document.getElementById(`vib-btn-${n}`).classList.add('active');
+}
+setVibrating(1);
+
+// ── VANISHING BOUNDARY ──
+let vanishContrast = false;
+function adjustVanish(val) {
+  const v = parseInt(val);
+  document.getElementById('v-left').style.background = `hsl(200, 40%, ${v}%)`;
+  document.getElementById('v-right').style.background = `hsl(30, 35%, ${v}%)`;
+  document.getElementById('vanish-label').textContent = `L: ${v}%`;
+}
+function toggleVanishBoundary() {
+  vanishContrast = !vanishContrast;
+  if (vanishContrast) {
+    document.getElementById('v-left').style.background = `hsl(200, 40%, 30%)`;
+    document.getElementById('v-right').style.background = `hsl(30, 35%, 75%)`;
+    document.getElementById('vanish-slider').value = 52;
+  } else {
+    const v = document.getElementById('vanish-slider').value;
+    adjustVanish(v);
+  }
+}
+</script>
+</body>
+</html>

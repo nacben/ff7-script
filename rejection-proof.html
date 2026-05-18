@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rejection Proof — Jia Jiang's 100-Day Journey to Conquer Fear</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --dark:#0d1117;--darker:#07090e;--card:#161b22;
+      --fire:#f97316;--gold:#eab308;--emerald:#10b981;
+      --purple:#8b5cf6;--blue:#3b82f6;--rose:#f43f5e;
+      --text:#f8fafc;--muted:#94a3b8;--border:#21262d;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Georgia,serif;background:var(--dark);color:var(--text);line-height:1.7;overflow-x:hidden;}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(7,9,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;}
+    .nav-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
+    .nav-brand{font-size:1rem;font-weight:800;color:var(--fire);text-decoration:none;letter-spacing:-.5px;}
+    .nav-links{display:flex;gap:1.25rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:600;transition:color .2s;}
+    .nav-links a:hover{color:var(--text);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── LAYOUT ── */
+    section{padding:5.5rem 1.5rem;}
+    .container{max-width:1100px;margin:0 auto;}
+
+    /* ── HERO ── */
+    #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 25% 35%,rgba(249,115,22,.13) 0%,transparent 55%),radial-gradient(ellipse at 75% 70%,rgba(139,92,246,.08) 0%,transparent 55%),var(--darker);}
+    .hero-bg-text{position:absolute;font-size:clamp(120px,20vw,240px);font-weight:900;color:rgba(255,255,255,.022);letter-spacing:-10px;user-select:none;pointer-events:none;top:50%;transform:translateY(-50%);white-space:nowrap;}
+    .hero-content{text-align:center;max-width:880px;position:relative;z-index:2;padding:6rem 0 4rem;}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.28);color:var(--fire);padding:.3rem .9rem;border-radius:100px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1.75rem;}
+    .badge::before{content:'●';font-size:.5rem;animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+    .hero-title{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:900;line-height:1.0;letter-spacing:-3px;margin-bottom:1.25rem;background:linear-gradient(135deg,#fff 0%,#f97316 45%,#eab308 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-sub{font-size:clamp(1rem,2.2vw,1.25rem);color:var(--muted);max-width:620px;margin:0 auto 2.5rem;line-height:1.65;}
+    .hero-author{display:inline-flex;align-items:center;gap:.85rem;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:.55rem 1.25rem .55rem .55rem;margin-bottom:3rem;}
+    .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--fire),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;flex-shrink:0;}
+    .author-text{text-align:left;}
+    .author-name{font-size:.88rem;font-weight:700;line-height:1.2;}
+    .author-role{font-size:.74rem;color:var(--muted);}
+    .hero-stats{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+    .h-stat-num{font-size:2.4rem;font-weight:900;color:var(--fire);display:block;line-height:1;}
+    .h-stat-lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem;}
+    .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.78rem;display:flex;flex-direction:column;align-items:center;gap:.35rem;animation:bob 2.2s ease-in-out infinite;}
+    @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
+
+    /* ── SECTION HEADER HELPERS ── */
+    .stag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:.28rem .75rem;border-radius:4px;margin-bottom:1rem;}
+    .stitle{font-size:clamp(1.7rem,4vw,2.7rem);font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:.9rem;}
+    .sdesc{font-size:1rem;color:var(--muted);max-width:640px;line-height:1.7;}
+
+    /* ── COLOR UTILS ── */
+    .c-fire{color:var(--fire);} .c-gold{color:var(--gold);} .c-em{color:var(--emerald);} .c-purp{color:var(--purple);} .c-blue{color:var(--blue);} .c-rose{color:var(--rose);}
+    .bg-fire{background:rgba(249,115,22,.12);} .bg-gold{background:rgba(234,179,8,.12);} .bg-em{background:rgba(16,185,129,.12);} .bg-purp{background:rgba(139,92,246,.12);} .bg-blue{background:rgba(59,130,246,.12);} .bg-rose{background:rgba(244,63,94,.12);}
+    .bdr-fire{border-color:rgba(249,115,22,.25)!important;} .bdr-gold{border-color:rgba(234,179,8,.25)!important;} .bdr-em{border-color:rgba(16,185,129,.25)!important;} .bdr-purp{border-color:rgba(139,92,246,.25)!important;} .bdr-rose{border-color:rgba(244,63,94,.25)!important;}
+
+    /* ── ORIGIN ── */
+    #origin{background:var(--darker);}
+    .origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem;}
+    @media(max-width:768px){.origin-grid{grid-template-columns:1fr;}}
+    .prose{font-size:.95rem;color:var(--muted);line-height:1.85;}
+    .prose p{margin-bottom:1.1rem;}
+    .prose strong{color:var(--text);}
+    .prose em{color:var(--fire);}
+    .timeline-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;}
+    .tl-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:1.5rem;}
+    .tl-item{display:flex;gap:1rem;margin-bottom:1.35rem;position:relative;}
+    .tl-item:not(:last-child)::after{content:'';position:absolute;left:17px;top:36px;bottom:-20px;width:2px;background:var(--border);}
+    .tl-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+    .tl-text h4{font-size:.88rem;font-weight:700;margin-bottom:.2rem;}
+    .tl-text p{font-size:.8rem;color:var(--muted);line-height:1.5;}
+
+    /* ── SCIENCE ── */
+    #science{background:var(--dark);}
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.35rem;margin-top:3rem;}
+    .sci-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.65rem;transition:transform .25s,border-color .25s;}
+    .sci-card:hover{transform:translateY(-4px);}
+    .sci-icon{font-size:1.9rem;margin-bottom:.85rem;}
+    .sci-card h3{font-size:1rem;font-weight:700;margin-bottom:.6rem;}
+    .sci-card p{font-size:.87rem;color:var(--muted);line-height:1.7;}
+    .sci-card .hl{color:var(--fire);font-weight:600;}
+
+    /* ── REJECTION VS FAILURE ── */
+    #rvf{background:var(--darker);}
+    .rvf-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:start;margin-top:3rem;}
+    @media(max-width:720px){.rvf-grid{grid-template-columns:1fr;} .vs-mid{display:none;}}
+    .rvf-side{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;}
+    .rvf-side h3{font-size:1.05rem;font-weight:800;margin-bottom:1.1rem;padding-bottom:.65rem;border-bottom:2px solid currentColor;}
+    .rvf-pt{display:flex;gap:.7rem;margin-bottom:.85rem;font-size:.87rem;color:var(--muted);line-height:1.5;align-items:flex-start;}
+    .rvf-pt span:first-child{flex-shrink:0;}
+    .vs-mid{display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:var(--muted);padding-top:4rem;}
+    .pull{background:linear-gradient(135deg,rgba(249,115,22,.09),rgba(234,179,8,.04));border:1px solid rgba(249,115,22,.18);border-radius:14px;padding:2.25rem;margin-top:3rem;text-align:center;}
+    .pull p{font-size:clamp(1rem,2.2vw,1.25rem);font-weight:700;line-height:1.55;max-width:680px;margin:0 auto;}
+
+    /* ── STORIES ── */
+    #stories{background:var(--dark);}
+    .stories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.35rem;margin-top:3rem;}
+    .story-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .25s,box-shadow .25s;}
+    .story-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.35);}
+    .sc-top{padding:1.4rem 1.4rem .85rem;display:flex;gap:.85rem;align-items:flex-start;}
+    .sc-pill{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;padding:.22rem .6rem;border-radius:100px;display:inline-block;white-space:nowrap;}
+    .sc-emoji{font-size:1.9rem;flex-shrink:0;margin-top:-.1rem;}
+    .sc-meta h3{font-size:.96rem;font-weight:700;line-height:1.3;margin-bottom:.2rem;}
+    .sc-out{font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:.3rem;}
+    .sc-body{padding:0 1.4rem 1.4rem;font-size:.87rem;color:var(--muted);line-height:1.7;}
+    .sc-body p+p{margin-top:.5rem;}
+    .sc-lesson{margin-top:.9rem;padding:.65rem .9rem;background:rgba(249,115,22,.07);border-left:3px solid var(--fire);border-radius:0 7px 7px 0;font-size:.82rem;color:var(--text);line-height:1.5;}
+    .sc-lesson span{color:var(--fire);font-weight:700;}
+
+    /* ── TOOLBOX ── */
+    #toolbox{background:var(--darker);}
+    .tool-section{margin-top:2.75rem;}
+    .tool-section-hdr{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:1.25rem;display:flex;align-items:center;gap:.65rem;}
+    .tool-num-badge{padding:.28rem .7rem;border-radius:5px;font-size:.72rem;}
+    .toolbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.1rem;}
+    .tc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.45rem;position:relative;overflow:hidden;transition:transform .22s,border-color .22s;}
+    .tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+    .tc:hover{transform:translateY(-3px);}
+    .tc-num{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:.6rem;}
+    .tc h3{font-size:.97rem;font-weight:800;margin-bottom:.5rem;line-height:1.3;}
+    .tc p{font-size:.84rem;color:var(--muted);line-height:1.65;}
+    .tc-ex{margin-top:.7rem;padding:.55rem .75rem;background:rgba(255,255,255,.04);border-radius:6px;font-size:.79rem;color:var(--muted);font-style:italic;line-height:1.5;}
+
+    /* ── FAMOUS ── */
+    #famous{background:var(--dark);}
+    .famous-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.35rem;margin-top:3rem;}
+    .fc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.65rem;transition:transform .22s;}
+    .fc:hover{transform:translateY(-4px);}
+    .fc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.85rem;}
+    .fc-name{font-size:.97rem;font-weight:700;margin-bottom:.15rem;}
+    .fc-work{font-size:.8rem;color:var(--muted);font-style:italic;}
+    .fc-n{font-size:2.1rem;font-weight:900;color:var(--rose);line-height:1;}
+    .bar-bg{background:rgba(255,255,255,.07);border-radius:100px;height:5px;margin-bottom:.75rem;overflow:hidden;}
+    .bar{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--rose),var(--fire));width:0;transition:width 1.4s ease .3s;}
+    .fc-quote{font-size:.8rem;color:var(--muted);line-height:1.5;border-left:2px solid var(--rose);padding-left:.7rem;font-style:italic;margin-bottom:.65rem;}
+    .fc-out{font-size:.8rem;color:var(--emerald);font-weight:600;}
+
+    /* ── STATS ROW ── */
+    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1.1rem;margin-top:3rem;}
+    .stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.35rem;text-align:center;}
+    .stat-n{font-size:2.3rem;font-weight:900;line-height:1;margin-bottom:.35rem;}
+    .stat-l{font-size:.78rem;color:var(--muted);line-height:1.4;}
+
+    /* ── PSYCHOLOGY ── */
+    #psychology{background:var(--darker);}
+    .psych-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.75rem;margin-top:3rem;}
+    .psych-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;position:relative;}
+    .p-tag{position:absolute;top:-11px;left:1.35rem;background:var(--purple);color:#fff;font-size:.67rem;font-weight:700;padding:.22rem .7rem;border-radius:100px;text-transform:uppercase;letter-spacing:1px;}
+    .p-source{font-size:.75rem;color:var(--muted);margin-bottom:.4rem;}
+    .psych-card h3{font-size:1.02rem;font-weight:700;margin-bottom:.65rem;}
+    .psych-card p{font-size:.87rem;color:var(--muted);line-height:1.7;}
+    .p-finding{margin-top:1.1rem;background:rgba(139,92,246,.1);border-radius:7px;padding:.9rem 1rem;font-size:.87rem;font-weight:600;color:var(--text);border-left:3px solid var(--purple);line-height:1.55;}
+
+    /* ── UPSIDE ── */
+    #upside{background:var(--dark);}
+
+    /* ── MEANING ── */
+    #meaning{background:var(--darker);}
+    .meaning-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
+    @media(max-width:768px){.meaning-grid{grid-template-columns:1fr;}}
+    .meaning-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;}
+    .meaning-card h3{font-size:1rem;font-weight:700;margin-bottom:.65rem;display:flex;align-items:center;gap:.5rem;}
+    .meaning-card p{font-size:.87rem;color:var(--muted);line-height:1.7;}
+    .meaning-card .quote-in{margin-top:1rem;font-style:italic;color:var(--text);font-size:.87rem;border-left:2px solid var(--gold);padding-left:.75rem;line-height:1.55;}
+
+    /* ── QUOTES ── */
+    #quotes{background:var(--dark);}
+    .quotes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.35rem;margin-top:3rem;}
+    .qc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.85rem;}
+    .q-mark{font-size:3.5rem;line-height:.5;color:var(--fire);opacity:.35;font-family:Georgia,serif;margin-bottom:.85rem;display:block;}
+    .q-text{font-size:.97rem;line-height:1.7;color:var(--text);font-style:italic;margin-bottom:1.1rem;}
+    .q-name{font-size:.84rem;font-weight:700;color:var(--fire);}
+    .q-src{font-size:.76rem;color:var(--muted);}
+
+    /* ── TRANSFORMATION ── */
+    #transformation{background:var(--darker);}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
+    @media(max-width:640px){.compare-grid{grid-template-columns:1fr;}}
+    .compare-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;}
+    .compare-card h3{font-size:.97rem;font-weight:700;margin-bottom:1.1rem;padding-bottom:.6rem;border-bottom:2px solid currentColor;}
+    .compare-list{list-style:none;}
+    .compare-list li{font-size:.86rem;color:var(--muted);padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5;}
+    .compare-list li:last-child{border-bottom:none;}
+    .compare-list li span:first-child{flex-shrink:0;margin-top:.1rem;}
+
+    /* ── APPLY ── */
+    #apply{background:var(--dark);}
+    .challenge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem;margin-top:3rem;}
+    .cc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.65rem;text-align:center;transition:transform .22s,border-color .22s;}
+    .cc:hover{transform:translateY(-4px);border-color:rgba(16,185,129,.3);}
+    .cc-week{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--emerald);margin-bottom:.6rem;}
+    .cc-emoji{font-size:2.2rem;margin-bottom:.65rem;}
+    .cc h3{font-size:.96rem;font-weight:700;margin-bottom:.45rem;}
+    .cc p{font-size:.84rem;color:var(--muted);line-height:1.6;}
+    .insight-trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.35rem;margin-top:3rem;}
+    .insight-card{border-radius:14px;padding:1.85rem;text-align:center;}
+    .insight-card .ic-emoji{font-size:2.5rem;margin-bottom:.85rem;}
+    .insight-card h4{font-size:.97rem;font-weight:800;margin-bottom:.45rem;}
+    .insight-card p{font-size:.84rem;color:var(--muted);line-height:1.65;}
+
+    /* ── FOOTER ── */
+    footer{background:var(--darker);border-top:1px solid var(--border);padding:3.5rem 1.5rem;text-align:center;}
+    .footer-logo{font-size:1.65rem;font-weight:900;background:linear-gradient(135deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;}
+    footer p{color:var(--muted);font-size:.9rem;max-width:480px;margin:.5rem auto;}
+    .footer-donut{font-size:1.2rem;margin-top:1.25rem;font-style:italic;color:rgba(148,163,184,.6);}
+    .footer-credit{font-size:.75rem;color:rgba(148,163,184,.35);margin-top:1.75rem;}
+
+    /* ── FADE IN ── */
+    .fi{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+    .fi.vis{opacity:1;transform:translateY(0);}
+    .fi.d1{transition-delay:.1s;}
+    .fi.d2{transition-delay:.2s;}
+    .fi.d3{transition-delay:.3s;}
+    .fi.d4{transition-delay:.4s;}
+  </style>
+</head>
+<body>
+
+<!-- ░░ NAV ░░ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">Rejection Proof</a>
+    <ul class="nav-links">
+      <li><a href="#science">Science</a></li>
+      <li><a href="#stories">100 Days</a></li>
+      <li><a href="#toolbox">Toolbox</a></li>
+      <li><a href="#famous">Famous Rejections</a></li>
+      <li><a href="#psychology">Research</a></li>
+      <li><a href="#apply">Apply It</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ░░ HERO ░░ -->
+<section id="hero">
+  <div class="hero-bg-text">NO&nbsp;&nbsp;NO&nbsp;&nbsp;NO</div>
+  <div class="hero-content">
+    <div class="badge">100 Days of Rejection</div>
+    <h1 class="hero-title">Rejection<br>Proof</h1>
+    <p class="hero-sub">Jia Jiang quit his corporate job, challenged himself to seek rejection 100 times in a row, and accidentally changed millions of lives — including his own. This is what he learned.</p>
+    <div class="hero-author">
+      <div class="avatar">JJ</div>
+      <div class="author-text">
+        <div class="author-name">Jia Jiang</div>
+        <div class="author-role">Entrepreneur · Speaker · Author · Beijing → Austin → Silicon Valley</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div><span class="h-stat-num">100</span><div class="h-stat-lbl">Days of Rejection</div></div>
+      <div><span class="h-stat-num">M+</span><div class="h-stat-lbl">Video Views</div></div>
+      <div><span class="h-stat-num">∞</span><div class="h-stat-lbl">Life Lessons</div></div>
+      <div><span class="h-stat-num">1</span><div class="h-stat-lbl">Transforming Idea</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- ░░ ORIGIN ░░ -->
+<section id="origin">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-fire c-fire">The Beginning</div>
+      <h2 class="stitle">A Dream, a Drawer Full of Blueprints, and One Spark</h2>
+      <p class="sdesc">July 4, 2012. A pregnant wife. A fireworks sky. And a man who had quietly surrendered his deepest dream to fear.</p>
+    </div>
+    <div class="origin-grid">
+      <div class="prose fi d1">
+        <p>Jia Jiang grew up in Beijing dreaming of becoming <strong>the next Bill Gates</strong>. At 14, he tore down his sports posters and replaced them with biographies of Edison and Konosuke Matsushita. He wrote a letter to his family promising to <em>buy Microsoft by age 25</em>.</p>
+        <p>He moved to America alone at 16. His first host family robbed him. He recovered, learned English with thousands of flash cards, earned a computer science degree from BYU, then an MBA from Duke. He landed a six-figure corporate job. From the outside: perfect.</p>
+        <p>But the dream was suffocating. When his uncle dismissed his shoe-skate invention idea, Jia buried the blueprint and never pursued it. Years later, Roger Adams patented the exact same idea — and founded <strong>Heelys, valued at ~$1 billion after its IPO</strong>. Jia watched kids skating on Heelys in malls and felt the unbearable weight of what might have been.</p>
+        <p>Sitting at Independence Day fireworks, his pregnant wife Tracy beside him, Jia realized his entrepreneurial dream might die not from failure — but from <strong>fear of rejection</strong>. Tracy issued a challenge: quit your job, give yourself six months, build something real, leave no regret.</p>
+        <p>When the investor rejected his start-up app four months in, Jia discovered <em>Rejection Therapy</em> — a concept developed by Canadian entrepreneur Jason Comely. He took it further: 100 days, 100 attempts, all video-recorded and shared with the world. What happened next changed everything.</p>
+      </div>
+      <div class="fi d2">
+        <div class="timeline-box">
+          <div class="tl-label">The Journey Timeline</div>
+          <div class="tl-item">
+            <div class="tl-dot bg-fire" style="font-size:.9rem;">🇨🇳</div>
+            <div class="tl-text"><h4>Childhood Dream (Beijing)</h4><p>Idolizes Bill Gates at 14; vows to buy Microsoft by 25.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot bg-blue" style="font-size:.9rem;">✈️</div>
+            <div class="tl-text"><h4>Arrives in America (1998)</h4><p>First host family robs him. Learns there are good and bad people.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot bg-gold" style="font-size:.9rem;">💡</div>
+            <div class="tl-text"><h4>The Heelys Moment</h4><p>Invents shoe-skates. Uncle rejects it. He buries the blueprint. Heelys later ~$1B.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot bg-purp" style="font-size:.9rem;">💼</div>
+            <div class="tl-text"><h4>Corporate Decade (2002–2012)</h4><p>Duke MBA. Fortune 500. 3,700 sq ft house. Golden retriever. Miserable.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot bg-fire" style="font-size:.9rem;">🍩</div>
+            <div class="tl-text"><h4>Quits Job · 100 Days Begin (2012)</h4><p>Olympic donuts go viral. Millions watch. The world discovers Jackie Braun.</p></div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot bg-em" style="font-size:.9rem;">🌟</div>
+            <div class="tl-text"><h4>Transformation Complete</h4><p>Fear conquered. Tracy gets Google job. New mission launched.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ SCIENCE ░░ -->
+<section id="science">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-purp c-purp">Neuroscience &amp; Evolution</div>
+      <h2 class="stitle">Why Rejection Hurts So Much</h2>
+      <p class="sdesc">It is not weakness or thin skin. Rejection activates the same brain chemistry as physical pain — and that is by evolutionary design. Understanding this changes everything.</p>
+    </div>
+    <div class="grid-3">
+      <div class="sci-card bdr-rose fi d1">
+        <div class="sci-icon">🧠</div>
+        <h3>The Opioid Response</h3>
+        <p>University of Michigan researchers found that social rejection causes the brain to <span class="hl">release natural opioids</span> — the same painkilling chemicals triggered by physical injury. More stunning: participants were told the rejections were <em>fake</em> before the study. The brains released opioids anyway. The body cannot tell the difference between social and physical pain.</p>
+      </div>
+      <div class="sci-card bdr-purp fi d2">
+        <div class="sci-icon">🦕</div>
+        <h3>10,000 Years of Fear</h3>
+        <p>Our ancestors lived in small tribes. <span class="hl">Rejection by the group meant death</span> — facing predators alone, without food or protection. Natural selection hardwired this fear into our DNA. That instinct still runs in our genetic code today, even though there are no mastodons in downtown Austin and a stranger's "no" will not get us eaten. Rejection fear is an evolutionary appendix: vestigial, but capable of causing real harm.</p>
+      </div>
+      <div class="sci-card bdr-gold fi d3">
+        <div class="sci-icon">😂</div>
+        <h3>Laughter: The Biological Antidote</h3>
+        <p>Oxford evolutionary psychologist Robin Dunbar found that participants endured <span class="hl">significantly more pain while watching comedy</span> (Simpsons, South Park) than neutral or feel-good content — because laughter releases endorphins, a different class of opioids that both fight pain and generate pleasure. Dunbar believes laughter may have evolved specifically to bond human groups. It is a double shot of natural painkillers — which is exactly why Jia's funniest requests hurt the least.</p>
+      </div>
+      <div class="sci-card bdr-fire fi d1">
+        <div class="sci-icon">🔬</div>
+        <h3>Rejection vs. Failure</h3>
+        <p>Failure can be blamed on timing, skill gaps, or market conditions. <span class="hl">Rejection feels inescapably personal</span> because another human being is specifically choosing against you. In Silicon Valley, entrepreneurs proudly collect failures. Nobody brags about rejections. The distinction matters: failure is impersonal, rejection is intimate — and your DNA treats it as a threat to tribal survival.</p>
+      </div>
+      <div class="sci-card bdr-blue fi d2">
+        <div class="sci-icon">⚔️</div>
+        <h3>The Revenge Trap</h3>
+        <p>Colgate social psychologist Kevin Carlsmith ran lab experiments on perceived injustice. Everyone who could take revenge on a wrongdoer did so — <span class="hl">and then felt worse</span> than those who had no revenge option. We believe lashing back will restore dignity. It doesn't. Real-world evidence: school shootings and acid attacks trace back to the same cycle of rejection-pain escalating into catastrophic revenge.</p>
+      </div>
+      <div class="sci-card bdr-em fi d3">
+        <div class="sci-icon">🧙</div>
+        <h3>The Wizard of Oz Effect</h3>
+        <p>Like the terrifying Wizard behind the curtain, rejection feels catastrophic from a distance. When Toto pulls back the curtain, a harmless gray-haired man is running a machine. <span class="hl">The fear is almost always worse than the actual rejection.</span> Facing rejection 100 times gave Jia's brain the lived evidence it needed to finally believe: "No" is survivable — and often quite funny.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ REJECTION VS FAILURE ░░ -->
+<section id="rvf">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-rose c-rose">The Crucial Distinction</div>
+      <h2 class="stitle">Rejection vs. Failure</h2>
+      <p class="sdesc">We have conferences about failure, memes about failure, TED Talks about failure. But rejection? Silence. Here is why they are fundamentally different experiences.</p>
+    </div>
+    <div class="rvf-grid fi">
+      <div class="rvf-side bdr-gold">
+        <h3 class="c-gold">Failure</h3>
+        <div class="rvf-pt"><span>📊</span><span>Attributable to timing, market, execution — external factors absorb the shame</span></div>
+        <div class="rvf-pt"><span>🏆</span><span>Silicon Valley treats failures as badges of honor — "fail fast, learn fast"</span></div>
+        <div class="rvf-pt"><span>🔄</span><span>Yields lessons: "I made mistakes," "I'll improve," "I'm wiser now"</span></div>
+        <div class="rvf-pt"><span>🗣️</span><span>Discussed openly — entrepreneurs tell failure stories for credibility and relatability</span></div>
+        <div class="rvf-pt"><span>😌</span><span>Even feels noble sometimes — "I tried, I learned, I grew"</span></div>
+      </div>
+      <div class="vs-mid">VS</div>
+      <div class="rvf-side bdr-rose">
+        <h3 class="c-rose">Rejection</h3>
+        <div class="rvf-pt"><span>👤</span><span>Always involves another person actively choosing against you — impossible to externalize</span></div>
+        <div class="rvf-pt"><span>🤫</span><span>Treated as shameful, rarely discussed, deeply personal — almost taboo</span></div>
+        <div class="rvf-pt"><span>⚡</span><span>Triggers opioid release — the brain processes it as a physical wound</span></div>
+        <div class="rvf-pt"><span>😤</span><span>When unjust, provokes rage and revenge fantasies — which make everything worse</span></div>
+        <div class="rvf-pt"><span>🧬</span><span>Evolution treats it as an existential threat — fight or flee, immediately</span></div>
+      </div>
+    </div>
+    <div class="pull fi">
+      <p>"Rejection doesn't just feel like a rejection of our request — it feels like a rejection of our character, looks, intelligence, and beliefs. Even when the rejector means nothing personal, it will feel deeply personal. The pain is real and it is chemical."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ STORIES ░░ -->
+<section id="stories">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-gold c-gold">The 100 Days</div>
+      <h2 class="stitle">Key Experiments &amp; What They Revealed</h2>
+      <p class="sdesc">Each rejection attempt was a laboratory. The experiments ranged from absurd to profound — and every one produced a lesson that no business school teaches.</p>
+    </div>
+    <div class="stories-grid">
+
+      <!-- Day 1 -->
+      <div class="story-card fi d1">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-rose c-rose">Day 1</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">💵</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Borrow $100 from a Security Guard</h3>
+            <div class="sc-out c-rose">❌ Rejected — but the guard asked "Why?"</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>Jia walked up to the office building security guard, phone recording, heart pounding, and asked to borrow $100. The guard said no — but then paused: <em>"Why?"</em></p>
+          <p>Paralyzed by shame, Jia fled without answering. Watching the replay that night, he realized the guard had offered to continue the conversation — an invitation he had completely missed because he was desperate to escape.</p>
+          <div class="sc-lesson"><span>Lesson:</span> Fear turns us into mumbling idiots who flee before the conversation can even begin. Confidence and composure change the entire experience of being rejected — for both people.</div>
+        </div>
+      </div>
+
+      <!-- Day 3 - Krispy Kreme -->
+      <div class="story-card fi d2" style="border-color:rgba(249,115,22,.3);background:linear-gradient(135deg,var(--card),rgba(249,115,22,.05));">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-fire c-fire">Day 3 ⭐ VIRAL</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">🍩</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Olympic Ring Donuts at Krispy Kreme</h3>
+            <div class="sc-out c-em">✅ YES — and they were free</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>Jia asked shift leader Jackie Braun to make five interlinked donuts in the shape of the Olympic rings — in 15 minutes. Instead of saying no, Jackie pulled out paper, sketched the design, thought through the fryer logistics, and disappeared into the kitchen.</p>
+          <p>Minutes later: perfect Olympic ring donuts, iced in the correct five colors. Free of charge. Jackie's smile was "the kind you see only on someone who has made another person happy."</p>
+          <p>The video went viral: 15,000+ Reddit upvotes, Yahoo! front page, featured in dozens of countries. Krispy Kreme stock jumped 29% that week. Jackie became famous for her generosity.</p>
+          <div class="sc-lesson"><span>Lesson:</span> The world is far more generous than fear makes it seem. Amazing things happen the moment you find the courage to ask — things that are simply impossible without asking.</div>
+        </div>
+      </div>
+
+      <!-- Day 6 - Backyard Soccer -->
+      <div class="story-card fi d3">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-blue c-blue">Day 6</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">⚽</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Play Soccer in a Stranger's Backyard</h3>
+            <div class="sc-out c-em">✅ Scott the Cowboys fan said yes</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>Wearing cleats and holding a soccer ball, Jia knocked on a random door mid-Dallas Cowboys overtime. Scott stared at the cleats for a long moment, then said: <em>"I guess so."</em></p>
+          <p>Why did he say yes? <em>"It was so off the wall — how could I say no?"</em> The sheer outrageousness of the request triggered curiosity rather than suspicion. Scott missed his overtime to snap a photo of a stranger playing soccer in his yard.</p>
+          <div class="sc-lesson"><span>Lesson:</span> Outlandish requests can be paradoxically easier to grant than ordinary ones. Personal curiosity on the part of the person being asked — not your strategy — often determines the outcome.</div>
+        </div>
+      </div>
+
+      <!-- Southwest Flight -->
+      <div class="story-card fi d1">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-purp c-purp">Day ~20</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">✈️</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Give the Welcome Announcement on a Southwest Flight</h3>
+            <div class="sc-out c-em">✅ YES — earned a free drink</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>Flight attendant Jeff handed Jia the microphone. With 130 passengers staring, he announced himself as "just a customer who thinks Southwest is always on time, always friendly, always awesome" — and asked for applause. He got it.</p>
+          <p>But this attempt nearly broke him. His DNA was screaming: <em>"You are in danger! Someone will think you're a terrorist and tackle you!"</em> A public rejection by 130 people simultaneously felt incomparably more threatening than any private one.</p>
+          <div class="sc-lesson"><span>Lesson:</span> Fear of rejection is biological, not just psychological. You are fighting 10,000 years of evolution. But every time you survive the terror, the wiring slowly changes.</div>
+        </div>
+      </div>
+
+      <!-- Rosebush -->
+      <div class="story-card fi d2">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-rose c-rose">Day ~45</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">🌹</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Plant a Rosebush in a Stranger's Yard</h3>
+            <div class="sc-out c-gold">↗ Rejected → Referred to neighbor</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>A white-haired man said no — his dog would dig it up. But Jia stayed in the conversation and asked <em>why</em>. The man explained, then added: <em>"Go across the street to Lauren. She loves flowers."</em></p>
+          <p>Lauren said yes immediately and was delighted with the peach rosebush. The "why" question transformed a rejection into a referral — and a planted rosebush in a stranger's garden.</p>
+          <div class="sc-lesson"><span>Lesson:</span> "Why?" is the most powerful word after a rejection. It reveals the true reason — usually impersonal — and sometimes opens a door that didn't seem to exist.</div>
+        </div>
+      </div>
+
+      <!-- One-day job -->
+      <div class="story-card fi d3">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-em c-em">Day ~35</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">🏢</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Find a Job in One Day (Walk Into Offices Cold)</h3>
+            <div class="sc-out c-em">✅ Hired by BigCommerce on 3rd try</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>After two stern rejections, Jia walked into a third office where Jennifer Carrier — raised by a Southern hospitality mom and a salesman dad, trained at modeling school, waitress-turned-office-manager — greeted him warmly and offered a trial assistant position.</p>
+          <div class="sc-lesson"><span>Lesson:</span> The same request gets polar-opposite responses from different people. Rejection reveals the rejector's history and personality — not the universal merit of your ask. <em>It is almost never about you.</em></div>
+        </div>
+      </div>
+
+      <!-- McGriddles -->
+      <div class="story-card fi d1">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-gold c-gold">Day ~50</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">🥐</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Order McGriddles at 2 PM (Breakfast-Only Item)</h3>
+            <div class="sc-out c-gold">↗ Partial YES — honey griddle cake</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>The clerk said no (they'd cleaned the egg machine). Jia retreated: <em>"Do you have something <strong>like</strong> a McGriddles?"</em> The clerk offered a honey-roasted griddle cake with cheese. Jia took it, claimed victory over a fan's "impossible" challenge.</p>
+          <div class="sc-lesson"><span>Lesson:</span> Don't rout — retreat strategically. When the exact ask fails, retreat to a lesser ask. Every "no" is surrounded by invisible yeses. Your job is to find them.</div>
+        </div>
+      </div>
+
+      <!-- PetSmart haircut -->
+      <div class="story-card fi d2">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-purp c-purp">Day ~40</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">✂️</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Ask a Dog Groomer at PetSmart to Cut His Hair</h3>
+            <div class="sc-out c-rose">❌ Rejected — with uncontrollable laughter</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>Jia asked the groomer how much a "hair trimming" would cost. "What kind of dog?" — "Mine. My own hair." Four groomers erupted in laughter. He pushed: "Can you treat me like a Tibetan mastiff? I'll sit, I won't bark." Laughter intensified. No one minded the rejection.</p>
+          <div class="sc-lesson"><span>Lesson:</span> Laughter is a biological antidote to rejection pain. When humor is present, endorphins suppress the pain. The opioid alarm never fires. Jia left PetSmart feeling <em>great</em> despite the "no."</div>
+        </div>
+      </div>
+
+      <!-- Finding Google -->
+      <div class="story-card fi d3" style="border-color:rgba(16,185,129,.3);background:linear-gradient(135deg,var(--card),rgba(16,185,129,.04));">
+        <div class="sc-top">
+          <div>
+            <div class="sc-pill bg-em c-em">Day 100 🏆</div>
+            <div class="sc-emoji" style="margin-top:.5rem;">🔍</div>
+          </div>
+          <div class="sc-meta">
+            <h3>Help Tracy Get a Job at Google</h3>
+            <div class="sc-out c-em">✅ Google reversed its own rejection</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <p>Tracy quit her job and spent 6 months applying rejection-proof principles: hundreds of networking messages (nearly half responded), four formal rejections, authentic interviews where she focused only on what she could control. Each "no" was treated as data, not verdict.</p>
+          <p>After the fourth rejection, the recruiter was so moved by how gracefully Tracy handled each "no" that he advocated for her. The team reversed course. <em>"I've never seen anyone take rejection so positively — never. That broke my heart."</em></p>
+          <div class="sc-lesson"><span>Lesson:</span> Rejection is so feeble it can even change. And how you take a no can matter as much as what you asked for. Tracy's number was four — though it felt like four hundred.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ░░ TOOLBOX ░░ -->
+<section id="toolbox">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-fire c-fire">Complete Framework</div>
+      <h2 class="stitle">The Rejection Toolbox</h2>
+      <p class="sdesc">After 100 days and thousands of human interactions, Jia distilled the principles of rejection into a practical framework organized across five domains. This is the complete system.</p>
+    </div>
+
+    <!-- Domain 1: Rethinking -->
+    <div class="tool-section fi">
+      <div class="tool-section-hdr">
+        <span class="tool-num-badge bg-fire c-fire">01</span>
+        Rethinking Rejection — New Mental Models
+      </div>
+      <div class="toolbox-grid">
+        <div class="tc bdr-fire" style="--tc-top:var(--fire);"><span class="tc::before" style="background:var(--fire);"></span>
+          <span class="tc-num c-fire">Principle 1</span>
+          <h3>Rejection Is Human</h3>
+          <p>Every rejection has at least two parties. The response you receive usually reveals more about the rejector — their mood, history, needs, and cultural background — than about you or your request.</p>
+          <div class="tc-ex">Jennifer at BigCommerce said yes to the same request that two other office managers refused. Same Jia. Same words. Completely different people — completely different outcomes.</div>
+        </div>
+        <div class="tc bdr-gold">
+          <span class="tc-num c-gold">Principle 2</span>
+          <h3>Rejection Is an Opinion</h3>
+          <p>The rejector is offering their perspective, filtered through their psychology, upbringing, cultural context, and current circumstances. It is not objective truth about the merit of your idea or your worth as a person.</p>
+          <div class="tc-ex">Jia's uncle rejected his shoe-skate idea. Heelys sold for ~$1B. The uncle gave an opinion, not a verdict.</div>
+        </div>
+        <div class="tc bdr-em">
+          <span class="tc-num c-em">Principle 3</span>
+          <h3>Rejection Has a Number</h3>
+          <p>If you ask enough people, a "no" will eventually become a "yes." There is no idea — however unconventional — that will be universally rejected by every person on Earth. The question is only how many asks it takes.</p>
+          <div class="tc-ex">J.K. Rowling: 12 rejections before Harry Potter. Kathryn Stockett: 60 before The Help. Robert Pirsig: 121 — a Guinness record.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain 2: Taking a No -->
+    <div class="tool-section fi">
+      <div class="tool-section-hdr">
+        <span class="tool-num-badge bg-blue c-blue">02</span>
+        Taking a No — What to Do After Rejection
+      </div>
+      <div class="toolbox-grid">
+        <div class="tc bdr-blue">
+          <span class="tc-num c-blue">Tactic 1</span>
+          <h3>Ask "Why" Before Good-bye</h3>
+          <p>Do not flee after a rejection. Stay in the conversation and ask why. This single question often reveals the rejection was never personal — and can uncover an unexpected path forward.</p>
+          <div class="tc-ex">The man who didn't want a rosebush explained his dog would dig it up — and then referred Jia to a flower-loving neighbor who said yes immediately.</div>
+        </div>
+        <div class="tc bdr-purp">
+          <span class="tc-num c-purp">Tactic 2</span>
+          <h3>Retreat, Don't Run</h3>
+          <p>When the exact ask fails, retreat to a lesser ask rather than abandoning entirely. Like military retreats vs. routs — retreating strategically preserves optionality. Running creates a rout of your own making.</p>
+          <div class="tc-ex">"Can't do McGriddles" → "Do you have something <em>like</em> a McGriddles?" → Honey griddle cake with cheese. A partial win beats a complete loss.</div>
+        </div>
+        <div class="tc bdr-fire">
+          <span class="tc-num c-fire">Tactic 3</span>
+          <h3>Collaborate, Don't Contend</h3>
+          <p>Arguing with a rejector is the most reliable way to ensure a permanent "no." Framing them as a collaborator — someone helping you solve a shared problem — transforms adversaries into partners.</p>
+          <div class="tc-ex">A documentary crew argued with a music studio employee: he shut down completely. Jia stepped in, said "we know it's unusual and you can say no" — the employee immediately said yes and played drums for them.</div>
+        </div>
+        <div class="tc bdr-gold">
+          <span class="tc-num c-gold">Tactic 4</span>
+          <h3>Switch Up, Don't Give Up</h3>
+          <p>Before quitting, try asking a different person, in a different environment, or under different circumstances. NBA reject Stephon Marbury moved to Beijing, led a team to its first-ever championship, and had a bronze statue built in his likeness.</p>
+          <div class="tc-ex">Jia's job search: 2 rejections, then Jennifer at BigCommerce. Same request, different variables — completely different result.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain 3: Positioning for Yes -->
+    <div class="tool-section fi">
+      <div class="tool-section-hdr">
+        <span class="tool-num-badge bg-em c-em">03</span>
+        Positioning for Yes — Increasing the Odds
+      </div>
+      <div class="toolbox-grid">
+        <div class="tc bdr-em">
+          <span class="tc-num c-em">Strategy 1</span>
+          <h3>Give Your "Why"</h3>
+          <p>Always explain the reason behind your request. Harvard psychologist Ellen Langer's landmark "Copy Machine" study found that requests with a reason (even a trivial one) succeeded 93–94% of the time, versus 60% without any reason at all.</p>
+          <div class="tc-ex">In New York City, Jia asked dozens of random strangers to pose in photos with him — and told them <em>why</em> (people are part of a city's fabric). Every single one said yes.</div>
+        </div>
+        <div class="tc bdr-rose">
+          <span class="tc-num c-rose">Strategy 2</span>
+          <h3>Start with "I"</h3>
+          <p>Make it clear you are asking for a favor rather than pretending to benefit them. UT Austin researcher James Pennebaker found "I"-statements are perceived as more honest. Never manufacture false benefits for the other person without genuinely knowing their interests.</p>
+          <div class="tc-ex">The hairdresser incident: Jia said "you must be bored with your job" — she was deeply offended. He didn't know her. Starting with "I would love to cut your hair" would have been honest and respectful.</div>
+        </div>
+        <div class="tc bdr-blue">
+          <span class="tc-num c-blue">Strategy 3</span>
+          <h3>Acknowledge Doubts</h3>
+          <p>Preemptively name the obvious objections or strangeness of your request. This disarms suspicion, demonstrates empathy, and paradoxically builds credibility — because it signals you are not crazy, just honest.</p>
+          <div class="tc-ex">At Starbucks: "Is that weird?" → barista Eric visibly relaxed, felt understood, and said yes. Domino's ran ads brutally criticizing their own old pizza — and recorded a historic 14.3% sales jump.</div>
+        </div>
+        <div class="tc bdr-purp">
+          <span class="tc-num c-purp">Strategy 4</span>
+          <h3>Target the Audience</h3>
+          <p>The finest request aimed at the wrong audience is wasted. Match your ask to people who are most likely to be receptive by context, interest, personality, and circumstances.</p>
+          <div class="tc-ex">Joshua Bell, Grammy-winning violinist, earned almost nothing busking anonymously in a DC metro. Days earlier, the same performance earned a standing ovation at the Kennedy Center. Same talent. Wrong audience.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain 4: Giving a No -->
+    <div class="tool-section fi">
+      <div class="tool-section-hdr">
+        <span class="tool-num-badge bg-gold c-gold">04</span>
+        Giving a No — The Art of Graceful Rejection
+      </div>
+      <div class="toolbox-grid">
+        <div class="tc bdr-gold">
+          <span class="tc-num c-gold">Delivery 1</span>
+          <h3>Patience and Respect</h3>
+          <p>The way you deliver a "no" can matter more than the rejection itself. Jordan at 24 Hour Fitness was so patient and respectful that his "no" felt like a "yes" — he even found Jia an alternative gym through his personal contact.</p>
+          <div class="tc-ex">Kelly Blazek's rude LinkedIn rejection email went viral and destroyed a reputation built over years of genuine volunteer work. Jackie Braun's generous yes made Krispy Kreme's stock jump 29%.</div>
+        </div>
+        <div class="tc bdr-fire">
+          <span class="tc-num c-fire">Delivery 2</span>
+          <h3>Be Direct</h3>
+          <p>Avoid two forms of indirect rejection: "big setups" (long preambles before the bad news) and "yes-buts" (false acknowledgment followed by rejection). Apple forbids the word "unfortunately" in customer service because it undermines trust.</p>
+          <div class="tc-ex">Microsoft's Stephen Elop buried layoff news for 12,500 employees in paragraph 11 of an 1,100-word memo. The response: ugly protests and global PR coverage headlined "How Not to Cut 12,500 Jobs."</div>
+        </div>
+        <div class="tc bdr-em">
+          <span class="tc-num c-em">Delivery 3</span>
+          <h3>Offer Alternatives</h3>
+          <p>When you must say no, offering alternatives signals you are rejecting the <em>request</em> — not the person. This crucial distinction turns potential enemies into loyal advocates who remember your generosity.</p>
+          <div class="tc-ex">Costco manager Robert couldn't allow the intercom request. He bought Jia and his family dinner and suggested the company magazine. Jia became a vocal fan. Robert later recognized by customers who saw the video.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domain 5: Finding Power -->
+    <div class="tool-section fi">
+      <div class="tool-section-hdr">
+        <span class="tool-num-badge bg-purp c-purp">05</span>
+        Finding Power — Detachment and Inner Freedom
+      </div>
+      <div class="toolbox-grid">
+        <div class="tc bdr-purp" style="grid-column:span 2;">
+          <span class="tc-num c-purp">Core Principle</span>
+          <h3>Detachment from Results</h3>
+          <p>Buddhism, Hinduism, Tao Te Ching, and the Bhagavad Gita all converge on this: detach from outcomes, focus on what you can control. Jia and Tracy made two lists — controllable (effort, networking, authenticity) and uncontrollable (whether someone says yes). They poured everything into the first list and released the second.</p>
+          <p style="margin-top:.65rem;font-size:.84rem;color:var(--muted);">UCLA basketball coach John Wooden, who won 10 NCAA championships in 11 years, never talked to his team about winning. His metric was effort and preparation — not results. Tracy's Google recruiter reversed course precisely because she was detached: "She took it so positively — I've never seen that. It broke my heart, and I wanted to advocate for her."</p>
+          <div class="tc-ex">Jack Canfield (Chicken Soup for the Soul): "Live with high intention and low attachment." Lao Tzu: "Care about people's approval and you will be their prisoner."</div>
+        </div>
+        <div class="tc bdr-fire">
+          <span class="tc-num c-fire">Freedom 1</span>
+          <h3>Freedom to Ask</h3>
+          <p>A 2011 Accenture study found only 44–48% of working Americans have ever asked for a raise. Yet 85% of those who ask receive something. We are systematically self-rejecting — withholding the very asks that could change our lives.</p>
+        </div>
+        <div class="tc bdr-gold">
+          <span class="tc-num c-gold">Freedom 2</span>
+          <h3>Freedom to Accept Yourself</h3>
+          <p>Constant approval-seeking forces us to bend into shapes that are not our own. What we need is not acceptance from others first — it is acceptance from ourselves. Internal worth should be the prerequisite to seeking external validation, not its reward.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░ FAMOUS REJECTIONS ░░ -->
+<section id="famous">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-rose c-rose">Hall of Rejection</div>
+      <h2 class="stitle">Famous Works, Famous Rejections</h2>
+      <p class="sdesc">The books and careers we celebrate today were once dismissed as unmarketable, uninteresting, and unsalvageable. The rejections did not stop them — they refined them.</p>
+    </div>
+    <div class="famous-grid">
+      <div class="fc fi d1">
+        <div class="fc-top">
+          <div><div class="fc-name">J.K. Rowling</div><div class="fc-work">Harry Potter and the Philosopher's Stone</div></div>
+          <div class="fc-n">12</div>
+        </div>
+        <div class="bar-bg"><div class="bar" style="--w:10%;"></div></div>
+        <div class="fc-quote">"It's far too long for children."</div>
+        <div class="fc-out">→ 100+ million copies. One of the 10 bestselling books in history.</div>
+      </div>
+      <div class="fc fi d2">
+        <div class="fc-top">
+          <div><div class="fc-name">Stephen King</div><div class="fc-work">Carrie</div></div>
+          <div class="fc-n">30</div>
+        </div>
+        <div class="bar-bg"><div class="bar" style="--w:25%;"></div></div>
+        <div class="fc-quote">"We are not interested in science fiction which deals with negative utopias. They do not sell."</div>
+        <div class="fc-out">→ King's breakthrough. Over 1 million copies. Multiple film adaptations.</div>
+      </div>
+      <div class="fc fi d3">
+        <div class="fc-top">
+          <div><div class="fc-name">Kathryn Stockett</div><div class="fc-work">The Help</div></div>
+          <div class="fc-n">60</div>
+        </div>
+        <div class="bar-bg"><div class="bar" style="--w:50%;"></div></div>
+        <div class="fc-quote">Sixty consecutive rejections over nearly three years of persistent submissions.</div>
+        <div class="fc-out">→ #1 New York Times bestseller for 4 years. Major film adaptation. Award-winning.</div>
+      </div>
+      <div class="fc fi d1">
+        <div class="fc-top">
+          <div><div class="fc-name">William Golding</div><div class="fc-work">Lord of the Flies</div></div>
+          <div class="fc-n">20</div>
+        </div>
+        <div class="bar-bg"><div class="bar" style="--w:17%;"></div></div>
+        <div class="fc-quote">"An absurd and uninteresting fantasy which was rubbish and dull."</div>
+        <div class="fc-out">→ Nobel Prize in Literature. Required reading in schools worldwide for 60+ years.</div>
+      </div>
+      <div class="fc fi d2">
+        <div class="fc-top">
+          <div><div class="fc-name">Anne Frank</div><div class="fc-work">The Diary of a Young Girl</div></div>
+          <div class="fc-n">15</div>
+        </div>
+        <div class="bar-bg"><div class="bar" style="--w:12%;"></div></div>
+        <div class="fc-quote">"The girl doesn't have a special perception or feeling which could lift that book above the 'curiosity' level."</div>
+        <div class="fc-out">→ 31 million copies sold. One of the most important books in human history.</div>
+      </div>
+      <div class="fc fi d3">
+        <div class="fc-top">
+          <div><div class="fc-name">Robert M. Pirsig</div><div class="fc-work">Zen &amp; the Art of Motorcycle Maintenance</div></div>
+          <div class="fc-n" style="font-size:1.7rem;">121</div>
+        </div>
+        <div class="bar-bg"><div class="bar" style="--w:100%;"></div></div>
+        <div class="fc-quote">Guinness World Record for most rejections before publication of any successful book.</div>
+        <div class="fc-out">→ 5 million copies sold. Changed a generation's relationship with philosophy and technology.</div>
+      </div>
+    </div>
+
+    <div class="stats-row fi" style="margin-top:3rem;">
+      <div class="stat-box">
+        <div class="stat-n c-rose">198</div>
+        <div class="stat-l">Times Tom Brady was passed over in the NFL draft before winning 3 Super Bowls</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n c-fire">85%</div>
+        <div class="stat-l">Of Americans who ask for a raise receive something — yet only ~46% have ever asked</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n c-gold">0.5%</div>
+        <div class="stat-l">Google's acceptance rate — lower than Harvard's — yet Tracy got in after 4 rejections</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n c-em">4</div>
+        <div class="stat-l">Formal Google rejections Tracy received before Google reversed course and hired her</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ PSYCHOLOGY RESEARCH ░░ -->
+<section id="psychology">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-purp c-purp">Research Deep Dive</div>
+      <h2 class="stitle">The Science Behind the Principles</h2>
+      <p class="sdesc">Jia's discoveries weren't just personal intuitions. They map directly onto decades of peer-reviewed research in behavioral psychology, social influence, and evolutionary biology.</p>
+    </div>
+    <div class="psych-grid">
+      <div class="psych-card fi d1">
+        <div class="p-tag">Harvard · 1978</div>
+        <div class="p-source">Ellen Langer · Psychology</div>
+        <h3>The Copy Machine Study</h3>
+        <p>Langer asked strangers at a copy machine if she could cut in front of them. With no reason: 60% complied. With a real reason ("I'm in a rush"): 94%. With a nonsensical reason ("because I have to make copies"): 93%. Even a trivially circular reason triggered compliance.</p>
+        <div class="p-finding">🔑 The brain needs to hear <em>any</em> reason to lower its guard. Always give your "why" — even a simple one dramatically changes outcomes.</div>
+      </div>
+      <div class="psych-card fi d2">
+        <div class="p-tag">U Michigan Medical School</div>
+        <div class="p-source">Neuroimaging Research</div>
+        <h3>Social Rejection Triggers Opioid Release</h3>
+        <p>Brain scans showed that when participants were told potential dates rejected them, their brains immediately released natural opioids — identical to the response to physical injury. Crucially: participants knew the profiles and rejections were fabricated before the study. The brains released opioids anyway. The body cannot distinguish social pain from physical pain.</p>
+        <div class="p-finding">🔑 "Don't take it personally" is biologically useless advice. The pain is real, chemical, and automatic. Empathy — not dismissal — is what helps.</div>
+      </div>
+      <div class="psych-card fi d3">
+        <div class="p-tag">Oxford University</div>
+        <div class="p-source">Robin Dunbar · Evolutionary Psychology</div>
+        <h3>Laughter Measurably Reduces Pain</h3>
+        <p>Participants exposed to identical physical pain (frozen sleeves, wall-sits) could endure significantly more pain while watching comedy than neutral or positive-but-not-funny content. Only genuine laughter — not just happiness — triggered the effect. Dunbar believes laughter evolved specifically to bond social groups, and produces endorphins that fight pain and create pleasure simultaneously.</p>
+        <div class="p-finding">🔑 Humor is a biological weapon against rejection pain. When you make a request amusing, the opioid alarm never fires. Inject humor wherever possible.</div>
+      </div>
+      <div class="psych-card fi d1">
+        <div class="p-tag">Yale University</div>
+        <div class="p-source">Stanley Milgram · Social Psychology</div>
+        <h3>The Milgram Shock Experiment</h3>
+        <p>Ordinary people delivered potentially fatal electric shocks to strangers — not because they were cruel, but because an authority figure in a lab coat told them to. The experiment demonstrated that social context, authority signals, and group pressure can override individual moral judgment, sometimes completely.</p>
+        <div class="p-finding">🔑 People's opinions and rejections are heavily shaped by social forces outside their control. This is why rejection is an opinion — not objective truth about your merit.</div>
+      </div>
+      <div class="psych-card fi d2">
+        <div class="p-tag">U of Pennsylvania</div>
+        <div class="p-source">Jennifer Mueller · Psychology</div>
+        <h3>The Bias Against Creativity</h3>
+        <p>People say they love creativity. But Mueller's research showed that subconsciously, novel ideas trigger anxiety because they're uncertain and disruptive to established order. People consistently reject genuinely creative ideas in favor of comfortable, conventional ones — even while insisting they value innovation. The more creative the idea, the higher the probability of subconscious rejection.</p>
+        <div class="p-finding">🔑 If your creative idea is rejected, it may be evidence of its worth, not its weakness. George Bernard Shaw: "All great truths begin as blasphemies."</div>
+      </div>
+      <div class="psych-card fi d3">
+        <div class="p-tag">UT Austin</div>
+        <div class="p-source">James Pennebaker · Social Psychology</div>
+        <h3>The Pronoun Study</h3>
+        <p>Analysis of e-mail language patterns revealed that people who use "I" more are perceived as more honest and sincere. People who favor "you," "he/she/they" as subjects are more likely to be seen as distancing themselves or being evasive. Utility companies that write "to better serve you" before raising fees are rarely believed.</p>
+        <div class="p-finding">🔑 Start requests with "I" — it signals authentic honesty. Pretending a request benefits someone else, without genuinely knowing their interests, reads as manipulation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ FINDING UPSIDE ░░ -->
+<section id="upside">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-gold c-gold">The Hidden Gift</div>
+      <h2 class="stitle">Finding the Upside in Rejection</h2>
+      <p class="sdesc">Every rejection has hidden value — if you are willing to look for it. Jia identified four specific ways rejection can become a resource rather than a setback.</p>
+    </div>
+    <div class="grid-3" style="margin-top:3rem;">
+      <div class="sci-card bdr-fire fi d1">
+        <div class="sci-icon">🔥</div>
+        <h3>Motivation</h3>
+        <p>Michael Jordan's Hall of Fame speech was essentially a thank-you note to every person who rejected him — from the high school coach who cut him from varsity to the media that said he wasn't as good as Magic or Bird. Tom Brady cried at the draft, being pick #199. He went on to win multiple Super Bowls. <span class="hl">The rage of proving doubters wrong is one of the most powerful human motivators.</span></p>
+        <p style="margin-top:.65rem;font-size:.85rem;font-style:italic;color:var(--fire);">"You look for any kind of messages that people may say or do to get you motivated to play at the highest level." — Michael Jordan</p>
+      </div>
+      <div class="sci-card bdr-em fi d2">
+        <div class="sci-icon">📈</div>
+        <h3>Self-Improvement</h3>
+        <p>Jia stood at an Austin intersection soliciting charity donations and changed his sign four times based on how cars responded. Each rejection was a data point. The best product developers treat rejection as a feedback loop — <span class="hl">A/B testing their approach in real-time</span> without emotional attachment to any particular version. What works is what matters.</p>
+      </div>
+      <div class="sci-card bdr-purp fi d3">
+        <div class="sci-icon">💎</div>
+        <h3>Worthiness</h3>
+        <p>University of Pennsylvania research shows we subconsciously reject creative ideas because novelty is uncomfortable. <span class="hl">If your idea is radical enough to be called "incredibly stupid" by a close friend</span>, consider whether you might be onto something important. Jia's best friend later admitted he would have talked Jia out of the video blog entirely — "it sounded incredibly stupid."</p>
+      </div>
+      <div class="sci-card bdr-gold fi d1">
+        <div class="sci-icon">🦁</div>
+        <h3>Character Building</h3>
+        <p>Courage is a muscle. Jia gave a 23-minute speech to 3,000 people at the World Domination Summit and walked off to a standing ovation — because he had already given the same speech to 6 people on an Austin street where most passersby ignored him. <span class="hl">The small rejections are training for the large arenas.</span> You cannot skip the street corner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ FINDING MEANING ░░ -->
+<section id="meaning">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-blue c-blue">Finding Meaning</div>
+      <h2 class="stitle">When Rejection Goes Deeper Than a "No"</h2>
+      <p class="sdesc">Sometimes facing rejection is not about getting a yes or a no. Sometimes it is about enduring rejection because there is a profound reason — a cause that matters more than the pain.</p>
+    </div>
+    <div class="meaning-grid">
+      <div class="meaning-card fi d1">
+        <h3>🪖 Major Scotty Smiley</h3>
+        <p>In 2005, Army lieutenant Scotty Smiley was blinded by a suicide car bomb in Iraq. He felt rejected by God: <em>"My life, in my opinion, was taken from me."</em> He faced losing the career that defined him.</p>
+        <p style="margin-top:.65rem;">Instead of quietly retiring, Smiley petitioned to remain on active duty. He became the army's first blind active-duty officer. He climbed mountains, skied, surfed, skydived, completed a triathlon, received a Purple Heart and Bronze Star, won the ESPY Best Outdoor Athlete award, and taught leadership at West Point.</p>
+        <div class="quote-in">"I didn't want to be Lt. Dan Taylor — bitter about what happened to me. I chose to define myself by my reaction, not by my injury."</div>
+      </div>
+      <div class="meaning-card fi d2">
+        <h3>📖 Viktor Frankl</h3>
+        <p>In Nazi concentration camps, prisoners were stripped of everything: dignity, comfort, security, justice, loved ones. Death was decided randomly by sadistic guards. Frankl observed that even in this total abyss, one freedom could not be taken: the freedom to <em>choose your attitude toward suffering.</em></p>
+        <p style="margin-top:.65rem;">Having meaning — whether it was spiritual growth, caring for other prisoners, or preserving one's inner life — not only prevented despair but gave people the strength to survive what seemed unsurvivable.</p>
+        <div class="quote-in">"We may not have freedom to control our situations, but we always have freedom to find meaning in every experience — even in rejection." — Frankl</div>
+      </div>
+      <div class="meaning-card fi d1">
+        <h3>😊 Massoud Adibpour: Make DC Smile</h3>
+        <p>Every Monday morning, Adibpour holds large signs with positive messages at a busy DC intersection — waving, smiling, asking passersby to join him. Week after week, through heat and cold, with no monetary reward. Most people ignored or rejected him.</p>
+        <p style="margin-top:.65rem;">Why did he keep going? Because he found that making others happy made him happier. The rejections did not erode his purpose — they reinforced it. His cause inoculated him against the pain.</p>
+        <div class="quote-in">"You can't buy happiness. Rejection is terrible, especially when the weather is cold. But gradually, as I made others happy, I became happier myself."</div>
+      </div>
+      <div class="meaning-card fi d2">
+        <h3>🎤 Louis C.K.: 8 Years of Empty Rooms</h3>
+        <p>Louis C.K.'s first stand-up attempt ended after 90 seconds when the audience stared in silence. The emcee mocked him for 10 minutes afterward. <em>"It was a terrible feeling and I wanted to die."</em></p>
+        <p style="margin-top:.65rem;">Saturday Night Live director Jim Downey came to Boston looking for talent and selected every single comedian who auditioned — except Louis C.K. Yet he still didn't quit. For 8 years he performed to empty rooms because clubs required a show "in case someone walked in."</p>
+        <div class="quote-in">"A little time went by and I was like, well, I didn't die, and I'm still interested. I made it through the bad feeling. I can handle feeling that bad."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ QUOTES ░░ -->
+<section id="quotes" style="background:var(--darker);">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-gold c-gold">Wisdom</div>
+      <h2 class="stitle">Words That Cut Through</h2>
+    </div>
+    <div class="quotes-grid">
+      <div class="qc fi d1">
+        <span class="q-mark">"</span>
+        <p class="q-text">After endless mountains and rivers that leave doubt whether there is a path out, suddenly one encounters the shade of a willow, bright flowers, and a lovely village.</p>
+        <div class="q-name">Lu You (1125 AD)</div>
+        <div class="q-src">Chinese poet — Jia's favorite metaphor for rejection leading to discovery</div>
+      </div>
+      <div class="qc fi d2">
+        <span class="q-mark">"</span>
+        <p class="q-text">I didn't die, and I'm still interested. That felt bad when it was going on, and I'm healed now, and I'm still interested in trying again. I made it through the bad feeling. I can handle feeling that bad.</p>
+        <div class="q-name">Louis C.K.</div>
+        <div class="q-src">On bombing his first stand-up attempt — and why he went back</div>
+      </div>
+      <div class="qc fi d3">
+        <span class="q-mark">"</span>
+        <p class="q-text">For someone like me, who achieved a lot over the course of my career, you look for any kind of messages that people may say or do to get you motivated to play the game at the highest level. Because that is when I feel I excel at my best.</p>
+        <div class="q-name">Michael Jordan</div>
+        <div class="q-src">Hall of Fame induction speech — listing every rejection that fueled his career</div>
+      </div>
+      <div class="qc fi d1">
+        <span class="q-mark">"</span>
+        <p class="q-text">The way to get startup ideas is not to try to think of startup ideas. It's to look for problems, preferably problems you have yourself.</p>
+        <div class="q-name">Paul Graham</div>
+        <div class="q-src">Y Combinator founder — the insight that made Jia change his entire mission</div>
+      </div>
+      <div class="qc fi d2">
+        <span class="q-mark">"</span>
+        <p class="q-text">I wish I'd had the courage to live a life true to myself, not the life others expected of me.</p>
+        <div class="q-name">The Most Common Regret of the Dying</div>
+        <div class="q-src">Bronnie Ware, hospice care nurse and author of "The Top Five Regrets of the Dying"</div>
+      </div>
+      <div class="qc fi d3">
+        <span class="q-mark">"</span>
+        <p class="q-text">Rejection is like chicken. It's yummy or yucky depending on how you cook it. We cannot let the fear of rejection cripple us.</p>
+        <div class="q-name">Jia Jiang</div>
+        <div class="q-src">His signature line — delivered on an Austin street to an audience of six strangers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ TRANSFORMATION ░░ -->
+<section id="transformation">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-em c-em">Transformation</div>
+      <h2 class="stitle">Before and After 100 Days</h2>
+      <p class="sdesc">The journey didn't just teach Jia tactics. It fundamentally rewired how he experienced the world, himself, and other people.</p>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card fi d1">
+        <h3 style="color:var(--rose);">😰 Before: Rejection-Fearing Mind</h3>
+        <ul class="compare-list">
+          <li><span>🔴</span><span>Treated rejection as a personal verdict on his worth and intelligence</span></li>
+          <li><span>🔴</span><span>Fled every "no" without asking why, running before the conversation ended</span></li>
+          <li><span>🔴</span><span>Constantly sought approval from family, colleagues, and strangers</span></li>
+          <li><span>🔴</span><span>Buried his own ideas at the first sign of resistance or skepticism</span></li>
+          <li><span>🔴</span><span>Surrendered a decade of entrepreneurship because his uncle didn't like one idea</span></li>
+          <li><span>🔴</span><span>Monitored others' faces for approval signals during every conversation</span></li>
+          <li><span>🔴</span><span>Told himself not to "bother people" with asks and requests</span></li>
+          <li><span>🔴</span><span>Cried alone in a closet, trapped by others' expectations, unable to act</span></li>
+        </ul>
+      </div>
+      <div class="compare-card fi d2">
+        <h3 style="color:var(--emerald);">✨ After: Rejection-Proof Mind</h3>
+        <ul class="compare-list">
+          <li><span>🟢</span><span>Understands rejection reveals more about rejectors than about himself</span></li>
+          <li><span>🟢</span><span>Stays in conversations after "no," asks why, retreats strategically</span></li>
+          <li><span>🟢</span><span>Accepts himself first — internal worth no longer contingent on approval</span></li>
+          <li><span>🟢</span><span>Uses every rejection as data, feedback, and motivation to keep going</span></li>
+          <li><span>🟢</span><span>Called his uncle, asked why, discovered the rejection was never about entrepreneurship</span></li>
+          <li><span>🟢</span><span>Speaks to 3,000 people with the same calm as speaking to 6 on a street corner</span></li>
+          <li><span>🟢</span><span>Asks for anything — Olympic donuts, plane rides, college lectures — with curiosity</span></li>
+          <li><span>🟢</span><span>Coaches his wife through Google rejections while maintaining joy and excitement</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pull fi" style="margin-top:2.5rem;">
+      <p>"My 100 Days of Rejection returned me to the very state my son Brian is in right now — pointing at the world with delight, asking for anything, unafraid. I am no longer afraid of people. I have never felt that way before in my life."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ APPLY ░░ -->
+<section id="apply">
+  <div class="container">
+    <div class="fi">
+      <div class="stag bg-em c-em">Your Turn</div>
+      <h2 class="stitle">Build Your Own Rejection Practice</h2>
+      <p class="sdesc">Courage is a muscle. It weakens without use. Here is a progressive practice, inspired by Jia's journey, to build rejection immunity week by week.</p>
+    </div>
+    <div class="challenge-grid">
+      <div class="cc fi d1">
+        <div class="cc-week">Week 1 · Beginner</div>
+        <div class="cc-emoji">👋</div>
+        <h3>Low-Stakes Asks</h3>
+        <p>Ask for a table upgrade at a restaurant. Request a discount at a coffee shop. Ask someone for directions you don't need. Practice the mechanics of asking with low emotional investment.</p>
+      </div>
+      <div class="cc fi d2">
+        <div class="cc-week">Week 2 · Building</div>
+        <div class="cc-emoji">❓</div>
+        <h3>Practice the "Why"</h3>
+        <p>When you get a "no" this week — in any context — pause. Instead of retreating, ask: "I understand completely. Can I ask why?" Do this once a day. Notice what you discover.</p>
+      </div>
+      <div class="cc fi d3">
+        <div class="cc-week">Week 3 · Advancing</div>
+        <div class="cc-emoji">🎯</div>
+        <h3>The Real Ask</h3>
+        <p>Identify one thing you have been afraid to ask for — a raise, a date, a creative collaboration, a second chance. Plan your "why," acknowledge doubts upfront, target the right person. Then ask.</p>
+      </div>
+      <div class="cc fi d4">
+        <div class="cc-week">Week 4 · Expert</div>
+        <div class="cc-emoji">🔥</div>
+        <h3>The Outlandish Request</h3>
+        <p>Design your own Jia-style challenge. Find a request that seems absurd but is harmless — something that makes you laugh, might make someone's day, and reminds you the world is kinder than fear suggests.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.15rem;font-weight:800;margin:3.5rem 0 1.5rem;text-align:center;" class="fi">The Three Transforming Insights</h3>
+    <div class="insight-trio">
+      <div class="insight-card fi d1" style="background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(249,115,22,.02));border:1px solid rgba(249,115,22,.2);">
+        <div class="ic-emoji">🧩</div>
+        <h4>Rejection Is Not About You</h4>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.65;">The same request gets wildly different responses from different people. The "universe" is not a single judge rendering a verdict on your worth — it is billions of individuals with different histories, contexts, and needs. Rejection reflects the rejector.</p>
+      </div>
+      <div class="insight-card fi d2" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.02));border:1px solid rgba(16,185,129,.2);">
+        <div class="ic-emoji">🌊</div>
+        <h4>Every No Leads Somewhere</h4>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.65;">The rosebush rejection became a referral. The failed start-up rejection became the viral blog. The Google rejections became Google reversing course. Every "no" creates a path — if you stay in the conversation and ask why.</p>
+      </div>
+      <div class="insight-card fi d3" style="background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(139,92,246,.02));border:1px solid rgba(139,92,246,.2);">
+        <div class="ic-emoji">🔓</div>
+        <h4>Freedom Lives on the Other Side</h4>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.65;">Real freedom — to ask, to dream, to take risks, to be yourself without needing everyone's approval — lives on the far side of rejection fear. The only path through it is through it. There are no shortcuts. Ask anyway.</p>
+      </div>
+    </div>
+
+    <div class="pull fi" style="margin-top:3rem;">
+      <p>"We often reject ourselves before others get the chance. The what-ifs that haunt us are usually our own doing — because we didn't ask, didn't try. The saddest regret is not being rejected. It's never having asked."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
+<footer>
+  <div class="footer-logo">Rejection Proof</div>
+  <p>How many more dreams would be fulfilled, how many more ideas realized, how many more love stories written — if we were not afraid of rejection?</p>
+  <p>Based on <em>Rejection Proof</em> by Jia Jiang (Crown Business, 2015)</p>
+  <p class="footer-donut">"If it doesn't help, just buy them a box of donuts. That always helps." — Jia Jiang</p>
+  <div class="footer-credit">Designed as an educational companion to the book · All content adapted from Jia Jiang's work</div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const fi = document.querySelectorAll('.fi');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); } });
+  }, { threshold: 0.08 });
+  fi.forEach(el => obs.observe(el));
+
+  // Animate rejection bars
+  document.querySelectorAll('.bar').forEach(bar => {
+    const target = bar.style.getPropertyValue('--w') || bar.getAttribute('data-w') || '50%';
+    bar.style.width = '0%';
+    const bo = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(() => { bar.style.width = target; }, 200);
+          bo.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    bo.observe(bar);
+  });
+
+  // Nav active state
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  const no = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => {
+          l.style.color = l.getAttribute('href') === '#' + e.target.id ? 'var(--fire)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+  secs.forEach(s => no.observe(s));
+</script>
+</body>
+</html>

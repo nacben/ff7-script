@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steve Jobs: In His Own Words</title>
+<meta name="description" content="A comprehensive educational collection of Steve Jobs's most powerful insights, wisdom, and milestones — spanning 1976 to 2011.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000;
+  --bg2:#111113;
+  --bg3:#1c1c1e;
+  --card:rgba(28,28,30,.85);
+  --card-h:rgba(38,38,42,.95);
+  --txt:#f5f5f7;
+  --txt2:#ababaf;
+  --txt3:#636366;
+  --accent:#2997ff;
+  --accent-h:#5aadff;
+  --warm:#ff9f0a;
+  --green:#32d74b;
+  --purple:#bf5af2;
+  --red:#ff375f;
+  --yellow:#ffd60a;
+  --teal:#64d2ff;
+  --br:rgba(255,255,255,.07);
+  --br-h:rgba(255,255,255,.14);
+  --r:16px;
+  --r-sm:10px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--txt3);border-radius:3px}
+::selection{background:rgba(41,151,255,.3)}
+
+/* ─── NAV ─────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--br);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 28px;
+  height:52px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-size:1rem;font-weight:600;color:var(--txt);
+  text-decoration:none;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  color:var(--txt2);text-decoration:none;
+  font-size:.84rem;transition:color .2s;letter-spacing:-.01em;
+}
+.nav-links a:hover{color:var(--txt)}
+@media(max-width:680px){.nav-links{display:none}}
+
+/* ─── HERO ────────────────────────────────────── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  justify-content:center;text-align:center;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(41,151,255,.12) 0%,transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 30%,rgba(255,159,10,.05) 0%,transparent 50%),
+    #000;
+}
+.hero-particles{
+  position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.15) 0%,transparent 100%),
+    radial-gradient(1px 1px at 80% 20%,rgba(255,255,255,.1) 0%,transparent 100%),
+    radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,.12) 0%,transparent 100%),
+    radial-gradient(1px 1px at 10% 80%,rgba(255,255,255,.08) 0%,transparent 100%),
+    radial-gradient(1px 1px at 90% 60%,rgba(255,255,255,.1) 0%,transparent 100%);
+  animation:drift 20s ease-in-out infinite alternate;
+}
+@keyframes drift{from{transform:translateY(0)}to{transform:translateY(-12px)}}
+.hero-content{
+  position:relative;z-index:1;max-width:820px;
+  padding:130px 24px 100px;
+}
+.hero-eyebrow{
+  font-size:.78rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:20px;
+  opacity:0;animation:fadeUp .8s ease forwards .3s;
+}
+.hero-title{
+  font-size:clamp(3.2rem,9vw,6.5rem);font-weight:700;
+  letter-spacing:-.045em;line-height:1.02;margin-bottom:24px;
+  background:linear-gradient(160deg,#fff 30%,rgba(255,255,255,.5) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  opacity:0;animation:fadeUp .8s ease forwards .5s;
+}
+.hero-dates{
+  font-size:1rem;color:var(--txt3);margin-bottom:28px;letter-spacing:.08em;
+  opacity:0;animation:fadeUp .8s ease forwards .65s;
+}
+.hero-subtitle{
+  font-size:clamp(1rem,2.4vw,1.25rem);color:var(--txt2);
+  max-width:560px;margin:0 auto 44px;line-height:1.6;
+  opacity:0;animation:fadeUp .8s ease forwards .75s;
+}
+.hero-pill-quote{
+  display:inline-block;
+  background:rgba(41,151,255,.1);border:1px solid rgba(41,151,255,.25);
+  border-radius:100px;padding:10px 22px;
+  font-size:.95rem;color:var(--accent);font-style:italic;
+  margin-bottom:44px;
+  opacity:0;animation:fadeUp .8s ease forwards .9s;
+}
+.hero-cta{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .8s ease forwards 1.05s;
+}
+.btn{
+  padding:13px 26px;border-radius:100px;font-size:.95rem;
+  font-weight:500;text-decoration:none;transition:all .22s ease;
+  display:inline-flex;align-items:center;gap:7px;
+  border:none;cursor:pointer;font-family:var(--font);
+  letter-spacing:-.01em;
+}
+.btn-p{background:var(--accent);color:#fff}
+.btn-p:hover{background:var(--accent-h);transform:scale(1.02) translateY(-1px)}
+.btn-s{
+  background:rgba(255,255,255,.08);color:var(--txt);
+  border:1px solid var(--br-h);
+}
+.btn-s:hover{background:rgba(255,255,255,.13);transform:scale(1.02) translateY(-1px)}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--txt3);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  opacity:0;animation:fadeIn 1s ease forwards 2s;
+}
+.scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,var(--accent),transparent)}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+.hero-scroll{animation:fadeIn 1s ease forwards 2s,scrollBounce 2.2s ease-in-out infinite 3s}
+
+/* ─── STATS ───────────────────────────────────── */
+.stats-band{
+  background:var(--bg2);
+  border-top:1px solid var(--br);border-bottom:1px solid var(--br);
+  padding:64px 24px;
+}
+.stats-grid{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px;
+  text-align:center;
+}
+.stat-num{
+  display:block;font-size:2.8rem;font-weight:700;
+  letter-spacing:-.05em;color:var(--accent);
+}
+.stat-lbl{font-size:.85rem;color:var(--txt2);margin-top:4px}
+
+/* ─── SHARED SECTION ──────────────────────────── */
+.sec{padding:96px 24px}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec-hd{text-align:center;margin-bottom:60px}
+.eyebrow{
+  font-size:.75rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:14px;
+}
+.sec-title{
+  font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;
+  letter-spacing:-.04em;line-height:1.08;margin-bottom:14px;
+}
+.sec-desc{font-size:1.05rem;color:var(--txt2);max-width:580px;margin:0 auto;line-height:1.65}
+
+/* ─── INTRO ───────────────────────────────────── */
+.intro-wrap{
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+  padding:96px 24px;
+}
+.intro-inner{max-width:740px;margin:0 auto}
+.intro-p{
+  font-size:1.1rem;color:var(--txt2);line-height:1.85;margin-bottom:22px;
+}
+.intro-p strong{color:var(--txt);font-weight:600}
+.pullquote{
+  font-size:clamp(1.3rem,3vw,1.75rem);font-weight:600;
+  letter-spacing:-.025em;line-height:1.35;color:var(--txt);
+  border-left:4px solid var(--accent);padding-left:28px;
+  margin:48px 0;
+}
+.award-chips{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;
+}
+.chip{
+  padding:6px 14px;border-radius:100px;
+  font-size:.78rem;font-weight:600;letter-spacing:.03em;
+  background:rgba(41,151,255,.1);color:var(--accent);
+  border:1px solid rgba(41,151,255,.2);
+}
+
+/* ─── FEATURED QUOTES ─────────────────────────── */
+.featured-wrap{
+  background:var(--bg2);
+  border-top:1px solid var(--br);border-bottom:1px solid var(--br);
+  padding:96px 24px;
+}
+.feat-grid{
+  max-width:1040px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+}
+.feat-card{
+  padding:36px;border-radius:var(--r);
+  border:1px solid var(--br);transition:all .28s ease;
+  position:relative;overflow:hidden;
+}
+.feat-card:hover{border-color:var(--br-h);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.feat-card.span2{grid-column:1/-1;background:linear-gradient(135deg,rgba(41,151,255,.07) 0%,transparent 55%)}
+.feat-card.warm{background:linear-gradient(135deg,rgba(255,159,10,.07) 0%,transparent 55%)}
+.feat-card.purple{background:linear-gradient(135deg,rgba(191,90,242,.07) 0%,transparent 55%)}
+.feat-card.green{background:linear-gradient(135deg,rgba(50,215,75,.07) 0%,transparent 55%)}
+.feat-q{
+  font-size:clamp(1rem,2vw,1.3rem);font-style:italic;
+  line-height:1.55;color:var(--txt);margin-bottom:20px;
+}
+.feat-src{font-size:.8rem;color:var(--txt3)}
+@media(max-width:680px){.feat-grid{grid-template-columns:1fr}.feat-card.span2{grid-column:1}}
+
+/* ─── QUOTES SECTION ──────────────────────────── */
+.quotes-wrap{padding:80px 0;background:var(--bg)}
+.q-hd{text-align:center;padding:0 24px;margin-bottom:44px}
+.search-wrap{max-width:580px;margin:0 auto 28px;padding:0 24px;position:relative}
+.search-icon{
+  position:absolute;left:40px;top:50%;transform:translateY(-50%);
+  color:var(--txt3);pointer-events:none;
+}
+.search-inp{
+  width:100%;padding:14px 18px 14px 50px;
+  background:var(--bg3);border:1px solid var(--br);
+  border-radius:100px;color:var(--txt);font-size:.95rem;
+  font-family:var(--font);outline:none;transition:all .22s;
+}
+.search-inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(41,151,255,.18)}
+.search-inp::placeholder{color:var(--txt3)}
+.filter-strip{padding:0 24px;margin-bottom:44px;overflow-x:auto;scrollbar-width:none}
+.filter-strip::-webkit-scrollbar{display:none}
+.filter-row{display:flex;gap:9px;padding-bottom:6px;width:max-content;margin:0 auto}
+.ftag{
+  padding:7px 17px;border-radius:100px;font-size:.82rem;
+  font-weight:500;border:1px solid var(--br);background:transparent;
+  color:var(--txt2);cursor:pointer;transition:all .2s;
+  white-space:nowrap;font-family:var(--font);
+}
+.ftag:hover{border-color:var(--br-h);color:var(--txt)}
+.ftag.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.res-count{text-align:center;font-size:.82rem;color:var(--txt3);margin-bottom:22px;padding:0 24px}
+.q-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:20px;padding:0 24px;max-width:1200px;margin:0 auto;
+}
+@media(max-width:480px){.q-grid{grid-template-columns:1fr}}
+.qcard{
+  background:var(--card);border:1px solid var(--br);
+  border-radius:var(--r);padding:28px;
+  backdrop-filter:blur(8px);transition:all .28s ease;
+  display:flex;flex-direction:column;gap:16px;
+  opacity:0;transform:translateY(16px);animation:fadeUp .5s ease forwards;
+}
+.qcard:hover{
+  border-color:var(--br-h);background:var(--card-h);
+  transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.qmark{
+  font-size:2.6rem;line-height:1;color:var(--accent);
+  font-family:Georgia,serif;opacity:.55;
+}
+.qtext{font-size:.97rem;line-height:1.72;color:var(--txt);flex:1;font-style:italic}
+.qfoot{display:flex;flex-direction:column;gap:7px}
+.qtopic{
+  display:inline-flex;align-items:center;padding:3px 11px;
+  border-radius:100px;font-size:.72rem;font-weight:600;
+  letter-spacing:.03em;width:fit-content;
+}
+.qsource{font-size:.78rem;color:var(--txt3);line-height:1.45}
+.no-res{
+  text-align:center;padding:80px 24px;
+  color:var(--txt3);font-size:1.05rem;grid-column:1/-1;
+  line-height:1.7;
+}
+mark{background:rgba(41,151,255,.22);color:var(--accent-h);border-radius:2px;padding:0 2px}
+
+/* Category tag colors */
+.cat-innovation{background:rgba(41,151,255,.13);color:#2997ff}
+.cat-design{background:rgba(50,215,75,.13);color:#32d74b}
+.cat-leadership{background:rgba(255,159,10,.13);color:#ff9f0a}
+.cat-philosophy{background:rgba(191,90,242,.13);color:#bf5af2}
+.cat-technology{background:rgba(100,210,255,.13);color:#64d2ff}
+.cat-creativity{background:rgba(255,55,95,.13);color:#ff375f}
+.cat-business{background:rgba(255,214,10,.13);color:#ffd60a}
+.cat-people{background:rgba(50,215,75,.13);color:#34c759}
+
+/* ─── DEEP DIVE PANELS ────────────────────────── */
+.themes-wrap{
+  background:var(--bg2);
+  border-top:1px solid var(--br);padding:96px 24px;
+}
+.themes-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;
+}
+.theme-card{
+  border-radius:var(--r);border:1px solid var(--br);
+  padding:36px 30px;transition:all .28s ease;
+  background:var(--card);
+}
+.theme-card:hover{border-color:var(--br-h);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.theme-icon{font-size:2rem;margin-bottom:16px}
+.theme-name{
+  font-size:1.1rem;font-weight:700;letter-spacing:-.02em;
+  margin-bottom:10px;
+}
+.theme-desc{font-size:.9rem;color:var(--txt2);line-height:1.65}
+.theme-quote{
+  margin-top:16px;padding-top:16px;border-top:1px solid var(--br);
+  font-size:.85rem;font-style:italic;color:var(--txt2);line-height:1.55;
+}
+.theme-quote::before{content:"\201C";color:var(--accent);font-size:1.2rem;margin-right:2px}
+
+/* ─── TIMELINE ────────────────────────────────── */
+.timeline-wrap{padding:96px 24px;background:var(--bg)}
+.timeline-inner{max-width:860px;margin:0 auto}
+.tl{position:relative;padding-left:36px}
+.tl::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--accent),rgba(41,151,255,.05));
+}
+.tl-item{
+  position:relative;padding:0 0 44px 36px;
+  opacity:0;transform:translateX(-16px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.tl-item.vis{opacity:1;transform:translateX(0)}
+.tl-dot{
+  position:absolute;left:-5px;top:7px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bg);
+  box-shadow:0 0 0 4px rgba(41,151,255,.18);
+}
+.tl-year{
+  font-size:.75rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:8px;
+}
+.tl-box{
+  background:var(--bg3);border:1px solid var(--br);
+  border-radius:var(--r-sm);padding:18px 22px;
+}
+.tl-ev{font-size:.92rem;color:var(--txt2);line-height:1.7}
+.tl-ev+.tl-ev{margin-top:10px;padding-top:10px;border-top:1px solid var(--br)}
+
+/* ─── RESIGNATION LETTER ──────────────────────── */
+.letter-wrap{
+  background:var(--bg2);
+  border-top:1px solid var(--br);padding:96px 24px;
+}
+.letter-card{
+  max-width:660px;margin:0 auto;
+  background:var(--bg3);border:1px solid var(--br);
+  border-radius:var(--r);padding:56px;
+  position:relative;overflow:hidden;
+}
+.letter-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--warm));
+}
+.letter-date{font-size:.8rem;color:var(--txt3);margin-bottom:6px;letter-spacing:.06em}
+.letter-title{font-size:1.25rem;font-weight:700;margin-bottom:30px;letter-spacing:-.02em}
+.letter-body p{font-size:1rem;color:var(--txt2);line-height:1.82;margin-bottom:18px}
+.letter-sig{
+  font-size:1.8rem;font-style:italic;
+  color:var(--txt);margin-top:36px;font-family:Georgia,serif;
+}
+@media(max-width:680px){.letter-card{padding:32px 22px}}
+
+/* ─── LEGACY BAR ──────────────────────────────── */
+.legacy-wrap{
+  padding:96px 24px;
+  background:linear-gradient(135deg,rgba(41,151,255,.05) 0%,transparent 50%),var(--bg);
+  border-top:1px solid var(--br);
+}
+.legacy-inner{max-width:800px;margin:0 auto;text-align:center}
+.legacy-quote{
+  font-size:clamp(1.2rem,3vw,1.7rem);font-style:italic;
+  line-height:1.5;color:var(--txt);margin-bottom:24px;
+  font-weight:500;letter-spacing:-.02em;
+}
+.legacy-attr{font-size:.9rem;color:var(--txt3)}
+.legacy-apple{
+  margin-top:40px;padding:28px;
+  background:rgba(255,255,255,.03);border:1px solid var(--br);
+  border-radius:var(--r);
+}
+.legacy-apple p{font-size:1rem;color:var(--txt2);line-height:1.75;font-style:italic}
+
+/* ─── FOOTER ──────────────────────────────────── */
+footer{
+  padding:56px 24px;background:var(--bg2);
+  border-top:1px solid var(--br);text-align:center;
+}
+.foot-logo{font-size:1rem;font-weight:600;margin-bottom:10px;letter-spacing:-.02em}
+.foot-ded{font-size:.85rem;color:var(--txt3);line-height:1.65;margin-bottom:6px}
+.foot-ded em{color:var(--txt2);font-style:normal}
+.foot-credo{
+  margin-top:20px;display:inline-block;
+  font-size:.82rem;color:var(--txt3);letter-spacing:.06em;
+}
+
+/* ─── BACK TO TOP ─────────────────────────────── */
+#btt{
+  position:fixed;bottom:28px;right:28px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;border:none;
+  cursor:pointer;font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(8px);
+  transition:all .3s ease;z-index:100;
+}
+#btt.on{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--accent-h);transform:translateY(-2px)}
+
+/* ─── ANIMATIONS ──────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fi{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">
+      <span>&#9670;</span> Steve Jobs
+    </a>
+    <ul class="nav-links">
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#quotes">Quotations</a></li>
+      <li><a href="#timeline">Milestones</a></li>
+      <li><a href="#letter">Legacy</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">A curated educational resource</div>
+    <h1 class="hero-title">Steve Jobs</h1>
+    <p class="hero-dates">1955 &mdash; 2011</p>
+    <p class="hero-subtitle">
+      CEO of the Decade. Visionary. Co-founder of Apple. A man who made
+      a dent in the universe — and left us an extraordinary record of
+      how he thought, built, and led.
+    </p>
+    <div class="hero-pill-quote">
+      &ldquo;The Journey Is the Reward.&rdquo;
+    </div>
+    <div class="hero-cta">
+      <a href="#quotes" class="btn btn-p">Explore Quotations</a>
+      <a href="#timeline" class="btn btn-s">View Milestones</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══ STATS ═══════════════════════════════════════ -->
+<div class="stats-band">
+  <div class="stats-grid">
+    <div>
+      <span class="stat-num" data-n="90">0</span>
+      <span class="stat-lbl">Topics Covered</span>
+    </div>
+    <div>
+      <span class="stat-num" data-n="35">0</span>
+      <span class="stat-lbl">Years of Innovation</span>
+    </div>
+    <div>
+      <span class="stat-num" data-n="56">0</span>
+      <span class="stat-lbl">Years of Life</span>
+    </div>
+    <div>
+      <span class="stat-num" data-n="300">0</span>
+      <span class="stat-lbl">Apple Stores Opened</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INTRO ════════════════════════════════════════ -->
+<section class="intro-wrap" id="intro">
+  <div class="intro-inner">
+    <div class="eyebrow fi">Introduction</div>
+    <h2 class="sec-title fi" style="margin-bottom:28px">The Vision Thing</h2>
+
+    <p class="intro-p fi">
+      Since 1976, <strong>Steve Jobs</strong> spoke his mind — to the delight of
+      his advocates and the dismay of his detractors — in every venue imaginable:
+      press releases, public appearances, keynote addresses, and interviews with
+      print and electronic media across four decades.
+    </p>
+
+    <div class="pullquote fi">
+      &ldquo;I'm always keeping my eyes open for the next big opportunity.&rdquo;
+    </div>
+
+    <p class="intro-p fi">
+      Jobs occupied a unique position in modern business history. His peers and
+      critics alike recognized the scope of his impact:
+    </p>
+
+    <div class="award-chips fi">
+      <span class="chip">CEO of the Decade &mdash; Fortune</span>
+      <span class="chip">World's Best-Performing CEO &mdash; Harvard Business Review</span>
+      <span class="chip">Person of the Decade &mdash; Wall Street Journal</span>
+      <span class="chip">Person of the Year &mdash; Financial Times</span>
+    </div>
+
+    <p class="intro-p fi" style="margin-top:28px">
+      On <strong>August 24, 2011</strong>, Jobs announced his resignation as Apple's CEO,
+      asking the board to execute the company's succession plan and name
+      Timothy Cook as his successor. On <strong>October 5, 2011</strong> — one day after
+      Apple's new CEO held his first media event — the Apple board announced
+      that Steve Jobs, age 56, had passed away.
+    </p>
+    <p class="intro-p fi">
+      Apple's board released a statement: <strong>&ldquo;Steve's brilliance, passion
+      and energy were the source of countless innovations that enrich and improve
+      all of our lives. The world is immeasurably better because of Steve.&rdquo;</strong>
+    </p>
+    <p class="intro-p fi">
+      What follows is a curated collection of his most powerful and enduring
+      words — searchable by topic, organized by theme, and presented alongside
+      the milestones of an extraordinary life.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ FEATURED ═════════════════════════════════════ -->
+<section class="featured-wrap">
+  <div class="sec-hd fi">
+    <div class="eyebrow">Signature Words</div>
+    <h2 class="sec-title">Words That Shaped an Era</h2>
+    <p class="sec-desc">His most celebrated observations, selected for their timeless clarity.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card span2 fi">
+      <p class="feat-q">&ldquo;Your time is limited, so don&rsquo;t waste it living someone else&rsquo;s
+      life. Don&rsquo;t be trapped by dogma — which is living with the results of
+      other people&rsquo;s thinking. Don&rsquo;t let the noise of others&rsquo; opinions
+      drown out your own inner voice. And most important, have the courage
+      to follow your heart and intuition.&rdquo;</p>
+      <span class="feat-src">Commencement address, Stanford University, June 12, 2005</span>
+    </div>
+    <div class="feat-card warm fi">
+      <p class="feat-q">&ldquo;Innovation distinguishes between a leader and a follower.&rdquo;</p>
+      <span class="feat-src">The Innovation Secrets of Steve Jobs, 2011</span>
+    </div>
+    <div class="feat-card purple fi">
+      <p class="feat-q">&ldquo;It&rsquo;s better to be a pirate than to join the Navy.&rdquo;</p>
+      <span class="feat-src">Odyssey: Pepsi to Apple, 1987</span>
+    </div>
+    <div class="feat-card fi">
+      <p class="feat-q">&ldquo;My model for business is the Beatles. They were four guys who
+      kept each other&rsquo;s negative tendencies in check. They balanced each other
+      and the total was greater than the sum of the parts.&rdquo;</p>
+      <span class="feat-src">60 Minutes, 2003</span>
+    </div>
+    <div class="feat-card green fi">
+      <p class="feat-q">&ldquo;People think focus means saying yes to the thing you&rsquo;ve got to
+      focus on. But that&rsquo;s not what it means at all. It means saying no to the
+      hundred other good ideas that there are. Innovation is saying no to 1,000 things.&rdquo;</p>
+      <span class="feat-src">Apple Worldwide Developers Conference, 1997</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THEMES DEEP DIVE ══════════════════════════════ -->
+<section class="themes-wrap" id="themes">
+  <div class="sec-hd fi">
+    <div class="eyebrow">Key Themes</div>
+    <h2 class="sec-title">Eight Pillars of His Philosophy</h2>
+    <p class="sec-desc">Jobs&rsquo;s worldview crystallized around a handful of ideas he
+    returned to again and again throughout his career.</p>
+  </div>
+  <div class="themes-grid">
+    <div class="theme-card fi">
+      <div class="theme-icon">&#9670;</div>
+      <h3 class="theme-name" style="color:#2997ff">Design</h3>
+      <p class="theme-desc">For Jobs, design was never about aesthetics alone — it was
+      about function, soul, and the invisible architecture of experience.
+      He believed great design required deep understanding, passionate commitment,
+      and the willingness to peel back every layer until the elegant solution emerged.</p>
+      <p class="theme-quote">Design is the fundamental soul of a man-made creation that ends
+      up expressing itself in successive outer layers of the product or service.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#128161;</div>
+      <h3 class="theme-name" style="color:#ff9f0a">Innovation</h3>
+      <p class="theme-desc">Jobs understood that true innovation was not about R&amp;D budgets
+      or committee decisions — it was about vision, taste, and the courage to say
+      no to 1,000 good ideas in service of one great one. He distinguished leaders
+      from followers by their willingness to invent, not imitate.</p>
+      <p class="theme-quote">Innovation has nothing to do with how many R&amp;D dollars you have.
+      It&rsquo;s about the people you have, how you&rsquo;re led, and how much you get it.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#128101;</div>
+      <h3 class="theme-name" style="color:#32d74b">People</h3>
+      <p class="theme-desc">Jobs believed recruiting was &ldquo;the heart and soul&rdquo; of what
+      Apple did. He sought people who wanted to make a dent in the universe,
+      who thrived under the pressure of impossible standards, and who understood
+      that the work was bigger than any individual on the team.</p>
+      <p class="theme-quote">All we are is our ideas, or people. That&rsquo;s what keeps us going
+      to work in the morning.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#129504;</div>
+      <h3 class="theme-name" style="color:#bf5af2">Philosophy</h3>
+      <p class="theme-desc">Deeply influenced by Zen Buddhism, Jobs approached life as a
+      beginner — open, unencumbered by expert assumptions. He treasured experience
+      over intellectual abstraction, prioritized what mattered over what impressed,
+      and measured success not by wealth but by meaning.</p>
+      <p class="theme-quote">The heaviness of being successful was replaced by the lightness of
+      being a beginner again, less sure about everything.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#128187;</div>
+      <h3 class="theme-name" style="color:#64d2ff">Technology</h3>
+      <p class="theme-desc">Jobs saw technology not as an end but as a tool — a bicycle for
+      the mind. He insisted that Apple own the entire stack: hardware, software,
+      and the operating system, so that the user experience could be seamless,
+      accountable, and sublime.</p>
+      <p class="theme-quote">What a computer is to me is the most remarkable tool that we have
+      ever come up with. It&rsquo;s the equivalent of a bicycle for our minds.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#127775;</div>
+      <h3 class="theme-name" style="color:#ff375f">Creativity</h3>
+      <p class="theme-desc">Jobs insisted that creativity was an act of synthesis — connecting
+      dots across disciplines, stealing great ideas shamelessly, and refusing to
+      separate art from engineering. He celebrated musicians who coded, scientists
+      who painted, and the blurry intersection where both lived.</p>
+      <p class="theme-quote">Good artists copy, great artists steal. We have always been
+      shameless about stealing great ideas.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#127919;</div>
+      <h3 class="theme-name" style="color:#ffd60a">Leadership</h3>
+      <p class="theme-desc">His model of leadership was demanding, intentional, and
+      occasionally uncomfortable. He believed a leader&rsquo;s job was not to be
+      easy on people but to make them better — to create the conditions in
+      which excellence was not only expected but inevitable.</p>
+      <p class="theme-quote">My job is not to be easy on people. My job is to make them better.</p>
+    </div>
+    <div class="theme-card fi">
+      <div class="theme-icon">&#128200;</div>
+      <h3 class="theme-name" style="color:#34c759">Simplicity</h3>
+      <p class="theme-desc">Simplicity was not a style for Jobs — it was a discipline.
+      He pruned Apple&rsquo;s product line from dozens of models to four.
+      He killed features, programs, and good ideas relentlessly. He believed
+      that the hardest work was not adding complexity but removing it.</p>
+      <p class="theme-quote">That&rsquo;s been one of my mantras — focus and simplicity. Simple
+      can be harder than complex.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTATIONS ════════════════════════════════════ -->
+<section class="quotes-wrap" id="quotes">
+  <div class="q-hd">
+    <div class="eyebrow fi">Complete Collection</div>
+    <h2 class="sec-title fi">Quotations</h2>
+    <p class="sec-desc fi">Search and explore across 8 themes — from design to death,
+    from simplicity to survival.</p>
+  </div>
+
+  <div class="search-wrap">
+    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.35-4.35"></path>
+    </svg>
+    <input type="text" class="search-inp" id="srch"
+      placeholder="Search quotes, topics, or sources&hellip;" autocomplete="off">
+  </div>
+
+  <div class="filter-strip">
+    <div class="filter-row" id="ftags"></div>
+  </div>
+
+  <div class="res-count" id="rcount"></div>
+  <div class="q-grid" id="qgrid"></div>
+</section>
+
+<!-- ═══ TIMELINE ═════════════════════════════════════ -->
+<section class="timeline-wrap" id="timeline">
+  <div class="timeline-inner">
+    <div class="sec-hd fi">
+      <div class="eyebrow">1955 &mdash; 2011</div>
+      <h2 class="sec-title">Milestones</h2>
+      <p class="sec-desc">The defining moments of an extraordinary life —
+      from a garage in Silicon Valley to the world stage.</p>
+    </div>
+    <div class="tl" id="tlc"></div>
+  </div>
+</section>
+
+<!-- ═══ RESIGNATION LETTER ════════════════════════════ -->
+<section class="letter-wrap" id="letter">
+  <div class="sec-hd fi">
+    <div class="eyebrow">August 24, 2011</div>
+    <h2 class="sec-title">End of an Era</h2>
+    <p class="sec-desc">Steve Jobs&rsquo;s resignation letter as CEO of Apple —
+    a document that closed one of the most remarkable chapters in business history.</p>
+  </div>
+  <div class="letter-card fi">
+    <div class="letter-date">AUGUST 24, 2011</div>
+    <h3 class="letter-title">To the Apple Board of Directors and the Apple Community</h3>
+    <div class="letter-body">
+      <p>I have always said if there ever came a day when I could no longer meet my duties
+      and expectations as Apple&rsquo;s CEO, I would be the first to let you know.
+      Unfortunately, that day has come.</p>
+      <p>I hereby resign as CEO of Apple. I would like to serve, if the Board sees fit,
+      as Chairman of the Board, director and Apple employee.</p>
+      <p>As far as my successor goes, I strongly recommend that we execute our succession
+      plan and name Tim Cook as CEO of Apple.</p>
+      <p>I believe Apple&rsquo;s brightest and most innovative days are ahead of it. And I
+      look forward to watching and contributing to its success in a new role.</p>
+      <p>I have made some of the best friends of my life at Apple, and I thank you for all
+      the many years of being able to work alongside you.</p>
+    </div>
+    <div class="letter-sig">&mdash; Steve</div>
+  </div>
+</section>
+
+<!-- ═══ LEGACY ════════════════════════════════════════ -->
+<section class="legacy-wrap">
+  <div class="legacy-inner fi">
+    <p class="legacy-quote">
+      &ldquo;Being the richest man in the cemetery doesn&rsquo;t matter to me.
+      Going to bed at night saying we&rsquo;ve done something wonderful &mdash;
+      that&rsquo;s what matters to me.&rdquo;
+    </p>
+    <p class="legacy-attr">CNNMoney/Fortune, May 25, 1993</p>
+    <div class="legacy-apple">
+      <p>
+        &ldquo;Steve&rsquo;s brilliance, passion and energy were the source of
+        countless innovations that enrich and improve all of our lives.
+        The world is immeasurably better because of Steve.&rdquo;
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <div class="foot-logo">Steve Jobs: In His Own Words</div>
+  <p class="foot-ded">An educational resource based on published interviews, speeches, and writings, 1976&ndash;2011.</p>
+  <p class="foot-ded">Dedicated to <em>Britton Edwards</em>.</p>
+  <span class="foot-credo">&ldquo;The Journey Is the Reward.&rdquo;</span>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
+<script>
+// ════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════
+const QUOTES = [
+  {
+    topic:"Anxiety before iPad Debut",
+    text:"Even though we've been using these internally for some time and working on it for a few years, you still have butterflies in your stomach the week before — the night before introduction — the launch. You never know until you get it into your customers' hands and they tell you what they think. We think this is a profound game-changer.",
+    source:"Apple event for iPhone 4.0 software, April 8, 2010",cat:"leadership"
+  },
+  {
+    topic:"Apple's Core: Employees",
+    text:"All we are is our ideas, or people. That's what keeps us going to work in the morning, to hang around these great bright people. I've always thought that recruiting is the heart and soul of what we do.",
+    source:"D5 Conference: All Things Digital, May 30, 2007",cat:"people"
+  },
+  {
+    topic:"Apple's DNA",
+    text:"Most of us can't wait to get to work in the morning. But it's not like Apple has somehow morphed into a mass-market consumer electronics company. Our DNA hasn't changed. It's that mass-market consumer electronics is turning into Apple.",
+    source:"CNNMoney/Fortune, February 21, 2005",cat:"business"
+  },
+  {
+    topic:"Apple's Existence",
+    text:"What if Apple didn't exist? Think about it. Time wouldn't get published next week. Some 70% of the newspapers in the U.S. wouldn't publish tomorrow morning. Some 60% of the kids wouldn't have computers; 64% of the teachers wouldn't have computers. More than half the Websites created on Macs wouldn't exist. So there's something worth saving here.",
+    source:"Time, August 18, 1997",cat:"business"
+  },
+  {
+    topic:"Attention Getting",
+    text:"And one more thing…",
+    source:"Characteristically used toward the end of Apple events",cat:"leadership"
+  },
+  {
+    topic:"Being the Best",
+    text:"We're not going to be the first to this party, but we're going to be the best.",
+    source:"Apple event for iPhone OS 4.0, April 8, 2010",cat:"leadership"
+  },
+  {
+    topic:"Beyond Recruiting",
+    text:"It's not just recruiting. After recruiting, it's building an environment that makes people feel they are surrounded by equally talented people and their work is bigger than they are. The feeling that the work will have tremendous influence and is part of a strong, clear vision — all those things.",
+    source:"In the Company of Giants, 1997",cat:"people"
+  },
+  {
+    topic:"Branding",
+    text:"We don't stand a chance of advertising with features and benefits and with RAMs and with charts and comparisons. The only chance we have of communicating is with a feeling.",
+    source:"The Apple Way, 2006",cat:"business"
+  },
+  {
+    topic:"Broad-Based Education",
+    text:"Reed College at that time offered perhaps the best calligraphy instruction in the country. I decided to take a calligraphy class to learn how to do this. None of this had even a hope of any practical application in my life. But ten years later, when we were designing the first Macintosh computer, it all came back to me.",
+    source:"Commencement address, Stanford University, June 12, 2005",cat:"creativity"
+  },
+  {
+    topic:"Broad Life Experiences",
+    text:"A lot of people in our industry haven't had very diverse experiences. So they don't have enough dots to connect, and they end up with very linear solutions without a broad perspective on the problem. The broader one's understanding of the human experience, the better design we will have.",
+    source:"Wired, February 1996",cat:"design"
+  },
+  {
+    topic:"Company Focus",
+    text:"We do no market research. We don't hire consultants. We just want to make great products.",
+    source:"CNNMoney/Fortune, February 2008",cat:"business"
+  },
+  {
+    topic:"Competition",
+    text:"I wasn't aware that Apple owned me, you know. I don't think they do. I think that I own me. And for me not to be able to practice my craft ever again in my life seems odd. It's hard to think that a $2 billion company with 4,300+ people couldn't compete with six people in blue jeans.",
+    source:"Newsweek, September 30, 1985",cat:"leadership"
+  },
+  {
+    topic:"Computers",
+    text:"The problem is, in hardware you can't build a computer that's twice as good as anyone else's anymore. Too many people know how to do it. You're lucky if you do one that's one-and-a-third times better. And then it's only six months before everybody else catches up.",
+    source:"Rolling Stone, June 16, 1994",cat:"technology"
+  },
+  {
+    topic:"Computers for Everyman",
+    text:"The roots of Apple were to build computers for people, not for corporations. The world doesn't need another Dell or Compaq.",
+    source:"Time, October 18, 1999",cat:"technology"
+  },
+  {
+    topic:"Computers as Tools",
+    text:"What a computer is to me is the most remarkable tool that we have ever come up with. It's the equivalent of a bicycle for our minds.",
+    source:"Memory & Imagination, 1990",cat:"technology"
+  },
+  {
+    topic:"Consumer Product Design",
+    text:"When you first start off trying to solve a problem, the first solutions you come up with are very complex, and most people stop there. But if you keep going, and live with the problem and peel more layers of the onion off, you can oftentimes arrive at some very elegant and simple solutions. Most people just don't put in the time or energy to get there.",
+    source:"Newsweek, October 14, 2006",cat:"design"
+  },
+  {
+    topic:"Contribution",
+    text:"It was one of the first times I started thinking that maybe Thomas Edison did a lot more to improve the world than Karl Marx and Neem Karoli Baba put together.",
+    source:"Steve Jobs: The Brilliant Mind Behind Apple, 2009",cat:"philosophy"
+  },
+  {
+    topic:"Convergence",
+    text:"The place where Apple has been standing for the last two decades is exactly where computer technology and the consumer electronics markets are converging. So it's not like we're having to cross the river to go somewhere else; the other side of the river is coming to us.",
+    source:"CNNMoney/Fortune, February 21, 2005",cat:"business"
+  },
+  {
+    topic:"Creating New Tools",
+    text:"We make tools for people. Tools to create, tools to communicate. The age we're living in, these tools surprise you. That's why I love what we do. Because we make these tools, and we're constantly surprised with what people do with them.",
+    source:"D5 Conference: All Things Digital, 2007",cat:"creativity"
+  },
+  {
+    topic:"Creativity and Technology",
+    text:"One of the things I learned at Pixar is the technology industries and the content industries do not understand each other. In Silicon Valley, most people think the creative process is a bunch of guys in their early 30s, sitting on a couch, drinking beer and thinking of jokes. These are like ships passing in the night.",
+    source:"CNN Tech, June 10, 2011",cat:"creativity"
+  },
+  {
+    topic:"Credo: The Journey",
+    text:"The Journey Is the Reward.",
+    source:"Folklore.org, January 1983",cat:"philosophy"
+  },
+  {
+    topic:"Credo: Real Artists Ship",
+    text:"Real artists ship.",
+    source:"Folklore.org, January 1984",cat:"creativity"
+  },
+  {
+    topic:"Credo: Focus and Simplicity",
+    text:"The organization is clean and simple to understand, and very accountable. Everything just got simpler. That's been one of my mantras — focus and simplicity.",
+    source:"Bloomberg Businessweek, May 12, 1998",cat:"business"
+  },
+  {
+    topic:"Customer Loyalty",
+    text:"I get asked a lot why Apple's customers are so loyal. It's not because they belong to the Church of Mac! That's ridiculous. It's because when you buy our products, and three months later you get stuck on something, you quickly figure out how to get past it. And you think, 'Wow, someone over there at Apple actually thought of this!'",
+    source:"Bloomberg Businessweek, October 12, 2004",cat:"business"
+  },
+  {
+    topic:"Death",
+    text:"That's why I think death is the most wonderful invention of life. It purges the system of these old models that are obsolete. I think that's one of Apple's challenges, really. When two young people walk in with the next thing, are we going to embrace it and say this is fantastic?",
+    source:"Playboy, February 1985",cat:"philosophy"
+  },
+  {
+    topic:"Dent In the Universe",
+    text:"Being the richest man in the cemetery doesn't matter to me. Going to bed at night saying we've done something wonderful — that's what matters to me.",
+    source:"CNNMoney/Fortune, May 25, 1993",cat:"philosophy"
+  },
+  {
+    topic:"Design: Fundamental Soul",
+    text:"In most people's vocabularies, design means veneer. It's interior decorating. But to me, nothing could be further from the meaning of design. Design is the fundamental soul of a man-made creation that ends up expressing itself in successive outer layers of the product or service.",
+    source:"CNNMoney/Fortune, January 24, 2000",cat:"design"
+  },
+  {
+    topic:"Design: How It Works",
+    text:"Design is a funny word. Some people think design means how it looks. But of course, if you dig deeper, it's really how it works. To design something really well, you have to get it. You have to really grok what it's all about. It takes a passionate commitment to really thoroughly understand something, chew it up, not just quickly swallow it.",
+    source:"Wired, February 1996",cat:"design"
+  },
+  {
+    topic:"Decision Making",
+    text:"At Apple, there are ten really important decisions to make every week. It's a transactional company; it's got a lot of new products every month. And if some of those decisions are wrong, maybe you can fix them a few months later.",
+    source:"To Infinity and Beyond! 2007",cat:"leadership"
+  },
+  {
+    topic:"Demise",
+    text:"Apple has some tremendous assets, but I believe without some attention, the company could — I'm searching for the right word — could, could die.",
+    source:"Time, August 18, 1997",cat:"business"
+  },
+  {
+    topic:"Employee Motivation",
+    text:"We attract a different type of person — a person who doesn't want to wait five or ten years to have someone take a giant risk on him or her. Someone who really wants to get in a little over his head and make a little dent in the universe.",
+    source:"Playboy, February 1985",cat:"people"
+  },
+  {
+    topic:"Employee Potential",
+    text:"My job is not to be easy on people. My job is to make them better.",
+    source:"CNNMoney/Fortune, February 2008",cat:"leadership"
+  },
+  {
+    topic:"Excellence",
+    text:"People judge you by your performance, so focus on the outcome. Be a yardstick of quality. Some people aren't used to an environment where excellence is expected.",
+    source:"Steve Jobs: The Journey is the Reward, 1987",cat:"leadership"
+  },
+  {
+    topic:"Flash Crash",
+    text:"Flash was created during the PC era — for PCs and mice. The mobile era is about low-power devices, touch interfaces, and open web standards — all areas where Flash falls short. We don't want to reduce the reliability and security of our iPhones, iPods and iPads by adding Flash.",
+    source:"Apple Website, April 2010",cat:"technology"
+  },
+  {
+    topic:"Focus",
+    text:"People think focus means saying yes to the thing you've got to focus on. But that's not what it means at all. It means saying no to the hundred other good ideas that there are. You have to pick carefully. I'm actually as proud of the things we haven't done as the things I have done. Innovation is saying no to 1,000 things.",
+    source:"Apple Worldwide Developers Conference, May 1997",cat:"leadership"
+  },
+  {
+    topic:"Focusing on Product",
+    text:"You need a very product-oriented culture, even in a technology company. Lots of companies have tons of great engineers and smart people. But ultimately, there needs to be some gravitational force that pulls it all together. Otherwise, you can get great pieces of technology all floating around the universe. But it doesn't add up to much.",
+    source:"Bloomberg Businessweek, October 12, 2004",cat:"business"
+  },
+  {
+    topic:"Forward Thinking",
+    text:"Let's go invent tomorrow rather than worrying about what happened yesterday.",
+    source:"D5 Conference: All Things Digital, May 30, 2007",cat:"leadership"
+  },
+  {
+    topic:"Getting It Right",
+    text:"It cost us, I don't know, six, nine months. But it was the right decision by a million miles.",
+    source:"CNNMoney/Fortune, March 8, 2007",cat:"leadership"
+  },
+  {
+    topic:"Goals",
+    text:"When we first started Apple we really built the first computer because we wanted one. We had a passion to do this one simple thing which was to get a bunch of computers to our friends so they could have as much fun with them as we were.",
+    source:"Return to the Little Kingdom, 2009",cat:"business"
+  },
+  {
+    topic:"Grace Under Pressure",
+    text:"Many times in an interview I will purposely upset someone — I'll criticize their prior work. I want to see what people are like under pressure. I want to see if they just fold or if they have firm conviction, belief, and pride in what they did.",
+    source:"In the Company of Giants, 1997",cat:"leadership"
+  },
+  {
+    topic:"Great Ideas",
+    text:"Ultimately, it comes down to taste. It comes down to trying to expose yourself to the best things that humans have done and then try to bring those things in to what you're doing. Picasso had a saying: good artists copy, great artists steal. And we have always been shameless about stealing great ideas.",
+    source:"Triumph of the Nerds, PBS, June 1996",cat:"creativity"
+  },
+  {
+    topic:"Hard Work",
+    text:"I'd never been so tired in my life. I'd come home at about ten o'clock at night and flop straight into bed, then haul myself out at six the next morning and take a shower and go to work. My wife deserves all the credit for keeping me at it.",
+    source:"CNNMoney/Fortune, November 9, 1998",cat:"leadership"
+  },
+  {
+    topic:"Innovation",
+    text:"A lot of companies have chosen to downsize, and maybe that was the right thing for them. We chose a different path. Our belief was that if we kept putting great products in front of customers, they would continue to open their wallets.",
+    source:"Success, June 2010",cat:"innovation"
+  },
+  {
+    topic:"Innovation: Leader vs. Follower",
+    text:"Innovation distinguishes between a leader and a follower.",
+    source:"The Innovation Secrets of Steve Jobs, 2011",cat:"innovation"
+  },
+  {
+    topic:"Innovation: R&D and Money",
+    text:"Innovation has nothing to do with how many R&D dollars you have. When Apple came up with the Mac, IBM was spending at least 100 times more on R&D. It's not about money. It's about the people you have, how you're led, and how much you get it.",
+    source:"CNNMoney/Fortune, November 9, 1998",cat:"innovation"
+  },
+  {
+    topic:"Insight",
+    text:"I think the artistry is in having an insight into what one sees around them. Generally putting things together in a way no one else has before and finding a way to express that to other people who don't have that insight.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"creativity"
+  },
+  {
+    topic:"Inspiration",
+    text:"The most important thing is a person. A person who incites and feeds your curiosity; and machines cannot do that in the same way that people can.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"people"
+  },
+  {
+    topic:"Integration",
+    text:"Apple's the only company left in this industry that designs the whole widget. Hardware, software, developer relations, marketing. It turns out that, in my opinion, that is Apple's greatest strategic advantage. Apple can innovate faster than anyone else.",
+    source:"Time, October 10, 1999",cat:"business"
+  },
+  {
+    topic:"Interdisciplinary Talents",
+    text:"I've never believed that they're separate. Leonardo da Vinci was a great artist and a great scientist. Michelangelo knew a tremendous amount about how to cut stone at the quarry. The finest dozen computer scientists I know are all musicians.",
+    source:"Time, October 10, 1999",cat:"creativity"
+  },
+  {
+    topic:"Jobs's Curriculum Vitae",
+    text:"Objective: I'm looking for a fixer-upper with a solid foundation. Am willing to tear down walls, build bridges, and light fires. I have great experience, lots of energy, a bit of that 'vision thing' and I'm not afraid to start from the beginning.",
+    source:"Steve Jobs's résumé, on me.com, January 5, 2000",cat:"leadership"
+  },
+  {
+    topic:"Jobs's $1 Annual Salary",
+    text:"I get 50 cents a year for showing up… and the other 50 cents is based on my performance.",
+    source:"AppleInsider.com, May 10, 2007",cat:"business"
+  },
+  {
+    topic:"Letting Go of the Past",
+    text:"If you look backward in this business, you'll be crushed. You have to look forward.",
+    source:"Wired, December 22, 2008",cat:"leadership"
+  },
+  {
+    topic:"Losing Market Share",
+    text:"And how are monopolies lost? Some very good product people invent some very good products, and the company achieves a monopoly. But after that, the product people aren't the ones that drive the company forward anymore. It's the marketing guys or the ones who expand the business into Latin America or whatever. So a different group of people start to move up.",
+    source:"Bloomberg Businessweek, October 12, 2004",cat:"business"
+  },
+  {
+    topic:"Losing Money",
+    text:"I'm the only person I know that's lost a quarter of a billion dollars in one year. It's very character-building.",
+    source:"Apple Confidential 2.0, 2004",cat:"leadership"
+  },
+  {
+    topic:"Making Bold Announcements",
+    text:"I understand the appeal of a slow burn, but personally I'm a big-bang guy.",
+    source:"Harvard Business School Working Knowledge, June 16, 2003",cat:"leadership"
+  },
+  {
+    topic:"Marketing",
+    text:"My dream is that every person in the world will have their own Apple computer. To do that, we've got to be a great marketing company.",
+    source:"Odyssey: Pepsi to Apple, 1987",cat:"business"
+  },
+  {
+    topic:"Microsoft's Lack of Innovation",
+    text:"The only problem with Microsoft is they just have no taste. I don't mean that in a small way. I mean that in a big way, in the sense that they don't think of original ideas and they don't bring much culture into their products.",
+    source:"Triumph of the Nerds, PBS, June 1996",cat:"innovation"
+  },
+  {
+    topic:"Money",
+    text:"I was worth about over a million dollars when I was twenty-three and over ten million dollars when I was twenty-four, and over a hundred million dollars when I was twenty-five, and it wasn't important because I never did it for the money.",
+    source:"Triumph of the Nerds, PBS, June 1996",cat:"philosophy"
+  },
+  {
+    topic:"Motivating Employees",
+    text:"What happens in most companies is that you don't keep great people under working environments where individual accomplishment is discouraged rather than encouraged. The great people leave and you end up with mediocrity. I know, because that's how Apple was built.",
+    source:"Playboy, February 1985",cat:"people"
+  },
+  {
+    topic:"Motivation: Changing the World",
+    text:"Do you want to spend the rest of your life selling sugared water, or do you want a chance to change the world?",
+    source:"Odyssey: Pepsi to Apple, 1987 — to PepsiCo executive John Sculley",cat:"leadership"
+  },
+  {
+    topic:"Motivation: Be a Pirate",
+    text:"It's better to be a pirate than to join the Navy.",
+    source:"Odyssey: Pepsi to Apple, 1987",cat:"leadership"
+  },
+  {
+    topic:"Need for Teamwork",
+    text:"In our business, one person can't do anything anymore. You create a team of people around you. You have a responsibility of integrity of work to that team. Everybody does try to turn out the best work that they can.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"people"
+  },
+  {
+    topic:"Netbooks",
+    text:"Netbooks aren't better than anything. They're just cheap laptops.",
+    source:"Apple event for iPad 1, January 27, 2010",cat:"technology"
+  },
+  {
+    topic:"New Products",
+    text:"It's in Apple's DNA that technology alone is not enough. That it's technology married with liberal arts, married with the humanities, that yields us the result that makes our hearts sing. And nowhere is that more true than in these post-PC devices.",
+    source:"Apple event for iPad 2, March 2, 2011",cat:"innovation"
+  },
+  {
+    topic:"No Resting on Laurels",
+    text:"I think if you do something and it turns out pretty good, then you should go do something else wonderful, not dwell on it for too long. Just figure out what's next.",
+    source:"msnbc.com, May 25, 2006",cat:"leadership"
+  },
+  {
+    topic:"Owning the User Experience",
+    text:"We're the only company that owns the whole widget — the hardware, the software and the operating system. We can take full responsibility for the user experience. We can do things the other guy can't do.",
+    source:"Time, January 14, 2002",cat:"technology"
+  },
+  {
+    topic:"Passion",
+    text:"People say you have to have a lot of passion for what you're doing and it's totally true. And the reason is because it's so hard that if you don't, any rational person would give up. If you really look at the ones that ended up being 'successful' — they loved what they did, so they could persevere when it got really tough.",
+    source:"D5 Conference: All Things Digital, May 30, 2007",cat:"philosophy"
+  },
+  {
+    topic:"Passion: Find What You Love",
+    text:"You've got to find what you love. And that is as true for your work as it is for your lovers. Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do. Don't settle.",
+    source:"Commencement address, Stanford University, June 12, 2005",cat:"philosophy"
+  },
+  {
+    topic:"Perseverance",
+    text:"I'm convinced that about half of what separates the successful entrepreneurs from the non-successful ones is pure perseverance. Unless you have a lot of passion about this, you're not going to survive. You're going to give it up. So you've got to have an idea, or a problem or a wrong that you want to right that you're passionate about; otherwise, you're not going to have the perseverance to stick it through.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"leadership"
+  },
+  {
+    topic:"Pixar",
+    text:"Pixar's got by far and away the best computer graphics talent in the entire world, and it now has the best animation and artistic talent in the whole world. We're probably close to ten years ahead of anybody else.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"creativity"
+  },
+  {
+    topic:"Pride in Product",
+    text:"Artists sign their work.",
+    source:"Folklore.org, February 1982 — on the Mac team members who signed the first Macintosh mold",cat:"design"
+  },
+  {
+    topic:"Priorities Assessment",
+    text:"I was in the parking lot, with the key in the car, and I thought to myself: If this is my last night on earth, would I rather spend it at a business meeting or with this woman? I ran across the parking lot, asked her if she'd have dinner with me. She said yes, we walked into town, and we've been together ever since.",
+    source:"New York Times Magazine, January 12, 1997",cat:"philosophy"
+  },
+  {
+    topic:"Process",
+    text:"The system is that there is no system. That doesn't mean we don't have process. Apple is a very disciplined company, and we have great processes. But that's not what it's about. Process makes you more efficient.",
+    source:"Bloomberg Businessweek, October 12, 2004",cat:"business"
+  },
+  {
+    topic:"Product Design: Lickable",
+    text:"We made the buttons on the screen look so good, you'll want to lick them.",
+    source:"CNNMoney/Fortune, 2000 — on OS X's Aqua user interface",cat:"design"
+  },
+  {
+    topic:"Product Imagination",
+    text:"We figure out what we want. And I think we're pretty good at having the right discipline to think through whether a lot of other people are going to want it, too. Henry Ford said, 'If I'd have asked my customers what they wanted, they would have told me: a faster horse.'",
+    source:"CNNMoney/Fortune, February 2008",cat:"innovation"
+  },
+  {
+    topic:"Product Secrecy",
+    text:"We never talk about future products. There used to be a saying at Apple: Isn't it funny — a ship that leaks from the top.",
+    source:"ABCNews.com, June 29, 2005",cat:"business"
+  },
+  {
+    topic:"Products' Appeal",
+    text:"The products speak for themselves.",
+    source:"Playboy, February 1985",cat:"design"
+  },
+  {
+    topic:"Quality: The Carpenter",
+    text:"We just wanted to build the best thing we could build. When you're a carpenter making a beautiful chest of drawers, you're not going to use a piece of plywood on the back, even though it faces the wall and nobody will ever see it. You'll know it's there, so you're going to use a beautiful piece of wood on the back.",
+    source:"Playboy, February 1985",cat:"design"
+  },
+  {
+    topic:"Quality vs. Quantity",
+    text:"Quality is more important than quantity. One home run is much better than two doubles.",
+    source:"Bloomberg Businessweek, February 6, 2006",cat:"leadership"
+  },
+  {
+    topic:"Repeating Success",
+    text:"There's a classic thing in business, which is the second-product syndrome. Often companies that have a really successful first product don't quite understand why that product was so successful. And so with the second product, their ambitions grow and they get much more grandiose, and their second product fails.",
+    source:"To Infinity and Beyond! 2007",cat:"business"
+  },
+  {
+    topic:"Risking Failure",
+    text:"One of my role models is Bob Dylan. If you look at the artists, if they get really good, it always occurs to them at some point that they can do this one thing for the rest of their lives, and they can be really successful to the outside world but not really be successful to themselves. Dylan and Picasso were always risking failure.",
+    source:"CNNMoney/Fortune, November 9, 1998",cat:"creativity"
+  },
+  {
+    topic:"Shared Vision",
+    text:"The thing that bound us together at Apple was the ability to make things that were going to change the world. That was very important.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"leadership"
+  },
+  {
+    topic:"Simplicity",
+    text:"As technology becomes more complex, Apple's core strength of knowing how to make very sophisticated technology comprehensible to mere mortals is in even greater demand.",
+    source:"New York Times Magazine, November 30, 2003",cat:"design"
+  },
+  {
+    topic:"Simplicity: Saying No",
+    text:"We've reviewed the road map of new products and axed more than 70 percent of them, keeping the 30 percent that were gems. The product teams at Apple are very excited. There's so much low-hanging fruit, it's easy to turn around.",
+    source:"Macworld Expo, January 6, 1998",cat:"business"
+  },
+  {
+    topic:"Slogan: First Generation iPod",
+    text:"One thousand songs in your pocket.",
+    source:"Apple advertisement, October 31, 2001",cat:"design"
+  },
+  {
+    topic:"Software: Soul of the Machine",
+    text:"You know, if the hardware is the brain and the sinew of our products, the software in them is their soul.",
+    source:"Keynote address, Apple Worldwide Development Conference, June 2011",cat:"technology"
+  },
+  {
+    topic:"Stagnation, the Danger of",
+    text:"The trouble with Apple is it succeeded beyond its wildest dreams. We succeeded so well, we got everyone else to dream the same dream. The trouble is, the dream didn't evolve. Apple stopped creating.",
+    source:"Apple Confidential 2.0, 2004",cat:"innovation"
+  },
+  {
+    topic:"Story, Importance of",
+    text:"John Lasseter once said — and this really stuck with me — 'No amount of technology will turn a bad story into a good story.' That dedication to quality is really ingrained in the culture of this studio.",
+    source:"To Infinity and Beyond! 2007",cat:"creativity"
+  },
+  {
+    topic:"Success",
+    text:"Pixar's seen by a lot of folks as an overnight success, but if you really look closely, most overnight successes took a long time.",
+    source:"To Infinity and Beyond! 2007",cat:"leadership"
+  },
+  {
+    topic:"Survival",
+    text:"Victory in our industry is spelled survival. The way we're going to survive is to innovate our way out of this.",
+    source:"Time, February 5, 2003",cat:"business"
+  },
+  {
+    topic:"Teamwork",
+    text:"My model for business is the Beatles. They were four guys who kept each other's kind of negative tendencies in check. They balanced each other and the total was greater than the sum of the parts. That's how I see business: great things in business are never done by one person, they're done by a team of people.",
+    source:"60 Minutes, 2003",cat:"people"
+  },
+  {
+    topic:"Technology in Perspective",
+    text:"Technology doesn't change the world. It really doesn't. Technologies can make it easier, can let us touch people we might not otherwise. But it's a disservice to constantly put things in a radical new light, that it's going to change everything. Things don't have to change the world to be important.",
+    source:"The Independent, October 29, 2005",cat:"technology"
+  },
+  {
+    topic:"Think Different",
+    text:"How do you tell somebody what you are, who you are, what you care about? If you know who somebody's heroes are, that tells you a lot about them. So we thought we're going to tell people who our heroes are. And that's what the 'Think Different' campaign is about.",
+    source:"Macworld Expo, March 13, 1999",cat:"business"
+  },
+  {
+    topic:"Thinking Through the Problem",
+    text:"Once you get into the problem, you see that it's complicated, and you come up with all these convoluted solutions. That's where most people stop. But the really great person will keep going, find the underlying problem, and come up with an elegant solution that works on every level.",
+    source:"AppleDesign, 1997",cat:"design"
+  },
+  {
+    topic:"To Be or Not to Be",
+    text:"Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma — which is living with the results of other people's thinking. Don't let the noise of others' opinions drown out your own inner voice. And most important, have the courage to follow your heart and intuition.",
+    source:"Commencement address, Stanford University, June 12, 2005",cat:"philosophy"
+  },
+  {
+    topic:"User Experience",
+    text:"At Apple we come at everything asking, 'How easy is this going to be for the user? How great is it going to be for the user?' Everybody says, 'Oh, the user is the most important thing,' but nobody else really does it.",
+    source:"CNNMoney/Fortune, February 21, 2005",cat:"design"
+  },
+  {
+    topic:"Vision",
+    text:"We're gambling on our vision, and we would rather do that than make 'me, too' products. Let some other companies do that. For us, it's always the next dream.",
+    source:"Apple product event for the first Macintosh computer, January 24, 1984",cat:"leadership"
+  },
+  {
+    topic:"Wisdom",
+    text:"I would trade all my technology for an afternoon with Socrates.",
+    source:"Newsweek, October 28, 2001",cat:"philosophy"
+  },
+  {
+    topic:"Working Hard and Growing Older",
+    text:"I read something Bill Gates said about six months ago. He said, 'I worked really, really hard in my twenties.' And I know what he means, because I worked really, really hard in my twenties too — seven days a week, lots of hours every day. But you can't do it forever. You don't want to do it forever.",
+    source:"Time, October 10, 1999",cat:"leadership"
+  },
+  {
+    topic:"Zen",
+    text:"The heaviness of being successful was replaced by the lightness of being a beginner again, less sure about everything. It freed me to enter one of the most creative periods of my life.",
+    source:"Commencement address, Stanford University, June 12, 2005",cat:"philosophy"
+  },
+  {
+    topic:"iPad and Inevitable Change",
+    text:"This transformation's going to make some people uneasy — people from the PC world, like you and me. It's going to make us uneasy because the PC has taken us a long way. And we like to talk about the post-PC era, but when it really starts to happen, I think it's uncomfortable for a lot of people.",
+    source:"D8 Conference, June 1–3, 2010",cat:"technology"
+  },
+  {
+    topic:"iPad Inspires iPhone",
+    text:"I actually started on the tablet first. I had this idea of being able to get rid of the keyboard, type on a multi-touch glass display. About six months later, they called me in and showed me this prototype display. And it was amazing. I thought, My God, we could build a phone out of this. And I put the tablet project on the shelf, because the phone was more important.",
+    source:"D8 Conference, June 1–3, 2010",cat:"innovation"
+  },
+  {
+    topic:"iPhone",
+    text:"iPhone is five years ahead of what everybody else has got. If we didn't do one more thing we'd be set for five years!",
+    source:"Newsweek, January 9, 2007",cat:"innovation"
+  },
+  {
+    topic:"Mac Legacy",
+    text:"Macintosh was basically this relatively small company in Cupertino, California, taking on the goliath, IBM, and saying 'Wait a minute, your way is wrong. This is not the legacy we want to leave. This is not what we want our kids to be learning. This is wrong and we are going to show you the right way to do it.'",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"leadership"
+  },
+  {
+    topic:"PARC's Innovations",
+    text:"Xerox PARC didn't have it totally right, but they had the germ of the idea of all three things. And the three things were: graphical user interfaces, object-oriented computing, and networking.",
+    source:"Smithsonian Institution Oral and Video Histories, April 20, 1995",cat:"technology"
+  },
+  {
+    topic:"Dent In the Universe: Impact",
+    text:"We have a major opportunity to influence where Apple is going. As every day passes, the work fifty people are doing here is going to send a giant ripple through the universe. I am really impressed with the quality of our ripple.",
+    source:"Return to the Little Kingdom, 2009",cat:"leadership"
+  },
+  {
+    topic:"Forward Thinking: Artist's Way",
+    text:"If you want to live your life in a creative way, as an artist, you have to not look back too much. You have to be willing to take whatever you've done and whoever you were and throw them away.",
+    source:"Playboy, February 1985",cat:"creativity"
+  },
+  {
+    topic:"Misplaced Values",
+    text:"You know, my main reaction to this money thing is that it's humorous, all the attention to it, because it's hardly the most insightful or valuable thing that's happened to me in the past ten years. But it makes me feel old, sometimes, when I speak at a campus and I find that what students are most in awe of is the fact that I'm a millionaire.",
+    source:"Playboy, February 1985",cat:"philosophy"
+  }
+];
+
+// ════════════════════════════════════════════
+// MILESTONES
+// ════════════════════════════════════════════
+const MILESTONES = [
+  {year:"1955",evs:["Steve Jobs born in San Francisco to Abdulfattah John Jandali and Joanne Simpson. Given up for adoption to Paul and Clara Jobs, who name him Steven Paul Jobs. (February 24)"]},
+  {year:"1966",evs:["The Jobs family moves to Los Altos, California. SJ enters Homestead High School and develops interests in music (especially Bob Dylan and the Beatles) and electronics."]},
+  {year:"1971",evs:["SJ meets future Apple co-founder Stephen 'Woz' Wozniak."]},
+  {year:"1972",evs:["SJ and Wozniak build and sell illegal tone generators called 'blue boxes,' illicitly earning $6,000 before moving on to legitimate ventures.","SJ graduates high school. Enrolls in Reed College (Portland, Oregon) but drops out after one semester while continuing to audit classes — including a calligraphy course that would later influence the Mac's typography.","At Reed, SJ meets future Apple employee Dan Kottke."]},
+  {year:"1974",evs:["SJ takes a job at Nolan Bushnell's video game company, Atari. (September)","SJ begins attending the Homebrew Computer Club."]},
+  {year:"1976",evs:["Apple is co-founded by SJ (45%), Wozniak (45%), and Ronald Wayne (10%). Wayne sells his share back for $800. (April 1)","SJ gets an order for 50 computers from the Byte Shop in Mountain View, California. (July)","SJ and Kottke exhibit the Apple I at the Personal Computer Festival in Atlantic City. (August)"]},
+  {year:"1977",evs:["Venture capitalist Mike Markkula invests $250,000 for a one-third interest in Apple. (January)","Apple debuts the Apple II at the West Coast Computer Faire in San Francisco. (April 16–17)","Apple ships its first Apple II system. (June)"]},
+  {year:"1979",evs:["Apple earns $47 million in revenues.","SJ and key staffers visit Xerox PARC, where they encounter the mouse and graphical user interface — an experience SJ immediately grasps will transform computing.","VisiCalc spreadsheet released for Apple II, spurring sales. (November)"]},
+  {year:"1980",evs:["Apple's IPO sells 4.6 million shares, priced at $22, closing at $29. Apple's valuation: $1.778 billion. (December 12)"]},
+  {year:"1981",evs:["IBM introduces its personal computer, the IBM PC 5150. SJ publicly derides it as technologically inferior and underestimates its business appeal. (August)","SJ becomes chairman of the board. (March)"]},
+  {year:"1983",evs:["Apple officially releases the Lisa (Local Integrated Software Architecture) computer. (January 19)","Apple hires PepsiCo executive John Sculley as CEO after SJ famously asks him: 'Do you want to spend the rest of your life selling sugared water, or do you want a chance to change the world?' (April 8)"]},
+  {year:"1984",evs:["Apple debuts the first Macintosh computer with the groundbreaking '1984' Super Bowl commercial directed by Ridley Scott — costing $1.2 million to produce and air. The Mac is the world's first mass-market GUI computer. (January 22)","Apple buys all 39 pages of available advertising space in Newsweek's Election Extra issue to promote the Macintosh. (November–December)"]},
+  {year:"1985",evs:["Wozniak resigns from Apple to found CL9. (February 6)","Sculley, with board approval, relieves SJ as head of the Mac division. (May 31)","SJ sells his Apple stock, keeping only one share, and announces he is leaving to start NeXT. (September 13)","SJ and Wozniak are awarded the National Medal of Technology by President Ronald Reagan."]},
+  {year:"1986",evs:["SJ buys The Graphics Group (later Pixar Animation Studios) from George Lucas for $10 million, becoming its CEO and majority shareholder.","Pixar debuts its graphics workstation, the Pixar Image Computer. (May)"]},
+  {year:"1988",evs:["The NeXT computer debuts. (October 12)"]},
+  {year:"1989",evs:["Pixar's animated film Tin Toy wins an Academy Award for Best Animated Short Film."]},
+  {year:"1991",evs:["SJ marries Laurene Powell at the Ahwanhee Hotel in Yosemite National Park. The ceremony is officiated by Zen Buddhist monk Kobin Chino. (March 18)","Pixar and Walt Disney Studios team up to develop, produce, and distribute animated feature films."]},
+  {year:"1995",evs:["Disney releases Toy Story on Thanksgiving weekend. The film grosses $191.7 million domestically — the biggest advance in animation since Walt Disney's Snow White. (November)","Pixar's IPO sells 6.9 million shares. (November 29)"]},
+  {year:"1996",evs:["After promising a new OS it couldn't deliver, Apple narrows its search to BeOS and Steve Jobs's NeXT software.","SJ convinces Apple's board to buy NeXT and its assets for $427 million. SJ returns to Apple in an advisory capacity. (December)"]},
+  {year:"1997",evs:["Amelio resigns. SJ becomes Apple's interim CEO, which he terms 'iCEO.' He declines the permanent CEO title, citing his continuing interest in Pixar. (July 9)","At Macworld, SJ announces a new partnership with Microsoft — met with mixed feelings by Apple followers. (August)","Apple debuts its PowerBook running on the PowerPC G3 chip. (November)"]},
+  {year:"1998",evs:["At Macworld, Apple announces the Power Mac 'Blue and White' G3 tower. (January 5)","SJ cleans house at Apple: decreases products dramatically, kills Newton, kills the software-licensing program, and fires select employees. (March)","Pixar releases A Bug's Life, grossing $162 million domestically. (November 20)"]},
+  {year:"1999",evs:["Apple announces the candy-colored iMac G3 in five colors, the iBook, and the AirPort base station — Apple's first wireless network device. (July 21)","Pixar releases Toy Story 2, grossing $245.8 million domestically. (November 13)"]},
+  {year:"2000",evs:["At Macworld, SJ announces he has dropped his 'interim' status to become permanent CEO. (January 5)","SJ releases Public Beta Mac OS X, built on NeXT's object-oriented software."]},
+  {year:"2001",evs:["Apple opens its flagship retail store in New York City. Within ten years, more than 300 such stores open worldwide. (May)","Pixar releases Monsters, Inc., grossing $255 million domestically. (October 28)","The iPod debuts with the ad line, '1,000 songs in your pocket.' (November 10)"]},
+  {year:"2003",evs:["Apple debuts the iTunes Music Store for Mac-only computers. (April 28)","Pixar releases Finding Nemo, grossing $339.7 million domestically and winning the Academy Award for Best Animated Feature. (May 30)","The iTunes store opens to Windows computer users. (October 16)"]},
+  {year:"2004",evs:["SJ announces to his employees that he has pancreatic cancer and will undergo surgery. Timothy Cook takes over as acting CEO during SJ's medical leave. (August)","Disney CEO Michael Eisner is ousted; replaced by Robert Iger, who sees Pixar as the future of Disney animation. (September)","Pixar releases The Incredibles, grossing $261 million domestically. Academy Award: Best Animated Feature. (November 5)"]},
+  {year:"2006",evs:["Disney buys Pixar for $7.4 billion. SJ receives a 7% stake ($3.5 billion) in Disney, becoming its largest individual shareholder and a board member. (January 24)","Pixar releases Cars, grossing $244 million domestically. (June 9)"]},
+  {year:"2007",evs:["SJ announces at Macworld that Apple Computer Inc. is being repositioned as simply Apple, Inc. (January 9)","Apple debuts the original iPhone.","Pixar releases Ratatouille, grossing $206 million domestically. Academy Award: Best Animated Feature Film. (June 29)"]},
+  {year:"2008",evs:["Apple announces the MacBook Air — a revolutionary lightweight laptop — at Macworld. (January 15)","Pixar releases WALL•E, grossing $223 million domestically. Academy Award: Best Animated Feature. (June 27)","Bloomberg prematurely releases SJ's obituary. At an Apple event, SJ quotes Mark Twain: 'Reports of my death are greatly exaggerated.' (September 9)"]},
+  {year:"2009",evs:["SJ takes a six-month medical leave of absence; Cook again takes over as acting CEO. (January 14)","SJ undergoes a successful liver transplant at Methodist University Hospital in Memphis. (April)","Pixar releases Up, grossing $293 million domestically. Two Academy Awards. (May 29)","Fortune magazine names SJ 'CEO of the decade.'"]},
+  {year:"2010",evs:["Apple debuts the iPad, ushering in the tablet era. (April 3)","Pixar releases Toy Story 3, grossing $415 million domestically. Two Academy Awards. (June 18)","Financial Times names SJ its 'Person of the Year.'"]},
+  {year:"2011",evs:["Mac App Store opens. (January 6)","SJ takes an extended open-ended leave of absence; Cook again takes the helm. (January 17)","Apple sells iPad 2. (March 11)","Pixar releases Cars 2. (June 24)","Based on Apple's market capitalization of $343 billion, it temporarily exceeds Exxon as the world's most valuable company. (August)","Steve Jobs resigns as CEO of Apple. Timothy Cook is appointed CEO; SJ assumes the position of Chairman. (August 24)","Steve Jobs passes away at age 56, one day after Apple's new CEO holds his first media event. (October 5)"]}
+];
+
+// ════════════════════════════════════════════
+// CATEGORIES
+// ════════════════════════════════════════════
+const CATS = [
+  {id:"all",label:"All Topics"},
+  {id:"innovation",label:"Innovation"},
+  {id:"design",label:"Design"},
+  {id:"leadership",label:"Leadership"},
+  {id:"philosophy",label:"Philosophy"},
+  {id:"technology",label:"Technology"},
+  {id:"creativity",label:"Creativity"},
+  {id:"business",label:"Business"},
+  {id:"people",label:"People"}
+];
+
+let activeCat = "all";
+let query = "";
+
+// ════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════
+function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function hi(text,q){
+  if(!q)return text;
+  return text.replace(new RegExp(`(${esc(q)})`,'gi'),'<mark>$1</mark>');
+}
+
+// ════════════════════════════════════════════
+// RENDER FILTERS
+// ════════════════════════════════════════════
+function renderFilters(){
+  const el = document.getElementById('ftags');
+  el.innerHTML = CATS.map(c=>
+    `<button class="ftag${c.id===activeCat?' on':''}" data-id="${c.id}">${c.label}</button>`
+  ).join('');
+  el.querySelectorAll('.ftag').forEach(b=>b.addEventListener('click',()=>{
+    activeCat=b.dataset.id; renderFilters(); renderQuotes();
+  }));
+}
+
+// ════════════════════════════════════════════
+// RENDER QUOTES
+// ════════════════════════════════════════════
+function renderQuotes(){
+  const grid=document.getElementById('qgrid');
+  const count=document.getElementById('rcount');
+  const q=query.toLowerCase();
+  const filtered=QUOTES.filter(x=>{
+    const okCat=activeCat==='all'||x.cat===activeCat;
+    const okQ=!q||x.text.toLowerCase().includes(q)||x.topic.toLowerCase().includes(q)||x.source.toLowerCase().includes(q);
+    return okCat&&okQ;
+  });
+  count.textContent=`${filtered.length} quote${filtered.length!==1?'s':''} found`;
+  if(!filtered.length){
+    grid.innerHTML=`<div class="no-res">No quotes found${query?` for "<strong>${query}</strong>"`:''}.${query?'<br>Try a different search term.':''}</div>`;
+    return;
+  }
+  grid.innerHTML=filtered.map((x,i)=>`
+    <div class="qcard" style="animation-delay:${Math.min(i*.04,.4)}s">
+      <div class="qmark">&ldquo;</div>
+      <p class="qtext">${hi(x.text,query)}</p>
+      <div class="qfoot">
+        <span class="qtopic cat-${x.cat}">${hi(x.topic,query)}</span>
+        <span class="qsource">${hi(x.source,query)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ════════════════════════════════════════════
+// RENDER TIMELINE
+// ════════════════════════════════════════════
+function renderTimeline(){
+  const el=document.getElementById('tlc');
+  el.innerHTML=MILESTONES.map(m=>`
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">${m.year}</div>
+      <div class="tl-box">
+        ${m.evs.map((e,i)=>`<p class="tl-ev"${i?` style="margin-top:10px;padding-top:10px;border-top:1px solid var(--br)"`:''}>${e}</p>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ════════════════════════════════════════════
+// SEARCH
+// ════════════════════════════════════════════
+document.getElementById('srch').addEventListener('input',function(){
+  query=this.value.trim(); renderQuotes();
+});
+
+// ════════════════════════════════════════════
+// COUNTER ANIMATION
+// ════════════════════════════════════════════
+const seen=new Set();
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!seen.has(e.target)){
+      seen.add(e.target);
+      const target=+e.target.dataset.n;
+      let n=0;const step=target/55;
+      const t=setInterval(()=>{
+        n+=step;if(n>=target){n=target;clearInterval(t)}
+        e.target.textContent=Math.round(n)+(target>=300?'+':'+');
+      },16);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.stat-num').forEach(el=>cObs.observe(el));
+
+// ════════════════════════════════════════════
+// SCROLL ANIMATIONS
+// ════════════════════════════════════════════
+const sObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fi').forEach(el=>sObs.observe(el));
+
+// Timeline observer (set up after render)
+const tlObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+
+// ════════════════════════════════════════════
+// BACK TO TOP
+// ════════════════════════════════════════════
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>{
+  btt.classList.toggle('on',window.scrollY>600);
+},{ passive:true });
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+renderFilters();
+renderQuotes();
+renderTimeline();
+setTimeout(()=>{
+  document.querySelectorAll('.tl-item').forEach(el=>tlObs.observe(el));
+},80);
+</script>
+</body>
+</html>

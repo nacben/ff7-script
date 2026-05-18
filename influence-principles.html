@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Influence: The Psychology of Persuasion — Cialdini's 6 Principles</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1628;
+    --bg3: #141d35;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --border: rgba(255,255,255,0.08);
+
+    --blue:   #3b82f6;
+    --purple: #8b5cf6;
+    --green:  #10b981;
+    --pink:   #ec4899;
+    --amber:  #f59e0b;
+    --red:    #ef4444;
+
+    --blue-dim:   rgba(59,130,246,0.12);
+    --purple-dim: rgba(139,92,246,0.12);
+    --green-dim:  rgba(16,185,129,0.12);
+    --pink-dim:   rgba(236,72,153,0.12);
+    --amber-dim:  rgba(245,158,11,0.12);
+    --red-dim:    rgba(239,68,68,0.12);
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--purple), var(--green), var(--pink), var(--amber), var(--red));
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 3px; left: 0; right: 0;
+    background: rgba(10,14,26,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    padding: 0 1.5rem;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.1rem;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a:hover { color: var(--text); background: var(--border); }
+
+  .nav-links a[data-color="blue"]   { color: var(--blue); }
+  .nav-links a[data-color="purple"] { color: var(--purple); }
+  .nav-links a[data-color="green"]  { color: var(--green); }
+  .nav-links a[data-color="pink"]   { color: var(--pink); }
+  .nav-links a[data-color="amber"]  { color: var(--amber); }
+  .nav-links a[data-color="red"]    { color: var(--red); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 63px; left: 0; right: 0;
+    background: rgba(10,14,26,0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 999;
+    padding: 1rem 1.5rem;
+  }
+
+  .mobile-menu.open { display: block; }
+
+  .mobile-menu a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(59,130,246,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(16,185,129,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 70%, rgba(236,72,153,0.1) 0%, transparent 40%);
+    animation: heroShift 10s ease-in-out infinite alternate;
+  }
+
+  @keyframes heroShift {
+    0%   { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(30deg); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #fff 30%, var(--blue) 60%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-author {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero-pill {
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid;
+  }
+
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .scroll-arrow {
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid var(--text-dim);
+    border-bottom: 2px solid var(--text-dim);
+    transform: rotate(45deg);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 2rem; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-lead {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* ─── FADE IN ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── FOUNDATION SECTION ─── */
+  #foundation { background: var(--bg2); }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .concept-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .concept-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .concept-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .concept-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .concept-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .example-box {
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 12px 12px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+
+  .example-box strong { color: var(--text); }
+
+  /* ─── PRINCIPLE SECTIONS ─── */
+  .principle-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .principle-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+  }
+
+  .principle-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    pointer-events: none;
+  }
+
+  /* Per-principle theming */
+  #reciprocation::before { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+  #reciprocation::after  { background: radial-gradient(ellipse at top right, var(--blue), transparent 60%); opacity: 0.07; }
+  #commitment::before    { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+  #commitment::after     { background: radial-gradient(ellipse at top left, var(--purple), transparent 60%); opacity: 0.07; }
+  #social-proof::before  { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+  #social-proof::after   { background: radial-gradient(ellipse at top right, var(--green), transparent 60%); opacity: 0.07; }
+  #liking::before        { background: linear-gradient(90deg, transparent, var(--pink), transparent); }
+  #liking::after         { background: radial-gradient(ellipse at top left, var(--pink), transparent 60%); opacity: 0.07; }
+  #authority::before     { background: linear-gradient(90deg, transparent, var(--amber), transparent); }
+  #authority::after      { background: radial-gradient(ellipse at top right, var(--amber), transparent 60%); opacity: 0.07; }
+  #scarcity::before      { background: linear-gradient(90deg, transparent, var(--red), transparent); }
+  #scarcity::after       { background: radial-gradient(ellipse at top left, var(--red), transparent 60%); opacity: 0.07; }
+
+  .principle-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .principle-number {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.12;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .principle-meta { flex: 1; min-width: 280px; }
+
+  .principle-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 0.75rem;
+    border: 1px solid;
+  }
+
+  .principle-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .principle-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ─── TABS ─── */
+  .tab-container { margin: 2rem 0; }
+
+  .tab-buttons {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+    font-family: inherit;
+    letter-spacing: 0.03em;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active {
+    color: var(--text);
+    border-bottom-color: currentColor;
+  }
+
+  .tab-panel {
+    display: none;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 2rem;
+    animation: tabIn 0.3s ease;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes tabIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── CARDS ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+
+  .card:hover { transform: translateY(-3px); }
+
+  .card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* Color-specific card glows */
+  .glow-blue .card:hover   { box-shadow: 0 8px 30px rgba(59,130,246,0.25);   border-color: rgba(59,130,246,0.4); }
+  .glow-purple .card:hover { box-shadow: 0 8px 30px rgba(139,92,246,0.25);   border-color: rgba(139,92,246,0.4); }
+  .glow-green .card:hover  { box-shadow: 0 8px 30px rgba(16,185,129,0.25);   border-color: rgba(16,185,129,0.4); }
+  .glow-pink .card:hover   { box-shadow: 0 8px 30px rgba(236,72,153,0.25);   border-color: rgba(236,72,153,0.4); }
+  .glow-amber .card:hover  { box-shadow: 0 8px 30px rgba(245,158,11,0.25);   border-color: rgba(245,158,11,0.4); }
+  .glow-red .card:hover    { box-shadow: 0 8px 30px rgba(239,68,68,0.25);    border-color: rgba(239,68,68,0.4); }
+
+  /* ─── STUDY CALLOUT ─── */
+  .study-callout {
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .study-callout::before {
+    content: 'STUDY';
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+  }
+
+  .study-callout h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .study-callout p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .study-callout .stat {
+    font-size: 2rem;
+    font-weight: 800;
+    display: block;
+    margin: 0.75rem 0 0.25rem;
+    line-height: 1;
+  }
+
+  /* ─── QUOTE BLOCK ─── */
+  .quote-block {
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    margin: 2rem 0;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+
+  .quote-block::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.5rem; left: 1.5rem;
+    font-size: 5rem;
+    line-height: 1;
+    opacity: 0.15;
+    font-family: Georgia, serif;
+  }
+
+  .quote-block blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+
+  .quote-block cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-style: normal;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── KEY RULE ─── */
+  .key-rule {
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 1.25rem 1.75rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* ─── STORY BOX ─── */
+  .story-box {
+    background: var(--bg2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  .story-box strong { color: var(--text); }
+
+  /* ─── DEFENSE BOX ─── */
+  .defense-box {
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    border: 1px dashed;
+    margin: 1rem 0;
+  }
+
+  .defense-box h4 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .defense-box ul {
+    padding-left: 1.25rem;
+  }
+
+  .defense-box li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.65;
+  }
+
+  /* ─── EPILOGUE ─── */
+  #epilogue {
+    background: var(--bg2);
+  }
+
+  .synthesis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .synthesis-card {
+    background: var(--bg3);
+    border-radius: 16px;
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+  }
+
+  .synthesis-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .synthesis-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ─── QUICK REFERENCE ─── */
+  #quick-ref {
+    background: var(--bg);
+  }
+
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .ref-card {
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .ref-card:hover { transform: translateY(-6px); }
+
+  .ref-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .ref-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ref-card-num {
+    font-size: 0.75rem;
+    font-weight: 800;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: currentColor;
+    color: #0a0e1a;
+    flex-shrink: 0;
+  }
+
+  .ref-card-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  .ref-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.5rem 0.75rem;
+    align-items: start;
+    margin-bottom: 0.5rem;
+  }
+
+  .ref-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    padding-top: 0.1rem;
+  }
+
+  .ref-value {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── BACK TO TOP ─── */
+  #back-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    z-index: 500;
+    text-decoration: none;
+  }
+
+  #back-top.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  #back-top:hover {
+    background: var(--bg2);
+    transform: translateY(-3px);
+  }
+
+  #back-top svg { stroke: var(--text-muted); }
+
+  /* ─── UTILITY ─── */
+  .text-blue   { color: var(--blue); }
+  .text-purple { color: var(--purple); }
+  .text-green  { color: var(--green); }
+  .text-pink   { color: var(--pink); }
+  .text-amber  { color: var(--amber); }
+  .text-red    { color: var(--red); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .highlight {
+    background: rgba(255,255,255,0.07);
+    border-radius: 6px;
+    padding: 0.1em 0.4em;
+    font-weight: 600;
+  }
+
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .stat-item {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .stat-num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  p + p { margin-top: 0.9rem; }
+  h3 + p { margin-top: 0.6rem; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 4rem 1.25rem; }
+    .principle-header { gap: 1rem; }
+    .principle-number { font-size: 3.5rem; }
+    .tab-btn { font-size: 0.78rem; padding: 0.6rem 0.9rem; }
+    .tab-panel { padding: 1.25rem; }
+    .quote-block { padding: 1.5rem; }
+    .ref-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 2rem; }
+    .principle-number { display: none; }
+    .study-callout .stat { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Influence</a>
+    <ul class="nav-links">
+      <li><a href="#foundation">Foundation</a></li>
+      <li><a href="#reciprocation" data-color="blue">Reciprocation</a></li>
+      <li><a href="#commitment" data-color="purple">Commitment</a></li>
+      <li><a href="#social-proof" data-color="green">Social Proof</a></li>
+      <li><a href="#liking" data-color="pink">Liking</a></li>
+      <li><a href="#authority" data-color="amber">Authority</a></li>
+      <li><a href="#scarcity" data-color="red">Scarcity</a></li>
+      <li><a href="#epilogue">Epilogue</a></li>
+      <li><a href="#quick-ref">Reference</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#foundation"  onclick="closeMobile()">Foundation</a>
+  <a href="#reciprocation" onclick="closeMobile()" style="color:var(--blue)">1 · Reciprocation</a>
+  <a href="#commitment"    onclick="closeMobile()" style="color:var(--purple)">2 · Commitment & Consistency</a>
+  <a href="#social-proof"  onclick="closeMobile()" style="color:var(--green)">3 · Social Proof</a>
+  <a href="#liking"        onclick="closeMobile()" style="color:var(--pink)">4 · Liking</a>
+  <a href="#authority"     onclick="closeMobile()" style="color:var(--amber)">5 · Authority</a>
+  <a href="#scarcity"      onclick="closeMobile()" style="color:var(--red)">6 · Scarcity</a>
+  <a href="#epilogue"      onclick="closeMobile()">Epilogue</a>
+  <a href="#quick-ref"     onclick="closeMobile()">Quick Reference</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Robert Cialdini · 1984</div>
+    <h1 class="hero-title">The Psychology<br>of Persuasion</h1>
+    <p class="hero-subtitle">How compliance professionals — salespeople, fundraisers, recruiters, advertisers — get you to say yes. And how to defend yourself.</p>
+    <p class="hero-author">Based on <em>Influence</em> by Robert B. Cialdini</p>
+
+    <div class="hero-pills">
+      <span class="hero-pill" style="color:var(--blue);border-color:rgba(59,130,246,0.4);background:var(--blue-dim)">Reciprocation</span>
+      <span class="hero-pill" style="color:var(--purple);border-color:rgba(139,92,246,0.4);background:var(--purple-dim)">Commitment</span>
+      <span class="hero-pill" style="color:var(--green);border-color:rgba(16,185,129,0.4);background:var(--green-dim)">Social Proof</span>
+      <span class="hero-pill" style="color:var(--pink);border-color:rgba(236,72,153,0.4);background:var(--pink-dim)">Liking</span>
+      <span class="hero-pill" style="color:var(--amber);border-color:rgba(245,158,11,0.4);background:var(--amber-dim)">Authority</span>
+      <span class="hero-pill" style="color:var(--red);border-color:rgba(239,68,68,0.4);background:var(--red-dim)">Scarcity</span>
+    </div>
+
+    <div class="quote-block" style="max-width:600px;margin:0 auto 3rem;">
+      <blockquote>"Since 95% of people are imitators and only 5% initiators, people are persuaded more by the actions of others than by any proof we can offer."</blockquote>
+      <cite>— Cavett Robert, sales trainer</cite>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FOUNDATION -->
+<section id="foundation">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="section-label" style="color:var(--blue)">Chapter 1</span>
+      <h2 class="section-title">How Your Mind Works</h2>
+      <p class="section-lead">Before exploring the six weapons of influence, we must understand the machinery they exploit: the automatic, fixed-action patterns that govern most human behavior.</p>
+    </div>
+
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-icon">🦃</div>
+        <h3>Fixed-Action Patterns</h3>
+        <p>Animals possess pre-programmed sequences of behavior triggered by specific stimuli. A mother turkey nurtures her chicks when she hears their "cheep-cheep" — but attacks a stuffed polecat (her natural enemy) if it makes the same sound. Remove the sound and she ignores her own chick. The trigger feature is everything.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">⚡</div>
+        <h3>Click-Whirr Response</h3>
+        <p>Humans have the same automatic tapes. When a single trigger feature is present, the entire behavioral sequence clicks into play — automatically, without rational deliberation. This isn't stupidity; it's efficiency. We couldn't function if we had to reason out every decision from scratch.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">📊</div>
+        <h3>The Contrast Principle</h3>
+        <p>Our perceptions are relative, not absolute. The same thing appears different depending on what preceded it. This principle affects everything from the weight of objects to the price of sweaters — and compliance professionals exploit it deliberately.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🧠</div>
+        <h3>The Expensive = Good Shortcut</h3>
+        <p>A jewelry store owner accidentally doubled sales of turquoise pieces by leaving a note to raise prices, which her assistant misread as "raise" not "half." Customers used price as a proxy for quality — a usually reliable heuristic turned against them. The trigger feature fired the "high quality" pattern automatically.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <h3 class="section-title" style="font-size:1.5rem;margin-bottom:1.25rem">The Contrast Principle in Action</h3>
+
+      <div class="example-box">
+        <strong>The Three Bowls:</strong> Put one hand in cold water, one in hot, then both in lukewarm. The same water feels warm to the cold hand and cool to the hot hand. The absolute temperature is irrelevant — only contrast matters.
+      </div>
+      <div class="example-box" style="border-left-color:var(--purple)">
+        <strong>Real Estate Bait-and-Switch:</strong> Show clients genuinely run-down, overpriced properties first. Then show the mediocre property you actually want to sell. By contrast, the mediocre property looks excellent. The "setup" houses are called "blockers" in the trade.
+      </div>
+      <div class="example-box" style="border-left-color:var(--green)">
+        <strong>Clothing Store Strategy:</strong> Salespeople are trained to sell the expensive item first — a suit before a sweater. Spending $400 on a suit makes a $95 sweater seem trivial by contrast. If the sweater were shown first, $95 would feel steep.
+      </div>
+    </div>
+
+    <div class="quote-block fade-in">
+      <blockquote>"Civilization advances by extending the number of operations we can perform without thinking about them."</blockquote>
+      <cite>— Alfred North Whitehead, mathematician and philosopher</cite>
+    </div>
+
+    <div class="fade-in">
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.8">In an increasingly complex world, we rely more heavily on these automatic shortcuts — not less. We cannot scrutinize every decision. The principles of influence work <em>because</em> the heuristics they exploit are usually valid. Their power comes from exploiting the same machinery that makes us functional human beings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRINCIPLE 1: RECIPROCATION -->
+<section id="reciprocation" class="principle-section">
+  <div class="section-inner">
+    <div class="principle-header fade-in">
+      <div class="principle-number text-blue">01</div>
+      <div class="principle-meta">
+        <span class="principle-tag text-blue" style="border-color:rgba(59,130,246,0.4);background:var(--blue-dim)">Principle One</span>
+        <h2 class="principle-title">Reciprocation</h2>
+        <p class="principle-subtitle">"The Old Give and Take — and Take"</p>
+      </div>
+    </div>
+
+    <div class="key-rule text-blue fade-in" style="border-left-color:var(--blue)">
+      We feel a deep obligation to repay what others have given us — favors, gifts, invitations, concessions — even when the gift was uninvited.
+    </div>
+
+    <div class="tab-container fade-in" data-tabs="recip">
+      <div class="tab-buttons">
+        <button class="tab-btn active text-blue" onclick="switchTab('recip',0,this)">How It Works</button>
+        <button class="tab-btn" onclick="switchTab('recip',1,this)">Real Examples</button>
+        <button class="tab-btn" onclick="switchTab('recip',2,this)">Defend Yourself</button>
+      </div>
+
+      <div id="recip-0" class="tab-panel active">
+        <p>The rule of reciprocation is so deeply ingrained that sociologists regard it as a foundational element of human culture. Every human society teaches it. It solved the adaptive problem of sharing resources and expertise — you could give something now without permanently losing it, because social obligation would ensure repayment.</p>
+
+        <div class="study-callout fade-in" style="background:var(--blue-dim);border-color:rgba(59,130,246,0.3)">
+          <h4 class="text-blue">The Regan Coca-Cola Experiment</h4>
+          <p>Researcher Dennis Regan had subjects rate paintings alongside a confederate. In one condition, the confederate spontaneously brought the subject a Coke ("I got myself one, I got you one too"). Later, he asked subjects to buy raffle tickets.</p>
+          <span class="stat text-blue">2×</span>
+          <p>Subjects who received an unsolicited Coke bought <strong>twice as many</strong> raffle tickets — even when they had reported disliking the confederate. <em>Liking didn't matter. The gift created the obligation.</em></p>
+        </div>
+
+        <p>The rule overpowers other social factors. You may dislike the person who gave you something, but you still feel obligated. The rule can be triggered by uninvited gifts — you didn't ask for the favor, yet you feel in debt. This asymmetry is ruthlessly exploitable.</p>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--blue)">Reciprocal Concessions</h3>
+        <p>The rule operates not just for gifts, but for concessions in negotiation. If someone makes a concession to you, you feel pressure to make one back. Compliance professionals exploit this with the <strong>Rejection-Then-Retreat</strong> technique:</p>
+
+        <div class="story-box">
+          <strong>Boy Scout Candy Bars:</strong> A Boy Scout approached Cialdini asking him to buy $5 tickets to their annual circus. Cialdini refused. The Scout then asked "Well, how about some chocolate bars? They're only $1 each." Cialdini bought two. Walking away with his bars, he realized he didn't even like chocolate — but the $1 request seemed like a concession deserving of one in return.
+        </div>
+
+        <div class="study-callout" style="background:var(--blue-dim);border-color:rgba(59,130,246,0.3)">
+          <h4 class="text-blue">Zoo Trip Compliance Study</h4>
+          <p>Researchers asked students to chaperon a juvenile delinquents' zoo trip (large request). Then: "If you can't do that, would you spend just two hours in a supervised recreational program?" The two-step approach tripled compliance compared to asking the smaller request alone.</p>
+          <span class="stat text-blue">3×</span>
+          <p>The retreat created an obligation to reciprocate the concession — and made the target feel more satisfied with their decision.</p>
+        </div>
+
+        <div class="story-box">
+          <strong>Watergate:</strong> G. Gordon Liddy presented his intelligence plan for the 1972 election to CREEP. The plan involved prostitutes, wiretapping, and kidnapping — at $1 million. It was rejected. He came back with a scaled-down version for $500,000. Then $250,000. The step-by-step concession strategy eventually gained approval for what became the Watergate break-in.
+        </div>
+      </div>
+
+      <div id="recip-1" class="tab-panel">
+        <div class="cards-grid glow-blue">
+          <div class="card">
+            <h4 class="text-blue">Hare Krishna Flowers</h4>
+            <p>Devotees gave airport travelers a "gift" flower before soliciting donations. Travelers could not simply refuse — they already held the flower. Devotees were stationed at trash cans to retrieve the discarded flowers and give them to the next person. Donations flowed regardless of annoyance.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-blue">Amway BUG Device</h4>
+            <p>Amway distributors leave a collection of products with prospects for 24–72 hours, free of charge, with no obligations. When they return to collect the "BUG," they find customers eager to buy. The free trial created an obligation that straightforward sales pitches couldn't.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-blue">Christmas Card Stranger</h4>
+            <p>Cialdini sent Christmas cards to strangers as an experiment. Dozens of cards flooded back — from people he'd never met. Nobody paused to investigate. An unknown name received a card; the reciprocity rule clicked on; a card was sent back automatically.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-blue">Ethiopia &amp; Mexico, 1985</h4>
+            <p>The Ethiopian Red Cross sent $5,000 in disaster relief to earthquake-ravaged Mexico — despite Ethiopia being one of the world's most impoverished nations in the midst of a famine. The reason: Mexico had sent aid to Ethiopia after Italy invaded in 1935. The debt was fifty years old, yet it remained active.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-blue">Charity Address Labels</h4>
+            <p>Charities that include personalized address label "gifts" in their solicitation letters see dramatically higher donation rates. You already have the labels — the debt is created the moment you open the envelope.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-blue">Free Samples</h4>
+            <p>The free sample is a venerable compliance tool: give something, create a feeling of debt, collect the purchase. Supermarket sample demonstrators know customers buy not out of desire for the product, but to escape the uncomfortable sense of obligation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="recip-2" class="tab-panel">
+        <p>The problem is not the rule of reciprocation itself — it is essential to civilized society. The problem is when it's triggered by something that isn't a genuine gift, but a calculated compliance device.</p>
+
+        <div class="defense-box" style="border-color:rgba(59,130,246,0.4);background:var(--blue-dim)">
+          <h4 class="text-blue">&#9679; Defense Strategy</h4>
+          <ul>
+            <li><strong>Accept gifts graciously, but reassess before reciprocating.</strong> If what seemed like a gift is revealed to be a compliance tactic, mentally redefine it — it is a sales technique, not a gift. You owe the salesperson nothing.</li>
+            <li><strong>Recognize uninvited "gifts."</strong> If someone spontaneously does you a favor you didn't request and then asks something in return, identify whether this was a genuine act of generosity or an engineered obligation.</li>
+            <li><strong>Tricks deserve no reciprocation.</strong> You may use the favor and feel no guilt — the rule was being exploited in bad faith. You're not violating the norm; they were.</li>
+            <li><strong>For rejection-then-retreat:</strong> Recognize that a scaled-down second request is still manipulative if the first request was fabricated merely to set up the retreat. You can decline both.</li>
+          </ul>
+        </div>
+
+        <div class="quote-block">
+          <blockquote>"Everything should be made as simple as possible, but not simpler."</blockquote>
+          <cite>— Albert Einstein</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRINCIPLE 2: COMMITMENT & CONSISTENCY -->
+<section id="commitment" class="principle-section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="principle-header fade-in">
+      <div class="principle-number text-purple">02</div>
+      <div class="principle-meta">
+        <span class="principle-tag text-purple" style="border-color:rgba(139,92,246,0.4);background:var(--purple-dim)">Principle Two</span>
+        <h2 class="principle-title">Commitment &amp; Consistency</h2>
+        <p class="principle-subtitle">"Hobgoblins of the Mind"</p>
+      </div>
+    </div>
+
+    <div class="key-rule text-purple fade-in" style="border-left-color:var(--purple)">
+      Once we've made a choice or taken a stand, we encounter strong personal and interpersonal pressure to behave consistently with that commitment — even when it leads us somewhere we don't want to go.
+    </div>
+
+    <div class="tab-container fade-in" data-tabs="commit">
+      <div class="tab-buttons">
+        <button class="tab-btn active text-purple" onclick="switchTab('commit',0,this)">How It Works</button>
+        <button class="tab-btn" onclick="switchTab('commit',1,this)">Real Examples</button>
+        <button class="tab-btn" onclick="switchTab('commit',2,this)">Defend Yourself</button>
+      </div>
+
+      <div id="commit-0" class="tab-panel active">
+        <p>The drive to be consistent is enormously powerful — it simplifies decision-making, appears virtuous to observers, and protects us from the discomfort of cognitive dissonance. Once committed, we selectively filter information, reinterpret evidence, and invent justifications — all to remain consistent with our prior position.</p>
+
+        <div class="study-callout" style="background:var(--purple-dim);border-color:rgba(139,92,246,0.3)">
+          <h4 class="text-purple">Racetrack Confidence Study</h4>
+          <p>Researchers surveyed bettors immediately before and immediately after placing their bets at the racetrack. The bet itself — identical horses, identical odds — produced a dramatic shift:</p>
+          <span class="stat text-purple">Much more confident</span>
+          <p>After placing the bet, bettors rated their horse's chances significantly higher than they had moments before. Nothing changed except their commitment. The consistency drive immediately began generating supporting beliefs.</p>
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--purple)">The Foot-in-the-Door Technique</h3>
+        <p>Small initial commitments can powerfully influence future behavior. Once you've agreed to a small request, your self-image adjusts to accommodate the commitment — and you become more likely to comply with larger related requests.</p>
+
+        <div class="study-callout" style="background:var(--purple-dim);border-color:rgba(139,92,246,0.3)">
+          <h4 class="text-purple">Freedman &amp; Fraser Petition Study</h4>
+          <p>Researchers asked California homeowners to allow a large, ugly "DRIVE CAREFULLY" sign on their front lawn. Most refused. But in another neighborhood, residents had been asked two weeks earlier to sign a small petition for safe driving — almost everyone had agreed. When the billboard request came:</p>
+          <span class="stat text-purple">76%</span>
+          <p>Of those who'd signed the petition agreed to the huge billboard, versus just <strong>17%</strong> in the control group. The small petition had changed how people saw themselves — as public-spirited citizens concerned about safe driving — and they acted consistently with that identity.</p>
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--purple)">The Inner Choice Mechanism</h3>
+        <p>Commitments are most powerful when they're: <strong>active</strong> (written down), <strong>public</strong> (made in front of others), and perceived as <strong>freely chosen</strong> (not coerced). The consistency drive then works from the inside — we change not just our behavior but our self-image.</p>
+
+        <div class="study-callout" style="background:var(--purple-dim);border-color:rgba(139,92,246,0.3)">
+          <h4 class="text-purple">Freedman Robot Study — Mild vs. Severe Threat</h4>
+          <p>Children were told not to play with an attractive toy robot. Half were given a mild threat ("I'll be a little unhappy with you"); half a severe threat ("I'll be very angry and take away all toys"). Six weeks later, with no threats present:</p>
+          <span class="stat text-purple">Lasting change</span>
+          <p>Children under the <em>mild threat</em> had internalized the prohibition and were far less likely to play with the robot. Children under the severe threat had no real reason not to play — they'd complied before due to external pressure, not because they'd decided they didn't want it. The mild threat created inner choice; the severe threat didn't.</p>
+        </div>
+      </div>
+
+      <div id="commit-1" class="tab-panel">
+        <div class="cards-grid glow-purple">
+          <div class="card">
+            <h4 class="text-purple">Chinese POW Camps</h4>
+            <p>Chinese captors asked American POWs to write essays stating ways "the United States is not perfect." Small initial commitment. Then larger essays. Then radio broadcasts. Some soldiers became genuine collaborators, having slowly walked themselves to collaboration one small step at a time — their self-image shifting with each commitment.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-purple">Amway Goal Setting</h4>
+            <p>Amway asks distributors to write down their sales goals. This seemingly innocent exercise transforms the goals from aspirations into commitments — which must be honored to remain consistent with one's written self-image.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-purple">Customer Sales Agreements</h4>
+            <p>Some car dealers have customers fill out their own sales agreements rather than having the salesperson do it. Customers who write down the deal themselves feel stronger commitment to follow through.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-purple">Deutsch-Gerard Commitment Study</h4>
+            <p>Subjects estimated line lengths. Those who wrote down their judgments (even privately) were far less likely to change their answers when told the group disagreed. The mere act of writing created a commitment to be consistent with the initial estimate.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-purple">Fraternity Hazing</h4>
+            <p>Aronson &amp; Mills showed that groups we work hard to join are rated as more valuable. The suffering of hazing creates cognitive consistency: "I endured so much to join — this group must be worth it." Easy initiations produce less commitment. This is why hazing persists despite formal prohibitions.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-purple">Lowball Car Tactic</h4>
+            <p>A salesperson offers a car at an attractively low price, the customer commits mentally, then discovers an "error" (forgot to add dealer prep, lost a trade-in value, etc.) that raises the real price. Many customers proceed anyway — they've already internally committed to buying the car and invented supporting reasons.</p>
+          </div>
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>Iowa Energy Conservation:</strong> Researchers offered homeowners information about energy conservation and told half of them their names would be published in the newspaper as "energy-conscious citizens." They conserved more. When the publicity was canceled, they conserved <em>even more</em> — the public commitment had created a genuine shift in self-image that outlasted the external incentive.
+        </div>
+      </div>
+
+      <div id="commit-2" class="tab-panel">
+        <p>The consistent-behavior impulse is not inherently bad — it simplifies life and signals integrity. The problem is when it's exploited to take us somewhere we'd never choose to go if we thought it through freshly.</p>
+
+        <div class="defense-box" style="border-color:rgba(139,92,246,0.4);background:var(--purple-dim)">
+          <h4 class="text-purple">&#9679; Defense Strategy</h4>
+          <ul>
+            <li><strong>The stomach signal:</strong> Learn to recognize a slight tightening in the stomach when you feel you're being steered by manufactured consistency. This is your gut telling you something is off.</li>
+            <li><strong>Ask the heart-of-hearts question:</strong> "Knowing what I now know about the full deal, would I make the same choice again from scratch?" If the honest answer is no — you have information you didn't have at the start, and you're not obligated to honor a commitment made under false pretenses.</li>
+            <li><strong>Watch for lowball tactics:</strong> If conditions change significantly after you've committed, you are not in the same agreement you originally made. The obligation to consistency runs only to the deal you actually made.</li>
+            <li><strong>Notice the foot-in-the-door setup:</strong> Be wary of small, seemingly inconsequential requests that seem designed to shift your self-image before a larger request follows.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRINCIPLE 3: SOCIAL PROOF -->
+<section id="social-proof" class="principle-section">
+  <div class="section-inner">
+    <div class="principle-header fade-in">
+      <div class="principle-number text-green">03</div>
+      <div class="principle-meta">
+        <span class="principle-tag text-green" style="border-color:rgba(16,185,129,0.4);background:var(--green-dim)">Principle Three</span>
+        <h2 class="principle-title">Social Proof</h2>
+        <p class="principle-subtitle">"Truths Are Us"</p>
+      </div>
+    </div>
+
+    <div class="key-rule text-green fade-in" style="border-left-color:var(--green)">
+      We determine what is correct by finding out what other people think is correct. The more uncertain we are, the more we look to others — especially similar others — to guide our behavior.
+    </div>
+
+    <div class="tab-container fade-in" data-tabs="social">
+      <div class="tab-buttons">
+        <button class="tab-btn active text-green" onclick="switchTab('social',0,this)">How It Works</button>
+        <button class="tab-btn" onclick="switchTab('social',1,this)">Real Examples</button>
+        <button class="tab-btn" onclick="switchTab('social',2,this)">Defend Yourself</button>
+      </div>
+
+      <div id="social-0" class="tab-panel active">
+        <p>Social proof is a mental shortcut for deciding what to believe or how to act in ambiguous situations. It leverages the wisdom of crowds — usually correctly. The problem arises when the evidence is fabricated, distorted, or misread.</p>
+
+        <div class="study-callout" style="background:var(--green-dim);border-color:rgba(16,185,129,0.3)">
+          <h4 class="text-green">Canned Laughter Research</h4>
+          <p>Audiences exposed to canned laughter rated weak, mediocre jokes as significantly funnier, laughed longer and more often, and reported more enjoyment of the program overall — even though everyone knows the laughter is artificial and finds it somewhat annoying. The mechanical social proof overrides their conscious knowledge.</p>
+          <span class="stat text-green">Funnier</span>
+          <p>The parallel: a turkey responds to the "cheep-cheep" of her enemy's recording as nurturingly as she would to her own chick. We respond to the sound of others laughing as if the content were genuinely humorous.</p>
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--green)">The Bystander Effect &amp; Pluralistic Ignorance</h3>
+        <p>The Kitty Genovese case shocked New York in 1964: 38 witnesses watched her murder unfold over 35 minutes. Not one called the police. Bibb Latané and John Darley's crucial insight was counterintuitive:</p>
+
+        <div class="story-box">
+          The witnesses didn't fail to act <em>despite</em> 38 people watching — they failed to act <em>because</em> of it. Each witness looked to the others for cues on how to respond. The others appeared calm (because everyone else was also looking for cues). This <strong>pluralistic ignorance</strong> — everyone assuming from others' inaction that nothing is wrong — paralyzed the entire group. One witness alone would likely have acted.
+        </div>
+
+        <div class="stat-row" style="margin:1.5rem 0">
+          <div class="stat-item">
+            <div class="stat-num text-green">85%</div>
+            <div class="stat-desc">helped when the only bystander in a smoke-filled room experiment</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num text-green">31%</div>
+            <div class="stat-desc">helped when 5 other (passive) bystanders were present</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" style="color:#ef4444">75% → 10%</div>
+            <div class="stat-desc">help rate drop as bystanders increased in emergency simulations</div>
+          </div>
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--green)">The Similarity Amplifier</h3>
+        <p>Social proof is most powerful when the others are <em>similar</em> to us. Cialdini calls this "the principle of the people." We watch what similar people do to determine what is correct for us.</p>
+
+        <div class="study-callout" style="background:var(--green-dim);border-color:rgba(16,185,129,0.3)">
+          <h4 class="text-green">The Werther Effect</h4>
+          <p>Sociologist David Phillips showed that after front-page suicide stories, the suicide rate in the regions where the story ran spiked by an average of <strong>58 additional suicides</strong>. Furthermore: single-victim stories were followed by single-victim crashes; murder-suicide stories were followed by multi-victim crashes. And victims were similar in age to the publicized case. The imitation was specific and conscious-level unconscious.</p>
+        </div>
+      </div>
+
+      <div id="social-1" class="tab-panel">
+        <div class="cards-grid glow-green">
+          <div class="card">
+            <h4 class="text-green">Salted Tip Jars</h4>
+            <p>Bartenders "salt" their tip jars with a few bills at the start of the shift. The pre-existing tips signal that tipping is the correct behavior here. The empty jar receives fewer tips; the seeded jar, more.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-green">Evangelical Ringers</h4>
+            <p>Some evangelical ministers pack the front rows with their own employees before broadcasts, specifically to trigger the social proof mechanism in skeptical viewers: if this many people are enthusiastic, it must be worthwhile.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-green">"Fastest-Growing" Claims</h4>
+            <p>Advertisers don't just claim a product is good — they claim it's the "fastest-growing" or "largest-selling." This is social proof: millions of consumers have voted with their wallets. You should too.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-green">The Doomsday Cult</h4>
+            <p>Festinger infiltrated a doomsday cult whose leader predicted a great flood. When midnight passed and no flood came, members became <em>more</em> fervent, not less, and immediately began seeking converts. Social proof replaced the failed physical proof — the more who believed, the more certain members felt.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-green">Jonestown Massacre</h4>
+            <p>Jim Jones relocated his congregation from San Francisco to Guyana — deliberately creating a situation of extreme uncertainty where the only similar others were fellow Temple members. With no outside reference points, members used each other as social proof, creating an insular reality spiral that ended in 900 deaths.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-green">Wallet Return Study</h4>
+            <p>Wallets were more likely to be returned when the finder's note inside indicated the finder was similar to the recipient — 70% return rate vs. 33% from dissimilar finders. We help similar others because we see our own likely behavior reflected in theirs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="social-2" class="tab-panel">
+        <div class="defense-box" style="border-color:rgba(16,185,129,0.4);background:var(--green-dim)">
+          <h4 class="text-green">&#9679; Defense Strategy</h4>
+          <ul>
+            <li><strong>Name someone specifically in an emergency.</strong> Don't yell "Someone call an ambulance!" Point directly: "You, sir, in the blue jacket — call 911 right now." Directly assigned responsibility breaks the bystander effect instantly.</li>
+            <li><strong>Recognize falsified social proof.</strong> Canned laughter, seeded tip jars, fake Amazon reviews, planted applause — all are manufactured evidence. When you become aware of artificial social proof, it loses its power.</li>
+            <li><strong>Don't look to others in a crowd before looking for yourself.</strong> In an ambiguous situation, make an independent assessment before scanning for social cues — the cues may reflect others' uncertainty, not actual information.</li>
+            <li><strong>Be especially careful about similarity.</strong> The most powerful social proof comes from people like you — the most manipulable version of the principle. When you see evidence from "people just like you," scrutinize it carefully.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRINCIPLE 4: LIKING -->
+<section id="liking" class="principle-section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="principle-header fade-in">
+      <div class="principle-number text-pink">04</div>
+      <div class="principle-meta">
+        <span class="principle-tag text-pink" style="border-color:rgba(236,72,153,0.4);background:var(--pink-dim)">Principle Four</span>
+        <h2 class="principle-title">Liking</h2>
+        <p class="principle-subtitle">"The Friendly Thief"</p>
+      </div>
+    </div>
+
+    <div class="key-rule text-pink fade-in" style="border-left-color:var(--pink)">
+      We prefer to comply with requests from people we like. Compliance professionals systematically exploit this by engineering liking through a set of well-understood factors.
+    </div>
+
+    <div class="tab-container fade-in" data-tabs="liking">
+      <div class="tab-buttons">
+        <button class="tab-btn active text-pink" onclick="switchTab('liking',0,this)">How It Works</button>
+        <button class="tab-btn" onclick="switchTab('liking',1,this)">Real Examples</button>
+        <button class="tab-btn" onclick="switchTab('liking',2,this)">Defend Yourself</button>
+      </div>
+
+      <div id="liking-0" class="tab-panel active">
+        <p>Six factors reliably produce liking, and compliance professionals consciously deploy all six:</p>
+
+        <div class="cards-grid glow-pink">
+          <div class="card">
+            <h4 class="text-pink">1. Physical Attractiveness</h4>
+            <p>Attractive people are automatically assumed to be more talented, kinder, more honest, and more intelligent — the <em>halo effect</em>. Canadian elections: attractive candidates got 2.5× more votes. Pennsylvania courts: attractive defendants were twice as likely to avoid jail and get shorter sentences. Teachers grade attractive students more favorably.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-pink">2. Similarity</h4>
+            <p>We like people who are similar to us in dress, interests, background, and opinions. Salespeople are trained to mirror body language, echo verbal patterns, and discover shared interests. In one study, hitchhikers dressed like the person driving got far more rides.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-pink">3. Compliments</h4>
+            <p>We like those who like us. The North Carolina study found that even <em>clearly false</em> flattery created liking — subjects knew the compliments were exaggerated but liked the flatterer more anyway. The flattery worked by bypassing the cognitive filter.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-pink">4. Familiarity</h4>
+            <p>We like what is familiar. Mere repeated exposure increases liking (the mere exposure effect). We prefer our mirror image to photographs of ourselves (because we're used to the mirror), while our friends prefer the photographs. Ohio politicians changed their names to Brown or Williams and won elections purely on name recognition.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-pink">5. Association</h4>
+            <p>We like people and things associated with positive stimuli. This is why car commercials use beautiful models, why celebrities endorse products, why people avoid the weatherman when it rains. Sports fans say "We won" but "They lost" — psychologically merging with the team when it reflects well, distancing when it doesn't.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-pink">6. Cooperation</h4>
+            <p>Working together toward a shared goal generates powerful liking, even between former adversaries. The jigsaw classroom — where students from different ethnic groups must cooperate to learn the material — dramatically reduced prejudice, increased self-esteem, and improved test scores.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="liking-1" class="tab-panel">
+        <div class="study-callout" style="background:var(--pink-dim);border-color:rgba(236,72,153,0.3)">
+          <h4 class="text-pink">Joe Girard — World's Greatest Salesman</h4>
+          <p>Joe Girard was listed in the Guinness Book of World Records as the greatest retail car salesman for 12 consecutive years. His formula: a fair price plus someone the customer liked buying from. Each month, he sent cards to his entire customer list — 13,000+ people — each containing a simple message:</p>
+          <span class="stat text-pink">"I like you."</span>
+          <p>The cards covered every holiday — Valentine's Day, Thanksgiving, birthdays. The message was always the same. And it worked. When people needed a car, they thought of Joe Girard, who liked them.</p>
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>Tupperware Parties:</strong> The Tupperware party is a masterwork of applied liking. The products are sold not by a stranger in a store, but by a friend or acquaintance in her home. A University of Virginia study found that social bond with the hostess was <em>twice as important</em> as product preference in determining whether attendees bought. The company generates over $2.5 million in sales daily by engineering the liking context.
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>Arizona State Sweatshirt Study:</strong> Researchers counted ASU sweatshirts worn on campus on Monday mornings after wins vs. losses. After wins, ASU sweatshirts were worn significantly more often. After losses, far less. Students were "basking in reflected glory" (BIRGing) or distancing from failure (CORFing — "Cutting Off Reflected Failure"). Association management is continuous and automatic.
+        </div>
+
+        <div class="study-callout" style="background:var(--pink-dim);border-color:rgba(236,72,153,0.3)">
+          <h4 class="text-pink">Good Cop / Bad Cop</h4>
+          <p>The classic interrogation technique exploits association and liking. The "bad cop" creates fear and hostility. The "good cop" offers kindness and understanding — generating liking by contrast and association. Suspects confide in and cooperate with the good cop not because of the information offered, but because of the liking generated — even though both cops want exactly the same thing.</p>
+        </div>
+
+        <div class="study-callout" style="background:var(--pink-dim);border-color:rgba(236,72,153,0.3)">
+          <h4 class="text-pink">School Desegregation Research</h4>
+          <p>Simply putting black and white students together in classrooms — contact alone — increased prejudice rather than reducing it. The competitive classroom structure (one winner, many losers) exacerbated conflict. But in the <strong>jigsaw classroom</strong>, each student holds one piece of the puzzle the whole group needs:</p>
+          <span class="stat text-pink">Dramatically better</span>
+          <p>Within weeks: reduced prejudice across racial groups, dramatically improved self-esteem, higher test scores, greater liking for schoolmates. Carlos, a Mexican-American child who'd been failing and withdrawn, emerged as a valued contributor when his classmates discovered his knowledge was essential.</p>
+        </div>
+      </div>
+
+      <div id="liking-2" class="tab-panel">
+        <div class="defense-box" style="border-color:rgba(236,72,153,0.4);background:var(--pink-dim)">
+          <h4 class="text-pink">&#9679; Defense Strategy</h4>
+          <ul>
+            <li><strong>Separate the person from the proposal.</strong> Ask: "Do I like this deal, or do I merely like this person?" The quality of the deal exists independently of your feelings about the salesperson. Train yourself to evaluate them separately.</li>
+            <li><strong>Watch for unexpected liking.</strong> If you find yourself liking a compliance practitioner more than you'd expect given the circumstances — if the warmth seems sudden or greater than the situation warrants — treat this as a signal to scrutinize the proposal more carefully.</li>
+            <li><strong>Notice association tactics.</strong> Celebrity endorsements, beautiful people next to products, holiday cards from salespeople — all are association maneuvers designed to transfer goodwill. Recognize them as such and evaluate the product independently.</li>
+            <li><strong>Question flattery.</strong> When someone praises you before making a request, ask whether the praise would have come without the request. If it wouldn't, it's probably calculated.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRINCIPLE 5: AUTHORITY -->
+<section id="authority" class="principle-section">
+  <div class="section-inner">
+    <div class="principle-header fade-in">
+      <div class="principle-number text-amber">05</div>
+      <div class="principle-meta">
+        <span class="principle-tag text-amber" style="border-color:rgba(245,158,11,0.4);background:var(--amber-dim)">Principle Five</span>
+        <h2 class="principle-title">Authority</h2>
+        <p class="principle-subtitle">"Directed Deference"</p>
+      </div>
+    </div>
+
+    <div class="key-rule text-amber fade-in" style="border-left-color:var(--amber)">
+      We follow the lead of legitimate authorities. We've been trained since birth to believe that obedience to proper authority is right, and disobedience is wrong — and compliance professionals exploit this conditioning ruthlessly.
+    </div>
+
+    <div class="tab-container fade-in" data-tabs="auth">
+      <div class="tab-buttons">
+        <button class="tab-btn active text-amber" onclick="switchTab('auth',0,this)">How It Works</button>
+        <button class="tab-btn" onclick="switchTab('auth',1,this)">Real Examples</button>
+        <button class="tab-btn" onclick="switchTab('auth',2,this)">Defend Yourself</button>
+      </div>
+
+      <div id="auth-0" class="tab-panel active">
+        <p>Deference to authority is mostly adaptive: doctors, lawyers, engineers genuinely possess expertise we lack. The problem is that we respond to the <em>symbols</em> of authority — titles, uniforms, trappings of wealth — rather than the substance. Compliance professionals understand that it's easier to manufacture symbols than genuine expertise.</p>
+
+        <div class="study-callout" style="background:var(--amber-dim);border-color:rgba(245,158,11,0.3)">
+          <h4 class="text-amber">The Milgram Obedience Experiments</h4>
+          <p>Stanley Milgram's Yale experiments are the most disturbing authority studies ever conducted. Ordinary citizens were ordered by a researcher in a lab coat to administer electric shocks to a screaming "victim" in increasing increments up to 450 volts. The victim (an actor) pounded walls, complained of a heart condition, then fell silent.</p>
+          <span class="stat text-amber">65%</span>
+          <p>Of subjects administered the maximum 450-volt shock — even though they could hear screaming, pleading, and then ominous silence from behind the partition. They agonized, sweat, shook — but continued when the researcher said "The experiment requires that you continue." The subjects were normal people — secretaries, teachers, workers. Obedience to authority overrode their own conscience and ethics.</p>
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>The Critical Caveat:</strong> When two authority figures gave contradictory orders, every single subject stopped complying and followed their own judgment. And when a fellow subject (rather than an authority) demanded continuation, compliance stopped. Authority only works as long as it is perceived as legitimate — and competing authorities cancel each other out.
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--amber)">Symbols of Authority</h3>
+        <p>Three categories of authority symbols are especially powerful: <strong>titles</strong>, <strong>clothes</strong>, and <strong>trappings</strong>. Each can be fabricated with minimal effort. Each works.</p>
+      </div>
+
+      <div id="auth-1" class="tab-panel">
+        <div class="cards-grid glow-amber">
+          <div class="card">
+            <h4 class="text-amber">Medical Obedience</h4>
+            <p>Studies found a 12% error rate in following medication orders — nurses and pharmacists complying with incorrect prescriptions because they were ordered by doctors. In one study, 95% of nurses complied with a clearly excessive, potentially dangerous dosage ordered by a stranger over the phone claiming to be "Dr. Smith." The title alone was sufficient authority.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-amber">Robert Young / Sanka</h4>
+            <p>The actor Robert Young, who played "Marcus Welby, M.D." on television, sold decaffeinated coffee for years in commercials. He was not a doctor. He had never played one in real life. Yet viewers responded to the authority cues embedded in the fiction — the same authority responses that fired for real doctors fired for a fictional one.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-amber">Titles &amp; Height</h4>
+            <p>Studies show we perceive the same person as physically taller when introduced with a prestigious title. A visiting academic was introduced to different classes as a "professor," "lecturer," or "student." The "professor" was estimated to be over an inch taller than the "student." The title created a physical illusion of authority.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-amber">Bickman Uniform Study</h4>
+            <p>Researcher in guard uniform vs. civilian clothes asked passersby to do unusual things (give a stranger a coin for the meter, pick up a bag). The uniform produced 92% compliance; civilian clothes 42%. The uniform's authority doubled compliance — for requests with zero legitimate connection to guard authority.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-amber">Business Suit Jaywalking</h4>
+            <p>Subjects were 3.5 times more likely to follow a jaywalker across a street against a light when the jaywalker wore a business suit versus jeans. The expensive clothes triggered authority deference even in a context where business authority is irrelevant.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-amber">Luxury Car Honking Study</h4>
+            <p>When a car failed to move at a green light, drivers behind a luxury car waited significantly longer before honking — 50% never honked at all. Nearly all honked immediately at an economy car. Expensive car trappings triggered automatic deference to presumed high-status authority.</p>
+          </div>
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>S. Brian Willson:</strong> In 1987, Willson sat on railroad tracks protesting a weapons shipment. The train crew had orders to proceed and were told protesters would move. Willson didn't move; the train ran over him, severing both legs. The crew followed authority orders without exercising independent judgment. Later, the crew filed suit against Willson for their emotional distress at what their authority-directed behavior had caused them to do.
+        </div>
+      </div>
+
+      <div id="auth-2" class="tab-panel">
+        <div class="defense-box" style="border-color:rgba(245,158,11,0.4);background:var(--amber-dim)">
+          <h4 class="text-amber">&#9679; Defense Strategy</h4>
+          <ul>
+            <li><strong>Ask two key questions before deferring:</strong> (1) "Is this person truly an expert in the relevant domain?" (A doctor is an authority on medicine, not on politics or investments). (2) "Is this authority being honest with me, or do they have an incentive to mislead?" Expertise + honesty must both be present.</li>
+            <li><strong>Watch for credentials vs. relevant credentials.</strong> An authority's legitimacy is domain-specific. A famous physicist endorsing a financial product is not an authority on finance.</li>
+            <li><strong>Notice the Vincent the Waiter strategy.</strong> Experts who argue against their own interests are extraordinarily credible. If your financial advisor says "I'd move money out of our product," trust that advice. If your doctor says "you don't need this test," trust that even more than the advice to get the expensive test.</li>
+            <li><strong>Verify beyond the title.</strong> Before major decisions, do independent research. Titles are easy to fabricate. Uniforms are costumes. Luxury cars can be rented. Substance is harder to fake than symbols.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRINCIPLE 6: SCARCITY -->
+<section id="scarcity" class="principle-section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="principle-header fade-in">
+      <div class="principle-number text-red">06</div>
+      <div class="principle-meta">
+        <span class="principle-tag text-red" style="border-color:rgba(239,68,68,0.4);background:var(--red-dim)">Principle Six</span>
+        <h2 class="principle-title">Scarcity</h2>
+        <p class="principle-subtitle">"The Rule of the Few"</p>
+      </div>
+    </div>
+
+    <div class="key-rule text-red fade-in" style="border-left-color:var(--red)">
+      Opportunities seem more valuable when their availability is limited. We want things more when we cannot have them — or might soon lose them.
+    </div>
+
+    <div class="tab-container fade-in" data-tabs="scarc">
+      <div class="tab-buttons">
+        <button class="tab-btn active text-red" onclick="switchTab('scarc',0,this)">How It Works</button>
+        <button class="tab-btn" onclick="switchTab('scarc',1,this)">Real Examples</button>
+        <button class="tab-btn" onclick="switchTab('scarc',2,this)">Defend Yourself</button>
+      </div>
+
+      <div id="scarc-0" class="tab-panel active">
+        <p>Scarcity triggers desire through two mechanisms: (1) things that are scarce are usually more valuable (the availability heuristic is generally correct), and (2) psychological reactance — when our freedom to have something is threatened, we want it more, not less.</p>
+
+        <div class="study-callout" style="background:var(--red-dim);border-color:rgba(239,68,68,0.3)">
+          <h4 class="text-red">The Cookie Experiment</h4>
+          <p>Subjects rated chocolate chip cookies from a jar containing 10 vs. a jar containing 2. Same cookies, same recipe. The results:</p>
+          <span class="stat text-red">More desirable</span>
+          <p>The cookies from the nearly-empty jar were consistently rated as tastier, more desirable, and worth more money. In a second version where the jar went from 10 to 2 cookies (newly scarce), ratings were highest of all. And when the scarcity was social — created by demand from others rather than low supply — desire was highest of all.</p>
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>Mesa Temple Insight:</strong> Cialdini had no interest in visiting a local Mormon temple — until he learned it was about to be permanently closed to non-Mormons. Suddenly he wanted to visit. A friend felt the same irrational desire. The opportunity's impending loss created desire that its permanent existence never had. They visited on the last day. The temple itself was unremarkable. The desire had been entirely manufactured by scarcity, not substance.
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:700;margin:1.5rem 0 0.75rem;color:var(--red)">Psychological Reactance</h3>
+        <p>When freedom to have something is removed or threatened, we want it more. We also assign it more positive qualities than we previously had. This is especially powerful for freedoms we've already established:</p>
+
+        <div class="study-callout" style="background:var(--red-dim);border-color:rgba(239,68,68,0.3)">
+          <h4 class="text-red">The Romeo &amp; Juliet Effect</h4>
+          <p>Researchers in Colorado surveyed couples whose parents did or didn't strongly object to their relationship. When parents intensified their opposition, romantic love and desire for marriage <em>increased dramatically</em>. When parental interference decreased, so did romantic intensity. Parent opposition activated reactance — the very attempt to limit freedom increased the perceived value of what was forbidden.</p>
+          <span class="stat text-red">Stronger love</span>
+          <p>The classic story isn't just poetry — it's psychology. Attempting to ban something makes it more attractive, not less.</p>
+        </div>
+      </div>
+
+      <div id="scarc-1" class="tab-panel">
+        <div class="cards-grid glow-red">
+          <div class="card">
+            <h4 class="text-red">Limited Number Tactic</h4>
+            <p>"Only 5 left at this price." "Limited time offer." "Exclusive." Whether true or not, these signals activate the scarcity heuristic. The perception of scarcity matters more than actual scarcity.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-red">Kennesaw Gun Law</h4>
+            <p>When Kennesaw, Georgia required all households to own a gun, neighboring towns scrambled to buy guns — despite having no obligation. News of the law triggered reactance in outsiders who felt their freedom threatened, driving up demand dramatically.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-red">Dade County Phosphate Ban</h4>
+            <p>When Dade County banned phosphate detergents, residents began smuggling them from neighboring counties, stockpiling them, and rating the banned detergent as softer, kinder, and better-smelling than before the ban — qualities never attributed to it when it was freely available.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-red">Censorship Effect</h4>
+            <p>A UNC study found that when students learned a speech on a controversial topic was being banned, they became more sympathetic to its argument — without ever hearing it. A Purdue study found that books labeled "for adults only" were predicted to be enjoyed more, AND were enjoyed more. Restriction signals desirability.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-red">Auction Fever</h4>
+            <p>ABC paid $3.3 million for the rights to Poseidon Adventure, knowing they'd lose $1 million airing it. CBS president Wood: "The fever of the thing got us... we'd lost perspective... logic went right out the window." The competition and deadline of auction created emotional arousal that overrode financial logic.</p>
+          </div>
+          <div class="card">
+            <h4 class="text-red">Richard's Car Sales</h4>
+            <p>Cialdini's friend Richard stacked multiple interested buyers' appointments for the same car at the same time. Each buyer arrived to find competitors examining "their" car. The manufactured social scarcity created urgency and rivalry — Richard consistently sold cars above asking price.</p>
+          </div>
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>Loss Framing Research:</strong> Homeowners told about the money they were losing daily by failing to insulate their homes were far more likely to insulate than homeowners told about the money they'd save. The prospect of losing something is psychologically more motivating than the prospect of gaining something of equal value — loss language activates scarcity thinking.
+        </div>
+
+        <div class="story-box fade-in">
+          <strong>Collectibles &amp; Flaws:</strong> The most prized collectibles are often ones with manufacturing errors — the 3-eyed Washington stamp, the upside-down airplane stamp. These "mistakes" create extreme scarcity and extreme value. The rarer the flaw, the more valuable the item — proof that scarcity, not quality, drives perceived value.
+        </div>
+      </div>
+
+      <div id="scarc-2" class="tab-panel">
+        <div class="defense-box" style="border-color:rgba(239,68,68,0.4);background:var(--red-dim)">
+          <h4 class="text-red">&#9679; Defense Strategy</h4>
+          <ul>
+            <li><strong>Recognize the arousal as a signal to STOP.</strong> The emotional rush of potential loss — the urgency, the heat, the compulsive desire — is itself the trigger to pause rather than act. High-pressure scarcity tactics deliberately short-circuit deliberation. Feel the urgency; let it be your cue to slow down.</li>
+            <li><strong>Ask the critical question:</strong> "Do I want this item to <em>possess</em> it, or to <em>use</em> it?" The scarce cookie doesn't taste better. The closed-access temple isn't more beautiful. If you only want the thing because it might be unavailable, you've been manipulated by scarcity, not genuine value.</li>
+            <li><strong>Recognize manufactured scarcity.</strong> "Only 5 left" on an e-commerce site. A deadline on a discount. The "can't-come-back" tactic in vacuum cleaner sales. These signals are often fabricated — ask whether the scarcity is real before letting it motivate a decision.</li>
+            <li><strong>Watch for social scarcity (competitive demand).</strong> The most powerful version of scarcity is not "there are only 5" but "other people want this one." Auction fever, rival buyers in real estate, simultaneous competing appointments — these create the strongest emotional arousal. Cool yourself down before deciding.</li>
+          </ul>
+        </div>
+
+        <div class="quote-block">
+          <blockquote>"The way to love anything is to realize that it might be lost."</blockquote>
+          <cite>— G. K. Chesterton</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ EPILOGUE -->
+<section id="epilogue">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="section-label" style="color:var(--text-dim)">Epilogue</span>
+      <h2 class="section-title">Instant Influence</h2>
+      <p class="section-lead">In an age of explosive information growth, we have no choice but to use mental shortcuts more, not less. This creates both opportunity and danger.</p>
+    </div>
+
+    <div class="synthesis-grid fade-in">
+      <div class="synthesis-card">
+        <h3 style="color:var(--blue)">The Complexity Trap</h3>
+        <p>Modern life bombards us with more decisions, more information, more choices than any previous generation. The only viable response is to rely more heavily on heuristics — shortcuts that compress complex decisions into single features. "Expensive = good." "Popular = correct." "Expert says so = true." These shortcuts usually work. Their reliability is precisely what makes them exploitable.</p>
+      </div>
+      <div class="synthesis-card">
+        <h3 style="color:var(--purple)">The Exploiter's Advantage</h3>
+        <p>As we increasingly depend on shortcuts, their exploitability increases. A compliance professional who understands these principles can engineer consent at scale — with minimal genuine value offered. The sophistication of exploitation has grown alongside the sophistication of defense, but the asymmetry of effort favors the attacker. One salesperson needs to understand just one principle. One buyer needs to understand all six.</p>
+      </div>
+      <div class="synthesis-card">
+        <h3 style="color:var(--green)">The Legitimate Operator</h3>
+        <p>Not all users of these principles are predators. The insurance agent who genuinely likes their clients is more effective — and more honest. The charity that sends address labels creates real value exchange. The real estate agent who creates urgency around a genuinely scarce property is being honest. The principles themselves are neutral; their ethical content depends on whether the trigger feature accurately reflects reality.</p>
+      </div>
+      <div class="synthesis-card">
+        <h3 style="color:var(--pink)">The Recommended Response</h3>
+        <p>Cialdini's recommendation is asymmetric: accept genuine offers of social proof, liking, authority, and reciprocation at face value — they're usually accurate. But when you recognize that the trigger feature has been fabricated — the social proof is canned laughter, the authority is a costume, the scarcity is manufactured — the response should be aggressive. Boycott, complain, warn others. These are not just wrongs done to you; they are attacks on the efficiency of social shortcuts for everyone.</p>
+      </div>
+    </div>
+
+    <div class="quote-block fade-in">
+      <blockquote>"The exchange with Joe Pine — 'With a face like yours, you'd be better off with a wooden leg than you have with a wooden head' — captures it perfectly: the compliant person follows social proof even when it's fabricated. The critical person recognizes fabrication for what it is."</blockquote>
+      <cite>— Robert Cialdini, paraphrasing the Frank Zappa / Joe Pine exchange</cite>
+    </div>
+
+    <div class="fade-in" style="background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:2rem;margin:2rem 0">
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem">The Final Principle</h3>
+      <p style="color:var(--text-muted);line-height:1.8">The fair and honest compliance practitioner is an ally in a complex world. When the dentist says "you should get this filling," you don't have to research dentistry — you can use authority correctly. When the realtor says "three other buyers are looking at this house today" and it's true, scarcity is doing legitimate work. The enemy is not persuasion — it is deception in persuasion's clothing. When we can identify the difference, we harness the efficiency of shortcuts without paying the price of exploitation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ QUICK REFERENCE -->
+<section id="quick-ref">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="section-label" style="color:var(--text-dim)">Quick Reference</span>
+      <h2 class="section-title">The Six Principles at a Glance</h2>
+      <p class="section-lead">A visual summary of Cialdini's weapons of influence — triggers, mechanisms, warning signs, and defenses.</p>
+    </div>
+
+    <div class="ref-grid fade-in">
+      <!-- Reciprocation -->
+      <div class="ref-card" style="color:var(--blue);border-color:rgba(59,130,246,0.3)">
+        <div class="ref-card-header">
+          <div class="ref-card-num">1</div>
+          <div class="ref-card-title">Reciprocation</div>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Trigger</span>
+          <span class="ref-value">Receiving a gift, favor, or concession — even unsolicited</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Mechanism</span>
+          <span class="ref-value">Deep social obligation to repay; creates psychological discomfort until resolved</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Watch For</span>
+          <span class="ref-value">Unsolicited gifts, free samples, early concessions in negotiation, the rejection-then-retreat pattern</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Defense</span>
+          <span class="ref-value">Redefine tricks as tricks, not gifts; you owe nothing for an engineered obligation</span>
+        </div>
+      </div>
+
+      <!-- Commitment -->
+      <div class="ref-card" style="color:var(--purple);border-color:rgba(139,92,246,0.3)">
+        <div class="ref-card-header">
+          <div class="ref-card-num">2</div>
+          <div class="ref-card-title">Commitment &amp; Consistency</div>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Trigger</span>
+          <span class="ref-value">A prior statement, agreement, or action — especially written and public</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Mechanism</span>
+          <span class="ref-value">Drive to appear consistent; self-image adjusts to match commitments, generating supporting beliefs</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Watch For</span>
+          <span class="ref-value">Foot-in-the-door, lowball tactics, invitations to state your values publicly, escalating asks</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Defense</span>
+          <span class="ref-value">Ask: "Knowing all I know now, would I make this same choice again?" Your past self's commitment doesn't bind your present self when the facts have changed.</span>
+        </div>
+      </div>
+
+      <!-- Social Proof -->
+      <div class="ref-card" style="color:var(--green);border-color:rgba(16,185,129,0.3)">
+        <div class="ref-card-header">
+          <div class="ref-card-num">3</div>
+          <div class="ref-card-title">Social Proof</div>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Trigger</span>
+          <span class="ref-value">Uncertainty + evidence of what others are doing, especially similar others</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Mechanism</span>
+          <span class="ref-value">We use others' behavior as information about the correct behavior; most efficient in ambiguous situations</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Watch For</span>
+          <span class="ref-value">Canned laughter, seeded tip jars, fake reviews, "fastest-growing" claims, crowd behavior in emergencies</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Defense</span>
+          <span class="ref-value">Name specific individuals in emergencies; look for yourself before consulting others; identify manufactured social evidence</span>
+        </div>
+      </div>
+
+      <!-- Liking -->
+      <div class="ref-card" style="color:var(--pink);border-color:rgba(236,72,153,0.3)">
+        <div class="ref-card-header">
+          <div class="ref-card-num">4</div>
+          <div class="ref-card-title">Liking</div>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Trigger</span>
+          <span class="ref-value">Attractiveness, similarity, compliments, familiarity, positive associations, cooperative context</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Mechanism</span>
+          <span class="ref-value">We automatically comply more with those we like; liking is systematically engineered by practitioners</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Watch For</span>
+          <span class="ref-value">Sales contexts that engineer warmth, celebrity endorsements, sudden unexpected rapport, flattery before a request</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Defense</span>
+          <span class="ref-value">Separate person from proposal; ask "Do I like this deal?" independently of "Do I like this person?"</span>
+        </div>
+      </div>
+
+      <!-- Authority -->
+      <div class="ref-card" style="color:var(--amber);border-color:rgba(245,158,11,0.3)">
+        <div class="ref-card-header">
+          <div class="ref-card-num">5</div>
+          <div class="ref-card-title">Authority</div>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Trigger</span>
+          <span class="ref-value">Titles, uniforms, trappings of status and expertise (luxury cars, expensive clothes)</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Mechanism</span>
+          <span class="ref-value">Trained deference to legitimate authority; we respond to symbols of authority rather than substance</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Watch For</span>
+          <span class="ref-value">Authority symbols outside relevant domain, credentials without verification, advice that serves the advisor's interests</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Defense</span>
+          <span class="ref-value">Is this a real expert in this domain? Are they being honest? Value advisors who argue against their own interests.</span>
+        </div>
+      </div>
+
+      <!-- Scarcity -->
+      <div class="ref-card" style="color:var(--red);border-color:rgba(239,68,68,0.3)">
+        <div class="ref-card-header">
+          <div class="ref-card-num">6</div>
+          <div class="ref-card-title">Scarcity</div>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Trigger</span>
+          <span class="ref-value">Limited quantity, deadline, newly scarce, or desired by others — especially competitive demand</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Mechanism</span>
+          <span class="ref-value">Scarce = valuable (usually true); psychological reactance amplifies desire when freedom is threatened</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Watch For</span>
+          <span class="ref-value">Artificial deadlines, "only X left" claims, manufactured competition, boiler room operations, auction frenzy</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-label">Defense</span>
+          <span class="ref-value">Urgency = signal to STOP. Ask: "Do I want to possess or to use?" The scarce cookie does not taste better.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final quotes -->
+    <div class="fade-in" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:3rem">
+      <div class="quote-block" style="margin:0">
+        <blockquote>"Everything should be made as simple as possible, but not simpler."</blockquote>
+        <cite>— Albert Einstein</cite>
+      </div>
+      <div class="quote-block" style="margin:0">
+        <blockquote>"Civilization advances by extending the number of operations we can perform without thinking about them."</blockquote>
+        <cite>— Alfred North Whitehead</cite>
+      </div>
+      <div class="quote-block" style="margin:0">
+        <blockquote>"The way to love anything is to realize that it might be lost."</blockquote>
+        <cite>— G. K. Chesterton</cite>
+      </div>
+    </div>
+
+    <div class="fade-in" style="text-align:center;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border)">
+      <p style="color:var(--text-dim);font-size:0.8rem;letter-spacing:0.05em">Based on <em>Influence: The Psychology of Persuasion</em> by Robert B. Cialdini (1984) · Educational reference only</p>
+    </div>
+  </div>
+</section>
+
+<!-- Back to Top -->
+<a href="#hero" id="back-top" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</a>
+
+<script>
+  // ─── Progress Bar ───
+  const progressBar = document.getElementById('progress-bar');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+
+  // ─── Back to Top ───
+  const backTop = document.getElementById('back-top');
+  function updateBackTop() {
+    backTop.classList.toggle('visible', window.scrollY > 400);
+  }
+
+  window.addEventListener('scroll', () => {
+    updateProgress();
+    updateBackTop();
+  }, { passive: true });
+
+  // ─── Hamburger Menu ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ─── Fade-in Intersection Observer ───
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Add staggered delay for children in grids
+        const delay = entry.target.dataset.delay || 0;
+        entry.target.style.transitionDelay = delay + 'ms';
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  fadeEls.forEach((el, i) => {
+    observer.observe(el);
+  });
+
+  // ─── Tab Switching ───
+  function switchTab(group, index, btn) {
+    // Find the tab container
+    const container = btn.closest('.tab-container');
+    // Deactivate all buttons in this container
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Hide all panels (find by ID pattern: group-0, group-1, group-2)
+    for (let i = 0; i < 3; i++) {
+      const panel = document.getElementById(group + '-' + i);
+      if (panel) panel.classList.remove('active');
+    }
+    const target = document.getElementById(group + '-' + index);
+    if (target) {
+      target.classList.add('active');
+      // Trigger fade-in for any fade-in elements inside the new panel
+      target.querySelectorAll('.fade-in').forEach(el => {
+        el.classList.add('visible');
+      });
+    }
+  }
+
+  // ─── Stagger card animations ───
+  document.querySelectorAll('.cards-grid').forEach(grid => {
+    grid.querySelectorAll('.card').forEach((card, i) => {
+      card.style.transitionDelay = (i * 60) + 'ms';
+    });
+  });
+
+  // ─── Smooth active nav indication ───
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.style.fontWeight = a.getAttribute('href') === '#' + id ? '800' : '600';
+          a.style.opacity = a.getAttribute('href') === '#' + id ? '1' : '0.7';
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // ─── Hero pill hover ───
+  document.querySelectorAll('.hero-pill').forEach(pill => {
+    pill.addEventListener('mouseenter', () => {
+      pill.style.transform = 'translateY(-2px) scale(1.05)';
+      pill.style.transition = 'transform 0.2s ease';
+    });
+    pill.addEventListener('mouseleave', () => {
+      pill.style.transform = '';
+    });
+  });
+
+  // ─── Ref card hover glow ───
+  document.querySelectorAll('.ref-card').forEach(card => {
+    const colorStr = card.style.color; // e.g. var(--blue)
+    card.addEventListener('mouseenter', () => {
+      card.style.boxShadow = '0 16px 48px rgba(0,0,0,0.5)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.boxShadow = '';
+    });
+  });
+</script>
+</body>
+</html>

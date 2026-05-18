@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propaganda — Edward L. Bernays (1928)</title>
+<style>
+  :root {
+    --ink: #1a1209;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d49a;
+    --red: #8b1a1a;
+    --red-light: #c0392b;
+    --slate: #2c3e50;
+    --slate-mid: #3d5166;
+    --slate-light: #5d7a96;
+    --mist: #eef2f7;
+    --card-bg: #ffffff;
+    --shadow: rgba(0,0,0,0.12);
+    --shadow-deep: rgba(0,0,0,0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    background: rgba(26,18,9,0.96);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
+    border-bottom: 2px solid var(--gold);
+  }
+  nav .brand { color: var(--gold); font-size: 1rem; font-variant: small-caps; letter-spacing: 0.12em; }
+  nav ul { display: flex; gap: 1.6rem; list-style: none; }
+  nav ul a { color: var(--cream); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; transition: opacity 0.2s, color 0.2s; }
+  nav ul a:hover { opacity: 1; color: var(--gold-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0d0a05 0%, #1e1408 40%, #2c1f0a 70%, #1a1209 100%);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 100px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem; opacity: 0.85;
+  }
+  #hero h1 {
+    font-size: clamp(4rem, 12vw, 9rem);
+    color: var(--cream);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 0.9;
+    text-shadow: 0 4px 40px rgba(201,168,76,0.3);
+  }
+  #hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-byline {
+    margin-top: 2rem;
+    color: rgba(245,240,232,0.6);
+    font-size: 1.05rem;
+    letter-spacing: 0.15em;
+    font-variant: small-caps;
+  }
+  .hero-year {
+    display: inline-block;
+    margin-top: 0.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    padding: 0.3rem 1.2rem;
+    border-radius: 2px;
+  }
+  .hero-tagline {
+    margin-top: 3rem;
+    max-width: 600px;
+    color: rgba(245,240,232,0.55);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.8;
+  }
+  .scroll-cue {
+    margin-top: 4rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: var(--gold); opacity: 0.5; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .scroll-cue .arrow { font-size: 1.4rem; animation: bounce 1.8s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(6px)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem; display: block;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400; line-height: 1.2; margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .lead {
+    font-size: 1.15rem; line-height: 1.9; color: #3a3020; max-width: 780px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── CONTEXT BAND ── */
+  #context {
+    background: var(--slate);
+    color: var(--cream);
+  }
+  #context h2 { color: var(--cream); }
+  #context .lead { color: rgba(245,240,232,0.75); }
+  .context-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .context-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px;
+    padding: 1.5rem;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .context-card:hover { background: rgba(255,255,255,0.12); border-color: var(--gold); }
+  .context-card .icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .context-card h3 { color: var(--gold-light); font-size: 0.95rem; margin-bottom: 0.5rem; font-weight: 600; }
+  .context-card p { font-size: 0.88rem; color: rgba(245,240,232,0.65); line-height: 1.65; }
+
+  /* ── WHO IS BERNAYS ── */
+  #bernays { background: #fdf8f0; }
+  .bernays-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    margin-top: 2rem;
+  }
+  @media (max-width: 720px) { .bernays-layout { grid-template-columns: 1fr; gap: 2rem; } }
+  .bernays-timeline { position: relative; padding-left: 2rem; }
+  .bernays-timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--gold), var(--red));
+  }
+  .tl-item { margin-bottom: 1.8rem; position: relative; }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -2.4rem; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--cream);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .tl-year { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em; font-weight: 700; }
+  .tl-text { font-size: 0.9rem; color: #3a3020; line-height: 1.6; margin-top: 0.2rem; }
+  .bernays-stat-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .bstat {
+    background: var(--slate);
+    color: var(--cream);
+    border-radius: 6px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .bstat .num { font-size: 2rem; color: var(--gold); font-weight: 700; display: block; }
+  .bstat .desc { font-size: 0.75rem; opacity: 0.65; letter-spacing: 0.05em; }
+
+  /* ── CHAPTERS ── */
+  #chapters { background: var(--mist); }
+  .chapters-intro { max-width: 680px; }
+  .chapter-accordion { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+  .chapter-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 2px 12px var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .chapter-item:hover { box-shadow: 0 4px 24px var(--shadow-deep); }
+  .chapter-item.alt { border-left-color: var(--red); }
+  .chapter-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.5rem; cursor: pointer;
+    user-select: none;
+  }
+  .chapter-num {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); min-width: 55px; font-weight: 700;
+  }
+  .chapter-item.alt .chapter-num { color: var(--red); }
+  .chapter-title { font-size: 1rem; font-weight: 600; flex: 1; color: var(--ink); }
+  .chapter-toggle {
+    font-size: 1.2rem; color: var(--slate-light);
+    transition: transform 0.3s;
+  }
+  .chapter-item.open .chapter-toggle { transform: rotate(45deg); }
+  .chapter-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s ease;
+    padding: 0 1.5rem;
+  }
+  .chapter-item.open .chapter-body { max-height: 800px; }
+  .chapter-body-inner { padding-bottom: 1.5rem; }
+  .chapter-body p { font-size: 0.93rem; color: #3a3020; line-height: 1.8; margin-bottom: 0.8rem; }
+  .chapter-body blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 0.6rem 1rem;
+    margin: 1rem 0;
+    background: #fdf8f0;
+    font-style: italic;
+    color: #5a4a30;
+    font-size: 0.9rem;
+  }
+  .chapter-item.alt .chapter-body blockquote { border-left-color: var(--red); }
+  .concept-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .tag {
+    font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--mist); border: 1px solid #ccd;
+    border-radius: 20px; padding: 0.2rem 0.7rem; color: var(--slate-mid);
+  }
+
+  /* ── KEY IDEAS ── */
+  #ideas {
+    background: linear-gradient(135deg, #1a1209 0%, #2c1f0a 100%);
+    color: var(--cream);
+  }
+  #ideas h2 { color: var(--cream); }
+  #ideas .lead { color: rgba(245,240,232,0.65); }
+  .ideas-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .idea-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px;
+    padding: 1.8rem;
+    position: relative;
+    transition: transform 0.25s, border-color 0.25s, background 0.25s;
+  }
+  .idea-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.09);
+  }
+  .idea-number {
+    position: absolute; top: -18px; left: 1.5rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em;
+    padding: 0.25rem 0.75rem; border-radius: 20px;
+  }
+  .idea-card h3 { color: var(--gold-light); font-size: 1.05rem; margin-bottom: 0.8rem; }
+  .idea-card p { font-size: 0.88rem; color: rgba(245,240,232,0.7); line-height: 1.75; }
+
+  /* ── QUOTES ── */
+  #quotes { background: #fdf8f0; }
+  .quotes-mosaic {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .quote-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 16px var(--shadow);
+    border-top: 3px solid var(--gold);
+    position: relative;
+  }
+  .quote-card.red-top { border-top-color: var(--red); }
+  .quote-card.slate-top { border-top-color: var(--slate); }
+  .quote-card::before {
+    content: '\201C';
+    position: absolute; top: -10px; left: 1.5rem;
+    font-size: 4rem; color: var(--gold); line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .quote-card.red-top::before { color: var(--red); }
+  .quote-card.slate-top::before { color: var(--slate); }
+  .quote-text { font-size: 0.95rem; font-style: italic; color: #3a3020; line-height: 1.85; margin-top: 1.2rem; }
+  .quote-source { margin-top: 1rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate-light); }
+
+  /* ── MECHANICS DIAGRAM ── */
+  #mechanics { background: var(--slate); color: var(--cream); }
+  #mechanics h2 { color: var(--cream); }
+  #mechanics .lead { color: rgba(245,240,232,0.7); }
+  .flow-diagram {
+    margin-top: 3rem;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0; justify-content: center;
+  }
+  .flow-node {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    text-align: center;
+    min-width: 140px;
+    max-width: 160px;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .flow-node:hover { background: rgba(255,255,255,0.15); border-color: var(--gold); }
+  .flow-node .fn-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .flow-node h4 { color: var(--gold-light); font-size: 0.82rem; margin-bottom: 0.3rem; }
+  .flow-node p { font-size: 0.72rem; color: rgba(245,240,232,0.55); line-height: 1.5; }
+  .flow-arrow {
+    font-size: 1.5rem; color: var(--gold); opacity: 0.6; padding: 0 0.3rem;
+    align-self: center;
+  }
+  .media-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1rem; margin-top: 2.5rem;
+  }
+  .media-item {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .media-item:hover { background: rgba(255,255,255,0.12); }
+  .media-item .mi-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .media-item h4 { font-size: 0.8rem; color: var(--gold-light); margin-bottom: 0.3rem; }
+  .media-item p { font-size: 0.72rem; color: rgba(245,240,232,0.5); line-height: 1.5; }
+
+  /* ── PSYCHOLOGY ── */
+  #psychology { background: var(--cream); }
+  .psych-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 680px) { .psych-grid { grid-template-columns: 1fr; } }
+  .psych-block {
+    border-radius: 10px;
+    padding: 2rem;
+    background: var(--card-bg);
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .psych-block h3 { font-size: 1.05rem; color: var(--ink); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--gold); }
+  .psych-block ul { list-style: none; padding: 0; }
+  .psych-block li {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    padding: 0.6rem 0; border-bottom: 1px solid #eee; font-size: 0.88rem; color: #3a3020;
+  }
+  .psych-block li:last-child { border-bottom: none; }
+  .psych-block li .li-dot { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── CRITICAL LENS ── */
+  #critical {
+    background: linear-gradient(135deg, #4a0e0e 0%, #6b1a1a 50%, #8b1a1a 100%);
+    color: var(--cream);
+  }
+  #critical h2 { color: var(--cream); }
+  #critical .lead { color: rgba(245,240,232,0.7); }
+  .critical-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;
+  }
+  @media (max-width: 680px) { .critical-grid { grid-template-columns: 1fr; } }
+  .crit-card {
+    border-radius: 10px;
+    padding: 1.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .crit-card.pro { background: rgba(255,255,255,0.07); }
+  .crit-card.con { background: rgba(0,0,0,0.2); }
+  .crit-card h3 { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .crit-card.pro h3 { color: var(--gold-light); }
+  .crit-card.con h3 { color: #f4a4a4; }
+  .crit-card ul { list-style: none; }
+  .crit-card li { font-size: 0.88rem; padding: 0.45rem 0; color: rgba(245,240,232,0.75); display: flex; gap: 0.6rem; }
+  .crit-card.pro li::before { content: '✓'; color: var(--gold-light); flex-shrink: 0; }
+  .crit-card.con li::before { content: '✗'; color: #f4a4a4; flex-shrink: 0; }
+  .legacy-note {
+    margin-top: 2.5rem;
+    background: rgba(255,255,255,0.07);
+    border-left: 4px solid var(--gold-light);
+    border-radius: 0 8px 8px 0;
+    padding: 1.5rem 1.8rem;
+    font-size: 0.93rem;
+    color: rgba(245,240,232,0.8);
+    line-height: 1.8;
+  }
+
+  /* ── APPLICATIONS ── */
+  #applications { background: var(--mist); }
+  .app-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .app-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.8rem;
+    box-shadow: 0 2px 14px var(--shadow);
+    border-bottom: 3px solid var(--gold);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .app-card:hover { transform: translateY(-4px); box-shadow: 0 6px 28px var(--shadow-deep); }
+  .app-card .app-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .app-card h3 { font-size: 1rem; color: var(--ink); margin-bottom: 0.6rem; }
+  .app-card p { font-size: 0.86rem; color: #5a5040; line-height: 1.7; }
+  .app-card .app-era { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 0.8rem; }
+
+  /* ── GLOSSARY ── */
+  #glossary { background: #fdf8f0; }
+  .gloss-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem; margin-top: 2rem;
+  }
+  .gloss-item {
+    padding: 1.2rem 1.4rem;
+    border-radius: 8px;
+    background: var(--card-bg);
+    border-left: 3px solid var(--slate);
+    box-shadow: 0 1px 8px var(--shadow);
+  }
+  .gloss-item dt { font-size: 0.9rem; font-weight: 700; color: var(--slate); margin-bottom: 0.3rem; }
+  .gloss-item dd { font-size: 0.84rem; color: #5a5040; line-height: 1.65; }
+
+  /* ── FURTHER READING ── */
+  #reading { background: var(--slate); color: var(--cream); }
+  #reading h2 { color: var(--cream); }
+  #reading .lead { color: rgba(245,240,232,0.65); }
+  .reading-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem; margin-top: 2rem;
+  }
+  .read-card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 1.4rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .read-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.11); }
+  .read-card .rc-tag { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .read-card h4 { color: var(--cream); font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .read-card .rc-author { font-size: 0.78rem; color: var(--gold-light); margin-bottom: 0.6rem; }
+  .read-card p { font-size: 0.82rem; color: rgba(245,240,232,0.6); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.45);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer strong { color: var(--gold); }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed; top: 56px; left: 0; height: 3px;
+    background: linear-gradient(to right, var(--gold), var(--red));
+    width: 0%; z-index: 998; transition: width 0.1s;
+  }
+
+  /* ── TOOLTIP ── */
+  [data-tip] { position: relative; cursor: help; border-bottom: 1px dashed var(--gold); }
+  [data-tip]::after {
+    content: attr(data-tip);
+    position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--cream); font-size: 0.75rem; line-height: 1.5;
+    padding: 0.4rem 0.8rem; border-radius: 4px; white-space: nowrap;
+    max-width: 220px; white-space: normal; text-align: center;
+    pointer-events: none; opacity: 0; transition: opacity 0.2s;
+    z-index: 10; font-style: normal; font-weight: 400;
+  }
+  [data-tip]:hover::after { opacity: 1; }
+
+  /* ── STICKY TOC ── */
+  .toc-sidebar {
+    position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 0.5rem; z-index: 100;
+  }
+  .toc-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(201,168,76,0.3); border: 1px solid var(--gold);
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .toc-dot:hover, .toc-dot.active { background: var(--gold); transform: scale(1.4); }
+  .toc-dot[title]:hover::before {
+    content: attr(title);
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    background: var(--ink); color: var(--cream); font-size: 0.7rem;
+    padding: 0.2rem 0.6rem; border-radius: 3px; white-space: nowrap;
+  }
+  @media (max-width: 900px) { .toc-sidebar { display: none; } }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- Navigation -->
+<nav>
+  <span class="brand">Propaganda · Bernays · 1928</span>
+  <ul>
+    <li><a href="#context">Context</a></li>
+    <li><a href="#chapters">Chapters</a></li>
+    <li><a href="#ideas">Key Ideas</a></li>
+    <li><a href="#psychology">Psychology</a></li>
+    <li><a href="#critical">Critique</a></li>
+    <li><a href="#applications">Legacy</a></li>
+  </ul>
+</nav>
+
+<!-- Sticky TOC dots -->
+<div class="toc-sidebar">
+  <div class="toc-dot" title="Hero" onclick="scrollTo('hero')"></div>
+  <div class="toc-dot" title="Context" onclick="scrollTo('context')"></div>
+  <div class="toc-dot" title="Bernays" onclick="scrollTo('bernays')"></div>
+  <div class="toc-dot" title="Chapters" onclick="scrollTo('chapters')"></div>
+  <div class="toc-dot" title="Key Ideas" onclick="scrollTo('ideas')"></div>
+  <div class="toc-dot" title="Quotes" onclick="scrollTo('quotes')"></div>
+  <div class="toc-dot" title="Mechanics" onclick="scrollTo('mechanics')"></div>
+  <div class="toc-dot" title="Psychology" onclick="scrollTo('psychology')"></div>
+  <div class="toc-dot" title="Critique" onclick="scrollTo('critical')"></div>
+  <div class="toc-dot" title="Applications" onclick="scrollTo('applications')"></div>
+  <div class="toc-dot" title="Glossary" onclick="scrollTo('glossary')"></div>
+  <div class="toc-dot" title="Reading" onclick="scrollTo('reading')"></div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">A deep exploration of a foundational text</p>
+  <h1><em>Propa</em>ganda</h1>
+  <p class="hero-byline">Edward L. Bernays</p>
+  <span class="hero-year">1928</span>
+  <p class="hero-tagline">
+    "The conscious and intelligent manipulation of the organized habits and opinions of the masses is an important element in democratic society."
+  </p>
+  <div class="scroll-cue">
+    <span>Explore below</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- CONTEXT -->
+<section id="context">
+  <div class="section-inner fade-in">
+    <span class="section-label">Historical Setting</span>
+    <h2>America in 1928</h2>
+    <p class="lead">
+      Bernays wrote at the apex of the Roaring Twenties — a decade of mass media explosion, rapid industrialization, post-WWI disillusionment, and a new science of the mind. Understanding this moment is essential to understanding the book.
+    </p>
+    <div class="context-grid">
+      <div class="context-card">
+        <div class="icon">📡</div>
+        <h3>Mass Media Revolution</h3>
+        <p>Radio reached millions of homes. National newspapers had record circulations. Over 22,000 periodicals were in print. Ideas could spread instantly across a continent.</p>
+      </div>
+      <div class="context-card">
+        <div class="icon">🏭</div>
+        <h3>Industrial Mass Production</h3>
+        <p>Factories could supply whole nations. But supply now needed to create its own demand — requiring systematic influence over consumer choice and desire.</p>
+      </div>
+      <div class="context-card">
+        <div class="icon">⚔️</div>
+        <h3>WWI Propaganda Legacy</h3>
+        <p>The Committee on Public Information had mobilized American opinion for war with astonishing efficiency. This showed what organized persuasion could accomplish.</p>
+      </div>
+      <div class="context-card">
+        <div class="icon">🧠</div>
+        <h3>Birth of Psychology</h3>
+        <p>Freud's ideas about unconscious drives were reshaping how thinkers understood motivation. Gustave Le Bon and Wilfred Trotter had mapped the group mind.</p>
+      </div>
+      <div class="context-card">
+        <div class="icon">🗳️</div>
+        <h3>Mass Democracy</h3>
+        <p>Universal suffrage had expanded the electorate dramatically. The question became: how do leaders govern when they must win the consent of millions?</p>
+      </div>
+      <div class="context-card">
+        <div class="icon">💼</div>
+        <h3>Corporate Scandal &amp; PR</h3>
+        <p>The muckraking era had exposed corporate abuses. Large firms discovered they needed public goodwill to survive — and began hiring specialists to cultivate it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS BERNAYS -->
+<section id="bernays">
+  <div class="section-inner fade-in">
+    <span class="section-label">The Author</span>
+    <h2>Edward L. Bernays: The Father of Public Relations</h2>
+    <div class="bernays-layout">
+      <div>
+        <p class="lead" style="font-size:1rem; margin-bottom:1.5rem;">
+          Bernays occupies a singular place in 20th-century history. A nephew of Sigmund Freud, he blended psychology, sociology, and commercial savvy into what he called "public relations" — a profession he largely invented and then spent a lifetime defining.
+        </p>
+        <div class="bernays-timeline">
+          <div class="tl-item">
+            <div class="tl-year">1891</div>
+            <div class="tl-text">Born in Vienna; family moves to New York. His aunt Martha Freud was Sigmund's wife.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1917–1919</div>
+            <div class="tl-text">Serves on Woodrow Wilson's Committee on Public Information — the U.S. government's wartime propaganda bureau. Witnesses the power of coordinated persuasion firsthand.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1919</div>
+            <div class="tl-text">Opens one of the first public relations consultancies in New York with his future wife, Doris Fleischman.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1923</div>
+            <div class="tl-text">Publishes <em>Crystallizing Public Opinion</em>, the first book to theorize the public relations profession.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1928</div>
+            <div class="tl-text">Publishes <em>Propaganda</em> — his most bold and candid statement on the engineering of consent.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1929</div>
+            <div class="tl-text">"Torches of Freedom" campaign links women's smoking to suffrage — one of history's most cited PR stunts.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1947</div>
+            <div class="tl-text">Coins the phrase <span data-tip="Later used by Noam Chomsky as the title of his landmark media criticism book">"engineering of consent"</span> in an essay of the same name.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1995</div>
+            <div class="tl-text">Dies in Cambridge, Massachusetts, at age 103. <em>Life</em> magazine had named him one of the 100 most influential Americans of the 20th century.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="bernays-stat-grid">
+          <div class="bstat"><span class="num">103</span><span class="desc">Years he lived</span></div>
+          <div class="bstat"><span class="num">1928</span><span class="desc">Year of <em>Propaganda</em></span></div>
+          <div class="bstat"><span class="num">2</span><span class="desc">Prior major books</span></div>
+          <div class="bstat"><span class="num">∞</span><span class="desc">Clients, from Procter &amp; Gamble to the U.S. govt.</span></div>
+        </div>
+        <div style="margin-top:2rem; background: var(--slate); border-radius: 10px; padding: 1.8rem;">
+          <h3 style="color:var(--gold-light); font-size:0.95rem; margin-bottom:1rem;">Notable Clients &amp; Campaigns</h3>
+          <ul style="list-style:none; font-size:0.86rem; color:rgba(245,240,232,0.75); line-height:2;">
+            <li>🚬 American Tobacco — "Torches of Freedom" (1929)</li>
+            <li>🥓 Beech-Nut Packing — "Hearty breakfasts" via doctors</li>
+            <li>🧼 Procter &amp; Gamble — Ivory Soap sculpture contests</li>
+            <li>🍌 United Fruit Company — Guatemala, 1950s</li>
+            <li>🎭 Metropolitan Opera &amp; Broadway productions</li>
+            <li>🏛️ U.S. government — Wartime information campaigns</li>
+            <li>💡 General Electric, Westinghouse</li>
+          </ul>
+        </div>
+        <div style="margin-top:1.2rem; background:#fdf8f0; border-radius:8px; padding:1.4rem; border-left:3px solid var(--gold);">
+          <p style="font-size:0.85rem; color:#5a4a30; font-style:italic; line-height:1.7;">
+            "The three main elements of public relations are practically as old as society: informing people, persuading people, or integrating people with people." — Bernays
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section id="chapters">
+  <div class="section-inner fade-in">
+    <span class="section-label">Chapter by Chapter</span>
+    <h2>What the Book Actually Says</h2>
+    <p class="lead chapters-intro">
+      Each of the book's eleven chapters tackles a different arena where systematic public persuasion operates. Click any chapter to expand a summary of its core argument, key examples, and central concepts.
+    </p>
+    <div class="chapter-accordion">
+
+      <div class="chapter-item" id="ch1">
+        <div class="chapter-header" onclick="toggleChapter('ch1')">
+          <span class="chapter-num">Chapter I</span>
+          <span class="chapter-title">Organizing Chaos</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Bernays opens with his most provocative claim: democratic society cannot function without an "invisible government" — a small group of people who shape public opinion, narrow choices, and simplify decisions for the masses. He sees this not as sinister, but as a practical necessity.</p>
+            <p>In a complex industrial society, no citizen can personally research every product, policy, or candidate. We inevitably rely on trusted intermediaries — journalists, party leaders, brand names, professional associations — to filter and present reality. This is not a failure of democracy, Bernays argues; it <em>is</em> how democracy actually works.</p>
+            <blockquote>"We are governed, our minds are molded, our tastes formed, our ideas suggested, largely by men we have never heard of."</blockquote>
+            <p>He catalogs the staggering diversity of American organizations — trade associations, civic clubs, ethnic newspapers, professional bodies — and notes that these form an interlocking web through which ideas travel. A Rotarian who receives an opinion at a club meeting carries it into the church, the family, the workplace. Opinion spreads along social networks, not solely through mass media.</p>
+            <div class="concept-tags">
+              <span class="tag">Invisible Government</span>
+              <span class="tag">Social Networks</span>
+              <span class="tag">Complexity of Democracy</span>
+              <span class="tag">Opinion Leaders</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item alt" id="ch2">
+        <div class="chapter-header" onclick="toggleChapter('ch2')">
+          <span class="chapter-num">Chapter II</span>
+          <span class="chapter-title">The New Propaganda</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Bernays directly addresses the word "propaganda" and its toxic reputation after WWI. He insists on rehabilitating it as a neutral, even honorable, term. Propaganda simply means organized effort to spread a belief or doctrine — something every church, civic group, and government has always done.</p>
+            <p>He traces the word's origin to the Catholic Church's <em>Congregatio de Propaganda Fide</em> (1627), formed to spread the faith — hence "propaganda." The wartime connotation, he argues, reflects the child-like tendency to label the other side's persuasion as sinister while calling one's own persuasion "truth."</p>
+            <blockquote>"Modern propaganda is a consistent, enduring effort to create or shape events to influence the relations of the public to an enterprise, idea or group."</blockquote>
+            <p>He gives a telling example: half the front-page stories in a major newspaper on any given day are the result of deliberate propagandistic intent — press releases, staged events, official statements shaped to produce a particular public impression. This is not deception, he says; it is the modern structure of public communication.</p>
+            <div class="concept-tags">
+              <span class="tag">Definition of Propaganda</span>
+              <span class="tag">Legitimacy</span>
+              <span class="tag">News Creation</span>
+              <span class="tag">WWI Legacy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item" id="ch3">
+        <div class="chapter-header" onclick="toggleChapter('ch3')">
+          <span class="chapter-num">Chapter III</span>
+          <span class="chapter-title">The New Propagandists</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Who shapes public opinion? Bernays maps the ecosystem: presidents, senators, clergy, editors, fashion leaders, financiers, celebrities. But he notes that many of these visible figures are themselves guided by less-visible advisers — anonymous tailor contracts that dictate American menswear, PR strategists behind political candidates.</p>
+            <p>He introduces the <span data-tip="What we today call a 'PR professional' or 'communications strategist'">"counsel on public relations"</span> as a new professional role: part lawyer, part sociologist, part strategist. This professional serves clients by analyzing both the client's offering and the public's psychology — then designing actions, policies, and communications that bridge the two.</p>
+            <blockquote>"The public relations counsel, then, is the agent who, working with modern media of communication and the group formations of society, brings an idea to the consciousness of the public."</blockquote>
+            <p>Crucially, Bernays argues this role carries ethical obligations. The counsel should refuse clients whose causes are dishonest or antisocial. Their business depends on credibility — if they spread falsehoods, their professional value collapses. He sketches the beginning of an ethical code for the profession.</p>
+            <div class="concept-tags">
+              <span class="tag">Public Relations Counsel</span>
+              <span class="tag">Opinion Leaders</span>
+              <span class="tag">Professional Ethics</span>
+              <span class="tag">Invisible Advisers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item alt" id="ch4">
+        <div class="chapter-header" onclick="toggleChapter('ch4')">
+          <span class="chapter-num">Chapter IV</span>
+          <span class="chapter-title">The Psychology of Public Relations</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>This is the book's intellectual heart. Bernays draws on Le Bon, Trotter, Lippmann, and Freud to argue that the group mind behaves differently from the individual mind. Groups don't reason — they feel. They follow trusted leaders, respond to symbols and clichés, and are motivated by unconscious desires they rarely acknowledge.</p>
+            <p>He distinguishes <em>old</em> propaganda (direct repetition — "Buy more bacon!") from <em>new</em> propaganda (indirect influence through social structure — convince doctors to recommend hearty breakfasts, and patients follow). The new method works with psychology rather than against resistance.</p>
+            <blockquote>"If you can influence the leaders, either with or without their conscious cooperation, you automatically influence the group which they sway."</blockquote>
+            <p>His piano-selling example is revealing: don't advertise pianos. Instead, create a fashion for "music rooms" through celebrity architects and society leaders. When a piano becomes a natural part of a desirable domestic identity, buyers will arrive at the purchase as if it were their own idea — because psychologically, it feels that way.</p>
+            <div class="concept-tags">
+              <span class="tag">Group Mind</span>
+              <span class="tag">Freud &amp; Le Bon</span>
+              <span class="tag">Unconscious Motivation</span>
+              <span class="tag">Indirect Influence</span>
+              <span class="tag">Social Proof</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item" id="ch5">
+        <div class="chapter-header" onclick="toggleChapter('ch5')">
+          <span class="chapter-num">Chapter V</span>
+          <span class="chapter-title">Business and the Public</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Bernays argues that modern business has fundamentally changed its relationship with the public. Gone are the days when corporations could say "it's none of your business" how they operate. The muckraking era proved that public goodwill is a business asset — its absence, a liability.</p>
+            <p>Mass production requires mass demand. A factory capable of supplying a continent cannot wait for customers to appear naturally — it must actively cultivate them. This is why advertising and PR became essential industries in themselves.</p>
+            <blockquote>"Modern business must have its finger continuously on the public pulse. It must understand the changes in the public mind and be prepared to interpret itself fairly and eloquently to changing opinion."</blockquote>
+            <p>He discusses "inter-commodity competition" — the new battle not just between rival brands but between entire categories: pianos vs. radios, oranges vs. apples, silk vs. cotton. Winning in this environment requires shaping culture, not just delivering messages. He also addresses how corporate reputation affects stock prices, bond flotations, and long-term survival.</p>
+            <div class="concept-tags">
+              <span class="tag">Corporate Reputation</span>
+              <span class="tag">Mass Production</span>
+              <span class="tag">Inter-commodity Competition</span>
+              <span class="tag">Public Goodwill</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item alt" id="ch6">
+        <div class="chapter-header" onclick="toggleChapter('ch6')">
+          <span class="chapter-num">Chapter VI</span>
+          <span class="chapter-title">Propaganda and Political Leadership</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>The central tension in democratic politics: the leader must follow the people, but the people need to be led. Bernays argues that "the voice of the people" is not a divine oracle — it is itself the product of prior propaganda by whoever shaped those opinions first.</p>
+            <p>He is sharply critical of politicians who lag behind business in their use of modern communication. While businesses had adopted sophisticated audience research and media strategy, campaigns in 1928 still relied on speeches, rallies, and stunts largely unchanged since Andrew Jackson's era.</p>
+            <blockquote>"The political leader of to-day should be a leader as finely versed in the technique of propaganda as in political economy and civics."</blockquote>
+            <p>His concrete proposal: a U.S. "Secretary of Public Relations" in the Cabinet, whose role is to interpret the government to the people and the people to the government. He also cites Thomas Masaryk's choice to declare Czechoslovakian independence on a Monday rather than a Sunday — so the world's press would have more space to cover it. Timing is itself a form of propaganda.</p>
+            <div class="concept-tags">
+              <span class="tag">Democratic Theory</span>
+              <span class="tag">Political Communication</span>
+              <span class="tag">Agenda Setting</span>
+              <span class="tag">Media Strategy</span>
+              <span class="tag">Trial Balloons</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item" id="ch7">
+        <div class="chapter-header" onclick="toggleChapter('ch7')">
+          <span class="chapter-num">Chapter VII</span>
+          <span class="chapter-title">Women's Activities and Propaganda</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Written two years after women's suffrage was still new, this chapter examines women's organizations as practitioners of effective propaganda. The suffrage movement itself was, in Bernays's analysis, a masterclass in organized persuasion — regiimenting a recalcitrant majority through sustained moral pressure and public spectacle.</p>
+            <p>He surveys the accomplishments of coordinated women's groups: the Sheppard-Towner Maternity Act, eight-hour workday legislation, prohibition. These were not won by voting alone but by sustained, organized pressure campaigns that resemble modern lobbying and issue advocacy.</p>
+            <p>Bernays sees women's clubs and coalitions as particularly effective because they combine genuine grassroots membership with professional leadership — giving them both authenticity and strategy. He suggests women represent a largely untapped force in public life and could reshape social and political culture if they deploy propaganda more deliberately.</p>
+            <div class="concept-tags">
+              <span class="tag">Women's Suffrage</span>
+              <span class="tag">Issue Advocacy</span>
+              <span class="tag">Coalition Building</span>
+              <span class="tag">Grassroots Organizing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item alt" id="ch8">
+        <div class="chapter-header" onclick="toggleChapter('ch8')">
+          <span class="chapter-num">Chapter VIII</span>
+          <span class="chapter-title">Propaganda for Education</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Education suffers from a PR problem, Bernays argues. Educators are trained to teach individuals in classrooms but have no training in communicating with the wider public. Meanwhile, schools and universities depend on public support — either from state legislatures or private donors — yet they fail to cultivate that support systematically.</p>
+            <p>He describes the development of college news bureaus — early versions of today's university communications offices — and argues they should be standard. He also observes the structural tension at endowed universities: wealthy donors who fund institutions often want practical, commercial curricula, while scholars want to pursue abstract knowledge.</p>
+            <blockquote>"The normal school should provide for the training of the educator to make him realize that his is a twofold job: education as a teacher and education as a propagandist."</blockquote>
+            <p>He gives the example of a Harvard professor whose Maya calendar discovery only reached the public because a young communications officer recognized its news value and framed it accessibly. Left to academics alone, the breakthrough would have appeared only in obscure journals.</p>
+            <div class="concept-tags">
+              <span class="tag">University Communications</span>
+              <span class="tag">Public Scholarship</span>
+              <span class="tag">Science Communication</span>
+              <span class="tag">Institutional Reputation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item" id="ch9">
+        <div class="chapter-header" onclick="toggleChapter('ch9')">
+          <span class="chapter-num">Chapter IX</span>
+          <span class="chapter-title">Propaganda in Social Service</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Charities, health campaigns, civil rights organizations, and social reform movements all require propaganda to overcome inertia. Human behavior defaults to habit; changing it requires organized, sustained persuasion. Bernays sees no ethical distinction between commercial and social propaganda — both seek to reshape belief and behavior.</p>
+            <p>His main case study is the NAACP's 1920 campaign against lynching. Bernays advised holding a major anti-lynching convention in Atlanta — the South — rather than in a Northern city. A condemnation issued from within the affected region would carry more moral and rhetorical authority. The conference enlisted both Northern leaders and Southern ministers, placing unexpected voices on the same platform.</p>
+            <blockquote>"Social progress is simply the progressive education and enlightenment of the public mind in regard to its immediate and distant social problems."</blockquote>
+            <p>The chapter argues that effective social change is inseparable from effective communication strategy. Prison reform, public health, anti-discrimination efforts — all require winning public opinion before winning policy.</p>
+            <div class="concept-tags">
+              <span class="tag">Civil Rights</span>
+              <span class="tag">Social Change</span>
+              <span class="tag">Nonprofit Communications</span>
+              <span class="tag">Framing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item alt" id="ch10">
+        <div class="chapter-header" onclick="toggleChapter('ch10')">
+          <span class="chapter-num">Chapter X</span>
+          <span class="chapter-title">Art and Science</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>Bernays argues that aesthetic appreciation — fine art, design, architecture — does not arise spontaneously. It is cultivated through exposure, association, and the authority of recognized taste-makers. Museums, galleries, and exhibitions are themselves forms of propaganda, whether or not their curators acknowledge it.</p>
+            <p>He criticizes American museums of his era for behaving like "morgues or sanctuaries" — passively housing beauty rather than actively projecting it into community life. A truly engaged museum would partner with commercial manufacturers to bring good design into mass-produced household goods.</p>
+            <p>On science: industrial laboratories conducting pure research were discovering that their breakthroughs required public interpretation to have full impact. The telephone, radio, and electric light required propaganda to explain their significance and drive adoption. Science communication, in this framing, is an ethical obligation alongside technical achievement.</p>
+            <div class="concept-tags">
+              <span class="tag">Aesthetic Education</span>
+              <span class="tag">Museum Communication</span>
+              <span class="tag">Applied Design</span>
+              <span class="tag">Science Communication</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-item" id="ch11">
+        <div class="chapter-header" onclick="toggleChapter('ch11')">
+          <span class="chapter-num">Chapter XI</span>
+          <span class="chapter-title">The Mechanics of Propaganda</span>
+          <span class="chapter-toggle">+</span>
+        </div>
+        <div class="chapter-body">
+          <div class="chapter-body-inner">
+            <p>The concluding chapter catalogs the technical media through which propaganda operates: newspapers, magazines, radio, motion pictures, lectures, personalities, schools, and parades. Bernays notes that the relative value of each medium shifts constantly, and effective practitioners must adapt.</p>
+            <p>He observes that newspapers in 1928 had largely stopped resisting "propagandistic" stories — recognizing that nearly all news serves someone's interest, and that the real editorial criterion is news value, not neutrality. Magazine journalism, he notes, is inherently more propagandistic than newspapers because magazines are built around deliberate editorial identities.</p>
+            <blockquote>"Propaganda will never die out. Intelligent men must realize that propaganda is the modern instrument by which they can fight for productive ends and help to bring order out of chaos."</blockquote>
+            <p>Film he calls "the greatest unconscious carrier of propaganda in the world" — shaping national habits and ideals through mass entertainment rather than explicit argument. The chapter closes with a note of cautious optimism: as the public grows more aware of persuasion techniques, propagandists will be forced toward truth and genuine public benefit to remain effective.</p>
+            <div class="concept-tags">
+              <span class="tag">Media Channels</span>
+              <span class="tag">Newspapers</span>
+              <span class="tag">Radio</span>
+              <span class="tag">Motion Pictures</span>
+              <span class="tag">Personality Branding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KEY IDEAS -->
+<section id="ideas">
+  <div class="section-inner fade-in">
+    <span class="section-label">Synthesis</span>
+    <h2>The Book's Seven Central Ideas</h2>
+    <p class="lead">Cutting through 11 chapters, these are the organizing arguments that give the book its lasting — and troubling — power.</p>
+    <div class="ideas-grid">
+      <div class="idea-card">
+        <span class="idea-number">01</span>
+        <h3>Propaganda Is Inevitable in Complex Societies</h3>
+        <p>No one can evaluate every product, policy, or candidate from scratch. Society requires trusted intermediaries to simplify choices. Propaganda fills this role whether we acknowledge it or not. The only question is whether it is exercised wisely and ethically.</p>
+      </div>
+      <div class="idea-card">
+        <span class="idea-number">02</span>
+        <h3>The Group Mind Operates by Emotion and Symbol</h3>
+        <p>Drawing on Le Bon and Freud, Bernays insists people in groups don't reason — they react. They follow leaders, mirror in-group norms, and respond to clichés and symbols that trigger emotional association. Direct logical argument is far less powerful than indirect emotional framing.</p>
+      </div>
+      <div class="idea-card">
+        <span class="idea-number">03</span>
+        <h3>Influence Leaders, Not Masses Directly</h3>
+        <p>The most efficient method is not mass communication but targeted influence on the nodes of social networks — editors, clergy, doctors, celebrities, community leaders. They then carry the message to their audiences with the authority of a trusted voice.</p>
+      </div>
+      <div class="idea-card">
+        <span class="idea-number">04</span>
+        <h3>Create Circumstances, Don't Just Deliver Messages</h3>
+        <p>The sophisticated propagandist doesn't merely broadcast arguments. They engineer events — exhibitions, endorsements, social rituals — that make the desired conclusion appear to arise naturally. The consumer, voter, or reader believes the idea is their own discovery.</p>
+      </div>
+      <div class="idea-card">
+        <span class="idea-number">05</span>
+        <h3>Unconscious Motivations Drive Behavior</h3>
+        <p>People rarely act for the reasons they state. A car purchase is not really about transportation — it may be about status, identity, social belonging. Effective propaganda speaks to the real (hidden) desire, not the stated rationale.</p>
+      </div>
+      <div class="idea-card">
+        <span class="idea-number">06</span>
+        <h3>Public Relations Is a Legitimate Profession</h3>
+        <p>Bernays argues for a professional class of PR counsel analogous to lawyers and doctors — with similar ethical codes, client duties, and public responsibilities. Refusing dishonest clients, labeling sources clearly, and serving public as well as private interests are professional obligations, not optional virtues.</p>
+      </div>
+      <div class="idea-card">
+        <span class="idea-number">07</span>
+        <h3>Democracy Requires Managed Public Opinion</h3>
+        <p>For Bernays, "engineering consent" is not antidemocratic — it is how democracy <em>actually</em> functions at scale. The alternative — millions of individuals independently reasoning their way to informed decisions — is a fiction. The real choice is between conscious, accountable propaganda and unconscious, irresponsible propaganda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section id="quotes">
+  <div class="section-inner fade-in">
+    <span class="section-label">Primary Sources</span>
+    <h2>Bernays in His Own Words</h2>
+    <p class="lead">These passages, directly from <em>Propaganda</em>, capture the range of Bernays's thinking — from the eerily prescient to the disturbingly candid.</p>
+    <div class="quotes-mosaic">
+      <div class="quote-card">
+        <p class="quote-text">Those who manipulate this unseen mechanism of society constitute an invisible government which is the true ruling power of our country.</p>
+        <div class="quote-source">Chapter I · Organizing Chaos</div>
+      </div>
+      <div class="quote-card red-top">
+        <p class="quote-text">Universal literacy was supposed to educate the common man to control his environment. Once he could read and write he would have a mind fit to rule. So ran the democratic doctrine. But instead of a mind, universal literacy has given him rubber stamps.</p>
+        <div class="quote-source">Chapter II · The New Propaganda</div>
+      </div>
+      <div class="quote-card slate-top">
+        <p class="quote-text">A man buying a suit of clothes imagines that he is choosing, according to his taste and his personality, the kind of garment which he prefers. In reality, he may be obeying the orders of an anonymous gentleman tailor in London.</p>
+        <div class="quote-source">Chapter III · The New Propagandists</div>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">Men are rarely aware of the real reasons which motivate their actions. A man may believe that he buys a motor car because, after careful study of the technical features of all makes on the market, he has concluded that this is the best. He is almost certainly fooling himself.</p>
+        <div class="quote-source">Chapter IV · Psychology of Public Relations</div>
+      </div>
+      <div class="quote-card red-top">
+        <p class="quote-text">Under the old salesmanship the manufacturer said to the prospective purchaser, "Please buy a piano." The new salesmanship has reversed the process and caused the prospective purchaser to say to the manufacturer, "Please sell me a piano."</p>
+        <div class="quote-source">Chapter IV · Psychology of Public Relations</div>
+      </div>
+      <div class="quote-card slate-top">
+        <p class="quote-text">Ours must be a leadership democracy administered by the intelligent minority who know how to regiment and guide the masses.</p>
+        <div class="quote-source">Chapter VI · Political Leadership</div>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">The American motion picture is the greatest unconscious carrier of propaganda in the world to-day. It is a great distributor for ideas and opinions. The motion picture can standardize the ideas and habits of a nation.</p>
+        <div class="quote-source">Chapter XI · The Mechanics of Propaganda</div>
+      </div>
+      <div class="quote-card red-top">
+        <p class="quote-text">Propaganda will never die out. Intelligent men must realize that propaganda is the modern instrument by which they can fight for productive ends and help to bring order out of chaos.</p>
+        <div class="quote-source">Chapter XI · The Mechanics of Propaganda</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MECHANICS DIAGRAM -->
+<section id="mechanics">
+  <div class="section-inner fade-in">
+    <span class="section-label">How It Works</span>
+    <h2>The Bernays Model of Influence</h2>
+    <p class="lead">Bernays described a systematic process — not a single act of persuasion but an engineered cascade from client objective to public behavior. Here is that model, made visible.</p>
+
+    <div class="flow-diagram">
+      <div class="flow-node">
+        <div class="fn-icon">🎯</div>
+        <h4>Client Objective</h4>
+        <p>Define the desired public attitude or behavior</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-icon">🔬</div>
+        <h4>Public Analysis</h4>
+        <p>Study group formations, leaders, and unconscious desires</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-icon">🤝</div>
+        <h4>Leader Cultivation</h4>
+        <p>Align with key influencers whose interests overlap</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-icon">🎭</div>
+        <h4>Event Creation</h4>
+        <p>Stage circumstances that make the idea visible and real</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-icon">📣</div>
+        <h4>Media Amplification</h4>
+        <p>Let natural news channels carry the manufactured reality</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-icon">💡</div>
+        <h4>Public Adoption</h4>
+        <p>The target audience embraces the idea as their own</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h3 style="color: var(--gold-light); font-size: 1.1rem; margin-bottom: 1rem;">The Media Channels of 1928</h3>
+      <p style="color: rgba(245,240,232,0.65); font-size: 0.9rem; margin-bottom: 1.5rem;">Bernays catalogued every available medium — each with distinct psychology and reach. Compare them to today's equivalents.</p>
+      <div class="media-grid">
+        <div class="media-item">
+          <div class="mi-icon">📰</div>
+          <h4>Newspapers</h4>
+          <p>Primary medium; editors as gatekeepers; news value = power</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">📻</div>
+          <h4>Radio</h4>
+          <p>New and explosive — 50M listeners simultaneously; emotional intimacy</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">🎞️</div>
+          <h4>Motion Pictures</h4>
+          <p>"Greatest unconscious carrier of propaganda" — mass normalization</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">📖</div>
+          <h4>Magazines</h4>
+          <p>Editorial identity = built-in propaganda; authority in niche communities</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">🎤</div>
+          <h4>Lectures</h4>
+          <p>Symbol-value exceeds direct audience; creates media event</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">🌟</div>
+          <h4>Celebrity Endorsement</h4>
+          <p>Personality transfer — the admired person lends credibility</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">📜</div>
+          <h4>Pamphlets &amp; Mail</h4>
+          <p>Targeted messaging to specific community leaders</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">🏛️</div>
+          <h4>Exhibitions &amp; Events</h4>
+          <p>Engineered circumstances that generate their own news coverage</p>
+        </div>
+        <div class="media-item">
+          <div class="mi-icon">🏫</div>
+          <h4>Schools</h4>
+          <p>Long-term cultural formation; commercial firms saw this early</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PSYCHOLOGY -->
+<section id="psychology">
+  <div class="section-inner fade-in">
+    <span class="section-label">Intellectual Foundations</span>
+    <h2>The Psychology Behind the Book</h2>
+    <p class="lead">Bernays synthesized cutting-edge social science of his era. Understanding his intellectual sources helps distinguish what holds up from what has been revised or refuted.</p>
+    <div class="psych-grid">
+      <div class="psych-block">
+        <h3>Thinkers Bernays Drew On</h3>
+        <ul>
+          <li><span class="li-dot">▸</span><strong>Gustave Le Bon</strong> — <em>The Crowd</em> (1895): groups have a "group mind" distinct from individual reason; crowds are suggestible, emotional, and led by strong personalities.</li>
+          <li><span class="li-dot">▸</span><strong>Wilfred Trotter</strong> — <em>Instincts of the Herd</em> (1916): humans are fundamentally gregarious; herd instinct shapes behavior even in isolation.</li>
+          <li><span class="li-dot">▸</span><strong>Sigmund Freud</strong> — unconscious drives and repression; desires masked by socially acceptable rationalizations; symbols trigger deep emotional responses.</li>
+          <li><span class="li-dot">▸</span><strong>Walter Lippmann</strong> — <em>Public Opinion</em> (1922): people respond to "pictures in their heads" (stereotypes), not reality itself; the press shapes these pictures.</li>
+          <li><span class="li-dot">▸</span><strong>Graham Wallas</strong> — <em>Human Nature in Politics</em> (1908): political behavior is driven by non-rational impulses, not deliberate calculation.</li>
+        </ul>
+      </div>
+      <div class="psych-block">
+        <h3>Key Psychological Mechanisms Described</h3>
+        <ul>
+          <li><span class="li-dot">▸</span><strong>Social Proof:</strong> People follow what trusted others do, especially in uncertain situations. Leaders provide the model; followers multiply it.</li>
+          <li><span class="li-dot">▸</span><strong>Cliché Thinking:</strong> The group mind shortcuts to pre-packaged images ("the interests," "Bolshevik") that trigger automatic emotional reactions.</li>
+          <li><span class="li-dot">▸</span><strong>Associative Transfer:</strong> Prestige and credibility move from a trusted source to an associated idea or product — the celebrity endorsement effect.</li>
+          <li><span class="li-dot">▸</span><strong>Identity Congruence:</strong> People buy, vote, and believe in ways consistent with their self-image and group membership — not purely on merit.</li>
+          <li><span class="li-dot">▸</span><strong>Manufactured Consent:</strong> When people believe an idea is culturally normal ("this is what sophisticated people do"), resistance drops and adoption accelerates.</li>
+          <li><span class="li-dot">▸</span><strong>Unconscious Substitution:</strong> Real desire (social status) is displaced onto an acceptable object (a car, a fashion item) without awareness.</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:2rem; background:#fdf8f0; border-radius:10px; padding:1.8rem; border: 1px solid #e0d8c0;">
+      <h3 style="color:var(--slate); font-size:0.95rem; margin-bottom:0.8rem;">What Modern Psychology Has Revised</h3>
+      <p style="font-size:0.88rem; color:#5a5040; line-height:1.8;">
+        Le Bon's "group mind" theory is now considered an oversimplification — crowds are more varied in their behavior than he suggested. Freud's hydraulic model of unconscious drives is largely rejected in academic psychology, though concepts like cognitive bias and motivated reasoning carry forward many of his insights in updated form. Bernays's faith in elite "intelligent minorities" as natural guides of mass society reflects the paternalism of his era more than any empirical finding. Lippmann's stereotype theory, however, has been substantially validated by decades of cognitive psychology research — we genuinely do navigate the world via simplified mental models, not raw reality.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CRITICAL LENS -->
+<section id="critical">
+  <div class="section-inner fade-in">
+    <span class="section-label">Critical Analysis</span>
+    <h2>Reading Bernays Critically</h2>
+    <p class="lead">Propaganda is simultaneously one of the most candid books ever written about power and one of the most troubling. Its arguments have been praised as realism and condemned as a manual for manipulation. Both readings have merit.</p>
+    <div class="critical-grid">
+      <div class="crit-card pro">
+        <h3>The Case For Bernays</h3>
+        <ul>
+          <li>He names a real phenomenon that existed before him and will persist after — propaganda did not begin with Bernays and won't end with any critique of him.</li>
+          <li>His call for professional ethics, source transparency, and rejection of dishonest clients represents genuine responsibility, not cynical cover.</li>
+          <li>His analysis of mass psychology, though dated in specifics, anticipated decades of research in cognitive bias and social influence.</li>
+          <li>His advocacy for public institutions (museums, universities, government agencies) to communicate better is genuinely useful democratic advice.</li>
+          <li>His defense of the NAACP's anti-lynching strategy as sound communication practice, in 1928, shows remarkable openness on civil rights.</li>
+          <li>He anticipated the media landscape of the 21st century — social networks, influencer culture, manufactured virality — with uncanny accuracy.</li>
+        </ul>
+      </div>
+      <div class="crit-card con">
+        <h3>The Case Against Bernays</h3>
+        <ul>
+          <li>His elitism is explicit and unexamined: "the intelligent minority" should guide "the masses" — a patronizing premise that undermines democratic theory.</li>
+          <li>He blurs the line between legitimate communication and manipulation while claiming to draw a clear ethical boundary.</li>
+          <li>His United Fruit Company work (1950s) — helping orchestrate the CIA coup in Guatemala through manufactured public opinion — shows his ethics had real limits.</li>
+          <li>The "Torches of Freedom" cigarette campaign deliberately exploited feminist symbolism to addict women to tobacco, causing enormous public health harm.</li>
+          <li>His framework assumes elites naturally serve the public interest — ignoring how systematic propaganda can entrench unjust power.</li>
+          <li>By celebrating propaganda as "inevitable," he forecloses discussion of structural reforms that would reduce the need for managed opinion.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legacy-note">
+      <strong>The Goebbels Problem:</strong> Joseph Goebbels, Hitler's propaganda minister, reportedly kept Bernays's books in his office and cited them as an influence. Bernays himself was horrified when he learned this — a Jewish man's theories of persuasion being weaponized for genocide. He later argued that democratic propaganda could and should be used to counter authoritarian propaganda. The episode raises a question the book never fully answers: if propaganda techniques are value-neutral, what guarantees they will be used for good ends? Bernays's answer — the ethics of the profession — now reads as dangerously insufficient.
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS & LEGACY -->
+<section id="applications">
+  <div class="section-inner fade-in">
+    <span class="section-label">Lasting Influence</span>
+    <h2>From 1928 to the Present</h2>
+    <p class="lead">The techniques Bernays described have shaped every subsequent era of communications, politics, and commerce. Here is the direct line from the book to the present.</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-icon">📺</div>
+        <h3>Television Advertising</h3>
+        <p>Bernays's principle of associating products with aspirational identities and celebrity endorsers became the template for the entire advertising industry. Mad Men was a dramatization of his ideas applied to broadcast media.</p>
+        <div class="app-era">1950s – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🗳️</div>
+        <h3>Political Consulting</h3>
+        <p>Campaign professionals who segment electorates, conduct focus groups, craft emotional narratives, and manage candidate image are all practitioners of Bernays's "new salesmanship" applied to elections.</p>
+        <div class="app-era">1960s – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">💼</div>
+        <h3>Corporate PR Industry</h3>
+        <p>The multi-billion dollar global public relations industry — press releases, media relations, crisis communications, reputation management — is the direct institutional descendant of what Bernays called "the counsel on public relations."</p>
+        <div class="app-era">1919 – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🌐</div>
+        <h3>Social Media Influence</h3>
+        <p>Influencer marketing, sponsored content, astroturfing, viral campaign engineering — Bernays anticipated all of these. The "key person" he targeted on behalf of velvet manufacturers is today called a "macro-influencer."</p>
+        <div class="app-era">2004 – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🧬</div>
+        <h3>Behavioral Economics</h3>
+        <p>Thaler and Sunstein's "nudge" theory — designing choice architecture to push people toward desired decisions — is Bernays's manufactured circumstances in the language of behavioral science.</p>
+        <div class="app-era">2000s – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🔥</div>
+        <h3>Culture Wars &amp; Disinformation</h3>
+        <p>Bernays noted that clichés could "stampede millions." The deliberate engineering of outrage, identity polarization, and tribal cue-taking in contemporary politics is his model deployed without his (stated) ethical constraints.</p>
+        <div class="app-era">2010s – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🎓</div>
+        <h3>Media Literacy Education</h3>
+        <p>The widespread inclusion of propaganda analysis in school curricula — teaching students to identify techniques of persuasion — is a direct response to the world Bernays described and helped build.</p>
+        <div class="app-era">1970s – present</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🏥</div>
+        <h3>Public Health Campaigns</h3>
+        <p>Anti-smoking campaigns, vaccine outreach, obesity prevention — all use the tools Bernays outlined: physician authority, social norms, leader endorsement, and event creation. This is propaganda in explicit service of public good.</p>
+        <div class="app-era">1960s – present</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary">
+  <div class="section-inner fade-in">
+    <span class="section-label">Key Terms</span>
+    <h2>Glossary of Bernays's Concepts</h2>
+    <div class="gloss-grid">
+      <dl class="gloss-item">
+        <dt>Invisible Government</dt>
+        <dd>Bernays's term for the network of opinion leaders, experts, and advisers who shape public perception without being elected or publicly acknowledged.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Group Mind</dt>
+        <dd>Borrowed from Le Bon — the collective psychology of people in groups, characterized by emotional responsiveness, suggestibility, and reliance on trusted leaders rather than independent reasoning.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Counsel on Public Relations</dt>
+        <dd>Bernays's preferred title for the PR professional — emphasizing advisory, strategic, and ethical dimensions beyond simple press agentry.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Creating Circumstances</dt>
+        <dd>The practice of engineering events, exhibitions, or situations so that a desired conclusion appears to arise naturally, rather than being argued directly.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Continuous Interpretation</dt>
+        <dd>The sustained, consistent management of every point of public contact to build a coherent impression over time — as opposed to one-off campaigns.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>High-Spotting</dt>
+        <dd>Dramatizing a single vivid element that efficiently represents and signals the whole — a skyscraper built ten feet taller than any competitor, for example.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Cliché / Stereotype</dt>
+        <dd>Pre-packaged images or words that trigger automatic emotional responses in audiences — shortcuts the group mind uses in place of deliberate thought. (Bernays uses both; Lippmann preferred "stereotype.")</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Trial Balloon</dt>
+        <dd>A technique politicians use to release anonymous or semi-official statements and then gauge public reaction before committing to a policy — the feedback loop of managed opinion.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Engineering of Consent</dt>
+        <dd>Bernays's later formulation (1947) for the systematic management of public opinion to secure agreement with desired policies or behaviors — the phrase Chomsky later borrowed for his landmark media critique.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Rubber Stamp Mind</dt>
+        <dd>Bernays's metaphor for how mass literacy produced not independent thinkers but people who mechanically reproduce the slogans, clichés, and opinions pre-formed for them by media and opinion leaders.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Inter-commodity Competition</dt>
+        <dd>Competition not between rival brands in the same category but between entire categories — pianos vs. radios, oranges vs. apples — requiring category-level propaganda to grow the overall market.</dd>
+      </dl>
+      <dl class="gloss-item">
+        <dt>Propaganda (rehabilitated)</dt>
+        <dd>For Bernays, any organized effort to spread a belief or doctrine — neutral in itself, ethical or unethical depending on the truth and social benefit of what is being spread.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- FURTHER READING -->
+<section id="reading">
+  <div class="section-inner fade-in">
+    <span class="section-label">Go Deeper</span>
+    <h2>Further Reading</h2>
+    <p class="lead">Bernays is best understood in dialogue with the critics, successors, and scholars who engaged with his ideas — sometimes building on them, sometimes dismantling them.</p>
+    <div class="reading-grid">
+      <div class="read-card">
+        <div class="rc-tag">Companion Text · 1922</div>
+        <h4>Public Opinion</h4>
+        <div class="rc-author">Walter Lippmann</div>
+        <p>The philosophical twin to Bernays's practical manual. Lippmann explores how "pictures in our heads" (stereotypes) mediate our relationship to reality, and what that means for democratic government.</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Critique · 1988</div>
+        <h4>Manufacturing Consent</h4>
+        <div class="rc-author">Noam Chomsky &amp; Edward Herman</div>
+        <p>The landmark structural critique of mass media. Chomsky's title deliberately inverts Bernays's "engineering of consent." Argues that media propaganda serves elite interests through institutional filters, not conscious conspiracy.</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Biography · 1996</div>
+        <h4>The Father of Spin</h4>
+        <div class="rc-author">Larry Tye</div>
+        <p>The definitive biography of Bernays — including his Guatemala work for United Fruit and the gap between his stated ethics and his actual client list. Essential for a complete picture.</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Media Critique · 2002</div>
+        <h4>The Century of the Self</h4>
+        <div class="rc-author">Adam Curtis (documentary)</div>
+        <p>BBC documentary using Bernays as its central figure, tracing how his ideas shaped 20th-century consumer capitalism and political management. Highly accessible and visually stunning.</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Political Theory · 1995</div>
+        <h4>The Phantom Public</h4>
+        <div class="rc-author">Walter Lippmann</div>
+        <p>Lippmann's more pessimistic follow-up, arguing that the "omnicompetent citizen" of democratic theory is an illusion. Citizens can only react to officials, not meaningfully direct them.</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Behavioral Science · 2008</div>
+        <h4>Nudge</h4>
+        <div class="rc-author">Richard Thaler &amp; Cass Sunstein</div>
+        <p>The behavioral economics case for "choice architecture" — designing environments to steer people toward better decisions. The academic and ethical heir to Bernays's "creating circumstances."</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Psychology · 1895</div>
+        <h4>The Crowd</h4>
+        <div class="rc-author">Gustave Le Bon</div>
+        <p>The foundational text on group psychology that Bernays drew on most heavily. Influential on Hitler and Mussolini as well as Bernays — a reminder that ideas about crowd psychology are not ideologically neutral.</p>
+      </div>
+      <div class="read-card">
+        <div class="rc-tag">Media Literacy · 2019</div>
+        <h4>This Is Not Propaganda</h4>
+        <div class="rc-author">Peter Pomerantsev</div>
+        <p>A contemporary investigation of how information warfare and deliberate disinformation campaigns operate in the age of social media — updating Bernays's analysis for the 21st century.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Propaganda</strong> by Edward L. Bernays (1928)</p>
+  <p style="margin-top:0.5rem;">This educational resource explores the book's arguments, context, and legacy.<br>All quoted passages are brief citations for educational commentary.</p>
+  <p style="margin-top:1rem; font-size:0.72rem; opacity:0.5;">Public domain work · Educational use · No affiliation with any organization</p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress-bar').style.width = (scrolled / total * 100) + '%';
+    updateActiveDot();
+  });
+
+  // Chapter accordion
+  function toggleChapter(id) {
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.chapter-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Smooth scroll to section
+  function scrollTo(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // TOC dot activation
+  const sections = ['hero','context','bernays','chapters','ideas','quotes','mechanics','psychology','critical','applications','glossary','reading'];
+  const dots = document.querySelectorAll('.toc-dot');
+  function updateActiveDot() {
+    let current = 0;
+    sections.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 80) current = i;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Capitalisme de la Séduction — Michel Clouscard</title>
+<style>
+  :root {
+    --rouge: #c0392b;
+    --rouge-sombre: #96281b;
+    --or: #d4a017;
+    --or-clair: #f0c940;
+    --noir: #0d0d0d;
+    --noir-doux: #1a1a1a;
+    --gris-fonce: #2a2a2a;
+    --gris-moyen: #444;
+    --gris-clair: #888;
+    --blanc: #f5f0e8;
+    --blanc-casse: #e8e0d0;
+    --bleu-nuit: #0f1923;
+    --accent: #e74c3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--noir);
+    color: var(--blanc);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #1a0505 0%, #0d0d0d 70%);
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(192,57,43,0.04) 50px, rgba(192,57,43,0.04) 51px),
+      repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(192,57,43,0.04) 50px, rgba(192,57,43,0.04) 51px);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 2rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: var(--blanc);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 60px rgba(192,57,43,0.4);
+  }
+
+  .hero-title .accent { color: var(--rouge); }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gris-clair);
+    font-style: italic;
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  .hero-author {
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-editeur {
+    font-size: 0.85rem;
+    color: var(--gris-clair);
+    letter-spacing: 0.1em;
+  }
+
+  .hero-divider {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--rouge), transparent);
+    margin: 3rem auto;
+  }
+
+  .hero-citation {
+    max-width: 700px;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--blanc-casse);
+    border-left: 3px solid var(--rouge);
+    padding-left: 1.5rem;
+    text-align: left;
+    margin: 0 auto 3rem;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gris-clair);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-cue::after {
+    content: '↓';
+    font-size: 1.2rem;
+    color: var(--rouge);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== NAV ===== */
+  #nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(192,57,43,0.3);
+    padding: 0 2rem;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-logo {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--or);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    color: var(--gris-clair);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--or); }
+
+  /* ===== SECTIONS ===== */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--blanc);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .section-intro {
+    font-size: 1.1rem;
+    color: var(--blanc-casse);
+    max-width: 750px;
+    margin-bottom: 3rem;
+  }
+
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--rouge);
+    margin: 2rem 0;
+  }
+
+  /* ===== FULL-WIDTH BANDS ===== */
+  .band {
+    background: var(--noir-doux);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .band-rouge {
+    background: linear-gradient(135deg, var(--rouge-sombre) 0%, #5a0f0f 100%);
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .band-sombre {
+    background: var(--bleu-nuit);
+  }
+
+  /* ===== CONCEPT CARDS ===== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .card {
+    background: var(--gris-fonce);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--rouge);
+  }
+
+  .card-num {
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(192,57,43,0.15);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    line-height: 1;
+    font-family: 'Courier New', monospace;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    color: var(--or);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+    color: var(--gris-clair);
+    line-height: 1.7;
+  }
+
+  .card .tag {
+    display: inline-block;
+    background: rgba(192,57,43,0.2);
+    border: 1px solid rgba(192,57,43,0.4);
+    color: var(--rouge);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+
+  /* ===== NIVEAUX D'INITIATION ===== */
+  .niveaux {
+    position: relative;
+    margin-top: 3rem;
+  }
+
+  .niveau-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2rem;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .niveau-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 39px;
+    top: 80px;
+    bottom: -2px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--rouge) 0%, rgba(192,57,43,0.2) 100%);
+  }
+
+  .niveau-num {
+    width: 80px;
+    height: 80px;
+    background: var(--gris-fonce);
+    border: 2px solid var(--rouge);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--rouge);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .niveau-body {
+    background: var(--gris-fonce);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .niveau-body:hover { border-color: rgba(192,57,43,0.4); }
+
+  .niveau-body h3 {
+    font-size: 1.15rem;
+    color: var(--or);
+    margin-bottom: 0.5rem;
+  }
+
+  .niveau-body .objets {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--rouge);
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.75rem;
+  }
+
+  .niveau-body p {
+    font-size: 0.95rem;
+    color: var(--gris-clair);
+  }
+
+  /* ===== CITATION BLOCS ===== */
+  .citation-bloc {
+    background: rgba(192,57,43,0.08);
+    border-left: 4px solid var(--rouge);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .citation-bloc blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--blanc-casse);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .citation-source {
+    font-size: 0.8rem;
+    color: var(--rouge);
+    letter-spacing: 0.1em;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ===== OPPOSITION TABLE ===== */
+  .opposition {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin: 3rem 0;
+    align-items: stretch;
+  }
+
+  .opp-col {
+    padding: 2rem;
+    border-radius: 4px;
+  }
+
+  .opp-col.gauche {
+    background: rgba(15,25,35,0.8);
+    border: 1px solid rgba(100,150,200,0.2);
+  }
+
+  .opp-col.droite {
+    background: rgba(35,10,10,0.8);
+    border: 1px solid rgba(192,57,43,0.3);
+  }
+
+  .opp-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--or);
+    padding: 0 1.5rem;
+    background: var(--gris-fonce);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .opp-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .opp-col.gauche h3 { color: #5b9bd5; }
+  .opp-col.droite h3 { color: var(--rouge); }
+
+  .opp-col ul {
+    list-style: none;
+  }
+
+  .opp-col ul li {
+    font-size: 0.9rem;
+    color: var(--gris-clair);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .opp-col ul li::before {
+    content: '→';
+    color: var(--or);
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+  }
+
+  /* ===== SCHEMA TRIPTYQUE ===== */
+  .triptyque {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 3rem 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .trip-col {
+    background: var(--gris-fonce);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .trip-col:nth-child(2) {
+    background: rgba(192,57,43,0.15);
+  }
+
+  .trip-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .trip-col h3 {
+    font-size: 1rem;
+    color: var(--or);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .trip-col p {
+    font-size: 0.85rem;
+    color: var(--gris-clair);
+    line-height: 1.6;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-top: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--rouge) 0%, var(--or) 50%, var(--rouge) 100%);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 2rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -0.45rem;
+    top: 0.5rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--rouge);
+    border: 2px solid var(--noir);
+  }
+
+  .timeline-item h3 {
+    color: var(--or);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-item p {
+    color: var(--gris-clair);
+    font-size: 0.9rem;
+  }
+
+  .timeline-item .date {
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+    color: var(--rouge);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ===== STAT BLOCS ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+    margin: 3rem 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    background: var(--gris-fonce);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--rouge);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gris-clair);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===== ACCORDION ===== */
+  .accordion {
+    margin-top: 2rem;
+  }
+
+  .acc-item {
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  .acc-header {
+    background: var(--gris-fonce);
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .acc-header:hover { background: var(--gris-moyen); }
+
+  .acc-header h3 {
+    font-size: 1rem;
+    color: var(--blanc);
+  }
+
+  .acc-header .acc-icon {
+    color: var(--rouge);
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .acc-item.open .acc-icon { transform: rotate(45deg); }
+
+  .acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: rgba(26,26,26,0.8);
+  }
+
+  .acc-item.open .acc-body { max-height: 600px; }
+
+  .acc-body-inner {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--gris-clair);
+    line-height: 1.8;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .acc-body-inner p + p { margin-top: 1rem; }
+
+  /* ===== SCHÉMA DYNAMIQUE ===== */
+  .schema-container {
+    background: var(--gris-fonce);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 3rem;
+    margin: 3rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .schema-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(192,57,43,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .schema-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 2rem;
+  }
+
+  .pyramid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .pyr-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .pyr-block {
+    background: rgba(192,57,43,0.15);
+    border: 1px solid rgba(192,57,43,0.3);
+    color: var(--blanc-casse);
+    font-size: 0.85rem;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    transition: background 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+
+  .pyr-block:hover {
+    background: rgba(192,57,43,0.35);
+    border-color: var(--rouge);
+  }
+
+  .pyr-block.highlight {
+    background: rgba(192,57,43,0.4);
+    border-color: var(--rouge);
+    color: var(--blanc);
+    font-weight: bold;
+  }
+
+  /* ===== INTERACTIVE TABS ===== */
+  .tabs {
+    margin-top: 2rem;
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--gris-clair);
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: color 0.2s, border-color 0.2s;
+    font-family: 'Georgia', serif;
+    margin-bottom: -1px;
+  }
+
+  .tab-btn:hover { color: var(--blanc); }
+  .tab-btn.active { color: var(--or); border-bottom-color: var(--rouge); }
+
+  .tab-panels { margin-top: 0; }
+
+  .tab-panel {
+    display: none;
+    padding: 2rem 0;
+    font-size: 0.95rem;
+    color: var(--gris-clair);
+    line-height: 1.8;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== HIGHLIGHTS ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(192,57,43,0.15), rgba(192,57,43,0.05));
+    border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 4px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+
+  .highlight-box h4 {
+    color: var(--or);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .highlight-box p {
+    color: var(--blanc-casse);
+    font-size: 0.95rem;
+  }
+
+  /* ===== GLOSSAIRE ===== */
+  .glossaire-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .glos-item {
+    border-left: 3px solid var(--rouge);
+    padding-left: 1.25rem;
+  }
+
+  .glos-term {
+    font-size: 1rem;
+    color: var(--or);
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+    font-style: italic;
+  }
+
+  .glos-def {
+    font-size: 0.88rem;
+    color: var(--gris-clair);
+    line-height: 1.6;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--noir-doux);
+    border-top: 1px solid rgba(192,57,43,0.3);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-inner { max-width: 700px; margin: 0 auto; }
+
+  .footer-title {
+    font-size: 1.2rem;
+    color: var(--or);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-sub {
+    font-size: 0.85rem;
+    color: var(--gris-clair);
+    margin-bottom: 2rem;
+  }
+
+  .footer-note {
+    font-size: 0.75rem;
+    color: var(--gris-moyen);
+    font-style: italic;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 2rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .opposition { grid-template-columns: 1fr; }
+    .opp-vs { padding: 1rem; }
+    .triptyque { grid-template-columns: 1fr; }
+    .niveau-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+    .niveau-num { width: 60px; height: 60px; font-size: 1.2rem; }
+    .niveau-item:not(:last-child)::after { left: 29px; top: 60px; }
+    .nav-links { display: none; }
+    .schema-container { padding: 1.5rem; }
+    .pyr-block { font-size: 0.75rem; padding: 0.5rem 0.75rem; }
+  }
+
+  /* ===== SPECIAL ELEMENTS ===== */
+  strong.concept {
+    color: var(--or);
+    font-style: normal;
+  }
+
+  .marquee-band {
+    background: var(--rouge-sombre);
+    overflow: hidden;
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .marquee-inner {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Courier New', monospace;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .pill {
+    display: inline-block;
+    background: rgba(192,57,43,0.2);
+    border: 1px solid rgba(192,57,43,0.4);
+    color: var(--blanc-casse);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    margin: 0.2rem;
+  }
+
+  .big-quote {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--blanc);
+    line-height: 1.3;
+    margin: 3rem 0;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .big-quote::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -0.5rem;
+    font-size: 5rem;
+    color: var(--rouge);
+    opacity: 0.4;
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+
+  .big-quote em { color: var(--rouge); font-style: normal; }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-eyebrow">Éditions Sociales · Analyse Politique</div>
+  <h1 class="hero-title">Le Capitalisme<br>de la <span class="accent">Séduction</span></h1>
+  <p class="hero-subtitle">Critique de la social-démocratie libertaire</p>
+  <div class="hero-author">Michel Clouscard</div>
+  <div class="hero-editeur">Éditions Sociales</div>
+  <div class="hero-divider"></div>
+  <div class="hero-citation">
+    <p>«&nbsp;Le mondain est la catégorie qui permet de comprendre comment le capitalisme contemporain ne se contente plus d'exploiter le travail — il séduit, il initie, il intègre. La contestation elle-même devient marchandise.&nbsp;»</p>
+  </div>
+  <div class="scroll-cue">Découvrir</div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Clouscard — Capitalisme de la Séduction</span>
+    <ul class="nav-links">
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#niveaux">Niveaux</a></li>
+      <li><a href="#jazz-rock">Jazz & Rock</a></li>
+      <li><a href="#potlatch">Potlatch</a></li>
+      <li><a href="#socialdemo">Social-démocratie</a></li>
+      <li><a href="#logique">Logique</a></li>
+      <li><a href="#glossaire">Glossaire</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-band">
+  <div class="marquee-inner">
+    <span class="marquee-item">Le Mondain</span>
+    <span class="marquee-item">Potlatch de la Plus-Value</span>
+    <span class="marquee-item">Social-Démocratie Libertaire</span>
+    <span class="marquee-item">L'Initiation Capitaliste</span>
+    <span class="marquee-item">Jazz vs Rock</span>
+    <span class="marquee-item">La Bande · La Boîte · L'Animateur</span>
+    <span class="marquee-item">Le Plan Marshall Culturel</span>
+    <span class="marquee-item">Avoir Sans User · User Sans Avoir</span>
+    <span class="marquee-item">Le Mondain</span>
+    <span class="marquee-item">Potlatch de la Plus-Value</span>
+    <span class="marquee-item">Social-Démocratie Libertaire</span>
+    <span class="marquee-item">L'Initiation Capitaliste</span>
+    <span class="marquee-item">Jazz vs Rock</span>
+    <span class="marquee-item">La Bande · La Boîte · L'Animateur</span>
+    <span class="marquee-item">Le Plan Marshall Culturel</span>
+    <span class="marquee-item">Avoir Sans User · User Sans Avoir</span>
+  </div>
+</div>
+
+<!-- ===== INTRODUCTION ===== -->
+<div class="band" id="introduction">
+<section>
+  <div class="section-label">Présentation de l'œuvre</div>
+  <h2 class="section-title">Une critique radicale de la civilisation consumériste</h2>
+  <div class="divider"></div>
+  <p class="section-intro">
+    Dans cet ouvrage fondamental publié aux Éditions sociales, Michel Clouscard forge les outils théoriques d'une critique marxiste du capitalisme contemporain — un capitalisme qui ne se perpétue plus seulement par la contrainte, mais par la <strong class="concept">séduction</strong>. Sa thèse centrale : la gauche libertaire des années 1960–1970 n'a pas contesté le capitalisme, elle en a fourni le moteur culturel.
+  </p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-num">I</span>
+      <div class="tag">Thèse centrale</div>
+      <h3>Le mondain comme catégorie fondamentale</h3>
+      <p>Clouscard élabore la notion de <em>mondain</em> pour désigner ce registre de la vie sociale où le capitalisme déploie sa puissance de séduction — les loisirs, la mode, la consommation culturelle, l'hédonisme — en opposition au travail productif.</p>
+    </div>
+    <div class="card">
+      <span class="card-num">II</span>
+      <div class="tag">Paradoxe historique</div>
+      <h3>La contestation intégrée</h3>
+      <p>Mai 68 et la contre-culture n'ont pas renversé le capitalisme : ils ont fourni son nouveau visage. La révolte libertaire — jeans, rock, drogue, liberté sexuelle — a constitué le marché de consommation dont le capitalisme avait besoin pour se renouveler.</p>
+    </div>
+    <div class="card">
+      <span class="card-num">III</span>
+      <div class="tag">Méthode</div>
+      <h3>Du phénoménologique au dialectique</h3>
+      <p>Clouscard part des objets concrets de la vie quotidienne (le flipper, le juke-box, les jeans, la moto) pour remonter vers les structures économiques et idéologiques qui les produisent et leur donnent sens dans le cadre de la reproduction du capital.</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-num">5</span>
+      <span class="stat-label">Niveaux d'initiation mondaine</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">2</span>
+      <span class="stat-label">Parties analytiques</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">10</span>
+      <span class="stat-label">Chapitres au total</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1</span>
+      <span class="stat-label">Catégorie décisive : Le mondain</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== L'HONNÊTE HOMME ===== -->
+<div class="band-sombre">
+<section>
+  <div class="section-label">Chapitre 1 · Anthropologie de la modernité</div>
+  <h2 class="section-title">L'«&nbsp;honnête homme&nbsp;» et la civilisation bourgeoise</h2>
+  <div class="divider"></div>
+
+  <p class="section-intro">Clouscard remonte à l'archétype de l'<em>honnête homme</em> de la civilisation classique pour en déduire la généalogie du sujet bourgeois moderne — celui qui sait concilier la maîtrise des codes sociaux avec la poursuite de son intérêt.</p>
+
+  <div class="citation-bloc">
+    <blockquote>
+      L'honnête homme du XVII<sup>e</sup> siècle est le premier modèle d'une intégration sociale par les manières — par la distinction et non par la contrainte. Cette figure traverse les siècles pour devenir, dans le capitalisme contemporain, le consommateur cultivé, maître de ses codes et de ses désirs.
+    </blockquote>
+    <div class="citation-source">— Logique interne du Ch. 1</div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>L'anthropologie du bourgeois consommateur</h4>
+    <p>Le bourgeois moderne se définit non plus par sa seule capacité à produire de la valeur, mais par sa capacité à <em>consommer avec distinction</em>. La culture, le goût, les loisirs deviennent des espaces de réaffirmation de la position sociale — et donc de reproduction de la domination de classe.</p>
+  </div>
+
+  <div class="triptyque">
+    <div class="trip-col">
+      <div class="trip-icon">⚖️</div>
+      <h3>La distinction</h3>
+      <p>Maîtrise des codes sociaux, art de se comporter dans le monde — fondement de la domination symbolique bourgeoise.</p>
+    </div>
+    <div class="trip-col">
+      <div class="trip-icon">🎭</div>
+      <h3>L'apparence</h3>
+      <p>Le paraître comme mode d'être : la civilisation bourgeoise élève le paraître au rang de vertu cardinale, prélude à la société du spectacle.</p>
+    </div>
+    <div class="trip-col">
+      <div class="trip-icon">💰</div>
+      <h3>L'intérêt</h3>
+      <p>L'intérêt personnel rationnel comme moteur universel — horizon anthropologique du capitalisme libéral classique.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== NIVEAUX D'INITIATION ===== -->
+<div id="niveaux">
+<section>
+  <div class="section-label">Partie I · Chapitres 2 à 6</div>
+  <h2 class="section-title">Les cinq niveaux d'initiation mondaine<br>à la civilisation capitaliste</h2>
+  <div class="divider"></div>
+  <p class="section-intro">
+    Clouscard décrit une <strong class="concept">progression initiatique</strong> soigneusement construite par le capitalisme américain d'après-guerre pour intégrer la jeunesse européenne dans son orbite culturelle et économique. Chaque niveau correspond à des objets concrets, des pratiques et une position dans le processus de consommation.
+  </p>
+
+  <div class="citation-bloc">
+    <blockquote>
+      Le Plan Marshall n'était pas seulement économique. Il était anthropologique. Il s'agissait d'installer en Europe un certain type d'homme — l'homme de la consommation — à travers une initiation progressive et irrésistible.
+    </blockquote>
+    <div class="citation-source">— Logique des Ch. 2 à 6</div>
+  </div>
+
+  <div class="niveaux">
+
+    <div class="niveau-item">
+      <div class="niveau-num">1</div>
+      <div class="niveau-body">
+        <div class="objets">🎰 Affiche · Flipper · Juke-box</div>
+        <h3>Magie, totem, potlatch — L'ethnologie du Plan Marshall</h3>
+        <p>Le premier niveau est celui du <em>toucher</em> enchanté. L'affiche publicitaire agit comme un totem — elle convoque le désir sans le satisfaire. Le flipper et le juke-box sont les premiers machines à initier : ils créent une dépense rituelle (le potlatch), une déperdition consentie de l'argent de poche qui préfigure tous les comportements consuméristes. C'est l'ethnologie américaine mise au service du capital — la magie de l'objet qui fascine et intègre.</p>
+        <div style="margin-top:1rem">
+          <span class="pill">Magie de l'objet</span>
+          <span class="pill">Ethnologie américaine</span>
+          <span class="pill">Plan Marshall culturel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="niveau-item">
+      <div class="niveau-num">2</div>
+      <div class="niveau-body">
+        <div class="objets">👖 Jean · Cheveux longs · Guitare sèche</div>
+        <h3>Le prêt-à-porter de la contestation — Hollywood model</h3>
+        <p>Le deuxième niveau introduit la <em>mise en scène de soi</em> contestataire. Le jean (symbole d'une Amérique laborieuse et rebelle à la fois), les cheveux longs, la guitare sèche constituent un kit complet d'identification : le jeune Européen s'habille en contestataire américain. Hollywood a produit les archétypes — James Dean, le blues, le folk. La contestation devient un style, et le style une marchandise. C'est le <em>prêt-à-porter de la révolte</em>.</p>
+        <div style="margin-top:1rem">
+          <span class="pill">Modèle hollywoodien</span>
+          <span class="pill">Style comme marchandise</span>
+          <span class="pill">Intégration par la révolte</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="niveau-item">
+      <div class="niveau-num">3</div>
+      <div class="niveau-body">
+        <div class="objets">💃 L'animation machinale · La bande · La boîte</div>
+        <h3>La statue de Pompidou — Mécanique des corps</h3>
+        <p>Le troisième niveau est celui de l'<em>animation du corps</em> par la mécanique consumériste. Clouscard forge la métaphore de la «&nbsp;statue de Pompidou&nbsp;» : le corps est mis en mouvement par des stimuli extérieurs (la musique amplifiée, les lumières stroboscopiques, l'alcool) sans que ce mouvement ait de finalité autre que lui-même. La <em>bande</em> (le groupe de jeunes), la <em>boîte</em> (la discothèque) et <em>l'animateur</em> forment la trinité de cette civilisation de l'animation vide. C'est le triomphe du <em>groove</em> sans conscience.</p>
+        <div style="margin-top:1rem">
+          <span class="pill">La bande</span>
+          <span class="pill">La boîte</span>
+          <span class="pill">L'animateur</span>
+          <span class="pill">Animation machinale</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="niveau-item">
+      <div class="niveau-num">4</div>
+      <div class="niveau-body">
+        <div class="objets">💊 Drogue · La pilule · Liberté sexuelle</div>
+        <h3>Pharmacologie de l'Occident — L'idéologie du désir libéré</h3>
+        <p>Le quatrième niveau touche au corps intime. La drogue et la pilule contraceptive sont présentées comme deux faces d'une même médaille idéologique : libérer le corps de ses contraintes naturelles (la douleur, la grossesse) au profit d'une disponibilité totale au marché des plaisirs. Clouscard déconstruit le féminisme de cette époque en montrant qu'il a en partie servi — malgré lui — la libéralisation d'un marché qui profitait d'abord aux hommes : <em>user sans avoir</em>. La liberté sexuelle devient une marchandise comme les autres.</p>
+        <div style="margin-top:1rem">
+          <span class="pill">Pharmacologie idéologique</span>
+          <span class="pill">Féminisme récupéré</span>
+          <span class="pill">User sans avoir</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="niveau-item">
+      <div class="niveau-num">5</div>
+      <div class="niveau-body">
+        <div class="objets">🏍️ Moto · Hi-fi · Guitare électrique · Nikon</div>
+        <h3>L'intégration par la technologie — Usage progressif vs mondain</h3>
+        <p>Le cinquième et dernier niveau est celui de la <em>haute technologie du loisir</em>. La moto, la chaîne hi-fi, la guitare électrique, l'appareil photo Nikon sont des objets de haute valeur qui exigent un investissement important et signalent une intégration réussie dans la civilisation consumériste. Clouscard distingue ici l'<em>usage progressiste</em> de la technologie (au service de l'émancipation collective) et son <em>usage mondain</em> (au service du narcissisme consumériste). Le cinquième niveau est l'achèvement de l'initiation : le sujet est pleinement intégré.</p>
+        <div style="margin-top:1rem">
+          <span class="pill">Technologie du loisir</span>
+          <span class="pill">Usage progressiste vs mondain</span>
+          <span class="pill">Intégration accomplie</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="schema-container">
+    <div class="schema-title">Schéma de la progression initiatique</div>
+    <div class="pyramid">
+      <div class="pyr-row">
+        <div class="pyr-block highlight" style="width:90%">⑤ Moto · Hi-fi · Guitare électrique · Nikon → Intégration technologique totale</div>
+      </div>
+      <div class="pyr-row">
+        <div class="pyr-block" style="width:80%">④ Drogue · Pilule → Pharmacologie du désir libéré</div>
+      </div>
+      <div class="pyr-row">
+        <div class="pyr-block" style="width:70%">③ Bande · Boîte · Animateur → Animation machinale du corps</div>
+      </div>
+      <div class="pyr-row">
+        <div class="pyr-block" style="width:60%">② Jean · Cheveux longs · Guitare → Prêt-à-porter de la contestation</div>
+      </div>
+      <div class="pyr-row">
+        <div class="pyr-block" style="width:50%">① Affiche · Flipper · Juke-box → Magie de l'objet</div>
+      </div>
+      <div class="pyr-row">
+        <div class="pyr-block" style="width:40%" style="background:rgba(192,57,43,0.3)">Plan Marshall Culturel — Terreau anthropologique</div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== JAZZ & ROCK ===== -->
+<div class="band-rouge" id="jazz-rock">
+<section>
+  <div class="section-label">Chapitre 4 · Théorie musicale et politique</div>
+  <h2 class="section-title">Jazz vs Rock — La temporalité du capitalisme</h2>
+  <div class="divider"></div>
+  <p class="section-intro">L'une des analyses les plus originales et les plus provocantes de Clouscard porte sur la distinction entre jazz et rock comme deux rapports au temps et à la conscience historique.</p>
+
+  <div class="big-quote">
+    Le swing, c'est la <em>conscience historique des Noirs américains</em> dans le rythme. Le rock, c'est le rythme sans mémoire — <em>le capitalisme au corps</em>.
+  </div>
+
+  <div class="opposition">
+    <div class="opp-col gauche">
+      <h3>🎷 Le Jazz / Le Swing</h3>
+      <ul>
+        <li>Conscience historique de l'oppression (héritage de l'esclavage)</li>
+        <li>La syncope comme résistance : contre-temps, décalage, refus de la mesure imposée</li>
+        <li>Le swing = tension entre le rythme mécanique et la liberté humaine</li>
+        <li>Forme d'expression d'une communauté qui a une mémoire collective</li>
+        <li>L'improvisation comme acte de sujétion libre</li>
+        <li>La blue note : la douleur sublimée en art</li>
+        <li>Rapport dialectique au temps : passé / présent / futur</li>
+      </ul>
+    </div>
+    <div class="opp-vs">VS</div>
+    <div class="opp-col droite">
+      <h3>🎸 Le Rock</h3>
+      <ul>
+        <li>Rythme sans mémoire : la pulsation comme seul horizon</li>
+        <li>La mesure imposée et répétée à l'infini (4/4 systématique)</li>
+        <li>Effacement de la conscience au profit de la sensation brute</li>
+        <li>Fabrication industrielle des émotions (la star system)</li>
+        <li>L'amplification électrique comme violence de masse</li>
+        <li>Temporalité du capitalisme : présent pur, consommation immédiate</li>
+        <li>Récupération commerciale de la révolte noire</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="citation-bloc">
+    <blockquote>
+      Le rock est l'amputé de la conscience historique. Il prend le corps du blues, son énergie, son rythme — mais il en retire l'âme, la mémoire, la douleur sublimée. Ce qu'il reste est parfait pour le marché : de l'énergie sans direction, de l'enthousiasme sans projet, de la révolte sans révolution.
+    </blockquote>
+    <div class="citation-source">— Analyse du Ch. 4</div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>La dialectique du swing</h4>
+    <p>Le swing n'est pas simplement un effet rythmique — c'est une <em>forme de conscience</em>. Il surgit dans la tension entre la contrainte (le rythme imposé, la mesure) et la liberté (la syncope, le contre-temps). C'est précisément cette tension dialectique que le rock efface en soumettant le corps à une pulsation monotone et impérieuse — la temporalité même de la production capitaliste : un cycle sans fin, sans mémoire, sans projet.</p>
+  </div>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <h3>Castel & Régine — Le premier niveau de consommation mondaine</h3>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <p>Castel & Régine représente le cercle fermé de la nuit parisienne chic. C'est le <em>premier niveau</em> de la consommation nocturne mondaine : exclusif, cher, accessible seulement à l'élite. La boîte de nuit comme espace initiatique au sens strict — il faut être choisi, être reconnu, appartenir.</p>
+          <p>Ce niveau correspond à la pure distinction bourgeoise : consommer ici n'est pas seulement un plaisir, c'est une affirmation de classe. Le jazz y est encore présent, mais déjà domestiqué, mis au service de l'ambiance.</p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <h3>Club Méditerranée & Ibiza — Le deuxième niveau : la démocratisation du luxe</h3>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <p>Le Club Méditerranée invente le <em>potlatch démocratisé</em> : le luxe à crédit, l'exotisme en package, la liberté programmée. C'est le même principe que Castel & Régine, mais élargi à la petite bourgeoisie salariée. Ibiza radicalise encore ce modèle : dépense maximale, liberté maximale, amnésie maximale.</p>
+          <p>Ce deuxième niveau est crucial : il signale que le capitalisme a trouvé comment vendre l'illusion de la rupture (les vacances comme suspension du réel) tout en renforçant l'intégration (le retour au travail est rendu supportable par la promesse du prochain départ).</p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <h3>Saturday Night Fever — Le troisième niveau : la masse</h3>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <p><em>La Fièvre du samedi soir</em> (1977) est pour Clouscard l'expression parfaite du troisième niveau : la consommation nocturne de masse. La discothèque banalisée, accessible à tous, le rock et la disco comme bande-son de la compensation hebdomadaire. Du lundi au vendredi : exploitation. Du vendredi soir au dimanche : consommation frénétique pour oublier.</p>
+          <p>Ce film est lu par Clouscard comme un document sociologique : il montre un prolétaire (Tony Manero) dont toute l'énergie vitale et la créativité sont absorbées par le week-end — et donc rendues inoffensives politiquement. La danse devient le substitut de la lutte.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== POTLATCH ===== -->
+<div id="potlatch">
+<section>
+  <div class="section-label">Concept central · Économie politique de la consommation</div>
+  <h2 class="section-title">Le potlatch d'une part de la plus-value</h2>
+  <div class="divider"></div>
+  <p class="section-intro">
+    Clouscard emprunte à l'anthropologie (Mauss, Bataille) le concept de <strong class="concept">potlatch</strong> — la dépense somptuaire, la destruction rituelle de richesse — pour l'appliquer à la logique du capitalisme de consommation.
+  </p>
+
+  <div class="big-quote">
+    Le capitalisme contemporain ne se reproduit plus seulement en exploitant le travail. Il se reproduit en redistribuant <em>une part de la plus-value</em> sous forme de loisirs, de plaisirs, de libertés — juste assez pour que l'exploitation reste supportable.
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="tag">Anthropologie</div>
+      <h3>Le potlatch originel</h3>
+      <p>Dans les sociétés primitives étudiées par Marcel Mauss, le potlatch est la cérémonie où le chef détruit ou distribue ses richesses pour affirmer sa supériorité. La dépense ostentatoire comme fondement du prestige social.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Bataille</div>
+      <h3>La part maudite</h3>
+      <p>Georges Bataille théorise la «&nbsp;part maudite&nbsp;» : l'excédent que toute société doit dépenser, brûler, détruire. Quand cette dépense n'est pas canalisée, elle explose en guerre ou en révolution.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Clouscard</div>
+      <h3>La part redistributée</h3>
+      <p>Le capitalisme de la séduction résout le problème de la «&nbsp;part maudite&nbsp;» en la transformant en marché des loisirs : congés payés, week-ends, vacances, fêtes — autant de potlatch gérés et monétisés. La dépense somptuaire est privatisée.</p>
+    </div>
+  </div>
+
+  <div class="citation-bloc">
+    <blockquote>
+      Le capitalisme n'est plus simplement le règne de l'accumulation. Il est aussi le règne de la dépense — mais d'une dépense calculée, orientée, qui reproduit l'accumulation en la masquant. Le potlatch de la plus-value, c'est la carotte au bout du bâton de l'exploitation.
+    </blockquote>
+    <div class="citation-source">— Logique économique du Mondain</div>
+  </div>
+
+  <div class="triptyque">
+    <div class="trip-col">
+      <div class="trip-icon">💸</div>
+      <h3>Avoir sans user</h3>
+      <p>La propriété bourgeoise classique : posséder pour posséder. La résidence secondaire comme symbole de ce rapport — on la possède même quand on n'y est pas.</p>
+    </div>
+    <div class="trip-col">
+      <div class="trip-icon">🔥</div>
+      <h3>User sans avoir</h3>
+      <p>Le nouveau contrat social libertaire : jouir sans posséder. La location, le partage, le crédit à la consommation — jouir maintenant, payer plus tard. Le capitalisme vend du désir avant de vendre des objets.</p>
+    </div>
+    <div class="trip-col">
+      <div class="trip-icon">⚡</div>
+      <h3>La synthèse capitaliste</h3>
+      <p>Le capitalisme de la séduction réconcilie les deux : il vend à la fois la propriété ET le désir de jouir. La maison de campagne — l'apogée du système — représente avoir ET user, possession ET loisir.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== SOCIAL-DÉMOCRATIE ===== -->
+<div class="band" id="socialdemo">
+<section>
+  <div class="section-label">Chapitre 7 · Critique politique</div>
+  <h2 class="section-title">La social-démocratie libertaire — Nouveau contrat social</h2>
+  <div class="divider"></div>
+  <p class="section-intro">
+    Au cœur de l'analyse de Clouscard se trouve une critique acérée de la <strong class="concept">social-démocratie libertaire</strong> : cette synthèse idéologique qui prétend conjuguer la liberté individuelle (héritage de 68) avec la régulation sociale (héritage du mouvement ouvrier), mais qui en réalité sert les intérêts du capital.
+  </p>
+
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="switchTab(event, 'tab1')">Le nouveau contrat</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab2')">Père et fils</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab3')">Fausse innocence</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab4')">Les lois du mondain</button>
+    </div>
+    <div class="tab-panels">
+      <div class="tab-panel active" id="tab1">
+        <p>La social-démocratie libertaire invente un <em>nouveau contrat social</em> qui ne repose plus sur la citoyenneté politique (le contrat rousseauiste) ni sur la solidarité de classe (le contrat syndical), mais sur le <em>droit à la consommation</em>. Chaque individu est reconnu comme consommateur souverain — et c'est là que réside son «&nbsp;émancipation&nbsp;».</p>
+        <p style="margin-top:1rem">Ce contrat est profondément inégalitaire : il ne supprime pas les classes sociales, il déplace leur lisibilité. On n'est plus ouvrier ou bourgeois — on est «&nbsp;consommateur averti&nbsp;» ou «&nbsp;consommateur limité&nbsp;». L'exploitation continue, mais elle est masquée par le droit de choisir entre différentes marques de jeans.</p>
+        <div class="highlight-box" style="margin-top:1.5rem">
+          <h4>La promesse libertaire</h4>
+          <p>«&nbsp;Faites ce que vous voulez, consommez ce que vous voulez, aimez qui vous voulez — c'est votre droit.&nbsp;» Cette promesse est réelle dans sa forme, mais elle présuppose le maintien des structures d'exploitation qui la rendent possible pour certains et impossible pour d'autres.</p>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab2">
+        <p>Clouscard développe une analyse générationnelle du conflit culturel des années 60-70 en termes de rapport <em>père-fils</em>. Le père représente l'ancienne morale bourgeoise : travail, épargne, famille, patrie — l'idéologie de l'<em>avoir</em>. Le fils représente la nouvelle morale libertaire : plaisir, jouissance, liberté, authenticité — l'idéologie de l'<em>user</em>.</p>
+        <p style="margin-top:1rem">Ce conflit semble opposer deux visions du monde, mais Clouscard montre qu'il s'agit en réalité d'une <em>complémentarité fonctionnelle</em> au service du capital : le père accumule, le fils dépense. L'un capitalise, l'autre consomme. Le capitalisme a besoin des deux.</p>
+        <div class="citation-bloc" style="margin-top:1.5rem">
+          <blockquote>Le fils libertaire pense contester son père, mais il ne fait que jouer le rôle que le capitalisme lui a assigné : être le consommateur dont l'économie a besoin pour écouler ses surplus.</blockquote>
+          <div class="citation-source">— Ch. 7</div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab3">
+        <p>L'un des arguments les plus puissants de Clouscard est celui de la <em>fausse innocence</em> de la gauche libertaire. Cette gauche croit sincèrement s'opposer au capitalisme en défendant la liberté individuelle, le droit au plaisir, l'anti-autoritarisme — mais elle fait exactement ce que le capitalisme veut qu'elle fasse.</p>
+        <p style="margin-top:1rem">Cette fausse innocence a deux dimensions :</p>
+        <ul style="margin-top:1rem; list-style:none; padding-left:0">
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--gris-clair)">→ <strong style="color:var(--blanc)">Objective</strong> : les pratiques libertaires ont objectivement servi l'expansion du marché consumériste, indépendamment des intentions subjectives.</li>
+          <li style="padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05); color:var(--gris-clair)">→ <strong style="color:var(--blanc)">Subjective</strong> : la gauche libertaire se croit révolutionnaire alors qu'elle est profondément intégrée dans l'ordre bourgeois — son mode de vie, ses consommations, ses valeurs sont ceux de la petite bourgeoisie cultivée.</li>
+        </ul>
+        <div class="highlight-box" style="margin-top:1.5rem">
+          <h4>La récupération systématique</h4>
+          <p>Le capitalisme a une capacité unique à récupérer toute forme de contestation et à la transformer en produit. La révolte est un marché. La transgression est un style. La révolution est une esthétique. Et la gauche libertaire en a été à la fois l'auteur inconscient et la première victime.</p>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab4">
+        <p>Au chapitre 8, Clouscard formule les <em>lois universelles</em> de l'initiation mondaine à la civilisation capitaliste. Ces lois fonctionnent comme des invariants anthropologiques que le capitalisme a appris à exploiter systématiquement :</p>
+        <div class="accordion" style="margin-top:1.5rem">
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <h3>Loi 1 : L'initiation par l'objet</h3>
+              <span class="acc-icon">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p>Toute intégration à la civilisation capitaliste passe par l'adoption d'un objet chargé de valeur symbolique. L'objet est toujours plus qu'un objet : il est un signe, un rite de passage, une appartenance. Posséder le bon objet (le bon jean, le bon appareil photo, la bonne moto) signifie être reconnu comme membre de la communauté des consommateurs.</p>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <h3>Loi 2 : La progression des niveaux</h3>
+              <span class="acc-icon">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p>L'initiation se fait toujours par étapes progressives. On ne passe pas directement du flipper à la moto — il y a une pédagogie de la consommation, une formation du désir qui monte en gamme. Chaque niveau crée le désir du niveau suivant. C'est la structure même du marché comme processus d'apprentissage perpétuel.</p>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <h3>Loi 3 : L'irresistibilité de l'expansion mondaine</h3>
+              <span class="acc-icon">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p>Une fois engagé dans la spirale mondaine, il est presque impossible de s'en extraire. La loi du «&nbsp;mode/démodé&nbsp;» est impitoyable : ce qui était désirable hier est honteux aujourd'hui. L'économie du désir fonctionne comme une tapis roulant — il faut courir de plus en plus vite pour rester à la même place. Cette irresistibilité est la marque de l'efficacité idéologique du système.</p>
+              </div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <div class="acc-header" onclick="toggleAcc(this)">
+              <h3>Loi 4 : La récupération de la contestation</h3>
+              <span class="acc-icon">+</span>
+            </div>
+            <div class="acc-body">
+              <div class="acc-body-inner">
+                <p>Toute forme de résistance au mondain est récupérée et transformée en produit. Le punk, le grunge, le hip-hop — chaque sous-culture contestataire devient un marché dans les cinq ans suivant son émergence. Le système est auto-immunisé contre la révolte culturelle. Seule la lutte des classes, ancrée dans les rapports de production matériels, échappe à cette récupération.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== LOGIQUE DU MONDAIN ===== -->
+<div id="logique">
+<section>
+  <div class="section-label">Partie II · La logique du mondain</div>
+  <h2 class="section-title">Vers une nouvelle civilisation — L'apogée du système</h2>
+  <div class="divider"></div>
+  <p class="section-intro">
+    La seconde partie de l'ouvrage dégage la <strong class="concept">logique interne</strong> du mondain — ses structures, ses archétypes, sa dynamique propre — et décrit ce que Clouscard appelle une «&nbsp;nouvelle civilisation&nbsp;» : la première civilisation des sens, fondée non plus sur la production mais sur la consommation.
+  </p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="tag">Phénoménologie → Logique</div>
+      <h3>Du particulier à l'universel</h3>
+      <p>Clouscard opère le passage de la description phénoménologique des pratiques mondaines (les objets concrets, les comportements) à leur logique abstraite. Cette logique révèle que le mondain n'est pas un phénomène marginal mais <em>le principe organisateur</em> du capitalisme contemporain.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Mode / Démodé</div>
+      <h3>Le néo-nominalisme de la mode</h3>
+      <p>La mode est la forme temporelle du mondain. Elle fonctionne selon une logique de <em>néo-nominalisme</em> : les noms changent (les marques, les styles, les tendances), mais la structure reste identique. Ce qui compte n'est pas l'objet lui-même mais sa position dans le système différentiel mode/démodé.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Archétypes & Rétro</div>
+      <h3>La rétro-mode et les archétypes</h3>
+      <p>Le mondain génère ses propres <em>archétypes</em> (James Dean, Marilyn Monroe, le beatnik) et les recycle en <em>rétro-mode</em>. Le passé est transformé en produit de consommation présent. L'histoire est dépolitisée, nostalgisée, esthétisée — elle devient style.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Péchés capitaux</div>
+      <h3>Les péchés capitaux de la nouvelle civilisation</h3>
+      <p>Clouscard décrit avec ironie les «&nbsp;péchés capitaux&nbsp;» de la civilisation mondaine : le narcissisme, l'hédonisme, l'individualisme, le présentisme, le consumérisme — présentés comme autant de vertus émancipatrices par la gauche libertaire.</p>
+    </div>
+  </div>
+
+  <div class="citation-bloc">
+    <blockquote>
+      Nous vivons dans la première civilisation qui ait élevé le plaisir des sens au rang de valeur suprême — non plus la vertu, non plus le salut, non plus la raison, mais la jouissance immédiate et renouvelable. Ce n'est pas une émancipation : c'est une nouvelle forme de servitude.
+    </blockquote>
+    <div class="citation-source">— Partie II, Ch. 2</div>
+  </div>
+
+  <div class="accordion" style="margin-top:2rem">
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <h3>La maison de campagne — Apogée et réconciliation</h3>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <p>La maison de campagne est pour Clouscard le symbole parfait de l'accomplissement du système capitaliste mondain. Elle réconcilie toutes les contradictions apparentes : la propriété (avoir) et la jouissance (user), la ville (le travail) et la campagne (le loisir), le travail de la semaine et le repos du week-end, la rigueur productive et l'hédonisme consommatoire.</p>
+          <p>Celui qui possède une maison de campagne a réussi son initiation mondaine complète. Il possède et jouit, il travaille et se repose, il est dans le système et au-dessus de lui. C'est l'image parfaite du citoyen de la social-démocratie libertaire : pleinement intégré dans le capitalisme, croyant sincèrement être libre.</p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <h3>L'informatisation au service de la convivialité</h3>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <p>L'apogée du système, pour Clouscard, est l'informatisation de la société mise au service de la <em>convivialité</em>. C'est le stade où la technologie la plus avancée est entièrement soumise à la logique mondaine : la machine sert non plus à produire mais à <em>communiquer et à consommer</em>.</p>
+          <p>Cette analyse, rédigée au tournant des années 1980, préfigure de manière saisissante l'ère d'Internet et des réseaux sociaux : des technologies extraordinaires entièrement orientées vers la sociabilité consumériste, le partage de styles de vie, la mise en scène de soi — autant de formes d'approfondissement de la logique mondaine.</p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <h3>La première civilisation sensuelle</h3>
+        <span class="acc-icon">+</span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-inner">
+          <p>Clouscard désigne le capitalisme de la séduction comme producteur de la <em>première civilisation authentiquement sensuelle de l'histoire</em> — non pas au sens d'une émancipation des sens, mais au sens d'une mobilisation totale des sens au service de la reproduction du capital. Jamais autant de ressources n'avaient été consacrées à produire des objets de désir, des ambiances, des stimuli sensoriels.</p>
+          <p>Le potlatch de la plus-value atteint ici son accomplissement : une partie croissante de la richesse sociale est divertie de la production pour alimenter une économie du désir, du plaisir et de la sensation — et c'est cette économie qui devient le moteur principal de la croissance capitaliste.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== TIMELINE HISTORIQUE ===== -->
+<div class="band-sombre">
+<section>
+  <div class="section-label">Contexte historique</div>
+  <h2 class="section-title">Généalogie du capitalisme de la séduction</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Clouscard ancre son analyse dans une périodisation historique précise qui va de l'après-guerre américain à la social-démocratie européenne des années 1980.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="date">1944–1947</div>
+      <h3>Plan Marshall — L'infrastructure culturelle</h3>
+      <p>L'aide économique américaine est aussi une offensive culturelle : cinéma hollywoodien, musique pop, mode américaine. L'Europe dévastée accepte le modèle américain avec la reconstruction économique. C'est le premier grand «&nbsp;potlatch&nbsp;» américain — donner pour dominer.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="date">1950–1960</div>
+      <h3>L'initiation par les objets — Niveaux 1 et 2</h3>
+      <p>Flipper, juke-box, rock'n'roll, jeans, James Dean. La jeunesse européenne adopte massivement les codes culturels américains. La bourgeoisie s'inquiète, mais le capital prospère : un nouveau marché de masse est né.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="date">1960–1968</div>
+      <h3>La contre-culture comme moteur du marché</h3>
+      <p>La Beat generation, le folk, Bob Dylan, la pilule contraceptive. La contestation s'organise, mais ses objets (disques, livres, vêtements, voyages) alimentent le marché. La révolte est commercialisée avant même d'avoir été révolutionnaire.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="date">Mai 1968</div>
+      <h3>Le grand malentendu — La révolution mondaine</h3>
+      <p>Mai 68 est lu par Clouscard comme une révolution <em>mondaine</em> et non prolétarienne. La classe ouvrière a fait grève pour des augmentations de salaire (usage productif de la lutte). Les étudiants ont fait la fête pour la libération des mœurs (usage mondain). Le capitalisme a intégré les deux résultats.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="date">1970–1980</div>
+      <h3>Institutionnalisation de la social-démocratie libertaire</h3>
+      <p>Le projet socialiste et libertaire convergent dans la «&nbsp;gauche culturelle&nbsp;» : droits des femmes, droits des minorités, écologie, antinucléaire. Ces combats sont légitimes dans leur principe, mais leur récupération par le marché en fait les vecteurs d'une nouvelle phase d'accumulation capitaliste.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="date">1980+</div>
+      <h3>L'apogée — Informatisation et convivialité mondaine</h3>
+      <p>L'informatique personnelle, les Walkman, les chaînes câblées : la technologie est entièrement orientée vers la consommation individuelle. Le mondain a vaincu. La social-démocratie libertaire est le régime idéologique dominant de l'Occident prospère.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== GLOSSAIRE ===== -->
+<div id="glossaire">
+<section>
+  <div class="section-label">Dictionnaire conceptuel</div>
+  <h2 class="section-title">Glossaire des concepts de Clouscard</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Les concepts forgés par Clouscard constituent un appareil théorique original qui croise marxisme, anthropologie et critique culturelle. Voici les notions fondamentales.</p>
+
+  <div class="glossaire-grid">
+    <div class="glos-item">
+      <div class="glos-term">Le mondain</div>
+      <div class="glos-def">Catégorie centrale désignant l'ensemble des pratiques sociales liées à la consommation, au loisir, à la mode, à la distinction culturelle — par opposition au travail productif. C'est le terrain où le capitalisme déploie sa séduction.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">L'initiation mondaine</div>
+      <div class="glos-def">Processus progressif par lequel le capitalisme intègre les individus (et notamment les jeunes) dans la logique consumériste à travers une série d'objets et de pratiques ordonnés en niveaux croissants.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">Le potlatch de la plus-value</div>
+      <div class="glos-def">Mécanisme par lequel le capitalisme redistribue une fraction de la plus-value extraite sous forme de loisirs et de consommation, suffisante pour rendre l'exploitation supportable sans la remettre en question.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">Avoir sans user</div>
+      <div class="glos-def">Rapport à la propriété caractéristique de la bourgeoisie classique : posséder des biens dont on ne jouit pas directement (usines, terres, capitaux), qui existent comme pure valeur abstraite.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">User sans avoir</div>
+      <div class="glos-def">Rapport à la consommation propre à la social-démocratie libertaire : jouir de biens qu'on ne possède pas (location, crédit, partage), prétendre à la jouissance sans accéder à la propriété réelle.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">La social-démocratie libertaire</div>
+      <div class="glos-def">Idéologie de synthèse qui prétend conjuguer la liberté individuelle héritée de 68 et la régulation sociale héritée du mouvement ouvrier, mais qui sert objectivement les intérêts du capitalisme de la consommation.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">L'animation machinale</div>
+      <div class="glos-def">Mise en mouvement du corps par des stimuli extérieurs mécaniques (musique amplifiée, lumières, alcool) sans finalité consciente. La «&nbsp;statue de Pompidou&nbsp;» : un corps animé de l'extérieur, sans intériorité ni projet.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">La trinité mondaine</div>
+      <div class="glos-def">La Bande (le groupe de jeunes sans différenciation), La Boîte (l'espace de la consommation nocturne) et L'Animateur (le médiateur entre l'individu et la consommation) — trois piliers de la civilisation mondaine.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">Le néo-nominalisme</div>
+      <div class="glos-def">Logique de la mode où seuls les noms (les marques, les labels, les tendances) changent, tandis que la structure — le système différentiel mode/démodé — reste constante. La forme domine le contenu.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">Le Plan Marshall culturel</div>
+      <div class="glos-def">Dimension anthropologique du Plan Marshall (1947) : au-delà de l'aide économique, l'implantation en Europe d'un modèle culturel américain — le modèle du consommateur — à travers le cinéma, la musique et les objets de consommation.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">La fausse innocence</div>
+      <div class="glos-def">Position idéologique de la gauche libertaire qui croit sincèrement s'opposer au capitalisme tout en servant objectivement ses intérêts, en développant les marchés culturels de la contestation et de la différence.</div>
+    </div>
+    <div class="glos-item">
+      <div class="glos-term">La première civilisation sensuelle</div>
+      <div class="glos-def">Désignation ironique par Clouscard du capitalisme tardif comme «&nbsp;première civilisation des sens&nbsp;» — non pas au sens d'une libération, mais d'une mobilisation totale des sens au service de la reproduction du capital.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== ACTUALITÉ CRITIQUE ===== -->
+<div class="band-rouge">
+<section>
+  <div class="section-label">Résonances contemporaines</div>
+  <h2 class="section-title">Clouscard aujourd'hui — Une grille de lecture pour le présent</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Rédigée à l'orée des années 1980, l'analyse de Clouscard a acquis une pertinence nouvelle à l'ère du numérique, des réseaux sociaux et de l'<em>économie de l'attention</em>.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="tag">Réseaux sociaux</div>
+      <h3>Instagram & TikTok — Initiation mondaine 2.0</h3>
+      <p>Les réseaux sociaux réalisent le programme mondain à son niveau le plus abouti : mise en scène permanente de soi, consommation de styles de vie, identification par les objets possédés, animation machinale des corps — le tout monétisé et gamifié.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Économie de plateforme</div>
+      <h3>«&nbsp;User sans avoir&nbsp;» — Ubérisation et streaming</h3>
+      <p>L'économie des plateformes (Uber, Airbnb, Netflix, Spotify) réalise à grande échelle le principe clouscarien : jouir sans posséder, user sans avoir. La propriété recule, la jouissance s'étend — mais le capital reste entre les mains de quelques-uns.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Récupération</div>
+      <h3>Le punk, l'alter, le «&nbsp;woke&nbsp;» — Mêmes lois</h3>
+      <p>Chaque nouvelle forme de contestation culturelle (punk, alter-mondialisme, mouvements identitaires) est récupérée selon les mêmes mécanismes décrits par Clouscard : d'abord marginale et subversive, puis stylisée et commercialisée, enfin intégrée.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Féminisme de marché</div>
+      <h3>L'empowerment comme marchandise</h3>
+      <p>La critique clouscardinne du féminisme comme potentiellement récupéré par le marché trouve des échos dans le débat contemporain sur le «&nbsp;féminisme de marché&nbsp;» (femvertising, girl boss culture) — l'émancipation vendue comme produit de consommation.</p>
+    </div>
+  </div>
+
+  <div class="citation-bloc" style="margin-top:2rem">
+    <blockquote>
+      Ce qui frappe dans l'analyse de Clouscard, c'est son actualité. Il décrivait, en parlant du Walkman et de la discothèque, ce que nous voyons accompli par le smartphone et les réseaux sociaux. Le capitalisme de la séduction ne fait que se perfectionner — il ne change pas de nature.
+    </blockquote>
+    <div class="citation-source">— Lecture contemporaine</div>
+  </div>
+</section>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-title">Le Capitalisme de la Séduction</div>
+    <div class="footer-sub">Michel Clouscard — Éditions Sociales</div>
+    <p style="font-size:0.9rem; color:var(--gris-clair); margin-bottom:2rem; line-height:1.7">
+      Michel Clouscard (1928–2009) est un philosophe et sociologue marxiste français, professeur à l'Université de Bordeaux. Ses travaux portent sur la critique du capitalisme contemporain, la théorie de la conscience de classe et la philosophie dialectique. Son œuvre, longtemps marginalisée, connaît un renouveau d'intérêt à l'ère du capitalisme numérique.
+    </p>
+    <div class="footer-note">
+      Site éducatif à vocation de présentation et d'analyse critique de l'œuvre. Tous les concepts et citations sont tirés de <em>Le capitalisme de la séduction — Critique de la social-démocratie libertaire</em>, Éditions sociales. Usage non-commercial.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Accordion
+  function toggleAcc(header) {
+    const item = header.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Tabs
+  function switchTab(e, tabId) {
+    const container = e.target.closest('.tabs');
+    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    e.target.classList.add('active');
+    container.querySelector('#' + tabId).classList.add('active');
+  }
+
+  // Scroll-cue click
+  document.querySelector('.scroll-cue').addEventListener('click', () => {
+    document.querySelector('#introduction').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Sticky nav active state on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--or)' : '';
+    });
+  });
+
+  // Intersection observer for card animations
+  const cards = document.querySelectorAll('.card, .niveau-body, .glos-item, .stat-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(card);
+  });
+</script>
+</body>
+</html>

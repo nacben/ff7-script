@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wisdom of Insecurity — Alan Watts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & ROOT ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg0: #07090f;
+      --bg1: #0d1020;
+      --bg2: #121728;
+      --bg3: #181e32;
+      --gold: #c9a84c;
+      --gold-lt: #e8c970;
+      --gold-dim: rgba(201,168,76,0.25);
+      --gold-glow: rgba(201,168,76,0.07);
+      --teal: #4a9ab0;
+      --text0: #f2eadb;
+      --text1: #b8c6d8;
+      --text2: #7a8aaa;
+      --border: rgba(201,168,76,0.14);
+      --border-hi: rgba(201,168,76,0.4);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg0);
+      color: var(--text0);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1,h2,h3,h4,h5 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; line-height: 1.15; }
+    h1 { font-size: clamp(2.8rem,7vw,5.5rem); }
+    h2 { font-size: clamp(1.9rem,4vw,3rem); }
+    h3 { font-size: clamp(1.35rem,3vw,2rem); }
+    h4 { font-size: clamp(1.1rem,2vw,1.45rem); }
+    p  { margin-bottom: 1.1rem; }
+    a  { color: var(--gold); text-decoration: none; transition: color .3s; }
+    a:hover { color: var(--gold-lt); }
+    strong { color: var(--text0); font-weight: 600; }
+    em { font-style: italic; }
+
+    /* ===== PROGRESS BAR ===== */
+    #prog {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 2000;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+      width: 0%; transition: width .1s linear;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .7rem 2rem;
+      background: rgba(7,9,15,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Playfair Display',serif; font-size: .95rem;
+      color: var(--gold); letter-spacing: .05em;
+    }
+    .nav-links { display: flex; gap: 1.4rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Lato',sans-serif; font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--text2); transition: color .3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text2); border-radius: 2px; transition: .3s; }
+    @media(max-width:700px){
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--bg0); padding: 1rem 2rem; border-bottom: 1px solid var(--border);
+        gap: .75rem;
+      }
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+    .hero-inner { position: relative; z-index: 5; max-width: 860px; }
+    .hero-eyebrow {
+      font-family: 'Lato',sans-serif; font-size: .7rem; font-weight: 700;
+      letter-spacing: .35em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp .9s ease .4s forwards;
+    }
+    .hero-title {
+      color: var(--text0); margin-bottom: .4rem;
+      opacity: 0; animation: fadeUp .9s ease .7s forwards;
+    }
+    .hero-subtitle {
+      font-family: 'Playfair Display',serif; font-style: italic;
+      font-size: clamp(1.1rem,2.8vw,1.75rem);
+      color: var(--text1); margin-bottom: 2.2rem;
+      opacity: 0; animation: fadeUp .9s ease 1s forwards;
+    }
+    .hero-rule {
+      width: 70px; height: 1px; background: var(--gold);
+      margin: 0 auto 2rem;
+      opacity: 0; animation: fadeIn .9s ease 1.2s forwards;
+    }
+    .hero-quote {
+      font-family: 'Playfair Display',serif; font-style: italic;
+      font-size: clamp(1.05rem,2.2vw,1.4rem);
+      color: var(--text1); max-width: 600px; margin: 0 auto 2.2rem;
+      opacity: 0; animation: fadeUp .9s ease 1.4s forwards;
+    }
+    .hero-author {
+      font-family: 'Lato',sans-serif; font-size: .75rem; font-weight: 700;
+      letter-spacing: .25em; text-transform: uppercase; color: var(--text2);
+      opacity: 0; animation: fadeUp .9s ease 1.6s forwards;
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: var(--text2); font-family: 'Lato',sans-serif;
+      font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+      opacity: 0; animation: fadeIn 1s ease 2.1s forwards;
+    }
+    .scroll-pip {
+      width: 18px; height: 28px; border: 1px solid var(--text2);
+      border-radius: 9px; position: relative;
+    }
+    .scroll-pip::after {
+      content:''; position: absolute; top: 5px; left: 50%;
+      transform: translateX(-50%);
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--gold);
+      animation: pipBounce 1.6s ease-in-out infinite;
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .container-sm { max-width: 740px; margin: 0 auto; }
+    .sec-label {
+      font-family: 'Lato',sans-serif; font-size: .68rem; font-weight: 700;
+      letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: .9rem;
+    }
+    .sec-title { color: var(--text0); margin-bottom: 1.2rem; }
+    .sec-lead {
+      font-size: 1.15rem; color: var(--text1);
+      font-style: italic; margin-bottom: 2.8rem;
+    }
+    .rule { width: 56px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 1.5rem; }
+
+    .bg1 { background: var(--bg1); }
+    .bg2 { background: var(--bg2); }
+
+    /* ===== REVEAL ===== */
+    .r {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .r.in { opacity: 1; transform: none; }
+    .r.d1 { transition-delay: .1s; }
+    .r.d2 { transition-delay: .2s; }
+    .r.d3 { transition-delay: .3s; }
+    .r.d4 { transition-delay: .4s; }
+
+    /* ===== TWO COL ===== */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3.5rem; align-items: start;
+    }
+    @media(max-width:768px){ .two-col { grid-template-columns: 1fr; gap: 2rem; } }
+
+    /* ===== BLOCKQUOTE ===== */
+    .bq {
+      position: relative;
+      padding: 1.8rem 1.8rem 1.8rem 3.5rem;
+      margin: 2.5rem 0;
+      border-left: 3px solid var(--gold);
+      background: linear-gradient(135deg, var(--bg3), transparent);
+      border-radius: 0 10px 10px 0;
+    }
+    .bq::before {
+      content: '"';
+      position: absolute; top: -.6rem; left: .6rem;
+      font-family: 'Playfair Display',serif;
+      font-size: 5rem; color: var(--gold); opacity: .3; line-height: 1;
+    }
+    .bq p {
+      font-family: 'Playfair Display',serif;
+      font-size: clamp(1rem,1.8vw,1.25rem);
+      font-style: italic; color: var(--text0);
+      line-height: 1.65; margin-bottom: 0;
+    }
+    .bq cite {
+      display: block; margin-top: .9rem;
+      font-family: 'Lato',sans-serif; font-size: .72rem;
+      letter-spacing: .12em; color: var(--gold); font-style: normal;
+    }
+
+    /* ===== INSIGHT BOX ===== */
+    .insight {
+      background: linear-gradient(135deg, var(--bg3), var(--bg2));
+      border: 1px solid var(--border-hi);
+      border-radius: 14px; padding: 2.2rem; margin: 2rem 0;
+      position: relative; overflow: hidden;
+    }
+    .insight::before {
+      content:''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--teal));
+    }
+    .insight h4 { color: var(--gold); margin-bottom: .9rem; }
+    .insight p { color: var(--text1); margin-bottom: 0; }
+
+    /* ===== PARADOX CARDS ===== */
+    .paradox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem; margin: 2.5rem 0;
+    }
+    .px-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.6rem;
+      transition: border-color .3s, transform .3s;
+      cursor: default;
+    }
+    .px-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .px-try-label {
+      font-family: 'Lato',sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(220,100,100,.8); margin-bottom: .4rem;
+    }
+    .px-try-text {
+      font-family: 'Playfair Display',serif; font-style: italic;
+      font-size: 1rem; color: var(--text0); margin-bottom: .9rem;
+    }
+    .px-arrow { text-align: center; color: var(--gold); font-size: 1.1rem; margin: .5rem 0; }
+    .px-res-label {
+      font-family: 'Lato',sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(80,190,130,.9); margin-bottom: .4rem;
+    }
+    .px-res-text {
+      font-family: 'Playfair Display',serif; font-style: italic;
+      font-size: 1rem; color: var(--text1);
+    }
+
+    /* ===== CONCEPT CARDS ===== */
+    .concept-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.3rem; margin: 2.5rem 0;
+    }
+    .c-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.9rem;
+      transition: border-color .3s, transform .3s;
+    }
+    .c-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+    .c-icon { font-size: 1.9rem; margin-bottom: .9rem; display: block; }
+    .c-card h4 { color: var(--gold); font-size: 1.1rem; margin-bottom: .65rem; }
+    .c-card p { color: var(--text1); font-size: .95rem; line-height: 1.7; margin-bottom: 0; }
+
+    /* ===== STEPS / TIMELINE ===== */
+    .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+    .steps::before {
+      content:''; position: absolute; left: 1.6rem; top: 3rem; bottom: 3rem;
+      width: 1px; background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .step { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1.3rem; padding: 1.6rem 0; }
+    .step-num {
+      width: 3.2rem; height: 3.2rem; border-radius: 50%;
+      background: var(--bg1); border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display',serif; font-size: 1.1rem;
+      color: var(--gold); flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .step-body h4 { color: var(--text0); margin-bottom: .35rem; padding-top: .45rem; font-size: 1.1rem; }
+    .step-body p { color: var(--text1); font-size: .95rem; margin-bottom: 0; }
+
+    /* ===== PRINCIPLES ===== */
+    .principles { display: flex; flex-direction: column; gap: .9rem; margin: 2rem 0; }
+    .prin {
+      display: flex; gap: 1.3rem; align-items: flex-start;
+      padding: 1.3rem 1.4rem; background: var(--bg2);
+      border-radius: 10px; border: 1px solid var(--border);
+      transition: border-color .3s;
+    }
+    .prin:hover { border-color: var(--gold-dim); }
+    .prin-n { font-family: 'Playfair Display',serif; font-size: 1.4rem; color: var(--gold); opacity: .45; flex-shrink: 0; min-width: 1.8rem; line-height: 1; }
+    .prin-body h5 { font-size: 1rem; color: var(--text0); margin-bottom: .3rem; }
+    .prin-body p { color: var(--text1); font-size: .92rem; margin-bottom: 0; line-height: 1.65; }
+
+    /* ===== STAT ROW ===== */
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin: 2.5rem 0; }
+    @media(max-width:600px){ .stat-row { grid-template-columns: 1fr; } }
+    .stat {
+      text-align: center; padding: 2rem 1rem;
+      background: var(--bg2); border-radius: 12px; border: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: 'Playfair Display',serif; font-size: 2.4rem;
+      color: var(--gold); line-height: 1; margin-bottom: .45rem;
+    }
+    .stat-lbl {
+      font-family: 'Lato',sans-serif; font-size: .7rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; color: var(--text2);
+    }
+
+    /* ===== RIVER DIAGRAM ===== */
+    .river-wrap { position: relative; height: 180px; border-radius: 14px; overflow: hidden; margin: 2rem 0; background: var(--bg2); border: 1px solid var(--border); }
+    #river-canvas { width: 100%; height: 100%; }
+    .river-labels {
+      position: absolute; inset: 0; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 2rem; pointer-events: none;
+    }
+    .r-label {
+      font-family: 'Lato',sans-serif; font-size: .68rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; color: var(--text2);
+    }
+    .r-label.now { color: var(--gold); }
+    .river-caption { font-size: .88rem; color: var(--text2); font-style: italic; text-align: center; }
+
+    /* ===== I FINDER ===== */
+    .i-finder {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 2.4rem; text-align: center;
+    }
+    .i-finder h4 { color: var(--text0); margin-bottom: .7rem; }
+    .i-finder > p { color: var(--text1); margin-bottom: 1.8rem; }
+    .i-stages { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: .9rem; text-align: left; }
+    .i-stage {
+      background: var(--bg1); border-radius: 8px; padding: 1.1rem;
+      border-left: 3px solid transparent;
+    }
+    .i-stage.s1 { border-color: var(--teal); }
+    .i-stage.s2 { border-color: var(--gold); }
+    .i-stage.s3 { border-color: rgba(180,130,70,.5); }
+    .i-slabel {
+      font-family: 'Lato',sans-serif; font-size: .62rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--text2); margin-bottom: .4rem;
+    }
+    .i-stage p { font-size: .88rem; color: var(--text1); margin-bottom: 0; font-style: italic; line-height: 1.55; }
+
+    /* ===== BREATHING DEMO ===== */
+    .breath-demo {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.8rem; text-align: center; margin: 2.5rem 0;
+    }
+    .breath-demo h4 { color: var(--text0); margin-bottom: .6rem; }
+    .breath-demo > p { color: var(--text1); font-size: 1rem; max-width: 420px; margin: 0 auto; }
+    .breath-ring {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,154,176,.35), transparent 68%);
+      border: 2px solid var(--teal); margin: 1.8rem auto;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; animation: breathePulse 4s ease-in-out infinite;
+      transition: border-color .3s;
+      user-select: none;
+    }
+    .breath-ring:hover { border-color: var(--gold); }
+    .breath-ring span {
+      font-family: 'Lato',sans-serif; font-size: .68rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--text1);
+    }
+
+    /* ===== QUOTE GALLERY ===== */
+    .q-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+      gap: 1.3rem; margin: 2.5rem 0;
+    }
+    @media(max-width:640px){ .q-grid { grid-template-columns: 1fr; } }
+    .q-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 2.2rem;
+      position: relative; transition: border-color .3s, transform .3s; overflow: hidden;
+    }
+    .q-card::before {
+      content: '"'; position: absolute; top: -.8rem; left: 1.2rem;
+      font-family: 'Playfair Display',serif; font-size: 5.5rem;
+      color: var(--gold); opacity: .12; line-height: 1;
+    }
+    .q-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .q-card p {
+      font-family: 'Playfair Display',serif; font-size: 1.05rem;
+      font-style: italic; color: var(--text0); line-height: 1.65; margin-bottom: 1.2rem;
+    }
+    .q-chapter {
+      font-family: 'Lato',sans-serif; font-size: .67rem; font-weight: 700;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 3.5rem; align-items: start; }
+    @media(max-width:768px){ .about-grid { grid-template-columns: 1fr; } }
+    .about-portrait {
+      background: linear-gradient(135deg, var(--bg2), var(--bg3));
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 2.5rem 1.8rem; text-align: center;
+    }
+    .portrait-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+    .about-portrait h4 { color: var(--text0); margin-bottom: .4rem; }
+    .portrait-meta { font-family: 'Lato',sans-serif; font-size: .78rem; color: var(--text2); letter-spacing: .08em; }
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.4rem; justify-content: center; }
+    .tag {
+      background: var(--bg0); border: 1px solid var(--border);
+      border-radius: 20px; padding: .2rem .7rem;
+      font-family: 'Lato',sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--text2);
+    }
+
+    /* ===== BIG PULL QUOTE ===== */
+    .big-pull {
+      text-align: center; padding: 3.5rem 2rem;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+    .big-pull p {
+      font-family: 'Playfair Display',serif; font-style: italic;
+      font-size: clamp(1.3rem,3vw,2rem);
+      color: var(--text0); line-height: 1.5; margin-bottom: 1rem;
+    }
+    .big-pull cite {
+      font-family: 'Lato',sans-serif; font-size: .75rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #04060c; padding: 4rem 2rem;
+      text-align: center; border-top: 1px solid var(--border);
+    }
+    .footer-quote {
+      font-family: 'Playfair Display',serif; font-style: italic;
+      font-size: 1.15rem; color: var(--text2); max-width: 520px; margin: 0 auto 1.8rem;
+    }
+    .footer-meta { font-family: 'Lato',sans-serif; font-size: .75rem; color: var(--text2); letter-spacing: .08em; line-height: 2; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pipBounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(9px); }
+    }
+    @keyframes breathePulse {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.3); }
+    }
+
+    /* ===== MISC HELPERS ===== */
+    .gold-text { color: var(--gold); }
+    .muted { color: var(--text2); }
+    .small-text { font-size: .9rem; }
+    .mt1 { margin-top: 1rem; }
+    .mt2 { margin-top: 2rem; }
+    .mb0 { margin-bottom: 0 !important; }
+  </style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div id="prog"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <div class="nav-brand">The Wisdom of Insecurity</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#backwards-law">The Law</a></li>
+    <li><a href="#anxiety">Anxiety</a></li>
+    <li><a href="#time">Time</a></li>
+    <li><a href="#stream">Change</a></li>
+    <li><a href="#awareness">Self</a></li>
+    <li><a href="#moment">Now</a></li>
+    <li><a href="#transformation">Freedom</a></li>
+    <li><a href="#quotes">Quotes</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO ═══ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Alan Watts &nbsp;·&nbsp; 1951</div>
+    <h1 class="hero-title">The Wisdom<br>of Insecurity</h1>
+    <div class="hero-subtitle">A Message for an Age of Anxiety</div>
+    <div class="hero-rule"></div>
+    <p class="hero-quote">"When you try to stay on the surface of the water, you sink; but when you try to sink, you float."</p>
+    <div class="hero-author">The Law of Reversed Effort</div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-pip"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ THE BACKWARDS LAW ═══ -->
+<section id="backwards-law" class="bg1">
+  <div class="container">
+    <div class="sec-label r">Core Thesis</div>
+    <h2 class="sec-title r">The Backwards Law</h2>
+    <p class="sec-lead r">The central paradox at the heart of human suffering: the harder we pursue what we want, the more it eludes us.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>Alan Watts opens this book with a deceptively simple observation: there is a <strong>law of reversed effort</strong>. He sometimes called it the "backwards law."</p>
+        <p>The principle is ancient — the Chinese sage Lao-tzu recognized it two thousand years ago. The Sermon on the Mount encodes it. So does the mysticism of every great tradition. Yet we forget it constantly, in every area of our lives.</p>
+        <p>Watts discovered that this law governs not just physical actions but our deepest psychological and spiritual struggles. Our relationship with security, happiness, pain, the present moment — all governed by the same backwards principle.</p>
+      </div>
+      <div>
+        <div class="insight">
+          <h4>The Core Paradox</h4>
+          <p>The very act of intensely pursuing something — security, sleep, happiness, enlightenment — creates the very conditions that prevent it. The reaching creates the gap. The grasping prevents the having.</p>
+          <p class="mt1 mb0">Conversely, when you stop pursuing and simply <em>let be</em>, what you were chasing tends to arrive on its own.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="paradox-grid r">
+      <div class="px-card">
+        <div class="px-try-label">Try to →</div>
+        <div class="px-try-text">Stay on the surface of water</div>
+        <div class="px-arrow">↓</div>
+        <div class="px-res-label">Result:</div>
+        <div class="px-res-text">You sink</div>
+      </div>
+      <div class="px-card">
+        <div class="px-try-label">Try to →</div>
+        <div class="px-try-text">Fall into the water</div>
+        <div class="px-arrow">↓</div>
+        <div class="px-res-label">Result:</div>
+        <div class="px-res-text">You float</div>
+      </div>
+      <div class="px-card">
+        <div class="px-try-label">Try to →</div>
+        <div class="px-try-text">Hold your breath</div>
+        <div class="px-arrow">↓</div>
+        <div class="px-res-label">Result:</div>
+        <div class="px-res-text">You lose it</div>
+      </div>
+      <div class="px-card">
+        <div class="px-try-label">Try to →</div>
+        <div class="px-try-text">Secure your life against all risk</div>
+        <div class="px-arrow">↓</div>
+        <div class="px-res-label">Result:</div>
+        <div class="px-res-text">You feel more insecure</div>
+      </div>
+      <div class="px-card">
+        <div class="px-try-label">Try to →</div>
+        <div class="px-try-text">Forget yourself (force happiness)</div>
+        <div class="px-arrow">↓</div>
+        <div class="px-res-label">Result:</div>
+        <div class="px-res-text">You remember yourself more intensely</div>
+      </div>
+      <div class="px-card">
+        <div class="px-try-label">Try to →</div>
+        <div class="px-try-text">Escape from pain by resisting it</div>
+        <div class="px-arrow">↓</div>
+        <div class="px-res-label">Result:</div>
+        <div class="px-res-text">The pain intensifies</div>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>Most of us believe in order to feel secure, in order to make our individual lives seem valuable and meaningful. Belief has thus become an attempt to hang on to life, to grasp and keep it for one's own. But you cannot understand life and its mysteries as long as you try to grasp it. Indeed, you cannot grasp it, just as you cannot walk off with a river in a bucket.</p>
+      <cite>— Alan Watts, The Wisdom of Insecurity</cite>
+    </div>
+
+    <div class="insight r">
+      <h4>The Distinction: Belief vs. Faith</h4>
+      <p>Watts draws a precise and important line. <strong>Belief</strong> means insisting that truth must conform to what we already wish. It clings. <strong>Faith</strong> is the exact opposite — an unreserved opening of the mind to whatever truth turns out to be, without preconditions. Faith lets go. In this sense, faith is the essential virtue of genuine science, and of any religion that is not self-deception.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ AGE OF ANXIETY ═══ -->
+<section id="anxiety" class="bg2">
+  <div class="container">
+    <div class="sec-label r">Chapter I</div>
+    <h2 class="sec-title r">The Age of Anxiety</h2>
+    <p class="sec-lead r">We live in an era of unprecedented knowledge and unprecedented dread. Why has progress brought not peace, but anxiety?</p>
+
+    <div class="two-col r">
+      <div>
+        <p>By all outward appearances, our life is <em>a spark of light between one eternal darkness and another.</em> Watts opens with this unflinching observation: consciousness comes with a price.</p>
+        <p>For centuries, humanity managed this existential predicament through religious belief — through the conviction that there is an eternal order behind the fleeting, an immortal soul behind the mortal body. This belief was not merely comfortable. It was structurally necessary.</p>
+        <p>But science has eroded these certainties. Not by proving them false, but by making them seem unnecessary — unfalsifiable, emotionally motivated rather than rationally grounded. The authority of science has quietly displaced the authority of religion in the popular imagination.</p>
+      </div>
+      <div>
+        <div class="insight">
+          <h4>The Double Bind of Modernity</h4>
+          <p>Science has dissolved the old myths that made life bearable — but offers no new myths to replace them. The result is not liberation but a particular kind of despair: knowing too much to believe the old stories, not knowing enough to be at peace without them.</p>
+        </div>
+        <div class="bq" style="margin-top: 1.5rem;">
+          <p>Logic, intelligence, and reason are satisfied, but the heart goes hungry.</p>
+          <cite>— Alan Watts</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-row r">
+      <div class="stat">
+        <div class="stat-val">∞</div>
+        <div class="stat-lbl">The pursuit of security</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">0</div>
+        <div class="stat-lbl">Ultimate guarantee available</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">Now</div>
+        <div class="stat-lbl">The only moment that is real</div>
+      </div>
+    </div>
+
+    <div class="concept-grid r">
+      <div class="c-card">
+        <span class="c-icon">🔬</span>
+        <h4>Science's Honest Verdict</h4>
+        <p>Science cannot prove God does not exist, but finds the hypothesis unnecessary. This is not atheism — it is agnosticism. It leaves humanity without the mythological scaffolding that once made existence bearable, and it arrived through intellectual honesty, not malice.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">🎭</span>
+        <h4>Belief in Believing</h4>
+        <p>Many modern religious revivals are not real faith but nostalgia — a desire to <em>want</em> to believe because believing was comforting. But a myth only works when thought to be true. Knowingly pretending something isn't futile is not a religion — and it never works for long.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">🌊</span>
+        <h4>The Third Way</h4>
+        <p>Watts proposes a path beyond both desperate belief and bleak materialism. It requires neither myth nor despair — but it does require "a complete revolution in our ordinary, habitual ways of thinking and feeling." This book is the map to that revolution.</p>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>The present phase of human thought and history is especially ripe for this "letting go." Our minds have been prepared for it by this very collapse of the beliefs in which we have sought security. This disappearance of the old rocks and absolutes is no calamity, but rather a blessing. It almost compels us to face reality with open minds, and you can only know God through an open mind just as you can only see the sky through a clear window.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SECURITY PARADOX ═══ -->
+<section id="security" class="bg1">
+  <div class="container-sm">
+    <div class="sec-label r">Key Insight</div>
+    <h2 class="sec-title r">The Desire for Security <em>Is</em> Insecurity</h2>
+    <div class="rule r"></div>
+
+    <p class="r" style="font-size:1.15rem; color:var(--text1);">The most arresting psychological insight of the book arrives with startling directness:</p>
+
+    <div class="big-pull r">
+      <p>The desire for security and the feeling of insecurity are the same thing. To hold your breath is to lose your breath. A society based on the quest for security is nothing but a breath-retention contest in which everyone is as taut as a drum and as purple as a beet.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <p class="r">This is not a play on words. It is a precise psychological observation. When we feel insecure, we seek security. We build walls, accumulate resources, seek membership in the right groups, adopt the right beliefs. But the very act of building the wall announces that we feel threatened.</p>
+    <p class="r">Security means isolation — separating the "I" from the threatening world. But it is precisely this sense of isolation that creates the feeling of insecurity in the first place. The more we secure ourselves, the more separate we feel, and the more we crave further security.</p>
+
+    <div class="steps r">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Feel insecure</h4>
+          <p>The sense of being a separate, isolated "I" in a vast and indifferent universe creates fundamental vulnerability.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Seek security</h4>
+          <p>We try to fortify the "I" — through wealth, status, relationships, beliefs, identity, and belonging to the right group.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Feel more isolated</h4>
+          <p>The act of fortifying the self makes it feel more separate, more exposed, more alone in its fortress.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Crave more security</h4>
+          <p>The vicious circle deepens. Wanting more security always produces more wanting security.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">⌀</div>
+        <div class="step-body">
+          <h4>The only exit</h4>
+          <p>See that there is no security to find, and that the "I" doing the seeking is itself an illusion. Paradoxically, this seeing — not any achievement — is the exit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight r">
+      <h4>The Persian Sage at Heaven's Door</h4>
+      <p>A sage came to Heaven and knocked. "Who is there?" asked God's voice. "It is <em>I</em>," said the sage. "In this House there is no room for thee and me." The sage went away for years of meditation. Returning, the voice asked again. Again: "It is <em>I</em>." The door remained closed. Years later, he returned once more. "Who is there?" — "It is <em>thyself.</em>" The door was opened.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PAIN AND TIME ═══ -->
+<section id="time" class="bg2">
+  <div class="container">
+    <div class="sec-label r">Chapter II</div>
+    <h2 class="sec-title r">The Trap of Time</h2>
+    <p class="sec-lead r">Memory and prediction are humanity's greatest gifts — and the source of our peculiar torment.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>Unlike animals, humans live not just in the present but in a vast mental landscape of past and future. A dog enjoys its meal completely. A human eats while worrying about next month's bills, replaying yesterday's argument, planning next year's vacation.</p>
+        <p>This is remarkable: we have the capacity to suffer from things that are not happening right now. Worse, we suffer from things that may never happen at all. And the very powers that give us this capacity — memory and foresight — are also humanity's greatest adaptive achievements.</p>
+        <p>Watts illustrates with a vivid image: a man who knows he faces surgery in two weeks. He has food, friends, interesting work. But he cannot enjoy any of it. His mind is not here — it is in an imagined future that does not yet exist, and may never arrive in the form he fears.</p>
+      </div>
+      <div>
+        <div class="insight">
+          <h4>The Time Problem</h4>
+          <p>We live for the future, but the future never comes — only more present moments arrive. Every "future" goal, when reached, immediately becomes "now" — and then we look to the next future.</p>
+          <p class="mt1 mb0">We are always <em>preparing</em> to live, never living.</p>
+        </div>
+        <div class="bq" style="margin-top: 1.5rem;">
+          <p>What is the use of planning to be able to eat next week unless I can really enjoy the meals when they come?</p>
+          <cite>— Alan Watts</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- River Diagram -->
+    <div class="r">
+      <div class="sec-label" style="margin-bottom:.8rem;">The River of Time</div>
+      <div class="river-wrap">
+        <canvas id="river-canvas"></canvas>
+        <div class="river-labels">
+          <div class="r-label">← Past (Memory)</div>
+          <div class="r-label now">▼ Present ▼</div>
+          <div class="r-label">Future (Anticipation) →</div>
+        </div>
+      </div>
+      <p class="river-caption">All experience is NOW. Memory is a present trace of the past, not the past itself. You cannot experience "yesterday" — only the present moment of remembering it.</p>
+    </div>
+
+    <div class="bq r">
+      <p>After all, the future is quite meaningless and unimportant unless, sooner or later, it is going to become the present. Thus to plan for a future which, when it comes to me, will find me "absent," looking fixedly over its shoulder instead of into its face — this is the tragedy of the modern condition.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="concept-grid r">
+      <div class="c-card">
+        <span class="c-icon">🧠</span>
+        <h4>Memory Is a Present Experience</h4>
+        <p>When you remember something, you are not actually visiting the past. You are experiencing a present trace of the past — like seeing bird tracks in sand and inferring a bird that has long since flown. The bird has gone. You are not watching it.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">👁</span>
+        <h4>All Experience Is Momentary</h4>
+        <p>Every experience you have ever had has occurred in the present moment. You have never experienced "yesterday" — only the present moment of yesterday. The present moment is the only mode of existence available. Everything else is inference.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">🌀</span>
+        <h4>The Vicious Circle of Hope</h4>
+        <p>If happiness requires an assured future, we will never be happy — because certainty about the future is impossible. If we cannot be happy without certainty, we are demanding something the universe does not contain. This is the peculiar structure of modern anxiety.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ THE GREAT STREAM ═══ -->
+<section id="stream" class="bg1">
+  <div class="container">
+    <div class="sec-label r">Chapter III</div>
+    <h2 class="sec-title r">The Great Stream of Change</h2>
+    <p class="sec-lead r">Life, change, movement, and insecurity are many names for the same thing. To resist change is to resist life itself.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>The universe is not a collection of objects. It is a continuous process — a flowing. What we call "things" are patterns in this flow, the way a wave is a pattern in water. The wave has a shape, a character — but it <em>is</em> the water moving, not a separate thing riding on top of it.</p>
+        <p>And crucially: <em>you</em> are such a pattern. Your body replaces almost all its atoms every few years. Your thoughts flow continuously. Even your sense of self is not a fixed entity but a stream of experiences, sustained by memory the way a flame is sustained by wax.</p>
+        <p>We make ourselves miserable by trying to freeze what flows. By clinging to experiences, people, and moments that are inherently transient. We love the river but want it to stop flowing.</p>
+      </div>
+      <div>
+        <div class="bq">
+          <p>The poets have seen the truth that life, change, movement, and insecurity are so many names for the same thing. Here, if anywhere, truth is beauty, for movement and rhythm are of the essence of all things lovable.</p>
+          <cite>— Alan Watts</cite>
+        </div>
+        <div class="insight" style="margin-top:1.5rem;">
+          <h4>Ouroboros</h4>
+          <p>The ancient symbol of the snake eating its own tail. This, Watts says, is what the mind does when it tries to stand outside itself, to fix the flow, to make permanent what is essentially movement. The head cannot bite itself. The solution is not to stop the circle — but to see it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-pull r">
+      <p>Struggle as we may, "fixing" will never make sense out of change. The only way to make sense out of change is to plunge into it, move with it, and join the dance.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="principles r">
+      <div class="prin">
+        <div class="prin-n">I</div>
+        <div class="prin-body">
+          <h5>Every form is a pattern of movement</h5>
+          <p>A river's banks exist because water flows. You exist because food, air, and experiences flow through you. Freeze the flow and the form dissolves — not into nothing, but back into the larger process.</p>
+        </div>
+      </div>
+      <div class="prin">
+        <div class="prin-n">II</div>
+        <div class="prin-body">
+          <h5>Life and death are two sides of one force</h5>
+          <p>What we call "death" is inseparable from what we call "life." The same movement of change that creates also destroys. Resisting death is resisting the very force that produces life. "Unless a grain of corn fall into the ground and die, it remains alone. But if it dies, it brings forth much fruit."</p>
+        </div>
+      </div>
+      <div class="prin">
+        <div class="prin-n">III</div>
+        <div class="prin-body">
+          <h5>Consciousness is also a stream</h5>
+          <p>Even "I" — the apparent observer — is not a fixed tablet upon which life writes its record. It too is a stream of experiences in constant motion. Memory creates the illusion of permanence the way a whirling stick creates the illusion of a circle of fire.</p>
+        </div>
+      </div>
+      <div class="prin">
+        <div class="prin-n">IV</div>
+        <div class="prin-body">
+          <h5>Words are conventions, not realities</h5>
+          <p>Our suffering is compounded by the fact that words and ideas are fixed, while reality flows. We try to live in the world of words — stable, defined, categorized — but we actually live in the world of experience, which is always moving. The map is not the territory; the word "water" cannot quench thirst.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ BODY WISDOM ═══ -->
+<section id="body" class="bg2">
+  <div class="container">
+    <div class="sec-label r">Chapter IV</div>
+    <h2 class="sec-title r">The Wisdom of the Body</h2>
+    <p class="sec-lead r">We have elevated the brain over the body — and both have suffered for it.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>The brain is a remarkable instrument. But we have made the mistake of assuming that because the brain can <em>think about</em> things, it is wiser than the ancient systems that actually manage life — digestion, immune response, hormonal regulation, the thousands of processes that keep us alive without our conscious direction.</p>
+        <p>We no longer trust our bodies. We eat by the clock, not hunger. We sleep by schedule, not tiredness. We override physical signals with intellectual plans. We feel uncomfortable when idle, because the brain demands stimulation even when the body needs rest.</p>
+        <p>Watts calls this the "European dissociation" — the split between the cortex and the rest of the organism. It is the biological face of the split between "I" and "me," between consciousness and nature.</p>
+      </div>
+      <div>
+        <div class="concept-grid" style="grid-template-columns:1fr;">
+          <div class="c-card">
+            <span class="c-icon">💭</span>
+            <h4>The Brain's Mistake</h4>
+            <p>The brain lives in the future — it is designed to predict and plan. But the future is an abstraction. No amount of brain-activity can be directly tasted, heard, smelled, or enjoyed. We chase the phantom of a better tomorrow, and when tomorrow arrives, we immediately look to the next one.</p>
+          </div>
+          <div class="c-card">
+            <span class="c-icon">⚡</span>
+            <h4>Instinctual Wisdom</h4>
+            <p>The body's deep wisdom — immune response, hormonal balance, physical intuition — operates without verbalizing or "knowing how." The homing pigeon navigates thousands of miles without a map. The foetus builds an eye without engineering drawings. This effortless knowing is what the brain imitates poorly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>The brain should, and in some cases does, calculate and reason with the unconscious ease of the other bodily organs. After all, the brain is not a muscle, and is thus not designed for effort and strain. When it works rightly, it is the highest form of instinctual wisdom — working like the homing instinct of pigeons, without verbalizing the process or knowing "how" it does it.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="insight r">
+      <h4>The Vicious Circle of Stimulation</h4>
+      <p>Modern civilization has built an economy designed to produce happiness through endless stimulation — and has produced frustration instead. We stimulate our sense organs until they become insensitive, so pleasure requires stronger and stronger stimulants. Watts describes it with uncomfortable accuracy: the person who continuously itches their ears with the radio, whose eyes flit without rest from television to newspaper to magazine, kept in a kind of "orgasm-without-release" through a series of teasing glimpses of shiny surfaces. This is not materialism — truly materialistic people would love matter. What we have is <em>brain-ism</em>: the worship of abstraction over reality, of promise over presence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ THE I ILLUSION ═══ -->
+<section id="awareness" class="bg1">
+  <div class="container">
+    <div class="sec-label r">Chapter V</div>
+    <h2 class="sec-title r">The Illusion of the Separate Self</h2>
+    <p class="sec-lead r">What is this "I" that seems to stand apart from experience, watching and judging? Watts invites us to look — carefully — and find it.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>Most of our suffering comes from the feeling that there is an "I" separate from experience — a self that is troubled by things, afraid of pain, anxious about the future. This self seems like a permanent spectator watching the show of life from behind the eyes.</p>
+        <p>But Watts asks us to look directly: can you find this self? When you try to observe yourself thinking, what do you actually find? Not a thinker — only more thinking. When you try to catch yourself feeling, you find more feeling. You never find an "I" separate from whatever experience is happening right now.</p>
+        <p>The "I" is an inference, a convention, a useful fiction created by the continuity of memory. It is real as a convention, as the equator is real — but it is not a <em>thing</em> standing apart from experience, watching it from outside.</p>
+      </div>
+      <div>
+        <div class="i-finder">
+          <h4>Try This Experiment</h4>
+          <p>Right now — can you find the one who is reading these words?</p>
+          <div class="i-stages">
+            <div class="i-stage s1">
+              <div class="i-slabel">Experience 1</div>
+              <p>"I am reading this sentence"</p>
+            </div>
+            <div class="i-stage s2">
+              <div class="i-slabel">Experience 2</div>
+              <p>"I am aware that I am reading" — but now you are thinking about reading, not reading</p>
+            </div>
+            <div class="i-stage s3">
+              <div class="i-slabel">The Discovery</div>
+              <p>You never find a thinker behind the thought — only another thought. There is simply experience, with no separate experiencer behind it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>"I feel fine" means that a fine feeling is present. It does not mean that there is one thing called an "I" and another separate thing called a feeling, so that when you bring them together this "I" feels the fine feeling. There are no feelings but present feelings, and whatever feeling is present is "I." No one ever found an "I" apart from some present experience.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="concept-grid r">
+      <div class="c-card">
+        <span class="c-icon">🌊</span>
+        <h4>Memory Creates the Illusion</h4>
+        <p>Memory makes it seem like there is a continuous "I" that persists through time. But memory is itself a present experience. It is like whirling a burning stick to create the illusion of a circle of fire — the circle is real as appearance, but no circle exists in fact.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">🪞</span>
+        <h4>No Experiencer Behind Experience</h4>
+        <p>You do not feel feelings; feelings happen. You do not see sight; seeing happens. Just as you cannot smell your own nose, there is no "you" standing behind your experience, watching it from outside. The watcher is always another experience being watched.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">✨</span>
+        <h4>The Practical Liberation</h4>
+        <p>When you see there is no separate "I," there is no one to protect, no one to save, no one to be fundamentally insecure. The vicious circle cannot run without its center. This is not a loss — it is the opening of the thing Watts calls awareness: experience complete in itself.</p>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>There is a Chinese story of one who came to a great sage, saying, "I have no peace of mind. Please pacify my mind." The sage answered, "Bring out your mind before me, and I will pacify it." "These many years," he replied, "I have sought my mind, but I cannot find it." "There," concluded the sage, "it is pacified!"</p>
+      <cite>— Ancient Chinese story, quoted by Alan Watts</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ THE MARVELOUS MOMENT ═══ -->
+<section id="moment" class="bg2">
+  <div class="container-sm">
+    <div class="sec-label r">Chapter VI</div>
+    <h2 class="sec-title r">The Marvelous Moment</h2>
+    <div class="rule r"></div>
+
+    <p class="sec-lead r">If all experience is in the present moment and there is no separate "I" — what remains? Something so ordinary it is almost invisible, and so extraordinary that every mystical tradition has pointed at it.</p>
+
+    <p class="r">When joy is at its peak, we do not think "I am happy." We are simply absorbed in the experience. Children at play do not observe themselves playing — they <em>are</em> play. Music heard with full attention is not analyzed — it is simply heard. The experience is complete. There is no "I" watching it.</p>
+
+    <p class="r">This "forgetting of self" in experience is what Watts identifies as the closest most of us come to what the spiritual traditions call enlightenment, liberation, satori, or the vision of God. And it requires no special technique — only the recognition that you cannot actually be separate from your present experience.</p>
+
+    <div class="bq r">
+      <p>When you are listening to music, you must listen to it. But so long as you are thinking "I am listening to this music," you are not listening. To understand joy or fear, you must be wholly and undividedly aware of it. So long as you are calling it names and saying "I am happy," or "I am afraid," you are not being aware of it.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="breath-demo r">
+      <h4>The Breathing Demonstration</h4>
+      <div class="breath-ring" id="breathRing" title="Click to start guided breathing">
+        <span id="breathText">Click me</span>
+      </div>
+      <p>Notice: when you breathe naturally without thinking about it, it flows perfectly. The moment you try to deliberately control your breathing, it becomes awkward. This is the backwards law made tangible in your own body, in this very moment.</p>
+    </div>
+
+    <p class="r">Awareness is not detachment from experience. It is <em>complete</em> presence in experience — without the narrating voice of the self that stands apart and comments. When the mind is not divided into "I" and "this experience," experience is whole and full.</p>
+
+    <div class="insight r">
+      <h4>Pain Without Resistance — The Most Counterintuitive Claim</h4>
+      <p>Watts makes a shocking assertion: pain suffered <em>without resistance</em> — without the "I" trying to escape it — is fundamentally different from resisted pain. When you stop trying to be separate from the pain, it stops being a "problem." It hurts — period. But without the second layer of suffering that comes from fighting it, the mind can absorb it the way water absorbs a blow.</p>
+      <p class="mt1 mb0 muted" style="font-style:italic;">"Wanting to get out of pain is the pain itself; it is not the reaction of an 'I' distinct from the pain. When you actually see that you are the pain, pain ceases to be a motive, for there is no one to be moved."</p>
+    </div>
+
+    <div class="bq r">
+      <p>The real reason why human life can be so utterly exasperating and frustrating is not because there are facts called death, pain, fear, or hunger. The madness of the thing is that when such facts are present, we circle, buzz, writhe, and whirl, trying to get the "I" out of the experience. Sanity, wholeness, and integration lie in the realization that we are not divided, that man and his present experience are one.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ TRANSFORMATION ═══ -->
+<section id="transformation" class="bg1">
+  <div class="container">
+    <div class="sec-label r">Chapter VII</div>
+    <h2 class="sec-title r">The Transformation of Life</h2>
+    <p class="sec-lead r">The undivided mind lives differently — not through effort or self-improvement, but through clear seeing.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>Watts is careful to distinguish this transformation from any kind of spiritual self-improvement project. You cannot decide to be "undivided." You cannot practice non-self-consciousness. Any effort to achieve these states immediately reinstates the split between the improver and the one being improved.</p>
+        <p>What can happen is <em>understanding</em> — genuine insight. When the vicious circle is truly seen — when you perceive that "I" chasing security creates insecurity, that grasping happiness prevents it — the circle does not need to be broken by effort. It stops turning because its energy source (the belief in the separate "I") has been removed.</p>
+        <p>The key moment is seeing that you are your experience, not a separate observer of it. You are this moment, not someone moving through moments.</p>
+      </div>
+      <div>
+        <div class="insight">
+          <h4>The Dance Metaphor</h4>
+          <p>When you dance, you do not dance <em>in order to</em> arrive somewhere. The meaning of dancing is the dance. When you listen to music, you do not rush through it to get to the final chord. The meaning is in each moment of the music itself.</p>
+          <p class="mt1 mb0">Life is like this. When lived fully in the present, it needs no future justification, no purpose beyond itself. It is complete in each moment — not as a resigned acceptance of what is, but as direct recognition that this is where living actually occurs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-pull r">
+      <p>When you realize that you live in, that indeed you are this moment now, and no other — that apart from this there is no past and no future — you must relax and taste to the full, whether it be pleasure or pain. At once it becomes obvious why this universe exists, why conscious beings have been produced, why sensitive organs, why space, time, and change. The whole problem of justifying nature disappears utterly. Obviously, it all exists for this moment.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="concept-grid r">
+      <div class="c-card">
+        <span class="c-icon">🎯</span>
+        <h4>Life Is the Point</h4>
+        <p>How long have the planets been circling the sun? Are they getting somewhere? Does spring try to outdo itself each year, rushing toward some final perfect spring? Life is not a journey with a destination — it is the destination itself, available in each moment.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">💀</span>
+        <h4>Death as Renewal</h4>
+        <p>"Nothing is more creative than death, since it is the whole secret of life. It means that the past must be abandoned, that the unknown cannot be avoided, that 'I' cannot continue, and that nothing can be ultimately fixed. When a man knows this, he lives for the first time in his life."</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">🌐</span>
+        <h4>The Unity of Experience</h4>
+        <p>When the division between "I" and experience collapses, you discover you are not separate from the world. The sensation of the sky is not "in here" while the sky is "out there." For all practical purposes of feeling and experience, you are that sensation. The world draws into its own unity.</p>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>Nothing is more creative than death, since it is the whole secret of life. It means that the past must be abandoned, that the unknown cannot be avoided, that "I" cannot continue. When a man knows this, he lives for the first time in his life. By holding his breath, he loses it. By letting it go he finds it.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CREATIVE MORALITY ═══ -->
+<section id="morality" class="bg2">
+  <div class="container">
+    <div class="sec-label r">Chapter VIII</div>
+    <h2 class="sec-title r">Creative Morality</h2>
+    <p class="sec-lead r">When the divided mind becomes whole, something like love emerges — not as an emotion pursued, but as the natural character of undivided awareness.</p>
+
+    <div class="two-col r">
+      <div>
+        <p>Conventional morality is rules and regulations — trying to force the divided self to behave as if it were unified. It fails because the "good I" trying to improve the "bad me" only deepens the division. You cannot discipline yourself into love. You cannot reason yourself into genuine compassion.</p>
+        <p>St. Augustine's formula — "Love, and do what you will" — sounds dangerous. But it describes the undivided mind precisely. When there is no separate "I" trying to benefit itself at the expense of everything else, action naturally expresses what Watts calls "the organizing and unifying principle which makes the world a universe."</p>
+        <p>This is not the warm glow of sentiment. It is structural. The undivided mind is not interested in itself — it is absorbed in the people and situations before it. And absorption in others <em>is</em> love, in its most practical form.</p>
+      </div>
+      <div>
+        <div class="bq">
+          <p>The mind must be interested or absorbed in something, just as a mirror must always be reflecting something. When it is not trying to be interested in itself — as if a mirror would reflect itself — it must be interested in other people and things. There is no problem of how to love. We love. We are love.</p>
+          <cite>— Alan Watts</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight r">
+      <h4>Why Rules and Condemnation Fail</h4>
+      <p>A man who gives bread <em>in order to be charitable</em>, lives with a woman <em>in order to be faithful</em>, eats with someone different from himself <em>in order to be unprejudiced</em> — Watts notes — "is as cold as a clam. He does not actually see the other person." Morality as performance is not morality. It is a more sophisticated form of self-interest — the interest of the "I" in being a good "I."</p>
+      <p class="mt1 mb0">Equally, condemnation does not create virtue. The moralist who harangues and threatens only drives the divided mind deeper into its vicious circle — the "I" that was afraid of being bad now becomes afraid of condemnation, which creates the same anxious circling.</p>
+    </div>
+
+    <div class="bq r">
+      <p>Everyone has love, but it can only come out when he is convinced of the impossibility and the frustration of trying to love himself. This conviction will not come through condemnations, through hating oneself, through calling self-love all the bad names in the universe. It comes only in the awareness that one has no self to love.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ WONDER ═══ -->
+<section id="wonder" class="bg1">
+  <div class="container-sm">
+    <div class="sec-label r">Chapter IX — The Final Destination</div>
+    <h2 class="sec-title r">Wonder Beyond Knowledge</h2>
+    <div class="rule r"></div>
+
+    <p class="sec-lead r">Science and philosophy, pursued to their limits, arrive at the same place the mystics began: radical unknowing, and the discovery that the most ordinary moment is an inexhaustible mystery.</p>
+
+    <p class="r">Watts ends the book not with answers but with a kind of productive vertigo — the disorientation that comes when thought has exhausted its options and the mind is forced to simply <em>be</em> with what is. This is not defeat. It is the threshold of something real.</p>
+
+    <div class="bq r">
+      <p>Steadily he approaches the point where what is unknown is not a mere blank space in a web of words but a window in the mind, a window whose name is not ignorance but wonder.</p>
+      <cite>— Alan Watts</cite>
+    </div>
+
+    <div class="concept-grid r">
+      <div class="c-card">
+        <span class="c-icon">🔭</span>
+        <h4>Eddington's Confession</h4>
+        <p>The physicist Eddington — not in mystical reverie but in careful scientific sobriety — wrote: <em>"Something unknown is doing we don't know what."</em> This, Watts suggests, is the nearest science comes to what the mystics have always said about God. The greatest minds arrive at wonder, not certainty.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">📿</span>
+        <h4>The Hindu Upanishads</h4>
+        <p><em>"He who thinks that God is not comprehended, by him God is comprehended; but he who thinks that God is comprehended knows him not. God is unknown to those who know him, and is known to those who do not know him at all."</em> The paradox points beyond both belief and disbelief.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-icon">🌿</span>
+        <h4>St. John of the Cross</h4>
+        <p><em>"One of the greatest favors bestowed on the soul is to enable it to see so distinctly and to feel so profoundly that it cannot comprehend God at all."</em> The highest spiritual attainment is not certainty — it is the capacity to live fully in the presence of irreducible mystery.</p>
+      </div>
+    </div>
+
+    <div class="big-pull r">
+      <p>To be at this moment is pure miracle. In such feeling, seeing, and thinking life requires no future to complete itself nor explanation to justify itself. In this moment it is finished.</p>
+      <cite>— Alan Watts, final words of The Wisdom of Insecurity</cite>
+    </div>
+
+    <div class="insight r">
+      <h4>The Full Circle</h4>
+      <p>Thought has moved in a complete circle. We began seeking security and certainty. We discovered that seeking creates what it fears. We explored the present moment and found it the only reality. We dissolved the "I" that sought and feared. We found that life needs no justification beyond itself. And we arrived — not at an answer — but at the bare fact of this moment: inexplicable, complete, alive.</p>
+      <p class="mt1 mb0 gold-text" style="font-style:italic; font-family:'Playfair Display',serif;">"Free from clutching at themselves the hands can handle; free from looking after themselves the eyes can see; free from trying to understand itself thought can think."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ QUOTES GALLERY ═══ -->
+<section id="quotes" class="bg2">
+  <div class="container">
+    <div class="sec-label r">Selected Wisdom</div>
+    <h2 class="sec-title r">Unforgettable Passages</h2>
+    <p class="sec-lead r">The book's most luminous insights gathered for reflection and return.</p>
+
+    <div class="q-grid">
+      <div class="q-card r">
+        <p>The desire for security and the feeling of insecurity are the same thing. To hold your breath is to lose your breath.</p>
+        <div class="q-chapter">On Being Aware</div>
+      </div>
+      <div class="q-card r d1">
+        <p>You cannot understand life and its mysteries as long as you try to grasp it. Indeed, you cannot grasp it, just as you cannot walk off with a river in a bucket.</p>
+        <div class="q-chapter">The Age of Anxiety</div>
+      </div>
+      <div class="q-card r d2">
+        <p>Struggle as we may, "fixing" will never make sense out of change. The only way to make sense out of change is to plunge into it, move with it, and join the dance.</p>
+        <div class="q-chapter">The Great Stream</div>
+      </div>
+      <div class="q-card r">
+        <p>The meaning and purpose of dancing is the dance. Like music, also, it is fulfilled in each moment of its course. You do not play a sonata in order to reach the final chord.</p>
+        <div class="q-chapter">The Transformation of Life</div>
+      </div>
+      <div class="q-card r d1">
+        <p>Nothing is more creative than death, since it is the whole secret of life. When a man knows this, he lives for the first time in his life. By holding his breath, he loses it. By letting it go he finds it.</p>
+        <div class="q-chapter">The Transformation of Life</div>
+      </div>
+      <div class="q-card r d2">
+        <p>Belief clings, but faith lets go. In this sense of the word, faith is the essential virtue of science, and likewise of any religion that is not self-deception.</p>
+        <div class="q-chapter">The Age of Anxiety</div>
+      </div>
+      <div class="q-card r">
+        <p>Everyone has love, but it can only come out when he is convinced of the impossibility of trying to love himself. It comes only in the awareness that one has no self to love.</p>
+        <div class="q-chapter">Creative Morality</div>
+      </div>
+      <div class="q-card r d1">
+        <p>The more security I can get, the more I shall want. To put it still more plainly: the desire for security and the feeling of insecurity are the same thing.</p>
+        <div class="q-chapter">On Being Aware</div>
+      </div>
+      <div class="q-card r d2">
+        <p>To be at this moment is pure miracle. In this moment it is finished.</p>
+        <div class="q-chapter">Religion Reviewed</div>
+      </div>
+      <div class="q-card r">
+        <p>Life and death are not two opposed forces; they are simply two ways of looking at the same force, for the movement of change is as much the builder as the destroyer.</p>
+        <div class="q-chapter">The Great Stream</div>
+      </div>
+      <div class="q-card r d1">
+        <p>What we have forgotten is that thoughts and words are conventions, and that it is fatal to take conventions too seriously. A convention is a social convenience, as money is. But it is absurd to confuse it with real wealth.</p>
+        <div class="q-chapter">The Great Stream</div>
+      </div>
+      <div class="q-card r d2">
+        <p>Something unknown is doing we don't know what. — Eddington</p>
+        <div class="q-chapter">Religion Reviewed (quoted)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ ABOUT ═══ -->
+<section id="about" class="bg1">
+  <div class="container">
+    <div class="sec-label r">The Author</div>
+    <h2 class="sec-title r">Alan Wilson Watts</h2>
+
+    <div class="about-grid r">
+      <div class="about-portrait">
+        <span class="portrait-icon">🌿</span>
+        <h4>Alan W. Watts</h4>
+        <div class="portrait-meta">1915 — 1973</div>
+        <div class="portrait-meta" style="margin-top:.3rem;">San Francisco, California</div>
+        <div class="tags">
+          <span class="tag">Philosophy</span>
+          <span class="tag">Zen</span>
+          <span class="tag">Taoism</span>
+          <span class="tag">Vedanta</span>
+          <span class="tag">Christianity</span>
+          <span class="tag">Psychology</span>
+        </div>
+      </div>
+      <div>
+        <p>Alan Watts held both a Master's degree in theology and a doctorate of divinity, and is best known as an interpreter of Zen Buddhism in particular, and of Indian and Chinese philosophy in general. Standing apart from sectarian membership, he earned a reputation as one of the most original and "unrutted" philosophers of the twentieth century — author of some twenty books, and a voice that reached millions through lectures, radio, and writing.</p>
+        <p>Written in 1951, <em>The Wisdom of Insecurity</em> marked a turning point in Watts' thinking. Having previously written theological texts defending Christian and Oriental mysticism through argument and reinterpretation, he found a new approach: showing the truths of religion not by defending them but by clearing away what blocked their perception. He described his earlier approach as "putting legs on a snake — unnecessary and confusing, because only doubtful truths need defense."</p>
+        <p>The book was made possible by the Matchette Foundation, established by a businessman devoted to metaphysical inquiry — one of those, Watts noted with warmth, "who are not wholly absorbed in the vicious circle of making money to make money to make money." Watts wrote it in San Francisco, distilling years of thought into this slender, devastating volume.</p>
+
+        <div class="bq" style="margin-top:2rem;">
+          <p>This book is in the spirit of the Chinese sage Lao-tzu, that master of the law of reversed effort, who declared that those who justify themselves do not convince, that to know truth one must get rid of knowledge, and that nothing is more powerful and creative than emptiness — from which men shrink.</p>
+          <cite>— Alan Watts, Preface (May 1951, San Francisco)</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══ -->
+<footer>
+  <p class="footer-quote">"In this moment it is finished."</p>
+  <div class="footer-meta">
+    <p><em>The Wisdom of Insecurity</em> by Alan W. Watts</p>
+    <p>First published 1951 · Vintage Books / Random House</p>
+    <p style="margin-top:1.2rem; opacity:.45; font-size:.7rem;">Educational website created for exploration of Watts' ideas</p>
+  </div>
+</footer>
+
+<script>
+// ═══ HERO CANVAS — PARTICLE STREAM ═══
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], raf;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  class Particle {
+    constructor(fresh) {
+      this.reset(fresh);
+    }
+    reset(fresh) {
+      this.x = fresh ? rand(0, W) : (Math.random() < .5 ? -10 : W + 10);
+      this.y = rand(0, H);
+      this.r = rand(.4, 2.2);
+      this.vx = rand(.08, .35) * (Math.random() < .5 ? 1 : -1);
+      this.vy = rand(-.12, .12);
+      this.life = 0;
+      this.maxLife = rand(220, 420);
+      const gold = Math.random() < .12;
+      const a = rand(.08, .45);
+      this.color = gold
+        ? `rgba(201,168,76,${a})`
+        : `rgba(${Math.floor(rand(40,90))},${Math.floor(rand(90,160))},${Math.floor(rand(170,230))},${a})`;
+    }
+    step() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.life++;
+      if (this.life > this.maxLife || this.x < -20 || this.x > W + 20 || this.y < -20 || this.y > H + 20)
+        this.reset(false);
+    }
+    draw() {
+      const fi = Math.min(this.life / 40, 1);
+      const fo = Math.min((this.maxLife - this.life) / 40, 1);
+      ctx.save();
+      ctx.globalAlpha = fi * fo;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function init() {
+    resize();
+    const n = Math.min(Math.floor(W * H / 7000), 130);
+    particles = Array.from({ length: n }, () => {
+      const p = new Particle(true);
+      p.life = Math.floor(rand(0, p.maxLife));
+      return p;
+    });
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    // subtle vignette
+    const g = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * .7);
+    g.addColorStop(0, 'rgba(14,16,32,.18)');
+    g.addColorStop(1, 'rgba(7,9,15,.55)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    particles.forEach(p => { p.step(); p.draw(); });
+    raf = requestAnimationFrame(loop);
+  }
+
+  init();
+  loop();
+  window.addEventListener('resize', () => { init(); }, { passive: true });
+})();
+
+// ═══ RIVER CANVAS ═══
+(function() {
+  const canvas = document.getElementById('river-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, offset = 0;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = rect.width;
+    H = canvas.height = rect.height || 180;
+  }
+
+  function drawRiver() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Background fade
+    const bg = ctx.createLinearGradient(0, 0, W, 0);
+    bg.addColorStop(0,   'rgba(18,23,40,.9)');
+    bg.addColorStop(.42, 'rgba(24,30,50,.6)');
+    bg.addColorStop(.5,  'rgba(30,40,60,.4)');
+    bg.addColorStop(.58, 'rgba(24,30,50,.6)');
+    bg.addColorStop(1,   'rgba(18,23,40,.9)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Flowing wave lines
+    for (let i = 0; i < 10; i++) {
+      const yBase = H * (.15 + i * .075);
+      const speed = .3 + i * .04;
+      const amp   = 3 + i * 1.2;
+      const phase = offset * speed + i * 1.1;
+      const alpha = .15 + Math.sin(i * .7) * .05;
+
+      ctx.beginPath();
+      ctx.moveTo(0, yBase);
+      for (let x = 0; x <= W; x += 4) {
+        const y = yBase + Math.sin((x / 60) + phase) * amp + Math.sin((x / 30) - phase * .7) * amp * .4;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `rgba(74,154,176,${alpha})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Gold center marker
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(W / 2, 0);
+    ctx.lineTo(W / 2, H);
+    ctx.strokeStyle = 'rgba(201,168,76,.6)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 6]);
+    ctx.stroke();
+    ctx.restore();
+
+    offset += .018;
+    requestAnimationFrame(drawRiver);
+  }
+
+  resize();
+  drawRiver();
+  window.addEventListener('resize', resize, { passive: true });
+})();
+
+// ═══ PROGRESS BAR ═══
+const prog = document.getElementById('prog');
+function updateProg() {
+  const s = window.scrollY;
+  const d = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = Math.round((s / d) * 100) + '%';
+}
+window.addEventListener('scroll', updateProg, { passive: true });
+updateProg();
+
+// ═══ SCROLL REVEAL ═══
+const revealEls = document.querySelectorAll('.r');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => ro.observe(el));
+
+// ═══ NAV ACTIVE LINKS ═══
+const navAs = document.querySelectorAll('.nav-links a');
+const sectionIds = Array.from(navAs).map(a => a.getAttribute('href').slice(1));
+const secEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+const sectionObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navAs.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { threshold: .35 });
+secEls.forEach(s => sectionObs.observe(s));
+
+// ═══ HAMBURGER MENU ═══
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// ═══ BREATHING EXERCISE ═══
+(function() {
+  const ring = document.getElementById('breathRing');
+  const text = document.getElementById('breathText');
+  if (!ring) return;
+
+  let active = false, timer = null, phaseTimer = null;
+
+  const phases = [
+    { label: 'Inhale...', dur: 4000, scale: 1.4 },
+    { label: 'Hold...', dur: 2000, scale: 1.4 },
+    { label: 'Exhale...', dur: 5000, scale: 1.0 },
+    { label: 'Hold...', dur: 2000, scale: 1.0 },
+  ];
+
+  function runPhase(i) {
+    const p = phases[i % phases.length];
+    text.textContent = p.label;
+    ring.style.transform = `scale(${p.scale})`;
+    ring.style.transition = `transform ${p.dur}ms ease-in-out`;
+    phaseTimer = setTimeout(() => runPhase(i + 1), p.dur);
+  }
+
+  ring.addEventListener('click', () => {
+    if (active) {
+      clearTimeout(phaseTimer);
+      clearTimeout(timer);
+      ring.style.animation = 'breathePulse 4s ease-in-out infinite';
+      ring.style.transform = '';
+      ring.style.transition = '';
+      text.textContent = 'Click me';
+      active = false;
+    } else {
+      ring.style.animation = 'none';
+      active = true;
+      runPhase(0);
+      // Auto-stop after 2 minutes
+      timer = setTimeout(() => {
+        clearTimeout(phaseTimer);
+        ring.style.animation = 'breathePulse 4s ease-in-out infinite';
+        ring.style.transform = '';
+        ring.style.transition = '';
+        text.textContent = 'Click me';
+        active = false;
+      }, 120000);
+    }
+  });
+})();
+</script>
+</body>
+</html>

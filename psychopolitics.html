@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psychopolitics — Byung-Chul Han</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deepest: #0a0e1a;
+  --bg-deep: #0f1424;
+  --bg-mid: #161b30;
+  --bg-card: #1a2138;
+  --bg-elevated: #222a45;
+  --text-primary: #f5f3ee;
+  --text-secondary: #b8b6ae;
+  --text-muted: #7a7972;
+  --accent-gold: #d4af6a;
+  --accent-gold-bright: #e9c989;
+  --accent-amber: #c89456;
+  --accent-rust: #9a5b3e;
+  --border-subtle: rgba(212, 175, 106, 0.15);
+  --border-glow: rgba(212, 175, 106, 0.35);
+  --shadow-soft: 0 10px 40px rgba(0,0,0,0.4);
+  --shadow-deep: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-deepest);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* Ambient background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(212, 175, 106, 0.06), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(154, 91, 62, 0.05), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-bright));
+  z-index: 1000;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+/* Top nav */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 0.04em;
+}
+
+.nav-title span { color: var(--text-secondary); font-weight: 300; font-style: italic; }
+
+.menu-toggle {
+  background: transparent;
+  border: 1px solid var(--border-glow);
+  color: var(--accent-gold);
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+}
+
+.menu-toggle:hover {
+  background: var(--accent-gold);
+  color: var(--bg-deepest);
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0; right: -360px;
+  width: 360px;
+  height: 100vh;
+  background: var(--bg-deep);
+  border-left: 1px solid var(--border-subtle);
+  z-index: 200;
+  padding: 5rem 2rem 2rem;
+  overflow-y: auto;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-deep);
+}
+
+.sidebar.open { right: 0; }
+
+.sidebar-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  background: transparent;
+  border: none;
+  color: var(--accent-gold);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.sidebar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li a {
+  display: block;
+  padding: 0.7rem 0;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(212, 175, 106, 0.06);
+  transition: all 0.3s;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.sidebar li a::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.sidebar li a:hover,
+.sidebar li a.active {
+  color: var(--accent-gold-bright);
+  padding-left: 3rem;
+}
+
+.sidebar li a.active::before { opacity: 1; }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.overlay.show { opacity: 1; pointer-events: all; }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  background: radial-gradient(ellipse at center, var(--bg-mid) 0%, var(--bg-deepest) 70%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--accent-gold), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleY(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleY(1.3); }
+}
+
+.hero-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.2s forwards;
+}
+
+.hero-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  max-width: 1100px;
+  margin-bottom: 2.5rem;
+  color: var(--text-primary);
+  opacity: 0;
+  animation: fadeUp 1.2s 0.5s forwards;
+}
+
+.hero-quote .accent {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.hero-attribution {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  opacity: 0;
+  animation: fadeUp 1s 0.9s forwards;
+}
+
+.hero-title-block {
+  opacity: 0;
+  animation: fadeUp 1s 1.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-author {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--accent-gold);
+  font-size: 1.1rem;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sections */
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-wide { max-width: 1200px; }
+
+.chapter-header {
+  margin-bottom: 4rem;
+  text-align: center;
+  position: relative;
+}
+
+.chapter-symbol {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--accent-gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  border: 1px solid var(--border-glow);
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  background: var(--bg-mid);
+  position: relative;
+  transition: transform 0.5s;
+}
+
+.chapter-symbol::before,
+.chapter-symbol::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+  top: 50%;
+}
+
+.chapter-symbol::before { right: 100%; margin-right: 30px; }
+.chapter-symbol::after { left: 100%; margin-left: 30px; }
+
+.chapter-number {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.chapter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.chapter-tagline {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.prose p {
+  font-size: 1.08rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+.prose p:first-of-type::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  float: left;
+  line-height: 0.9;
+  margin: 0.3rem 0.8rem 0 0;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.prose strong {
+  color: var(--accent-gold-bright);
+  font-weight: 500;
+}
+
+.prose em {
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+/* Pull quotes */
+.pull-quote {
+  margin: 3.5rem -2rem;
+  padding: 3rem 3rem;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(212, 175, 106, 0.04), rgba(154, 91, 62, 0.04));
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pull-quote::before {
+  content: '"';
+  font-family: 'Playfair Display', serif;
+  font-size: 8rem;
+  position: absolute;
+  top: -1rem;
+  left: 2rem;
+  color: var(--accent-gold);
+  opacity: 0.2;
+  line-height: 1;
+}
+
+.pull-quote blockquote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  line-height: 1.4;
+  color: var(--text-primary);
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+
+.pull-quote cite {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+}
+
+/* Concept boxes */
+.concept-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-gold);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.concept-box:hover {
+  border-left-color: var(--accent-gold-bright);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.concept-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.concept-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.concept-body {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Deep Dive collapsible */
+.deep-dive {
+  background: var(--bg-mid);
+  border: 1px solid var(--border-subtle);
+  margin: 2.5rem 0;
+  overflow: hidden;
+}
+
+.deep-dive-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  padding: 1.3rem 1.8rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.deep-dive-toggle:hover { background: var(--bg-elevated); }
+
+.deep-dive-toggle .icon {
+  color: var(--accent-gold);
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+  font-weight: 300;
+}
+
+.deep-dive.open .deep-dive-toggle .icon { transform: rotate(45deg); }
+
+.deep-dive-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.deep-dive.open .deep-dive-content { max-height: 2000px; }
+
+.deep-dive-inner {
+  padding: 0 1.8rem 1.8rem;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.deep-dive-inner p { margin-bottom: 1.2rem; }
+
+/* Connect / cross-reference */
+.connect {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(212, 175, 106, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  margin: 0.3rem 0.3rem 0.3rem 0;
+}
+
+.connect:hover {
+  background: var(--accent-gold);
+  color: var(--bg-deepest);
+}
+
+.connect::before { content: '\2197'; font-size: 0.9rem; }
+
+.connections {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.connections-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* Power evolution timeline */
+.timeline {
+  margin: 4rem 0;
+  position: relative;
+  padding: 3rem 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold) 20%, var(--accent-gold) 80%, transparent);
+  transform: translateY(-50%);
+}
+
+.timeline-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  position: relative;
+}
+
+.timeline-stage {
+  text-align: center;
+  position: relative;
+  background: var(--bg-deepest);
+  padding: 2rem 1rem;
+}
+
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0 0 6px var(--bg-deepest), 0 0 20px var(--accent-gold);
+  position: relative;
+}
+
+.timeline-era {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.timeline-symbol {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--accent-gold-bright);
+  opacity: 0.7;
+}
+
+/* Comparison grid (Big Brother / Mole-Snake) */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 3rem 0;
+  position: relative;
+}
+
+.comparison::before {
+  content: 'vs';
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-deepest);
+  color: var(--accent-gold);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-glow);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.compare-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 2.5rem 2rem;
+  transition: all 0.4s;
+}
+
+.compare-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-3px);
+}
+
+.compare-card.dark { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.compare-card.light { background: linear-gradient(135deg, #1a2138, #2a2845); }
+
+.compare-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--accent-gold);
+}
+
+.compare-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--accent-gold-bright);
+}
+
+.compare-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.compare-card ul { list-style: none; }
+
+.compare-card li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(212, 175, 106, 0.08);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.compare-card li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+}
+
+.compare-card li:last-child { border-bottom: none; }
+
+/* Philosopher cards */
+.philosophers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.philosopher-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  padding: 1.8rem;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.philosopher-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-amber));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+
+.philosopher-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.philosopher-card:hover::before { transform: scaleX(1); }
+
+.philosopher-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 0.3rem;
+}
+
+.philosopher-dates {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.philosopher-role {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Mole / Snake special viz */
+.creatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 3rem 0;
+  align-items: stretch;
+}
+
+.creature {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  transition: all 0.4s;
+}
+
+.creature:hover {
+  border-color: var(--accent-gold);
+  background: var(--bg-elevated);
+}
+
+.creature-icon {
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: sepia(0.3) hue-rotate(-10deg);
+}
+
+.creature-name {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--accent-gold);
+  margin-bottom: 0.3rem;
+}
+
+.creature-era {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.creature-attrs {
+  text-align: left;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  list-style: none;
+}
+
+.creature-attrs li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(212, 175, 106, 0.06);
+}
+
+.creature-attrs li:last-child { border: none; }
+
+/* Back to top */
+.back-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 50%;
+  color: var(--accent-gold);
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
+}
+
+.back-top.show { opacity: 1; pointer-events: all; }
+
+.back-top:hover {
+  background: var(--accent-gold);
+  color: var(--bg-deepest);
+  transform: translateY(-3px);
+}
+
+/* Footer */
+.footer {
+  margin-top: 6rem;
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-deep);
+}
+
+.footer-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  font-size: 1.1rem;
+}
+
+.footer-meta {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4rem 0;
+  color: var(--accent-gold);
+  font-size: 1.3rem;
+  opacity: 0.5;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+}
+
+.divider span { padding: 0 1.5rem; }
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .top-nav { padding: 0.8rem 1rem; }
+  .nav-title { font-size: 0.95rem; }
+  .nav-title span { display: none; }
+  .menu-toggle { padding: 0.4rem 0.9rem; font-size: 0.75rem; }
+  .sidebar { width: 100%; right: -100%; padding: 4.5rem 1.5rem 2rem; }
+  .section { padding: 5rem 1.2rem 3rem; }
+  .pull-quote { margin: 2.5rem -1.2rem; padding: 2rem 1.5rem; }
+  .timeline-stages { grid-template-columns: 1fr; gap: 1rem; }
+  .timeline-line { display: none; }
+  .comparison { grid-template-columns: 1fr; gap: 1.5rem; }
+  .comparison::before { display: none; }
+  .creatures { grid-template-columns: 1fr; gap: 1.5rem; }
+  .chapter-symbol::before, .chapter-symbol::after { display: none; }
+  .back-top { bottom: 1rem; right: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="top-nav">
+  <div class="nav-title">Psychopolitics <span>— Byung-Chul Han</span></div>
+  <button class="menu-toggle" id="menuToggle">Chapters</button>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-close" id="sidebarClose">&times;</button>
+  <div class="sidebar-title">Table of Contents</div>
+  <ul id="chapterNav">
+    <li><a href="#intro" data-num="00">Introduction</a></li>
+    <li><a href="#ch1" data-num="01">The Crisis of Freedom</a></li>
+    <li><a href="#ch2" data-num="02">Smart Power</a></li>
+    <li><a href="#ch3" data-num="03">The Mole and the Snake</a></li>
+    <li><a href="#ch4" data-num="04">Biopolitics</a></li>
+    <li><a href="#ch5" data-num="05">Foucault's Dilemma</a></li>
+    <li><a href="#ch6" data-num="06">Healing as Killing</a></li>
+    <li><a href="#ch7" data-num="07">Shock</a></li>
+    <li><a href="#ch8" data-num="08">Friendly Big Brother</a></li>
+    <li><a href="#ch9" data-num="09">Emotional Capitalism</a></li>
+    <li><a href="#ch10" data-num="10">Gamification</a></li>
+    <li><a href="#ch11" data-num="11">Big Data</a></li>
+    <li><a href="#ch12" data-num="12">Beyond the Subject</a></li>
+    <li><a href="#ch13" data-num="13">Idiotism</a></li>
+  </ul>
+</aside>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-eyebrow">A Reader's Companion</div>
+  <h1 class="hero-quote">Protect me <span class="accent">from</span> what I want.</h1>
+  <div class="hero-attribution">Jenny Holzer &mdash; Truisms</div>
+  <div class="hero-title-block">
+    <div class="hero-subtitle">A Study Of</div>
+    <h2 class="hero-title">Psychopolitics</h2>
+    <div class="hero-subtitle" style="margin-top:0.5rem">Neoliberalism &amp; the New Technologies of Power</div>
+    <p class="hero-author">by Byung-Chul Han</p>
+  </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section class="section" id="intro">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">&#x2042;</div>
+    <div class="chapter-number">Introduction</div>
+    <h2 class="chapter-title">The Argument</h2>
+    <p class="chapter-tagline">A philosophy of power that no longer chains, but liberates &mdash; the better to exploit.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Byung-Chul Han's <em>Psychopolitics</em> diagnoses a transformation in the very architecture of power. The neoliberal regime, Han argues, has discovered that the most efficient form of domination is no longer the chain, the prison, or the surveillance camera trained on resisting bodies. It is the cheerful prompt, the gentle nudge, the smiling Like &mdash; technologies that no longer coerce the subject from without but inhabit her psyche, motivating her to become the agent of her own subjection.</p>
+    <p>Where Foucault saw the disciplinary society administering bodies through institutions, Han identifies a successor regime that administers <strong>souls</strong>. Freedom does not vanish; rather, freedom itself becomes the medium of compulsion. The achievement-subject, exhausted and self-optimizing, mistakes her servitude for self-realization. This guide traces Han's argument through all thirteen chapters of the book.</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-line"></div>
+    <div class="timeline-stages">
+      <div class="timeline-stage">
+        <div class="timeline-symbol">&#x265B;</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-era">Pre-Modern</div>
+        <div class="timeline-name">Sovereign Power</div>
+        <div class="timeline-desc">Power that <em>kills</em>. The spectacle of punishment. The sword that takes life.</div>
+      </div>
+      <div class="timeline-stage">
+        <div class="timeline-symbol">&#x25A3;</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-era">Modern</div>
+        <div class="timeline-name">Disciplinary Power</div>
+        <div class="timeline-desc">Power that <em>normalizes</em> bodies. The prison, the factory, the clinic. Biopolitics.</div>
+      </div>
+      <div class="timeline-stage">
+        <div class="timeline-symbol">&#x2734;</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-era">Neoliberal</div>
+        <div class="timeline-name">Psychopolitics</div>
+        <div class="timeline-desc">Power that <em>seduces</em> psyches. The Like, the dashboard, the algorithmic mirror.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="philosophers reveal">
+    <div class="philosopher-card">
+      <div class="philosopher-name">Michel Foucault</div>
+      <div class="philosopher-dates">1926 &ndash; 1984</div>
+      <div class="philosopher-role">Theorist of disciplinary power and biopolitics. Han's most important interlocutor and the figure whose analysis must be surpassed.</div>
+    </div>
+    <div class="philosopher-card">
+      <div class="philosopher-name">Karl Marx</div>
+      <div class="philosopher-dates">1818 &ndash; 1883</div>
+      <div class="philosopher-role">The analysis of exploitation must be updated: today the worker exploits herself, and capital is internalized as drive.</div>
+    </div>
+    <div class="philosopher-card">
+      <div class="philosopher-name">Gilles Deleuze</div>
+      <div class="philosopher-dates">1925 &ndash; 1995</div>
+      <div class="philosopher-role">Diagnosed the shift from disciplinary societies to societies of control. Provides Han with the mole-snake distinction.</div>
+    </div>
+    <div class="philosopher-card">
+      <div class="philosopher-name">G.W.F. Hegel</div>
+      <div class="philosopher-dates">1770 &ndash; 1831</div>
+      <div class="philosopher-role">Thinker of Spirit, concept, and mediation &mdash; everything that Big Data's regime of pure correlation cannot accommodate.</div>
+    </div>
+    <div class="philosopher-card">
+      <div class="philosopher-name">Friedrich Nietzsche</div>
+      <div class="philosopher-dates">1844 &ndash; 1900</div>
+      <div class="philosopher-role">Diagnostician of the last man. His critique of self-tormenting interiority anticipates the achievement-subject's plight.</div>
+    </div>
+    <div class="philosopher-card">
+      <div class="philosopher-name">Walter Benjamin</div>
+      <div class="philosopher-dates">1892 &ndash; 1940</div>
+      <div class="philosopher-role">His distinction between Erfahrung (deep experience) and Erlebnis (shallow event) anchors Han's late critique.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span>&#10086;</span></div>
+
+<!-- CHAPTER 1 -->
+<section class="section" id="ch1">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">I</div>
+    <div class="chapter-number">Chapter One</div>
+    <h2 class="chapter-title">The Crisis of Freedom</h2>
+    <p class="chapter-tagline">When freedom is the most cunning form of unfreedom.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han opens with a paradox so polished it shines: the neoliberal subject is freer than any worker before her &mdash; and more thoroughly exploited. She is not commanded; she commands herself. She is not driven; she drives herself. Yet she collapses beneath the weight of her own productivity, diagnoses herself with burnout, and returns to the project of self-optimization with renewed zeal. The crisis, Han argues, is not a crisis of freedom's absence but of its perverse plenitude.</p>
+    <p>The classical worker, exploited by another, could at least locate the antagonist outside herself. She could strike, organize, refuse. The <strong>achievement-subject</strong> has no such luxury. She is, at once, master and slave. Her tormentor wears her own face. Aggression, finding no external object, turns inward as depression, anxiety, exhaustion &mdash; the signature pathologies of late capitalism.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>Freedom itself is bringing forth compulsion and constraint.</blockquote>
+    <cite>Byung-Chul Han</cite>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">The Achievement-Subject</h3>
+    <p class="concept-body">The successor to the disciplinary "obedience-subject." Where the latter was shaped by external commandments (thou shalt), the former obeys the imperative of unlimited self-production (yes, you can). The achievement-subject is, in Han's pointed phrase, the <em>slave who believes herself free</em> because she lacks a visible master.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Capital, in this analysis, has assumed the structural position of <strong>God</strong>: an unconditional, totalizing horizon to which all life-energies are addressed. The digital network is not yet the prison Foucault described; it is something stranger &mdash; a panopticon whose inmates voluntarily transmit their data, post their locations, narrate their desires, and call this exposure self-expression.</p>
+  </div>
+
+  <div class="deep-dive reveal">
+    <button class="deep-dive-toggle">Deep Dive: Why neoliberalism is not "just" capitalism <span class="icon">+</span></button>
+    <div class="deep-dive-content">
+      <div class="deep-dive-inner">
+        <p>For Han, neoliberalism marks a qualitative break from industrial capitalism. Industrial capitalism exploited the body as a production unit, requiring discipline, repression, and the careful management of populations. Its subject was producer first, consumer second. Neoliberalism, by contrast, exploits the psyche &mdash; emotion, communication, attention, creativity. Its subject must be permanently mobilized, permanently positive, permanently producing herself.</p>
+        <p>This is why classical Marxist categories cannot fully grasp what is happening. The factory has not disappeared; it has migrated into the worker. The whistle that ends the shift never sounds because the shift has no end &mdash; the smartphone makes every site a workplace and every hour potential labor-time. Self-exploitation is more efficient than other-exploitation because it generates no resistance; one cannot strike against oneself.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch2">Smart Power</a>
+    <a class="connect" href="#ch3">The Snake</a>
+    <a class="connect" href="#ch6">Self-Optimization</a>
+  </div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section class="section" id="ch2">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">II</div>
+    <div class="chapter-number">Chapter Two</div>
+    <h2 class="chapter-title">Smart Power</h2>
+    <p class="chapter-tagline">The most efficient power does not say no &mdash; it says yes, and yes again.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Power, Han observes, has grown intelligent. It has discovered that prohibition is wasteful &mdash; every "no" generates resistance, every chain provokes an attempted breaking. <strong>Smart power</strong> reverses the equation. It does not forbid; it suggests. It does not punish; it rewards. It does not extract obedience by threat but by seduction, presenting itself as the very content of the subject's wishes.</p>
+    <p>Its emblematic gesture is the Like. The thumb-up is the agent of a subjugation so subtle the subject mistakes it for affirmation. Each click trains the algorithm, deepens the profile, and tightens the loop by which the subject is rendered legible to capital. To Like is to consent &mdash; not merely to a piece of content, but to the entire apparatus of psychometric capture.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>Smart power reads and appraises our conscious and unconscious thoughts. It bets on willing self-organization and self-optimization.</blockquote>
+    <cite>Byung-Chul Han</cite>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Seduction Replaces Repression</h3>
+    <p class="concept-body">Foucault's disciplinary power operated through prohibition, surveillance, and the threat of punishment. Smart power operates through suggestion, recommendation, and the promise of pleasure. It does not strike against will; it manufactures will. Its violence is so smooth it registers as no violence at all.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>This is why critique struggles to gain purchase. The classical critic could position herself outside the order she opposed, naming its prohibitions and refusing them. But what does refusal look like in a regime that demands nothing it does not first persuade you to want? Power has dissolved into ambient encouragement. It no longer wears a uniform; it wears your smile.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch1">Achievement-Subject</a>
+    <a class="connect" href="#ch8">Friendly Big Brother</a>
+    <a class="connect" href="#ch11">Big Data</a>
+  </div>
+</section>
+
+<!-- CHAPTER 3 -->
+<section class="section" id="ch3">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">III</div>
+    <div class="chapter-number">Chapter Three</div>
+    <h2 class="chapter-title">The Mole and the Snake</h2>
+    <p class="chapter-tagline">From the dark tunnel of the factory to the open, slithering circuits of the network.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han takes Deleuze's striking image and unfolds it. The <strong>mole</strong> is the figure of disciplinary capitalism: it burrows, it labors in the dark beneath fixed institutions, its movements are circumscribed by the walls of factory, barracks, and school. The mole is the laborer in the proper sense &mdash; bound to a place, a schedule, a contract that distinguishes work-time from leisure-time.</p>
+    <p>The <strong>snake</strong> is the figure of control capitalism: it glides through open spaces, never confined, modulating its form to fit any landscape. The snake is the entrepreneur, the project-self, the freelancer whose labor and life are indistinguishable. There are no walls to bound the snake because there are no walls at all &mdash; only continuous, undulating performance.</p>
+  </div>
+
+  <div class="creatures reveal">
+    <div class="creature">
+      <span class="creature-icon">&#x1F43E;</span>
+      <div class="creature-name">The Mole</div>
+      <div class="creature-era">Disciplinary Society</div>
+      <ul class="creature-attrs">
+        <li>Confined to enclosed spaces</li>
+        <li>Industrial worker / labourer</li>
+        <li>Body as production unit</li>
+        <li>Repression from without</li>
+        <li>Clear divide: work / leisure</li>
+        <li>Class consciousness possible</li>
+        <li>Object of <em>biopolitics</em></li>
+      </ul>
+    </div>
+    <div class="creature">
+      <span class="creature-icon">&#x1F40D;</span>
+      <div class="creature-name">The Snake</div>
+      <div class="creature-era">Control Society</div>
+      <ul class="creature-attrs">
+        <li>Glides through open networks</li>
+        <li>Entrepreneur of the self</li>
+        <li>Psyche as production unit</li>
+        <li>Compulsion from within</li>
+        <li>Work and life are one</li>
+        <li>Isolated, competitive, fragmented</li>
+        <li>Object of <em>psychopolitics</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prose reveal">
+    <p>This shift, Han stresses, is not merely sociological. It marks the inadequacy of Foucault's whole analytic. Biopolitics, designed to think the disciplined body, cannot apprehend what neoliberalism actually does. The snake has no body to discipline &mdash; or rather, its body is its psyche, its mood, its capacity for innovation, its always-on availability. To analyze the snake one needs <strong>psychopolitics</strong>.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch4">Biopolitics</a>
+    <a class="connect" href="#ch5">Foucault's Limit</a>
+    <a class="connect" href="#ch9">Emotional Labor</a>
+  </div>
+</section>
+
+<!-- CHAPTER 4 -->
+<section class="section" id="ch4">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">IV</div>
+    <div class="chapter-number">Chapter Four</div>
+    <h2 class="chapter-title">Biopolitics</h2>
+    <p class="chapter-tagline">A genealogy of how power came to manage life itself.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>To grasp what is new, Han first reconstructs what came before. Foucault's signature thesis was that modernity inaugurated a profound mutation in the form of power. The sovereign of old wielded the right to <strong>kill</strong> &mdash; a punctual, theatrical, terrible right. The modern state, by contrast, claimed the right to <strong>foster life</strong>. Power became productive, administrative, statistical.</p>
+    <p>Foucault named this regime <strong>biopolitics</strong>: a politics that takes life as its object. Its instruments are the census, the public health campaign, the school curriculum, the asylum, the factory schedule. Its concern is not the punishment of individual transgression but the optimization of <em>populations</em> &mdash; rates of birth and death, patterns of disease, distributions of capacity. The body emerges as a production unit to be measured, regulated, and put to work.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>Biopolitics is the proper form of power for industrial capitalism, which depends on the disciplining of bodies.</blockquote>
+    <cite>Byung-Chul Han, after Foucault</cite>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">From Sovereignty to Discipline</h3>
+    <p class="concept-body">Sovereign power is spectacular, episodic, negative &mdash; it cuts. Disciplinary power is diffuse, continuous, positive &mdash; it shapes. Where sovereignty answers transgression with execution, discipline anticipates transgression with formation. The factory does not need to behead the worker if it has already taught his hands the rhythm of the machine.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch3">The Mole</a>
+    <a class="connect" href="#ch5">Foucault's Dilemma</a>
+  </div>
+</section>
+
+<!-- CHAPTER 5 -->
+<section class="section" id="ch5">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">V</div>
+    <div class="chapter-number">Chapter Five</div>
+    <h2 class="chapter-title">Foucault's Dilemma</h2>
+    <p class="chapter-tagline">A great thinker arrives at the threshold of psychopolitics &mdash; and does not cross it.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han's argument here is at once an homage and a critique. Foucault, he writes, intuited that something was happening to power. In his late lectures on neoliberalism he sensed that the entrepreneur-of-the-self was a different creature than the disciplined body, that homo economicus had stepped beyond the analytics of the prison and the clinic. But Foucault did not complete the turn.</p>
+    <p>The reason, Han suggests, is that biopolitics is structurally inadequate to neoliberalism. Biopolitics targets the body, population, and biological life &mdash; precisely what neoliberalism leaves to one side. Neoliberalism does not need to discipline bodies; it needs to mobilize psyches. Its target is not biological but <strong>psychological</strong>: affect, desire, attention, creativity, communicability.</p>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Psychopower (after Stiegler)</h3>
+    <p class="concept-body">Bernard Stiegler's term for a regime of domination that operates upon the psyche through industrial technologies of attention &mdash; advertising, media, the algorithm. Han radicalizes this insight: psychopolitics names not just the capture of attention but the colonization of the subject's freedom itself, turning that freedom into the very engine of exploitation.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>To analyze what neoliberalism does, one needs a concept of power that can think the manufacture of desire, the seduction of the subject by her own image, the dashboard, the metric, the friendly app. Biopolitics belongs to the era of the mole. Psychopolitics belongs to the era of the snake.</p>
+  </div>
+
+  <div class="deep-dive reveal">
+    <button class="deep-dive-toggle">Deep Dive: What Foucault almost saw <span class="icon">+</span></button>
+    <div class="deep-dive-content">
+      <div class="deep-dive-inner">
+        <p>Foucault's late work on "governmentality" and the "care of the self" hovered near the questions Han is asking. He saw that the neoliberal subject is not merely produced but self-producing, not merely watched but self-watching. Yet his apparatus &mdash; built to think the prison, the clinic, the confessional &mdash; treated this self-relation as still fundamentally a question of the body's conduct.</p>
+        <p>What Foucault missed, Han argues, is that under neoliberalism the body recedes as a site of investment. The corporation no longer needs your back; it needs your enthusiasm. It does not require you to be on time; it requires you to <em>love</em> being on time, to perform that love, to broadcast it, to make of it a personal brand. This is not discipline. This is something else.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch4">Biopolitics</a>
+    <a class="connect" href="#ch9">Emotional Capitalism</a>
+  </div>
+</section>
+
+<!-- CHAPTER 6 -->
+<section class="section" id="ch6">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">VI</div>
+    <div class="chapter-number">Chapter Six</div>
+    <h2 class="chapter-title">Healing as Killing</h2>
+    <p class="chapter-tagline">The wellness industry as the soft outer face of total mobilization.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Few chapters of <em>Psychopolitics</em> are as scalpel-sharp as this one. Han turns his attention to the proliferating industries of self-care, self-optimization, mindfulness, productivity, and wellness &mdash; the seminars, the apps, the gurus, the books that promise to restore the exhausted achievement-subject to her best self.</p>
+    <p>These industries present themselves as remedies. They are, Han argues, accelerants. The exhausted subject is repaired only so that she may be exploited further. The burnout retreat is a pit stop in a race that cannot be exited. The therapist's office becomes an annex of the firm's productivity dashboard.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>Healing, it turns out, means killing.</blockquote>
+    <cite>Byung-Chul Han</cite>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Pain Commodified</h3>
+    <p class="concept-body">In the wellness economy, suffering is not refused but processed &mdash; rendered into a problem with a purchasable solution. The system that produces exhaustion sells you the cure. The cure returns you, restored, to the system that produces exhaustion. The loop is closed and profitable.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>What makes this killing rather than merely instrumentalizing? For Han, what dies is the possibility of <strong>genuine negativity</strong> &mdash; the right to be exhausted without immediately converting that exhaustion into a project. The right to suffer without optimizing the suffering. The right, finally, to be other than productive. Healing as it is sold today does not address this loss; it intensifies it.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch1">Achievement-Subject</a>
+    <a class="connect" href="#ch9">Emotional Capitalism</a>
+    <a class="connect" href="#ch13">Idiotism</a>
+  </div>
+</section>
+
+<!-- CHAPTER 7 -->
+<section class="section" id="ch7">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">VII</div>
+    <div class="chapter-number">Chapter Seven</div>
+    <h2 class="chapter-title">Shock</h2>
+    <p class="chapter-tagline">The most powerful violence today is the one that does not feel like violence at all.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han walks the reader through two genealogies of shock. The first is psychiatric: Ewen Cameron's mid-century electroshock experiments, which sought to break and re-form personalities by jolt and trauma. The second is economic: Milton Friedman's doctrine that crisis is the opportunity in which previously unthinkable neoliberal reforms can be installed by force &mdash; the thesis Naomi Klein elaborated as the <em>shock doctrine</em>.</p>
+    <p>Han's argument here is provocative. Klein's account, he suggests, still belongs to a paradigm of <strong>negative</strong> power &mdash; power that breaks, traumatizes, imposes. It explains certain historical episodes (Pinochet's Chile, post-Soviet Russia) very well. But it does not explain the everyday functioning of neoliberalism in the comfortable democracies of the present.</p>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Positivity, not Shock</h3>
+    <p class="concept-body">In Han's diagnosis, contemporary neoliberalism does not need shock. It rules through positivity: encouragement, recommendation, the smiling interface, the gentle metric. It does not break the subject; it asks her to break <em>herself</em>, and rewards her for doing so with a dopaminergic Like.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>This is not a refutation of Klein so much as a refinement. Shock therapy was the surgical entry; psychopolitics is the slow chemical that follows. Once installed, neoliberalism reproduces itself without requiring further trauma &mdash; indeed it spreads most successfully where everything appears most peaceful, most well-lit, most agreeable.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch2">Smart Power</a>
+    <a class="connect" href="#ch6">Healing as Killing</a>
+  </div>
+</section>
+
+<!-- CHAPTER 8 -->
+<section class="section" id="ch8">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">VIII</div>
+    <div class="chapter-number">Chapter Eight</div>
+    <h2 class="chapter-title">Friendly Big Brother</h2>
+    <p class="chapter-tagline">The panopticon is no longer a building. It is everywhere &mdash; and we built it for ourselves.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han revisits one of the twentieth century's defining political imaginaries: Orwell's <em>1984</em>. There, surveillance is grim, intrusive, hated; the telescreen is loathed; Big Brother is the face one is forced to behold. Apple's famous 1984 advertisement, broadcast that same year, positioned the personal computer as the hammer that would shatter such tyranny.</p>
+    <p>The irony, Han observes, is now total. The device the ad celebrated has become the most powerful surveillance instrument in human history &mdash; and we carry it willingly, often lovingly, in our pockets. We do not need to be coerced into self-exposure. We rush toward it. We tag our locations, narrate our meals, broadcast our heartbeats. The confession that the priest once extracted, we now perform spontaneously for an audience of strangers and algorithms.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>Big Brother now wears a friendly face. His friendliness is what makes surveillance so efficient.</blockquote>
+    <cite>Byung-Chul Han</cite>
+  </div>
+
+  <div class="comparison reveal">
+    <div class="compare-card dark">
+      <div class="compare-icon">&#x1F441;</div>
+      <div class="compare-title">Orwell's Big Brother</div>
+      <div class="compare-subtitle">1984 &mdash; Disciplinary</div>
+      <ul>
+        <li>Surveillance is feared</li>
+        <li>The telescreen is an enemy</li>
+        <li>Watching is centralized</li>
+        <li>Self-exposure is forbidden</li>
+        <li>Power is visible, hated</li>
+        <li>The subject conceals</li>
+        <li>Resistance is imaginable</li>
+      </ul>
+    </div>
+    <div class="compare-card light">
+      <div class="compare-icon">&#x1F4F1;</div>
+      <div class="compare-title">The Digital Panopticon</div>
+      <div class="compare-subtitle">Today &mdash; Psychopolitical</div>
+      <ul>
+        <li>Surveillance is loved</li>
+        <li>The smartphone is a friend</li>
+        <li>Watching is distributed</li>
+        <li>Self-exposure is mandated</li>
+        <li>Power is invisible, friendly</li>
+        <li>The subject reveals</li>
+        <li>Resistance feels absurd</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>The smartphone is not just an effective surveillance apparatus; it is also a mobile confessional.</blockquote>
+    <cite>Byung-Chul Han</cite>
+  </div>
+
+  <div class="prose reveal">
+    <p>The crucial difference, Han insists, is structural. Orwell's panopticon required a center &mdash; a Party, a State, a watcher. Today's panopticon has no center because each user is, simultaneously, watcher and watched, inmate and guard. The Foucauldian image of the central tower has dissolved into the lateral, peer-to-peer watching of social platforms, where the most intimate surveillance is performed by friends and lovers.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch2">Smart Power</a>
+    <a class="connect" href="#ch11">Big Data</a>
+    <a class="connect" href="#ch13">Silence</a>
+  </div>
+</section>
+
+<!-- CHAPTER 9 -->
+<section class="section" id="ch9">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">IX</div>
+    <div class="chapter-number">Chapter Nine</div>
+    <h2 class="chapter-title">Emotional Capitalism</h2>
+    <p class="chapter-tagline">When feeling becomes a productive force, the heart goes to work.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han carefully distinguishes three terms that everyday usage collapses. <strong>Feelings</strong> are durable, narrative, slow; they take shape over time and are embedded in stories of a life. <strong>Emotions</strong> are performative, situational, expressed; they are what feelings look like when they are made visible. <strong>Affects</strong> are pre-personal, immediate, contagious; they are the raw intensities that pass through bodies before they are organized into anything stable.</p>
+    <p>Neoliberalism, Han argues, prefers emotions and affects to feelings. Feelings are too slow, too private, too resistant to capture. Emotions can be mobilized: smiled at the customer, performed at the meeting, expressed in the brand. Affects can be ignited: the spike of outrage, the rush of belonging, the flash of enthusiasm that drives the click and the purchase.</p>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">The Emotionalization of Work</h3>
+    <p class="concept-body">Where industrial labor demanded the body's strength and obedience, immaterial labor demands the heart's enthusiasm. Customer service, brand management, knowledge work &mdash; all require the worker to feel correctly and to display that feeling. Subjectivity itself, intimate emotional life, becomes a factor of production.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>The exhausted worker who cannot summon a smile is not merely tired; she is malfunctioning. Affective performance is part of the job description. This is the deepest sense in which neoliberalism is psychopolitical: it does not buy your time, it leases your inner life.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch1">Achievement-Subject</a>
+    <a class="connect" href="#ch3">The Snake</a>
+    <a class="connect" href="#ch10">Gamification</a>
+  </div>
+</section>
+
+<!-- CHAPTER 10 -->
+<section class="section" id="ch10">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">X</div>
+    <div class="chapter-number">Chapter Ten</div>
+    <h2 class="chapter-title">Gamification</h2>
+    <p class="chapter-tagline">Play, the last refuge of freedom, becomes the newest tool of capture.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Homo ludens &mdash; the human at play &mdash; was supposed to be the figure of freedom. Play is non-purposive, self-justifying, an end in itself. To play is to step out of the regime of utility into a space governed by its own rules, for no reason but joy. Or so the philosophical tradition has held.</p>
+    <p>Gamification reverses this. It does not introduce play into work as a relief; it weaponizes play to make work more efficient. Points, badges, leaderboards, streaks, levels &mdash; the apparatus of the game is grafted onto labor, fitness, education, finance, even mourning. The achievement-subject discovers, with delight, that her self-exploitation can be experienced as a game she might win.</p>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Profanation</h3>
+    <p class="concept-body">For Han (following Agamben), profanation is the act that returns something captured by the sacred to common use. Authentic play is profane &mdash; it strips the seriousness from utility, the holiness from work. Gamification is the opposite gesture: it captures play <em>for</em> utility, re-sacralizing labor by dressing it as game.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han invokes Heidegger's meditation on time-play-space (<em>Zeit-Spiel-Raum</em>) to mark what is lost. Genuine play opens a space-time of its own, suspending ordinary purposes. Gamified labor recognizes no such suspension &mdash; the game is the work, the work is the game, and there is no longer any outside from which the ruse might be perceived.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch1">Self-Exploitation</a>
+    <a class="connect" href="#ch9">Emotional Capitalism</a>
+    <a class="connect" href="#ch13">Idiotism</a>
+  </div>
+</section>
+
+<!-- CHAPTER 11 -->
+<section class="section" id="ch11">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">XI</div>
+    <div class="chapter-number">Chapter Eleven</div>
+    <h2 class="chapter-title">Big Data</h2>
+    <p class="chapter-tagline">The Enlightenment dreamed of clear knowledge. Dataism delivers infinite knowledge of nothing in particular.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han opens with the legend of Columbus's egg &mdash; the trick that, once seen, looks obvious. Big Data, he suggests, is the contemporary version: a discovery so elementary it could only have been made by the first to dare. It treats the world as a field of correlations to be harvested, sidestepping the older questions of cause, meaning, and concept.</p>
+    <p>This is, in Han's diagnosis, an epistemic <strong>second Enlightenment</strong>, but a perverse one. The first Enlightenment sought to free the mind by submitting nature to the concept &mdash; to render the world thinkable. Dataism abandons the concept entirely. It does not ask why; it asks only how often. It is a knowledge without spirit, without negativity, without theory.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>Big Data is wholly blind to the event.</blockquote>
+    <cite>Byung-Chul Han</cite>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Quantified Self &amp; Digital Unconscious</h3>
+    <p class="concept-body">The Quantified Self movement turns the body and mood into streams of metrics &mdash; steps, sleep, mood, calories, heart rate. What emerges is a kind of <em>digital unconscious</em>: a portrait of the subject built from data she did not know she was producing, legible to the algorithm before it is legible to her. The dashboard knows her better than she knows herself.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>The danger Han names is not merely surveillance. It is the alliance of <strong>Big Brother and Big Business</strong> &mdash; political and commercial capture fused into a single apparatus. The state once feared the market; the market now provides the state with capacities Orwell could not have imagined. And both are funded, ultimately, by the cheerful self-exposure of subjects who think they are merely sharing.</p>
+    <p>Against this regime, Han mobilizes Hegel. Hegelian Spirit is the work of the concept, the labor of mediation, the negativity by which truth is wrenched from immediacy. <strong>Correlation is not Spirit.</strong> The mere observation that A often accompanies B is not understanding &mdash; it is the abdication of understanding. Big Data is intelligence without intellect.</p>
+  </div>
+
+  <div class="deep-dive reveal">
+    <button class="deep-dive-toggle">Deep Dive: Why correlation is not concept <span class="icon">+</span></button>
+    <div class="deep-dive-content">
+      <div class="deep-dive-inner">
+        <p>For Hegel, knowledge is achieved through the work of the concept &mdash; a labor that begins in immediate appearance, passes through negation, and arrives at a determination richer than where it started. The concept is mediation; it accommodates contradiction; it has a history.</p>
+        <p>Correlation has no history. It is the synchronic registration of co-occurrence. It tells us that the people who buy umbrellas often buy raincoats. It does not tell us what an umbrella is, what rain is, why anyone might wish to be dry. It works &mdash; spectacularly &mdash; while remaining indifferent to meaning. This indifference is precisely what makes it suitable for a regime of power that does not need to understand its subjects, only to predict them.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch8">Digital Panopticon</a>
+    <a class="connect" href="#ch12">The Event</a>
+  </div>
+</section>
+
+<!-- CHAPTER 12 -->
+<section class="section" id="ch12">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">XII</div>
+    <div class="chapter-number">Chapter Twelve</div>
+    <h2 class="chapter-title">Beyond the Subject</h2>
+    <p class="chapter-tagline">If psychopolitics captures the psyche, the way out leads beyond the psyche itself.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>Han, late in the book, begins to sketch what resistance might look like. Crucially, he does not call for a more authentic self, a more sovereign individual, a more rigorous interiority. The neoliberal regime feeds on such selves; it is built to mine them. The way out cannot be a deeper way in.</p>
+    <p>Instead Han points toward <strong>the event</strong> &mdash; that which arrives unforeseen, exceeds the calculable, breaks the loop of data and prediction. The event is precisely what Big Data is blind to. It is the singular irruption that no algorithm, trained on the past, could have predicted. To remain open to the event is to refuse the closure of the dashboard.</p>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Erfahrung vs Erlebnis</h3>
+    <p class="concept-body">Han borrows Walter Benjamin's distinction. <em>Erlebnis</em> is shallow lived-experience &mdash; the accumulating series of stimuli, photos, scrolls, dings. <em>Erfahrung</em> is deep experience &mdash; the slow process by which something transforms us, integrates into memory, becomes part of who we are. Late capitalism produces an avalanche of Erlebnis and a famine of Erfahrung.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>The art of living, Han suggests, may today require an act of <strong>de-psychologization</strong> &mdash; a refusal of the demand to be perpetually expressive, transparent, optimized. Not a deeper self, then, but a strategic withdrawal from the regime of selfhood. To become, perhaps, less interesting, less legible, less captured.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch11">Big Data's Blindness</a>
+    <a class="connect" href="#ch13">Idiotism</a>
+  </div>
+</section>
+
+<!-- CHAPTER 13 -->
+<section class="section" id="ch13">
+  <div class="chapter-header reveal">
+    <div class="chapter-symbol">XIII</div>
+    <div class="chapter-number">Chapter Thirteen</div>
+    <h2 class="chapter-title">Idiotism</h2>
+    <p class="chapter-tagline">A philosophy of refusal &mdash; not louder protest, but stranger silence.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>The final chapter is the book's most counter-intuitive and, perhaps, its most beautiful. Han recuperates an old philosophical figure: the <strong>idiot</strong>. Not the imbecile of common abuse, but the <em>idiotes</em> of Greek antiquity &mdash; the private one, the one who stands apart, the one who has not been processed into the common discourse. The idiot, in this old sense, is a kind of philosopher.</p>
+    <p>To be an idiot, today, is to be a heretic. Heresy, etymologically, is <em>choice</em> &mdash; the assertion of an alternative against an orthodoxy. The orthodoxy of psychopolitics is the demand for total communication, total positivity, total expressiveness. To be silent, to be slow, to be uncommunicative, to be uninteresting to the algorithm &mdash; these are heresies of the present.</p>
+  </div>
+
+  <div class="pull-quote reveal">
+    <blockquote>What a relief to have nothing to say, the right to say nothing.</blockquote>
+    <cite>Gilles Deleuze</cite>
+  </div>
+
+  <div class="concept-box reveal">
+    <div class="concept-label">Key Concept</div>
+    <h3 class="concept-title">Pure Immanence as Life</h3>
+    <p class="concept-body">Han closes by gesturing toward a mode of being that refuses the demands of capture: a pure immanence, a life not subordinated to performance, optimization, or display. This is not nihilism. It is a defense of what does not produce, what does not communicate, what does not Like and is not Liked. It is the silence that interrupts the chatter and, in interrupting it, opens a space where something else might begin.</p>
+  </div>
+
+  <div class="prose reveal">
+    <p>The idiot, then, is Han's figure of hope. Not the revolutionary, not the dissident in the classical sense &mdash; both are too legible, too easily incorporated. The idiot escapes by refusing the question. By having nothing to say. By withdrawing from the imperative of self-broadcast. By making, of her opacity, a quiet, unsellable freedom.</p>
+  </div>
+
+  <div class="connections reveal">
+    <div class="connections-label">Connect</div>
+    <a class="connect" href="#ch6">Healing as Killing</a>
+    <a class="connect" href="#ch8">Friendly Big Brother</a>
+    <a class="connect" href="#ch12">Beyond the Subject</a>
+  </div>
+</section>
+
+<div class="divider"><span>&#10086;</span></div>
+
+<footer class="footer">
+  <p class="footer-text">The crisis of freedom is not that we have too little of it &mdash; but that we have a kind of freedom that no longer knows how to refuse.</p>
+  <p class="footer-meta">A reader's companion to Psychopolitics &mdash; Byung-Chul Han</p>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">&uarr;</button>
+
+<script>
+// Progress bar
+const progressBar = document.getElementById('progressBar');
+const backTop = document.getElementById('backTop');
+
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrolled = (scrollTop / docHeight) * 100;
+  progressBar.style.width = scrolled + '%';
+  if (scrollTop > 400) backTop.classList.add('show');
+  else backTop.classList.remove('show');
+}
+
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// Sidebar
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const menuToggle = document.getElementById('menuToggle');
+const sidebarClose = document.getElementById('sidebarClose');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  overlay.classList.add('show');
+}
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+}
+
+menuToggle.addEventListener('click', openSidebar);
+sidebarClose.addEventListener('click', closeSidebar);
+overlay.addEventListener('click', closeSidebar);
+
+document.querySelectorAll('#chapterNav a').forEach(a => {
+  a.addEventListener('click', closeSidebar);
+});
+
+// Active section highlighting
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('#chapterNav a');
+
+function updateActive() {
+  let current = '';
+  const offset = window.scrollY + 200;
+  sections.forEach(s => {
+    if (s.offsetTop <= offset) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', updateActive, { passive: true });
+
+// Back to top
+backTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Deep dive toggles
+document.querySelectorAll('.deep-dive-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.classList.toggle('open');
+  });
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Initial
+updateProgress();
+updateActive();
+</script>
+
+</body>
+</html>

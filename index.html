@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Society of the Spectacle — Guy Debord, 1967</title>
+<meta name="description" content="A reader's companion to Guy Debord's 1967 critique of advanced capitalism — 221 theses on the colonization of social life by images.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & ROOT
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Paper palette (light sections) */
+  --bg-paper: #efe9da;
+  --bg-paper-deep: #e6dfca;
+  --ink: #14110d;
+  --ink-soft: #3a352c;
+  --ink-muted: #6a6356;
+  --rule: #2a251e;
+
+  /* Spectacle palette (dark sections) */
+  --bg-dark: #0c0a08;
+  --bg-dark-2: #161310;
+  --cream: #ece5d2;
+  --cream-soft: #b8b09c;
+  --cream-dim: #7a7464;
+
+  /* Accent */
+  --red: #b31919;
+  --red-bright: #d92626;
+  --gold: #b8924a;
+
+  /* Type */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --reading-width: 68ch;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --section-pad: clamp(4rem, 10vh, 9rem);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 3.5rem;
+}
+
+body {
+  background: var(--bg-paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.65;
+  font-feature-settings: "kern", "liga", "calt", "onum";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+::selection {
+  background: var(--red);
+  color: var(--cream);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(12, 10, 8, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(236, 229, 210, 0.08);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.topnav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0.85rem var(--gutter);
+}
+.topnav-title {
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.topnav-title em {
+  font-style: normal;
+  color: var(--red-bright);
+}
+.topnav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+.topnav-links a {
+  color: var(--cream-soft);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.topnav-links a:hover { color: var(--cream); }
+@media (max-width: 880px) {
+  .topnav-links { display: none; }
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+section {
+  padding: var(--section-pad) var(--gutter);
+  position: relative;
+}
+
+.section-light {
+  background: var(--bg-paper);
+  color: var(--ink);
+}
+.section-light-deep {
+  background: var(--bg-paper-deep);
+  color: var(--ink);
+}
+.section-dark {
+  background: var(--bg-dark);
+  color: var(--cream);
+}
+.section-dark-2 {
+  background: var(--bg-dark-2);
+  color: var(--cream);
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.container-narrow {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.container-reading {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--red);
+}
+.section-dark .eyebrow { color: var(--red-bright); }
+.section-dark-2 .eyebrow { color: var(--red-bright); }
+.section-dark .eyebrow::before { background: var(--red-bright); }
+.section-dark-2 .eyebrow::before { background: var(--red-bright); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+h2 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 1.5rem; }
+h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 0.85rem; }
+h4 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+
+p { margin-bottom: 1.1em; }
+p.lead {
+  font-size: 1.18em;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.section-dark p.lead, .section-dark-2 p.lead { color: var(--cream-soft); }
+
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  background: var(--bg-dark);
+  color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--section-pad) + 1rem) var(--gutter) 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(179, 25, 25, 0.08), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 10% 90%, rgba(184, 146, 74, 0.05), transparent 70%);
+  pointer-events: none;
+}
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  position: relative;
+  z-index: 1;
+}
+.hero-top div { line-height: 1.7; }
+.hero-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin: auto 0;
+}
+@media (min-width: 980px) {
+  .hero-main { grid-template-columns: 2fr 1fr; gap: 5rem; }
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 11vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.hero-title .of {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.55em;
+  color: var(--cream-dim);
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  display: inline-block;
+  padding: 0 0.3em;
+  vertical-align: 0.18em;
+}
+.hero-title .accent { color: var(--red-bright); }
+.hero-author {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--cream-soft);
+  margin-top: 1.5rem;
+  letter-spacing: 0.02em;
+}
+.hero-sidebar {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--cream-soft);
+  border-left: 1px solid rgba(236, 229, 210, 0.18);
+  padding-left: 1.5rem;
+}
+.hero-sidebar p { margin-bottom: 1.2em; }
+.hero-thesis {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(236, 229, 210, 0.18);
+  padding-top: 2.5rem;
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.hero-thesis-num {
+  font-family: var(--font-mono);
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--red);
+  letter-spacing: -0.05em;
+}
+.hero-thesis-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2.2vw, 1.65rem);
+  line-height: 1.4;
+  color: var(--cream);
+  max-width: 38em;
+}
+.hero-thesis-text .lead-word {
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--red-bright);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+/* ============================================
+   PROLOGUE / ABOUT
+   ============================================ */
+.prologue-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 880px) {
+  .prologue-grid { grid-template-columns: 1fr 1.6fr; gap: 5rem; }
+}
+.prologue-aside {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.prologue-aside dl { display: grid; gap: 1.25rem; }
+.prologue-aside dt {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+.prologue-aside dd {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--red);
+  padding-left: 1rem;
+}
+.prologue-body p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+.prologue-body .dropcap::first-letter {
+  font-family: var(--font-display);
+  font-size: 5.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.85;
+  margin: 0.07em 0.08em -0.05em -0.02em;
+  color: var(--red);
+}
+
+/* ============================================
+   CORE THESIS DISPLAY
+   ============================================ */
+.core-thesis {
+  text-align: center;
+  padding: calc(var(--section-pad) + 1rem) var(--gutter);
+}
+.core-thesis-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--red-bright);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+.core-thesis-quote {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 5vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+  margin: 0 auto 2.5rem;
+  color: var(--cream);
+}
+.core-thesis-quote .strike-through {
+  position: relative;
+  display: inline-block;
+  color: var(--cream-dim);
+}
+.core-thesis-quote .strike-through::after {
+  content: "";
+  position: absolute;
+  left: -0.05em;
+  right: -0.05em;
+  top: 52%;
+  height: 0.08em;
+  background: var(--red-bright);
+}
+.core-thesis-quote .emphasis {
+  color: var(--red-bright);
+  font-style: italic;
+}
+.core-thesis-attribution {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.core-thesis-expand {
+  max-width: 60ch;
+  margin: 3.5rem auto 0;
+  text-align: left;
+  font-size: 1.05rem;
+  color: var(--cream-soft);
+  line-height: 1.7;
+  border-top: 1px solid rgba(236, 229, 210, 0.15);
+  padding-top: 2rem;
+}
+
+/* ============================================
+   PROGRESSION (BEING/HAVING/APPEARING)
+   ============================================ */
+.progression {
+  margin-top: 3rem;
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+@media (min-width: 880px) {
+  .progression { grid-template-columns: repeat(3, 1fr); }
+}
+.progression-step {
+  padding: 2.5rem 1.75rem;
+  position: relative;
+}
+@media (min-width: 880px) {
+  .progression-step + .progression-step {
+    border-left: 1px solid rgba(20, 17, 13, 0.18);
+  }
+}
+.progression-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
+  margin-bottom: 1rem;
+}
+.progression-stage {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.progression-step:nth-child(1) .progression-stage { color: var(--ink); }
+.progression-step:nth-child(2) .progression-stage { color: var(--ink-soft); }
+.progression-step:nth-child(3) .progression-stage { color: var(--red); }
+.progression-era {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+}
+.progression-desc {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.progression-arrow {
+  position: absolute;
+  right: -0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--red);
+  background: var(--bg-paper);
+  width: 1.7rem;
+  text-align: center;
+  z-index: 2;
+}
+@media (max-width: 879px) {
+  .progression-arrow { display: none; }
+}
+
+/* ============================================
+   FOUR MANIFESTATIONS
+   ============================================ */
+.manifestations {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(236, 229, 210, 0.12);
+  border: 1px solid rgba(236, 229, 210, 0.12);
+  margin-top: 3rem;
+}
+@media (min-width: 700px) {
+  .manifestations { grid-template-columns: 1fr 1fr; }
+}
+.manifestation {
+  background: var(--bg-dark);
+  padding: 2.25rem 1.75rem 2.5rem;
+  position: relative;
+}
+.manifestation-num {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cream-dim);
+  letter-spacing: 0.15em;
+}
+.manifestation-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.85rem;
+  margin-bottom: 0.6rem;
+  color: var(--cream);
+}
+.manifestation-name .roman {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  color: var(--red-bright);
+  font-size: 0.75em;
+  margin-right: 0.6rem;
+  vertical-align: 0.12em;
+}
+.manifestation-desc {
+  font-size: 0.98rem;
+  color: var(--cream-soft);
+  line-height: 1.6;
+}
+.manifestation-modern {
+  margin-top: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.manifestation-modern::before {
+  content: "Now: ";
+  color: var(--cream-dim);
+}
+
+/* ============================================
+   CHAPTERS
+   ============================================ */
+.chapters-intro {
+  max-width: 70ch;
+  margin-bottom: 4rem;
+}
+.chapter-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(20, 17, 13, 0.18);
+}
+.chapter {
+  border-bottom: 1px solid rgba(20, 17, 13, 0.18);
+  padding: 2.25rem 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (min-width: 880px) {
+  .chapter { grid-template-columns: 12ch 1fr 14ch; gap: 3rem; }
+}
+.chapter-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--red);
+  letter-spacing: 0.05em;
+  padding-top: 0.5rem;
+}
+.chapter-num small {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+.chapter-body {
+  max-width: 56ch;
+}
+.chapter-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+  line-height: 1.15;
+}
+.chapter-epigraph {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  border-left: 2px solid var(--red);
+  padding: 0.3rem 0 0.3rem 0.85rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.chapter-epigraph cite {
+  display: block;
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0.3rem;
+  opacity: 0.7;
+}
+.chapter-desc {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+.chapter-key {
+  background: rgba(20, 17, 13, 0.04);
+  border-left: 2px solid var(--ink);
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.94rem;
+}
+.chapter-key-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.35rem;
+}
+.chapter-key-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.chapter-key-quote .ref {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.78em;
+  color: var(--ink-muted);
+  margin-left: 0.5rem;
+}
+.chapter-meta {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  padding-top: 0.5rem;
+}
+.chapter-meta span { display: block; }
+.chapter-meta .tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink-muted);
+  padding: 0.15rem 0.4rem;
+  margin-top: 0.5rem;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   DUAL DIAGRAM (CONCENTRATED / DIFFUSE)
+   ============================================ */
+.dual-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+@media (min-width: 880px) {
+  .dual-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+.dual-card {
+  background: var(--bg-paper-deep);
+  border: 1px solid rgba(20, 17, 13, 0.15);
+  padding: 2.25rem 2rem;
+}
+.dual-card-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+.dual-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.dual-card-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+  font-size: 0.98rem;
+}
+.dual-card ul {
+  list-style: none;
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+.dual-card li {
+  padding: 0.65rem 0;
+  border-top: 1px dashed rgba(20, 17, 13, 0.15);
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+.dual-card li strong {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+.dual-card-quote {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ink);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.dual-card-quote .ref {
+  display: block;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--red);
+  margin-top: 0.4rem;
+  letter-spacing: 0.1em;
+}
+.integrated-note {
+  margin-top: 3rem;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 2rem;
+  border-left: 4px solid var(--red-bright);
+}
+.integrated-note h3 {
+  font-size: 1.3rem;
+  color: var(--cream);
+  margin-bottom: 0.85rem;
+}
+.integrated-note p {
+  font-size: 0.98rem;
+  color: var(--cream-soft);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* ============================================
+   TIME SECTION
+   ============================================ */
+.time-strip {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 880px) {
+  .time-strip { grid-template-columns: repeat(3, 1fr); }
+}
+.time-block {
+  padding: 2.25rem 1.5rem;
+  position: relative;
+  border-top: 4px solid;
+}
+.time-block-1 {
+  background: rgba(20, 17, 13, 0.04);
+  border-color: var(--ink);
+}
+.time-block-2 {
+  background: rgba(184, 146, 74, 0.08);
+  border-color: var(--gold);
+}
+.time-block-3 {
+  background: rgba(179, 25, 25, 0.06);
+  border-color: var(--red);
+}
+.time-era {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+.time-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.time-form {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.time-desc {
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.time-shape {
+  margin-top: 1.5rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================
+   DÉTOURNEMENT
+   ============================================ */
+.detournement-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (min-width: 980px) {
+  .detournement-grid { grid-template-columns: 1.3fr 1fr; gap: 5rem; }
+}
+.det-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+.det-quote .strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--red-bright);
+  color: var(--cream-dim);
+}
+.det-quote .insert {
+  color: var(--red-bright);
+  font-style: italic;
+}
+.det-source {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.det-explainer {
+  background: rgba(236, 229, 210, 0.05);
+  border-left: 3px solid var(--red-bright);
+  padding: 1.5rem 1.75rem;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--cream-soft);
+}
+.det-explainer h4 {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.85rem;
+}
+.det-explainer p:last-child { margin-bottom: 0; }
+
+/* ============================================
+   MODERN RELEVANCE
+   ============================================ */
+.relevance-intro {
+  max-width: 65ch;
+  margin-bottom: 4rem;
+}
+.relevance-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(20, 17, 13, 0.2);
+}
+@media (min-width: 700px) {
+  .relevance-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .relevance-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.relevance-item {
+  padding: 2rem 1.75rem 2rem 0;
+  border-bottom: 1px solid rgba(20, 17, 13, 0.15);
+}
+@media (min-width: 700px) {
+  .relevance-item:nth-child(even) { padding-left: 1.75rem; padding-right: 0; border-left: 1px solid rgba(20, 17, 13, 0.15); }
+}
+@media (min-width: 1100px) {
+  .relevance-item { padding-left: 1.75rem !important; border-left: 1px solid rgba(20, 17, 13, 0.15) !important; padding-right: 1.75rem !important; }
+  .relevance-item:first-child { border-left: none !important; padding-left: 0 !important; }
+  .relevance-item:nth-child(3n+1) { border-left: none !important; padding-left: 0 !important; }
+}
+.relevance-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--red);
+  margin-bottom: 0.85rem;
+}
+.relevance-then {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.4rem;
+}
+.relevance-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  margin-bottom: 1.25rem;
+  color: var(--ink);
+}
+.relevance-now {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+}
+.relevance-realized {
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   SELECTED THESES
+   ============================================ */
+.theses-list {
+  display: grid;
+  gap: 0;
+  margin-top: 3rem;
+}
+.thesis-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-top: 1px solid rgba(236, 229, 210, 0.12);
+}
+@media (min-width: 880px) {
+  .thesis-row { grid-template-columns: 11ch 1fr; gap: 3rem; padding: 2.5rem 0; }
+}
+.thesis-row:last-child { border-bottom: 1px solid rgba(236, 229, 210, 0.12); }
+.thesis-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--red-bright);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  align-self: start;
+}
+.thesis-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  line-height: 1.45;
+  color: var(--cream);
+}
+.thesis-quote .quote-mark {
+  color: var(--red-bright);
+  font-weight: 700;
+}
+.thesis-context {
+  margin-top: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+
+/* ============================================
+   GLOSSARY
+   ============================================ */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+@media (min-width: 700px) {
+  .glossary-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.glossary-term {
+  background: var(--bg-paper);
+  border: 1px solid rgba(20, 17, 13, 0.12);
+  padding: 1.5rem 1.5rem;
+  transition: border-color 0.2s;
+}
+.glossary-term:hover { border-color: var(--red); }
+.glossary-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+.glossary-pron {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.85rem;
+}
+.glossary-def {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.glossary-def em {
+  background: rgba(179, 25, 25, 0.08);
+  font-style: normal;
+  padding: 0 0.2em;
+}
+
+/* ============================================
+   FIGURES (PEOPLE) MENTIONED
+   ============================================ */
+.figures-section {
+  margin-top: 5rem;
+}
+.figures-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(20, 17, 13, 0.2);
+}
+.figure {
+  padding: 1.25rem 1.25rem 1.25rem 0;
+  border-bottom: 1px solid rgba(20, 17, 13, 0.12);
+  font-size: 0.93rem;
+}
+.figure-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.figure-years {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+.figure-role {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.figure-thesis {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--red);
+  margin-top: 0.5rem;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================
+   READING GUIDE
+   ============================================ */
+.reading-guide {
+  background: var(--bg-dark-2);
+  color: var(--cream);
+  padding: 3rem 2.5rem;
+  margin-top: 3rem;
+  border-top: 4px solid var(--red);
+}
+.reading-guide h3 {
+  color: var(--cream);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+.reading-guide p {
+  color: var(--cream-soft);
+  font-size: 1.02rem;
+}
+.reading-paths {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media (min-width: 700px) {
+  .reading-paths { grid-template-columns: repeat(3, 1fr); }
+}
+.reading-path {
+  border-left: 2px solid var(--red);
+  padding-left: 1.25rem;
+}
+.reading-path h4 {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.reading-path-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+.reading-path p {
+  font-size: 0.92rem;
+  color: var(--cream-soft);
+  line-height: 1.55;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.site-footer {
+  background: var(--bg-dark);
+  color: var(--cream);
+  padding: 6rem var(--gutter) 4rem;
+  position: relative;
+}
+.footer-feuerbach {
+  max-width: 60ch;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-attribution {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 2rem;
+}
+.footer-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.4vw, 1.65rem);
+  line-height: 1.55;
+  color: var(--cream);
+}
+.footer-cite {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-top: 2rem;
+}
+.footer-meta {
+  margin-top: 6rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(236, 229, 210, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cream-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.fade-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  margin: 2.5rem 0;
+}
+.rule-thin {
+  height: 1px;
+  background: rgba(20, 17, 13, 0.18);
+  margin: 2rem 0;
+}
+.section-dark .rule-thin,
+.section-dark-2 .rule-thin {
+  background: rgba(236, 229, 210, 0.15);
+}
+
+/* details/summary styling for collapsibles */
+details.thesis-collapse {
+  margin-top: 1.5rem;
+}
+details.thesis-collapse summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding: 0.5rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+details.thesis-collapse summary::-webkit-details-marker { display: none; }
+details.thesis-collapse summary::after {
+  content: "+";
+  font-family: var(--font-mono);
+  font-weight: 400;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--red);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+}
+details.thesis-collapse[open] summary::after { content: "−"; }
+details.thesis-collapse .extra {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  border-left: 2px solid var(--red);
+  padding-left: 1rem;
+}
+.section-dark details.thesis-collapse .extra,
+.section-dark-2 details.thesis-collapse .extra { color: var(--cream-soft); }
+
+/* svg shapes for time block */
+.time-shape svg { width: 100%; height: 100%; }
+.cyclical-shape circle { fill: none; stroke: var(--ink); stroke-width: 2; }
+.linear-shape line { stroke: var(--gold); stroke-width: 2; }
+.linear-shape circle { fill: var(--gold); }
+.pseudo-shape path { fill: none; stroke: var(--red); stroke-width: 2; stroke-linecap: round; }
+
+/* responsive type for very small screens */
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  :root { --section-pad: 4rem; }
+}
+
+/* Print-friendliness */
+@media print {
+  .topnav, .hero-scroll { display: none; }
+  body { background: white; color: black; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     TOP NAVIGATION
+     ============================================ -->
+<nav class="topnav" aria-label="Primary">
+  <div class="topnav-inner">
+    <div class="topnav-title">Debord <em>·</em> 1967</div>
+    <ul class="topnav-links">
+      <li><a href="#prologue">Prologue</a></li>
+      <li><a href="#core">Core</a></li>
+      <li><a href="#progression">Stages</a></li>
+      <li><a href="#chapters">Chapters</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#time">Time</a></li>
+      <li><a href="#detournement">Method</a></li>
+      <li><a href="#relevance">Relevance</a></li>
+      <li><a href="#theses">Theses</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<header class="hero">
+  <div class="hero-top">
+    <div>
+      LA SOCIÉTÉ DU SPECTACLE<br>
+      Buchet-Chastel · Paris · November 1967
+    </div>
+    <div>
+      221 Theses · 9 Chapters<br>
+      Translation: Ken Knabb, 2002
+    </div>
+  </div>
+
+  <div class="hero-main">
+    <div>
+      <h1 class="hero-title">
+        The<br>
+        Society<br>
+        <span class="of">of the</span><br>
+        <span class="accent">Spectacle</span>
+      </h1>
+      <div class="hero-author">— Guy Debord</div>
+    </div>
+    <aside class="hero-sidebar">
+      <p>A reading companion to the work that diagnosed advanced capitalism's most distinctive feature: the colonization of social life by images.</p>
+      <p>Half a century before the smartphone, Debord identified the mechanism by which modern people became spectators of their own lives.</p>
+      <p style="color: var(--red-bright); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2rem;">↓ Begin reading</p>
+    </aside>
+  </div>
+
+  <div class="hero-thesis">
+    <div class="hero-thesis-num">01</div>
+    <div class="hero-thesis-text">
+      <span class="lead-word">In societies dominated</span> by modern conditions of production, life is presented as an immense accumulation of <em>spectacles</em>. Everything that was directly lived has receded into a representation.
+    </div>
+  </div>
+
+  <div class="hero-scroll">scroll ↓</div>
+</header>
+
+<!-- ============================================
+     PROLOGUE
+     ============================================ -->
+<section id="prologue" class="section-light">
+  <div class="container">
+    <div class="eyebrow">Prologue</div>
+    <h2>A book against the world that looks back</h2>
+
+    <div class="prologue-grid">
+      <aside class="prologue-aside">
+        <dl>
+          <div>
+            <dt>Published</dt>
+            <dd>14 November 1967, Paris</dd>
+          </div>
+          <div>
+            <dt>Author</dt>
+            <dd>Guy Debord (1931–1994), founding member of the Situationist International (1957–1972)</dd>
+          </div>
+          <div>
+            <dt>Form</dt>
+            <dd>221 numbered theses, nine chapters, each opening with an epigraph</dd>
+          </div>
+          <div>
+            <dt>Lineage</dt>
+            <dd>Marx, Hegel, Lukács, Feuerbach; Surrealism, Lettrism, the Situationists</dd>
+          </div>
+          <div>
+            <dt>Influence</dt>
+            <dd>Theoretical scaffolding of May 1968; reference point for every later critique of media, image, attention</dd>
+          </div>
+          <div>
+            <dt>The method</dt>
+            <dd><em>Détournement</em> — rerouted quotation. Lines from Marx and Hegel are inverted, twisted, and put back into circulation</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div class="prologue-body">
+        <p class="dropcap"><em>The Society of the Spectacle</em> is not a long book. It is short, dense, and structured like a hand grenade — 221 numbered theses, none more than a page, most a paragraph or two, each a compressed argument that detonates against the next. It reads like aphorism but argues like a philosophical system.</p>
+
+        <p>Debord's claim is deceptively simple. Advanced capitalism, having converted nearly all human labour and most human relations into commodities, has now reached a stage where it converts <em>experience itself</em> into a commodity — and the form this commodity takes is the image. What had been directly lived recedes into representation. What had been a relationship between people becomes a relationship mediated by pictures of things.</p>
+
+        <p>This is not a complaint about television, or advertising, or propaganda — though all three feature. The spectacle is not a thing one looks at. It is the <em>social arrangement</em> by which we look at things together, and by which we come to mistake the looking for the living. It is, in Debord's most precise formulation, "a social relation between people that is mediated by images."</p>
+
+        <p>What follows is a guide through the architecture of that argument: its core thesis, its historical anatomy, its diagnosis of time and space, its political conclusions, and the strange, ongoing way it has outlived almost all the other books of 1967 because the world it described has continued, with horrifying punctuality, to arrive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CORE THESIS
+     ============================================ -->
+<section id="core" class="section-dark core-thesis">
+  <div class="container-narrow">
+    <div class="core-thesis-tag">— Thesis 04 — the misreading he warned against —</div>
+    <blockquote class="core-thesis-quote">
+      The spectacle is <span class="strike-through">not a collection of images;</span><br>
+      it is a <span class="emphasis">social relation</span> between people<br>
+      that is mediated by images.
+    </blockquote>
+    <div class="core-thesis-attribution">Guy Debord · §4 · 1967</div>
+
+    <div class="core-thesis-expand">
+      <p>Most readers cross out the first clause and quote only the second; Debord put both there for a reason. The spectacle is not television. It is not the news. It is not advertising. It is not the internet, or social media, or your phone.</p>
+      <p>It is the way each of those things has become the medium through which we relate to each other — and the way that mediation, once installed, replaces what it claims to represent. The image is not the disease. The image-as-bond is.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PROGRESSION: BEING / HAVING / APPEARING
+     ============================================ -->
+<section id="progression" class="section-light">
+  <div class="container">
+    <div class="eyebrow">Thesis 17 · The historical shift</div>
+    <h2>Being. Having. Appearing.</h2>
+    <p class="lead" style="max-width: 60ch;">Debord compresses centuries of economic history into a single sentence: capitalism does not merely change what we own — it changes what we <em>are</em>, in stages.</p>
+
+    <div class="progression">
+      <div class="progression-step">
+        <div class="progression-num">01</div>
+        <div class="progression-stage">Being</div>
+        <div class="progression-era">Pre-capitalist · Pre-modern</div>
+        <div class="progression-desc">Human fulfillment is equated with <em>what one is</em>. Identity is rooted in lineage, place, vocation, faith. The world is given; the self is inherited.</div>
+        <div class="progression-arrow">→</div>
+      </div>
+      <div class="progression-step">
+        <div class="progression-num">02</div>
+        <div class="progression-stage">Having</div>
+        <div class="progression-era">Industrial capitalism · 19th century</div>
+        <div class="progression-desc">Fulfillment shifts to <em>what one possesses</em>. The commodity replaces the soul as the measure of a life. Marx wrote his account of this stage; Debord assumes you already know it.</div>
+        <div class="progression-arrow">→</div>
+      </div>
+      <div class="progression-step">
+        <div class="progression-num">03</div>
+        <div class="progression-stage">Appearing</div>
+        <div class="progression-era">Spectacle · 20th century onward</div>
+        <div class="progression-desc">All <em>having</em> must now derive its prestige and ultimate purpose from <em>appearances</em>. To own without being seen to own is to not own. To live without being seen to live is to barely live at all.</div>
+      </div>
+    </div>
+
+    <div class="rule-thin"></div>
+    <p style="font-family: var(--font-display); font-style: italic; font-size: 1.15rem; max-width: 50ch; color: var(--ink-soft);">"Individual reality is allowed to appear only if it is not actually real."  <span style="font-family: var(--font-mono); font-style: normal; font-size: 0.75rem; color: var(--red); letter-spacing: 0.1em;">§17</span></p>
+  </div>
+</section>
+
+<!-- ============================================
+     FOUR MANIFESTATIONS
+     ============================================ -->
+<section id="forms" class="section-dark">
+  <div class="container">
+    <div class="eyebrow">Thesis 6 · The four faces</div>
+    <h2 style="color: var(--cream);">Where the spectacle shows itself</h2>
+    <p class="lead" style="max-width: 62ch;">The spectacle is not abstract; it has names. Debord lists four. Each is a different costume for the same operation: <em>the omnipresent affirmation of the choices that have already been made in the sphere of production.</em></p>
+
+    <div class="manifestations">
+      <div class="manifestation">
+        <div class="manifestation-num">I</div>
+        <div class="manifestation-name"><span class="roman">i.</span> News</div>
+        <div class="manifestation-desc">The continuous reporting of pseudo-events. Not the world but the daily summary of itself. The function of news is not information; it is the production of the feeling that something is happening.</div>
+        <div class="manifestation-modern">infinite scroll · the feed · push notification · trending</div>
+      </div>
+      <div class="manifestation">
+        <div class="manifestation-num">II</div>
+        <div class="manifestation-name"><span class="roman">ii.</span> Propaganda</div>
+        <div class="manifestation-desc">The official voice of every state, agency, party, brand. Not lies precisely, but a continuous monologue of self-praise — "the ruling order's nonstop discourse about itself" (§24).</div>
+        <div class="manifestation-modern">press releases · branded content · corporate values · official accounts</div>
+      </div>
+      <div class="manifestation">
+        <div class="manifestation-num">III</div>
+        <div class="manifestation-name"><span class="roman">iii.</span> Advertising</div>
+        <div class="manifestation-desc">Each commodity carries its own appeal to be looked at, to be wanted. The advertisement does not sell the object; it teaches the form of wanting that will then attach to whatever object is currently being sold.</div>
+        <div class="manifestation-modern">influencer content · sponsored posts · "personal brand" · the algorithmic ad</div>
+      </div>
+      <div class="manifestation">
+        <div class="manifestation-num">IV</div>
+        <div class="manifestation-name"><span class="roman">iv.</span> Entertainment</div>
+        <div class="manifestation-desc">The colonization of leisure. What was once outside the workday — play, festival, dialogue — is now produced for us, packaged, and sold back. Free time becomes the time when the spectacle does its most thorough work.</div>
+        <div class="manifestation-modern">streaming services · gaming · the attention economy · the metaverse</div>
+      </div>
+    </div>
+
+    <div class="rule-thin"></div>
+    <p style="font-family: var(--font-display); font-style: italic; max-width: 55ch; color: var(--cream-soft); font-size: 1.1rem;">"In both form and content the spectacle serves as a total justification of the conditions and goals of the existing system. The spectacle also represents the constant presence of this justification since it monopolizes the majority of the time spent outside the production process."  <span style="font-family: var(--font-mono); font-style: normal; font-size: 0.75rem; color: var(--red-bright); letter-spacing: 0.1em;">§6</span></p>
+  </div>
+</section>
+
+<!-- ============================================
+     CHAPTERS
+     ============================================ -->
+<section id="chapters" class="section-light">
+  <div class="container">
+    <div class="eyebrow">The architecture · 9 chapters · 221 theses</div>
+    <h2>The whole argument</h2>
+    <p class="lead chapters-intro">Debord builds his case in nine movements. The first three define the spectacle; the fourth audits two centuries of revolution; the fifth and sixth dissect time; the seventh, space; the eighth, art and language; the ninth, the materialization of ideology itself. Theses are numbered continuously across chapters.</p>
+
+    <div class="chapter-list">
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 1<small>§1–34</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">The Culmination of Separation</h3>
+          <div class="chapter-epigraph">
+            "Truth is considered profane, and only illusion is sacred."
+            <cite>— Feuerbach, <em>The Essence of Christianity</em>, 1843</cite>
+          </div>
+          <p class="chapter-desc">The opening movement. Defines the spectacle as the form taken by social <em>separation</em> in advanced capitalism. The world has been split into reality and image; the image now dominates the reality. Spectators are united only in their isolation from one another.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"The spectacle is capital accumulated to the point that it becomes images."<span class="ref">§34</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">SEPARATION</span>
+          <span class="tag">ALIENATION</span>
+          <span class="tag">REPRESENTATION</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 2<small>§35–53</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">The Commodity as Spectacle</h3>
+          <div class="chapter-epigraph">
+            "As labor is increasingly rationalized and mechanized... people's activity becomes less and less active and more and more contemplative."
+            <cite>— Lukács, <em>History and Class Consciousness</em>, 1923</cite>
+          </div>
+          <p class="chapter-desc">Extends Marx's analysis of commodity fetishism to its absolute form. When the commodity colonizes every domain of life, it is no longer one object among many; it is the only object, and the spectacle is its visible face. The consumer becomes a consumer of illusions; the commodity, the materialized illusion.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"The spectacle is the stage at which the commodity has succeeded in totally colonizing social life."<span class="ref">§42</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">FETISHISM</span>
+          <span class="tag">EXCHANGE-VALUE</span>
+          <span class="tag">PSEUDO-NEED</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 3<small>§54–72</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Unity and Division Within Appearances</h3>
+          <div class="chapter-epigraph">
+            "Those who maintain that 'one divides into two' is the fundamental law of things are on the side of the materialist dialectic..."
+            <cite>— <em>Red Flag</em>, Beijing, 21 September 1964</cite>
+          </div>
+          <p class="chapter-desc">The spectacle is at once globally unified and locally divided. It produces apparent conflicts — between rival superpowers, between styles, between celebrities — that all serve the same underlying system. Introduces the famous distinction between the <em>concentrated</em> spectacle (totalitarian states) and the <em>diffuse</em> spectacle (Western consumerism).</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"Spectacular oppositions conceal the unity of poverty."<span class="ref">§63</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">CONCENTRATED</span>
+          <span class="tag">DIFFUSE</span>
+          <span class="tag">STAR</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 4<small>§73–124</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">The Proletariat as Subject and Representation</h3>
+          <div class="chapter-epigraph">
+            "Equal right to all the goods and pleasures of this world, the destruction of all authority, the negation of all moral restraints..."
+            <cite>— Parliamentary Inquest on the Paris Commune, 1871</cite>
+          </div>
+          <p class="chapter-desc">The longest and most political chapter. A condensed history of revolutionary thought and its betrayals: Hegel, Marx, Bakunin, the First International, the Paris Commune, Lenin, Stalin, Trotsky, the Spanish anarchists, the Hungarian workers' councils. The recurring tragedy: the <em>representation</em> of the working class has become its enemy.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"The representation of the working class has become an enemy of the working class."<span class="ref">§100</span></div>
+          </div>
+          <details class="thesis-collapse">
+            <summary>The chapter's verdict on parties and unions</summary>
+            <div class="extra">
+              Both ideology and organization — the very forms invented to free the proletariat — became, by his account, instruments of its further subjection. Trade unions sell labour-power at a "fair" price; Bolshevik parties seize the state and become a new ruling bureaucracy. The only undefeated form, Debord argues, is the <em>workers' council</em>: federated, recallable, never delegating away the power to decide. Theses 116–121 are the constructive heart of the book.
+            </div>
+          </details>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">PROLETARIAT</span>
+          <span class="tag">COUNCILS</span>
+          <span class="tag">BUREAUCRACY</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 5<small>§125–146</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Time and History</h3>
+          <div class="chapter-epigraph">
+            "O, gentlemen, the time of life is short!... An if we live, we live to tread on kings."
+            <cite>— Shakespeare, <em>Henry IV</em></cite>
+          </div>
+          <p class="chapter-desc">A philosophical history of <em>time itself</em>. Static societies live in cyclical time (the return of the same). Class societies introduce a separate, irreversible time monopolized by rulers. The bourgeoisie democratizes irreversible time — but only as the abstract time of economic production. Time becomes the measure of commodities before it is the terrain of human development.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"The temporalization of humanity, brought about through the mediation of a society, amounts to a humanization of time."<span class="ref">§125</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">CYCLICAL</span>
+          <span class="tag">IRREVERSIBLE</span>
+          <span class="tag">HISTORY</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 6<small>§147–164</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Spectacular Time</h3>
+          <div class="chapter-epigraph">
+            "We have nothing of our own except time, which even the homeless can experience."
+            <cite>— Baltasar Gracián, <em>The Art of Worldly Wisdom</em>, 1647</cite>
+          </div>
+          <p class="chapter-desc">A devastating account of <em>pseudo-cyclical</em> time: the work week, the vacation, the holiday season, the news cycle. Time has been rendered into a consumable commodity. Even leisure is sold back to us as a "block" of programmed hours. The American spends three to six hours daily watching television, Debord notes; the figure has only gone up.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"The reality of time has been replaced by the publicity of time."<span class="ref">§154</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">PSEUDO-CYCLE</span>
+          <span class="tag">LEISURE</span>
+          <span class="tag">PSEUDO-EVENT</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 7<small>§165–179</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Territorial Domination</h3>
+          <div class="chapter-epigraph">
+            "Whoever becomes the ruler of a city that is accustomed to freedom and does not destroy it can expect to be destroyed by it..."
+            <cite>— Machiavelli, <em>The Prince</em></cite>
+          </div>
+          <p class="chapter-desc">The spectacle's conquest of <em>space</em>. Urbanism is the technology by which capitalism remakes the environment in its own image — atomizing workers, abolishing the street, replacing cities with the formless spread of suburbs, freeways, and "distribution factories" (today's shopping mall, fulfillment center, gated cul-de-sac). Tourism completes the work: the commodified visit to places already drained of distinction.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"Urbanism is the modern method for solving the ongoing problem of safeguarding class power by atomizing the workers."<span class="ref">§172</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">URBANISM</span>
+          <span class="tag">TOURISM</span>
+          <span class="tag">ATOMIZATION</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 8<small>§180–211</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Negation and Consumption Within Culture</h3>
+          <div class="chapter-epigraph">
+            "Read whatever newspapers you please, and you cannot fail to be convinced that we never stop... celebrating the freedom and national happiness that we enjoy."
+            <cite>— Ruge to Marx, March 1843</cite>
+          </div>
+          <p class="chapter-desc">A history of the dissolution of art. Once myth shattered, culture became a separate sphere; once that sphere reached self-consciousness, it began to negate itself. Dada wanted to abolish art without realizing it; Surrealism wanted to realize it without abolishing it. Both failed. The chapter ends by introducing Debord's own method: <em>détournement</em>.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"Dadaism sought to abolish art without realizing it; surrealism sought to realize art without abolishing it. The situationists have shown that the abolition and realization of art are inseparable aspects of a single transcendence of art."<span class="ref">§191</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">DÉTOURNEMENT</span>
+          <span class="tag">DADA</span>
+          <span class="tag">STRUCTURALISM</span>
+        </div>
+      </article>
+
+      <article class="chapter">
+        <div class="chapter-num">Ch. 9<small>§212–221</small></div>
+        <div class="chapter-body">
+          <h3 class="chapter-title">Ideology Materialized</h3>
+          <div class="chapter-epigraph">
+            "Self-consciousness exists in itself and for itself only insofar as it exists in and for another self-consciousness."
+            <cite>— Hegel, <em>The Phenomenology of Spirit</em>, 1807</cite>
+          </div>
+          <p class="chapter-desc">The closing movement. Ideology is no longer a system of beliefs people hold; it has been built into the objects, the streets, the screens — the very texture of daily life. To live in the spectacle is to live <em>inside</em> an ideology, no longer needing to be told it. The book ends, like Marx's <em>Theses on Feuerbach</em>, with the demand for praxis — for theory that completes itself by becoming action.</p>
+          <div class="chapter-key">
+            <span class="chapter-key-label">Key Thesis</span>
+            <div class="chapter-key-quote">"The spectacle is the acme of ideology because it fully exposes and manifests the essence of all ideological systems: the impoverishment, enslavement and negation of real life."<span class="ref">§215</span></div>
+          </div>
+        </div>
+        <div class="chapter-meta">
+          <span>Concept</span>
+          <span class="tag">IDEOLOGY</span>
+          <span class="tag">PRAXIS</span>
+          <span class="tag">TOTALITY</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Reading guide -->
+    <div class="reading-guide">
+      <h3>Three ways to read the book</h3>
+      <p>Debord himself warns, in the translator's note, that the opening chapters are the hardest. Most first-time readers give up by §11 and conclude the book is impenetrable. It is not. Try one of these paths:</p>
+
+      <div class="reading-paths">
+        <div class="reading-path">
+          <h4>The historical path</h4>
+          <div class="reading-path-title">Start at Chapter 4</div>
+          <p>"With remarkable conciseness sums up the lessons of two centuries of revolutionary experience" (Ken Knabb). Concrete events. Then loop back.</p>
+        </div>
+        <div class="reading-path">
+          <h4>The philosophical path</h4>
+          <div class="reading-path-title">Start at Chapter 5</div>
+          <p>Time, history, the bourgeois revolution. The argument unfolds chronologically from the agrarian village to the global market.</p>
+        </div>
+        <div class="reading-path">
+          <h4>The aphoristic path</h4>
+          <div class="reading-path-title">Read only the odd-numbered theses</div>
+          <p>You will lose almost nothing. The book is structured to reward partial readings. Many readers return for decades.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     CONCENTRATED / DIFFUSE
+     ============================================ -->
+<section class="section-light-deep">
+  <div class="container">
+    <div class="eyebrow">Two forms of one system · §63–65</div>
+    <h2>Concentrated &nbsp;&amp;&nbsp; Diffuse</h2>
+    <p class="lead" style="max-width: 60ch;">When Debord wrote, the world was officially split into two camps. He saw through the split. Both Cold War blocs, he argued, were producing the same product — separation — by different methods. They were two forms of the same spectacle.</p>
+
+    <div class="dual-grid">
+      <div class="dual-card">
+        <div class="dual-card-tag">§64 · Form I</div>
+        <h3>The Concentrated Spectacle</h3>
+        <p class="dual-card-subtitle">"The dominion of the concentrated spectacle is a police state."</p>
+        <ul>
+          <li><strong>Where</strong>Bureaucratic capitalism — Stalin's USSR, Mao's China, North Korea</li>
+          <li><strong>Image</strong>Single, unitary, official. One face fills every screen.</li>
+          <li><strong>Star</strong>The Leader. Cult of personality. "The absolute star."</li>
+          <li><strong>Choice</strong>None. To choose anything not chosen is treason.</li>
+          <li><strong>Enforcement</strong>Direct violence. Police, prison, terror.</li>
+          <li><strong>Commodity</strong>Concentrated — the bureaucracy owns the total social labour and rations it back</li>
+        </ul>
+        <div class="dual-card-quote">
+          "If the entire Chinese population has to study Mao to the point of identifying with Mao, this is because there is nothing else they can be."
+          <span class="ref">§64</span>
+        </div>
+      </div>
+
+      <div class="dual-card">
+        <div class="dual-card-tag">§65 · Form II</div>
+        <h3>The Diffuse Spectacle</h3>
+        <p class="dual-card-subtitle">"Each individual commodity fights for itself."</p>
+        <ul>
+          <li><strong>Where</strong>Commodity-abundant capitalism — postwar US, Western Europe, today's globalized world</li>
+          <li><strong>Image</strong>Plural, competing, branded. A thousand faces, all selling.</li>
+          <li><strong>Star</strong>The Celebrity. Many at once, replaceable.</li>
+          <li><strong>Choice</strong>Endless — but only among pre-selected alternatives</li>
+          <li><strong>Enforcement</strong>Soft. Boredom, debt, exclusion, the algorithm.</li>
+          <li><strong>Commodity</strong>Diffuse — a flood of star products, each promising salvation, all delivering disappointment</li>
+        </ul>
+        <div class="dual-card-quote">
+          "The proliferation of faddish gadgets reflects the fact that as the mass of commodities becomes increasingly absurd, absurdity itself becomes a commodity."
+          <span class="ref">§67</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="integrated-note">
+      <h3>A postscript Debord added in 1988</h3>
+      <p>Twenty-one years later, in <em>Comments on the Society of the Spectacle</em>, Debord argued a third form had emerged that combined the previous two — the <strong>integrated spectacle</strong>. It uses the concentrated form's seamless ideological control alongside the diffuse form's commodity abundance, while abolishing any space of refuge. Television and the market, secret services and supermarkets, working together. He wrote this in 1988. He had not yet seen the internet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TIME
+     ============================================ -->
+<section id="time" class="section-light">
+  <div class="container">
+    <div class="eyebrow">Chapters 5 &amp; 6 · The longest argument</div>
+    <h2>Three times</h2>
+    <p class="lead" style="max-width: 60ch;">Debord spends fifty theses on the question of <em>time</em>, because the spectacle's deepest crime is what it does to lived duration. The history he sketches has three movements.</p>
+
+    <div class="time-strip">
+      <div class="time-block time-block-1">
+        <div class="time-era">First · pre-modern</div>
+        <div class="time-name">Cyclical</div>
+        <div class="time-form">The static society · the eternal return</div>
+        <div class="time-desc">Time as the return of the same — seasons, generations, harvests, rites. Static societies have no history because they refuse to have one. The cosmos repeats; the village waits. Myth guarantees that what was, will be.</div>
+        <div class="time-shape">
+          <svg class="cyclical-shape" viewBox="0 0 200 60" preserveAspectRatio="xMidYMid meet">
+            <circle cx="30" cy="30" r="18"/>
+            <circle cx="70" cy="30" r="18"/>
+            <circle cx="110" cy="30" r="18"/>
+            <circle cx="150" cy="30" r="18"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="time-block time-block-2">
+        <div class="time-era">Second · class society to bourgeois revolution</div>
+        <div class="time-name">Irreversible</div>
+        <div class="time-form">History · the arrow · the chronicle</div>
+        <div class="time-desc">Rulers monopolize an irreversible time of dynasties, wars, conquests. The bourgeoisie democratizes it: the time of production, of progress, of accumulation. History becomes real — but only as the history of <em>things</em>. Workers live inside a time they cannot direct.</div>
+        <div class="time-shape">
+          <svg class="linear-shape" viewBox="0 0 200 60" preserveAspectRatio="xMidYMid meet">
+            <line x1="10" y1="30" x2="190" y2="30"/>
+            <circle cx="40" cy="30" r="3"/>
+            <circle cx="80" cy="30" r="3"/>
+            <circle cx="120" cy="30" r="3"/>
+            <circle cx="160" cy="30" r="3"/>
+            <polygon points="185,25 195,30 185,35" fill="var(--gold)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="time-block time-block-3">
+        <div class="time-era">Third · the present</div>
+        <div class="time-name">Pseudo-cyclical</div>
+        <div class="time-form">Spectacular time · time as commodity</div>
+        <div class="time-desc">The spectacle's master-stroke: a counterfeit cycle made of work-weeks, weekends, vacations, news-cycles, sales seasons. The form of cyclical time imposed on irreversible time. We feel time pass without feeling we have lived. "Spectacular time is the illusorily lived time of a constantly changing reality" (§155).</div>
+        <div class="time-shape">
+          <svg class="pseudo-shape" viewBox="0 0 200 60" preserveAspectRatio="xMidYMid meet">
+            <path d="M 10 30 Q 30 5 50 30 T 90 30 T 130 30 T 170 30 T 195 30"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule-thin"></div>
+
+    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 90ch;">
+      <div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">What we lose</h3>
+        <p style="color: var(--ink-soft); font-size: 1.02rem;">"Fixated on the delusory center around which his world seems to move, the spectator no longer experiences life as a journey toward fulfillment and toward death. Once he has given up on really living he can no longer acknowledge his own death." <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--red);">§160</span></p>
+      </div>
+      <div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">What we might recover</h3>
+        <p style="color: var(--ink-soft); font-size: 1.02rem;">"The revolutionary project of a classless society, of an all-embracing historical life, implies the withering away of the social measurement of time in favor of a federation of independent times — a federation of playful individual and collective forms of irreversible time that are simultaneously present." <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--red);">§163</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     DÉTOURNEMENT
+     ============================================ -->
+<section id="detournement" class="section-dark-2">
+  <div class="container">
+    <div class="eyebrow">The method · §206–209</div>
+    <h2 style="color: var(--cream);">Détournement</h2>
+    <p class="lead" style="max-width: 60ch; color: var(--cream-soft);">Debord's most lasting contribution to political aesthetics. A French word meaning "diversion," "rerouting," "hijack." The Situationists' answer to a culture industry that absorbs every critique by repackaging it.</p>
+
+    <div class="detournement-grid">
+      <div>
+        <div class="det-quote">
+          The <span class="strike">philosophy of poverty</span><br>
+          <span class="insert">poverty of philosophy</span>.
+        </div>
+        <div class="det-source">— Marx détourns Proudhon, 1847</div>
+
+        <div class="det-quote">
+          Philosophers have only <span class="strike">interpreted</span> the world; the point is to <span class="insert">change</span> it.
+        </div>
+        <div class="det-source">— Marx détourns Hegel, §11 on Feuerbach</div>
+
+        <div class="det-quote">
+          Plagiarism is necessary. <span class="insert">Progress depends on it.</span>
+        </div>
+        <div class="det-source">— Debord détourns Lautréamont · §207</div>
+      </div>
+
+      <div class="det-explainer">
+        <h4>What it is</h4>
+        <p>To take an existing cultural artifact — a sentence from a philosopher, a frame from an advertisement, a film, a quote from scripture — and place it in a new context where it now says something it was never meant to say.</p>
+        <p>Not parody. Not pastiche. Not the academic citation that respectfully fences off its source. Détournement is the deliberate appropriation of language and image, removing them from their original frame, severing their old loyalties, and putting them to work for something they were designed to oppose.</p>
+        <p style="margin-top: 1.25rem;"><strong>Why it matters:</strong> the spectacle works by quotation — by recycling the past as decor. Détournement returns the favor. It steals back what was stolen, "reradicalizing previous critical conclusions that have been petrified into respectable truths."</p>
+        <p style="margin-top: 1.25rem;"><strong>The Situationist legacy:</strong> hip-hop sampling, the political meme, the subverted billboard, the protest sign that hijacks a corporate slogan, every great editorial cartoon. Wherever the dominant images have been turned against themselves, détournement is at work.</p>
+      </div>
+    </div>
+
+    <div class="rule-thin"></div>
+
+    <p style="font-family: var(--font-display); font-style: italic; font-size: 1.15rem; max-width: 70ch; color: var(--cream-soft);">"Détournement is the flexible language of anti-ideology. It appears in communication that knows it cannot claim to embody any definitive certainty. It is language that cannot and need not be confirmed by any previous or supracritical reference."  <span style="font-family: var(--font-mono); font-style: normal; font-size: 0.78rem; color: var(--red-bright);">§208</span></p>
+  </div>
+</section>
+
+<!-- ============================================
+     MODERN RELEVANCE
+     ============================================ -->
+<section id="relevance" class="section-light">
+  <div class="container">
+    <div class="eyebrow">Why 1967 is still 2026</div>
+    <h2>The book that kept happening</h2>
+    <p class="lead relevance-intro">Most political philosophy of the 1960s reads, today, as period piece. Debord reads as journalism. Below: a dozen claims he made before there was a personal computer in any home, and the recognisable shape they took on once there was one in every pocket.</p>
+
+    <div class="relevance-grid">
+
+      <div class="relevance-item">
+        <div class="relevance-num">§1</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"Everything that was directly lived has receded into a representation."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The vacation, the meal, the protest, the funeral, the war — all primarily experienced through the act of recording them for an audience.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§24</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"This 'communication' is essentially unilateral."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">A platform with five billion accounts where you cannot actually reach almost anyone, and almost no one can actually reach you. Comment sections as theatre.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§30</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"The more he contemplates, the less he lives; the more he identifies with the dominant images of need, the less he understands his own life and his own desires."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">A measurable epidemic of teenagers who can describe the lives of people they have never met but cannot name a desire of their own.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§60</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"Stars — spectacular representations of living human beings — project this general banality into images of permitted roles."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The influencer economy: a generation taught that the legitimate ambition is to become a permitted role for others to identify with.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§61</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"The agent of the spectacle who is put on stage as a star is the opposite of an individual."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The brand-self. The personal "feed." The carefully composed persona that, as it grows more public, becomes less recognisable to the person who composed it.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§59</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"Dissatisfaction itself becomes a commodity as soon as the economy of abundance develops the capacity to process that particular raw material."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">Wellness, therapy-speak, the recovery industry, the entire merchandising of "authentic struggle" — every critique of the system, sold back in branded form.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§153</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"The time that modern society is constantly seeking to 'save'... ends up being spent by the average American in watching television three to six hours a day."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">Seven hours of screen time, every day, across all devices. The phone is the first thing reached for in the morning and the last looked at before sleep.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§157</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"The pseudo-events that vie for attention in spectacular dramatizations have not been lived by those who are informed about them."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The endless news cycle: a hurricane of outrages that arrive, peak, and are forgotten in 48 hours, leaving no memory and no resolution.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§172</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"Bringing isolated individuals together as isolated individuals... the omnipresent receivers of spectacular messages fill the isolation with the ruling images."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The open-plan office, the co-working space, the apartment with everyone wearing headphones — community as backdrop, community without contact.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§166</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"The free space of commodities is constantly being altered and redesigned in order to become ever more identical to itself."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The "AirSpace" aesthetic. The same minimal café, the same logo system, the same chair, in 90 cities. The world made into one global airport waiting area.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§168</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"Tourism — human circulation packaged for consumption — is the opportunity to go and see what has been banalized."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">Overtourism. The Instagram pilgrimage. Venice, Kyoto, Barcelona as content backdrops. The location pin replacing the experience.</div>
+      </div>
+
+      <div class="relevance-item">
+        <div class="relevance-num">§214</div>
+        <div class="relevance-then">Debord wrote</div>
+        <div class="relevance-quote">"The despotism of a fragment imposing itself as pseudo-knowledge of a frozen totality."</div>
+        <div class="relevance-now">→ Today</div>
+        <div class="relevance-realized">The viral take. The 280-character verdict on a war you've read no book about. Confident epistemology produced at scale by people with no time to learn.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SELECTED THESES
+     ============================================ -->
+<section id="theses" class="section-dark">
+  <div class="container">
+    <div class="eyebrow">Fifteen passages · the canon within the canon</div>
+    <h2 style="color: var(--cream);">The theses people quote</h2>
+    <p class="lead" style="max-width: 60ch; color: var(--cream-soft);">If the book has a hit list — the lines repeated on dorm-room posters, in essays, on the back of zines, in art shows from Berlin to Buenos Aires — these are most of them. Read in order, they make a second small book inside the first.</p>
+
+    <div class="theses-list">
+
+      <div class="thesis-row">
+        <div class="thesis-num">01</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>In societies dominated by modern conditions of production, life is presented as an immense accumulation of spectacles. Everything that was directly lived has receded into a representation.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The book's opening line, a détournement of the first sentence of Marx's <em>Capital</em>: "an immense accumulation of commodities."</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">04</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The spectacle is not a collection of images; it is a social relation between people that is mediated by images.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The single most quoted line. Crucially: <em>not</em> a thing one looks at. A way of relating.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">06</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The spectacle... is the omnipresent affirmation of the choices that have already been made in the sphere of production and in the consumption implied by that production.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">Why the spectacle feels like freedom: it celebrates choices, but only after the only real choice has already been removed.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">09</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>In a world that is really upside down, the true is a moment of the false.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">Hegel détourné: not "the true is the whole" but the inversion of the inversion. A line printed on a thousand May 1968 posters.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">12</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>Its sole message is: What appears is good; what is good appears.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The spectacle's tautology. To be on the screen is to be real; to be real is to be on the screen.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">13</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>It is the sun that never sets over the empire of modern passivity. It covers the entire surface of the globe, endlessly basking in its own glory.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">An imperial line written about an imperial thing. The British Empire's claim, repurposed for the empire of looking.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">17</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The first stage of the economy's domination of social life brought about an evident degradation of <em>being</em> into <em>having</em>... The present stage... is bringing about a general shift from <em>having</em> to <em>appearing</em>.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The three-stage compression of capitalist history into a single sentence.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">24</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The spectacle is the ruling order's nonstop discourse about itself, its never-ending monologue of self-praise, its self-portrait at the stage of totalitarian domination of all aspects of life.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">Possibly the most accurate one-sentence description of the cable news / corporate communications / state press conference ecosystem ever written.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">30</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The more he contemplates, the less he lives; the more he identifies with the dominant images of need, the less he understands his own life and his own desires.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The book's psychological diagnosis in a single line. To read it is to recognise oneself at the end of a long day of scrolling.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">34</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The spectacle is capital accumulated to the point that it becomes images.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The definition Debord wanted on his tombstone, more or less. A direct détournement of Marx: capital so vast it changes phase, like water into vapour.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">42</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>Commodification is not only visible, we no longer see anything else; the world we see is the world of the commodity.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The point at which the analysis closes its own loop. There is no outside.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">49</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The spectacle is money one can only look at, because in it all use has already been exchanged for the totality of abstract representation.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">One of his most condensed images. The spectacle as a currency whose only function is to be displayed.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">100</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>The representation of the working class has become an enemy of the working class.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">The conclusion of Chapter 4's history. The party that claims to represent you ends up speaking instead of you, and finally against you.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">191</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>Dadaism sought to abolish art without realizing it; surrealism sought to realize art without abolishing it. The critical position since developed by the situationists has shown that the abolition and realization of art are inseparable aspects of a single transcendence of art.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">Debord's verdict on the twentieth century's two great avant-gardes — and his statement of what was meant to come next.</div>
+        </div>
+      </div>
+
+      <div class="thesis-row">
+        <div class="thesis-num">207</div>
+        <div>
+          <div class="thesis-quote"><span class="quote-mark">"</span>Ideas improve. The meaning of words plays a role in that improvement. Plagiarism is necessary. Progress depends on it. It sticks close to an author's phrasing, exploits his expressions, deletes a false idea, replaces it with the right one.<span class="quote-mark">"</span></div>
+          <div class="thesis-context">Itself a near-verbatim détournement of the 19th-century poet Lautréamont, which is the joke.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GLOSSARY
+     ============================================ -->
+<section id="glossary" class="section-light">
+  <div class="container">
+    <div class="eyebrow">A small dictionary</div>
+    <h2>Twelve terms that unlock the book</h2>
+    <p class="lead" style="max-width: 60ch;">Debord assumes a reader who has already worked through Marx, Hegel, and Lukács. Most haven't. These twelve terms, in plain language.</p>
+
+    <div class="glossary-grid">
+
+      <div class="glossary-term">
+        <div class="glossary-name">Spectacle</div>
+        <div class="glossary-pron"><em>le spectacle</em> · the central term</div>
+        <div class="glossary-def">Not a collection of images. The <em>social arrangement</em> by which life is made to pass through images. A way of relating to oneself, others, and the world that has been outsourced to representation. The form taken by separation under advanced capitalism.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Commodity Fetishism</div>
+        <div class="glossary-pron">from Marx, <em>Capital</em> Vol. 1, Ch. 1</div>
+        <div class="glossary-def">The trick by which commodities appear to have value <em>in themselves</em>, hiding the social labour that made them. In the spectacle, this trick reaches absolute form: the image becomes its own justification, with no remaining reference to the human activity it occludes.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Reification</div>
+        <div class="glossary-pron"><em>Verdinglichung</em> · "thing-ification"</div>
+        <div class="glossary-def">Lukács's term, central to the epigraph of Chapter 2. The conversion of human <em>relations</em> into apparent relations between <em>things</em>. The boss becomes a job, the friend becomes a contact, the lover becomes a profile.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Alienation</div>
+        <div class="glossary-pron">from the young Marx, 1844</div>
+        <div class="glossary-def">The separation of producers from what they produce, from their own activity, from each other, and from their nature as historical beings. In Debord, alienation reaches its <em>visible</em> form — it becomes the image we live among.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Détournement</div>
+        <div class="glossary-pron"><em>de-toor-nuh-mahn</em> · diversion, hijack</div>
+        <div class="glossary-def">The reuse of existing cultural elements — a quote, an image, a film, a slogan — rearranged in a new context that subverts their original meaning. Debord's method throughout the book. The opposite of citation.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Recuperation</div>
+        <div class="glossary-pron"><em>récupération</em> · the spectacle's counter-move</div>
+        <div class="glossary-def">The mechanism by which radical gestures, once they have proven attractive, are absorbed by the spectacle, drained of meaning, and sold back as products. Punk on a poster in a shopping mall. Revolution as a perfume ad.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Pseudo-need</div>
+        <div class="glossary-pron">§51</div>
+        <div class="glossary-def">A "need" manufactured by the system to keep itself running. Distinguished from the (still unmet) authentic human needs for community, meaningful work, time, dignity. The pseudo-need wears the costume of desire and the costume of necessity.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Pseudo-event</div>
+        <div class="glossary-pron">from Daniel Boorstin · §157, §200</div>
+        <div class="glossary-def">An event that exists only to be reported on. The press conference. The launch. The viral moment. Debord cites Boorstin's coinage but goes further: pseudo-events are now the substance of reality, not its decoration.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Concentrated Spectacle</div>
+        <div class="glossary-pron">§64</div>
+        <div class="glossary-def">The bureaucratic-totalitarian form: one image of the good, one Leader, no choice, enforced by police. Stalin's USSR, Mao's China. Smaller models persist today wherever a personality cult does state business.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Diffuse Spectacle</div>
+        <div class="glossary-pron">§65</div>
+        <div class="glossary-def">The commodity-abundant form: a flood of competing images, brands, celebrities. Enforces nothing directly; lets boredom, debt, and exclusion do the work. The form most readers reading this live inside.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Praxis</div>
+        <div class="glossary-pron"><em>πρᾶξις</em> · the act of acting</div>
+        <div class="glossary-def">Theory that completes itself by becoming action. Debord's repeated demand. A critique of the spectacle that does not generate practical struggle is itself a spectacle — one more commodity in the marketplace of ideas.</div>
+      </div>
+
+      <div class="glossary-term">
+        <div class="glossary-name">Workers' Council</div>
+        <div class="glossary-pron"><em>soviet</em> · the constructive proposal</div>
+        <div class="glossary-def">The political form Debord endorses (§§116–121). Federated, directly democratic, with all delegates instantly recallable. The opposite of the party and the union. Where decisions are made by those who live the consequences.</div>
+      </div>
+
+    </div>
+
+    <!-- Figures section -->
+    <div class="figures-section">
+      <div class="eyebrow">Voices in the book · a partial census</div>
+      <h2 style="font-size: 1.85rem;">Whom Debord is arguing with</h2>
+      <p class="lead" style="font-size: 1.02rem; max-width: 60ch;">A book that proceeds by détournement is necessarily crowded. Below: the people whose lines Debord quotes, twists, or attacks — to read the book is to overhear this conversation.</p>
+
+      <div class="figures-list">
+        <div class="figure">
+          <span class="figure-name">G. W. F. Hegel</span>
+          <div class="figure-years">1770–1831</div>
+          <div class="figure-role">The philosophical foundation. Debord both salvages and inverts him at every turn.</div>
+          <div class="figure-thesis">§§76, 80, 127, 161, 206</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Karl Marx</span>
+          <div class="figure-years">1818–1883</div>
+          <div class="figure-role">The book is, in a sense, Marx written for the age of television.</div>
+          <div class="figure-thesis">§§78–89, 144, 215</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Ludwig Feuerbach</span>
+          <div class="figure-years">1804–1872</div>
+          <div class="figure-role">Opens the whole book. The age that prefers the sign to the thing.</div>
+          <div class="figure-thesis">Ch. 1 epigraph · §216</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Georg Lukács</span>
+          <div class="figure-years">1885–1971</div>
+          <div class="figure-role">The theorist of reification; Chapter 2's epigraph. Praised then attacked at §112.</div>
+          <div class="figure-thesis">Ch. 2 epigraph · §112</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Mikhail Bakunin</span>
+          <div class="figure-years">1814–1876</div>
+          <div class="figure-role">The anarchist counter-pole to Marx. Right about authority, wrong about method.</div>
+          <div class="figure-thesis">§§91–93</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Rosa Luxemburg</span>
+          <div class="figure-years">1871–1919</div>
+          <div class="figure-role">The conscience of the German left. Murdered by social democrats.</div>
+          <div class="figure-thesis">§101</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">V. I. Lenin</span>
+          <div class="figure-years">1870–1924</div>
+          <div class="figure-role">Treated as the architect of the revolutionary catastrophe Debord is trying to surpass.</div>
+          <div class="figure-thesis">§§98–103, 112</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Joseph Stalin</span>
+          <div class="figure-years">1878–1953</div>
+          <div class="figure-role">The case study in the concentrated spectacle; the price of ideology made absolute.</div>
+          <div class="figure-thesis">§§70, 103–107</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Niccolò Machiavelli</span>
+          <div class="figure-years">1469–1527</div>
+          <div class="figure-role">The original secular analyst of power; Chapter 7's epigraph on cities and freedom.</div>
+          <div class="figure-thesis">Ch. 7 epigraph · §139</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Lewis Mumford</span>
+          <div class="figure-years">1895–1990</div>
+          <div class="figure-role">American urbanist; Debord cites his diagnosis of the suburban sprawl.</div>
+          <div class="figure-thesis">§§172, 174</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Anton Pannekoek</span>
+          <div class="figure-years">1873–1960</div>
+          <div class="figure-role">The Dutch council communist Debord most admires; theorist of workers' self-management.</div>
+          <div class="figure-thesis">§116</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Daniel Boorstin</span>
+          <div class="figure-years">1914–2004</div>
+          <div class="figure-role">American historian whose <em>The Image</em> gave Debord the term "pseudo-event."</div>
+          <div class="figure-thesis">§§198–200</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Jean-Baptiste Bossuet</span>
+          <div class="figure-years">1627–1704</div>
+          <div class="figure-role">The French bishop whose line on time and eternity Debord redeploys.</div>
+          <div class="figure-thesis">§136</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Søren Kierkegaard</span>
+          <div class="figure-years">1813–1855</div>
+          <div class="figure-role">Cited as a pioneer of détournement avant la lettre. Used borrowed expressions deliberately.</div>
+          <div class="figure-thesis">§206</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Baltasar Gracián</span>
+          <div class="figure-years">1601–1658</div>
+          <div class="figure-role">Spanish Jesuit aphorist; Chapter 6's epigraph on time as the only thing that's ours.</div>
+          <div class="figure-thesis">Ch. 6 epigraph</div>
+        </div>
+        <div class="figure">
+          <span class="figure-name">Karl Korsch</span>
+          <div class="figure-years">1886–1961</div>
+          <div class="figure-role">German Marxist; quoted for the verdict that Hegel was the philosopher of the restoration, not the revolution.</div>
+          <div class="figure-thesis">§76</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER / FEUERBACH
+     ============================================ -->
+<footer class="site-footer">
+  <div class="footer-feuerbach">
+    <div class="footer-attribution">The book's opening epigraph · 1843</div>
+    <blockquote class="footer-quote">
+      "But for the present age, which prefers the sign to the thing signified, the copy to the original, representation to reality, appearance to essence... truth is considered profane, and only illusion is sacred."
+    </blockquote>
+    <div class="footer-cite">— Ludwig Feuerbach, <em>The Essence of Christianity</em></div>
+  </div>
+
+  <div class="footer-meta">
+    <div>La Société du Spectacle · Buchet-Chastel · 1967</div>
+    <div>Translation: Ken Knabb · 2002</div>
+    <div>221 theses · 9 chapters · 1 argument</div>
+  </div>
+</footer>
+
+<script>
+// Minimal enhancement: smooth-scroll fallback already handled by CSS scroll-behavior.
+// Highlight current section in topnav.
+(function() {
+  var sections = document.querySelectorAll('section[id], header.hero');
+  var links = document.querySelectorAll('.topnav-links a');
+  if (!('IntersectionObserver' in window)) return;
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var id = entry.target.id;
+      links.forEach(function(link) {
+        var match = link.getAttribute('href') === '#' + id;
+        link.style.color = match ? 'var(--cream)' : '';
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  sections.forEach(function(s) { observer.observe(s); });
+})();
+
+// Reveal-on-scroll for chapters (subtle)
+(function() {
+  if (!('IntersectionObserver' in window)) return;
+  var chapters = document.querySelectorAll('.chapter, .manifestation, .glossary-term, .figure, .relevance-item, .dual-card');
+  chapters.forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(12px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  chapters.forEach(function(el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

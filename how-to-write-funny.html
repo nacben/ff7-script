@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Write Funny — The Complete Guide</title>
+<style>
+  :root {
+    --gold: #f0c040;
+    --gold-dim: #c89a20;
+    --bg: #0d0d14;
+    --bg2: #13131f;
+    --bg3: #1a1a2e;
+    --card: #1e1e30;
+    --card2: #252540;
+    --text: #e8e8f0;
+    --text-dim: #9090b0;
+    --accent: #7c6fff;
+    --accent2: #ff6b6b;
+    --green: #4ecdc4;
+    --border: rgba(240,192,64,0.15);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 17px;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    width: 0%; z-index: 1000;
+    transition: width 0.1s linear;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+    background: rgba(13,13,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 56px; overflow-x: auto;
+  }
+  nav a {
+    color: var(--text-dim); text-decoration: none;
+    font-family: 'Arial', sans-serif; font-size: 13px;
+    white-space: nowrap; letter-spacing: 0.05em;
+    padding: 4px 8px; border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+  }
+  nav a:hover, nav a.active { color: var(--gold); background: rgba(240,192,64,0.08); }
+  .nav-brand {
+    font-size: 14px; font-weight: bold; color: var(--gold) !important;
+    background: none !important; flex-shrink: 0;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,111,255,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(240,192,64,0.08) 0%, transparent 60%),
+      var(--bg);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(255,255,255,0.018) 40px
+    );
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(240,192,64,0.12);
+    border: 1px solid rgba(240,192,64,0.3);
+    color: var(--gold); font-size: 12px; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 6px 18px; border-radius: 100px;
+    margin-bottom: 2rem; font-family: 'Arial', sans-serif;
+  }
+  h1.title {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: normal; letter-spacing: -0.02em;
+    line-height: 1.1; margin-bottom: 1rem;
+    color: var(--text);
+  }
+  h1.title span { color: var(--gold); }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-dim); max-width: 600px; margin: 0 auto 2.5rem;
+  }
+  .hero-quote {
+    max-width: 640px; margin: 0 auto 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-style: italic; color: var(--text-dim); font-size: 1rem;
+  }
+  .hero-quote cite { display: block; font-style: normal; color: var(--gold-dim); font-size: 0.85rem; margin-top: 0.5rem; }
+  .hero-stats {
+    display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .stat { text-align: center; }
+  .stat-n { font-size: 2.5rem; font-weight: bold; color: var(--gold); line-height: 1; }
+  .stat-l { font-size: 0.8rem; color: var(--text-dim); font-family: 'Arial', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold); color: #0d0d14;
+    padding: 14px 32px; border-radius: 100px;
+    font-family: 'Arial', sans-serif; font-weight: bold; font-size: 15px;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(240,192,64,0.25);
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(240,192,64,0.4); }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+  section + section { border-top: 1px solid var(--border); }
+
+  h2.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: normal; margin-bottom: 0.5rem;
+    color: var(--text); letter-spacing: -0.01em;
+  }
+  h2.section-title span { color: var(--gold); }
+  .section-num {
+    display: inline-block;
+    font-family: 'Arial', sans-serif; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); background: rgba(240,192,64,0.1);
+    padding: 3px 12px; border-radius: 100px; margin-bottom: 1rem;
+  }
+  .lead {
+    font-size: 1.15rem; color: var(--text-dim);
+    margin-bottom: 2rem; max-width: 720px;
+  }
+  p { margin-bottom: 1.2rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── TIPS ── */
+  .tip {
+    background: linear-gradient(135deg, rgba(124,111,255,0.08), rgba(124,111,255,0.04));
+    border: 1px solid rgba(124,111,255,0.25);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 2rem 0;
+    position: relative;
+  }
+  .tip-label {
+    font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tip-label::before { content: '★'; font-size: 14px; }
+  .tip h3 { font-size: 1rem; color: var(--text); margin-bottom: 0.6rem; }
+  .tip p { color: var(--text-dim); font-size: 0.95rem; margin: 0; }
+
+  /* ── QUOTES ── */
+  blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(240,192,64,0.04);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-style: italic; color: var(--text-dim);
+  }
+  blockquote cite {
+    display: block; font-style: normal;
+    color: var(--gold-dim); font-size: 0.85rem; margin-top: 0.5rem;
+  }
+
+  /* ── HIGHLIGHT BOXES ── */
+  .box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 2rem 0;
+  }
+  .box.danger { border-color: rgba(255,107,107,0.3); background: rgba(255,107,107,0.05); }
+  .box.success { border-color: rgba(78,205,196,0.3); background: rgba(78,205,196,0.05); }
+  .box h4 { color: var(--gold); font-size: 0.95rem; margin-bottom: 0.75rem; font-family: 'Arial', sans-serif; letter-spacing: 0.05em; }
+  .box.danger h4 { color: var(--accent2); }
+  .box.success h4 { color: var(--green); }
+
+  /* ── BRAIN SECTION ── */
+  .brain-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0;
+  }
+  @media(max-width:600px) { .brain-grid { grid-template-columns: 1fr; } }
+  .brain-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 1.5rem; border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .brain-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .brain-card.clown::before { background: linear-gradient(90deg, var(--gold), #ff9f43); }
+  .brain-card.editor::before { background: linear-gradient(90deg, var(--accent), var(--green)); }
+  .brain-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .brain-card.clown h3 { color: var(--gold); }
+  .brain-card.editor h3 { color: var(--accent); }
+  .brain-card p { color: var(--text-dim); font-size: 0.95rem; }
+  .brain-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+  /* ── CATEGORIES ── */
+  .spectrum {
+    position: relative; margin: 2.5rem 0;
+    background: var(--card); border-radius: var(--radius); padding: 2rem;
+    border: 1px solid var(--border);
+  }
+  .spectrum-bar {
+    height: 8px; border-radius: 4px;
+    background: linear-gradient(90deg, var(--bg3), var(--accent), var(--gold));
+    margin-bottom: 1rem;
+  }
+  .spectrum-labels {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; color: var(--text-dim);
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 1.5rem;
+  }
+  .cat-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .cat-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem; background: var(--card2);
+    border-radius: 8px; border: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .cat-item:hover { border-color: var(--gold); }
+  .cat-rank {
+    font-family: 'Arial', sans-serif; font-size: 11px; font-weight: bold;
+    color: var(--gold); background: rgba(240,192,64,0.1);
+    padding: 3px 8px; border-radius: 4px; white-space: nowrap; margin-top: 2px;
+  }
+  .cat-name { font-weight: bold; color: var(--text); }
+  .cat-desc { font-size: 0.9rem; color: var(--text-dim); margin-top: 2px; }
+
+  /* ── FILTERS GRID ── */
+  #filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem; margin: 2rem 0;
+  }
+  .filter-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 0;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    overflow: hidden;
+  }
+  .filter-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    border-color: rgba(240,192,64,0.4);
+  }
+  .filter-card.open { border-color: var(--gold); }
+  .filter-header {
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .filter-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Arial', sans-serif; font-weight: bold; font-size: 14px;
+    flex-shrink: 0;
+    background: rgba(240,192,64,0.15); color: var(--gold);
+  }
+  .filter-title { font-size: 1.05rem; color: var(--text); }
+  .filter-emoji { font-size: 1.3rem; }
+  .filter-body {
+    display: none; padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+  .filter-card.open .filter-body { display: block; }
+  .filter-what, .filter-how {
+    font-size: 0.88rem; margin-bottom: 0.75rem;
+  }
+  .filter-what strong, .filter-how strong {
+    display: block; font-family: 'Arial', sans-serif;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold-dim); margin-bottom: 3px;
+  }
+  .filter-what p, .filter-how p { color: var(--text-dim); margin: 0; }
+  .filter-example {
+    background: var(--bg3); border-radius: 8px; padding: 0.75rem 1rem;
+    font-size: 0.85rem; font-style: italic; color: var(--text-dim);
+    margin-top: 0.75rem; border-left: 2px solid var(--gold);
+  }
+  .filter-example small { display: block; font-style: normal; color: var(--gold-dim); font-size: 0.75rem; margin-top: 4px; }
+
+  /* ── METHODS ── */
+  .methods { display: flex; flex-direction: column; gap: 2rem; margin: 2rem 0; }
+  .method {
+    background: var(--card); border-radius: var(--radius);
+    padding: 2rem; border: 1px solid var(--border);
+    position: relative;
+  }
+  .method-num {
+    position: absolute; top: -1px; left: 2rem;
+    background: var(--gold); color: #0d0d14;
+    font-family: 'Arial', sans-serif; font-size: 11px; font-weight: bold;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 14px; border-radius: 0 0 8px 8px;
+  }
+  .method h3 { font-size: 1.4rem; margin: 0.75rem 0 0.5rem; color: var(--gold); }
+  .method p { color: var(--text-dim); font-size: 0.95rem; }
+  .method-steps { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .method-step {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    font-size: 0.9rem; color: var(--text-dim);
+  }
+  .step-dot {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(240,192,64,0.15); color: var(--gold);
+    font-size: 11px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* ── ACTION STEPS ── */
+  .action-steps {
+    background: linear-gradient(135deg, rgba(78,205,196,0.07), rgba(78,205,196,0.03));
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 2.5rem 0;
+  }
+  .action-steps h4 {
+    font-family: 'Arial', sans-serif; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .action-steps h4::before { content: '✓'; font-size: 14px; }
+  .action-steps ol { padding-left: 1.25rem; }
+  .action-steps li { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 0.6rem; }
+  .action-steps li:last-child { margin-bottom: 0; }
+
+  /* ── PROCESS OVERVIEW ── */
+  .process-flow {
+    display: flex; flex-direction: column; gap: 0;
+    margin: 2rem 0; position: relative;
+  }
+  .process-flow::before {
+    content: '';
+    position: absolute; left: 24px; top: 48px; bottom: 48px;
+    width: 2px; background: linear-gradient(to bottom, var(--gold), var(--accent));
+    opacity: 0.3;
+  }
+  .process-step {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding: 1.5rem 1.5rem 1.5rem 0;
+  }
+  .process-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--card2); border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .process-content h4 { font-size: 1.05rem; color: var(--gold); margin-bottom: 0.4rem; }
+  .process-content p { font-size: 0.9rem; color: var(--text-dim); margin: 0; }
+
+  /* ── MEDIA TABLE ── */
+  .media-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .media-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+  .media-card:hover { border-color: rgba(240,192,64,0.4); }
+  .media-card h4 { color: var(--gold); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .media-card p { color: var(--text-dim); font-size: 0.82rem; margin: 0; }
+  .media-emoji { font-size: 1.8rem; margin-bottom: 0.6rem; }
+
+  /* ── CLICHÉ LIST ── */
+  .cliche-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0;
+  }
+  .cliche-tag {
+    background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.2);
+    color: var(--accent2); font-family: 'Arial', sans-serif; font-size: 12px;
+    padding: 4px 12px; border-radius: 100px;
+    text-decoration: line-through; opacity: 0.7;
+  }
+
+  /* ── SUBTEXT EXAMPLES ── */
+  .subtext-example {
+    background: var(--card2); border-radius: var(--radius);
+    padding: 1.25rem 1.5rem; margin: 1rem 0;
+    border: 1px solid var(--border);
+  }
+  .subtext-joke { font-style: italic; color: var(--text); margin-bottom: 0.5rem; font-size: 1rem; }
+  .subtext-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 3px; }
+  .subtext-text { color: var(--text-dim); font-size: 0.88rem; }
+  .subtext-author { font-size: 0.8rem; color: var(--gold-dim); margin-top: 4px; }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem; margin: 2rem 0;
+  }
+  .summary-card {
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem;
+  }
+  .summary-card h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .summary-card p { font-size: 0.82rem; color: var(--text-dim); margin: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim); font-size: 0.85rem;
+    font-family: 'Arial', sans-serif;
+  }
+  footer a { color: var(--gold-dim); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  /* ── UTILITY ── */
+  ul.styled { padding-left: 1.25rem; }
+  ul.styled li { margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.95rem; }
+  .gold { color: var(--gold); }
+  .dim { color: var(--text-dim); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media(max-width:600px) { .two-col { grid-template-columns: 1fr; } }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Arial', sans-serif; font-size: 12px;
+    background: rgba(240,192,64,0.1); color: var(--gold);
+    border: 1px solid rgba(240,192,64,0.2);
+    padding: 3px 12px; border-radius: 100px;
+    margin: 0 4px 4px 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .fade-up-d1 { animation-delay: 0.1s; }
+  .fade-up-d2 { animation-delay: 0.2s; }
+  .fade-up-d3 { animation-delay: 0.3s; }
+  .fade-up-d4 { animation-delay: 0.4s; }
+
+  /* ── FILTER SEARCH ── */
+  .filter-controls {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+  }
+  .filter-btn {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text-dim); font-family: 'Arial', sans-serif;
+    font-size: 12px; padding: 6px 14px; border-radius: 100px;
+    cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: rgba(240,192,64,0.12); border-color: var(--gold);
+    color: var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <a href="#hero" class="nav-brand">HOW TO WRITE FUNNY</a>
+  <a href="#intro">Intro</a>
+  <a href="#brain">Your Brain</a>
+  <a href="#problem">Biggest Problem</a>
+  <a href="#laughs">Get Laughs</a>
+  <a href="#subtext">Subtext</a>
+  <a href="#filters">11 Filters</a>
+  <a href="#methods">Methods</a>
+  <a href="#process">Process</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════ HERO -->
+<div id="hero">
+  <div class="fade-up">
+    <div class="hero-tag">The Complete Guide to Comedy Writing</div>
+  </div>
+  <h1 class="title fade-up fade-up-d1">How to Write <span>Funny</span></h1>
+  <p class="hero-sub fade-up fade-up-d2">
+    A deep, practical guide to the craft of humor writing — from the neuroscience of comedy to the 11 Funny Filters that generate every laugh ever written.
+  </p>
+  <div class="hero-quote fade-up fade-up-d3">
+    "All I know is that I learned how to get laughs, and that's all I know about it. You have to learn what people will laugh at, then proceed accordingly."
+    <cite>— Stan Laurel</cite>
+  </div>
+  <div class="hero-stats fade-up fade-up-d4">
+    <div class="stat"><div class="stat-n">11</div><div class="stat-l">Funny Filters</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Writing Methods</div></div>
+    <div class="stat"><div class="stat-n">18</div><div class="stat-l">Pro Tips</div></div>
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">Humor Categories</div></div>
+  </div>
+  <a href="#intro" class="cta fade-up fade-up-d4">Start Learning ↓</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ INTRO -->
+<section id="intro">
+  <div class="section-num">Chapter 1</div>
+  <h2 class="section-title">Introduction: <span>The Craft of Comedy</span></h2>
+  <p class="lead">Writing humor that's genuinely funny — gut-busting, milk-out-of-the-nose funny — is one of the most difficult literary crafts. Here's why, and what you can do about it.</p>
+
+  <p>When you get pulled into a good piece of humor writing, something magical happens. A string of words ignites a spark that sends outlandish images and funny ideas racing into your brain, culminating in an explosion of laughter. Most of us have no idea what's making us laugh. We can't articulate it.</p>
+
+  <p>There aren't many great humor writers in the world. You could count on one hand the ones who've made you laugh out loud. It's a one-in-a-million writer who can elicit sustained, hardy laughs from total strangers with nothing more than words on a page.</p>
+
+  <div class="two-col">
+    <div class="box danger">
+      <h4>⚡ Why Horror is Easy</h4>
+      <p>Vampires, ghosts, blood, screaming — pre-vetted spooky clichés sit waiting on the horror tool shelf. You could write a decent one over a weekend.</p>
+    </div>
+    <div class="box danger">
+      <h4>💧 Why Sadness is Easy</h4>
+      <p>Write about a pet that dies, or a couple splitting up. Separate characters who are meant to be together. Writing a tearjerker is like pushing a button.</p>
+    </div>
+  </div>
+
+  <p>But writing something funny? That's something else entirely. All the go-to ideas have been done to death: banana-peel slipping, mothers-in-law, three-things-walk-into-a-bar… How do you create laughs from thin air?</p>
+
+  <div class="box success">
+    <h4>✦ The Good News</h4>
+    <p>Professional comedy writers have a very good idea of what's going to work. It's their job, and they do it consistently — using special tools locked in the subconscious mind. This guide describes those tools and explains how to use them. Comedy writing is a craft. It can be learned. It doesn't have to take decades.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #1</div>
+    <h3>Concept is King</h3>
+    <p>The core concept you're writing about has to be funny — it's the most important part. The greatest writing in the world will not save a bad concept. But a great concept written barely adequately will be met with great success. Express your concept in a single line. That's your "joke." If the concept makes readers laugh, they'll read on. If it doesn't, they won't.</p>
+  </div>
+
+  <blockquote>
+    "To paraphrase E. B. White, comedy is like a frog — once you start dissecting it, it's not funny. And dissecting comedy is exactly what we're going to do."
+  </blockquote>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ BRAIN -->
+<section id="brain">
+  <div class="section-num">Chapter 2</div>
+  <h2 class="section-title">Your Brain's <span>Comedy Engine</span></h2>
+  <p class="lead">Access both hemispheres of your brain to eliminate writer's block and tap an endless reserve of comedy ideas.</p>
+
+  <p>Productive humor writers churn out enormous amounts of material. They write in journals and notebooks. They're an unstoppable force of nature. With practice and positive reinforcement, they get very good at it. You can too — if you solve one of two core problems.</p>
+
+  <div class="brain-grid">
+    <div class="brain-card clown">
+      <div class="brain-icon">🤡</div>
+      <h3>The Clown</h3>
+      <p>The <strong>right brain</strong> — creative, subjective, outside the box, nonjudgmental. The Clown writes down every idea, no matter how stupid it seems. Overconfident writers are too Clown-heavy: they love being silly, but their material falls apart on the page without editorial structure.</p>
+    </div>
+    <div class="brain-card editor">
+      <div class="brain-icon">✏️</div>
+      <h3>The Editor</h3>
+      <p>The <strong>left brain</strong> — logical, objective, organized, analytical. Most writers are too much Editor. They question every choice and judge every idea before it can shine. The Editor must evaluate raw material and craft it into superb humor — but not kill everything at birth.</p>
+    </div>
+  </div>
+
+  <p>Just like we need both sides of our brain to function in the world, humor writers need to balance both sides of their comedy brain. The back-and-forth reliance on these two very different halves is like doing mental calisthenics. The more you do it, the more adroit you'll become.</p>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #2</div>
+    <h3>Quantity Is the Key to Quality</h3>
+    <p>No writer cranks out pure gold in a single draft. The best comedy writers write dozens — sometimes hundreds — of jokes, then carefully select only the best. They make it seem easy because they never show you all the bad jokes they throw away. Write more to have better material to choose from.</p>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">Developing Your Inner Clown</h3>
+
+  <div class="two-col">
+    <div class="box">
+      <h4>📓 Exercise 1: Morning Pages</h4>
+      <p>Write for a half hour every day, without stopping, no matter what you're writing — and no matter how bad you think it is. Don't stop to think, don't correct typos. Just keep writing until the timer beeps. This primes the pump and clears the gunk from your brain so the good stuff can flow.</p>
+    </div>
+    <div class="box">
+      <h4>🗒️ Exercise 2: The Notebook</h4>
+      <p>Always keep a little notebook with you. Write down every idea you have, especially ones you find amusing. These little observations are the crude oil of the humor-writing business. Failing to save them is like letting oil from your well spill out all over the sand.</p>
+    </div>
+  </div>
+
+  <p>Once a week, flip through your notebook and save any ideas you still find amusing — this is your Editor at work. If you reject every idea, you still have some rebalancing to do.</p>
+
+  <div class="action-steps">
+    <h4>Chapter 2 Action Steps</h4>
+    <ol>
+      <li>Buy a little notebook and keep it with you at all times. Write down any thought or observation that strikes you as amusing — or even merely interesting.</li>
+      <li>Every day for at least two weeks, do the Morning Pages: write without stopping for half an hour. Love and accept all of it, even the garbage.</li>
+      <li>At the end of each week, go through your Morning Pages and notebook. Save anything remotely interesting to a "short list" — your bank of potential comedy ideas.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ PROBLEM -->
+<section id="problem">
+  <div class="section-num">Chapter 3</div>
+  <h2 class="section-title">The Humor Writer's <span>Biggest Problem</span></h2>
+  <p class="lead">It's not "how do I come up with ideas?" It's something more fundamental — and more controllable than most writers realize.</p>
+
+  <p>Let's say you churn out brilliant, funny prose. Then what? Who's going to read it? Your mom, probably. How are you going to find an audience?</p>
+
+  <div class="box danger">
+    <h4>⚠️ The Scale Problem</h4>
+    <p>There's more writing published online every day than has ever been published in the history of human civilization — and that number doubles the next day. Most people don't like to read. They'd rather do anything else. In our culture of easy entertainment and instant gratification, reading is akin to homework.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #3</div>
+    <h3>Make It Accessible</h3>
+    <p>Accessible writing is easy to find and easy to read. It's written clearly and simply to appeal to as many readers as possible, covering subject matter that's understandable to as many readers as possible. Because the audience for the written word is so small, the more accessible your writing is, the bigger its potential audience. Don't make readers work even harder to find or understand your writing.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #4</div>
+    <h3>Make It Short</h3>
+    <p>Anything worth saying is worth saying briefly. Sometimes cutting a word or two can make a line twice as funny, or turn an unfunny line into a funny one. By trimming your writing, you force yourself to get at the heart of what you have to say, and say it in a way readers can more easily digest. (Mark Twain apologized for a letter's lengthiness by explaining he didn't have time to make it short.)</p>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">The Seven Humor Media</h3>
+  <p>One secret trick: steal attention-getting traits from other humor media to make your prose more appealing. Just as a plant needs creative ways to attract bees, your writing needs creative ways to attract readers.</p>
+
+  <div class="media-grid">
+    <div class="media-card">
+      <div class="media-emoji">📝</div>
+      <h4>Prose</h4>
+      <p>Undivided attention, deep intimacy, longest-lasting. Weakness: small audience, perceived as intellectual work.</p>
+    </div>
+    <div class="media-card">
+      <div class="media-emoji">📺</div>
+      <h4>TV / Web Video</h4>
+      <p>World's most accessible and popular. People are addicted. Expensive to produce, but words-only web video can be very affordable.</p>
+    </div>
+    <div class="media-card">
+      <div class="media-emoji">🎬</div>
+      <h4>Movies</h4>
+      <p>Immersive storytelling format. Requires dramatic structure beyond comedic structure for anything longer than a sketch.</p>
+    </div>
+    <div class="media-card">
+      <div class="media-emoji">🎙️</div>
+      <h4>Audio / Podcast</h4>
+      <p>Next most intimate after prose. Uniquely accessible — people listen while commuting or exercising.</p>
+    </div>
+    <div class="media-card">
+      <div class="media-emoji">🎭</div>
+      <h4>Stage</h4>
+      <p>Live performance energy is unmatched. The human element is a critical tool almost all humor media exploit.</p>
+    </div>
+    <div class="media-card">
+      <div class="media-emoji">🖼️</div>
+      <h4>Visual</h4>
+      <p>Still images with no words. Internet memes master this — catchy images with brief text generating massive awareness.</p>
+    </div>
+    <div class="media-card">
+      <div class="media-emoji">🎨</div>
+      <h4>Street Art</h4>
+      <p>Audiences entertained when not expecting it are the best audiences. Surprise and delight are virtually impossible to achieve in any other medium.</p>
+    </div>
+  </div>
+
+  <div class="box success">
+    <h4>💡 Key Insight: Steal Strengths from Other Media</h4>
+    <p>Add a surprising image to your writing. Pair it with video. Write through a character voice. Include humor in unexpected places. The Onion began as a free street newspaper — the street art medium helped introduce it to new readers who were absolutely delighted to find humor in an unexpected place.</p>
+  </div>
+
+  <div class="action-steps">
+    <h4>Chapter 3 Action Steps</h4>
+    <ol>
+      <li>Write a list of strengths and weaknesses of prose compared to the other six media.</li>
+      <li>Make a list of ideas for overcoming prose's weaknesses in your own writing — what strengths of other media could you employ to help readers find your work?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ LAUGHS -->
+<section id="laughs">
+  <div class="section-num">Chapter 4</div>
+  <h2 class="section-title">How to <span>Get Laughs</span></h2>
+  <p class="lead">There are different kinds of laughs. Understanding them — and what causes the rarest, most healing kind — is the foundation of comedy writing.</p>
+
+  <div class="box">
+    <h4>📊 The Anatomy of Laughter</h4>
+    <p style="color:var(--text-dim); font-size:0.95rem;">
+      <strong style="color:var(--text);">90%+</strong> — Nervous laughter. People greasing social wheels, breaking tension. Empty, non-healing.<br><br>
+      <strong style="color:var(--text);">~9%</strong> — Pure, hardy laughter in response to real-life situations (the funny thing the dog did, the non-injurious fall). Good for you, but can't be engineered — only happens by accident.<br><br>
+      <strong style="color:var(--text);">~1%</strong> — Laughter in response to consciously crafted comedy. Most of this comes from performance, social contracts, and laugh tracks.<br><br>
+      <strong style="color:var(--gold);">.00001%</strong> — Laughter generated by nothing but the written word, with no performer, no sound, no laugh track. This is what we're after.
+    </p>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">The Essential Ingredient: Surprise</h3>
+
+  <p>Humor can exist without relatability, without timing, without tragedy, without taboo-breaking. Humor <em>cannot</em> exist without surprise. Even when something predictable happens that makes us laugh, that event must unfold in a surprising way to be funny.</p>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #5</div>
+    <h3>Avoid Clichés</h3>
+    <p>If you've heard a joke or funny phrase before, don't repeat it. Also avoid topics that have been joked about endlessly. There's no surprise with clichés because we've seen the joke before. Only fresh ideas, unique perspectives, and original thoughts can surprise — and only fresh, unique, and original writing can get laughs.</p>
+  </div>
+
+  <div class="box danger">
+    <h4>🚫 Comedy Clichés to Avoid</h4>
+    <div class="cliche-list">
+      <span class="cliche-tag">airline food quality</span>
+      <span class="cliche-tag">"That's what she said"</span>
+      <span class="cliche-tag">men hogging the remote</span>
+      <span class="cliche-tag">"I just threw up a little"</span>
+      <span class="cliche-tag">the "surfer dude" character</span>
+      <span class="cliche-tag">mothers-in-law</span>
+      <span class="cliche-tag">"You should see the other guy"</span>
+      <span class="cliche-tag">white people can't jump</span>
+      <span class="cliche-tag">game show buzzer sounds</span>
+      <span class="cliche-tag">"I could tell you, but..."</span>
+    </div>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">The Five Categories of Written Humor</h3>
+  <p>Written humor exists in a spectrum from basic to sophisticated. Only one category provides maximum surprise potential and the largest possible audience.</p>
+
+  <div class="spectrum">
+    <div class="spectrum-bar"></div>
+    <div class="spectrum-labels"><span>← Basic / Narrow Appeal</span><span>Sophisticated / Broad Appeal →</span></div>
+    <div class="cat-list">
+      <div class="cat-item">
+        <div class="cat-rank">Level 1</div>
+        <div>
+          <div class="cat-name">Kid Stuff</div>
+          <div class="cat-desc">Basic incongruity, simple discordance. Pratfalls, talking animals, simple puns. Funny to young children and those with that sensibility. Seeds from which more sophisticated humor grows.</div>
+        </div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-rank">Level 2</div>
+        <div>
+          <div class="cat-name">Conversational</div>
+          <div class="cat-desc">Prose written with the author's personality laid bare — "on the nose," no disguise. The writer's inherent character, but not a comedic construct. Dave Barry, early David Sedaris.</div>
+        </div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-rank">Level 3</div>
+        <div>
+          <div class="cat-name">Snark</div>
+          <div class="cat-desc">Conversational + smart-alecky sarcasm. The Know-It-All in transparent form. Ubiquitous on blogs and social media. Relies heavily on borrowed clichés. Effective when done well and without clichés.</div>
+        </div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-rank">Level 4</div>
+        <div>
+          <div class="cat-name">Formulaic Humor</div>
+          <div class="cat-desc">Multiple layers of humor. The 11 Funny Filters used skillfully. Written by professional comedy writers. Often assumes other character voices and formats. National Lampoon, Garrison Keillor, Spy Magazine.</div>
+        </div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-rank">★ Level 5</div>
+        <div>
+          <div class="cat-name">Satire</div>
+          <div class="cat-desc">Formulaic Humor plus one secret ingredient: Subtext. The laughs are more satisfying, more memorable. Can appeal to all readers — from the least to most sophisticated. The Onion, Kurt Vonnegut, Swift, Twain.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #6</div>
+    <h3>Proofread</h3>
+    <p>Get your spelling, grammar, and syntax right. Make a solid effort to ensure no typos slip through. Your work might be just as funny as the competition's, but if you have misspellings and bad punctuation and they don't, guess who gets the job.</p>
+  </div>
+
+  <div class="action-steps">
+    <h4>Chapter 4 Action Steps</h4>
+    <ol>
+      <li>In your next Morning Pages, ruminate: What kind of laughs do you want your writing to elicit? What category has your writing habitually been in? Do you tend to use clichés?</li>
+      <li>Write 10 one-sentence jokes using no clichés.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ SUBTEXT -->
+<section id="subtext">
+  <div class="section-num">Chapter 5</div>
+  <h2 class="section-title">Subtext: <span>The Magic Ingredient</span></h2>
+  <p class="lead">The secret ingredient that separates Satire from all other humor categories — and makes laughs more satisfying and memorable.</p>
+
+  <p>In any sophisticated writing, there's more there than just the literal words. Something else is being communicated clearly to any reasonably intelligent reader — but it's never stated outright. That's Subtext.</p>
+
+  <p>When you read a joke, you add two and two in your mind and expose the Subtext the writer has hidden. It's this exposure that surprises you and causes you to laugh. If you "got" a joke, you successfully uncovered its Subtext. If you didn't get it, you couldn't decipher it.</p>
+
+  <div class="box">
+    <h4>🚇 The Subway Metaphor</h4>
+    <p>Subtext is like a subway. It travels underground. If it traveled at street level, pedestrians, cars, and everything else would get plowed through as it crashed through everything in sight. This havoc is exactly what happens to your humor writing when you state your Subtext overtly. <strong style="color:var(--gold);">Never state your Subtext.</strong></p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #7</div>
+    <h3>Have Something to Say</h3>
+    <p>To be a writer, the first thing you need is something to say. Without that, why are you writing? By regularly sifting through your notebook and Morning Pages, you'll eventually find something worthy of being communicated to others that you can get passionate about.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #8</div>
+    <h3>Know What Joke You're Telling</h3>
+    <p>Always be in control of the message by using a clear, intentional Subtext. Never leave a joke open to interpretation. When you ask, "What is my joke really saying?" — you need a specific answer. You need to know what your Subtext is and how you're revealing it. If you don't know what you're saying, you have almost no chance that readers will laugh at it.</p>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">Subtext in Action</h3>
+  <p>Subtext can usually be stated in a simple sentence: subject, verb, object. It must be irreducible — no hidden meaning in itself. It must be a flat, on-the-nose opinion.</p>
+
+  <div class="subtext-example">
+    <div class="subtext-joke">"Don't forget: Tomorrow is Bring Your Daughter To Tears Day."</div>
+    <div class="subtext-label">Subtext</div>
+    <div class="subtext-text">The idea of Take Your Daughter to Work Day is sad — in our society, girls (not boys) need this extra exposure to the workplace.</div>
+    <div class="subtext-author">— Dan Guterman</div>
+  </div>
+
+  <div class="subtext-example">
+    <div class="subtext-joke">"Couldn't get tickets to the Daytona 500, so I just stayed home and set a box of Tide on fire."</div>
+    <div class="subtext-label">Subtext</div>
+    <div class="subtext-text">NASCAR is a pathetic, too-heavily-sponsored sport, and it's a twisted fact that many people watch it for the accidents.</div>
+    <div class="subtext-author">— Dan Guterman</div>
+  </div>
+
+  <div class="subtext-example">
+    <div class="subtext-joke">"Fun Fact: If you stretched out your intestines they would reach all the way to the cabin in the woods you were murdered in."</div>
+    <div class="subtext-label">Subtext</div>
+    <div class="subtext-text">It's a little unsettling when people point out how long our intestines are.</div>
+    <div class="subtext-author">— Dan Guterman</div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #9</div>
+    <h3>Comfort the Afflicted, Afflict the Comfortable</h3>
+    <p>If the target of your Satire is the downtrodden — the homeless, or victims of a tragedy — it will come across as mean-spirited, and audiences won't find it funny. You can make a joke about anything, but the target must deserve ridicule. The best targets are "the comfortable": the status quo, entrenched power, or any authority, no matter how low-level.</p>
+  </div>
+
+  <div class="box">
+    <h4>📌 Powerful Subtext Examples from Literature</h4>
+    <ul class="styled" style="margin-top:0.5rem;">
+      <li><em>War of the Worlds</em> (H.G. Wells): "Humanity's arrogance as the dominant species may be unwarranted."</li>
+      <li><em>1984</em> (Orwell): "Totalitarianism destroys souls."</li>
+      <li><em>Animal Farm</em> (Orwell): "Power corrupts."</li>
+      <li><em>Huckleberry Finn</em> (Twain): "Racism is wrong."</li>
+      <li>The Onion (daily): "Our government is incompetent." / "Americans don't care about the world, they care about snacks."</li>
+    </ul>
+  </div>
+
+  <blockquote>
+    "Comedy equals tragedy plus time."
+    <cite>— Steve Allen</cite>
+  </blockquote>
+
+  <blockquote>
+    "Humor is about one thing: life's nightmare hellscape of unrelenting horror."
+    <cite>— Todd Hanson, head writer, The Onion</cite>
+  </blockquote>
+
+  <div class="action-steps">
+    <h4>Chapter 5 Action Steps</h4>
+    <ol>
+      <li>Look at your 10 jokes from Chapter 4 and determine the Subtext of each. Try to write it as a simple subject-verb-object sentence. What is your joke really saying when you strip away the humor?</li>
+      <li>Write 10 different Subtext ideas that aren't necessarily funny — just opinions or value judgments like "We're destroying our planet" or "People without a legitimate handicap shouldn't ride mobility scooters in grocery stores."</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ FILTERS -->
+<section id="filters">
+  <div class="section-num">Chapter 6</div>
+  <h2 class="section-title">The 11 <span>Funny Filters</span></h2>
+  <p class="lead">Every joke ever written uses one or more of these 11 fundamental building blocks. Master them and you can generate laughs reliably, on command.</p>
+
+  <p>These are called "Funny Filters" because the humor writer starts with Subtext (which is not usually humorous) and filters it through one or more of these tools so it comes out the other end as a joke. That discovery of the hidden message is what causes the laugh.</p>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #10</div>
+    <h3>Heighten Contrast</h3>
+    <p>Humor often involves contrasting two things — the straight character and the jokester, two ends of an ironic situation, a fake world and the real world. A common flaw in unsuccessful humor is that the contrast isn't heightened enough. By simply pushing contrast to its greatest possible extreme, a lot of comedy writing becomes instantly funnier.</p>
+  </div>
+
+  <div class="filter-controls">
+    <button class="filter-btn active" onclick="expandAll()">Expand All</button>
+    <button class="filter-btn" onclick="collapseAll()">Collapse All</button>
+  </div>
+
+  <div id="filters-grid">
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">1</div>
+        <div>
+          <div class="filter-emoji">🔄</div>
+          <div class="filter-title">Irony</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Extreme Opposites — when the literal meaning is the opposite of the intended meaning.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Write the polar opposite of your Subtext with absolute conviction. Play it straight. Think "9 and 3" on a steering wheel — maximum contrast leverage.</p></div>
+        <div class="filter-example">
+          "Alcoholic Father Disappointed In Pothead Son" — The Onion
+          <br>"It's Not A Crack House, It's A Crack Home" — The Onion
+          <small>Note: Irony ≠ Sarcasm. Sarcasm is "Irony light" — delivered with attitude that exposes Subtext too knowingly. Irony pretends to adopt the opposite opinion with total conviction.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">2</div>
+        <div>
+          <div class="filter-emoji">🎭</div>
+          <div class="filter-title">Character</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>A comedic character with 1–3 clear traits acts (or is acted upon) in accordance with those traits.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Create a simply drawn, two-dimensional character (not a realistic dramatic character). Establish their 1–3 traits, then have them act on those traits. This is the engine behind virtually all performance-based comedy.</p></div>
+        <div class="filter-example">
+          "I don't get no respect. The other night I said to the bartender, 'surprise me.' He showed me a naked picture of my wife." — Rodney Dangerfield
+          <small>Key Archetypes: The Dummy, Slob, Snob, Know-It-All, Everyman, Manchild, Klutz, Lothario, Nerd, Robot/Straight Man, Naif, Bumbling Authority, Trickster.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">3</div>
+        <div>
+          <div class="filter-emoji">💥</div>
+          <div class="filter-title">Shock</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Anything shocking — sex, violence, swearing, or a gross-out. Anything inappropriate to mention in mixed company.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>In extreme moderation, and always with Subtext. Think of it as a dash of cayenne pepper. The more shocking the humor, the more astute the Subtext needs to be. As a main course, its audience is limited to 14-year-old boys.</p></div>
+        <div class="filter-example">
+          "You can't fight City Hall, but you can goddamn sure blow it up." — George Carlin
+          <small>Subtext: We all feel powerless and enraged by government incompetence — even possible to understand the rage of a terrorist, because we've all felt it.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">4</div>
+        <div>
+          <div class="filter-emoji">📏</div>
+          <div class="filter-title">Hyperbole</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Exaggeration so absurd it goes beyond the bounds of science or reason — not just "a lot" but to the point where physical laws are violated.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Exaggerate your Subtext — in any direction (big, small, positive, negative). Start with an opinion, then push it past the breaking point of reality. This is the filter that feels most like "real joke-writing."</p></div>
+        <div class="filter-example">
+          "The last time I gave a urine sample it had an olive in it." — Rodney Dangerfield (Subtext: I drink too much)
+          <br>"NRA Calls For Teachers to Keep Loaded Gun Pointed At Class for Entire School Day" — The Onion
+          <small>Hyperbole allows you to reach ridiculous extremes by exaggerating so far beyond reality that you're suddenly in an impossible reality.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">5</div>
+        <div>
+          <div class="filter-emoji">🔤</div>
+          <div class="filter-title">Wordplay</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Any use of words beyond their standard meanings — double/triple meanings, made-up words, puns, word switches, repetition, funny sounds.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Only with great Subtext. A wordplay joke without Subtext ("How did the frog die? He croaked.") is just a groaner. The difference between a groaner and a sophisticated Wordplay joke: the wordplay must serve astute Subtext.</p></div>
+        <div class="filter-example">
+          "I put a dollar in a change machine. Nothing changed." — George Carlin (Subtext: Societal change is difficult)
+          <br>"Fritolaysia Cuts Off Chiplomatic Relations With Snakistan" — The Onion (Mike DiCenzo)
+          <small>Best used in titles and headlines. Avoid: alliteration, acronyms, Tom Swifties as primary devices.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">6</div>
+        <div>
+          <div class="filter-emoji">👁️</div>
+          <div class="filter-title">Reference</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>A relatable observation — readers have seen, heard, or experienced the thing being referenced. Makes them say "oh, yeah, I've experienced that!"</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Observe and write down things you notice that others might recognize. Use the "did you ever notice…?" mindset to find unique observations about day-to-day life, culture, or the human condition — in a way no one has articulated before.</p></div>
+        <div class="filter-example">
+          Grade D: In-jokes (too narrow). Grade C: Call-backs. Grade B: Current events. Grade B+: Emerging speech patterns/clichés. Grade A: Universal observations about life pointed out for the first time.
+          <br><br>"Men don't care what's on TV. They only care what else is on TV." — Jerry Seinfeld
+          <small>Jerry Seinfeld is the master of Reference. He begins bits with References, then escalates using Hyperbole, Wordplay, Character, or other Filters.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">7</div>
+        <div>
+          <div class="filter-emoji">🤪</div>
+          <div class="filter-title">Madcap</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>The literary equivalent of physical humor — crazy made-up words, descriptions of slapstick, pratfalls, funny physical action, absurdist references, and seemingly random non sequiturs.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Make sure it serves (and even symbolizes) your Subtext. Works as the main thrust of a joke but also as a very effective garnish. Without Subtext, you have silliness for silliness's sake. Monty Python did this best.</p></div>
+        <div class="filter-example">
+          "Secretary Of Agriculture Attends Diplomatic Meeting With Foreign Cabbage" — The Onion
+          <br>Subtext: Americans couldn't care less what the Secretary of Agriculture does, so he may as well be meeting with a head of cabbage.
+          <small>Warning: Avoid classic Madcap clichés — banana peels, rubber chickens, Groucho glasses. These stopped being funny decades ago.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">8</div>
+        <div>
+          <div class="filter-emoji">🎭</div>
+          <div class="filter-title">Parody</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Making fun of another entertainment or information product by mimicking its format, voice, or anything that calls it to mind for your reader.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Use verisimilitude — make your Parody look or sound as much like the real thing as possible. Mirror the form or format, not the content. Play it straight; don't wink at the reader. Readers will often laugh before reading a word, just from recognizing the format.</p></div>
+        <div class="filter-example">
+          The Onion (parodies news websites), The Diary of a Wimpy Kid (parodies a diary), Ian Frazier's "Coyote v. Acme" (parodies legal briefs + Road Runner cartoons).
+          <small>The closer the resemblance to the original, the better. Verisimilitude is everything in Parody. Going halfway is not good enough.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">9</div>
+        <div>
+          <div class="filter-emoji">🔗</div>
+          <div class="filter-title">Analogy</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Comparing two very different things and finding their similarities. The more dissimilar the two things, the better. You must find many points of comparison.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Keep one side of the Analogy "behind the curtain" — only allude to it — while the other is laid bare. Never break character to reveal the secret half. Each time you make a connection the reader recognizes, that's a joke beat.</p></div>
+        <div class="filter-example">
+          George Orwell's Animal Farm: animals on a farm (revealed) vs. the Russian Revolution (secret). Power corrupts (Subtext).
+          <br>"Al Gore Places Infant Son In Rocket To Escape Dying Planet" — The Onion (Analogy to Superman's origin)
+          <small>The hidden half of the Analogy must be discovered by the reader. If you state it, the joke collapses.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">10</div>
+        <div>
+          <div class="filter-emoji">🔭</div>
+          <div class="filter-title">Misplaced Focus</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>A pretend lack of awareness of an obvious fact, brought to light by focusing intently on the wrong thing — something just to the side of your Subtext, far less important.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Think of something related to your Subtext but far less important. Draw readers' attention to it, indirectly causing them to think of your Subtext. Best with Subtext that will elicit strong opinions. It stirs righteous indignation.</p></div>
+        <div class="filter-example">
+          Jonathan Swift's "A Modest Proposal": focuses on eating Ireland's poor children (wrong thing) instead of solving child poverty (real issue).
+          <br>"Secondhand Smoke Linked to Secondhand Coolness" — The Onion
+          <br>"Mother of dead teen has no one to update her to the new iOS." — student joke
+          <small>It's like saying "Don't think of a Pink Elephant" — the glaring omission makes the real issue impossible to ignore.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-card" onclick="toggleFilter(this)">
+      <div class="filter-header">
+        <div class="filter-num">11</div>
+        <div>
+          <div class="filter-emoji">🪞</div>
+          <div class="filter-title">Metahumor</div>
+        </div>
+      </div>
+      <div class="filter-body">
+        <div class="filter-what"><strong>What It Is</strong><p>Making fun of other humor or the idea of humor itself — using humor as the subject or target of the joke. Stepping back and commenting on the act of comedy.</p></div>
+        <div class="filter-how"><strong>How to Use It</strong><p>Type A: Mocks the concept of humor itself (most sophisticated, most esoteric). Type B: Intellectually deconstructs comedy with no emotion. Type C: Openly derides well-respected comedy media/clichés. Type D: Mocks unsophisticated humor (easy laughs, less daring).</p></div>
+        <div class="filter-example">
+          "Viagra Giving Hope To Thousands Of Struggling Stand-Up Comedians" — The Onion
+          <br>Steve Martin referring to his own act as "hilarious comedy jokes."
+          <br>Marlin in Finding Nemo who is a terrible joke-teller — and is a clown fish.
+          <small>Antihumor is a subset: the absence of humor becomes funny when the audience is expecting something funny and gets nothing instead.</small>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /filters-grid -->
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #11</div>
+    <h3>Use Verisimilitude</h3>
+    <p>If you're copying something else in form (a pattern of speech, a character, another work of entertainment), make it as similar to the thing you're imitating as possible. If it's a senator character, he should talk like real senators talk. If it's a parody of an advertisement, it should sound as much like a real advertisement as possible. Be consistent, and never "break voice."</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #13</div>
+    <h3>Put the Funny Part Last</h3>
+    <p>A joke usually works best when the reveal — the funny word, the funny detail, the funniest part — comes last. Often, when assessing a joke, you'll notice the funny part is at the beginning or middle. Try moving it as close to the end as possible. That often makes it funnier.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #14</div>
+    <h3>There's Only One Rule in Comedy</h3>
+    <p>If they laugh, it's funny. When you feel overwhelmed by all the dos and don'ts, step away from the keyboard and forget about it for a while. Do something fun. When you come back to writing, remember: readers just want to have fun. They want to laugh. If you can make them laugh — no matter how you're doing it — you're doing it right.</p>
+  </div>
+
+  <div class="action-steps">
+    <h4>Chapter 6 Action Step</h4>
+    <ol>
+      <li>Every day for 10 days, write 10 funny one-liners using each of the 11 Funny Filters — one filter per day. Day 1: 10 ironic jokes. Day 2: 10 character jokes. And so on. Put yourself in Clown mode. They may not be good. That's okay. This is practice.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ METHODS -->
+<section id="methods">
+  <div class="section-num">Chapter 7</div>
+  <h2 class="section-title">Using the <span>Funny Filters</span></h2>
+  <p class="lead">Three practical methods for generating funny material — whether you start with an idea, a half-formed joke, or nothing at all.</p>
+
+  <p>These methods may seem clunky and mechanical at first. Comedy writing is a slog. But with practice they'll start to feel like instinct, or at least a well-honed skill.</p>
+
+  <p>The core formula is the same across all three methods: <strong class="gold">Subtext filtered through one or more Funny Filters.</strong> That's what creates a joke.</p>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #15</div>
+    <h3>One Impossible Thing at a Time</h3>
+    <p>When you create a joke, you create a comedy universe in which one key idea is askew from reality. You can only have one "crazy" idea or one impossible thing per joke. If you give readers two, they'll end up confused. If we're going to laugh easily and freely, one comedic concept at a time is all we can handle.</p>
+  </div>
+
+  <div class="methods">
+
+    <div class="method">
+      <div class="method-num">Method 1</div>
+      <h3>Filtering</h3>
+      <p>Start with Subtext, then filter it through one or more Funny Filters to make a joke. The most mechanical, reverse-engineered method.</p>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-dot">1</div>
+          <div>Find an opinion or observation in your notebook or Morning Pages that could serve as Subtext. It must have a clear subject-verb-object structure.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">2</div>
+          <div>Put on your Clown hat. Try filtering the Subtext through each of the 11 Funny Filters one by one — see what funny things happen to it.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">3</div>
+          <div>When multiple Funny Filters start piling up on an idea, something good is usually happening — continue in that vein.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">4</div>
+          <div>Let ideas sit for a few days. Come back and assess them with your Editor hat — then use Method 2 (Finessing) to polish them.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="method">
+      <div class="method-num">Method 2</div>
+      <h3>Finessing</h3>
+      <p>Start with a joke — or something resembling one — that came to you in a flash of inspiration, then refine it using your awareness of Subtext and the Funny Filters.</p>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-dot">1</div>
+          <div>Put on your Editor hat. Find a joke or funny idea from your notebook or short list.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">2</div>
+          <div>Identify the Subtext — what is this joke really saying? Know exactly what joke you're telling and what you're communicating.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">3</div>
+          <div>Heighten contrast as much as possible. Is the funny part last? Could you add a Funny Filter without adding words?</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">4</div>
+          <div>Check all 18 Humor-Writing Tips. Cut every unnecessary word. Proof for spelling and grammar.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="method">
+      <div class="method-num">Method 3</div>
+      <h3>Divining</h3>
+      <p>No ideas and no notes — use the Funny Filters by themselves to drum up something funny out of nothing.</p>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-dot">1</div>
+          <div>Go into pure Clown mode. Pick a Funny Filter — any one.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">2</div>
+          <div>Brainstorm using that filter's inherent logic: for Irony, think of opposites; for Character, think of famous people reduced to 1–3 traits; for Hyperbole, think of opinions and push them past reason; etc.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">3</div>
+          <div>Cycle through all 11 Funny Filters, generating at least one attempt with each. Quantity over quality here.</div>
+        </div>
+        <div class="method-step">
+          <div class="step-dot">4</div>
+          <div>Let the new jokes sit for a few days, then assess them with a more objective Editor eye.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #12</div>
+    <h3>Don't Fall In Love</h3>
+    <p>You may think you have the greatest idea in the world, but don't fall in love with it. You may have to change it or cut it based on feedback. Amateur humor writers often have one idea they're very proud of, making them immune to constructive feedback. Professional humor writers come up with tons of ideas and are prepared to discard any that don't connect. As Sir Arthur Quiller-Couch said: "Murder your darlings."</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #16</div>
+    <h3>Keep It Simple</h3>
+    <p>Don't overload a joke with too much exposition, information, or a confusing rubric. Just use a Funny Filter to give a twist to your one subtextual message, and state it in the clearest, simplest way possible. Anything more and you'll only confuse readers.</p>
+  </div>
+
+  <div class="box">
+    <h4>💡 Your Sense of Humor</h4>
+    <p>Every writer has comedy preferences. Some Funny Filters will come naturally to you; others will be a struggle. Feel free to play to your strengths — that's what gives you your unique voice. But practice using all 11 Filters, especially the difficult ones. When you can write any kind of joke using any Filter, you increase your potential readership. Each reader has their own preferences, so the more Filters you use, the more readers you'll reach.</p>
+  </div>
+
+  <div class="action-steps">
+    <h4>Chapter 7 Action Steps</h4>
+    <ol>
+      <li>Write 10 one-liners or headlines using the Filtering method — work from observations and non-joke notes in your notebook or Morning Pages.</li>
+      <li>Go through your jokes from the Chapter 6 Action Step and run them through the Finessing process to make sure they're as good as they can be.</li>
+      <li>Write 10 one-liners using the Divining method, cycling through each of the 11 Funny Filters.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ PROCESS -->
+<section id="process">
+  <div class="section-num">Chapter 8</div>
+  <h2 class="section-title">Process <span>Overview</span></h2>
+  <p class="lead">Master this simple system to become a prolific, reliable humor writer — one who generates great material consistently, not just occasionally.</p>
+
+  <p>All good humor writing starts with an opinion. A writer needs something to say. This opinion doesn't have to be funny — it just has to be something you have a feeling about. The humor writer generates this idea and is compelled to express it to readers.</p>
+
+  <div class="process-flow">
+    <div class="process-step">
+      <div class="process-icon">📝</div>
+      <div class="process-content">
+        <h4>Daily: Write Without Stopping</h4>
+        <p>Do the Morning Pages exercise every day. Write in your notebook when an idea strikes. These two activities develop your Clown brain and prime the pump of creativity until it overflows.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-icon">🔍</div>
+      <div class="process-content">
+        <h4>Weekly: Curate Your Short List</h4>
+        <p>1–2 times a week, go through your notebook and Morning Pages. If you see anything remotely interesting or potentially funny, move it to a short list — your bank of potential comedy ideas. Only a single-digit percentile of what you write will make it here, and that's fine.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-icon">⚗️</div>
+      <div class="process-content">
+        <h4>Daily: Write Humor (3 Methods)</h4>
+        <p>Spend a few minutes every day actually trying to write humor using Filtering, Finessing, or Divining. Run Subtext through Funny Filters. Polish existing jokes. Brainstorm from scratch.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-icon">✅</div>
+      <div class="process-content">
+        <h4>Ongoing: Apply the 18 Tips</h4>
+        <p>Check jokes against all the Humor-Writing Tips: Is it a cliché? Does it comfort the afflicted instead of afflicting the comfortable? Is the contrast heightened? Is the funny part last? Can any words be cut?</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="process-icon">📣</div>
+      <div class="process-content">
+        <h4>Eventually: Get It in Front of Readers</h4>
+        <p>Sift through your best jokes and decide what media each is best suited for — tweet, one-liner, article, story, screenplay? Get your work in front of readers and find out what they think. Incorporate feedback into your next piece.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-label">Humor-Writing Tip #18</div>
+    <h3>Ruffle Some Feathers</h3>
+    <p>In Satire, if someone's not offended, you're probably not doing it right. The best humor has a little sense of danger or mischievousness, as if the writer is getting away with saying something that shouldn't be allowed — often at the expense of a humorless authority or comfortable target. When a deserving target gets angry at something you wrote, consider that a badge of honor and a sign of success.</p>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">The Master Formula</h3>
+  <div class="box success">
+    <h4>✦ The Core Equation</h4>
+    <p style="color:var(--text); font-size:1.1rem; font-style:italic; text-align:center; padding: 0.5rem 0;">
+      Astute Subtext + One or More Funny Filters = A Joke That Works
+    </p>
+    <p>The Funny Filters are the processing mechanism. They filter your raw, bitter opinion so readers can't taste it directly — they experience only the sweet, refined humor. Like feeding an aspirin to a child: you don't give a plain, dry, bitter pill. You crunch it up and put it in a spoonful of jelly. That's what the Funny Filters do for Subtext.</p>
+  </div>
+
+  <h3 class="gold" style="font-size:1.3rem; margin: 2rem 0 1rem;">All 18 Humor-Writing Tips at a Glance</h3>
+  <div class="summary-grid">
+    <div class="summary-card"><h4>#1 Concept is King</h4><p>The funny idea is the most important part. A great concept even barely executed will succeed. Great writing cannot save a bad concept.</p></div>
+    <div class="summary-card"><h4>#2 Quantity = Quality</h4><p>Write dozens of jokes to find the gold. Never show the bad ones you throw away. Write more to have better material to choose from.</p></div>
+    <div class="summary-card"><h4>#3 Make It Accessible</h4><p>Easy to find, easy to read. Appeal to as many readers as possible. Don't make readers work hard.</p></div>
+    <div class="summary-card"><h4>#4 Make It Short</h4><p>Brevity is the soul of wit. Cutting a word or two can double the laughs. Use simpler, shorter words.</p></div>
+    <div class="summary-card"><h4>#5 Avoid Clichés</h4><p>If you've heard it before, don't repeat it. Avoid overused topics, phrases, and joke patterns.</p></div>
+    <div class="summary-card"><h4>#6 Proofread</h4><p>Spelling, grammar, syntax. No typos. Your competition won't have them.</p></div>
+    <div class="summary-card"><h4>#7 Have Something to Say</h4><p>To be a writer, you need something to communicate. Without that, why are you writing?</p></div>
+    <div class="summary-card"><h4>#8 Know Your Joke</h4><p>Be in control of your Subtext. Know exactly what joke you're telling and ensure your reader knows too.</p></div>
+    <div class="summary-card"><h4>#9 Afflict the Comfortable</h4><p>Never target the downtrodden. The best targets are the status quo, entrenched power, any authority.</p></div>
+    <div class="summary-card"><h4>#10 Heighten Contrast</h4><p>Push contrast to its greatest possible extreme. Many jokes fail simply because contrast isn't heightened enough.</p></div>
+    <div class="summary-card"><h4>#11 Verisimilitude</h4><p>If imitating something, make it as similar to the real thing as possible. Never break voice.</p></div>
+    <div class="summary-card"><h4>#12 Don't Fall in Love</h4><p>Be prepared to discard any idea. Generate tons of them. Murder your darlings.</p></div>
+    <div class="summary-card"><h4>#13 Funny Part Last</h4><p>The reveal, the funny word, the punchline — move it as close to the end as possible.</p></div>
+    <div class="summary-card"><h4>#14 One Rule: They Laugh</h4><p>If they laugh, it's funny. Don't get overwhelmed. Readers just want to have fun.</p></div>
+    <div class="summary-card"><h4>#15 One Impossible Thing</h4><p>Only one "crazy" idea per joke. Two impossible things confuses readers and kills the laugh.</p></div>
+    <div class="summary-card"><h4>#16 Keep It Simple</h4><p>Don't overload with exposition. One Funny Filter + one Subtext = one joke. State it as clearly as possible.</p></div>
+    <div class="summary-card"><h4>#17 (Quantity again)</h4><p>No writer produces only winners. The trick is to keep spewing junk and recognize the things that look like gold.</p></div>
+    <div class="summary-card"><h4>#18 Ruffle Feathers</h4><p>If no one's offended, you're probably not doing it right. Danger and mischievousness are signs of success.</p></div>
+  </div>
+
+  <div class="action-steps">
+    <h4>Chapter 8 Action Step</h4>
+    <ol>
+      <li>Keep writing, and practice these techniques until you're Tina Fey.</li>
+    </ol>
+  </div>
+
+  <blockquote style="margin-top:3rem;">
+    "Continuing to write on a regular basis, adjusting your approach, getting reader feedback and then incorporating that newfound wisdom into your next piece of writing — in conjunction with all the tools covered in this book — is the blueprint for becoming a great, funny writer."
+  </blockquote>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <p style="margin-bottom:0.5rem;">
+    <strong style="color:var(--gold);">How to Write Funny</strong>
+  </p>
+  <p>Based on the humor-writing guide covering concepts from The Onion, Second City, and the masters of comedy writing.</p>
+  <p style="margin-top:1rem; color:var(--text-dim); font-size:0.8rem;">
+    Further study: <a href="https://www.secondcity.com/training" target="_blank" rel="noopener">secondcity.com/training</a> · "Writing with The Onion" program at Second City Training Center, Chicago
+  </p>
+</footer>
+
+<script>
+// ── PROGRESS BAR
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight) * 100;
+  document.getElementById('progress-bar').style.width = scrolled + '%';
+});
+
+// ── NAV ACTIVE STATE
+const sections = document.querySelectorAll('section[id], div[id="hero"]');
+const navLinks = document.querySelectorAll('nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const id = entry.target.id;
+      const link = document.querySelector(`nav a[href="#${id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ── FILTER CARDS
+function toggleFilter(card) {
+  card.classList.toggle('open');
+}
+
+function expandAll() {
+  document.querySelectorAll('.filter-card').forEach(c => c.classList.add('open'));
+}
+
+function collapseAll() {
+  document.querySelectorAll('.filter-card').forEach(c => c.classList.remove('open'));
+}
+
+// Open all by default
+expandAll();
+
+// ── ANIMATE SECTIONS ON SCROLL
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('section').forEach(section => {
+  section.style.opacity = '0';
+  section.style.transform = 'translateY(20px)';
+  section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  fadeObserver.observe(section);
+});
+</script>
+
+</body>
+</html>

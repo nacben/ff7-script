@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>One-Dimensional Man — A Study Guide to Herbert Marcuse's 1964 Critique of Advanced Industrial Society</title>
+<meta name="description" content="A deep, educational reading of Herbert Marcuse's One-Dimensional Man: false needs, repressive desublimation, the closing of the political universe, and the Great Refusal." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     ONE-DIMENSIONAL MAN — A reading site
+     Visual idiom: industrial-editorial. Warm dark ground, cream
+     type, ember accent. Mechanical numbering, big serif display.
+     ============================================================ */
+
+  :root {
+    --ink: #0d0b08;
+    --ink-2: #15110c;
+    --paper: #f1e8d6;
+    --paper-dim: #d9cfba;
+    --rule: #2a241b;
+    --rule-soft: #1d1812;
+    --ember: #e08a3a;        /* industrial amber */
+    --ember-deep: #b56b22;
+    --rust: #b1432a;         /* used sparingly for refusal/critique */
+    --mute: #7a7264;
+    --mute-2: #5a5246;
+    --serif: "Fraunces", "EB Garamond", Georgia, serif;
+    --read: "EB Garamond", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --max: 1280px;
+    --column: 68ch;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { background: var(--ink); color: var(--paper); }
+  body {
+    margin: 0;
+    font-family: var(--read);
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* film-grain & subtle vignette */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(224,138,58,0.06), transparent 55%),
+      radial-gradient(ellipse at 50% 110%, rgba(0,0,0,0.55), transparent 70%);
+    z-index: 1;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    z-index: 2;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  ::selection { background: var(--ember); color: var(--ink); }
+
+  /* ───────── Typography ───────── */
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--paper);
+    letter-spacing: -0.01em;
+  }
+  h1 { font-weight: 300; }
+  p { margin: 0 0 1.05em; }
+  a { color: var(--ember); text-decoration: none; border-bottom: 1px solid rgba(224,138,58,0.35); transition: border-color .2s, color .2s; }
+  a:hover { color: var(--paper); border-color: var(--paper); }
+  em { font-style: italic; color: #f7eed8; }
+  strong { font-weight: 600; color: #fff5dd; }
+  small { font-size: 0.78rem; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ember);
+  }
+  .label--mute { color: var(--mute); }
+  .label--paper { color: var(--paper-dim); }
+
+  /* ───────── Layout ───────── */
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; position: relative; z-index: 3; }
+  .rule { height: 1px; background: var(--rule); margin: 0; }
+  .rule-double { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); height: 6px; }
+  section { position: relative; z-index: 3; }
+
+  /* ───────── Top nav ───────── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(13,11,8,0.85);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .nav-title {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-title .sigil {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ember);
+    position: relative;
+  }
+  .nav-title .sigil::after {
+    content: "";
+    position: absolute; inset: 3px;
+    background: var(--ember);
+  }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    border: none;
+  }
+  .nav-links a:hover { color: var(--ember); }
+  .progress {
+    position: absolute;
+    bottom: -1px; left: 0; height: 2px;
+    background: var(--ember);
+    width: 0%;
+    transition: width 0.15s linear;
+  }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* ───────── HERO ───────── */
+  .hero {
+    padding: 120px 0 80px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 56px;
+    align-items: baseline;
+    color: var(--mute);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .hero-meta span { display: inline-flex; align-items: baseline; gap: 10px; }
+  .hero-meta b { color: var(--paper); font-weight: 500; }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(60px, 11vw, 168px);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    margin: 0 0 28px;
+    font-variation-settings: "SOFT" 50, "WONK" 1;
+  }
+  .hero-title .em {
+    color: var(--ember);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .hero-sub {
+    max-width: 32ch;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--paper-dim);
+    font-size: clamp(22px, 2.8vw, 36px);
+    line-height: 1.25;
+    margin: 0 0 56px;
+  }
+  .hero-deck {
+    max-width: 60ch;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--paper);
+    border-left: 1px solid var(--ember);
+    padding-left: 22px;
+  }
+
+  .hero-coordinates {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--mute);
+    line-height: 1.8;
+  }
+  @media (max-width: 720px) {
+    .hero-coordinates { display: none; }
+  }
+
+  /* ───────── Section heading ───────── */
+  .sec-head {
+    padding: 96px 0 32px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .sec-head .index { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); }
+  .sec-head .index small { display: block; color: var(--mute); margin-top: 8px; letter-spacing: 0.18em; }
+  .sec-head h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+    font-variation-settings: "SOFT" 30;
+  }
+  .sec-head .deck {
+    max-width: 56ch;
+    color: var(--paper-dim);
+    font-size: 1.05rem;
+  }
+  @media (max-width: 760px) {
+    .sec-head { grid-template-columns: 1fr; gap: 18px; padding-top: 64px; }
+  }
+
+  /* ───────── Standard prose ───────── */
+  .prose {
+    max-width: var(--column);
+    margin-left: 248px;
+    padding: 0 0 32px;
+  }
+  .prose.center { margin: 0 auto; }
+  .prose p { font-size: 1.05rem; }
+  .prose h3 {
+    font-size: 1.45rem;
+    margin: 48px 0 16px;
+    color: var(--paper);
+  }
+  .prose h3::before {
+    content: "§ ";
+    color: var(--ember);
+    font-family: var(--mono);
+    font-size: 0.8em;
+  }
+  .prose .lede {
+    font-size: 1.15rem;
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 400;
+  }
+  .prose .lede::first-letter {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 4.4rem;
+    float: left;
+    line-height: 0.92;
+    padding: 6px 14px 0 0;
+    color: var(--ember);
+  }
+  @media (max-width: 1020px) {
+    .prose { margin-left: 0; }
+  }
+
+  /* ───────── Pull quote ───────── */
+  .pull {
+    margin: 56px 0;
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .pull .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+  }
+  .pull blockquote {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(22px, 2.5vw, 34px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--paper);
+  }
+  .pull blockquote::before { content: "“"; color: var(--ember); margin-right: 4px; }
+  .pull blockquote::after { content: "”"; color: var(--ember); }
+  .pull cite {
+    display: block;
+    margin-top: 18px;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  @media (max-width: 760px) {
+    .pull { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* ───────── Chapter cards ───────── */
+  .chapter {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+  .chapter:last-child { border-bottom: 1px solid var(--rule); }
+  .chapter-num {
+    position: sticky; top: 84px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+    height: max-content;
+  }
+  .chapter-num .num {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 5.2rem;
+    line-height: 1;
+    color: var(--paper);
+    margin-top: 8px;
+    letter-spacing: -0.04em;
+  }
+  .chapter-body { max-width: var(--column); }
+  .chapter-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .chapter-thesis {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ember);
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+  .chapter-body p { font-size: 1.02rem; }
+  .chapter-body .example {
+    margin: 28px 0;
+    padding: 22px 24px;
+    background: rgba(224,138,58,0.06);
+    border-left: 2px solid var(--ember);
+    font-size: 0.96rem;
+  }
+  .chapter-body .example .tag {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 8px;
+  }
+  .chapter-body .marcuse {
+    margin: 24px 0;
+    padding-left: 22px;
+    border-left: 1px solid var(--rule);
+    color: var(--paper-dim);
+    font-style: italic;
+    font-size: 1.02rem;
+  }
+  .chapter-body .marcuse cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  @media (max-width: 1020px) {
+    .chapter { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
+    .chapter-num { position: relative; top: 0; }
+    .chapter-num .num { font-size: 4rem; display: inline-block; margin-left: 18px; vertical-align: middle; }
+  }
+
+  /* ───────── Part divider ───────── */
+  .part {
+    margin-top: 120px;
+    padding: 56px 0 24px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    border-top: 2px solid var(--ember);
+    align-items: end;
+  }
+  .part .tag {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember);
+  }
+  .part h2 {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin: 0 0 16px;
+    font-variation-settings: "SOFT" 40;
+  }
+  .part .intro {
+    grid-column: 2;
+    max-width: 60ch;
+    color: var(--paper-dim);
+    font-size: 1.05rem;
+    margin-top: 16px;
+  }
+  @media (max-width: 1020px) {
+    .part { grid-template-columns: 1fr; gap: 16px; }
+    .part .intro { grid-column: 1; }
+  }
+
+  /* ───────── Diagnosis grid ───────── */
+  .diagnosis {
+    padding: 48px 0 88px;
+  }
+  .diag-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+  }
+  .diag-grid > div {
+    background: var(--ink);
+    padding: 36px 32px;
+  }
+  .diag-grid h4 {
+    font-size: 1.4rem;
+    margin: 0 0 12px;
+    font-weight: 400;
+    color: var(--paper);
+  }
+  .diag-grid .num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ember);
+    letter-spacing: 0.2em;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .diag-grid p { font-size: 0.98rem; color: var(--paper-dim); margin: 0; }
+  @media (max-width: 760px) {
+    .diag-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───────── Concept lexicon ───────── */
+  .lexicon { padding: 48px 0 96px; }
+  .lex-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .lex-item {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .lex-item dt {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: var(--paper);
+    font-variation-settings: "SOFT" 20;
+  }
+  .lex-item dt small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--ember);
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .lex-item dd { margin: 0; color: var(--paper-dim); font-size: 1rem; }
+  @media (max-width: 760px) {
+    .lex-item { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* ───────── Today panels ───────── */
+  .today { padding: 32px 0 96px; }
+  .today-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    margin-top: 32px;
+    border: 1px solid var(--rule);
+  }
+  .today-grid > article {
+    background: var(--ink);
+    padding: 32px 28px;
+  }
+  .today-grid h4 {
+    font-size: 1.2rem;
+    margin: 16px 0 12px;
+    font-weight: 400;
+    color: var(--paper);
+  }
+  .today-grid .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .today-grid p { font-size: 0.95rem; color: var(--paper-dim); margin: 0 0 12px; }
+  .today-grid .quote {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--mute);
+  }
+  @media (max-width: 880px) {
+    .today-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───────── Final / Closing ───────── */
+  .closing {
+    padding: 120px 0 80px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--ink), #0a0907 60%);
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+  .closing .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ember);
+    display: block;
+    margin-bottom: 32px;
+  }
+  .closing blockquote {
+    margin: 0 auto;
+    max-width: 28ch;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    font-variation-settings: "SOFT" 50;
+  }
+  .closing blockquote .ember { color: var(--ember); font-style: normal; }
+  .closing cite {
+    display: block;
+    margin-top: 32px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-style: normal;
+  }
+  .closing .german {
+    margin: 24px auto 0;
+    max-width: 40ch;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--paper-dim);
+    font-size: 1rem;
+  }
+
+  /* ───────── Footer ───────── */
+  footer {
+    padding: 48px 0;
+    border-top: 1px solid var(--rule);
+    background: #07060a;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: baseline;
+  }
+  footer p {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--mute);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  footer a { color: var(--paper-dim); border: none; }
+
+  /* ───────── Diagram: integration of opposites ───────── */
+  .opposites {
+    margin: 48px 0;
+    border: 1px solid var(--rule);
+    padding: 32px;
+    background: linear-gradient(180deg, rgba(224,138,58,0.04), transparent);
+  }
+  .opposites .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .opposites table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--serif);
+  }
+  .opposites td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 1.05rem;
+  }
+  .opposites tr:last-child td { border-bottom: none; }
+  .opposites td:first-child { color: var(--paper); width: 38%; }
+  .opposites td:nth-child(2) {
+    text-align: center;
+    font-family: var(--mono);
+    color: var(--ember);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    width: 18%;
+  }
+  .opposites td:nth-child(3) { color: var(--paper); width: 38%; text-align: right; }
+
+  /* ───────── Toggle (interactive) ───────── */
+  .toggle {
+    margin: 56px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--ember);
+    background: rgba(224,138,58,0.04);
+  }
+  .toggle .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .toggle h4 {
+    margin: 0 0 14px;
+    font-size: 1.4rem;
+    color: var(--paper);
+    font-weight: 400;
+  }
+  .toggle p { font-size: 0.98rem; color: var(--paper-dim); margin: 0 0 18px; }
+  .toggle .switch {
+    display: inline-flex;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .toggle button {
+    background: transparent;
+    color: var(--paper-dim);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border: none;
+    cursor: pointer;
+    border-right: 1px solid var(--rule);
+    transition: background .15s;
+  }
+  .toggle button:last-child { border-right: none; }
+  .toggle button.active { background: var(--ember); color: var(--ink); }
+  .toggle .panel {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 1.02rem;
+    color: var(--paper);
+    min-height: 90px;
+  }
+  .toggle .panel em { color: var(--ember); }
+
+  /* hash anchor offset */
+  :target { scroll-margin-top: 72px; }
+
+  /* fade-in on scroll */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .fade-up.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title"><span class="sigil"></span> Marcuse / 1964</div>
+    <div class="nav-links">
+      <a href="#thesis">Thesis</a>
+      <a href="#part-1">I · Society</a>
+      <a href="#part-2">II · Thought</a>
+      <a href="#part-3">III · Alternatives</a>
+      <a href="#lexicon">Lexicon</a>
+      <a href="#today">Today</a>
+    </div>
+  </div>
+  <div class="progress" id="progress"></div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-coordinates">
+      Boston · Beacon Press<br>
+      First edition, 1964<br>
+      Frankfurt School · Critical Theory<br>
+      ISBN 978-0-8070-1417-2
+    </div>
+    <div class="hero-meta">
+      <span><b>Vol</b> 01</span>
+      <span><b>Author</b> Herbert Marcuse</span>
+      <span><b>Year</b> 1964</span>
+      <span><b>Subject</b> Ideology of Advanced Industrial Society</span>
+    </div>
+    <h1 class="hero-title">One-<br>Dimensional <span class="em">Man</span></h1>
+    <p class="hero-sub">A study in the new unfreedom — comfortable, smooth, reasonable, democratic.</p>
+    <div class="hero-deck">
+      <p>A society can be totalitarian without terror. It can absorb its critics, satisfy its workers, dignify its enemies, and translate every refusal into a market segment. <em>One-Dimensional Man</em> is the book that named this condition. It argues that advanced industrial society, by making life materially easier, has flattened the very dimension of consciousness in which alternatives could be conceived. The chains have become comfortable. The thought of unchaining feels, at last, irrational.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ====================== THESIS / DIAGNOSIS ====================== -->
+<section id="thesis" class="diagnosis">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="index">00<small>The Diagnosis</small></div>
+      <div>
+        <h2>A society without opposition</h2>
+        <p class="deck">Marcuse opens with a paradox that still indicts our century: the more capable a civilization becomes, the less able it is to imagine being otherwise. Progress itself becomes the prison.</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p class="lede">Imagine a system so productive that it satisfies most of the needs it generates, so tolerant that it absorbs its critics, so peaceful that its peace requires permanent war, so rational that its rationality is the source of its madness. This is the society Marcuse anatomises. Its citizens are not oppressed in the classical sense — they vote, they shop, they sue, they speak. And yet they are unfree, because the very horizon of what they could want, think, or refuse has been pre-decided for them by a productive apparatus that recognizes no end outside itself.</p>
+
+      <p>The genius of advanced industrial society, in Marcuse's reading, is not that it crushes dissent but that it makes dissent unintelligible. The opposition's energy is not jailed — it is channeled, packaged, and sold back. The slave is told he is free; the unfree life is made comfortable; the comfortable life is administered down to its instincts. Every contradiction is welded into a brand: <em>clean bomb, peace through deterrence, free press that censors itself</em>. The result is one-dimensional: a flattening of consciousness in which only what already exists counts as real.</p>
+
+      <p>Marcuse calls this achievement the most singular of advanced industrial society: not its productivity, not its weapons, not even its wealth — but its capacity to <em>contain</em> qualitative change. The system has learned to deliver enough satisfaction to make the question of liberation seem quaint, neurotic, or simply impractical. To say, with the philosopher, that <em>"that which is cannot be true,"</em> sounds today like a poetic affectation. It is, in Marcuse's view, the last remaining task of thought.</p>
+    </div>
+
+    <div class="diag-grid">
+      <div>
+        <span class="num">01 · WELFARE</span>
+        <h4>It feeds us.</h4>
+        <p>Mass production delivers comforts, conveniences, security on a scale unimaginable to earlier ages. Hunger declines. Lifespans rise. The rational defense of the status quo is its actual capacity to <em>deliver the goods.</em></p>
+      </div>
+      <div>
+        <span class="num">02 · WARFARE</span>
+        <h4>It needs an enemy.</h4>
+        <p>The same productivity requires a permanent state of mobilization. The Enemy is structural, not contingent. He stabilizes the system: he justifies the budget, the jobs, the secrecy, the suspended judgment.</p>
+      </div>
+      <div>
+        <span class="num">03 · TECHNIQUE</span>
+        <h4>It administers us.</h4>
+        <p>Rule becomes administration. The bosses dissolve into bureaucrats; bureaucrats dissolve into procedures; procedures appear as the impersonal logic of the apparatus itself. There is no one to hate, because there is no one to confront.</p>
+      </div>
+      <div>
+        <span class="num">04 · CONSENT</span>
+        <h4>It is desired.</h4>
+        <p>The deepest control is the one that does not look like control. The individuals do not merely submit — they <em>recognize themselves</em> in their commodities. They find their soul in the automobile, the kitchen, the screen. They are the system; the system is them.</p>
+      </div>
+    </div>
+
+    <div class="pull">
+      <div class="tag">Cor — Cordis</div>
+      <blockquote>
+        A comfortable, smooth, reasonable, democratic unfreedom prevails in advanced industrial civilization, a token of technical progress.
+        <cite>— Chapter 1, opening lines</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PART I ============================ -->
+<section id="part-1">
+  <div class="wrap">
+    <div class="part">
+      <div>
+        <span class="tag">Part I</span>
+        <h2>One-Dimensional<br>Society</h2>
+      </div>
+      <p class="intro">How a productive apparatus, a political system, a culture, and a language conspire — not by coordination but by the gravitational pull of their shared efficiency — to close off the space in which qualitatively different ways of life could be thought, demanded, or even desired.</p>
+    </div>
+
+    <!-- Chapter 1 -->
+    <article class="chapter" id="ch1">
+      <div class="chapter-num">Chapter<span class="num">01</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The New Forms of Control</h3>
+        <p class="chapter-thesis">A new totalitarianism arises without terror — by the manipulation of needs, by the equation of liberty with the right to choose among administered options.</p>
+
+        <p>The freedoms that defined the bourgeois revolutions — freedom of thought, speech, enterprise — were once <em>critical</em> ideas, weapons against an obsolete order. Once that order was overthrown, these freedoms became furniture in the rooms of the new one. Independence of thought, autonomy, the right to opposition: they all retain their formal status, but they have lost their bite. A society that can satisfy needs on a vast scale need not silence opposition; it need only render opposition <em>useless</em>.</p>
+
+        <p>Marcuse's most disturbing move is to redraw the line between true and false needs. He grants that we may genuinely enjoy what we are sold; the satisfaction is real. But satisfaction, he insists, is not the measure of freedom. <em>"Most of the prevailing needs to relax, to have fun, to behave and consume in accordance with the advertisements, to love and hate what others love and hate — belong to this category of false needs."</em> They were produced in us by interests that profit from our remaining their bearers. They are happiness in unhappiness: euphoria that arrests the development of the very faculty by which we could recognize the disease.</p>
+
+        <div class="example">
+          <span class="tag">Concrete example</span>
+          The worker and the boss watch the same television program. The typist is as attractively made up as her employer's daughter. They read the same newspaper. This is not, Marcuse warns, the abolition of class — it is the extent to which the satisfactions that preserve the system are now <em>shared</em> by those it exploits. Class assimilation through consumption is not victory. It is the most successful technique of domination ever devised.
+        </div>
+
+        <p>The proof of the system's grip is the strange shape of its protest. Bohemia, Zen, the beat life, the existential mood: all of these were once disruptive. Today, Marcuse observes, <em>"they are quickly digested by the status quo as part of its healthy diet."</em> They are no longer contradiction but ceremony — the harmless negation that the system requires in order to feel pluralist.</p>
+
+        <div class="marcuse">
+          The most effective and enduring form of warfare against liberation is the implanting of material and intellectual needs that perpetuate obsolete forms of the struggle for existence.
+          <cite>One-Dimensional Man, Ch. 1</cite>
+        </div>
+
+        <p>Liberty itself, in this configuration, becomes an instrument of domination. <em>"Free election of masters does not abolish the masters or the slaves."</em> The criterion of freedom is not the range of choices, but what may be chosen — and whether the choosing changes anything. A society in which we are perfectly free to select between brands of soap, channels of news, and parties of government, while the structure that makes us perfectly unfree to choose anything else remains untouched, is unfree at the root.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 2 -->
+    <article class="chapter" id="ch2">
+      <div class="chapter-num">Chapter<span class="num">02</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The Closing of the Political Universe</h3>
+        <p class="chapter-thesis">The Welfare State and the Warfare State fuse. Opposites converge — labor with capital, capital with the state — leaving no political agent capable of imagining a different totality.</p>
+
+        <p>The classical Marxian wager assumed a proletariat whose very existence was a living indictment of the system. The body that produced the wealth was excluded from it; the contradiction would, eventually, explode. Marcuse looks at the most advanced areas of mid-century industrial society and reports, with austerity, that the wager has been lost. Not because the contradictions have disappeared, but because they have been <em>managed</em>: mechanized, salaried, unionized, suburbanized, televised, integrated.</p>
+
+        <p>The mechanized worker no longer expends his life as raw muscle. He pushes buttons, monitors gauges, attends machines that nearly run themselves. His chains have been padded. His union sits at the same table as his employer, lobbying jointly for the same defense contracts. Strikes occur — over wages, over conditions — but they are wage disputes within the existing framework, not refusals of the framework itself. The system has absorbed its own negation by giving the negation a 401(k).</p>
+
+        <div class="opposites">
+          <span class="tag">The unification of opposites</span>
+          <table>
+            <tr><td>Welfare State</td><td>↔</td><td>Warfare State</td></tr>
+            <tr><td>Union</td><td>↔</td><td>Corporation</td></tr>
+            <tr><td>Labor Party</td><td>↔</td><td>Conservative Party</td></tr>
+            <tr><td>Private gain</td><td>↔</td><td>National defense</td></tr>
+            <tr><td>Capitalist West</td><td>↔</td><td>Socialist East</td></tr>
+            <tr><td>Freedom (formal)</td><td>↔</td><td>Servitude (real)</td></tr>
+          </table>
+        </div>
+
+        <p>The same convergence operates internationally. East and West, in Marcuse's analysis, mirror each other more than either admits: both organize life around the productive apparatus; both subordinate the individual to its requirements; both administer needs from above. The Enemy each names is, on closer inspection, the same enemy — the specter of <em>genuine liberation</em>, which would dissolve the basis of domination in both systems at once.</p>
+
+        <div class="marcuse">
+          Domination is transfigured into administration. The capitalist bosses and owners are losing their identity as responsible agents; they are assuming the function of bureaucrats in a corporate machine.
+          <cite>Ch. 2</cite>
+        </div>
+
+        <p>Hatred and frustration are then deprived of their target. There is no one to overthrow because no one is in charge — the manager reports to the board, the board to the shareholders, the shareholders to the market, the market to a productive logic that no one set in motion and no one can stop. The result is a vicious circle that encloses ruler and ruled alike. The technicians appear to rule; in fact they execute the imperatives of a machinery that requires them in order to function.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 3 -->
+    <article class="chapter" id="ch3">
+      <div class="chapter-num">Chapter<span class="num">03</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The Conquest of the Unhappy Consciousness: Repressive Desublimation</h3>
+        <p class="chapter-thesis">High culture once contradicted the world; now it adorns it. Sexuality is no longer suppressed; it is liberalized into a market instrument. The result is freedom that strengthens unfreedom.</p>
+
+        <p>For Marcuse, the cathedrals, salons, sonnets, and tragedies of the old high culture were never merely beautiful objects. They were inhabitants of a <em>second dimension</em>: a sphere that, by its very form, contradicted the world of business and toil. The artist, the lover, the rebel-poet, the great criminal, the fool — these were figures of refusal. Their existence in literature was the existence of a different order of life within ordinary life. They tormented the established reality by showing it as one possibility among others.</p>
+
+        <p>Advanced industrial culture has not destroyed these works. It has done something more efficient: it has <em>absorbed</em> them. Bach in the kitchen. Plato in the drugstore. Shakespeare on a screen during dinner. The classics, freed from their mausoleums, come back to life — but as merchandise, as background, as cultural capital. The estrangement that was the very substance of their truth is conquered by accessibility. The greatest art of refusal becomes the soundtrack of acceptance.</p>
+
+        <div class="marcuse">
+          What has been invalidated is their subversive force, their destructive content — their truth.
+          <cite>Ch. 3</cite>
+        </div>
+
+        <p>The parallel operation in the instinctual sphere Marcuse calls <em>repressive desublimation</em>. Earlier societies, including Freud's, controlled their populations by repressing sexual desire and channeling its energy into work, art, and civilization. Sublimation hurt — but the pain was the index of an unconquered freedom, a residue of refusal. Today, by contrast, the prohibitions have lifted. Sex is everywhere: in the office, in the advertising, in the sales meeting. The body has been given back to itself.</p>
+
+        <p>This sounds like liberation. It is something else. <em>Sublimation</em> created images and ideals that exceeded what society would let one have; the surplus was the soil of imagination, refusal, art. <em>Desublimation</em> grants immediate, localized gratification — and in granting it, deprives the unrealized of its compelling force. The Pleasure Principle no longer rebels against the Reality Principle; it has been hired to enforce it. We are happier; we are also smaller. The eroticized world is more domesticated than the repressed one ever was.</p>
+
+        <div class="example">
+          <span class="tag">Marcuse's example</span>
+          Compare love-making in a meadow and in an automobile, on a country walk and on a Manhattan street. In the open landscape, the environment <em>partakes</em> of the libidinal experience; the body's pleasure overflows into the world and the world into the body. In the mechanized environment, that overflow is blocked. Eros contracts into localized sexuality. We are given more sex and less Eros — a "compression of erotic energy" that leaves the surrounding world available, undisturbed, for the work of administration.
+        </div>
+
+        <p>The newly desublimated subject is, for the system, an ideal subject. The conflicts that drove him to refuse have been satisfied at a level too shallow to matter. He has been granted just enough freedom to forget that he is not free.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 4 -->
+    <article class="chapter" id="ch4">
+      <div class="chapter-num">Chapter<span class="num">04</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The Closing of the Universe of Discourse</h3>
+        <p class="chapter-thesis">The language of one-dimensional society is functional, ritualized, and self-validating. Contradictions are welded shut by hyphens. The means to say "no" are dismantled by the way we are taught to say "yes."</p>
+
+        <p>Marcuse turns to language because language is where thought lives or dies. In the universe he describes, the noun fuses with its function. <em>"The thing identified with its function is more real than the thing distinguished from its function."</em> A car is no longer the kind of object whose meaning could be questioned; it is whatever it is currently used for. A democracy is whatever the current elections produce. Freedom is what the Free World does. The concept's critical surplus — its capacity to judge the actuality in light of unrealized possibilities — is squeezed out of public discourse.</p>
+
+        <p>Three linguistic operations do this work:</p>
+
+        <p><strong>1. The self-validating hypothesis.</strong> Repeat a noun with its standard predicates often enough — <em>free</em> world, <em>democratic</em> elections, <em>fair</em> markets, <em>defensive</em> war — and the predicate ceases to be a description that could be tested. It becomes part of the noun. To question it sounds like questioning the meaning of the word itself: not heresy, but nonsense.</p>
+
+        <p><strong>2. The welded contradiction.</strong> "Clean bomb." "Luxury fall-out shelter." "Peace through strength." "Humanitarian intervention." The hyphen and the adjective do their work: opposites are joined in a single phrase so seamlessly that no logical space remains in which the contradiction could be felt. The most outrageous unification of incompatibles is presented as a routine technical specification.</p>
+
+        <p><strong>3. The personalized function.</strong> Politicians, executives, generals are introduced through their offices and brands: <em>U.S. Steel's Blough, Egypt's Nasser, your congressman, your highway.</em> The individual is absorbed into the institution; the institution is delivered, personalized, to a "you" who is assumed to be already on its side. The grammar itself enforces identification.</p>
+
+        <div class="marcuse">
+          In this universe of public discourse, speech moves in synonyms and tautologies; actually, it never moves toward the qualitative difference.
+          <cite>Ch. 4</cite>
+        </div>
+
+        <p>What disappears in this style is the medium in which historical alternatives could be named. A language stripped of its transcending vocabulary cannot, by definition, speak of a world other than the present one. The disturbing capacity of words like <em>Freedom</em>, <em>Reason</em>, <em>Justice</em> — once names of an unrealized horizon — collapses into descriptions of existing institutions. There is no longer a vocabulary in which the difference between <em>what is</em> and <em>what could be</em> could be articulated.</p>
+
+        <p>The closing of discourse is the closing of the future. To remember is to dissociate, and dissociation is dangerous. <em>"Remembrance is a mode of dissociation from the given facts, a mode of mediation which breaks, for short moments, the omnipresent power of the given facts."</em> A society that wants to be eternal must therefore liquidate memory as an "irrational rest" of an unrationalized past. Marcuse's analysis of language is, in the end, an analysis of how forgetting is engineered.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================ PART II ============================ -->
+<section id="part-2">
+  <div class="wrap">
+    <div class="part">
+      <div>
+        <span class="tag">Part II</span>
+        <h2>One-Dimensional<br>Thought</h2>
+      </div>
+      <p class="intro">The closure does not stop at institutions and language. It enters the laboratory and the library. Science is reorganized around what can be done. Philosophy is disciplined into asking only about what can be said. The dimension in which thought could judge reality is methodically dismantled by reason itself.</p>
+    </div>
+
+    <!-- Chapter 5 -->
+    <article class="chapter" id="ch5">
+      <div class="chapter-num">Chapter<span class="num">05</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">Negative Thinking: The Defeated Logic of Protest</h3>
+        <p class="chapter-thesis">The oldest Western logic — Plato's dialectic — was a two-dimensional thought in which the real had to be measured against the possible. To say <em>"that which is cannot be true"</em> was once the very work of reason.</p>
+
+        <p>Marcuse reconstructs the lost dialectic to remind us what reason was supposed to do. For Plato and the early tradition, truth was not a property of propositions but a state of <em>being</em>. The world as it appeared was incomplete, distorted, falling short of what it could be. To know was to bring this gap to consciousness; to act was to close it. Reason was therefore a subversive faculty: it required the philosopher to indict the existing city in the name of a possible one, even if it killed him.</p>
+
+        <p>This is the meaning of the strange sentence Marcuse keeps returning to: <em>"that which is cannot be true."</em> The categorical "is" hides an unfulfilled "ought." When we say <em>man is free</em>, we do not mean that humans factually exhibit freedom — we mean that they are owed freedom by their nature, and that the present arrangement, in which they are not free, stands accused. The proposition is a judgment passed on the world.</p>
+
+        <div class="marcuse">
+          Thus the subversive character of truth inflicts upon thought an imperative quality. Logic centers on judgments which are, as demonstrative propositions, imperatives — the predicative "is" implies an ought.
+          <cite>Ch. 5</cite>
+        </div>
+
+        <p>Aristotle's formal logic begins the long retreat from this dialectical work. By abstracting from substance, by treating propositions as fungible signs that can be slotted into general laws, formal logic creates a "purified" universe in which contradictions are mistakes. The two dimensions of being — actual and potential, fact and value — are pulled apart. Logic becomes the science of consistency among propositions, rather than the discipline of recognizing what is wrong with the world.</p>
+
+        <p>This is not yet defeat. Through Hegel, through Marx, dialectical thinking returns: the recognition that reality is structured by real contradictions, that the present is not stable but in motion against itself, that to think it is to identify the forces tending toward its overcoming. Negative thinking is the labor of refusal taken to the level of method. Marcuse warns that the formalisms of modern logic — for all their technical brilliance — descend from a tradition that purified thought of precisely this critical content.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 6 -->
+    <article class="chapter" id="ch6">
+      <div class="chapter-num">Chapter<span class="num">06</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">From Negative to Positive Thinking: The Logic of Domination</h3>
+        <p class="chapter-thesis">Modern science is not a neutral discovery of nature but a historical project. By treating nature as quantifiable matter ready for control, it pre-decides the form domination will take.</p>
+
+        <p>Marcuse's most provocative argument: scientific rationality is not the innocent victim of its political applications. The applications were possible because the rationality was already operational <em>in its pure form</em>. By stripping nature of inherent ends, by translating qualities into measurable quantities, by treating objects as <em>hypothetical systems</em> available for manipulation, modern science produced a world that is, in advance, the world of a particular project: control.</p>
+
+        <p>This is what Marcuse calls the <em>technological a priori</em>. Before any specific technology, scientific reason already approaches matter as something to be organized, calculated, and harnessed. <em>"Modern man takes the entirety of Being as raw material for production"</em> — and the science that makes this possible cannot then disclaim what it makes possible. The transition from the laboratory to the assembly line, from the assembly line to the missile silo, is not a corruption of pure thought. It is its consummation.</p>
+
+        <div class="marcuse">
+          Today, domination perpetuates and extends itself not only through technology but as technology, and the latter provides the great legitimation of the expanding political power, which absorbs all spheres of culture.
+          <cite>Ch. 6</cite>
+        </div>
+
+        <p>The political consequence is grave. Because the dominant rationality presents itself as <em>just reason itself</em>, criticism is forced into a permanent disadvantage. To object that a society dedicated to the rational mastery of nature is producing irrational outcomes — destruction, alienation, ecological ruin — appears unscientific, sentimental, even mystical. The forms of thought that could grasp this irrationality (dialectical, philosophical, "transcendent") are dismissed as relics. Positive thinking absorbs reason; what is left over is labeled fantasy.</p>
+
+        <p>Marcuse insists that this is not an argument for irrationalism or for a "qualitative physics" or a return to teleology. It is an argument that <em>another</em> direction of technical progress — one in which the project of mastery is replaced by a project of <em>pacification</em> — would entail an essentially different science, with different hypotheses, different concepts, and different facts. Reason as it stands has been one historical project. It is not the only one possible.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 7 -->
+    <article class="chapter" id="ch7">
+      <div class="chapter-num">Chapter<span class="num">07</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The Triumph of Positive Thinking: One-Dimensional Philosophy</h3>
+        <p class="chapter-thesis">Linguistic analysis, the dominant philosophy of the moment, takes ordinary language as its final tribunal — and in doing so, ratifies the mutilated consciousness that ordinary language records.</p>
+
+        <p>The Anglo-American philosophy of the mid-century — Wittgenstein, Austin, Ryle — sets itself a therapeutic task. Cure thought from "metaphysical ghosts." Show that the great inherited terms (mind, will, self, freedom) are confusions to be dissolved into descriptions of ordinary behavior. Restrict philosophy to what can be said clearly. Wittgenstein's famous edict: philosophy "leaves everything as it is."</p>
+
+        <p>Marcuse takes this program with deadly seriousness — and rejects it. The ordinary language to which analysts appeal is not neutral. It is the language of a particular society, the language a particular system makes its members speak. To take it as the final court of appeal is to award the case to the prosecution before the trial begins. The philosopher who restricts thought to "what we say" sterilizes thought of any standpoint from which what we say could be criticized.</p>
+
+        <div class="marcuse">
+          Linguistic philosophy suppresses once more what is continually suppressed in this universe of discourse: the mutilation of man and nature.
+          <cite>Ch. 7</cite>
+        </div>
+
+        <p>The "chumminess" of the analytic style — its Joe Doe and Dick Roe, its tasting of pineapple, its broom in the corner — is not, for Marcuse, a charming concession to common life. It is an ideological choice. By insisting on examples drawn from a sanitized everyday, by refusing the "high-brow" vocabulary of historical reflection, by treating concepts like <em>freedom</em> and <em>democracy</em> as syntactically equivalent to <em>broom</em> and <em>pineapple</em>, the philosopher pre-excludes the very transcendent dimension in which the meaning of those concepts could be tested.</p>
+
+        <p>What is needed instead, Marcuse argues, is a philosophy that treats ordinary discourse as <em>evidence</em> — evidence of the mutilation it records — rather than as the standard to which thought must conform. The poet, the dialectician, the critical theorist, even the angry man on the street who refuses the going vocabulary: each, in his way, points to the larger context in which everyday speech becomes legible as the symptom of a particular order. To pretend that no such larger context exists is to do philosophy at the price of intelligence.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================ PART III ============================ -->
+<section id="part-3">
+  <div class="wrap">
+    <div class="part">
+      <div>
+        <span class="tag">Part III</span>
+        <h2>The Chance of<br>the Alternatives</h2>
+      </div>
+      <p class="intro">If the system is so total, why bother? Marcuse's third part is the hardest. He refuses to manufacture optimism. He sketches the criteria by which a different historical project could be judged, then names — without hiding the despair — the only force he sees as still capable of breaking through.</p>
+    </div>
+
+    <!-- Chapter 8 -->
+    <article class="chapter" id="ch8">
+      <div class="chapter-num">Chapter<span class="num">08</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The Historical Commitment of Philosophy</h3>
+        <p class="chapter-thesis">Universal concepts — Beauty, Justice, Man, Freedom — are not metaphysical illusions to be dissolved. They are condensations of historical possibility that judge the present in the name of its unrealized future.</p>
+
+        <p>Marcuse here defends the universals that linguistic analysis was so eager to debunk. When we say <em>this is beautiful</em>, we do not just classify; we measure the particular against a horizon that exceeds it. The concept "beauty" carries the surplus of every beauty not yet realized. The concept "justice" carries the surplus of every justice still to be done. To dissolve these surpluses into the actual behaviors of actual people is to disarm thought.</p>
+
+        <p>The universal, in this reading, is not floating above history. It is the precipitate of a long, painful, collective experience — the experience of being not-yet what one could be. The abstract concept and the concrete possibility are two sides of the same historical work. To use the concept is to keep that possibility alive. To purge the concept is to bury the possibility.</p>
+
+        <div class="marcuse">
+          The substantive universals seem to designate qualities which surpass all particular experience, but persist in the mind, not as a figment of imagination, nor as mere logical possibilities, but as the "stuff" of which our world consists.
+          <cite>Ch. 8</cite>
+        </div>
+
+        <p>From here Marcuse advances a striking proposition: different historical projects can be judged by their rationality, and that rationality has criteria. A genuinely transcendent project — one that would replace the existing totality — must (a) lie within the real possibilities opened by present material and intellectual culture; (b) preserve and improve the productive achievements already attained; (c) offer a greater chance for what he calls the <em>pacification of existence</em>: the alleviation of toil, fear, and the struggle for life.</p>
+
+        <p>Truth, in this conception, is historical without being relative. It is comparative. A project is true to the extent that, on the basis of what already exists, it would render a more rational, less destructive form of life possible. Marxism was true at the moment of the Communist Manifesto, Marcuse argues, even though the world of 1848 could not yet see it. Fascism remains false even if it should rise to global power. The criterion is not present success; the criterion is the chance for a pacified existence.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 9 -->
+    <article class="chapter" id="ch9">
+      <div class="chapter-num">Chapter<span class="num">09</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">The Catastrophe of Liberation</h3>
+        <p class="chapter-thesis">Liberation is not the gentle unfolding of present trends. It is a rupture — what Marcuse, with deliberate severity, calls a <em>catastrophe</em>. To free this society would require breaking the very rationality that has made it.</p>
+
+        <p>The word is chosen on purpose. To pacify existence — to redirect the productive apparatus toward the satisfaction of vital needs with a minimum of toil — would not be a quantitative extension of the current direction. It would be its reversal. The same technology that now serves accumulation, surveillance, and war would have to be rebuilt around a different telos: the free play of human faculties, the reduction of cruelty, the cultivation of an "art of life."</p>
+
+        <p>This is more than an engineering problem. It would entail a transformation of <em>science itself</em> — a redefinition of values as technical tasks, of final causes as proper objects of method. Marcuse permits himself a rare moment of materialist utopianism: in a society oriented toward pacification, what we now call ethical or religious questions (how shall we live? what should we make? what should we want?) would become technical questions in the best sense. They would be answered by the deliberate organization of resources for the satisfaction of human needs, not by sermons.</p>
+
+        <div class="toggle" data-toggle>
+          <span class="tag">Choose your rationality</span>
+          <h4>Mastery — or pacification?</h4>
+          <p>Marcuse argues that <em>two</em> kinds of mastery of nature are possible, and our civilization has chosen one of them without ever knowing it had a choice. Click below to compare the projects.</p>
+          <div class="switch">
+            <button class="active" data-key="mastery">Repressive Mastery</button>
+            <button data-key="pacification">Pacification</button>
+          </div>
+          <div class="panel" id="togglePanel">
+            <em>Repressive mastery</em> treats nature as raw material for production. Forests become lumber, rivers become coolant, animals become protein. Reason is conquest; the result is the conquest of man through the conquest of nature. Efficiency becomes its own justification; ends are taken for granted; the apparatus expands by its own momentum.
+          </div>
+        </div>
+
+        <p>The obstacle is political, not technical. The technologies for pacification largely exist. The institutions that would have to direct them do not. The interests served by the existing direction of progress have a vested stake in its continuation; the consciousness shaped by satisfied false needs has a vested stake in not noticing. The change Marcuse describes therefore looks, from inside the going order, like an unacceptable loss — a giving-up of comforts, a slowing of growth, a turning-away from the great achievements of productivity. Hence: catastrophe.</p>
+
+        <p>And yet the catastrophe would be a <em>liberating</em> one. It would mean the conscious reduction of overdevelopment in the rich societies — less waste, less work, less push, less noise — so that the space and time required for genuine self-determination could exist. It would mean ending the permanent mobilization that justifies the suspension of judgment. It would mean re-discovering privacy, silence, the right to think against the prevailing noise. <em>"Liberation from the affluent society does not mean return to healthy and robust poverty."</em> It means the elimination of profitable waste, so that the satisfactions still denied — the deepest ones — might at last become possible.</p>
+      </div>
+    </article>
+
+    <!-- Chapter 10 -->
+    <article class="chapter" id="ch10">
+      <div class="chapter-num">Chapter<span class="num">10</span></div>
+      <div class="chapter-body">
+        <h3 class="chapter-title">Conclusion: The Great Refusal</h3>
+        <p class="chapter-thesis">The book ends without comfort. The integrated population is incapable of liberation. The hope, if any, lies in those the system has not absorbed — and in a refusal that holds, even without a strategy.</p>
+
+        <p>Marcuse refuses to falsify his diagnosis with an upbeat ending. The advanced industrial society he has described is, by his own analysis, capable of indefinite self-perpetuation. The popular base it has manufactured is loyal to its comforts. The working class that classical theory identified as the bearer of the alternative has become the ferment of social cohesion. The traditional means of political opposition have been integrated. The dialectic, deprived of its agent, can comprehend the world but not change it.</p>
+
+        <p>And yet he is unwilling to call this hopeless. Beneath the conservative popular base, he writes, is a <em>substratum</em>: the outcasts and outsiders, the exploited and persecuted of other races and other colors, the unemployed and unemployable. They live outside the integrated democratic process. Their refusal, when it comes, hits the system from a point the system has not yet domesticated. <em>"When they get together and go out into the streets, without arms, without protection, in order to ask for the most primitive civil rights, they know that they face dogs, stones, and bombs, jail, concentration camps, even death."</em></p>
+
+        <div class="marcuse">
+          The fact that they start refusing to play the game may be the fact which marks the beginning of the end of a period.
+          <cite>Ch. 10</cite>
+        </div>
+
+        <p>This is the Great Refusal. Not a strategy. Not a program. Not even, in many cases, a coherent ideology. It is the bare act of withdrawing one's complicity, of refusing to call by their official names the things that the official language has misnamed. It is the human "no" that has not yet been priced.</p>
+
+        <p>The closing pages of <em>One-Dimensional Man</em> are among the most honest in twentieth-century political theory. Marcuse does not promise the Great Refusal will succeed. He notes that the established societies have the economic and military capacity to absorb or crush almost any revolt. He says explicitly: <em>"Nothing indicates that it will be a good end."</em> What he refuses to do is to pretend, on those grounds, that no refusal is owed. The critical theory of society, having no concepts to bridge the present and its future, remains negative. It wants to remain loyal to those who, without hope, have given and continue to give their lives to the Great Refusal.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================ LEXICON ============================ -->
+<section id="lexicon" class="lexicon">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="index">A1<small>Concept Lexicon</small></div>
+      <div>
+        <h2>The vocabulary of refusal</h2>
+        <p class="deck">Marcuse's argument depends on a handful of precise, sometimes brutal concepts. Carry them with you. They have no shortcuts.</p>
+      </div>
+    </div>
+
+    <dl class="lex-list">
+
+      <div class="lex-item">
+        <dt>False Needs<small>Ch. 1</small></dt>
+        <dd>Needs superimposed upon the individual by particular social interests in his repression — needs that perpetuate toil, aggression, misery, and injustice. Their satisfaction is gratifying; the gratification keeps the system intact. Most of "the prevailing needs to relax, to have fun, to behave and consume in accordance with the advertisements" belong here.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>True Needs<small>Ch. 1</small></dt>
+        <dd>The vital needs — nourishment, clothing, lodging at the attainable level of culture — whose universal satisfaction is the prerequisite for the realization of all other needs. Beyond these, what people would freely want under conditions of real autonomy can only be answered "in the last analysis" by free people themselves.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>One-Dimensional Thought<small>Intro</small></dt>
+        <dd>A pattern of thought and behavior in which ideas, aspirations, and objectives that, by their content, transcend the established universe of discourse and action are either repelled or reduced to the terms of that universe. Critique becomes technical adjustment; alternatives become unintelligible.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>Repressive Desublimation<small>Ch. 3</small></dt>
+        <dd>The replacement of mediated, sublimated forms of gratification with immediate, controlled, localized satisfaction — granted from a position of strength by a society that can afford it. Result: liberated instincts that serve, rather than resist, the established order. "Pleasure, thus adjusted, generates submission."</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>The Happy Consciousness<small>Ch. 3</small></dt>
+        <dd>The belief that the real is rational, that the established system, in spite of everything, delivers the goods. It reflects the conviction that the apparatus is the effective agent of thought and action and must be obeyed — and absolves conscience by reifying responsibility into "general necessity."</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>Pacification of Existence<small>Ch. 1, 9</small></dt>
+        <dd>Marcuse's term for the historical alternative he hopes for: a development of human struggle with nature and with one another under conditions where competing needs and desires are no longer organized by vested interests in domination and scarcity. Not paradise. Just the end of compulsory war.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>Technological A Priori<small>Ch. 6</small></dt>
+        <dd>The hidden project encoded in modern scientific rationality itself: the approach to nature as quantifiable, manipulable matter — a "hypothetical system" of instrumentalities awaiting control. Technology is not "applied" science; the application is already there in the concepts.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>The Great Refusal<small>Ch. 3, 10</small></dt>
+        <dd>The protest against that which is, in the name of what could be. Originally a property of high art; in the conclusion, the political stance of those who refuse to play the game — even without a winning strategy. "Holding no promise and showing no success, it remains negative."</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>The Closing of the Universe of Discourse<small>Ch. 4</small></dt>
+        <dd>The process by which language is purged of the vocabulary in which alternatives to the present order could be articulated. Self-validating clichés, welded contradictions ("clean bomb"), and functional definitions replace the words that once made transcendence speakable.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>Welfare/Warfare State<small>Ch. 2</small></dt>
+        <dd>The fusion characteristic of advanced industrial society. Comforts at home depend on mobilization abroad; the permanent enemy stabilizes domestic employment and unifies opposing parties. Peace and war stop being opposites; both become aspects of the same productive logic.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>Containment<small>Ch. 1, 2</small></dt>
+        <dd>The system's "most singular achievement": the capacity to absorb every qualitative challenge before it can become a real alternative. Containment is the political form of one-dimensional rationality.</dd>
+      </div>
+
+      <div class="lex-item">
+        <dt>Negative Thinking<small>Ch. 5</small></dt>
+        <dd>Thinking that, with Hegel, recognizes the contradictions in the real and refuses the equation of the actual with the rational. Its judgment: "that which is cannot be true." Marcuse argues it is the only mode of thought adequate to a society that has made positive thinking into ideology.</dd>
+      </div>
+
+    </dl>
+  </div>
+</section>
+
+<!-- ============================ TODAY ============================ -->
+<section id="today" class="today">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="index">A2<small>Reading from now</small></div>
+      <div>
+        <h2>Why it returns, sixty years on</h2>
+        <p class="deck">Marcuse's 1964 description of one-dimensional society now reads, in places, as plain reportage. The mechanisms he isolated have not weakened. They have refined themselves.</p>
+      </div>
+    </div>
+
+    <div class="today-grid">
+      <article>
+        <span class="tag">01 · Algorithm</span>
+        <h4>Recommendation as administered desire</h4>
+        <p>Marcuse's "implantation of needs by vested interests" once required television and the supermarket. It now operates at the level of the individual feed. Algorithms learn what we want by showing us things to want; the more they succeed, the less we recognize the want as theirs.</p>
+        <div class="quote">"The products indoctrinate and manipulate; they promote a false consciousness which is immune against its falsehood."</div>
+      </article>
+      <article>
+        <span class="tag">02 · Brand</span>
+        <h4>Revolt incorporated</h4>
+        <p>Refusal sells. The aesthetics of dissent — punk, queer, anti-corporate, post-everything — are reliably absorbed into the next quarter's marketing. The Great Refusal becomes a t-shirt. Marcuse predicted exactly this absorption when he watched beatnik culture being "quickly digested by the status quo as part of its healthy diet."</p>
+        <div class="quote">"Such modes of protest and transcendence are no longer contradictory to the status quo and no longer negative."</div>
+      </article>
+      <article>
+        <span class="tag">03 · Discourse</span>
+        <h4>The welded contradiction returns</h4>
+        <p>"Defensive war." "Humanitarian bombing." "Compassionate austerity." "Smart sanctions." "Surgical strike." "Free speech absolutist." Each is a hyphenated phrase that closes the space in which the contradiction could be felt. Marcuse's chapter on language is now a working glossary of the daily news.</p>
+        <div class="quote">"The contradiction now appears as a principle of the logic of manipulation — realistic caricature of dialectics."</div>
+      </article>
+      <article>
+        <span class="tag">04 · Comfort</span>
+        <h4>Soft unfreedom</h4>
+        <p>The most loyal subjects of one-dimensional society are not the coerced. They are the served. Same-day delivery, push notifications, climate-controlled commutes, infinite media — the apparatus that wraps us is so attentive that resistance feels like ingratitude. Comfortable unfreedom is still the diagnosis.</p>
+        <div class="quote">"The people recognize themselves in their commodities; they find their soul in their automobile, hi-fi set, split-level home, kitchen equipment."</div>
+      </article>
+      <article>
+        <span class="tag">05 · Eros</span>
+        <h4>Desublimation, again</h4>
+        <p>Pornography is unlimited; sexual identities are administratively recognized; intimacy is a market segment. None of this is, by Marcuse's argument, evidence of liberation. It is consistent with a society that grants localized gratification precisely because the granted satisfaction renders the unrealized desires it forecloses — for time, for solidarity, for unhurried love — unspeakable.</p>
+        <div class="quote">"Pleasure, thus adjusted, generates submission."</div>
+      </article>
+      <article>
+        <span class="tag">06 · Refusal</span>
+        <h4>The substratum still appears</h4>
+        <p>Marcuse's "outcasts and outsiders" — the persecuted of other races, the unemployable, the migrant, the colonized — have not stopped, in his words, going out into the streets without arms, without protection. They are met today, as in 1964, with dogs, stones, bombs, jail. The Great Refusal is not a memory. It is a present tense.</p>
+        <div class="quote">"Their opposition hits the system from without and is therefore not deflected by the system."</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CLOSING ============================ -->
+<section class="closing">
+  <div class="wrap">
+    <span class="tag">— the final sentence —</span>
+    <blockquote>
+      It is only for the sake of those <span class="ember">without hope</span> that hope is given to us.
+    </blockquote>
+    <p class="german">Nur um der Hoffnungslosen willen ist uns die Hoffnung gegeben.</p>
+    <cite>Walter Benjamin, quoted by Marcuse · 1964</cite>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <p>An educational reading site · for study, not for sale</p>
+    <p>Herbert Marcuse · 1898 — 1979 · Frankfurt School</p>
+    <p>Source text: <em>One-Dimensional Man</em>, Beacon Press, 1964</p>
+  </div>
+</footer>
+
+<script>
+  /* progress bar */
+  (function () {
+    const bar = document.getElementById('progress');
+    const compute = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = p + '%';
+    };
+    document.addEventListener('scroll', compute, { passive: true });
+    compute();
+  })();
+
+  /* fade in on scroll */
+  (function () {
+    const targets = document.querySelectorAll('.chapter, .pull, .diag-grid > div, .today-grid > article, .lex-item, .sec-head, .part');
+    targets.forEach(t => t.classList.add('fade-up'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    targets.forEach(t => io.observe(t));
+  })();
+
+  /* mastery / pacification toggle */
+  (function () {
+    const toggle = document.querySelector('[data-toggle]');
+    if (!toggle) return;
+    const panel = toggle.querySelector('#togglePanel');
+    const buttons = toggle.querySelectorAll('button');
+    const content = {
+      mastery: '<em>Repressive mastery</em> treats nature as raw material for production. Forests become lumber, rivers become coolant, animals become protein. Reason is conquest; the result is the conquest of man through the conquest of nature. Efficiency becomes its own justification; ends are taken for granted; the apparatus expands by its own momentum.',
+      pacification: '<em>Pacification</em> treats nature as the medium of a life worth living. Mastery still occurs — illness is reduced, scarcity is overcome — but mastery is subordinated to liberation. Cultivation replaces extraction. Gardens replace clearcuts. The same technical capability is redirected: from the multiplication of needs to the satisfaction of vital ones, and from the satisfaction of vital ones to the free play of human faculties.'
+    };
+    buttons.forEach(b => {
+      b.addEventListener('click', () => {
+        buttons.forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        panel.innerHTML = content[b.dataset.key];
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

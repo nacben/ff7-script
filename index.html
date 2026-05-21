@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Man's Guide to Women — Love Lab Insights</title>
+<style>
+:root {
+  --bg: #0d1520;
+  --bg2: #131f30;
+  --bg3: #1a2840;
+  --card: #1e2f47;
+  --border: #2a3f5f;
+  --gold: #c9a227;
+  --gold2: #e8c56a;
+  --text: #dde4f0;
+  --muted: #7a8fa8;
+  --hero: #27c97a;
+  --zero: #e05252;
+  --p1: #3b82f6;
+  --p2: #8b5cf6;
+  --p3: #ec4899;
+  --p4: #ef4444;
+  --p5: #10b981;
+  --p6: #f59e0b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.7}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold2)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;width:260px;height:100vh;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;z-index:100;padding:20px 0}
+#nav h2{color:var(--gold);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;padding:0 20px 12px;border-bottom:1px solid var(--border);margin-bottom:12px}
+#nav a{display:block;padding:6px 20px;font-size:.82rem;color:var(--muted);transition:all .2s}
+#nav a:hover,#nav a.active{color:var(--text);background:var(--bg3);border-left:3px solid var(--gold)}
+.nav-part{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);padding:14px 20px 4px;font-weight:700}
+
+/* MAIN */
+#main{margin-left:260px;min-height:100vh}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,#0d1520 0%,#1a2840 50%,#0d1520 100%);padding:100px 60px 80px;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,162,39,.12),transparent 70%)}
+#hero .lab-badge{display:inline-block;background:rgba(201,162,39,.15);border:1px solid var(--gold);color:var(--gold);padding:6px 18px;border-radius:20px;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+#hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2}
+#hero h1 span{color:var(--gold)}
+#hero .sub{font-size:1.05rem;color:var(--muted);max-width:600px;margin:0 auto 40px}
+.stats-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:40px}
+.stat{text-align:center}
+.stat-num{font-size:2.2rem;font-weight:800;color:var(--gold)}
+.stat-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* SECTIONS */
+.section{padding:70px 60px;border-bottom:1px solid var(--border)}
+.part-header{display:flex;align-items:center;gap:16px;margin-bottom:48px}
+.part-badge{padding:8px 20px;border-radius:6px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.part-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#fff}
+.part-title span{display:block;font-size:.85rem;font-weight:400;color:var(--muted);margin-top:4px}
+.chapter-header{margin:50px 0 28px}
+.chapter-header h3{font-size:1.4rem;font-weight:700;color:#fff}
+.chapter-header h3 span{color:var(--gold)}
+.chapter-header p{color:var(--muted);margin-top:8px;font-size:.92rem}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:20px}
+.card h4{color:var(--gold2);font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.card p{color:var(--text);font-size:.93rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+/* QUOTE */
+.blockquote{border-left:3px solid var(--gold);padding:20px 28px;background:rgba(201,162,39,.06);border-radius:0 8px 8px 0;margin:28px 0;font-style:italic;color:var(--text);font-size:1rem}
+.blockquote cite{display:block;margin-top:10px;font-style:normal;color:var(--muted);font-size:.82rem}
+
+/* KEY INSIGHT */
+.insight{background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.3);border-radius:12px;padding:24px 28px;margin:28px 0}
+.insight-label{font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:10px}
+.insight p{color:var(--text);font-size:.95rem}
+
+/* ATTUNE */
+.attune-grid{display:grid;grid-template-columns:60px 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0}
+.attune-letter{background:var(--gold);color:#0d1520;font-size:1.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;min-height:90px}
+.attune-content{background:var(--card);padding:20px 24px;border-bottom:1px solid var(--border)}
+.attune-grid>*:nth-child(4n+1){background:rgba(201,162,39,.9)}
+.attune-grid>*:nth-child(4n+3){background:rgba(201,162,39,.7)}
+.attune-content h4{color:#fff;font-size:1rem;margin-bottom:6px}
+.attune-content p{color:var(--muted);font-size:.88rem}
+
+/* HERO ZERO */
+.hz-table{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+.hz-card{border-radius:12px;padding:24px}
+.hz-hero{background:rgba(39,201,122,.08);border:1px solid rgba(39,201,122,.3)}
+.hz-zero{background:rgba(224,82,82,.08);border:1px solid rgba(224,82,82,.3)}
+.hz-title{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap-8px}
+.hz-hero .hz-title{color:var(--hero)}
+.hz-zero .hz-title{color:var(--zero)}
+.hz-list{list-style:none}
+.hz-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.88rem;color:var(--text);display:flex;align-items:flex-start;gap:10px}
+.hz-list li::before{content:'✓';color:var(--hero);flex-shrink:0;font-weight:700}
+.hz-zero .hz-list li::before{content:'✗';color:var(--zero)}
+
+/* RESEARCH BOX */
+.research{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:24px 0;display:flex;gap:16px}
+.research-icon{font-size:1.5rem;flex-shrink:0}
+.research h5{color:var(--gold2);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.research p{color:var(--muted);font-size:.87rem}
+
+/* STAGES */
+.stages{display:flex;gap:0;margin:28px 0;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.stage{flex:1;padding:28px 24px;border-right:1px solid var(--border)}
+.stage:last-child{border-right:none}
+.stage-num{font-size:2.5rem;font-weight:900;margin-bottom:8px}
+.stage-1 .stage-num{color:#ec4899}
+.stage-2 .stage-num{color:#3b82f6}
+.stage-3 .stage-num{color:#f59e0b}
+.stage h4{color:#fff;font-size:1rem;margin-bottom:10px}
+.stage p{color:var(--muted);font-size:.85rem}
+
+/* CHECKLIST */
+.checklist{list-style:none;margin:16px 0}
+.checklist li{padding:9px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;font-size:.9rem;color:var(--text)}
+.checklist li::before{content:'→';color:var(--gold);flex-shrink:0}
+
+/* WARNING */
+.warning{background:rgba(224,82,82,.07);border:1px solid rgba(224,82,82,.25);border-radius:10px;padding:20px 24px;margin:24px 0}
+.warning h5{color:var(--zero);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.warning ul{list-style:none}
+.warning ul li{padding:6px 0;font-size:.88rem;color:var(--text);display:flex;gap:10px}
+.warning ul li::before{content:'⚠';flex-shrink:0}
+
+/* PILL */
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:.06em;margin-right:6px}
+
+/* FORMULA */
+.formula{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:24px;text-align:center;margin:24px 0}
+.formula .eq{font-size:1.2rem;color:var(--gold2);font-weight:700;line-height:2}
+.formula .eq span{color:var(--muted);font-size:.9rem;font-weight:400}
+
+/* ANATOMY */
+.anatomy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:24px 0}
+.anatomy-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px}
+.anatomy-item h5{color:var(--gold2);font-size:.85rem;margin-bottom:8px}
+.anatomy-item p{color:var(--muted);font-size:.82rem}
+
+/* CONFLICT */
+.horsemen{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+.horseman{background:rgba(224,82,82,.07);border:1px solid rgba(224,82,82,.2);border-radius:10px;padding:18px}
+.horseman h5{color:var(--zero);font-size:.88rem;margin-bottom:8px}
+.horseman p{color:var(--muted);font-size:.83rem}
+
+/* FOOTER */
+#footer{padding:60px;text-align:center;background:var(--bg2);color:var(--muted);font-size:.85rem}
+#footer .authors{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-bottom:30px}
+.author{text-align:center}
+.author-name{color:var(--gold2);font-weight:700;font-size:.95rem}
+.author-title{font-size:.78rem;color:var(--muted)}
+
+/* MOBILE */
+#menu-btn{display:none;position:fixed;top:14px;left:14px;z-index:200;background:var(--gold);color:#0d1520;border:none;border-radius:8px;padding:8px 12px;font-size:1.2rem;cursor:pointer}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
+@media(max-width:900px){
+  #nav{transform:translateX(-100%);transition:transform .3s}
+  #nav.open{transform:translateX(0)}
+  #main{margin-left:0}
+  .section{padding:50px 24px}
+  #hero{padding:80px 24px 60px}
+  .grid-2,.grid-3,.hz-table,.stages,.horsemen{grid-template-columns:1fr}
+  .stats-row{gap:24px}
+  #menu-btn{display:block}
+  #overlay.open{display:block}
+  .attune-grid{grid-template-columns:50px 1fr}
+}
+</style>
+</head>
+<body>
+
+<button id="menu-btn" onclick="toggleNav()">☰</button>
+<div id="overlay" onclick="toggleNav()"></div>
+
+<nav id="nav">
+  <h2>Love Lab Guide</h2>
+  <a href="#intro">Introduction</a>
+  <div class="nav-part">Part 1 · Understanding</div>
+  <a href="#ch1">Ch 1 — What Women Want</a>
+  <a href="#ch2">Ch 2 — A Mind of Her Own</a>
+  <div class="nav-part">Part 2 · Dating</div>
+  <a href="#ch3">Ch 3 — Read My Hips</a>
+  <a href="#ch4">Ch 4 — First Impressions</a>
+  <div class="nav-part">Part 3 · Romancing</div>
+  <a href="#ch5">Ch 5 — Making Your Move</a>
+  <a href="#ch6">Ch 6 — Hookup or More?</a>
+  <div class="nav-part">Part 4 · Making Love</div>
+  <a href="#ch7">Ch 7 — Image Is Everything</a>
+  <a href="#ch8">Ch 8 — Her Body</a>
+  <a href="#ch9">Ch 9 — Her Best Ever</a>
+  <div class="nav-part">Part 5 · Living Together</div>
+  <a href="#ch10">Ch 10 — Fight Like a Girl</a>
+  <a href="#ch11">Ch 11 — Why So Long for Shoes?</a>
+  <a href="#ch12">Ch 12 — Best Friends Forever</a>
+  <div class="nav-part">Part 6 · Lifetime Love</div>
+  <a href="#ch13">Ch 13 — Is She the One?</a>
+  <a href="#ch14">Ch 14 — Mother Nature</a>
+  <a href="#ch15">Ch 15 — Staying Together</a>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="lab-badge">🔬 From the Love Lab — 40 Years of Research</div>
+  <h1>The Man's Guide to <span>Women</span></h1>
+  <p class="sub">Science-backed secrets from the world's leading relationship researchers — what women really want, and how to become the Hero every woman wishes she had.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">3,000+</div><div class="stat-label">Couples Studied</div></div>
+    <div class="stat"><div class="stat-num">40</div><div class="stat-label">Years of Research</div></div>
+    <div class="stat"><div class="stat-num">94%</div><div class="stat-label">Divorce Prediction Accuracy</div></div>
+    <div class="stat"><div class="stat-num">20</div><div class="stat-label">Year Followup Period</div></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="section" id="intro">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(201,162,39,.15);color:var(--gold);border:1px solid var(--gold)">Introduction</div>
+    <div class="part-title">Secrets from the Love Lab <span>Why this research changes everything</span></div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🔑 The Central Finding</div>
+    <p>Research shows that what <strong>men do in a relationship</strong> is, by a large margin, the crucial factor that separates a great relationship from a failed one. Men are the make-or-break variable — which is why most relationship books are written for the wrong patient.</p>
+  </div>
+
+  <p style="margin-bottom:20px;color:var(--muted)">In a small apartment laboratory at the University of Washington — the "Love Lab" — John Gottman and his team used video, biometric sensors, and decades of interviews to study more than 3,000 couples. They measured heart rate, blood flow, breathing, sweat, facial expressions, tone of voice, and emotional content — synchronized to a video time code — then followed couples for up to 20 years.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>What the Research Shows</h4>
+      <p>Men in happy, healthy relationships make <strong>more money</strong>, have <strong>more and better sex</strong>, <strong>live longer</strong>, suffer less chronic illness, and show less cognitive decline in later years — compared to their single counterparts.</p>
+    </div>
+    <div class="card">
+      <h4>Hero vs. Zero</h4>
+      <p>When it comes to women, men are either <strong style="color:var(--hero)">Heroes</strong> or <strong style="color:var(--zero)">Zeros</strong>. The difference isn't about looks, wealth, or pickup lines — it's about emotional intelligence, trustworthiness, and genuine connection.</p>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">👨‍🔬</div>
+    <div>
+      <h5>About John Gottman, PhD</h5>
+      <p>World-renowned for predicting divorce with <strong>94% accuracy</strong>, Gottman is professor emeritus of psychology at the University of Washington. Over 40 years, he and Julie Schwartz Gottman have followed couples through newlywed years, parenting, midlife, retirement, and into their late eighties.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 1 -->
+<section class="section" id="ch1" style="border-top:3px solid var(--p1)">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(59,130,246,.15);color:var(--p1);border:1px solid var(--p1)">Part One</div>
+    <div class="part-title" style="color:var(--p1)">Understanding a Woman</div>
+  </div>
+
+  <div class="chapter-header">
+    <h3>Chapter 1 · <span>What Do Women Really Want?</span></h3>
+    <p>Understanding the Heart of a Woman</p>
+  </div>
+
+  <div class="blockquote">
+    "The great question that has never been answered and which I have not yet been able to answer, despite my 30 years of research into the feminine soul, is 'What does a woman want?'"
+    <cite>— Sigmund Freud</cite>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">⭐ The #1 Thing Women Want</div>
+    <p>The number one thing women look for in a man is <strong>trustworthiness</strong>. Not six-pack abs, not a six-figure income. Trustworthiness means: <em>you are who you say you are, and you do what you say you are going to do.</em> You show up — as yourself.</p>
+  </div>
+
+  <div class="grid-2" style="margin:28px 0">
+    <div class="card">
+      <h4>Why Trustworthiness Matters — The Data</h4>
+      <ul class="checklist">
+        <li>Children are <strong>5× more likely to live in poverty</strong> without involved fathers</li>
+        <li>Children are <strong>3× more likely to fail in school</strong> without fathers</li>
+        <li>Children are <strong>2× more likely</strong> to have behavioral problems, use drugs, or commit suicide without fathers</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Two Major Female Complaints</h4>
+      <ul class="checklist">
+        <li><strong>"He is never there for me"</strong> — emotional unavailability</li>
+        <li><strong>"There isn't enough intimacy and connection"</strong> — feeling alone in the relationship</li>
+      </ul>
+      <p style="margin-top:14px;font-size:.85rem;color:var(--muted)">Men's complaints: too much fighting, not enough sex. The solution to both sides? <em>Attunement.</em></p>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:50px">
+    <h3>The <span>A-TT-U-N-E</span> Framework</h3>
+    <p>The single skill that solves the central problem in most relationships</p>
+  </div>
+
+  <div class="formula">
+    <div class="eq">Trustworthiness = Emotional Connection<br>
+    <span>Emotional Connection is created through →</span><br>
+    <strong>ATTUNEMENT</strong></div>
+  </div>
+
+  <div class="attune-grid">
+    <div class="attune-letter">A</div>
+    <div class="attune-content">
+      <h4>Attend — Give Undivided Attention</h4>
+      <p>Turn off the game. Put away your phone. When she wants to talk, your attention is how you express love. Even if the topic seems trivial, it's a request for connection. On dates: no scanning the room, no checking other women, no texting during dinner.</p>
+    </div>
+    <div class="attune-letter">TT</div>
+    <div class="attune-content">
+      <h4>Turn Toward — Physically Face Her</h4>
+      <p>Women equate intimacy with face-to-face, eye-to-eye conversation. Biological anthropologist Helen Fisher notes that men historically faced enemies but sat beside friends. Unless you're both hunting buffalo — turn toward her while you talk.</p>
+    </div>
+    <div class="attune-letter">U</div>
+    <div class="attune-content">
+      <h4>Understand — Ask Questions</h4>
+      <p>The goal is understanding, not fixing. Don't offer solutions, don't distract her, don't minimize, don't joke. Ask questions about what she's feeling and what it means to her. Whether she's complaining about her mother or pissed at you — let understanding be the goal.</p>
+    </div>
+    <div class="attune-letter">N</div>
+    <div class="attune-content">
+      <h4>Nondefensively Listen — Don't React</h4>
+      <p>This is critical if what she's upset about is you. No counterattacking, no excuses, no interrupting. Any feeling is fact to the person feeling it. You were given two ears and one mouth for a reason. Men who could "downregulate" their anger had the best relationships in the lab.</p>
+    </div>
+    <div class="attune-letter">E</div>
+    <div class="attune-content">
+      <h4>Empathize — Feel What She Feels</h4>
+      <p>Understanding is intellectual; empathy is emotional. Let her know it makes sense that she would feel this way. The emotional brain calms down when it feels connected and not alone. Attuning doesn't mean you agree — it means you hear her. That's what unlocks everything else.</p>
+    </div>
+  </div>
+
+  <div class="hz-table">
+    <div class="hz-card hz-hero">
+      <div class="hz-title">✓ Hero Behaviors</div>
+      <ul class="hz-list">
+        <li>Shows up when he says he will</li>
+        <li>Turns off distractions when she needs to talk</li>
+        <li>Asks questions and truly listens</li>
+        <li>Accepts her emotions without trying to fix them</li>
+        <li>Uses voice and size to comfort, never intimidate</li>
+        <li>Is consistently who he says he is</li>
+      </ul>
+    </div>
+    <div class="hz-card hz-zero">
+      <div class="hz-title">✗ Zero Behaviors</div>
+      <ul class="hz-list">
+        <li>Dismisses or minimizes her emotions</li>
+        <li>Checks email / phone while she's talking</li>
+        <li>Uses voice or size to intimidate</li>
+        <li>Doesn't show up when he said he would</li>
+        <li>Checks out other women when he's with her</li>
+        <li>Keeps secrets, lies, or cheats</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:30px">
+    <div class="insight-label">💡 The Hopscotch Principle</div>
+    <p>For boys, emotions are a leech that disrupts the game — get rid of them and play on. For girls, emotions <em>are</em> the game — they deepen the relationship. A woman has no "negative" emotions. For her, emotions are as natural as breathing and are opportunities for intimacy. Your job is to be present for them, not eliminate them.</p>
+  </div>
+</section>
+
+<!-- CH 2 -->
+<section class="section" id="ch2">
+  <div class="chapter-header">
+    <h3>Chapter 2 · <span>A Mind of Her Own</span></h3>
+    <p>The Art of Understanding a Woman's Brain</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Brain Facts — Dispelling Myths</h4>
+      <p>Male brains are ~10% bigger than female brains — as are male hands, torsos, and most male body parts. Brain size does not correlate with intelligence. Male and female brains have the same three main parts. The real differences lie in <strong>rhythm</strong> and <strong>fear processing</strong>.</p>
+    </div>
+    <div class="card">
+      <h4>The Holy Trinity of Female Hormones</h4>
+      <ul class="checklist">
+        <li><strong>Estrogen</strong> — peaks in weeks 1–2: friendlier, calmer, more social</li>
+        <li><strong>Progesterone</strong> — peaks in weeks 3–4: more irritable, wants solitude, more creative</li>
+        <li><strong>Testosterone</strong> — drives sexual desire in both sexes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:28px">
+    <div class="insight-label">📅 Understanding Her Cycle</div>
+    <p>At ovulation, women may be more emotionally sensitive and more interested in sex. Research shows they're somewhat more attracted to <em>alpha</em> men when ovulating, and kinder, more nurturing <em>beta</em> men when not. This doesn't mean she needs two men — it means the Hero is both. Adapt to her rhythm.</p>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">💃</div>
+    <div>
+      <h5>The Lap Dancer Study — Evolution & Human Behavior</h5>
+      <p>Researchers tracked ~5,300 lap dances and found that dancers made <strong>80% more in tips when ovulating</strong> versus menstruating — and women on the Pill (who don't ovulate) showed no variation at all. Men are picking up on ovulatory cues, at least unconsciously.</p>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:50px">
+    <h3>Women and <span>Fear</span> — A Critical Difference</h3>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(224,82,82,.3)">
+      <h4 style="color:var(--zero)">Her Reality — Fear Is Constant</h4>
+      <p>In a workshop of 50 couples, when asked "When did you last fear for your safety?" — every woman raised her hand for "in the last week." Every hand went up for "in the last month," "last 6 months," and "walking through the hotel parking garage tonight." Most men struggled to remember a fear incident from the last decade.</p>
+    </div>
+    <div class="card" style="border-color:rgba(39,201,122,.3)">
+      <h4 style="color:var(--hero)">What Heroes Do</h4>
+      <ul class="checklist">
+        <li>Walk beside or slightly behind her on the street (chivalry signals safety)</li>
+        <li>Don't race up on the driver who cut you off — her fear spikes when you do</li>
+        <li>Hold her hand when she's afraid — proven to shut down the brain's fear response</li>
+        <li>Never use your size or voice to intimidate</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">🧠</div>
+    <div>
+      <h5>The Startle Study — UC Berkeley (Levenson & McCarter)</h5>
+      <p>When startled by a gunshot, both genders had the same startle reflex — but different responses. <strong>Men felt angry</strong> and wanted to retaliate. <strong>Women felt afraid.</strong> High stress makes men <em>less</em> fearful; it makes women <em>more</em> fearful. Once fear-conditioned, women are twice as likely to feel fear in similar situations again.</p>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">🤝</div>
+    <div>
+      <h5>The Hand-Holding fMRI Study — University of Virginia (Coan, Schaefer, Davidson)</h5>
+      <p>When a happily married woman held her husband's hand during threat of electric shock, the fear response was <strong>completely shut down</strong> in her amygdala. Her unhappily married counterpart saw partial reduction. A stranger's hand: no effect at all. Your touch is uniquely powerful.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="section" id="ch3" style="border-top:3px solid var(--p2)">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(139,92,246,.15);color:var(--p2);border:1px solid var(--p2)">Part Two</div>
+    <div class="part-title" style="color:var(--p2)">Dating a Woman</div>
+  </div>
+
+  <div class="chapter-header">
+    <h3>Chapter 3 · <span>Read My Hips</span></h3>
+    <p>Understanding Women and Attraction</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🎯 The Counterintuitive Truth</div>
+    <p>You may think you're in the driver's seat when you approach a woman — but research shows it's the <strong>woman who controls whether a man approaches</strong>. She gives nonverbal go/no-go signals before you even consciously decide to make a move. When Dr. Monica Moore scored a woman's nonverbal behaviors, they predicted a man's approach with <strong>over 90% accuracy</strong>.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>What Attracts Women — The Research</h4>
+      <ul class="checklist">
+        <li><strong>Confidence</strong> (not arrogance — confidence comes from security; arrogance from insecurity)</li>
+        <li><strong>High social status</strong> (contextual — be the CEO of your own domain)</li>
+        <li><strong>Intelligence and humor</strong> (humor signals intelligence)</li>
+        <li><strong>Symmetrical faces</strong> (~53.5% of men have them)</li>
+        <li><strong>Low stress levels</strong> — low cortisol men are significantly more attractive</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Space Maximizing — The Body Language That Works</h4>
+      <p style="margin-bottom:12px">Research by Renninger, Wade & Grammer (Evolution & Human Behavior) found that men who successfully made contact were:</p>
+      <ul class="checklist">
+        <li>Stretching out, taking up space</li>
+        <li>Making glancing eye contact with a smile</li>
+        <li>Using male-to-male touching (slapping buddy's back)</li>
+        <li>NOT crossing arms or folding in on themselves</li>
+        <li>NOT fidgeting or making nervous gestures</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px">
+    <h3>Signs She's <span>Interested</span></h3>
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><h4>Eye Contact</h4><p>She repeatedly glances at you and looks away. The clearest signal. To confirm: move to the other side of the room and see if she finds your eyes again.</p></div>
+    <div class="card"><h4>Body Orientation</h4><p>She leans toward you. She points her feet, legs, or shoulders in your direction while talking. Her torso faces you.</p></div>
+    <div class="card"><h4>Touch Signals</h4><p>She plays with or tosses her hair. Fidgets with jewelry. Strokes the stem of her glass. Exposes her neck. Licks or bites her lip.</p></div>
+  </div>
+
+  <div class="warning">
+    <h5>Signs She's NOT Interested — Stop Here</h5>
+    <ul>
+      <li>She won't make eye contact (unless visibly shy)</li>
+      <li>She looks over your head or scans the room</li>
+      <li>She yawns repeatedly when you talk</li>
+      <li>She leans or turns her body away from you</li>
+      <li>She continues talking to her friend while you're standing there</li>
+      <li>She tells you directly she's not interested — <em>no always means no</em></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CH 4 -->
+<section class="section" id="ch4">
+  <div class="chapter-header">
+    <h3>Chapter 4 · <span>First Impressions</span></h3>
+    <p>Do's and Don'ts of Dating</p>
+  </div>
+
+  <div class="blockquote">
+    The goal of dating is to find someone genuinely interested in you for who you really are — not who you're pretending to be. You don't have to be ready to find your one true lid. But the premise is: be you, not a performance.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>The First Conversation — What Works</h4>
+      <ul class="checklist">
+        <li>Ask <strong>open-ended questions</strong> — answers that require more than yes/no</li>
+        <li>Follow up with deeper questions ("What made you go into law? What do you love about it?")</li>
+        <li>Look into her eyes while she's speaking</li>
+        <li>Let her tell her own story — don't rush or finish her sentences</li>
+        <li>Show passion and emotional energy about what you talk about</li>
+        <li>Mirror her body language naturally</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Voice — The Deep Voice Research</h4>
+      <p style="margin-bottom:12px">Prof. David Feinberg (McMaster University) found men with lower-pitched voices are considered more attractive and have more children. Duke University research found CEOs with deeper voices run larger companies.</p>
+      <p style="color:var(--muted);font-size:.85rem"><strong>Find your fundamental frequency:</strong> Pinch the bridge of your nose with thumb and index finger. Hum, varying pitch. Your fundamental frequency causes the bones of your nose to vibrate most. Speak from that range — don't force it low or let anxiety raise it.</p>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">👀</div>
+    <div>
+      <h5>The Mutual Gaze Study — Clark University</h5>
+      <p>Strangers who gazed into each other's eyes for just <strong>2 minutes</strong> experienced rapid and dramatically increased feelings of intimacy and affection. Look into her eyes — not a serial-killer stare, but a real, engaged gaze. There's a fine line. Blink.</p>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">☝️</div>
+    <div>
+      <h5>The Touch Study (Guéguen)</h5>
+      <p>Research shows <strong>greater compliance to any request</strong> when there is 1–2 seconds of light tactile contact on the forearm. Touch her forearm briefly when asking for her number, a dance, or a date. Brief. Playful. Confident — not a grip.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(201,162,39,.3)">
+      <h4>The Adventurous First Date</h4>
+      <p>The physiological response to <strong>fear closely resembles arousal</strong> — same right amygdala, same hormonal brew (dopamine, norepinephrine, phenylethylamine). Roller coasters, hiking, anything with a mild fear component can accelerate feelings of attraction. Plan something adventurous, not just dinner.</p>
+    </div>
+    <div class="card">
+      <h4>Gentleman Protocol</h4>
+      <ul class="checklist">
+        <li>Open doors, pull out her chair</li>
+        <li>Walk on the traffic side of the sidewalk</li>
+        <li>Walk in stride with her, not in front</li>
+        <li>Ask about her interests, passions, bucket list</li>
+        <li>Don't ask how the date is going — tune in and you'll know</li>
+        <li>Don't talk about ex-girlfriends</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3 -->
+<section class="section" id="ch5" style="border-top:3px solid var(--p3)">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(236,72,153,.15);color:var(--p3);border:1px solid var(--p3)">Part Three</div>
+    <div class="part-title" style="color:var(--p3)">Romancing a Woman</div>
+  </div>
+
+  <div class="chapter-header">
+    <h3>Chapter 5 · <span>Making Your Move</span></h3>
+    <p>The Science of Seduction</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Pheromones — What They Actually Do</h4>
+      <p style="margin-bottom:12px">Pheromones are chemical signals released from skin and sweat glands — and a woman's sense of smell (estrogen-enhanced) is significantly more acute than a man's. They create attraction and a sense of well-being, not "uncontrollable lust." Some people will just smell right to you; others won't. It's biology, not personal.</p>
+      <p style="color:var(--muted);font-size:.85rem">Karolinska Institute research: the chemical in men's sweat activated the hypothalamus (reproductive behavior center) in both straight women and gay men. Science confirms: smell is a real reproductive filter.</p>
+    </div>
+    <div class="card">
+      <h4>What You Can Control</h4>
+      <ul class="checklist">
+        <li>Showering and deodorant — a woman smells everything</li>
+        <li>Clean clothing</li>
+        <li>Oral hygiene — especially before a kiss</li>
+      </ul>
+      <p style="margin-top:14px;color:var(--muted);font-size:.85rem">What you can't control: your pheromones. Some women will be drawn to yours and some won't. Not personal. It's genetics-driven chemistry looking for the best reproductive match.</p>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px">
+    <h3>The <span>First Kiss</span> — It Matters More Than You Know</h3>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">💋</div>
+    <div>
+      <h5>Butler University Kiss Study (Bohannon)</h5>
+      <p>In a survey of 500 people comparing significant life memories, <strong>the first kiss beat everything</strong> — including losing virginity. People recalled <strong>90% of the details</strong> no matter how long ago it happened. And 66% of women have ended a relationship because of a bad first kiss (Gallup, Albany).</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:24px">
+    <div>
+      <div class="card"><h4>🫦 Read the Signals First</h4><p>She's focused on your eyes and lips. She licks or bites her bottom lip. She's smiling. She hasn't leaned back. If you move slightly closer and she stays or moves closer — it's time.</p></div>
+      <div class="card" style="margin-top:16px"><h4>⏳ Build Anticipation</h4><p>Touch her face. Stroke her hair. Let your lips hover near hers so she feels your breath. You want her to want to kiss you more than she wants to breathe. Dopamine — the "something wonderful is about to happen" chemical — is released in anticipation, making the actual kiss more pleasurable.</p></div>
+    </div>
+    <div>
+      <div class="card"><h4>✋ Use Your Hands</h4><p>Stroke her face or hair. Cup the back of her neck. Put your arms around her. Hands limply at your sides is not an option. Making her feel safe in your arms makes her want to be there more often.</p></div>
+      <div class="card" style="margin-top:16px"><h4>🚫 What Not to Do</h4><p>Don't dive at her face like a slice of pizza. Don't ram your tongue in immediately — it's a kiss, not an assault. Don't drool. Don't ask "May I kiss you?" — polite, but not exactly chemistry-igniting. Read her signals instead.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CH 6 -->
+<section class="section" id="ch6">
+  <div class="chapter-header">
+    <h3>Chapter 6 · <span>Is She More Than a Hookup?</span></h3>
+    <p>Reading a Woman's True Profile</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">⚗️ The Oxytocin Warning</div>
+    <p><strong>Oxytocin</strong> — the bonding hormone released during orgasm and affection — impairs judgment and shuts down the fear response. University of Zurich research: people who received oxytocin continued to trust others even after being betrayed. Don't make long-term decisions while in this state.</p>
+  </div>
+
+  <div class="insight" style="margin-top:20px;background:rgba(139,92,246,.08);border-color:rgba(139,92,246,.3)">
+    <div class="insight-label" style="color:var(--p2)">🧪 Limerence — The Hormonal Love Drug</div>
+    <p>The first stage of attraction is called <strong>limerence</strong> — a cascade of oxytocin, dopamine, PEA, testosterone, estrogen, serotonin, and DHEA that makes you obsessively think about someone, skip sleep and food, and feel high on life. It also makes you ignore red flags. People don't change their core character. If she's a bunny-boiler in limerence, she was one before you met.</p>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>Her <span>True Profile</span> — Heart, Mind, Body</h3></div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h4>❤️ Heart</h4>
+      <p>Is she kind, or does she complain about everyone? Does she blame others? Is she loyal — does she keep secrets? Does she take responsibility? Is she conscientious? Does she see everyone as either fully good or fully bad? People don't change their basic character.</p>
+    </div>
+    <div class="card">
+      <h4>🧠 Mind</h4>
+      <p>Do her words and actions match? Does she follow through? Is she trusting, or does she snoop through your phone and interrogate you? Does she text repeatedly without waiting? (Assuming you're not giving her reason for suspicion — these are red flags.)</p>
+    </div>
+    <div class="card">
+      <h4>🔥 Body</h4>
+      <p>Is there real sexual chemistry? Limerence is highly selective. If there's no attraction at the beginning of a relationship, it won't magically appear 200 intellectual debates later. Biology is powerful and does not respond to manipulation.</p>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>The <span>Four Warning Types</span> — Proceed With Caution</h3></div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(224,82,82,.3)">
+      <h4 style="color:var(--zero)">⚠️ The Damsel in Distress</h4>
+      <p>Presents as a victim. Endless stories about people who've let her down. Divides the world into Good and Bad. You'll be the Good Guy — until you're not. Derives identity from trauma. If everyone in her life has failed her, you could be next on that list.</p>
+    </div>
+    <div class="card" style="border-color:rgba(224,82,82,.3)">
+      <h4 style="color:var(--zero)">⚠️ The Princess</h4>
+      <p>Treats service workers badly. Swirls in entitlement. Expects expensive demonstrations of love. Unrealistic expectations. Lacks empathy and courtesy. You'll be her prince at first — until you join the ranks of her lowly subjects.</p>
+    </div>
+    <div class="card" style="border-color:rgba(224,82,82,.3)">
+      <h4 style="color:var(--zero)">⚠️ The Competer</h4>
+      <p>Always leads with her conquests. One-ups you constantly. Uses jealousy as a weapon. Perfectionistic and controlling. Restricted around joy and pleasure. She is no fun to be around.</p>
+    </div>
+    <div class="card" style="border-color:rgba(224,82,82,.3)">
+      <h4 style="color:var(--zero)">⚠️ The Drama Queen</h4>
+      <p>Chaos follows her. Every day is a new crisis. She needs you to fix them all. May have substance use issues. More than two or three drinks every evening? Ask yourself: are you willing to accept her exactly as she is, if nothing ever changes?</p>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:28px">
+    <div class="insight-label">✅ The Green Light</div>
+    <p>A woman is more than a hookup when you feel a connection in <strong>body, mind, and heart</strong>. When you feel a sense of ease, like you've come home. When you feel energized and happy and want her to meet your friends. When she makes you feel like your best self. That's how you know.</p>
+  </div>
+</section>
+
+<!-- PART 4 -->
+<section class="section" id="ch7" style="border-top:3px solid var(--p4)">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(239,68,68,.15);color:var(--p4);border:1px solid var(--p4)">Part Four</div>
+    <div class="part-title" style="color:var(--p4)">Making Love to a Woman</div>
+  </div>
+
+  <div class="chapter-header">
+    <h3>Chapter 7 · <span>Image Is Everything</span></h3>
+    <p>Understanding How Women View Their Bodies</p>
+  </div>
+
+  <div class="blockquote">
+    "No one ever told me I was pretty when I was a little girl. All little girls should be told they're pretty, even if they aren't."
+    <cite>— Marilyn Monroe</cite>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>The Advertising Reality</h4>
+      <ul class="checklist">
+        <li>Women view <strong>400–600 ads per day</strong></li>
+        <li>1 in 11 ads has a direct message about ideal feminine beauty</li>
+        <li>By age 60, a woman has seen ~<strong>6 million messages</strong> defining what she should look like</li>
+        <li>Most of these images are photoshopped — even models don't look like their ads</li>
+        <li>The "thin ideal" only emerged in the <strong>1920s</strong> — Renaissance painters celebrated full-bodied women as the height of sensuality</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>What This Means for You</h4>
+      <p style="margin-bottom:12px">A woman doesn't feel separate from her body. Her body image is her self-image. If she feels ugly, she's not going to be comfortable sharing her body with you — no matter how skilled you are.</p>
+      <p style="color:var(--muted);font-size:.85rem">The most important thing to understand: <strong>a woman's desire is dependent on her feeling desirable.</strong> Lovemaking begins with your words, your smiles, and your gaze — long before you get into bed.</p>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🪞 The Only Correct Answer</div>
+    <p>When she asks "Do I look fat in this?" — the only response is: <strong>"You are beautiful no matter what you wear."</strong> There is no other answer. Ever. One disparaging comment about her body requires hundreds of compliments to repair. A Hero never criticizes a woman's body.</p>
+  </div>
+
+  <div class="hz-table">
+    <div class="hz-card hz-hero">
+      <div class="hz-title">✓ How Heroes Make Her Feel Beautiful</div>
+      <ul class="hz-list">
+        <li>Comment spontaneously on how she looks in that color</li>
+        <li>Tell her she's beautiful first thing in the morning</li>
+        <li>Show her you adore every part of her with eyes, hands, and lips</li>
+        <li>Only have eyes for her when you're with her</li>
+        <li>Let her know how amazing she looks nursing, cooking, laughing</li>
+      </ul>
+    </div>
+    <div class="hz-card hz-zero">
+      <div class="hz-title">✗ Zero Behaviors</div>
+      <ul class="hz-list">
+        <li>Criticizes her body — even as a "joke"</li>
+        <li>Comments on other women's bodies in her presence</li>
+        <li>Suggests she go on a diet or exercise more</li>
+        <li>Compares her to past girlfriends</li>
+        <li>Treats her as a sexual object rather than a person</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CH 8 -->
+<section class="section" id="ch8">
+  <div class="chapter-header">
+    <h3>Chapter 8 · <span>Her Body Is a Wonderland</span></h3>
+    <p>An Anatomy Lesson — What You Need to Know</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🧠 The Most Important Erogenous Zone</div>
+    <p>A woman's <strong>most powerful erogenous zone is her mind</strong>. She needs to feel physically and emotionally safe, and connected to you, before her nerve endings become truly responsive. You can have encyclopedic knowledge of her anatomy — but if you haven't connected to her mind and heart, those nerve endings won't ignite. Nothing. Nada. Zip.</p>
+  </div>
+
+  <div class="anatomy-grid">
+    <div class="anatomy-item">
+      <h5>Mons Veneris</h5>
+      <p>Latin for "Mount of Venus." The padded area above the pubic bone. Entry point to understanding her anatomy.</p>
+    </div>
+    <div class="anatomy-item">
+      <h5>Labia (Majora & Minora)</h5>
+      <p>Two sets of lips. When she's aroused, the labia swell to several times their normal size — a beautiful sign she's lubricated and ready.</p>
+    </div>
+    <div class="anatomy-item">
+      <h5>Clitoris ← Find This</h5>
+      <p>As many nerve endings as the entire head of a penis — packed into a pea-sized space. The surest route to orgasm. A Hero can find it. A Hero isn't afraid to ask directions. A Zero wouldn't know one if it hit him in the face.</p>
+    </div>
+    <div class="anatomy-item">
+      <h5>Vagina</h5>
+      <p>Amazing elastic structure — walls rest against each other at rest (2.5–3 inches), then expand dramatically when aroused. The inner two-thirds balloon out; the outer third tightens.</p>
+    </div>
+    <div class="anatomy-item">
+      <h5>G-Spot</h5>
+      <p>1–2 knuckles in, under the pubic bone. Ridged tissue that swells to quarter-size when aroused. Named after Dr. Ernst Gräfenberg (1950) — though the "discovery" resembles Columbus "discovering" already-inhabited land.</p>
+    </div>
+    <div class="anatomy-item">
+      <h5>A-Spot & U-Spot</h5>
+      <p>The A-spot (anterior fornix): 4–5 inches in, between bladder and cervix. The U-spot: just above the urethra. Explore what's pleasurable for her specifically — every body is different.</p>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:20px">
+    <div class="insight-label">💆 The 99% Rule</div>
+    <p>There is not a single part of her body that is not an erogenous zone if touched in the right way. Her lips, neck, ears, shoulders, breasts, the small of her back, the palm of her hand, her inner thighs — all capable of extreme pleasure. Making love to a woman means making love to her whole body. A Hero's pleasure comes from her pleasure. This is the big secret.</p>
+  </div>
+</section>
+
+<!-- CH 9 -->
+<section class="section" id="ch9">
+  <div class="chapter-header">
+    <h3>Chapter 9 · <span>Becoming Her Best Ever</span></h3>
+    <p>A Primer on Passionate Sex</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🦔 The Porcupine Principle</div>
+    <p>The male porcupine sits before his partner and strokes her face gently, repeatedly — until her quills come down and she's ready. He doesn't rush. He doesn't assume. He checks. He goes back and strokes more if needed. <em>Stroke until she's ready, or somebody may end up hurt.</em> Be the porcupine.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Porn Is Not Sex — A Critical Distinction</h4>
+      <p style="margin-bottom:12px">Porn is built around male fantasy and masturbatory rhythm. It has nothing to do with what real women want. In porn, women are instantly wet and worshipping. In real sex, women need to be courted, tantalized, and genuinely aroused.</p>
+      <ul class="checklist">
+        <li>In porn, intercourse = pounding. In real sex, rhythm varies with her arousal</li>
+        <li>In porn, women orgasm from intercourse alone. In reality, only ~25% of women can</li>
+        <li>In porn, no one looks into each other's eyes. That's mutual masturbation. It's not great sex</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Building Desire Before the Bedroom</h4>
+      <p style="margin-bottom:12px">Sex is a story you begin writing long before you touch. Dopamine — the "something wonderful is about to happen" chemical — builds through anticipation. Text. Suggest. Flirt. Create possibility and inevitability. The more aroused she is, the higher her dopamine, and the more she'll crave you.</p>
+      <p style="color:var(--muted);font-size:.85rem">Research: the "discordant effect" — for women, physical engorgement only becomes actual sexual desire 10% of the time. For men, 50%. Connection between mind, heart, and genitals is what converts arousal into genuine desire.</p>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>The <span>Lovemaking Guide</span></h3></div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Her Voluptuous Soul — Eyes First</h4>
+      <p>The key to personal, pleasurable sex is eye contact. Gazing passionately into her eyes initiates social bonding and real intimacy. A real smile (Duchenne smile — from the corners of the eyes, not just the mouth) signals genuine warmth and safe intentions. You can't fake it — she'll know.</p>
+    </div>
+    <div class="card">
+      <h4>Touch — Your 10 Little Tongues</h4>
+      <p>Sensual touch is often light and suggestive — awakening the skin. Approach nipples with care: circle around them, don't flick like a light switch. Start with electric fingertip touch. As she becomes more aroused, she'll guide you toward more pressure. Follow her lead.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h4>Oral Sex — A Non-Negotiable</h4>
+    <p>A man's single greatest tool in pleasuring his partner. If you don't like it — as the book says — "get over it." Most women need clitoral stimulation to orgasm. Consistent rhythmic pressure (lips and tongue, no teeth) on and around the clitoris is what builds peak arousal. Don't neglect the rest of her body while you're at it. Idle hands are not good hands.</p>
+  </div>
+
+  <div class="grid-2" style="margin-top:16px">
+    <div class="card">
+      <h4>Signs of Her Arousal — Read Them</h4>
+      <ul class="checklist">
+        <li>Breathing becomes rapid and shallow</li>
+        <li>She presses her body toward your hand or mouth</li>
+        <li>Her body quivers or arches</li>
+        <li>She raises her legs or wraps them around you</li>
+        <li>Her thighs press together (intensity building)</li>
+        <li>She moves from side to side → wants the same from you</li>
+        <li>She relaxes fully → pleasure is filling her body</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>The Orgasm Reality</h4>
+      <p style="margin-bottom:12px">80% of men judge sexual satisfaction by whether they gave their partner orgasm(s). But only 25% of women orgasm from intercourse alone. The rest need clitoral stimulation — with fingers (hers or yours) or a toy.</p>
+      <p style="color:var(--muted);font-size:.85rem">Her anatomy — specifically the distance between her clitoris and vagina — may determine this. Don't take it personally. And don't obsess over "giving" her an orgasm. Focus on connecting and giving her pleasure. That's the real win.</p>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:28px">
+    <div class="insight-label">🤗 The Final Act — Hold Her</div>
+    <p>Lovemaking doesn't end with orgasm. The afterglow period is a source of enormous pleasure for women. They want to be held, stroked, and cuddled. Put your arm around her. Hold her before sex, during sex, after sex. Hold her when she's upset. Hold her when she's happy. Hold her when she feels unworthy of being held. This alone can make you her best ever.</p>
+  </div>
+</section>
+
+<!-- PART 5 -->
+<section class="section" id="ch10" style="border-top:3px solid var(--p5)">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(16,185,129,.15);color:var(--p5);border:1px solid var(--p5)">Part Five</div>
+    <div class="part-title" style="color:var(--p5)">Living With a Woman</div>
+  </div>
+
+  <div class="chapter-header">
+    <h3>Chapter 10 · <span>Learn to Fight Like a Girl</span></h3>
+    <p>Understanding Women and Conflict</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🔑 Headline Truth About Fighting</div>
+    <p>A woman will not have sex with you if she is mad, upset, or feeling like you don't hear or care about her feelings. You can't bully, reason, or logic her out of her emotions. When conflict happens, a woman wants one thing: a good listener. Her goal is to be <em>better understood by you</em> — not to have the problem solved. Problem-solving is secondary.</p>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>The Four <span>Horsemen</span> — Relationship Apocalypse Predictors</h3></div>
+
+  <p style="color:var(--muted);margin-bottom:20px;font-size:.9rem">If you escalate conflict with any of these four responses, there is an <strong>81% chance</strong> you are heading toward the end of your relationship.</p>
+
+  <div class="horsemen">
+    <div class="horseman"><h5>🗡️ Criticism</h5><p>Attacking her character rather than her behavior. "You always..." "You never..." Turns a complaint into an assault on who she is.</p></div>
+    <div class="horseman"><h5>🛡️ Defensiveness</h5><p>Making excuses, counterattacking, playing innocent. "I am listening!" when you're clearly not. Escalates instead of de-escalating.</p></div>
+    <div class="horseman"><h5>👑 Contempt</h5><p>Mockery, eye-rolling, name-calling, sarcasm. The most destructive of the four. "You're always so negative." "You're never logical." This is where relationships die.</p></div>
+    <div class="horseman"><h5>🧱 Stonewalling</h5><p>Shutting down, withdrawing, going silent. Feels like abandonment to her. The man thinks he's managing himself — she experiences it as him leaving her alone in pain.</p></div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>Diffuse Physiological Arousal — <span>The Real Enemy</span></h3></div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>What Flooding Feels Like</h4>
+      <p style="margin-bottom:12px">When you perceive criticism as an attack, your heart rate spikes above 100 bpm (80 if you're fit), adrenaline floods your bloodstream, and you enter DPA — Diffuse Physiological Arousal. In this state:</p>
+      <ul class="checklist">
+        <li>You lose your sense of humor</li>
+        <li>Hearing and peripheral vision are compromised</li>
+        <li>You repeat yourself obsessively</li>
+        <li>Creative problem solving becomes impossible</li>
+        <li>Empathy goes offline</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>The Three Hero Strategies</h4>
+      <ol style="list-style:decimal;padding-left:20px;color:var(--text)">
+        <li style="padding:8px 0;border-bottom:1px solid var(--border)"><strong>Breathe</strong> — stimulates the vagus nerve, reduces heart rate, lowers blood pressure</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--border)"><strong>Count to 10</strong> — another form of self-soothing and downregulation</li>
+        <li style="padding:8px 0"><strong>Take a break</strong> — "I'm having trouble listening right now. I'll come back in 30 minutes." The break must be at least 20 minutes. Spend it distracted (read a magazine) — NOT thinking about the conflict.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:28px">
+    <div class="insight-label">❓ The Three Hero Questions</div>
+    <p>When a woman brings up an issue, 40% of the time men have no idea what she's actually talking about. Heroes don't get defensive — they realize her pain may come out as criticism and ask:</p>
+    <div class="formula">
+      <div class="eq">
+        1. "What do you need?"<br>
+        2. "What are you concerned about?"<br>
+        3. "What are you feeling?"
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH 11 -->
+<section class="section" id="ch11">
+  <div class="chapter-header">
+    <h3>Chapter 11 · <span>Why Does It Take So Long to Buy a Pair of Shoes?</span></h3>
+    <p>Understanding the Evolutionary Importance of Shopping</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>The Evolutionary Explanation</h4>
+      <p style="margin-bottom:12px">Since 8000 BC, women were the gatherers — the ones who took their baskets and foraged for food, firewood, medicine, and materials for clothing. They never knew what they'd find. The tribe's survival depended on their keen memory, attention to detail, and creativity.</p>
+      <p style="color:var(--muted);font-size:.85rem">When a woman shops today, she's still bringing back gifts for the tribe — food, clothing, medicine, things to adorn herself and her home. It's hardwired at the evolutionary level.</p>
+    </div>
+    <div class="card">
+      <h4>Hunter vs. Gatherer — The Shopping Difference</h4>
+      <ul class="checklist">
+        <li><strong>Men shop like hunters</strong> — identify target, acquire, leave. Average: 26 minutes before wanting to leave</li>
+        <li><strong>Women shop like gatherers</strong> — explore, compare, socialize, take their time</li>
+        <li>Women make <strong>85% of household buying decisions</strong></li>
+        <li>Women have <strong>3× better object memory</strong> than men (research: ~20 items vs. ~7)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">🧠</div>
+    <div>
+      <h5>Memory Research (Loftus, Maccoby & Jacklin)</h5>
+      <p>Elizabeth Loftus, PhD — one of the world's leading memory researchers — reviewed decades of studies and concluded: <strong>women's memories are superior to men's, especially for anything with social context.</strong> This isn't stereotype — it's evolutionary adaptation. Their survival once depended on remembering which berry was poison.</p>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">💡 The Practical Upshot</div>
+    <p>Research by Bentler & Newcomb found that a woman's <strong>clothes-consciousness is one of the best long-term predictors of marital success</strong>. Her appearance matters deeply to her identity and survival instincts. Don't criticize her shopping. Don't judge her purchases. If you hate shopping — <em>don't go</em>. Let her gather.</p>
+  </div>
+</section>
+
+<!-- CH 12 -->
+<section class="section" id="ch12">
+  <div class="chapter-header">
+    <h3>Chapter 12 · <span>Best Friends Forever</span></h3>
+    <p>Understanding Women and Friendship</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">⚠️ What She Gets from Her Friends That She Can't Get from You</div>
+    <p>Even if you attune night and day, women still need the company of other women. This is biological, not a reflection on you. The social support of female friends is a distinct physiological need — one that you genuinely cannot fulfill, no matter how great a partner you are. This is good news for you: her friends support her, which supports your relationship.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(16,185,129,.3)">
+      <h4 style="color:var(--p5)">Female Friendship — The Health Data</h4>
+      <p style="margin-bottom:12px">Journal of Clinical Oncology study of ~3,000 nurses with breast cancer:</p>
+      <ul class="checklist">
+        <li>Women with few friends: <strong>2× more likely to die from breast cancer</strong></li>
+        <li>Socially isolated women: <strong>66% increased risk of premature death</strong> from any cause</li>
+        <li>Women with 10+ close friends: <strong>4× more likely to survive cancer</strong></li>
+        <li>Having a spouse showed no independent benefit — friendship did</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>The Alameda County Study (Berkman & Syme)</h4>
+      <p style="margin-bottom:12px">9-year study of 9,000 people revealed what determines longevity:</p>
+      <ul class="checklist">
+        <li>For <strong>men</strong>: whether they were married</li>
+        <li>For <strong>women</strong>: the quality of their female friendships</li>
+        <li>Subsequent research: quality of marriage also matters for both</li>
+      </ul>
+      <p style="color:var(--muted);font-size:.85rem;margin-top:12px">You live longer if you're with her. She lives longer if she has close female friends. <strong>Encourage her friendships — you're investing in your own lifespan.</strong></p>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">🧬</div>
+    <div>
+      <h5>Tend and Befriend — Taylor et al., UCLA</h5>
+      <p>Under stress, women don't go fight-or-flight. They <strong>"tend and befriend"</strong> — caretaking and seeking social support. This releases oxytocin, which reduces their stress response. Don't fight this. When she turns to her friends during a hard time, that's her biology working correctly.</p>
+    </div>
+  </div>
+
+  <div class="warning">
+    <h5>Red Flags — These Are Zero Behaviors</h5>
+    <ul>
+      <li>Resenting or feeling jealous of her female friendships</li>
+      <li>Trying to limit or control her contact with friends</li>
+      <li>Judging or criticizing her friends</li>
+      <li>Research on domestic violence: isolating a woman from her friends is a hallmark of abusive behavior</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PART 6 -->
+<section class="section" id="ch13" style="border-top:3px solid var(--p6)">
+  <div class="part-header">
+    <div class="part-badge" style="background:rgba(245,158,11,.15);color:var(--p6);border:1px solid var(--p6)">Part Six</div>
+    <div class="part-title" style="color:var(--p6)">Loving a Woman for a Lifetime</div>
+  </div>
+
+  <div class="chapter-header">
+    <h3>Chapter 13 · <span>Is She the One?</span></h3>
+    <p>Understanding Women and Commitment</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🔥 The Truth About Men and Commitment</div>
+    <p>Contrary to stereotypes: men want commitment just as much as women do. Research suggests most men are eventually as interested in finding "the one" as women are — it sometimes takes longer, but the desire is there. The difference is evolutionary strategy, not desire.</p>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>The <span>Three Stages</span> of Love</h3></div>
+
+  <div class="stages">
+    <div class="stage stage-1" style="background:rgba(236,72,153,.05)">
+      <div class="stage-num">1</div>
+      <h4>Limerence</h4>
+      <p style="color:var(--muted);font-size:.85rem">The hormonal cascade: oxytocin, dopamine, PEA, testosterone, estrogen, serotonin, DHEA. Can't sleep. Can't eat. Obsessive thoughts. Euphoric. Fear response suppressed. Red flags invisible. <strong>Not the time to make long-term decisions.</strong></p>
+    </div>
+    <div class="stage stage-2" style="background:rgba(59,130,246,.05)">
+      <div class="stage-num">2</div>
+      <h4>Building Trust</h4>
+      <p style="color:var(--muted);font-size:.85rem">The haze clears. You start to see what you ignored before. The evolutionary driver: reproductive care. Every argument in this stage asks one question: <em>"Will you be there for me if I need you?"</em> Trust is built or destroyed here.</p>
+    </div>
+    <div class="stage stage-3" style="background:rgba(245,158,11,.05)">
+      <div class="stage-num">3</div>
+      <h4>Loyalty & Commitment</h4>
+      <p style="color:var(--muted);font-size:.85rem">You've chosen her. Oxytocin still flows during affection and orgasm, keeping you bonded — but the tornado of other chemicals quiets. You're committed to her well-being as much as your own. Together you've created something bigger than either of you alone.</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:28px">
+    <div class="card">
+      <h4>She's the One When...</h4>
+      <ul class="checklist">
+        <li>She makes you feel like your <strong>best self</strong></li>
+        <li>You feel more alive, joyful, and adventurous with her</li>
+        <li>You feel like you're <strong>home</strong></li>
+        <li>You feel comfortable, relaxed — warm bed built just for you</li>
+        <li>She smells right, feels right, tastes right, moves right</li>
+        <li>You want her to meet everyone you love</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>She's NOT the One When...</h4>
+      <ul class="checklist" style="color:var(--zero)">
+        <li>She makes you feel insecure or not good enough</li>
+        <li>The bed feels icy cold and scratchy</li>
+        <li>You feel like your worst self when with her</li>
+        <li>There are feelings of anger, helplessness, substance use</li>
+        <li>Negativity only increases over time</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="research">
+    <div class="research-icon">💍</div>
+    <div>
+      <h5>Marriage vs. Cohabitation — The Health Data</h5>
+      <p>Committed marriage adds an average of <strong>8 years to a man's life</strong>. Pepper Schwartz & Philip Blumstein's study of 12,000+ couples found that the longer people cohabited, the <em>less</em> they resembled married couples in terms of commitment. Cohabiters were more likely to leave if someone better came along. "It's just a piece of paper" — the research says otherwise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CH 14 -->
+<section class="section" id="ch14">
+  <div class="chapter-header">
+    <h3>Chapter 14 · <span>Mother Nature</span></h3>
+    <p>Understanding Women and Children</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🌟 The Non-Negotiable</div>
+    <p>If you want to truly understand a woman, you have to understand and support her role as a mother. She has a <strong>biological drive to bond with her child and ensure that child's survival</strong>. This isn't about her loving you less. It's about a force of nature. You can understand it — or get the hell out of its way.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>The Motherhood Constellation (Daniel Stern, MD)</h4>
+      <p>When women are pregnant, they form a matrix around themselves of people who will support and validate their maternal identity. Their sense of self reorients toward their child's connection and well-being. This maternal preoccupation can last years and can be reactivated any time her child is in danger. You are part of this constellation — a critical part.</p>
+    </div>
+    <div class="card">
+      <h4>Why Fathers Matter — The Research</h4>
+      <ul class="checklist">
+        <li>Dad's involvement at age 5 is the <strong>best predictor of the child's empathy at 30</strong> (Sears follow-up study)</li>
+        <li>Fathers' play skills predict <strong>higher infant IQ scores</strong> (Nugent/Brazelton)</li>
+        <li>Children of involved dads have higher verbal ability test scores</li>
+        <li>Two-thirds of 2½-year-olds <strong>choose dad over mom as play partner</strong></li>
+        <li>Shared child care makes <em>both</em> partners happier in the relationship (Barnett & Rivers)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h4>How Dads and Moms Play Differently — Both Are Critical</h4>
+    <p style="margin-bottom:12px">Mothers stroke; fathers poke. Mothers teach patiently and persistently. Fathers make fits-and-starts play, dropping games when they're not fun and starting something new. This roller-coaster approach teaches babies to <strong>self-regulate</strong> — a critical developmental milestone.</p>
+    <p style="color:var(--muted);font-size:.85rem">Fathers offer more freedom to explore; mothers promote more caution. Children need both. Being "another kid" in play isn't childish — it's one of the most important things a father can do for his child's intellectual and social development.</p>
+  </div>
+</section>
+
+<!-- CH 15 -->
+<section class="section" id="ch15">
+  <div class="chapter-header">
+    <h3>Chapter 15 · <span>Staying Together</span></h3>
+    <p>Loving a Woman for a Lifetime</p>
+  </div>
+
+  <div class="blockquote">
+    In 1914, Einstein — the man who could explain the universe — handed his wife a list of demands she had to meet to stay married to him. A few months later, she left, took both children, filed for divorce, and kept every cent of his Nobel Prize money. Don't be Einstein.
+  </div>
+
+  <div class="insight">
+    <div class="insight-label">🔢 The Central Equation</div>
+    <div class="formula">
+      <div class="eq">
+        Hero &gt; Zero<br>
+        <span>because</span><br>
+        Hero = turns <strong>toward</strong> his partner<br>
+        Zero = turns <strong>away</strong> from his partner
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter-header" style="margin-top:40px"><h3>Six Ways to <span>Affair-Proof</span> Your Relationship</h3></div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(245,158,11,.3)">
+      <h4>1. The 6-Second Kiss</h4>
+      <p>Every time you leave each other — or reunite — kiss for 6 seconds minimum. Not 1. Not 2. Six. Oxytocin starts flowing within that window. Trust builds. Fear lessens. This is not negotiable.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,158,11,.3)">
+      <h4>2. Keep Dating Her</h4>
+      <p>At least once a week. Plan it. Get excited for it. Court her with the same energy as your first date. She shares your mailbox now — that doesn't mean dating ends.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,158,11,.3)">
+      <h4>3. Keep Getting to Know Her</h4>
+      <p>What would she do if she won the lottery? What does she dream about? What is she afraid of? What's her biggest struggle right now? There are still things to learn. Never stop being curious about her interior world.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,158,11,.3)">
+      <h4>4. Appreciate Her Daily</h4>
+      <p>Find some way every day to show gratitude that she is in your life. Compliment her. Thank her. Even emptying the dishwasher communicates care. These positive interactions are money in the bank — they make her more forgiving when you inevitably do something stupid.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,158,11,.3)">
+      <h4>5. Honor Her Dreams</h4>
+      <p>Research shows longevity and success of a relationship depends on each person supporting the other's goals. Women often put their dreams aside for family. Don't let that happen. Know her dreams. Move mountains to help her achieve them. You want to be with a woman who is fully alive.</p>
+    </div>
+    <div class="card" style="border-color:rgba(245,158,11,.3)">
+      <h4>6. Invest in Non-Conflict Time</h4>
+      <p>The way you respond to your partner when there's no conflict — the quality of the friendship — determines how much benefit of the doubt you'll get when conflict does arise. That relationship equity is your insurance policy. Invest constantly.</p>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:30px">
+    <div class="insight-label">✨ The Final Word</div>
+    <p>Women will challenge you. They will confuse you. They will sometimes break you — and they will heal you. The greatest mystery, when it comes to women, is not why they do what they do, but why men feel so much when they are with them. Women are a man's connection to the world and to life itself.</p>
+    <p style="margin-top:12px;color:var(--muted)">You may struggle to understand women. But understanding them, and loving them, is one of the greatest adventures life has to offer. <em>Be the Hero.</em></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div style="color:var(--gold2);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px">About the Authors</div>
+  <div class="authors">
+    <div class="author">
+      <div class="author-name">John Gottman, PhD</div>
+      <div class="author-title">World's leading marriage researcher · 40 years · 3,000+ couples studied · University of Washington</div>
+    </div>
+    <div class="author">
+      <div class="author-name">Julie Schwartz Gottman, PhD</div>
+      <div class="author-title">Co-founder, The Gottman Institute · Clinical psychologist · WA State Psychologist of the Year 2002</div>
+    </div>
+    <div class="author">
+      <div class="author-name">Douglas Abrams</div>
+      <div class="author-title">Author of The Multi-Orgasmic Man · Founder, Idea Architects · Former HarperCollins editor</div>
+    </div>
+    <div class="author">
+      <div class="author-name">Rachel Carlton Abrams, MD</div>
+      <div class="author-title">Board certified Family Medicine & Integrative Medicine · Author of The Multi-Orgasmic Woman</div>
+    </div>
+  </div>
+  <p>Based on <em>The Man's Guide to Women</em> by Gottman, Schwartz Gottman, Abrams & Carlton Abrams. All research citations available in the original text.</p>
+</footer>
+
+</main>
+
+<script>
+function toggleNav() {
+  document.getElementById('nav').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+
+// Active nav highlight
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('#nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`#nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3, rootMargin: '-100px 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

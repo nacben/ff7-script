@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No More Mr. Nice Guy — Breaking Free from the Nice Guy Syndrome</title>
+  <style>
+    :root {
+      --bg:       #0f172a;
+      --bg2:      #1e293b;
+      --bg3:      #263548;
+      --blue:     #3b82f6;
+      --amber:    #f59e0b;
+      --green:    #10b981;
+      --red:      #ef4444;
+      --purple:   #8b5cf6;
+      --t1:       #f1f5f9;
+      --t2:       #94a3b8;
+      --t3:       #64748b;
+      --border:   #334155;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg); color: var(--t1);
+      line-height: 1.7; font-size: 16px;
+    }
+
+    /* ── Progress bar ── */
+    #pb {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--amber));
+      z-index: 9999; transition: width .1s linear;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 3px; width: 100%;
+      background: rgba(15,23,42,.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 58px; padding: 0 1.5rem;
+    }
+    .nav-logo { font-weight: 800; font-size: .95rem; color: var(--blue); text-decoration: none; letter-spacing: -.01em; }
+    .nav-links { display: flex; gap: 1.25rem; list-style: none; }
+    .nav-links a { color: var(--t2); text-decoration: none; font-size: .82rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--t1); }
+    @media(max-width:768px){ .nav-links { display: none; } }
+
+    /* ── Layout ── */
+    main { padding-top: 61px; }
+    section { padding: 5rem 1.5rem; }
+    section:nth-child(even) { background: var(--bg2); }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── Typography helpers ── */
+    .badge {
+      display: inline-block; font-size: .7rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: .6rem;
+    }
+    h2.sh {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; margin-bottom: 1rem;
+    }
+    .lead { color: var(--t2); font-size: 1.05rem; max-width: 720px; margin-bottom: 2.5rem; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(140deg, #0f172a 0%, #0c2340 55%, #0f172a 100%);
+      padding: 7rem 1.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(59,130,246,.12) 0%, transparent 65%);
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-pill {
+      display: inline-block; background: rgba(59,130,246,.12);
+      border: 1px solid rgba(59,130,246,.3); color: var(--blue);
+      padding: .35rem 1rem; border-radius: 100px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900;
+      line-height: 1.05; margin-bottom: 1.5rem;
+      background: linear-gradient(145deg, #f1f5f9 30%, #64748b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--blue), var(--amber));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { font-size: 1.2rem; color: var(--t2); max-width: 680px; margin: 0 auto 2.5rem; }
+    .cta-row { display: flex; gap: .875rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: .75rem 1.75rem; border-radius: 8px; font-weight: 700;
+      text-decoration: none; font-size: .95rem; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-p { background: var(--blue); color: #fff; }
+    .btn-p:hover { background: #2563eb; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(59,130,246,.35); }
+    .btn-o { background: transparent; color: var(--t1); border: 1px solid var(--border); }
+    .btn-o:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ── Stats strip ── */
+    .stats { background: var(--bg2); padding: 2.5rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .stats-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 1.5rem; text-align: center; }
+    .stat-n { display: block; font-size: 2.4rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .stat-l { color: var(--t2); font-size: .85rem; margin-top: .3rem; }
+
+    /* ── Paradigm box ── */
+    .paradigm {
+      border-radius: 14px; padding: 2.25rem; text-align: center; margin: 2rem 0;
+      background: linear-gradient(135deg,rgba(59,130,246,.08),rgba(245,158,11,.04));
+      border: 1px solid rgba(59,130,246,.28);
+    }
+    .p-if { color: var(--t2); margin-bottom: .5rem; }
+    .p-st { font-size: 1.2rem; font-weight: 700; margin: .5rem 0; }
+    .p-then { color: var(--amber); font-size: 1rem; margin-top: .5rem; }
+
+    /* ── Cards grid ── */
+    .grid3 { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 1.25rem; margin-top: 2rem; }
+    .card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; transition: border-color .22s, transform .22s;
+    }
+    .card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .card-icon { font-size: 1.5rem; margin-bottom: .75rem; display: block; }
+    .card-title { font-weight: 700; margin-bottom: .4rem; }
+    .card-desc { color: var(--t2); font-size: .875rem; }
+
+    /* ── Case studies ── */
+    .cases { display: grid; grid-template-columns: repeat(auto-fill,minmax(290px,1fr)); gap: 1.25rem; margin-top: 2rem; }
+    .case { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .case-top {
+      padding: 1.1rem 1.35rem;
+      background: linear-gradient(135deg,rgba(59,130,246,.09),rgba(16,185,129,.04));
+      border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .9rem;
+    }
+    .av {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem; color: #fff; flex-shrink: 0;
+    }
+    .case-name { font-weight: 700; font-size: .95rem; }
+    .case-role { color: var(--t3); font-size: .78rem; }
+    .case-body { padding: 1.1rem 1.35rem; color: var(--t2); font-size: .875rem; }
+
+    /* ── Accordion ── */
+    .accordion { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 1.5rem; }
+    .acc-item { border-bottom: 1px solid var(--border); }
+    .acc-item:last-child { border-bottom: none; }
+    .acc-btn {
+      width: 100%; padding: 1.1rem 1.4rem;
+      background: var(--bg2); border: none; color: var(--t1);
+      font-size: .95rem; font-weight: 600; text-align: left;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      transition: background .18s;
+    }
+    .acc-btn:hover { background: var(--bg3); }
+    .acc-btn.open { background: rgba(59,130,246,.1); color: var(--blue); }
+    .acc-icon { font-size: 1.2rem; color: var(--t3); transition: transform .28s; line-height: 1; }
+    .acc-btn.open .acc-icon { transform: rotate(45deg); }
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height .32s ease; background: var(--bg); }
+    .acc-inner { padding: 1.1rem 1.4rem; color: var(--t2); font-size: .9rem; line-height: 1.75; }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 2.25rem; margin-top: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px;
+      background: linear-gradient(180deg,var(--blue),var(--amber),var(--green));
+    }
+    .tl-item { position: relative; margin-bottom: 2.25rem; }
+    .tl-dot {
+      position: absolute; left: -2.6rem; top: .3rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--blue); border: 3px solid var(--bg);
+    }
+    .tl-title { font-weight: 700; margin-bottom: .4rem; }
+    .tl-desc { color: var(--t2); font-size: .9rem; }
+
+    /* ── Social factors ── */
+    .factors { display: grid; grid-template-columns: repeat(auto-fill,minmax(210px,1fr)); gap: 1rem; margin-top: 2rem; }
+    .factor { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; }
+    .factor-icon { font-size: 2rem; margin-bottom: .65rem; display: block; }
+    .factor-title { font-weight: 700; font-size: .875rem; margin-bottom: .4rem; }
+    .factor-desc { color: var(--t2); font-size: .8rem; line-height: 1.55; }
+
+    /* ── Integrated grid ── */
+    .int-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 1rem; margin-top: 2rem; }
+    .int-item {
+      border: 1px solid rgba(16,185,129,.2);
+      background: linear-gradient(135deg,rgba(16,185,129,.07),rgba(16,185,129,.02));
+      border-radius: 10px; padding: 1.2rem;
+    }
+    .int-item::before { content: '✓'; color: var(--green); font-weight: 800; display: block; margin-bottom: .4rem; }
+    .int-item strong { display: block; margin-bottom: .3rem; font-size: .95rem; }
+    .int-item span { color: var(--t2); font-size: .83rem; }
+
+    /* ── Tabs ── */
+    .tab-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.75rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .tab-btn {
+      padding: .45rem .95rem; border: 1px solid var(--border); border-radius: 7px;
+      background: transparent; color: var(--t2); cursor: pointer; font-size: .82rem; font-weight: 600; transition: all .18s;
+    }
+    .tab-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .tab-btn:hover:not(.active) { border-color: var(--blue); color: var(--blue); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .tab-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
+    .tab-box h3 { font-size: 1.3rem; font-weight: 800; color: var(--blue); margin-bottom: .9rem; }
+    .tab-box p { color: var(--t2); margin-bottom: 1rem; font-size: .95rem; }
+    .tab-box em { font-style: italic; color: var(--t3); }
+    .strat-list { list-style: none; margin-top: .75rem; }
+    .strat-list li {
+      padding: .7rem 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: .7rem; color: var(--t2); font-size: .9rem;
+    }
+    .strat-list li:last-child { border-bottom: none; }
+    .strat-list li::before { content: '→'; color: var(--amber); font-weight: 800; flex-shrink: 0; }
+    .strat-list strong { color: var(--t1); }
+    .sub-h { font-weight: 700; margin: 1.5rem 0 .65rem; font-size: .95rem; color: var(--amber); }
+    .sub-hg { font-weight: 700; margin: 1.5rem 0 .65rem; font-size: .95rem; color: var(--green); }
+
+    /* ── Alert ── */
+    .alert {
+      border-radius: 10px; padding: 1.1rem 1.35rem; margin: 1.25rem 0;
+      background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.22);
+      color: var(--t2); font-size: .9rem;
+    }
+    .alert strong { color: var(--amber); }
+
+    /* ── Activities ── */
+    .acts { display: flex; flex-direction: column; gap: .9rem; margin-top: 2rem; }
+    .act { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .act-head {
+      padding: 1rem 1.35rem; display: flex; align-items: center; gap: .9rem;
+      cursor: pointer; transition: background .18s;
+    }
+    .act-head:hover { background: var(--bg3); }
+    .act-num {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(245,158,11,.12); color: var(--amber);
+      font-weight: 800; font-size: .8rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .act-title { font-weight: 700; flex: 1; font-size: .95rem; }
+    .act-ch { font-size: .72rem; color: var(--t3); background: var(--bg); padding: .2rem .65rem; border-radius: 100px; }
+    .act-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+    .act-inner { padding: 0 1.35rem 1.35rem; border-top: 1px solid var(--border); padding-top: 1.1rem; color: var(--t2); font-size: .9rem; line-height: 1.75; }
+
+    /* ── Quotes ── */
+    .quotes { display: grid; grid-template-columns: repeat(auto-fill,minmax(290px,1fr)); gap: 1.25rem; margin-top: 2rem; }
+    .quote { background: var(--bg2); border: 1px solid var(--border); border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0; padding: 1.35rem; }
+    .quote p { font-style: italic; color: var(--t2); font-size: .92rem; line-height: 1.75; margin-bottom: .65rem; }
+    .quote cite { font-size: .78rem; font-weight: 700; color: var(--blue); font-style: normal; }
+
+    /* ── Rules ── */
+    .rules-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(245px,1fr)); gap: .7rem; margin-top: 2rem; }
+    .rule {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: .9rem 1.1rem; display: flex; align-items: flex-start; gap: .7rem;
+      transition: border-color .2s;
+    }
+    .rule:hover { border-color: var(--amber); }
+    .rule-n { font-size: .7rem; font-weight: 800; color: var(--amber); flex-shrink: 0; margin-top: .15rem; min-width: 24px; }
+    .rule-t { color: var(--t2); font-size: .875rem; }
+
+    /* ── Epilogue ── */
+    .epil { text-align: center; max-width: 680px; margin: 0 auto; }
+    .epil p { color: var(--t2); font-size: 1.05rem; margin-bottom: 1.25rem; }
+    .epil strong { color: var(--t1); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem; text-align: center;
+    }
+    .foot-title { font-size: 1.1rem; font-weight: 800; margin-bottom: .4rem; }
+    .foot-author { color: var(--t2); margin-bottom: 1.25rem; font-size: .9rem; }
+    .foot-dedication { color: var(--t3); font-style: italic; font-size: .875rem; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+    /* ── Highlight chips ── */
+    .chip-bad {
+      display: inline-block; font-size: .67rem; background: rgba(239,68,68,.1);
+      color: #f87171; padding: .15rem .5rem; border-radius: 4px; font-weight: 700; margin-left: .35rem;
+    }
+
+    /* ── Scroll fade ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    .fade { animation: fadeUp .5s ease forwards; }
+  </style>
+</head>
+<body>
+
+<div id="pb"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">No More Mr. Nice Guy</a>
+    <ul class="nav-links">
+      <li><a href="#syndrome">Syndrome</a></li>
+      <li><a href="#traits">Traits</a></li>
+      <li><a href="#origins">Origins</a></li>
+      <li><a href="#integrated">Recovery</a></li>
+      <li><a href="#chapters">Chapters</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#rules">30 Rules</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════ HERO ══════════════ -->
+<div class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-pill">Dr. Robert A. Glover, Ph.D.</div>
+    <h1>No More<br><em>Mr. Nice Guy</em></h1>
+    <p class="hero-sub">A proven plan for getting what you want in love, sex, and life — by breaking free from the Nice Guy Syndrome.</p>
+    <div class="cta-row">
+      <a href="#syndrome" class="btn btn-p">Understand the Syndrome</a>
+      <a href="#activities" class="btn btn-o">Breaking Free Activities</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ STATS ══════════════ -->
+<div class="stats">
+  <div class="stats-grid">
+    <div><span class="stat-n">9</span><div class="stat-l">Chapters of insights</div></div>
+    <div><span class="stat-n">1,800+</span><div class="stat-l">Hours working with Nice Guys</div></div>
+    <div><span class="stat-n">46</span><div class="stat-l">Breaking Free activities</div></div>
+    <div><span class="stat-n">30</span><div class="stat-l">Rules that actually work</div></div>
+    <div><span class="stat-n">3</span><div class="stat-l">Generations affected</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ SYNDROME ══════════════ -->
+<section id="syndrome">
+  <div class="container">
+    <div class="badge">Chapter 1</div>
+    <h2 class="sh">The Nice Guy Syndrome</h2>
+    <p class="lead">Five decades of social change created a breed of men conditioned to seek approval from others. Dr. Glover calls them <strong>Nice Guys</strong> — and their core belief system is the root of their frustration.</p>
+
+    <div class="paradigm">
+      <div class="p-if">IF I can hide my flaws and become what I think others want me to be…</div>
+      <div class="p-st">THEN I will be loved, get my needs met, and have a problem-free life.</div>
+      <div class="p-then">↑ This is the Nice Guy Paradigm. It doesn't work.</div>
+    </div>
+
+    <p style="color:var(--t2);margin-bottom:1.5rem">Nice Guys are concerned with looking good and doing everything "right." They avoid conflict, put others first, and are especially focused on pleasing women. But when this strategy fails — as it consistently does — Nice Guys are often anything but nice. Underneath the pleasantness lives resentment, passivity, and rage.</p>
+
+    <div class="alert">
+      <strong>⚠ The Myth:</strong> Nice Guys believe that if they are "good," they will be loved, get their needs met, and live a problem-free life. This belief — formed in childhood — is both compelling and consistently, devastatingly wrong.
+    </div>
+
+    <h3 style="font-weight:800;font-size:1.1rem;margin:2.5rem 0 1rem">Some of the "Nicest" Guys You'll Ever Meet</h3>
+    <div class="cases">
+      <div class="case">
+        <div class="case-top">
+          <div class="av" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)">J</div>
+          <div><div class="case-name">Jason</div><div class="case-role">Chiropractor, mid-thirties</div></div>
+        </div>
+        <div class="case-body">Gets baby ready, cooks, cleans, never loses his temper — yet his wife always finds fault. Their sex life has dried up. "After all I do for Heather, you'd think she'd give me the one thing I really want." He can't see that his covert giving is driving her away.</div>
+      </div>
+      <div class="case">
+        <div class="case-top">
+          <div class="av" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">O</div>
+          <div><div class="case-name">Omar</div><div class="case-role">Compulsive giver</div></div>
+        </div>
+        <div class="case-body">Carries a pager so anyone can reach him anytime. His #1 goal is pleasing his girlfriend — yet every girlfriend has said he's emotionally unavailable. He genuinely can't understand how someone who gives so much can feel so absent.</div>
+      </div>
+      <div class="case">
+        <div class="case-top">
+          <div class="av" style="background:linear-gradient(135deg,#10b981,#3b82f6)">T</div>
+          <div><div class="case-name">Todd</div><div class="case-role">The great listener</div></div>
+        </div>
+        <div class="case-body">Women call him a great listener and say he'll make a wonderful "catch" someday. He has many female friends — and almost no dates. He can't understand why women keep choosing "jerks" over thoughtful, honest guys like him.</div>
+      </div>
+      <div class="case">
+        <div class="case-top">
+          <div class="av" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">B</div>
+          <div><div class="case-name">Bill</div><div class="case-role">The indispensable helper</div></div>
+        </div>
+        <div class="case-body">Can't say no. Fixes cars for women at church. Coaches little league. Helps everyone move. Visits his widowed mother every evening. He loves to give — but he never seems to get as much as he gives, and the resentment quietly builds.</div>
+      </div>
+      <div class="case">
+        <div class="case-top">
+          <div class="av" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">G</div>
+          <div><div class="case-name">Gary</div><div class="case-role">The eggshell walker</div></div>
+        </div>
+        <div class="case-body">His wife has frequent rage attacks, shaming him publicly. Gary never raises subjects that might upset her. After every fight, he's the first to apologize. His wife has never apologized for anything. He loves her and would do anything to please her.</div>
+      </div>
+      <div class="case">
+        <div class="case-top">
+          <div class="av" style="background:linear-gradient(135deg,#f43f5e,#fb923c)">J</div>
+          <div><div class="case-name">Jose</div><div class="case-role">The reluctant caretaker</div></div>
+        </div>
+        <div class="case-body">Has spent five years in a relationship he wanted to leave since Day 1. Can't break up because he fears his girlfriend couldn't survive without him. Spends every waking moment plotting how to exit without hurting her or looking like a jerk.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TRAITS ══════════════ -->
+<section id="traits">
+  <div class="container">
+    <div class="badge">Identifying Patterns</div>
+    <h2 class="sh">Characteristics of Nice Guys</h2>
+    <p class="lead">Every Nice Guy is unique, but they share a cluster of traits formed by the same childhood script. While others may have one or two, Nice Guys tend to possess a significant number.</p>
+
+    <h3 style="font-weight:700;font-size:1rem;color:var(--green);margin-bottom:.9rem">The "Nice" Traits</h3>
+    <div class="grid3">
+      <div class="card"><span class="card-icon">🎁</span><div class="card-title">Givers</div><div class="card-desc">Believe their generosity signals their goodness and will earn love and appreciation. They give constantly — and keep score silently.</div></div>
+      <div class="card"><span class="card-icon">🔧</span><div class="card-title">Fixers &amp; Caretakers</div><div class="card-desc">Automatically try to solve other people's problems — usually without being asked. This feels like love, but it's actually anxiety management.</div></div>
+      <div class="card"><span class="card-icon">👍</span><div class="card-title">Approval Seekers</div><div class="card-desc">Everything a Nice Guy does is at some level calculated to gain approval or avoid disapproval — even from people he doesn't like.</div></div>
+      <div class="card"><span class="card-icon">🕊️</span><div class="card-title">Conflict Avoiders</div><div class="card-desc">Go to great lengths to prevent rocking the boat. Problems are never resolved; they're smoothed over until the pressure explodes.</div></div>
+      <div class="card"><span class="card-icon">🙈</span><div class="card-title">Mistake Hiders</div><div class="card-desc">Convinced that any exposed flaw will cause others to leave or stop loving them. Their motto: "If at first you don't succeed, hide the evidence."</div></div>
+      <div class="card"><span class="card-icon">📏</span><div class="card-title">"Right Way" Seekers</div><div class="card-desc">Believe there's a secret formula for a smooth, problem-free life. Convinced that if they could just figure it out, nothing would ever go wrong.</div></div>
+      <div class="card"><span class="card-icon">🧊</span><div class="card-title">Feeling Repressors</div><div class="card-desc">Tend to analyze rather than feel. See intense emotion as dangerous. Work hard to keep their emotional state even — even when they're enraged.</div></div>
+      <div class="card"><span class="card-icon">👨‍👦</span><div class="card-title">180° from Dad</div><div class="card-desc">Many made a childhood decision to be completely different from their absent, angry, or addictive fathers — which often just creates a different distortion.</div></div>
+      <div class="card"><span class="card-icon">♀️</span><div class="card-title">Female-Oriented</div><div class="card-desc">More comfortable with women than with men. Seek women's approval above all else. Few, if any, close male friendships.</div></div>
+      <div class="card"><span class="card-icon">🚫</span><div class="card-title">Self-Deprioritizers</div><div class="card-desc">Feel it's selfish to put their own needs first. See self-sacrifice as virtue — then resent everyone for the sacrifice they chose.</div></div>
+      <div class="card"><span class="card-icon">❤️</span><div class="card-title">Partner-Centered</div><div class="card-desc">Only happy when their partner is happy. Their partner's mood dictates their own. This creates enmeshment, not intimacy.</div></div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:1rem;color:#f87171;margin:3rem 0 .75rem">The Not-So-Nice Traits <span class="chip-bad">Hidden</span></h3>
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">😐 Fundamentally Dishonest <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Despite priding themselves on honesty, Nice Guys are fundamentally dishonest. They tell lies, half-truths, and omit information whenever they fear disapproval. They avoid conflict not out of kindness but to protect themselves. They say what people want to hear and call it being considerate.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">🔒 Secretive <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Nice Guys will hide anything they believe might upset anyone. The nicer the guy, the darker the secrets. This is especially true sexually — "the nicer the guy, the darker the sexual secrets." Their inner life is compartmentalized from their public persona.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">🎭 Manipulative <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Because Nice Guys can't ask for what they want directly, they manipulate to get it. They give gifts to receive sex. They listen to get appreciation. They help others to create a sense of obligation. The manipulation is usually unconscious — which makes it no less real or damaging.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">🎮 Controlling <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">A major priority for Nice Guys is keeping their world smooth. This creates a compulsive need to control people and situations — managing outcomes so nothing disrupts the facade of peace they've built. They micromanage relationships while insisting they're easygoing.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">📈 Give to Get <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Nice Guys are generous givers — but their giving has unconscious strings attached. They give wanting appreciation, reciprocation, sex, or to neutralize someone's anger. When the implicit contract isn't honored, frustration and resentment accumulate silently.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">😤 Passive-Aggressive <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Nice Guys express frustration indirectly: being unavailable, forgetting, being chronically late, not following through, sexual dysfunction (can't get or maintain an erection), or repeating the same annoying behaviors even after promising to stop. This is how years of repressed resentment leaks out.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">🌋 Full of Rage <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">A lifetime of frustration and resentment creates a pressure cooker. Though Nice Guys frequently deny ever getting angry, this rage erupts at unexpected and seemingly disproportionate moments — devastating their loved ones and baffling everyone, including themselves.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">🔄 Addictive <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Since Nice Guys keep so much bottled up, it has to come out somewhere. The most common outlet is compulsive sexual behavior — pornography, affairs, peep shows, compulsive masturbation. Addictive behavior relieves stress, alters mood, and medicates repressed emotional pain.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">🚧 Boundary-Less <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Many Nice Guys cannot say "no," "stop," or "that's not acceptable." They feel like helpless victims of others' behavior — unable to see that their refusal to set limits is the actual problem. They teach people around them that anything goes.</div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" onclick="acc(this)">👻 Isolated <span class="acc-icon">+</span></button>
+        <div class="acc-body"><div class="acc-inner">Though desperately wanting connection, Nice Guys' behaviors push people away. Dr. Glover calls them "Teflon Men" — so smooth and slippery that nothing sticks, including genuine human connection. Their walls protect them from being found out — and from ever being truly known.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ORIGINS ══════════════ -->
+<section id="origins">
+  <div class="container">
+    <div class="badge">Chapter 2</div>
+    <h2 class="sh">The Making of a Nice Guy</h2>
+    <p class="lead">Nice Guys are made, not born. There is only one answer to why a person would try to hide who they are: <em>Because it did not feel safe or acceptable to be just who they were.</em></p>
+
+    <h3 style="font-weight:700;font-size:1rem;color:var(--blue);margin-bottom:.85rem">The Child Development Sequence</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">1. Complete Helplessness + Fear of Abandonment</div>
+        <div class="tl-desc">Infants are entirely dependent on others for survival. Their deepest fear is abandonment — because to a child, abandonment literally means death. This fear never fully leaves; it goes underground.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--amber)"></div>
+        <div class="tl-title">2. Ego-Centeredness</div>
+        <div class="tl-desc">Children naturally believe they are the center of the universe and the cause of everything that happens to them. This is normal — and it makes abandonment experiences feel like evidence of the child's own badness.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--purple)"></div>
+        <div class="tl-title">3. Abandonment Experiences</div>
+        <div class="tl-desc">Every child experiences abandonment — unmet needs, angry parents, neglect, unrealistic expectations, emotional unavailability, being used for parents' needs. No family is perfect; no child escapes these wounds.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-title">4. Toxic Shame Is Born</div>
+        <div class="tl-desc">The naïve, ego-centered interpretation of abandonment creates <strong>toxic shame</strong> — the deep core belief that "there is something fundamentally wrong with me." Not guilt for actions, but shame about existence itself.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-title">5. Survival Mechanisms Form</div>
+        <div class="tl-desc">Children develop creative strategies to: (1) cope with abandonment pain, (2) prevent it from happening again, and (3) hide their perceived "badness." For Nice Guys, this becomes: hide flaws, become what others want, earn love through compliance.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">6. The Childhood Script Governs Adult Life</div>
+        <div class="tl-desc">What worked (sort of) as a helpless child becomes a destructive script for adulthood. The Nice Guy applies his childhood survival mechanisms to adult relationships — and wonders why they don't work. Even when they consistently fail, he just tries harder.</div>
+      </div>
+    </div>
+
+    <h3 style="font-weight:700;font-size:1rem;color:var(--amber);margin:3rem 0 .85rem">Social &amp; Historical Forces</h3>
+    <p style="color:var(--t2);margin-bottom:1.5rem;font-size:.92rem">A unique combination of post-WWII social dynamics produced Nice Guys in historically unprecedented numbers. Three forces reshaped an entire generation of boys:</p>
+    <div class="factors">
+      <div class="factor">
+        <span class="factor-icon">👨‍🏭</span>
+        <div class="factor-title">Disconnected from Fathers</div>
+        <div class="factor-desc">Industrialization pulled fathers away. By 1970, 96% of families lived in urban areas. Sons lost daily contact with their dads — and with it, any model of healthy masculinity.</div>
+      </div>
+      <div class="factor">
+        <span class="factor-icon">👩‍🏫</span>
+        <div class="factor-title">Raised by Women</div>
+        <div class="factor-desc">Mothers and a female-dominated school system (85% female primary teachers) inherited the job of turning boys into men. Men adopted a female definition of masculinity and craved women's approval.</div>
+      </div>
+      <div class="factor">
+        <span class="factor-icon">⚡</span>
+        <div class="factor-title">Radical Feminism</div>
+        <div class="factor-desc">"Men are pigs." "A woman needs a man like a fish needs a bicycle." These messages convinced many men they had to eliminate or hide their maleness to be loved.</div>
+      </div>
+      <div class="factor">
+        <span class="factor-icon">✌️</span>
+        <div class="factor-title">Anti-War Movement</div>
+        <div class="factor-desc">The Vietnam era crystallized alienation between fathers and sons. A generation of young men became defined by love, peace, and conflict avoidance — the antithesis of their "establishment" fathers.</div>
+      </div>
+      <div class="factor">
+        <span class="factor-icon">📺</span>
+        <div class="factor-title">Cultural Messaging</div>
+        <div class="factor-desc">TV, media, and social norms consistently valorized the "sensitive new age guy" while portraying masculine energy as dangerous or toxic — conditioning men to suppress their vitality.</div>
+      </div>
+      <div class="factor">
+        <span class="factor-icon">🔄</span>
+        <div class="factor-title">Self-Perpetuating Cycle</div>
+        <div class="factor-desc">Nice Guy fathers raise the next generation of Nice Guys. Single mothers produce sons without male role models. Dr. Glover estimates we're now in our third generation of this syndrome.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ INTEGRATED MALE ══════════════ -->
+<section id="integrated">
+  <div class="container">
+    <div class="badge">The Alternative</div>
+    <h2 class="sh">The Integrated Male</h2>
+    <p class="lead">Recovery is not about becoming an S.O.B. — the opposite of crazy is still crazy. Recovery means becoming <em>integrated</em>: embracing all aspects of oneself, including imperfections, power, and the darker masculine energies.</p>
+
+    <div class="paradigm" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(16,185,129,.02));border-color:rgba(16,185,129,.28)">
+      <div style="font-size:1.4rem;font-weight:800;color:var(--green);margin-bottom:.75rem">Being Integrated</div>
+      <div style="color:var(--t2);font-size:1.02rem;max-width:600px;margin:0 auto">Accepting all aspects of oneself — power, assertiveness, courage, passion — as well as imperfections, mistakes, and the dark side. An integrated man is <em>perfectly imperfect</em> and needs no one's approval to feel complete.</div>
+    </div>
+
+    <div class="int-grid">
+      <div class="int-item"><strong>Strong sense of self</strong><span>Likes himself just as he is. Needs no external validation to feel complete.</span></div>
+      <div class="int-item"><strong>Takes responsibility for needs</strong><span>Asks for what he wants clearly and directly. Doesn't use covert contracts.</span></div>
+      <div class="int-item"><strong>Comfortable with masculinity</strong><span>Embraces sexuality, strength, and masculine energy without shame or apology.</span></div>
+      <div class="int-item"><strong>Lives with integrity</strong><span>Does what is right, not what is expedient. Decides what feels right and does it.</span></div>
+      <div class="int-item"><strong>Provides leadership</strong><span>Willing to stand up for and protect those he cares about — without being controlling.</span></div>
+      <div class="int-item"><strong>Clear and expressive</strong><span>States feelings directly. Doesn't hint, manipulate, pout, or go silent.</span></div>
+      <div class="int-item"><strong>Nurtures without fixing</strong><span>Can give care without needing to solve the problem or rescue the person.</span></div>
+      <div class="int-item"><strong>Sets firm boundaries</strong><span>Comfortable saying no, stop, or that's not acceptable — and following through.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CHAPTERS ══════════════ -->
+<section id="chapters">
+  <div class="container">
+    <div class="badge">Recovery Strategy</div>
+    <h2 class="sh">The Path to Breaking Free</h2>
+    <p class="lead">Chapters 3–9 form a proven, concrete plan. Each targets a specific domain where the Nice Guy Syndrome inflicts the most damage.</p>
+
+    <div class="tabs">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="tab('ch3',this)">Ch 3: Self-Approval</button>
+        <button class="tab-btn" onclick="tab('ch4',this)">Ch 4: Your Needs</button>
+        <button class="tab-btn" onclick="tab('ch5',this)">Ch 5: Personal Power</button>
+        <button class="tab-btn" onclick="tab('ch6',this)">Ch 6: Masculinity</button>
+        <button class="tab-btn" onclick="tab('ch7',this)">Ch 7: Love</button>
+        <button class="tab-btn" onclick="tab('ch8',this)">Ch 8: Sex</button>
+        <button class="tab-btn" onclick="tab('ch9',this)">Ch 9: Life &amp; Career</button>
+      </div>
+
+      <!-- Ch 3 -->
+      <div id="ch3" class="tab-panel active">
+        <div class="tab-box">
+          <h3>Learn to Please the Only Person Who Really Matters</h3>
+          <p>Just about everything a Nice Guy does is consciously or unconsciously calculated to gain someone's approval or avoid disapproval — even from strangers he'll never see again. By trying to please everyone, Nice Guys end up pleasing no one.</p>
+          <p><em>"I'm a chameleon. I will become whatever I believe a person wants me to be in order to be liked... Underneath it all, I'm not sure who I really am or if any of them would like me just for who I am. The funny thing is, I feel alone most of the time anyway." — Todd</em></p>
+          <div class="sub-h">Key Concepts</div>
+          <ul class="strat-list">
+            <li><strong>Attachments</strong> — Nice Guys attach identity to external things (appearance, niceness, being a good father, having a clean car) to feel valuable. These are all substitutes for the self-acceptance they never developed.</li>
+            <li><strong>Cover-Up Artists</strong> — Lying, drawing on "credit" from past good deeds, fixing rather than apologizing, the DEER Response (Defend, Explain, Excuse, Rationalize), and turning the tables with shame-dumping.</li>
+            <li><strong>Teflon Men</strong> — Their smoothness is actually a force field. Real connection requires rough edges. People connect with humanity, not with a curated performance of perfection.</li>
+          </ul>
+          <div class="sub-hg">Building Genuine Self-Approval</div>
+          <ul class="strat-list">
+            <li>Identify and consciously observe approval-seeking behaviors — then experiment with stopping them</li>
+            <li>Take good care of yourself daily — this directly challenges the core belief that you're not worth it</li>
+            <li>Use positive affirmations alongside other change processes (they alone won't stick)</li>
+            <li>Take extended solo time — discover who you are without others' eyes on you</li>
+            <li>Reveal yourself to safe people — the only way to release toxic shame is through exposure in a safe environment</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ch 4 -->
+      <div id="ch4" class="tab-panel">
+        <div class="tab-box">
+          <h3>Make Your Needs a Priority</h3>
+          <p>Nice Guys try to appear needless and wantless — believing their needs drove people away in childhood. Beneath this façade, all Nice Guys are extremely needy. The solution is radically simple: make your needs a conscious, unapologetic priority.</p>
+          <div class="sub-h">Four Ways Nice Guys Prevent Getting Their Needs Met</div>
+          <ul class="strat-list">
+            <li><strong>Appearing needless</strong> — Hiding needs to avoid abandonment, while pursuing them through indirect, manipulative channels that guarantee failure</li>
+            <li><strong>Making it hard to receive</strong> — Picking unavailable partners, sabotaging moments of intimacy, unconsciously ensuring that no one ever really shows up for them</li>
+            <li><strong>Covert contracts</strong> — "I'll do X for you so you'll do Y for me — and we'll both pretend this contract doesn't exist." The entire Nice Guy paradigm is one enormous covert contract with life.</li>
+            <li><strong>Caretaking</strong> — Focusing on others' problems to feel valuable while avoiding one's own issues. Caretaking always has two parts: giving what <em>you</em> need to give, and expecting something unspoken in return.</li>
+          </ul>
+          <div class="sub-h">The Victim Triangle</div>
+          <p>Give → Expect → Don't receive → Resentment → Explosion ("victim puke") → Remorse → Repeat. This cycle is why Nice Guys "aren't always so nice."</p>
+          <div class="sub-hg">Becoming Truly Selfish</div>
+          <ul class="strat-list">
+            <li>Having needs is part of being human — mature people prioritize getting their needs met</li>
+            <li>Put yourself first: you increase the likelihood of getting what you need and give without resentment</li>
+            <li>Self-focused men become less needy, less manipulative, more attractive, and better partners</li>
+            <li>No one was put on this planet to meet your needs — and you weren't put here to meet theirs</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ch 5 -->
+      <div id="ch5" class="tab-panel">
+        <div class="tab-box">
+          <h3>Reclaim Your Personal Power</h3>
+          <p>Nice Guys are wimps — not in their behavior, but in their orientation. Their paradigm guarantees perpetual powerlessness. Personal power is not the absence of fear; it's feeling fear and not giving in to it.</p>
+          <div class="sub-h">The Two Traps</div>
+          <ul class="strat-list">
+            <li><strong>Attempting the impossible</strong> — Life is by nature chaotic. Trying to make it smooth and predictable is an exercise in futility that produces mounting frustration</li>
+            <li><strong>Childhood tools for adult problems</strong> — Applying naïve survival mechanisms to complex adult situations guarantees failure and reinforces feelings of helplessness</li>
+          </ul>
+          <div class="sub-hg">Six Ways to Reclaim Power</div>
+          <ul class="strat-list">
+            <li><strong>Surrender</strong> — Let go of what you cannot control. Letting go doesn't mean not caring; it means opening a clenched fist and letting life flow.</li>
+            <li><strong>Dwell in reality</strong> — Stop projecting the reality you wish were true. Accept what actually is — then decide what to do about it.</li>
+            <li><strong>Express feelings</strong> — Men in touch with their feelings are powerful and assertive, not soft. Feelings won't kill you. Express them clearly and without attacking.</li>
+            <li><strong>Face fears</strong> — Every confronted fear builds the belief "I can handle it." Mantra: <em>"No matter what happens, I will handle it."</em></li>
+            <li><strong>Develop integrity</strong> — "Integrity = deciding what feels right and doing it." Lying (including omission) is fear-based and robs you of power. Only one way to be in integrity — decide what's right and do it.</li>
+            <li><strong>Set boundaries</strong> — Boundaries aren't about controlling others; they're about changing yourself. Apply the Second Date Rule and the Healthy Male Rule.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ch 6 -->
+      <div id="ch6" class="tab-panel">
+        <div class="tab-box">
+          <h3>Reclaim Your Masculinity</h3>
+          <p>Contrary to the prevailing sentiments of recent decades: it is OK to be a man. Boys disconnected from fathers and defined by women grow up confused about masculinity — and everyone in their life suffers for it.</p>
+          <div class="sub-h">Four Disconnections</div>
+          <ul class="strat-list">
+            <li><strong>From other men</strong> — No positive male bond in childhood; belief that they're "different from" (read: better than) other men — which isolates them from the many benefits of male community</li>
+            <li><strong>From masculinity itself</strong> — Repressing strength, assertiveness, sexuality, competitiveness, and passion to avoid looking like the "bad" men they decided not to become</li>
+            <li><strong>Monogamous to mother</strong> — Never fully individuated in childhood; adult partners sense his unavailability without knowing why</li>
+            <li><strong>Dependent on women's approval</strong> — Women don't want a man who tries to please them. They want a man who knows how to please himself. Approval-seeking makes Nice Guys unattractive.</li>
+          </ul>
+          <div class="sub-hg">Reclaiming Masculinity</div>
+          <ul class="strat-list">
+            <li><strong>Connect with men</strong> — The best thing you can do for your intimate relationship is develop male friendships. Do things with men. Without a sexual agenda, male friendships achieve a depth impossible with women.</li>
+            <li><strong>Get physically strong</strong> — Embrace your body. Work out, eat well, eliminate toxins. Physical strength translates directly to confidence in every other domain.</li>
+            <li><strong>Find healthy male role models</strong> — Observe how healthy men live and interact with the world. Consciously assimilate what you see.</li>
+            <li><strong>Reexamine your father</strong> — See him through adult eyes as a wounded human being, not a villain or saint. You can be different from him without being his opposite.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ch 7 -->
+      <div id="ch7" class="tab-panel">
+        <div class="tab-box">
+          <h3>Get the Love You Want</h3>
+          <p>Intimate relationships are an area of enormous frustration for Nice Guys — despite being the area they invest the most energy. Their toxic shame and survival mechanisms make genuine intimacy feel life-threatening.</p>
+          <div class="sub-h">Why Nice Guys Struggle in Love</div>
+          <ul class="strat-list">
+            <li><strong>Toxic shame</strong> — Intimacy requires vulnerability. Vulnerability means being "found out." Nice Guys have spent their whole lives avoiding being found out.</li>
+            <li><strong>Co-created dysfunction</strong> — "If there's one obviously wounded person in a relationship, there are always two." Nice Guys choose partners whose dysfunction diverts attention from their own.</li>
+            <li><strong>Enmeshment &amp; Avoidance</strong> — Enmeshers hover like "table dogs" waiting for scraps of attention. Avoiders are Nice Guys to everyone except their partner. Both patterns prevent real intimacy.</li>
+            <li><strong>Recreating childhood patterns</strong> — We are attracted to what is familiar. Nice Guys unconsciously recreate the dysfunctional dynamics of their childhood in adult relationships.</li>
+            <li><strong>Bad Enders</strong> — Nice Guys stay in bad relationships far too long, exit badly, and do it multiple times. Average: nine attempts to end a single relationship.</li>
+          </ul>
+          <div class="sub-hg">What Actually Works</div>
+          <ul class="strat-list">
+            <li>Stop focusing on your partner — focus on the relationship you co-create and why you needed to create it</li>
+            <li>Ask: "Why did I invite this person into my life? What do I need to learn here?"</li>
+            <li>Stop reinforcing undesirable behaviors — don't reward what you want to eliminate</li>
+            <li>Set boundaries: apply the Second Date Rule ("Would there have been a third date?") and the Healthy Male Rule ("How would a healthy man handle this?")</li>
+            <li>When starting new relationships, choose someone already responsible for their own life — not a fixer-upper</li>
+          </ul>
+          <div class="alert"><strong>Warning:</strong> If you're in a relationship, the recovery program presented in this book will seriously affect it. Either your relationship will begin to grow in exciting, unpredictable ways — or it will be sent to a long-overdue grave.</div>
+        </div>
+      </div>
+
+      <!-- Ch 8 -->
+      <div id="ch8" class="tab-panel">
+        <div class="tab-box">
+          <h3>Get the Sex You Want</h3>
+          <p>Sex is where all of a Nice Guy's shame, fear, and dysfunction converge and are magnified. Every Nice Guy Dr. Glover has worked with has had significant sexual problems — whether he admits it or not.</p>
+          <div class="alert"><strong>Core truth:</strong> All Nice Guys have shame and fear about being sexual and about being sexual beings. This is the most difficult concept for Nice Guys to accept — and the most important for breaking free.</div>
+          <div class="sub-h">Five Ways Nice Guys Sabotage Their Sex Lives</div>
+          <ul class="strat-list">
+            <li><strong>Vagiphobia</strong> — Creative avoidance of actual sex: "flirting without fucking," sexualizing relationships with unavailable women, pursuing intimacy up to the threshold and retreating</li>
+            <li><strong>Trying to be a "great lover"</strong> — Focusing entirely on partner's pleasure produces boring, routine, mechanical sex and disconnects the Nice Guy from his own experience</li>
+            <li><strong>Hidden compulsive behavior</strong> — Pornography, affairs, peep shows. "The nicer the guy, the darker the sexual secrets." The sexuality doesn't disappear — it goes underground.</li>
+            <li><strong>Repressing life energy</strong> — Approval-seeking kills attractiveness. Women consistently report that there's simply nothing to be turned on by in someone who has suppressed all their life energy.</li>
+            <li><strong>Settling for bad sex</strong> — Accepting whatever scraps are offered perpetuates bad sex. "You have to be willing to let go of what you've got to get what you want."</li>
+          </ul>
+          <div class="sub-hg">The Strategy for Good Sex</div>
+          <ul class="strat-list">
+            <li><strong>Come out of the closet</strong> — Reveal sexual shame and fear to safe, non-judgmental people. Secrecy is what keeps compulsive behavior powered.</li>
+            <li><strong>Take matters into your own hands</strong> — Practice healthy masturbation (without pornography or fantasy) to own your sexuality and learn to receive pleasure</li>
+            <li><strong>Say "no" to bad sex</strong> — Consider a sexual moratorium to break dysfunctional cycles, eliminate the fear that your partner "holds the key," and reset the dynamic</li>
+            <li><strong>Be the bull moose</strong> — Self-confidence is the greatest aphrodisiac. Stop performing. Chart your own path. Be so fully yourself that people are drawn to your energy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ch 9 -->
+      <div id="ch9" class="tab-panel">
+        <div class="tab-box">
+          <h3>Get the Life You Want</h3>
+          <p>The Nice Guy Syndrome wastes countless intelligent, talented men. The same dynamics that destroy relationships keep Nice Guys from living up to their potential in work, career, and life.</p>
+          <div class="sub-h">Why Nice Guys Underachieve</div>
+          <ul class="strat-list">
+            <li><strong>Fear</strong> — Fear of failure AND the paradoxical fear of success (being found out as a fraud, losing control, not being able to sustain expectations)</li>
+            <li><strong>Perfectionism</strong> — "Doing it right" kills creative energy. The attempt to be perfect before starting guarantees nothing ever gets finished or launched</li>
+            <li><strong>Can't ask for help</strong> — Terrible receivers, terrified to ask, won't delegate. Nobody becomes truly great alone. Nice Guys are jacks-of-all-trades but masters of none.</li>
+            <li><strong>Self-sabotage</strong> — Wasting time, procrastinating, never finishing projects, caretaking others instead of building their own life, creating chaos that justifies not succeeding</li>
+            <li><strong>Deprivation thinking</strong> — Believing there's not enough to go around. Playing small. Settling for scraps and building elaborate rationalizations for why the good things are for other people.</li>
+          </ul>
+          <div class="sub-hg">The Strategy for Getting the Life You Want</div>
+          <ul class="strat-list">
+            <li>Face fears — "If it frightens you, do it." Fear is a memory from childhood, not an accurate assessment of today's danger</li>
+            <li>Chart your own path — Make your own rules. Measure them by one standard: Do they work?</li>
+            <li>Let go of doing it right — "Good enough" finished beats "perfect" never started. Give yourself permission to not be published — and suddenly you can write.</li>
+            <li>Ask for help — People want to help you meet your needs. The surest way to receive is to ask directly and clearly</li>
+            <li>Develop abundance thinking — If one man can make a million dollars, start a business, or live his dream — why not you? What one man can do, another man can do.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ACTIVITIES ══════════════ -->
+<section id="activities">
+  <div class="container">
+    <div class="badge">Practical Tools</div>
+    <h2 class="sh">Breaking Free Activities</h2>
+    <p class="lead">These activities facilitate the paradigm shift necessary for recovery. They're not optional extras — they are the recovery process. Select each to expand it.</p>
+
+    <div class="acts">
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">1</div><div class="act-title">Find Safe People for Your Recovery</div><div class="act-ch">Ch. 1</div></div><div class="act-body"><div class="act-inner">Write down three possible safe people or groups who can support your recovery. If no one comes to mind, look in the phone directory for counselors or support groups. Call them when you finish the chapter. Recovery from the Nice Guy Syndrome is dependent on revealing yourself and receiving support from safe people — it cannot be done alone.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">2</div><div class="act-title">Why Do People Try to Change Who They Are?</div><div class="act-ch">Ch. 1</div></div><div class="act-body"><div class="act-inner">Reflect and write: Why would it seem rational for a person to hide certain things about himself and try to become something different — unless there was a compelling reason? What would make a child sacrifice who he is to become something else? Write your answer and share it with a safe person.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">3</div><div class="act-title">Identify Your Childhood Messages</div><div class="act-ch">Ch. 2</div></div><div class="act-body"><div class="act-inner">Think about how the stories of Alan, Jason, and Jose are similar to your own childhood. Write down the messages you received in your family that implied it wasn't OK for you to be who you were. Share with a safe person. Notice your feelings — sad, angry, lonely, numb? The purpose is to NAME, not blame. Naming allows change; blaming keeps you stuck.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">4</div><div class="act-title">Catalog Your Approval-Seeking Behaviors</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Review this list and note which apply: having your hair just right, being smart, never getting angry, making others happy, having a clean car, dressing well, never offending anyone, looking like a good father, being different from other men. Add your unique ones. Write examples of each. Ask people close to you how they see you seeking approval — their answers may surprise you.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">5</div><div class="act-title">The "No Approval" Thought Experiment</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Write your honest answers to two questions: (1) If you did not care what people thought of you, how would you live your life differently? (2) If you were not concerned with getting the approval of women, how would your relationships with the opposite sex be different? Share with a safe person and sit with the discomfort.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">6</div><div class="act-title">Map Your Hiding Behaviors</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Look over these common hiding areas: when you forget something, are late, break something, don't understand, do something wrong, are depressed, are in pain, or generally mess up — plus the basics of being human: being sexual, having bodily functions, getting older, having needs, being imperfect. Write examples of when you've tried to hide each. How effective do you think you are?</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">7</div><div class="act-title">The Unconditional Love Question</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Sit with these two questions and write your genuine responses: (1) Do you believe that people can see your human imperfections and still love you? (2) How would you be different if you knew the people who care about you would never leave or stop loving you — no matter what? These questions reveal the depth of your core beliefs about your own worth.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">8</div><div class="act-title">The Approval-Seeking Moratorium</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Choose one approval-seeking behavior and either: (1) Stop doing it for a set period — tell people what you're doing; note when you slip and why. OR (2) Consciously do MORE of it — observe how you feel and how people respond. Both approaches create awareness that can disrupt the unconscious approval-seeking loop.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">9</div><div class="act-title">Daily Self-Care Practice</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Make a list of good things you can do for yourself: exercise, eat healthy food, sleep enough, relax and play, get a massage, go out with friends, buy new shoes, listen to music. Post it somewhere visible. Choose at least one thing per day and do it. Warning: this will feel uncomfortable. That dissonance — between doing something good for yourself and your core belief that you're not worth it — is exactly the belief that needs to change.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">10</div><div class="act-title">Write Positive Affirmations</div><div class="act-ch">Ch. 3</div></div><div class="act-body"><div class="act-inner">Make a list of affirmations, write them on note cards, and place them where you'll see them. Change the cards often. When you read them, close your eyes and fully embrace the meaning. Observe your mind's tendency to reject them. Try: "I am lovable just as I am." "I am perfectly imperfect." "My needs are important." "I am the only person I have to please." "It is OK to be human and make mistakes."</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">12</div><div class="act-title">Examine Your Beliefs About Needs</div><div class="act-ch">Ch. 4</div></div><div class="act-body"><div class="act-inner">Write honest answers to: (1) Do you believe it is OK for you to have needs? (2) Do you believe people want to help you meet your needs? (3) Do you believe this world is a place of abundance? Your answers will reveal your core paradigm. The goal is to genuinely come to believe: having needs is human, mature people prioritize their needs, others want to help, and the world is abundant.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">13</div><div class="act-title">Expose a Covert Contract</div><div class="act-ch">Ch. 4</div></div><div class="act-body"><div class="act-inner">Identify at least one covert contract with a significant other. What do you give? What do you expect in return (even if unspoken)? Share this with the other person. Ask them how it feels to respond to an unclear, hidden agenda. Most Nice Guys are shocked to discover the depth of resentment accumulated from contracts the other person didn't even know existed.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">14</div><div class="act-title">The Caretaking Moratorium</div><div class="act-ch">Ch. 4</div></div><div class="act-body"><div class="act-inner">Identify two or three examples of your caretaking. Then for one week, either: (1) Stop giving completely (except to young children who depend on you) — tell people what you're doing and observe reactions. OR (2) Consciously caretake MORE than usual — pay attention to how you feel and how people respond. Both reveal the true mechanics of your caretaking behavior.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">15</div><div class="act-title">Observe How You Hurt the People You Love</div><div class="act-ch">Ch. 4</div></div><div class="act-body"><div class="act-inner">Ask yourself honestly: Do you make cutting remarks or hurtful "jokes"? Embarrass them in public? Are you frequently late? Do you "forget" things they've asked? Do you criticize? Withdraw or threaten to leave? Let frustration build until you explode? Ask the people in your life for feedback about your emotional pukes. This information is hard to hear — and essential for breaking the victim triangle.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">16</div><div class="act-title">Put Yourself First for a Week</div><div class="act-ch">Ch. 4</div></div><div class="act-body"><div class="act-inner">Make a decision to put yourself first for a weekend or a full week. Tell the people around you what you are doing. Ask a friend to support and encourage you. Pay attention to your initial anxiety and your tendency to revert to old patterns. At the end, ask the people around you what it was like when you put yourself first. Remember: you don't have to do it perfectly. Just do it.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">17</div><div class="act-title">Map Your Control Mechanisms</div><div class="act-ch">Ch. 5</div></div><div class="act-body"><div class="act-inner">Look over these ways Nice Guys try to create a smooth life: doing it right, playing it safe, anticipating and fixing, not rocking the boat, being charming, never being a problem, using covert contracts, controlling and manipulating, caretaking, withholding information, repressing feelings, making sure others don't have feelings, avoiding difficult situations. Write how you used each in childhood — and how you still use each now.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">18</div><div class="act-title">Identify a "Gift" from the Universe</div><div class="act-ch">Ch. 5</div></div><div class="act-body"><div class="act-inner">Think of one "gift" from the universe that you initially resisted but can now see as a positive stimulus for growth or learning. Are there similar gifts in your life right now to which you need to surrender? What would it feel like to ask "What do I need to learn from this?" instead of "Why is this happening to me?" Share with a safe person.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">21</div><div class="act-title">Face One Fear</div><div class="act-ch">Ch. 5</div></div><div class="act-body"><div class="act-inner">List one fear that has been controlling your life. Once you decide to confront it, begin repeating: "I can handle it. No matter what happens, I will handle it." Keep repeating this mantra until you take action and stop feeling the fear. Every confronted fear builds the neural belief that you can handle whatever comes — and that belief is the foundation of genuine personal power.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">22</div><div class="act-title">Tell the Truth in One Area</div><div class="act-ch">Ch. 5</div></div><div class="act-body"><div class="act-inner">Choose one area where you've been out of integrity. Identify the fear keeping you from the truth. Reveal the situation to a safe person. Then tell the truth or do what you must to make it right. Remind yourself: "I can handle it." Telling the truth is not a magic formula for a smooth life — but living with integrity is far easier than maintaining a life built around deceit and distortion.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">23</div><div class="act-title">Practice Observing Your Boundaries</div><div class="act-ch">Ch. 5</div></div><div class="act-body"><div class="act-inner">For one week, observe yourself. Do you say "yes" when you'd rather say "no"? Agree to things to avoid conflict? Avoid actions because someone might get upset? Tolerate intolerable situations hoping they'll go away? Write these observations down and share with a safe person. Awareness is the prerequisite for change — you cannot set limits until you can see where you have none.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">25</div><div class="act-title">Plan Three Male Connections</div><div class="act-ch">Ch. 6</div></div><div class="act-body"><div class="act-inner">List three men you'd like to know better. Next to each name, write a possible activity. Next to that, write a specific date to contact him by — and commit to it. The best thing you can do for your relationship with women is develop genuine male friendships. This isn't optional — it's essential for breaking the monogamous bond with your mother and reclaiming your masculine energy.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">26</div><div class="act-title">Three Ways to Take Care of Your Body</div><div class="act-ch">Ch. 6</div></div><div class="act-body"><div class="act-inner">Identify three ways you currently neglect your body. Write down three specific ways to start taking better care of yourself physically. Physical strength, health, and vitality translate directly into confidence and power in every other area of life. Masculinity denotes strength — embrace yours.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">33</div><div class="act-title">Map How You Try to Please Your Partner</div><div class="act-ch">Ch. 7</div></div><div class="act-body"><div class="act-inner">List the ways you currently try to please your partner. Then answer: What changes would you make if you did not have to worry about making her happy? What would you do differently if her approval wasn't a factor? Your answers reveal how much of your relationship energy is spent managing her mood rather than building genuine connection.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">36</div><div class="act-title">Honestly Assess Your Sex Life</div><div class="act-ch">Ch. 8</div></div><div class="act-body"><div class="act-inner">Take the sexual shame and fear quiz: (1) Was your first sexual experience joyous and something you could share openly, or hidden, guilty, rushed, painful, or frightening? (2) Would there be a crisis if your partner "caught" you masturbating — or do you do it compulsively and secretly? (3) Do you have sexual secrets you've never shared with anyone? If any answer is not "everything is open," you have sexual shame and fear to address.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">37</div><div class="act-title">Sexual Disclosure with Safe People</div><div class="act-ch">Ch. 8</div></div><div class="act-body"><div class="act-inner">Find a safe place to talk honestly about: (1) Your sexual history — earliest memories, childhood experiences, trauma, first sexual experience, adult history. (2) Ways you have acted out sexually — affairs, pornography, compulsive behaviors, anything hidden. (3) Your dark side — fantasies, rage, anything you have difficulty looking at in yourself. Internalized shame and fear are the greatest barriers to a satisfying sex life. This step cannot be skipped.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">40</div><div class="act-title">Face a Life or Career Fear</div><div class="act-ch">Ch. 9</div></div><div class="act-body"><div class="act-inner">Choose one from this list and name your specific fear: Ask for a raise or promotion. Quit an unsatisfying job. Start your own business. Go back to school. Confront a conflict situation. Promote an idea you've created. Pursue a lifelong goal. Spend more time on a passion. Write how you'll confront it, take one small step, and ask someone to encourage you. Remember: no matter what happens, you will handle it.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">41</div><div class="act-title">Write What You Really Want</div><div class="act-ch">Ch. 9</div></div><div class="act-body"><div class="act-inner">Answer honestly: What do you really want in life? What prevents you from making it happen? Write down three specific things you want to make happen. Then write a personal affirmation that points you in that direction and post it where you'll see it daily. Share your dreams and your affirmation with a safe person. Saying them out loud makes them real — and makes you accountable.</div></div></div>
+
+      <div class="act"><div class="act-head" onclick="act(this)"><div class="act-num">46</div><div class="act-title">Write Your Personal Rules</div><div class="act-ch">Ch. 9</div></div><div class="act-body"><div class="act-inner">Read the 30 Rules in the next section. Try a few on for size. Add your own personal rules based on what you know about yourself. Write these rules on note cards and put them where you can see them every day. Mature, successful people make their own rules and measure them by one standard: Do they work?</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ QUOTES ══════════════ -->
+<section id="quotes">
+  <div class="container">
+    <div class="badge">Core Wisdom</div>
+    <h2 class="sh">Key Insights from the Book</h2>
+    <div class="quotes">
+      <div class="quote"><p>"If you keep doing what you've always done, you'll keep getting what you've always had."</p><cite>— Dr. Robert Glover</cite></div>
+      <div class="quote" style="border-left-color:var(--amber)"><p>"The only alternative Nice Guys can see to being nice is becoming a bastard or jerk. Remember: the opposite of crazy is still crazy."</p><cite>— No More Mr. Nice Guy</cite></div>
+      <div class="quote"><p>"Nobody was put on this planet to meet your needs — except your parents, and their job is done."</p><cite>— Dr. Robert Glover</cite></div>
+      <div class="quote" style="border-left-color:var(--green)"><p>"Imperfect humans can only connect with other imperfect humans. It is a person's rough edges and human imperfections that give others something to connect with."</p><cite>— No More Mr. Nice Guy</cite></div>
+      <div class="quote"><p>"Women don't want a man who tries to please them — they want a man who knows how to please himself."</p><cite>— No More Mr. Nice Guy</cite></div>
+      <div class="quote" style="border-left-color:var(--amber)"><p>"The nicer the guy, the darker the sexual secrets."</p><cite>— Dr. Robert Glover</cite></div>
+      <div class="quote"><p>"In every situation, the child believed these events were telling a story about him — that something about him caused these things to happen."</p><cite>— On Toxic Shame</cite></div>
+      <div class="quote" style="border-left-color:var(--purple)"><p>"Your feelings are just feelings. They won't kill you. Men who are in touch with their feelings are powerful, assertive, and energized."</p><cite>— No More Mr. Nice Guy</cite></div>
+      <div class="quote"><p>"What one man can do, another man can do. The only thing stopping you from having the kind of life you really want is you."</p><cite>— No More Mr. Nice Guy</cite></div>
+      <div class="quote" style="border-left-color:var(--green)"><p>"Recovery from the Nice Guy Syndrome is dependent on revealing one's self and receiving support from safe people."</p><cite>— Dr. Robert Glover</cite></div>
+      <div class="quote"><p>"A major reason Nice Guys fail to live up to their potential is that they believe they have to do everything themselves."</p><cite>— No More Mr. Nice Guy</cite></div>
+      <div class="quote" style="border-left-color:var(--amber)"><p>"Life isn't a merry-go-round, it's a roller coaster. As Nice Guys reclaim personal power, they can experience the world in all of its serendipitous beauty."</p><cite>— No More Mr. Nice Guy</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 30 RULES ══════════════ -->
+<section id="rules">
+  <div class="container">
+    <div class="badge">Chapter 9 — The Strategy for Success</div>
+    <h2 class="sh">The 30 Rules That Work</h2>
+    <p class="lead">Mature, successful people make their own rules and measure them by one standard: <em>Do they work?</em> These rules have helped countless Nice Guys discover their passion and live up to their potential.</p>
+    <div class="rules-grid">
+      <div class="rule"><div class="rule-n">01</div><div class="rule-t">If it frightens you, do it.</div></div>
+      <div class="rule"><div class="rule-n">02</div><div class="rule-t">Don't settle. Every time you settle, you get exactly what you settled for.</div></div>
+      <div class="rule"><div class="rule-n">03</div><div class="rule-t">Put yourself first.</div></div>
+      <div class="rule"><div class="rule-n">04</div><div class="rule-t">No matter what happens, you will handle it.</div></div>
+      <div class="rule"><div class="rule-n">05</div><div class="rule-t">Whatever you do, do it 100%.</div></div>
+      <div class="rule"><div class="rule-n">06</div><div class="rule-t">If you do what you've always done, you'll get what you've always got.</div></div>
+      <div class="rule"><div class="rule-n">07</div><div class="rule-t">You are the only person on this planet responsible for your needs, wants, and happiness.</div></div>
+      <div class="rule"><div class="rule-n">08</div><div class="rule-t">Ask for what you want.</div></div>
+      <div class="rule"><div class="rule-n">09</div><div class="rule-t">If what you're doing isn't working, try something different.</div></div>
+      <div class="rule"><div class="rule-n">10</div><div class="rule-t">Be clear and direct.</div></div>
+      <div class="rule"><div class="rule-n">11</div><div class="rule-t">Learn to say "no."</div></div>
+      <div class="rule"><div class="rule-n">12</div><div class="rule-t">Don't make excuses.</div></div>
+      <div class="rule"><div class="rule-n">13</div><div class="rule-t">If you are an adult, you are old enough to make your own rules.</div></div>
+      <div class="rule"><div class="rule-n">14</div><div class="rule-t">Let people help you.</div></div>
+      <div class="rule"><div class="rule-n">15</div><div class="rule-t">Be honest with yourself.</div></div>
+      <div class="rule"><div class="rule-n">16</div><div class="rule-t">Do not let anyone treat you badly. No one. Ever.</div></div>
+      <div class="rule"><div class="rule-n">17</div><div class="rule-t">Remove yourself from a bad situation instead of waiting for it to change.</div></div>
+      <div class="rule"><div class="rule-n">18</div><div class="rule-t">Don't tolerate the intolerable — ever.</div></div>
+      <div class="rule"><div class="rule-n">19</div><div class="rule-t">Stop blaming. Victims never succeed.</div></div>
+      <div class="rule"><div class="rule-n">20</div><div class="rule-t">Live with integrity. Decide what feels right, then do it.</div></div>
+      <div class="rule"><div class="rule-n">21</div><div class="rule-t">Accept the consequences of your actions.</div></div>
+      <div class="rule"><div class="rule-n">22</div><div class="rule-t">Be good to yourself.</div></div>
+      <div class="rule"><div class="rule-n">23</div><div class="rule-t">Think "abundance."</div></div>
+      <div class="rule"><div class="rule-n">24</div><div class="rule-t">Face difficult situations and conflict head on.</div></div>
+      <div class="rule"><div class="rule-n">25</div><div class="rule-t">Don't do anything in secret.</div></div>
+      <div class="rule"><div class="rule-n">26</div><div class="rule-t">Do it now.</div></div>
+      <div class="rule"><div class="rule-n">27</div><div class="rule-t">Be willing to let go of what you have so you can get what you want.</div></div>
+      <div class="rule"><div class="rule-n">28</div><div class="rule-t">Have fun. If you're not having fun, something is wrong.</div></div>
+      <div class="rule"><div class="rule-n">29</div><div class="rule-t">Give yourself room to fail. There are no mistakes, only learning experiences.</div></div>
+      <div class="rule"><div class="rule-n">30</div><div class="rule-t">Control is an illusion. Let go; let life happen.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ EPILOGUE ══════════════ -->
+<section id="epilogue">
+  <div class="container">
+    <div class="epil">
+      <div class="badge">Epilogue</div>
+      <h2 class="sh">The Tools Work</h2>
+      <p>After over 1,800 hours working with Nice Guys across dozens of therapy groups, Dr. Glover's greatest discovery is simple: <strong>The tools and insights presented in No More Mr. Nice Guy! work.</strong></p>
+      <p>He watched countless men transform from helpless, passive, controlling, and resentful victims to empowered, integrated males. He saw relationships dramatically improve — and just as many die an overdue, necessary death.</p>
+      <p>As recovering Nice Guys learn to approve of themselves, they discover an unimaginable ability to love, accept love, and live life to its fullest. With this discovery of the true self comes unlimited freedom — <strong>freedom to be just who you are, freedom to stop seeking approval, freedom to start getting what you want.</strong></p>
+      <div class="cta-row" style="margin-top:2rem">
+        <a href="#syndrome" class="btn btn-p">Start from the Beginning</a>
+        <a href="#activities" class="btn btn-o">Begin the Activities</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-title">No More Mr. Nice Guy!</div>
+  <div class="foot-author">Dr. Robert A. Glover, Ph.D. · Certified Marriage and Family Therapist · Tacoma, Washington</div>
+  <div class="foot-dedication">
+    <em>"This book is dedicated to Elizabeth. You are my partner, my muse, and my best friend. If not for you, I would still be a hopelessly clueless Nice Guy. You are truly a gift from God."</em>
+    <br><br>
+    For the countless men and women who have invited Dr. Glover into the most personal areas of their lives — and especially for all the men who have been a part of the No More Mr. Nice Guy! men's groups. "You will never know how much being a part of your lives has changed my own."
+  </div>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const s = document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('pb').style.width = (s / h * 100) + '%';
+  });
+
+  // Accordion
+  function acc(btn) {
+    const body = btn.nextElementSibling;
+    const open = btn.classList.contains('open');
+    document.querySelectorAll('.acc-btn').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.style.maxHeight = '0';
+    });
+    if (!open) {
+      btn.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  // Tabs
+  function tab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Activities
+  function act(head) {
+    const body = head.nextElementSibling;
+    const open = body.style.maxHeight && body.style.maxHeight !== '0px';
+    document.querySelectorAll('.act-body').forEach(b => b.style.maxHeight = '0');
+    if (!open) body.style.maxHeight = body.scrollHeight + 'px';
+  }
+</script>
+</body>
+</html>

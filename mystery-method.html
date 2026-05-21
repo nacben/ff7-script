@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mystery Method — Complete Field Guide</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #10101a;
+  --bg3: #16162a;
+  --card: #1a1a2e;
+  --border: #2a2a4a;
+  --gold: #c9a84c;
+  --gold2: #e8c870;
+  --gold3: #f5e0a0;
+  --teal: #4ecdc4;
+  --rose: #e0606a;
+  --purple: #8b5cf6;
+  --blue: #3b82f6;
+  --text: #e8e8f0;
+  --muted: #9090b0;
+  --dim: #606080;
+  --font: 'Georgia', serif;
+  --mono: 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,15,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1rem 0.85rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+nav .brand {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--border);
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 80% 60%, rgba(78,205,196,0.04) 0%, transparent 60%),
+    var(--bg);
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg, transparent, transparent 80px, rgba(201,168,76,0.015) 80px, rgba(201,168,76,0.015) 81px
+  );
+}
+.hero-badge {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.35rem 1.2rem;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+#hero h1 {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+#hero h1 span { color: var(--gold); }
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--muted);
+  max-width: 600px;
+  margin: 1.5rem auto 3rem;
+}
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 3rem;
+}
+.stat { text-align: center; }
+.stat .num { font-size: 2rem; color: var(--gold2); font-weight: bold; display: block; }
+.stat .label { font-size: 0.8rem; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.hero-toc {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem; max-width: 900px; width: 100%;
+  margin-top: 1rem;
+}
+.toc-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.88rem;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.toc-item:hover { border-color: var(--gold); color: var(--gold3); background: rgba(201,168,76,0.05); }
+.toc-item .ch { color: var(--gold); font-size: 0.75rem; font-weight: bold; min-width: 1.5rem; }
+
+/* ── SECTIONS ── */
+section { padding: 5rem 0; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+.wide { max-width: 1100px; }
+
+.section-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+h3 {
+  font-size: 1.35rem;
+  color: var(--gold2);
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+h4 { font-size: 1.1rem; color: var(--teal); margin: 1.5rem 0 0.5rem; }
+p { margin-bottom: 1rem; color: var(--text); }
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0;
+}
+
+/* ── QUOTE ── */
+blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  background: rgba(201,168,76,0.04);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: var(--gold3);
+}
+blockquote cite { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.85rem; color: var(--dim); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+}
+.card.gold-border { border-color: rgba(201,168,76,0.4); }
+.card.teal-border { border-color: rgba(78,205,196,0.4); }
+.card.rose-border { border-color: rgba(224,96,106,0.4); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+@media(max-width:700px) { .grid2,.grid3 { grid-template-columns: 1fr; } }
+
+/* ── CALLOUT ── */
+.callout {
+  display: flex; gap: 1rem; align-items: flex-start;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+.callout-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+.callout-body { flex: 1; }
+.callout-body strong { color: var(--gold2); display: block; margin-bottom: 0.25rem; }
+.callout.teal { background: rgba(78,205,196,0.06); border-color: rgba(78,205,196,0.25); }
+.callout.teal .callout-body strong { color: var(--teal); }
+.callout.rose { background: rgba(224,96,106,0.06); border-color: rgba(224,96,106,0.25); }
+.callout.rose .callout-body strong { color: var(--rose); }
+.callout.purple { background: rgba(139,92,246,0.06); border-color: rgba(139,92,246,0.25); }
+.callout.purple .callout-body strong { color: var(--purple); }
+
+/* ── DIAGRAM: M3 Model ── */
+.m3-diagram {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+.m3-row {
+  display: flex; gap: 0; align-items: stretch;
+  margin-bottom: 0.75rem;
+}
+.m3-stage {
+  flex: 1;
+  text-align: center;
+  padding: 1.25rem 0.75rem;
+  border-radius: 8px;
+  position: relative;
+}
+.m3-stage.attract { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); }
+.m3-stage.comfort { background: rgba(78,205,196,0.1); border: 1px solid rgba(78,205,196,0.4); }
+.m3-stage.seduce { background: rgba(224,96,106,0.1); border: 1px solid rgba(224,96,106,0.4); }
+.m3-stage .stage-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.7; }
+.m3-stage .stage-name { font-size: 1.1rem; font-weight: bold; }
+.attract .stage-name { color: var(--gold2); }
+.comfort .stage-name { color: var(--teal); }
+.seduce .stage-name { color: var(--rose); }
+.m3-arrow {
+  display: flex; align-items: center; padding: 0 0.5rem;
+  color: var(--dim); font-size: 1.2rem;
+}
+.m3-phases {
+  display: grid; grid-template-columns: repeat(9,1fr); gap: 0.4rem;
+  margin-top: 1rem;
+}
+.phase-box {
+  text-align: center;
+  padding: 0.75rem 0.25rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+}
+.phase-box.a { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold3); }
+.phase-box.c { background: rgba(78,205,196,0.08); border: 1px solid rgba(78,205,196,0.3); color: var(--teal); }
+.phase-box.s { background: rgba(224,96,106,0.08); border: 1px solid rgba(224,96,106,0.3); color: var(--rose); }
+.phase-box .ph-code { font-weight: bold; font-size: 1rem; display: block; margin-bottom: 0.25rem; }
+.phase-box .ph-name { font-size: 0.68rem; opacity: 0.8; line-height: 1.3; }
+@media(max-width:700px) { .m3-phases { grid-template-columns: repeat(3,1fr); } }
+
+/* ── PHASE ACCORDION ── */
+.accordion { margin: 1rem 0; }
+.acc-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; overflow: hidden; }
+.acc-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background: var(--card);
+  transition: background 0.2s;
+}
+.acc-header:hover { background: var(--bg3); }
+.acc-header .acc-title { font-weight: bold; color: var(--gold2); }
+.acc-header .acc-phase { font-size: 0.8rem; color: var(--dim); }
+.acc-arrow { color: var(--gold); transition: transform 0.2s; font-size: 1.2rem; }
+.acc-item.open .acc-arrow { transform: rotate(180deg); }
+.acc-body { display: none; padding: 1.25rem 1.5rem; background: var(--bg2); border-top: 1px solid var(--border); }
+.acc-item.open .acc-body { display: block; }
+
+/* ── IOI LIST ── */
+.ioi-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.5rem; margin: 1rem 0;
+}
+.ioi-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.ioi-item::before { content: '✓'; color: var(--teal); font-weight: bold; flex-shrink: 0; }
+@media(max-width:600px) { .ioi-grid { grid-template-columns: 1fr; } }
+
+/* ── MASLOW ── */
+.maslow {
+  margin: 2rem 0;
+  display: flex; flex-direction: column; gap: 0; align-items: center;
+}
+.maslow-row {
+  border-radius: 6px;
+  padding: 0.9rem 2rem;
+  text-align: center;
+  margin-bottom: 3px;
+  transition: transform 0.15s;
+  cursor: default;
+}
+.maslow-row:hover { transform: scale(1.02); }
+.maslow-row .m-title { font-weight: bold; font-size: 0.95rem; }
+.maslow-row .m-desc { font-size: 0.8rem; opacity: 0.75; margin-top: 0.15rem; }
+
+/* ── RULE BOX ── */
+.rule-box {
+  background: var(--bg2);
+  border-left: 4px solid var(--gold);
+  padding: 1rem 1.5rem;
+  margin: 1.25rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.rule-box .rule-num { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem; }
+.rule-box .rule-text { color: var(--text); font-size: 0.95rem; }
+
+/* ── GLOSSARY ── */
+#glossary { background: var(--bg2); }
+.glossary-search {
+  display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center;
+}
+.glossary-search input {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1.25rem;
+  color: var(--text);
+  font-size: 1rem;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.glossary-search input:focus { border-color: var(--gold); }
+.glossary-search input::placeholder { color: var(--dim); }
+.gl-count { color: var(--dim); font-size: 0.85rem; white-space: nowrap; }
+.glossary-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+@media(max-width:650px) { .glossary-grid { grid-template-columns: 1fr; } }
+.gl-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+.gl-term {
+  color: var(--gold2);
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+.gl-def {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.gl-item.hidden { display: none; }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 0.5rem; top: 0.5rem; bottom: 0;
+  width: 2px; background: linear-gradient(180deg, var(--gold), var(--teal), var(--rose));
+}
+.tl-item { position: relative; margin-bottom: 1.5rem; }
+.tl-dot {
+  position: absolute; left: -1.85rem; top: 0.35rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--bg2);
+  flex-shrink: 0;
+}
+.tl-title { color: var(--gold2); font-weight: bold; margin-bottom: 0.25rem; }
+.tl-body { color: var(--muted); font-size: 0.9rem; }
+
+/* ── VENUE DIAGRAM ── */
+.venue-flow {
+  display: flex; align-items: center; gap: 0.5rem;
+  overflow-x: auto; padding: 1.5rem 0; flex-wrap: wrap;
+}
+.venue-node {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.9rem 1.25rem;
+  text-align: center;
+  min-width: 110px; flex-shrink: 0;
+}
+.venue-node .vn-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); }
+.venue-node .vn-name { font-weight: bold; margin-top: 0.2rem; font-size: 0.9rem; }
+.venue-node.meet { border-color: rgba(201,168,76,0.5); }
+.venue-node.meet .vn-name { color: var(--gold2); }
+.venue-node.comfort { border-color: rgba(78,205,196,0.4); }
+.venue-node.comfort .vn-name { color: var(--teal); }
+.venue-node.sex { border-color: rgba(224,96,106,0.4); }
+.venue-node.sex .vn-name { color: var(--rose); }
+.venue-arrow { color: var(--dim); font-size: 1.4rem; flex-shrink: 0; }
+.venue-label { font-size: 0.72rem; color: var(--dim); text-align: center; }
+
+/* ── HIGHLIGHT ── */
+.hl { color: var(--gold2); font-weight: bold; }
+.hl.teal { color: var(--teal); }
+.hl.rose { color: var(--rose); }
+
+/* ── REVIEW BOX ── */
+.review-list {
+  list-style: none;
+  margin: 1rem 0;
+}
+.review-list li {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.review-list li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--gold);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--dim);
+  font-size: 0.85rem;
+}
+footer .footer-title { color: var(--gold); font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+/* ── TAG ── */
+.tag {
+  display: inline-block;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  margin: 0.2rem 0.1rem;
+}
+.tag.teal { background: rgba(78,205,196,0.1); border-color: rgba(78,205,196,0.3); color: var(--teal); }
+.tag.rose { background: rgba(224,96,106,0.1); border-color: rgba(224,96,106,0.3); color: var(--rose); }
+
+/* ── 7 HOUR RULE ── */
+.hour-bar {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+.hour-bar-track {
+  display: flex; height: 28px; border-radius: 6px; overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+.hour-seg {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: bold; letter-spacing: 0.05em;
+  transition: flex 0.3s;
+}
+.hour-seg.a1 { background: rgba(201,168,76,0.8); color: #000; flex: 1; }
+.hour-seg.a2 { background: rgba(201,168,76,0.6); color: #000; flex: 1; }
+.hour-seg.a3 { background: rgba(201,168,76,0.4); color: #000; flex: 1; }
+.hour-seg.c1 { background: rgba(78,205,196,0.8); color: #000; flex: 1; }
+.hour-seg.c2 { background: rgba(78,205,196,0.5); color: #000; flex: 2; }
+.hour-seg.c3 { background: rgba(78,205,196,0.3); color: #000; flex: 1; }
+.hour-seg.s { background: rgba(224,96,106,0.8); color: #fff; flex: 1; }
+.hour-legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.hl-item { font-size: 0.78rem; color: var(--dim); display: flex; align-items: center; gap: 0.4rem; }
+.hl-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="brand">Mystery Method</span>
+  <a href="#overview">Overview</a>
+  <a href="#evolution">Evolution</a>
+  <a href="#attraction">Attraction</a>
+  <a href="#m3model">M3 Model</a>
+  <a href="#open">A1 Open</a>
+  <a href="#f2m">A2 F→M</a>
+  <a href="#m2f">A3 M→F</a>
+  <a href="#comfort">Comfort</a>
+  <a href="#endgame">End-Game</a>
+  <a href="#glossary">Glossary</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Complete Field Guide</div>
+  <h1>The <span>Mystery</span> Method</h1>
+  <p class="hero-sub">A comprehensive map of the courtship process — from cold approach to intimate relationship — rooted in evolutionary psychology and social dynamics.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="num">9</span><span class="label">Phases</span></div>
+    <div class="stat"><span class="num">7</span><span class="label">Avg Hours</span></div>
+    <div class="stat"><span class="num">3</span><span class="label">Core Stages</span></div>
+    <div class="stat"><span class="num">122+</span><span class="label">Glossary Terms</span></div>
+  </div>
+  <div class="hero-toc">
+    <a class="toc-item" href="#overview"><span class="ch">FWD</span>Neil Strauss Foreword</a>
+    <a class="toc-item" href="#casanova"><span class="ch">01</span>The Mystery Behind Casanova</a>
+    <a class="toc-item" href="#evolution"><span class="ch">02</span>Ultimate Purpose of Life</a>
+    <a class="toc-item" href="#attraction"><span class="ch">03</span>Rewiring Attraction Circuitry</a>
+    <a class="toc-item" href="#m3model"><span class="ch">04</span>Rules &amp; Structure</a>
+    <a class="toc-item" href="#open"><span class="ch">A1</span>Open</a>
+    <a class="toc-item" href="#f2m"><span class="ch">A2</span>Female-to-Male Interest</a>
+    <a class="toc-item" href="#m2f"><span class="ch">A3</span>Male-to-Female Interest</a>
+    <a class="toc-item" href="#comfort"><span class="ch">C</span>Conversation &amp; Comfort</a>
+    <a class="toc-item" href="#endgame"><span class="ch">SE</span>Mid-Game &amp; End-Game</a>
+    <a class="toc-item" href="#glossary"><span class="ch">GL</span>Glossary</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OVERVIEW / FOREWORD -->
+<section id="overview">
+<div class="container">
+  <div class="section-label">Foreword & Preface</div>
+  <h2>The Algorithm for Getting Women</h2>
+
+  <blockquote>
+    "Our lives weren't always like this. They were once free of consequences, free of drama, free of love, and free of women. But we weren't free. We were a slave to our desire."
+    <cite>— Neil Strauss, Foreword</cite>
+  </blockquote>
+
+  <p>Neil Strauss opens with a disarmingly honest scene: two men who don't feel like going out, dragging their feet to a sushi restaurant — and ending the night with phone numbers pressed into their palms. The point is not the outcome but the <em>system</em> behind it: a learnable, repeatable method for social dynamics.</p>
+
+  <div class="grid2">
+    <div class="card gold-border">
+      <h4>The Core Premise</h4>
+      <p style="color:var(--muted);font-size:0.9rem">If you want to be a multimillionaire, you need a game plan for wealth. If you want peak fitness, you need a training regimen. If you want a lifestyle filled with beautiful women — the Mystery Method is your proven game plan.</p>
+    </div>
+    <div class="card teal-border">
+      <h4>Who It's For</h4>
+      <p style="color:var(--muted);font-size:0.9rem">Originally developed for shy, introverted, "geeky" men who couldn't understand why social interactions failed. The method works because it decodes the <em>pattern</em> behind every successful courtship ever told.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <strong>The Central Insight</strong>
+      Attraction follows patterns. Those patterns can be learned. Mystery spent 10+ years in the field reverse-engineering successful courtships until he could articulate the underlying algorithm — and then teach it to others.
+    </div>
+  </div>
+
+  <h3>From Magic to Social Mastery</h3>
+  <p>Mystery began as an extremely shy teenager who used stage magic as a social mask. Performing at restaurants and cruise ships, he discovered that the <em>techniques</em> for getting strangers to welcome him — false time constraints, value demonstrations, scripted routines — worked independently of the magic. Remove the tricks; keep the social technology.</p>
+
+  <blockquote>
+    "Nature will unapologetically weed your genes out of existence if you don't take action and learn how to attract women now."
+    <cite>— Mystery, Preface</cite>
+  </blockquote>
+
+  <div class="callout teal">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <strong>May the Venusian arts enrich your life, not define it.</strong>
+      Mystery's explicit caveat: the pickup arts exist as a tool for personal enrichment. The goal is a lifestyle with genuine choice — not an identity built around seduction.
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CASANOVA -->
+<section id="casanova">
+<div class="container">
+  <div class="section-label">Chapter One</div>
+  <h2>The Mystery Behind Casanova</h2>
+
+  <p>Born in Venice in 1725, Giacomo Casanova documented 122 liaisons across his 73-year life — not with anyone, but with the high-value women of European aristocracy. His selectivity is the point. Mystery uses Casanova — not the fictional Don Juan, who "screwed anything that moved" — as the role model precisely <em>because</em> he was picky.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="m3-stage attract" style="border-radius:8px;padding:1.25rem;margin-bottom:0.5rem">
+        <div class="stage-label">The Model</div>
+        <div class="stage-name">Casanova</div>
+      </div>
+      <p style="color:var(--muted);font-size:0.88rem;margin-top:0.75rem">122 high-value women. Selective. Quality over quantity. His autobiography remains wildly popular 200 years later.</p>
+    </div>
+    <div class="card">
+      <div class="m3-stage comfort" style="border-radius:8px;padding:1.25rem;margin-bottom:0.5rem">
+        <div class="stage-label">The Counter-Model</div>
+        <div class="stage-name">Don Juan</div>
+      </div>
+      <p style="color:var(--muted);font-size:0.88rem;margin-top:0.75rem">Fictional. Thousands of women indiscriminately. The literary equivalent of pure quantity — the opposite of what Mystery teaches.</p>
+    </div>
+  </div>
+
+  <h3>The Seven-Hour Discovery</h3>
+  <p>By backward-engineering his own successes — "building" a girlfriend and then asking <em>how did I do that?</em> — Mystery identified that courtship from meeting to sex consistently took <span class="hl">four to ten hours</span>, averaging seven. This became the foundational Seven-Hour Rule.</p>
+
+  <div class="callout purple">
+    <div class="callout-icon">🎯</div>
+    <div class="callout-body">
+      <strong>The Counterintuitive Secret</strong>
+      To get the attention of a beautiful woman, you must first <em>disqualify yourself as a potential suitor</em>. If you approach telegraphing interest, she immediately knows you find her high-value — which makes you lower-value by comparison. The solution: demonstrate value before revealing interest.
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EVOLUTION -->
+<section id="evolution">
+<div class="container">
+  <div class="section-label">Chapter Two</div>
+  <h2>The Ultimate Purpose of Life</h2>
+
+  <p>Mystery grounds the entire method in evolutionary biology. Before any technique, understand the <em>why</em> — the biological imperatives that drive human social behavior.</p>
+
+  <div class="callout rose">
+    <div class="callout-icon">⏱️</div>
+    <div class="callout-body">
+      <strong>28,251 Days</strong>
+      The average American lives just 28,251 days. Even at 100 years, that's only 36,500 days. The universe requires only two things: survive and replicate. Your window is finite.
+    </div>
+  </div>
+
+  <div class="grid2" style="margin:2rem 0">
+    <div class="card gold-border">
+      <h4>Martial Arts → Survival</h4>
+      <p style="color:var(--muted);font-size:0.88rem">The Art of War. Practiced routines that, once internalized, improve your chances of physical survival. Named for Mars, Roman god of war.</p>
+      <div class="tag">Defense</div>
+      <div class="tag">Physical</div>
+    </div>
+    <div class="card teal-border">
+      <h4>Venusian Arts → Replication</h4>
+      <p style="color:var(--muted);font-size:0.88rem">The Art of Love. Practiced routines that, once internalized, improve your chances of successful replication. Named for Venus, Roman goddess of love.</p>
+      <div class="tag teal">Connection</div>
+      <div class="tag teal">Social</div>
+    </div>
+  </div>
+
+  <h3>Maslow's Hierarchy of Needs</h3>
+  <p>Every interaction in the field is shaped by where both parties sit on this hierarchy. You can't build genuine rapport with someone struggling to feel safe, and you can't feel self-actualized when you're lonely.</p>
+
+  <div class="maslow">
+    <div class="maslow-row" style="width:30%;background:rgba(139,92,246,0.3);border:1px solid rgba(139,92,246,0.5)">
+      <div class="m-title" style="color:#c4b5fd">Self-Actualization</div>
+      <div class="m-desc">Realizing your full potential</div>
+    </div>
+    <div class="maslow-row" style="width:46%;background:rgba(59,130,246,0.25);border:1px solid rgba(59,130,246,0.4)">
+      <div class="m-title" style="color:#93c5fd">Esteem</div>
+      <div class="m-desc">Achievement, recognition, status</div>
+    </div>
+    <div class="maslow-row" style="width:62%;background:rgba(78,205,196,0.2);border:1px solid rgba(78,205,196,0.4)">
+      <div class="m-title" style="color:var(--teal)">Love &amp; Belonging</div>
+      <div class="m-desc">Friendship, intimacy, connection — <strong>this is the Game</strong></div>
+    </div>
+    <div class="maslow-row" style="width:78%;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.4)">
+      <div class="m-title" style="color:var(--gold2)">Safety</div>
+      <div class="m-desc">Security, stability, freedom from fear</div>
+    </div>
+    <div class="maslow-row" style="width:94%;background:rgba(224,96,106,0.2);border:1px solid rgba(224,96,106,0.4)">
+      <div class="m-title" style="color:var(--rose)">Physiological</div>
+      <div class="m-desc">Food, water, sleep, warmth, sex</div>
+    </div>
+  </div>
+
+  <h3>The Three Vital Areas of Focus</h3>
+  <div class="grid3">
+    <div class="card">
+      <div style="font-size:2rem;margin-bottom:0.5rem">💪</div>
+      <h4>Health</h4>
+      <p style="color:var(--muted);font-size:0.88rem">Body and mind. Physical fitness signals replication value. Mental health drives social comfort. Neglect this and your other areas suffer.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:2rem;margin-bottom:0.5rem">💰</div>
+      <h4>Wealth</h4>
+      <p style="color:var(--muted);font-size:0.88rem">Resources enable every other area. A private apartment enables both health (sleep) and love (location for seduction). Financial independence funds the Game.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:2rem;margin-bottom:0.5rem">❤️</div>
+      <h4>Love</h4>
+      <p style="color:var(--muted);font-size:0.88rem">Romantic relationships, friendships, family, business networks. Loneliness compromises both self-esteem (health) and wealth-building potential.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-icon">⚡</div>
+    <div class="callout-body">
+      <strong>Spiraling</strong>
+      Neglect any one vital area and it infects the other two — which then infect each other in a runaway chain reaction. Health neglect → reduced productivity → wealth decline → loneliness → further health decline. Prevent the spiral by maintaining all three.
+    </div>
+  </div>
+
+  <h3>Dynamic Social Homeostasis</h3>
+  <p>All social animals live under constant pressure from two competing drives: <span class="hl">protecting themselves from others</span> and <span class="hl teal">aligning themselves with others</span>. Perfect balance between these drives is called dynamic social homeostasis — the stable state your emotional circuitry is always trying to restore.</p>
+
+  <h3>Approach Anxiety — The Evolutionary Explanation</h3>
+  <div class="grid2">
+    <div class="card rose-border">
+      <h4>Fear of Reprisal</h4>
+      <p style="color:var(--muted);font-size:0.88rem">In tribal times, approaching a woman who was taken could mean a coalition of her allies dropping rocks on your head. The fear is hardwired — even though modern laws protect you.</p>
+    </div>
+    <div class="card rose-border">
+      <h4>Fear of Rejection</h4>
+      <p style="color:var(--muted);font-size:0.88rem">In a tribe, one bad approach could be known by every woman. Social ruin = genetic death. The stakes felt existential — and your brain still treats them that way.</p>
+    </div>
+  </div>
+
+  <div class="callout teal">
+    <div class="callout-icon">🧠</div>
+    <div class="callout-body">
+      <strong>Confidence is not the objective. Competence is.</strong>
+      The fear of a cold approach never fully goes away — it's hardwired. The solution isn't to feel fearless; it's to have internalized enough competence that you act correctly <em>despite</em> the fear.
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ATTRACTION CIRCUITRY -->
+<section id="attraction">
+<div class="container">
+  <div class="section-label">Chapter Three</div>
+  <h2>Rewiring Her Attraction Circuitry</h2>
+
+  <blockquote>
+    "Don't bother trying to convince her, argue with her, or engage her in any other way on a purely logical level."
+    <cite>— Mystery</cite>
+  </blockquote>
+
+  <p>Women's attraction circuits are calibrated differently from men's — more tuned to social and survival value than physical appearance. Understanding this asymmetry is the foundation of everything that follows.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Male Attraction Switches</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Majority respond to <span class="hl">replication value</span>: hip-to-waist ratio, breast shape, facial symmetry, youth signals. Minority respond to survival value.</p>
+    </div>
+    <div class="card">
+      <h4>Female Attraction Switches</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Majority respond to <span class="hl teal">survival value</span>: social dominance, leadership, resources, protectiveness. Minority respond to replication value (looks).</p>
+    </div>
+  </div>
+
+  <h3>Key Attraction Principles</h3>
+
+  <div class="accordion" id="attraction-accordion">
+
+    <div class="acc-item open">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">Emotional Stimulation Over Logic</div>
+          <div class="acc-phase">Core Principle</div>
+        </div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        <p>Women often use emotions as legitimate reasons unto themselves — "feeling" something to be true is reason enough. A Venusian artist uses emotional stimulation rather than rational discourse. As long as it <em>feels right</em>, she will invent her own reasons for what is happening.</p>
+        <div class="callout" style="margin-top:1rem">
+          <div class="callout-icon">🎭</div>
+          <div class="callout-body">
+            <strong>Never Be Apathetic</strong>
+            Stimulate a <em>range</em> of feelings: curiosity, fascination, indignation, validation, laughter, embarrassment, happiness, sadness, fear of value loss. Engaging on an emotional level — even with a "bad" emotion — is always preferable to not engaging at all.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">Peacock Theory</div>
+          <div class="acc-phase">DHV Strategy</div>
+        </div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        <p>A male bird's long, cumbersome tail is costly evidence of survival ability — peahens want this in offspring. Similarly, wearing attention-getting clothes signals that you are comfortable with social pressure. If you survive wearing a top hat and boa, surrounded by laughing friends, your social dominance is demonstrated.</p>
+        <p><strong>Key rule:</strong> Your personality must be congruent with your peacocked image. Same man, same clothes — in the center of a laughing group vs. alone in the corner — reads completely differently.</p>
+        <div class="rule-box">
+          <div class="rule-num">Peacocking Rule</div>
+          <div class="rule-text">Wear at least one item curious-looking enough to give women a natural, low-risk reason to start a conversation with you. It becomes a lock-in prop and plausible deniability for her to approach.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">Anti-Slut Defense (ASD)</div>
+          <div class="acc-phase">Critical Mechanism</div>
+        </div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        <p>Women have a powerful interruption mechanism that prevents them from feeling responsible for sexual escalation. The word "slut" is a social weapon — and women's emotional circuitry evolved to avoid triggering it.</p>
+        <h4>Plausible Deniability</h4>
+        <p>A woman will rarely do anything during the pickup that makes her feel responsible for what may happen. She needs a cover story: "One thing led to another..." This is why serendipity is so romantic — if it was "meant to be," how can it be her fault?</p>
+        <div class="callout rose">
+          <div class="callout-icon">❌</div>
+          <div class="callout-body">
+            <strong>"Let's go back to my place and have sex."</strong>
+            She must say no — even if she wants to say yes — because saying yes makes her responsible.
+          </div>
+        </div>
+        <div class="callout teal">
+          <div class="callout-icon">✓</div>
+          <div class="callout-body">
+            <strong>"Let's stop by my place on the way to that party — I have to show you my tropical fish."</strong>
+            Now she has plausible deniability. Anything that happens is not "her fault."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">Congruence Tests</div>
+          <div class="acc-phase">Her Testing Mechanism</div>
+        </div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        <p>Women cannot simply ask if you'll support and protect them — you'd lie. So their emotional circuitry generates behavioral tests. She pushes; you either hold your ground or fold. Her intuition reads your response as data about your real character.</p>
+        <p>A test is actually an indicator of interest — she won't bother testing a low-value man. She'll just go nonresponsive and leave.</p>
+        <div class="rule-box">
+          <div class="rule-num">Congruence Test Rule</div>
+          <div class="rule-text">Appeasement is futile. Women push until they find your limits. Feeling your resistance gives her security. Giving in makes her lose respect — and then attraction.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">Cat Theory</div>
+          <div class="acc-phase">Pursuit Dynamics</div>
+        </div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        <blockquote style="margin:0 0 1rem">
+          "Why do you suppose we only feel compelled to chase the ones who run away?"
+          <cite>— Vicomte de Valmont, Les Liaisons Dangereuses</cite>
+        </blockquote>
+        <p>Tie a feather to a string and a cat will perform acrobatics. Put the feather down in front of the cat and it turns up its nose. The Venusian artist keeps validation and attention <em>just slightly out of reach</em>. Too easily acquired → boredom. Completely unattainable → she gives up.</p>
+        <div class="rule-box">
+          <div class="rule-num">Cat Theory Rule</div>
+          <div class="rule-text">Keep bait just barely out of her reach, then entice her in small increments. She must be baited to chase — not handed the prize.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div>
+          <div class="acc-title">Investment Theory</div>
+          <div class="acc-phase">Retention Mechanism</div>
+        </div>
+        <div class="acc-arrow">▼</div>
+      </div>
+      <div class="acc-body">
+        <p>Attraction alone is not enough — it's "but a vapor." She might be fully attracted to you tonight but not return your calls tomorrow. She must become <em>invested</em> before parting.</p>
+        <div class="grid2">
+          <div>
+            <h4>Forms of Investment</h4>
+            <ul class="review-list">
+              <li>Emotional — becoming emotionally vulnerable</li>
+              <li>Physical — kissing &gt; walking together; sex &gt; kissing</li>
+              <li>Time — 4–10 hours builds enough familiarity for sex</li>
+              <li>Effort — is she chasing? People value what cost them</li>
+              <li>Money — did she buy you a drink?</li>
+            </ul>
+          </div>
+          <div>
+            <h4>The Principle</h4>
+            <p style="color:var(--muted);font-size:0.88rem">The more time, money, and effort she invests, the more motivated she becomes to get a return on that investment. Many tactics in the Game are not designed to attract her — they use attraction as bait to <em>get her more invested</em>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end accordion -->
+
+  <h3>Preselection — The Most Powerful Switch</h3>
+  <p>A male grouse alone attracts no females. Place a stuffed female grouse beside him and other females soon enter his territory and mate with him. The principle: if a woman sees that other women find you attractive, she experiences an involuntary attraction signal.</p>
+
+  <div class="grid3">
+    <div class="card">
+      <h4>Women on Your Arm</h4>
+      <p style="color:var(--muted);font-size:0.85rem">The most direct demonstration. Other women's physical interest in you triggers the preselection switch instantly.</p>
+    </div>
+    <div class="card">
+      <h4>Women's Perfume</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Wearing it. When asked what you're wearing, smell your collar and smile to yourself. She fills in the story.</p>
+    </div>
+    <div class="card">
+      <h4>Lipstick on Cheek</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Physical evidence of female interest. As powerful as a good hip-to-waist ratio is to a man's eye.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- M3 MODEL -->
+<section id="m3model">
+<div class="container wide">
+  <div class="section-label">Chapter Four</div>
+  <h2>Rules &amp; Structure of the Game</h2>
+
+  <div class="container" style="padding:0">
+    <p>The Mystery Method is not a collection of pickup lines. It is a <em>model</em> of the courtship process — the natural sequence of events that has underlain every love story ever told — made explicit, teachable, and repeatable.</p>
+
+    <h3>The M3 Model</h3>
+    <p>Every courtship from meeting to sex passes through three stages, each with three phases — nine phases in total.</p>
+  </div>
+
+  <div class="m3-diagram">
+    <div class="m3-row">
+      <div class="m3-stage attract">
+        <div class="stage-label">Stage 1 • Pickup</div>
+        <div class="stage-name">ATTRACT</div>
+      </div>
+      <div class="m3-arrow">→</div>
+      <div class="m3-stage comfort">
+        <div class="stage-label">Stage 2 • Mid-Game</div>
+        <div class="stage-name">BUILD COMFORT</div>
+      </div>
+      <div class="m3-arrow">→</div>
+      <div class="m3-stage seduce">
+        <div class="stage-label">Stage 3 • End-Game</div>
+        <div class="stage-name">SEDUCE</div>
+      </div>
+    </div>
+
+    <div class="m3-phases">
+      <div class="phase-box a"><span class="ph-code">A1</span><span class="ph-name">Open</span></div>
+      <div class="phase-box a"><span class="ph-code">A2</span><span class="ph-name">F→M Interest</span></div>
+      <div class="phase-box a"><span class="ph-code">A3</span><span class="ph-name">M→F Interest</span></div>
+      <div class="phase-box c"><span class="ph-code">C1</span><span class="ph-name">Conversation</span></div>
+      <div class="phase-box c"><span class="ph-code">C2</span><span class="ph-name">Connection</span></div>
+      <div class="phase-box c"><span class="ph-code">C3</span><span class="ph-name">Intimacy</span></div>
+      <div class="phase-box s"><span class="ph-code">S1</span><span class="ph-name">Foreplay</span></div>
+      <div class="phase-box s"><span class="ph-code">S2</span><span class="ph-name">LMR</span></div>
+      <div class="phase-box s"><span class="ph-code">S3</span><span class="ph-name">Sex</span></div>
+    </div>
+  </div>
+
+  <div class="container" style="padding:0">
+    <h3>The Four M3 Sequencing Mistakes</h3>
+    <p>Most men fail not because of individual line flubs but because they run the phases in the wrong order. Understand the four failure patterns:</p>
+
+    <div class="grid2">
+      <div class="card rose-border">
+        <div class="tag rose">Mistake #1</div>
+        <h4>Seduction First (The Seducer)</h4>
+        <p style="color:var(--muted);font-size:0.88rem">Starting at the end. Equivalent to saying "You don't know me, but will you sleep with me?" Attraction hasn't been built; comfort doesn't exist. Blatant sexual advances from a stranger trigger discomfort, not arousal.</p>
+        <div class="tag rose">Fool's Mate</div> <span style="color:var(--dim);font-size:0.8rem">— works rarely, on inexperienced targets only</span>
+      </div>
+      <div class="card rose-border">
+        <div class="tag rose">Mistake #2</div>
+        <h4>Comfort First (The Nice Guy)</h4>
+        <p style="color:var(--muted);font-size:0.88rem">Starting in the middle. "Hi, I'm Joe, what's your name?" without first generating attraction. Beautiful women get this from dozens of men daily. It's not threatening — it's just boring. No attraction = protection shield goes up.</p>
+        <div class="tag rose">Friendship Zone Risk</div>
+      </div>
+      <div class="card rose-border">
+        <div class="tag rose">Mistake #3</div>
+        <h4>Attraction → Seduction (The Player)</h4>
+        <p style="color:var(--muted);font-size:0.88rem">Starting correctly, skipping comfort. Attraction is built but comfort never follows. She's making out with you tonight and never returns your calls tomorrow. Buyer's remorse.</p>
+        <div class="tag rose">Buyer's Remorse</div>
+      </div>
+      <div class="card rose-border">
+        <div class="tag rose">Mistake #4</div>
+        <h4>Attraction → Comfort → Stuck</h4>
+        <p style="color:var(--muted);font-size:0.88rem">Everything is going well but romantic intent is never conveyed. She grows comfortable with your nonsexual nature and prefers you stay that way. "Let's just be friends."</p>
+        <div class="tag rose">Friendship Zone</div>
+      </div>
+    </div>
+
+    <h3>Buyer's Remorse — The Point of No Return</h3>
+    <div class="card gold-border">
+      <p><strong>Kissing is comfort-building. Foreplay is seduction.</strong> This distinction matters enormously.</p>
+      <p style="color:var(--muted);font-size:0.88rem">Comfort kissing (under 30 seconds, no tongue) builds connection. The moment kissing turns into foreplay, you've crossed the point of no return. Without sufficient comfort established beforehand, she <em>will</em> experience buyer's remorse — and she won't return your calls.</p>
+      <div class="callout rose" style="margin-top:1rem">
+        <div class="callout-icon">🛑</div>
+        <div class="callout-body">
+          <strong>Ask yourself: "Is this foreplay?"</strong>
+          If yes — stop. Push her away. Return to comfort. "Whoa, we better slow down. Come on, let's rejoin our friends." A man with reserve who can say this builds more trust than one who can't.
+        </div>
+      </div>
+    </div>
+
+    <h3>Location Types</h3>
+    <div class="venue-flow">
+      <div class="venue-node meet">
+        <div class="vn-label">Meeting</div>
+        <div class="vn-name">Bar / Club</div>
+      </div>
+      <div style="text-align:center">
+        <div class="venue-arrow">→</div>
+        <div class="venue-label" style="font-size:0.7rem">Move</div>
+      </div>
+      <div class="venue-node comfort">
+        <div class="vn-label">C1</div>
+        <div class="vn-name">Quiet Corner</div>
+      </div>
+      <div style="text-align:center">
+        <div class="venue-arrow">→</div>
+        <div class="venue-label" style="font-size:0.7rem">Bounce</div>
+      </div>
+      <div class="venue-node comfort">
+        <div class="vn-label">C2</div>
+        <div class="vn-name">Diner / Walk</div>
+      </div>
+      <div style="text-align:center">
+        <div class="venue-arrow">→</div>
+        <div class="venue-label" style="font-size:0.7rem">Bounce</div>
+      </div>
+      <div class="venue-node comfort">
+        <div class="vn-label">C3</div>
+        <div class="vn-name">Your Living Room</div>
+      </div>
+      <div style="text-align:center">
+        <div class="venue-arrow">→</div>
+        <div class="venue-label" style="font-size:0.7rem">Move</div>
+      </div>
+      <div class="venue-node sex">
+        <div class="vn-label">Sex Location</div>
+        <div class="vn-name">Bedroom</div>
+      </div>
+    </div>
+
+    <h3>The Newbie Drill</h3>
+    <div class="card gold-border">
+      <div class="grid3">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;color:var(--gold);font-weight:bold">4</div>
+          <div style="color:var(--muted);font-size:0.85rem">nights per week</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;color:var(--gold);font-weight:bold">4</div>
+          <div style="color:var(--muted);font-size:0.85rem">hours per night</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;color:var(--gold);font-weight:bold">3</div>
+          <div style="color:var(--muted);font-size:0.85rem">approaches per hour</div>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:1rem;text-align:center">= 48 approaches/week → ~200/month → 2,400+/year</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- A1 OPEN -->
+<section id="open">
+<div class="container">
+  <div class="section-label">Phase A1</div>
+  <h2>Open — Crossing the Social Hook Point</h2>
+
+  <p>A1 begins when you open a set and ends when the set <em>wants you to stay</em>. That moment of social acceptance is the hook point. Before it, you're an uninvited stranger. After it, you're a welcomed guest.</p>
+
+  <div class="callout">
+    <div class="callout-icon">🎯</div>
+    <div class="callout-body">
+      <strong>The Three-Second Rule</strong>
+      Within three seconds of spotting a woman you're attracted to, open her set. Waiting gives approach anxiety time to compound. Moving quickly also reads as natural confidence — she can't tell you were nervous because you didn't hesitate.
+    </div>
+  </div>
+
+  <h3>Indirect vs. Direct Openers</h3>
+  <div class="grid2">
+    <div class="card rose-border">
+      <h4>Direct Opener</h4>
+      <p style="color:var(--muted);font-size:0.88rem">"Wow, you are beautiful; my name is Glen." Conveys confidence but immediately telegraphs interest, alienates her friends, and triggers her protection shield before you've demonstrated any value.</p>
+      <div class="tag rose">Rarely Recommended</div>
+    </div>
+    <div class="card teal-border">
+      <h4>Indirect Opener</h4>
+      <p style="color:var(--muted);font-size:0.88rem">A story, observation, or question that opens conversation without telegraphing sexual interest. Lets you assess group dynamics, demonstrate personality, and earn the right to be there before revealing intent.</p>
+      <div class="tag teal">MM Standard</div>
+    </div>
+  </div>
+
+  <h3>Protection Shield</h3>
+  <p>Beautiful women have developed strategies — individually and collectively — to screen out low-value approaches:</p>
+  <div class="ioi-grid">
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>Wearing a ring</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>"I have a boyfriend"</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>Surrounding with friends</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>Sitting in hard-to-approach spots</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>Being "bitchy"</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>Negative body language</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>No eye contact</div>
+    <div class="ioi-item" style="color:var(--rose)"><span style="color:var(--rose)">✗</span>Lack of responsiveness</div>
+  </div>
+  <p style="color:var(--muted);font-size:0.88rem">These strategies often aren't who she really is — they're learned responses to constant unwanted approaches. An indirect opener that doesn't telegraph interest is the key to bypassing the shield entirely.</p>
+
+  <h3>False Time Constraints (FTCs)</h3>
+  <p>When you open, you haven't demonstrated value yet. Her subconscious asks: <em>How long is this guy going to be here?</em> A false time constraint preempts that discomfort by creating the impression that you're leaving anyway.</p>
+
+  <div class="card gold-border">
+    <p style="color:var(--muted);font-size:0.88rem;margin:0">"I can only stay a sec — I'm here with friends, but check this out..."</p>
+    <p style="color:var(--muted);font-size:0.88rem;margin:0.5rem 0 0">"I've only got a minute, so I've got to tell you about..."</p>
+  </div>
+  <p style="color:var(--muted);font-size:0.88rem;margin-top:0.75rem">Once you reach the hook point, use another FTC. The set now <em>wants you to stay</em> — announcing you're leaving creates fear of loss and begins the cycle of baiting the target to chase.</p>
+
+  <h3>Body Language Fundamentals</h3>
+  <div class="grid2">
+    <div>
+      <div class="rule-box">
+        <div class="rule-num">Lean Back</div>
+        <div class="rule-text">The person leaning back holds more power. Lean in = you value her more than she values you. Lean back = equal or higher value. Never "peck" (lean in every time you speak).</div>
+      </div>
+      <div class="rule-box">
+        <div class="rule-num">Body Angle on Open</div>
+        <div class="rule-text">When running your opener, don't face the set with your full body. Head turned toward them, body angled away — as if you're just passing through. As they hook, gradually turn to face them. Reward their engagement.</div>
+      </div>
+    </div>
+    <div>
+      <div class="rule-box">
+        <div class="rule-num">Body Rocking</div>
+        <div class="rule-text">A physical false time constraint. Shift weight to your back leg mid-sentence as if about to leave, then come back as you continue talking. Nonverbal "I'm leaving... but actually..." loop.</div>
+      </div>
+      <div class="rule-box">
+        <div class="rule-num">Voice Tonality</div>
+        <div class="rule-text">Deep, from the diaphragm. Speak slowly with pauses. Speak loudly enough to project confidence. Eliminate "uh," "like," and "you know." Expressiveness in tone matters more than content.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Social Proof</h3>
+  <p>Be the most sociable person in the room. Move from set to set — not scanning predatorily but talking genuinely with everyone. As you do, adjacent sets notice. You appear to have friends everywhere. Women see this and their preselection switches activate before you even approach them.</p>
+
+  <div class="callout teal">
+    <div class="callout-icon">♟️</div>
+    <div class="callout-body">
+      <strong>Canned Material</strong>
+      Field-tested routines that generate consistent responses. The delivery matters more than the content. A comedian performing a joke for the 50th time has ironed out every timing beat — pickup artists do the same with social routines. Incongruence (the words don't match the delivery) is fatal. Naturalization takes ~24 repetitions.
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- A2 -->
+<section id="f2m">
+<div class="container">
+  <div class="section-label">Phase A2</div>
+  <h2>Female-to-Male Interest — Demonstrating Value</h2>
+
+  <p>A2 is about creating the conditions for her to develop genuine attraction. You demonstrate higher value (DHV) to the entire group while simultaneously <em>negging</em> the target, causing her to want your approval and give you indicators of interest (IOIs).</p>
+
+  <h3>Indicators of Interest (IOIs)</h3>
+  <p>IOIs are the feedback signals that tell you attraction is building. Track them — they determine when to advance phases.</p>
+
+  <div class="ioi-grid">
+    <div class="ioi-item">She reinitiates when you stop talking</div>
+    <div class="ioi-item">She giggles or laughs</div>
+    <div class="ioi-item">She touches you</div>
+    <div class="ioi-item">She builds rapport and comfort with you</div>
+    <div class="ioi-item">She tosses her hair</div>
+    <div class="ioi-item">She holds eye contact a beat longer</div>
+    <div class="ioi-item">She asks your name or age</div>
+    <div class="ioi-item">She compliments you</div>
+    <div class="ioi-item">She challenges you playfully</div>
+    <div class="ioi-item">She plays with her hair while talking</div>
+    <div class="ioi-item">Her leg touches yours (seated)</div>
+    <div class="ioi-item">She asks if you have a girlfriend</div>
+    <div class="ioi-item">She introduces you to her friends</div>
+    <div class="ioi-item">She buys you a drink</div>
+    <div class="ioi-item">She comes back to find you on leaving</div>
+    <div class="ioi-item">She returns your calls</div>
+  </div>
+
+  <div class="callout purple">
+    <div class="callout-icon">👁️</div>
+    <div class="callout-body">
+      <strong>Passive IOIs — Often the Only Ones You'll Get</strong>
+      Her friends leave but she stays. She comes to find you for extended periods. If you move, she follows. She doesn't flinch when you get close. These silences say more than words.
+    </div>
+  </div>
+
+  <h3>Neg Theory</h3>
+  <p>Beautiful women (9s and 10s) face a daily stream of men who say "You're beautiful" and offer to buy them drinks. They've developed rapid-dismissal strategies for exactly this. The neg circumvents these strategies without insulting her.</p>
+
+  <blockquote>
+    "A neg is not an insult but a negative social value judgment that is telegraphed. It's the same as if you pulled out a tissue and blew your nose. There's nothing insulting about blowing your nose. But she will feel that you aren't even trying to impress her."
+    <cite>— Mystery</cite>
+  </blockquote>
+
+  <div class="grid3">
+    <div class="card">
+      <h4>Shotgun Neg</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Said for the group's benefit. Keeps friends from thinking you have a sexual motive. Disarms obstacles. "She poops words." "Where's her off button?"</p>
+      <div class="tag">Nonneedy IOD</div>
+    </div>
+    <div class="card">
+      <h4>Tease Neg</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Cocky and playful. Deliberate flirting. "Pull my finger — phft! You fell for it. Weirdo." Stimulates emotions, conveys confidence.</p>
+      <div class="tag">Cocky-Playful</div>
+    </div>
+    <div class="card">
+      <h4>Sniper Neg</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Only she hears it. Makes her think she's done a DLV — "you have something on your nose." Creates self-consciousness, vulnerability to later flattery.</p>
+      <div class="tag">Private</div>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <div class="rule-num">Throw and Go Rule</div>
+    <div class="rule-text">Toss the neg like a pebble, then turn away before it lands. You're not watching for her reaction — if you were, she'd sense it, the neg would read as deliberate manipulation, and it would fail. Inadvertence is essential.</div>
+  </div>
+
+  <h3>Demonstrations of Higher Value (DHVs)</h3>
+  <p>Anything that conveys higher survival-and-replication value is a DHV. Conversely, anything that conveys lower S&amp;R value is a DLV (Demonstration of Lower Value).</p>
+
+  <div class="ioi-grid">
+    <div class="ioi-item">Preselection from other women</div>
+    <div class="ioi-item">Appearing leader of men</div>
+    <div class="ioi-item">Being protector of loved ones</div>
+    <div class="ioi-item">Being nonneedy</div>
+    <div class="ioi-item">Social intelligence and awareness</div>
+    <div class="ioi-item">Negging her (this IOD is also DHV)</div>
+    <div class="ioi-item">Strong frame control</div>
+    <div class="ioi-item">Interesting knowledge</div>
+    <div class="ioi-item">Emotional stimulation</div>
+    <div class="ioi-item">Others seeking your attention</div>
+    <div class="ioi-item">Fun, emotionally relevant stories</div>
+    <div class="ioi-item">Connecting conversationally</div>
+  </div>
+
+  <h3>Group Theory — Lead the Men, the Women Follow</h3>
+  <p>Beautiful women are rarely alone. They cluster with trusted friends in groups. The traditional approach — wait for her to be alone — drastically limits options and accelerates nothing. Mystery Method approaches the <em>group</em>.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Single Set</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Approach directly. No eye contact wait — just walk up, make eye contact, smile. Don't establish eye contact then stall — that breaks the Three-Second Rule and signals chickening out.</p>
+    </div>
+    <div class="card">
+      <h4>Two-Set</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Target + one friend (obstacle). Win the obstacle first. Neg the target while talking to the obstacle. Once obstacle likes you, pay attention to target. Wing may then occupy obstacle to enable isolation.</p>
+    </div>
+    <div class="card">
+      <h4>Three-Set and More</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Target + two+ obstacles. Same process — disarm all obstacles before IOI-ing target. In a three-set you can isolate the target because her friends still have each other. Easier than the two-set.</p>
+    </div>
+    <div class="card">
+      <h4>Mixed Set</h4>
+      <p style="color:var(--muted);font-size:0.85rem">Includes men. Initiate with the men first. Befriend them. Ask the waypoint question. If a man is the boyfriend — lucky you befriended him before expressing interest in his girlfriend.</p>
+    </div>
+  </div>
+
+  <h3>Multiple Conversational Threads</h3>
+  <p>Familiar friends naturally jump between topics — they don't exhaust one thread then move to the next. New acquaintances run one thread to completion and then feel awkward silence. By running multiple threads simultaneously, you create the <em>feeling</em> of deep familiarity even with someone you just met.</p>
+
+  <div class="rule-box">
+    <div class="rule-num">Thread Cutting</div>
+    <div class="rule-text">When a thread becomes boring, sad, or otherwise unhelpful — cut it and introduce a new one immediately. Don't wait for her to start a bad thread. Lead. Her boredom in a conversation is your responsibility.</div>
+  </div>
+
+  <h3>Winging — The Wing Rules</h3>
+  <ol style="color:var(--muted);font-size:0.9rem;padding-left:1.25rem;line-height:2">
+    <li>He who opens the set leads the set. Gets first choice of target.</li>
+    <li>Your primary purpose as wing: help the pickup artist get his target.</li>
+    <li>Never steal your wing's target (even if he's temporarily ignoring or negging her).</li>
+    <li>Occupy obstacles so the player gets more one-on-one time.</li>
+    <li>Always agree with your wing. Never take the girls' side over his.</li>
+    <li>Introduce your wing with an accomplishment intro, not just a name.</li>
+    <li>Never leave your wing standing unacknowledged — disrespecting him drops your value.</li>
+  </ol>
+
+  <h3>Locking In</h3>
+  <p>For as long as you're standing in front of a seated or bar-leaning group, they hold the power position — better sightlines, more comfort. The goal is to take their spot.</p>
+  <p>The <strong>Spin Maneuver</strong>: Say "go like this" (hold out hand → compliance test). Take her hand when she mirrors you. Say "do a little spin" (second compliance test). Spin her, and step into her bar position. You're now leaning back comfortably; she's facing you with her back to the room. The room sees her up on you, not the reverse.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- A3 -->
+<section id="m2f">
+<div class="container">
+  <div class="section-label">Phase A3</div>
+  <h2>Male-to-Female Interest — Getting Her Invested</h2>
+
+  <blockquote>
+    "Attraction is only a tool. In A3, you will use her interest — combined with takeaways and screening — to bait the target into demonstrating value of her own."
+    <cite>— Mystery</cite>
+  </blockquote>
+
+  <p>A common mistake: thinking that attraction gets the girl. It doesn't — it gets you the <em>opportunity</em> to get her invested. A3 uses her attraction as bait to make her chase, demonstrate value, and ultimately pair-bond with you.</p>
+
+  <h3>Frame Control</h3>
+  <p>The frame is the underlying unspoken assumption — the context that gives meaning to every word exchanged. He who controls the frame controls the communication itself.</p>
+
+  <div class="grid2">
+    <div class="card gold-border">
+      <h4>The Right Frame</h4>
+      <p style="color:var(--muted);font-size:0.88rem">You are the prize. She is chasing you. You are screening her to see if she qualifies. You have high standards and many options. If you like her, it's because she is genuinely special — not because you're settling.</p>
+    </div>
+    <div class="card rose-border">
+      <h4>The Wrong Frame</h4>
+      <p style="color:var(--muted);font-size:0.88rem">You need her approval. She is the prize. You are grateful she's talking to you. You'll take whatever you can get. Subtle behavioral cues telegraph this constantly — and her attraction circuits read them.</p>
+    </div>
+  </div>
+
+  <h3>Hoop Theory</h3>
+  <p>People constantly test whether you'll jump into their hoops — hold her purse, react to her fake IOD, explain yourself, apologize. Jumping into her hoops signals lower value. The solution: bait her to jump into yours first, then optionally jump into hers.</p>
+
+  <div class="callout">
+    <div class="callout-icon">🔄</div>
+    <div class="callout-body">
+      <strong>Give-and-Take Formula</strong>
+      If she gives you a hoop, make her jump into one of yours before you jump into hers. The more obvious the hoop, the less likely either party should jump into it — start small, build compliance momentum.
+    </div>
+  </div>
+
+  <h3>Kino Escalation</h3>
+  <p>"Kino" (kinesthetic — touch) should begin in the earliest stages of the set and escalate continuously to sex. There is no "big moment" — just a natural, seamless flow of increasingly intimate contact, none of which ever feels remarkable in isolation.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">Early Set (A1-A2)</div><div class="tl-body">Accidental arm brush. Demonstrative hand gestures that happen near her. Nothing that could be called deliberate.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">A3</div><div class="tl-body">Kino test (hands). Compliance momentum building. Spinning her. Light arm contact while telling stories.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">C1</div><div class="tl-body">Hand holding (via palm reading, thumb wrestling, etc.). Arm-in-arm. Sitting with legs touching.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">C2</div><div class="tl-body">Comfort kissing (under 30 sec, nonsexual). Embracing. Sitting on lap.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">C3 → S1</div><div class="tl-body">Transition to foreplay only after sufficient comfort. This is the point of no return.</div></div>
+  </div>
+
+  <div class="rule-box">
+    <div class="rule-num">One Step Forward, Two Steps Back</div>
+    <div class="rule-text">Escalate, then at any sign of hesitation — retreat further than you advanced. The retreat creates more discomfort than the advance did. She becomes more likely to accept the next forward step.</div>
+  </div>
+
+  <h3>Bait → Hook → Reel → Release</h3>
+  <p>The core A3 cycle — repeated continuously until she's fully invested:</p>
+
+  <div class="card gold-border">
+    <div style="display:flex;gap:0;align-items:center;flex-wrap:wrap;justify-content:center">
+      <div style="text-align:center;padding:1rem 1.5rem">
+        <div style="font-size:1.5rem">🎣</div>
+        <div style="color:var(--gold2);font-weight:bold">BAIT</div>
+        <div style="color:var(--dim);font-size:0.8rem">Challenge / Screen<br>Compliance test</div>
+      </div>
+      <div style="color:var(--dim);font-size:1.5rem;padding:0 0.5rem">→</div>
+      <div style="text-align:center;padding:1rem 1.5rem">
+        <div style="font-size:1.5rem">🪝</div>
+        <div style="color:var(--teal);font-weight:bold">HOOK</div>
+        <div style="color:var(--dim);font-size:0.8rem">She DHVs for you<br>She complies</div>
+      </div>
+      <div style="color:var(--dim);font-size:1.5rem;padding:0 0.5rem">→</div>
+      <div style="text-align:center;padding:1rem 1.5rem">
+        <div style="font-size:1.5rem">🎁</div>
+        <div style="color:var(--purple);font-weight:bold">REEL</div>
+        <div style="color:var(--dim);font-size:0.8rem">Give her an SOI<br>Kino escalation</div>
+      </div>
+      <div style="color:var(--dim);font-size:1.5rem;padding:0 0.5rem">→</div>
+      <div style="text-align:center;padding:1rem 1.5rem">
+        <div style="font-size:1.5rem">🔙</div>
+        <div style="color:var(--rose);font-weight:bold">RELEASE</div>
+        <div style="color:var(--dim);font-size:0.8rem">False disqualifier<br>Takeaway / IOD</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Screening — Having Standards</h3>
+  <p>High-value men are selective. Demonstrating selectivity is a DHV. Get her hoping she's good enough to qualify for you — not the other way around.</p>
+  <div class="callout teal">
+    <div class="callout-icon">🔍</div>
+    <div class="callout-body">
+      <strong>Screening Questions</strong>
+      "What do you want to be when you grow up?" / "Is there more to you than meets the eye?" / "What are your three best qualities?" / "Can you cook? Are you adventurous?" — You're not interrogating; you're genuinely curious whether she meets your standards.
+    </div>
+  </div>
+
+  <h3>Intermittent Rewarding</h3>
+  <p>Consistent rewarding breeds complacency. Intermittent, unpredictable rewarding breeds obsession. Mix IOIs with IODs in a hot-cold, push-pull dynamic. She should feel hope, doubt, surprise, longing, fear of loss — the full range of emotional engagement.</p>
+
+  <h3>Compliance Momentum</h3>
+  <p>Start with small, innocuous hoops. As she complies, the hoops grow larger. Her compliance momentum builds — she's falling further into your frame with each small yes, without noticing the pattern. The compliance threshold (where she realizes she benefits more from complying) should be reached in A3.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMFORT -->
+<section id="comfort">
+<div class="container">
+  <div class="section-label">Chapter Eight</div>
+  <h2>Conversation &amp; Comfort — C1</h2>
+
+  <blockquote>
+    "The Game is played in comfort. Everything else was merely to get to this point."
+    <cite>— Mystery</cite>
+  </blockquote>
+
+  <p>All the attraction and investment built so far is useless without genuine comfort. A woman who enjoyed your company at the club but doesn't <em>know</em> you won't return your calls. Comfort solves this.</p>
+
+  <div class="grid2">
+    <div class="card teal-border">
+      <h4>What Comfort Builds</h4>
+      <ul class="review-list">
+        <li>Wide conversational rapport</li>
+        <li>Sense of comfort and trust</li>
+        <li>Feeling that the interaction is real and genuine</li>
+        <li>A felt connection</li>
+      </ul>
+    </div>
+    <div class="card teal-border">
+      <h4>Why Numbers Flake</h4>
+      <p style="color:var(--muted);font-size:0.88rem">The primary cause: not enough comfort. She had fun but doesn't know you. She's not sure how you'll behave when you're alone. She's not uncomfortable enough to say no to seeing you but not comfortable enough to say yes.</p>
+    </div>
+  </div>
+
+  <h3>The Freeze-Out</h3>
+  <p>When she behaves badly in the comfort phase, you can't use attraction-phase tools (negging, ball-busting). Instead: withdraw attention. She'll ask "What's wrong?" You say "Nothing" — not sulking, genuinely unaffected, a slight loss of interest. She feels the loss and course-corrects.</p>
+
+  <div class="rule-box">
+    <div class="rule-num">After the Freeze-Out</div>
+    <div class="rule-text">Immediately give her an easy compliance test so you can reward her for passing it. Punishment alone creates fear of you. Punishment → easy win → reward creates a trained association: behave well = feel good.</div>
+  </div>
+
+  <h3>Commonality</h3>
+  <p>People are more attracted to those they consider similar to themselves. Draw out information about her and demonstrate shared experiences, values, or worldview. Serendipity — the feeling that this was <em>meant to be</em> — is a powerful comfort-builder.</p>
+  <p><strong>Caveat:</strong> Visibly fishing for commonalities reads as desperate. Use conversation games (music game, question game) to create organic, surprise moments of connection.</p>
+
+  <h3>Conspiracy</h3>
+  <p>Once you've bounced together, done A3, and started building comfort — a shared frame emerges naturally. Inside jokes. Nicknames. The two of you "in on something" together. This is conspiracy. Nurture it; it's what distinguishes you from "some guy she met at a bar."</p>
+
+  <h3>Vulnerability</h3>
+  <p>Sharing vulnerabilities creates emotional connection. Too early = try-hard. At the right time in comfort = powerful. Structure stories where vulnerability appears accidentally revealed. Her self-disclosure follows yours — the question game is excellent for this.</p>
+
+  <h3>Jealousy Plotlines</h3>
+  <p>For a woman, jealousy is often a more powerful motivator than horniness. The moment she experiences jealousy is frequently the first moment she consciously realizes how attracted she is to you.</p>
+
+  <div class="card gold-border">
+    <h4>How to Create Jealousy</h4>
+    <ul class="review-list">
+      <li>Bring a pivot (female friend) who sits on your lap at the right moment</li>
+      <li>Backward-merge to a previous set — introduce her to a previous target</li>
+      <li>Forward-merge — open a new set and bring your target with you</li>
+      <li>On the phone: "Hold on, I have another call" (3–4 times)</li>
+      <li>Casually mention "a girlfriend of mine..." in conversation</li>
+    </ul>
+  </div>
+
+  <h3>Grounding</h3>
+  <p>When she asks "What do you do?" — the answer alone creates distance. The grounding routine gives her your backstory so she can follow your journey and feel she <em>understands</em> you.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">"When I was young..."</div><div class="tl-body">Childhood dreams and ambitions. She sees you as a regular kid — commonality established.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">"When I was a teenager..."</div><div class="tl-body">The journey — what happened, how you got from there to here. Stories, setbacks, turning points.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-title">"Now I'm a [X]..."</div><div class="tl-body">Where you are today and what's next. She's been on this journey with you — the distance is gone.</div></div>
+  </div>
+
+  <div class="callout purple">
+    <div class="callout-icon">💬</div>
+    <div class="callout-body">
+      <strong>Talking is a Logistical Tool</strong>
+      Conversation occupies her conscious mind — including the part that would otherwise be running ASD calculations. Like a road trip where the conversation makes the miles disappear, skilled comfort-building makes the courtship advance seamlessly. She's suddenly at your place without having "decided" to go.
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- END GAME -->
+<section id="endgame">
+<div class="container">
+  <div class="section-label">Chapter Nine</div>
+  <h2>Mid-Game &amp; End-Game</h2>
+
+  <h3>The Seven-Hour Rule</h3>
+  <p>Mystery discovered through systematic analysis of his own successful courtships that sex consistently occurred after <span class="hl">four to ten hours</span> of cumulative comfort building — averaging seven. This pattern held regardless of whether those hours were continuous or accumulated across multiple meetings.</p>
+
+  <div class="hour-bar">
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem">Typical 7-Hour Courtship Timeline</div>
+    <div class="hour-bar-track">
+      <div class="hour-seg a1">A1</div>
+      <div class="hour-seg a2">A2</div>
+      <div class="hour-seg a3">A3</div>
+      <div class="hour-seg c1">C1</div>
+      <div class="hour-seg c2" style="flex:3">C2</div>
+      <div class="hour-seg c3">C3</div>
+      <div class="hour-seg s">S</div>
+    </div>
+    <div class="hour-legend">
+      <span class="hl-item"><span class="hl-dot" style="background:rgba(201,168,76,0.8)"></span>A1-A3 Pickup (~1hr)</span>
+      <span class="hl-item"><span class="hl-dot" style="background:rgba(78,205,196,0.8)"></span>C1 In-venue (~1hr)</span>
+      <span class="hl-item"><span class="hl-dot" style="background:rgba(78,205,196,0.5)"></span>C2 Bounce (~3hrs)</span>
+      <span class="hl-item"><span class="hl-dot" style="background:rgba(78,205,196,0.3)"></span>C3 Home (~1hr)</span>
+      <span class="hl-item"><span class="hl-dot" style="background:rgba(224,96,106,0.8)"></span>Seduction</span>
+    </div>
+  </div>
+
+  <h3>Bouncing and Time Bridges</h3>
+  <div class="grid2">
+    <div class="card teal-border">
+      <h4>The Bounce</h4>
+      <p style="color:var(--muted);font-size:0.88rem">Instant venue change — "We're about to grab food at Mel's; you're welcome to join us." Each bounce is a structured opportunity for her to pursue you, increases investment, and resets the "new venue" novelty that refreshes the interaction.</p>
+      <div class="callout teal" style="margin-top:0.75rem;padding:0.75rem 1rem">
+        <div class="callout-icon" style="font-size:1rem">💡</div>
+        <div class="callout-body" style="font-size:0.82rem"><strong>Get her number before bouncing.</strong> That way if the bounce fails, you haven't settled — you just happened to get her number along the way.</div>
+      </div>
+    </div>
+    <div class="card gold-border">
+      <h4>Time Bridge</h4>
+      <p style="color:var(--muted);font-size:0.88rem">Used when you can't bounce that night. Not just exchanging numbers — you leave with a specific plan: "I'm going to the Magic Castle Thursday. I'd like you to come." A number without a plan is a stairway to nowhere. A time bridge has two firm sides.</p>
+    </div>
+  </div>
+
+  <h3>Phone Game</h3>
+  <ul class="review-list">
+    <li>Never let any single number become too important — practice with all of them</li>
+    <li>Call the same night after leaving — short, casual chat, then let her go</li>
+    <li>Call a day or two later to chat, not necessarily to set a date</li>
+    <li>Invite her to fun activities the way you'd invite any friend</li>
+    <li>Time on the phone counts toward the seven hours</li>
+    <li>Numbers flake — keep rotating, keep practicing; as game improves, flake rate drops</li>
+  </ul>
+
+  <h3>Dating — A Repeatable Structure</h3>
+  <p>If you're getting numbers but not sex, design a specific date structure you can repeat and refine. Build in venue changes, hours together, and a natural path back to your place.</p>
+
+  <div class="card gold-border">
+    <h4>Sample Date Routine (Mystery's)</h4>
+    <div class="timeline" style="margin-top:1rem">
+      <div class="tl-item"><div class="tl-dot" style="background:var(--teal)"></div><div class="tl-title">7:30 PM — She arrives at your place</div><div class="tl-body">You "forgot" something — run back upstairs. She sees your apartment briefly, making it familiar (not unknown/scary) for later.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--teal)"></div><div class="tl-title">8:00 PM — Sushi</div><div class="tl-body">Comfort building, question game, palm reading, vibing. Various restaurant rituals as shared experience.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--teal)"></div><div class="tl-title">9:00 PM — Live music venue nearby</div><div class="tl-body">Another bounce. VIP card means no line. More drinks, push-pull to maintain tension.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--teal)"></div><div class="tl-title">10:00 PM — Concert room</div><div class="tl-body">Leading through crowd = natural physical closeness. Two hours of shared laughter.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--rose)"></div><div class="tl-title">Midnight — Back to your place</div><div class="tl-body">"You can come up, but only for a few minutes — I have to work tomorrow." Scarcity. Then balcony, then bedroom.</div></div>
+    </div>
+  </div>
+
+  <h3>Last-Minute Resistance (LMR)</h3>
+  <p>LMR is approach anxiety's counterpart — a hardwired fear response right before first-time sex. It's normal, not a rejection. Her emotional circuitry is protecting against genetic investment in a man who might not stick around.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Causes of LMR</h4>
+      <ul class="review-list">
+        <li>Insufficient comfort built</li>
+        <li>She doesn't feel she's "won" you over</li>
+        <li>She hasn't earned your interest in her eyes</li>
+        <li>ASD activated by premature escalation</li>
+        <li>She's worried about how you'll act after</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Responses to LMR</h4>
+      <ul class="review-list">
+        <li>Agree with her token resistance — don't argue</li>
+        <li>"I know, baby. We should stop." (Keep going.)</li>
+        <li>Freeze-out: turn on lights, check email, make a sandwich</li>
+        <li>Play solid game earlier so LMR barely arises</li>
+        <li>Convey pair-bond throughout C phases: "You're on my mind more than I expected"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout teal">
+    <div class="callout-icon">⚖️</div>
+    <div class="callout-body">
+      <strong>Solid Game Reduces LMR</strong>
+      The checklist: Are you healthy and socially comfortable? Do you convey non-neediness? Have you demonstrated preselection? Has she invested and chased? Have you built comfort over 7 hours and multiple venues? Did you use a jealousy plotline? If yes to all — LMR is rarely an issue.
+    </div>
+  </div>
+
+  <h3>Mystery's Kiss Gambit</h3>
+  <div class="card gold-border">
+    <p style="color:var(--gold3);font-style:italic">"Shh! You talk a lot. Would you like to kiss me?"</p>
+    <ul class="review-list" style="margin-top:0.75rem">
+      <li><strong>She says yes:</strong> Kiss her.</li>
+      <li><strong>She says maybe / why / I dunno:</strong> "Let's find out" — advance 90%, let her close the 10%.</li>
+      <li><strong>She says no:</strong> "I didn't say you could — it just looked like you had something on your mind." (Don't ask why.)</li>
+      <li><strong>She says not yet / not here:</strong> "I understand." — Logistical issue, not rejection. Kiss her later in private.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GLOSSARY -->
+<section id="glossary">
+<div class="container">
+  <div class="section-label">Reference</div>
+  <h2>Glossary</h2>
+  <p>Field-tested terminology used throughout the Mystery Method community.</p>
+
+  <div class="glossary-search">
+    <input type="text" id="glSearch" placeholder="Search terms..." oninput="filterGlossary()">
+    <span class="gl-count" id="glCount"></span>
+  </div>
+
+  <div class="glossary-grid" id="glossaryGrid">
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">The Mystery Method</div>
+  <p>by Mystery (Erik von Markovik) &nbsp;·&nbsp; Foreword by Neil Strauss</p>
+  <p style="margin-top:0.5rem">Educational summary. All concepts belong to their original authors.</p>
+</footer>
+
+<script>
+// ── ACCORDION ──
+function toggleAcc(header) {
+  const item = header.closest('.acc-item');
+  item.classList.toggle('open');
+}
+
+// ── GLOSSARY DATA ──
+const glossaryTerms = [
+  ["Accomplishment Introduction", "The wing describing the pickup artist to the set in a way that conveys not only his name but also something impressive he has done (e.g., 'This is Mystery. He levitated over Niagara Falls')."],
+  ["Advanced Group Theory", "The art of merging groups in the field to build social proof and improve logistical positioning."],
+  ["AFC (Average Frustrated Chump)", "A man who places women on a pedestal, rarely closes, and has a tendency toward nice-guy behavior that generates friend-zone outcomes."],
+  ["Anti-Slut Defense (ASD)", "A hardwired interrupt mechanism that prevents women from feeling responsible for sexual escalation, or from being perceived as a slut."],
+  ["Approach Anxiety", "The overwhelming urge to retreat from a high-value woman even in the presence of an equally overwhelming urge to approach her."],
+  ["Approach Invitations", "Eye contact and other subtle signals that a woman wants you to enter her physical space."],
+  ["Arbitrary Target", "Someone gamed for practice rather than genuine attraction."],
+  ["Bait-Hook-Reel-Release", "The A3 cycle: bait her with a challenge or screening question, she hooks by demonstrating value, you reel her in with an IOI, then release with an IOD or false disqualifier."],
+  ["Blurring", "When a woman gives out a phone number that doesn't work, or that she'll never respond to."],
+  ["Body Rocking", "Using physical movement (shifting weight back) to create the nonverbal impression that you're about to leave — a physical false time constraint."],
+  ["Bounce", "Moving you and the girl together to a different venue in the same night, as a comfort-building step."],
+  ["Buyer's Remorse", "The regret a woman experiences when — before enough comfort was built — she allowed things to escalate further than she was ready for."],
+  ["Calibration", "Finely tuned social intuition developed from extensive field experience, allowing you to predict social behavior before it occurs."],
+  ["Canned Material", "Field-tested, internalized routines ready to deploy in set. Generates consistent responses when delivered congruently."],
+  ["Cat Theory", "Keeping bait just out of reach and enticing in small increments. She must be made to chase like a cat with a feather on a string."],
+  ["C1", "Any comfort-building location within the meeting location (quiet corner, bar stool, etc.)."],
+  ["C2", "Any comfort-building location separate from the meeting and sex locations (restaurant, walk, etc.)."],
+  ["C3", "Any comfort-building location within the sex location (living room, balcony near your bedroom)."],
+  ["Comfort-Building Location", "A quieter, more secluded setting where lengthy dialogue can build trust and connection."],
+  ["Compliance Momentum", "The tendency for small acts of compliance to build upon each other, making larger compliance progressively easier."],
+  ["Compliance Testing", "Asking the target to do something (small or large) to gauge her investment level and advance the interaction."],
+  ["Compliance Threshold", "The point at which she realizes she benefits more from complying than from resisting."],
+  ["Congruence Test", "A conscious or unconscious behavioral test by women to determine whether a man's projected value is real."],
+  ["Conspiracy", "A shared frame between you and your romantic interest — inside jokes, nicknames, the sense of being 'in on something together.'"],
+  ["Courtship", "The full process of beginning a sexual relationship: 'from meet to sex.'"],
+  ["Cutting the Thread", "Ending a conversational thread that has become unhelpful and introducing a replacement immediately."],
+  ["Decimal Rating Scale", "A 6–10 scale for assessing female appearance: 6 = OK-looking, 10 = supermodel. Numbers below 6 are not rated."],
+  ["DHV", "Demonstration of Higher Value — anything that conveys higher survival-and-replication value."],
+  ["DLV", "Demonstration of Lower Value — anything that conveys lower S&R value."],
+  ["Disarm", "To neutralize a target's friends (obstacles) by demonstrating noninterest in the target and high social value to the group."],
+  ["Discretion", "Not publicly bragging about sexual conquests. Makes women far more willing to engage, knowing there will be no social consequences."],
+  ["Dynamic Social Homeostasis", "The balanced state between protecting oneself from others and aligning with others that all social animals seek."],
+  ["Emotional Stimulation", "Getting a woman to respond because it feels right, without rational discourse. The opposite of logical persuasion."],
+  ["End-Game", "The third stage of courtship — seduction (S1, S2, S3)."],
+  ["External Interrupt", "An abrupt change in a set's internal dynamic caused by someone else's arrival (waitress, friend, etc.)."],
+  ["False Disqualifier", "A line that disarms the target while demonstrating confidence and non-neediness. 'It would never work between us.' 'You're fired.'"],
+  ["False Time Constraint (FTC)", "Creating the illusion in the target's mind that you're about to leave, reducing her protective anxiety and creating fear of loss."],
+  ["Fool's Mate", "Seduction-first tactics. Occasionally works but not solid game — leaves you vulnerable and relies on the target's inexperience."],
+  ["Frame", "The underlying unspoken assumption — the context that supplies meaning to everything said. He who controls the frame controls the interaction."],
+  ["Frame Games", "The behavioral cues and subtleties through which people convey and contest their assumptions."],
+  ["Freeze-Out", "Deliberately withdrawing attention to create discomfort as correction for bad behavior, without expressing anger."],
+  ["Friendship Zone", "A trap where a woman has grown comfortable with someone's nonsexual nature and prefers he stay that way. 'Let's just be friends.'"],
+  ["Gaming Locations", "The set of physical locations visited during a complete courtship."],
+  ["Great Collapse", "The end result of unchecked spiraling: sickness, poverty, and loneliness simultaneously."],
+  ["Grounding", "Giving a target your backstory so she can follow your life's journey and feel she understands who you are today."],
+  ["Group Theory", "Applying social dynamics and the M3 model to groups of people found in public settings."],
+  ["Having Standards", "Subtle behavioral cues that set the frame of being a selective, high-value individual who won't accept just anyone."],
+  ["Hired Gun", "A woman employed for her beauty — hostess, bartender, promotional model, exotic dancer."],
+  ["Hoop", "A test or request used to see whether you'll jump — hold her purse, react to a fake IOD, explain yourself, apologize."],
+  ["Incongruence", "A disconnect between what you say and how you say it. Fatal to canned material delivery."],
+  ["IOD", "Indicator of Disinterest — signs, mostly nonverbal, that a woman isn't attracted or engaged."],
+  ["IOI", "Indicator of Interest — signs, mostly nonverbal, that a woman is attracted to you."],
+  ["Inner Game", "The internal strength and genuineness of your frame — who you are beneath the techniques."],
+  ["Internalization", "The process of practicing the MM skill set until it becomes automatic and unconscious."],
+  ["Investment", "The degree to which a woman involves herself — emotionally, physically, temporally, financially, or through effort."],
+  ["Kino", "Physical touching of any kind. Short for 'kinesthetic.'"],
+  ["Kino Escalation", "Progressively more intimate physical contact, beginning in early set and continuing seamlessly to sex."],
+  ["Kino Pinging", "Light, playful reciprocal touching that signals and generates growing attraction."],
+  ["LMR (Last-Minute Resistance)", "Resistant behavior just before first-time sex — a hardwired fear response, not a rejection."],
+  ["LMR Threshold", "The dividing line between having and not having sex with you. Variable across individuals and encounters."],
+  ["Leader of Men", "An attraction switch triggered in women when they see a man leading other men confidently."],
+  ["Lock-In Prop", "An item given to the target (hat, scarf, photos) to make it logistically harder for her to leave the set."],
+  ["M3 Model", "Mystery's model describing courtship through three stages (Attract, Comfort, Seduce) and nine phases."],
+  ["Meeting Location", "Any place with high probability of meeting women — bar, club, restaurant, festival, etc."],
+  ["Merge Backward", "Reopening a previous set and merging your current set back into it."],
+  ["Merge Forward", "Opening a new set and merging your existing set into it."],
+  ["Mid-Game", "The second stage of courtship — comfort building (C2)."],
+  ["Move", "Relocating within the current venue (meeting location → C1, or C3 → sex location)."],
+  ["Moxie", "Inventive courage — always leading the interaction with creative initiative."],
+  ["Multiple Conversational Threads", "Running several conversational topics in parallel, creating the feeling of deep familiarity even with a new acquaintance."],
+  ["Naturalization Phase", "The ~24 repetitions it takes for a scripted routine to come out congruently and naturally."],
+  ["Neg", "A subtle negative social value judgment — not an insult — that disqualifies you as a typical suitor and creates curiosity."],
+  ["Nice Guy", "A man who seeks comfort with a woman before generating attraction, triggering the protection shield."],
+  ["Obstacle", "A friend of your target. Must be disarmed before she can be won over."],
+  ["Opener", "A short story or comment used to get a group's attention and earn acceptance. Ideally indirect."],
+  ["Orbiter", "A nice guy who poses as a hot woman's platonic friend while secretly wanting to sleep with her."],
+  ["Pawn", "A woman previously gamed and brought into a new set to build social proof and lower protection shields."],
+  ["Peacocking", "Wearing attention-getting clothing to signal social dominance and create natural conversation entry points."],
+  ["Pecking", "Leaning in every time you speak — a DLV that signals you value her more than she values you."],
+  ["Pickup", "The first stage of courtship — attraction (A1, A2, A3, C1)."],
+  ["Plausible Deniability", "Giving a woman an excuse so that anything that happens isn't 'her fault.' Disables anti-slut defense."],
+  ["Player Traps", "Three errors for otherwise successful pickup artists: (1) failure to justify mutual attraction, (2) skipping comfort, (3) buyer's remorse."],
+  ["Preselection", "An attraction switch triggered when a woman sees that other women have already approved of you sexually."],
+  ["Protection Shield", "The collection of strategies women use to screen out low-value approaches from men."],
+  ["Proximity", "Physical nearness — often used by interested women to signal openness to an approach without being overt."],
+  ["Rationalization", "The mental process by which women explain their behavior after the fact ('one thing led to another...')."],
+  ["Replication", "Passing one's genes to offspring — the penultimate purpose of life according to MM's evolutionary framework."],
+  ["Routine Stack", "A prepared sequence of canned material: opener, several routines, gambits, and closers."],
+  ["S1", "Foreplay — the beginning of the seduction phase."],
+  ["S2", "Last-Minute Resistance — the emotional resistance just before first-time sex."],
+  ["S3", "Sex — the culmination of the courtship process."],
+  ["Seven-Hour Rule", "The average cumulative time (4–10 hours) of comfort building required before a woman is ready for seduction."],
+  ["Sex Location", "The private space (usually a bedroom) where sex ultimately takes place."],
+  ["Social Alignments", "Relationships formed to improve chances of survival and replication."],
+  ["Social Hook Point", "The threshold at which you've demonstrated enough value that the set wants you to stay."],
+  ["Social Proof", "The perception by others that you are valued by people around you. Created by gaming the room actively."],
+  ["Social Robot", "A person who applies game mechanics so rigidly they lose the ability to vibe naturally with people."],
+  ["Solid Game", "Following the MM process correctly (Attract → Comfort → Seduce) rather than shortcuts like fool's mate."],
+  ["SOI (Statement of Interest)", "An explicit verbal statement expressing your growing interest in the target."],
+  ["Spiraling", "The runaway chain reaction when a vital area (health/wealth/love) is neglected long enough to infect the other two."],
+  ["Three-Second Rule", "Open a set within three seconds of spotting the target to preempt approach anxiety and project natural confidence."],
+  ["Time Bridge", "An agreement to meet again at a specific time and place — a bridge, not just a phone number."],
+  ["Token Resistance", "Temporary, culturally programmed hesitation before physical escalation — not genuine rejection."],
+  ["Try-Hard", "Putting in too much visibly palpable effort to impress — a DLV that signals you don't believe you have sufficient value."],
+  ["Venusian Arts", "The art of picking up a woman you've just met and successfully beginning an intimate relationship — the replication-aiding counterpart to the martial arts."],
+  ["Vital Areas of Focus", "Health, Wealth, and Love — the three domains that must be maintained for successful survival and replication."],
+  ["Waypoint", "The 'So how do you all know each other?' question, asked 3–5 minutes into every set to map group dynamics."],
+  ["Wing", "A companion whose primary role is to help the pickup artist get his target, by occupying obstacles and providing social proof."],
+];
+
+// Render glossary
+const grid = document.getElementById('glossaryGrid');
+glossaryTerms.forEach(([term, def]) => {
+  const el = document.createElement('div');
+  el.className = 'gl-item';
+  el.innerHTML = `<div class="gl-term">${term}</div><div class="gl-def">${def}</div>`;
+  el.dataset.term = term.toLowerCase();
+  el.dataset.def = def.toLowerCase();
+  grid.appendChild(el);
+});
+
+function filterGlossary() {
+  const q = document.getElementById('glSearch').value.toLowerCase().trim();
+  const items = grid.querySelectorAll('.gl-item');
+  let count = 0;
+  items.forEach(item => {
+    const match = !q || item.dataset.term.includes(q) || item.dataset.def.includes(q);
+    item.classList.toggle('hidden', !match);
+    if (match) count++;
+  });
+  document.getElementById('glCount').textContent = q ? `${count} of ${glossaryTerms.length} terms` : `${glossaryTerms.length} terms`;
+}
+filterGlossary();
+
+// ── NAV HIGHLIGHT ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.style.color = '';
+        a.style.borderBottomColor = '';
+        if (a.getAttribute('href') === '#' + e.target.id) {
+          a.style.color = 'var(--gold)';
+          a.style.borderBottomColor = 'var(--gold)';
+        }
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

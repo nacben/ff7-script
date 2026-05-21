@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Models: Attract Women Through Honesty — A Deep Dive</title>
+<style>
+  :root {
+    --bg-primary: #0d0d14;
+    --bg-secondary: #12121e;
+    --bg-card: #1a1a28;
+    --bg-card-hover: #1f1f32;
+    --accent-gold: #c9a84c;
+    --accent-gold-light: #e8c86e;
+    --accent-blue: #4a90d9;
+    --accent-teal: #2ec4b6;
+    --accent-red: #e74c3c;
+    --accent-purple: #9b59b6;
+    --accent-green: #27ae60;
+    --text-primary: #e8e8f0;
+    --text-secondary: #9090a8;
+    --text-muted: #5c5c7a;
+    --border-color: #2a2a3e;
+    --border-bright: #3a3a58;
+    --gradient-gold: linear-gradient(135deg, #c9a84c, #e8c86e);
+    --gradient-blue: linear-gradient(135deg, #4a90d9, #2ec4b6);
+    --gradient-hero: linear-gradient(135deg, #0d0d14 0%, #1a1228 50%, #0d0d14 100%);
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+    --shadow-glow: 0 0 30px rgba(201,168,76,0.15);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --transition: 0.3s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLL PROGRESS ─── */
+  #scrollProgress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--gradient-gold);
+    z-index: 1000;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 3px; left: 0; right: 0;
+    background: rgba(13,13,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 999;
+    padding: 0 24px;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.03em;
+    transition: color var(--transition);
+  }
+
+  .nav-links a:hover { color: var(--accent-gold); }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section {
+    padding: 80px 0;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--accent-gold);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .hero-title span {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .hero-author {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 52px;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 52px;
+  }
+
+  .stat-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gradient-gold);
+    color: #0d0d14;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+
+  .hero-cta:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-tag {
+    display: inline-block;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+
+  .tag-gold { background: rgba(201,168,76,0.12); color: var(--accent-gold); border: 1px solid rgba(201,168,76,0.25); }
+  .tag-blue { background: rgba(74,144,217,0.12); color: var(--accent-blue); border: 1px solid rgba(74,144,217,0.25); }
+  .tag-teal { background: rgba(46,196,182,0.12); color: var(--accent-teal); border: 1px solid rgba(46,196,182,0.25); }
+  .tag-red { background: rgba(231,76,60,0.12); color: var(--accent-red); border: 1px solid rgba(231,76,60,0.25); }
+  .tag-purple { background: rgba(155,89,182,0.12); color: var(--accent-purple); border: 1px solid rgba(155,89,182,0.25); }
+  .tag-green { background: rgba(39,174,96,0.12); color: var(--accent-green); border: 1px solid rgba(39,174,96,0.25); }
+
+  .section-title {
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  /* ─── CORE THESIS ─── */
+  #core-thesis {
+    background: var(--bg-secondary);
+  }
+
+  .thesis-statement {
+    background: var(--bg-card);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    text-align: center;
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .thesis-statement h3 {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .thesis-statement p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .comparison-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid var(--border-color);
+  }
+
+  .comparison-card.needy {
+    border-top: 3px solid var(--accent-red);
+  }
+
+  .comparison-card.non-needy {
+    border-top: 3px solid var(--accent-green);
+  }
+
+  .comparison-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .comparison-label.bad { color: var(--accent-red); }
+  .comparison-label.good { color: var(--accent-green); }
+
+  .comparison-card h4 {
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+  }
+
+  .comparison-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comparison-card ul li {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .comparison-card ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+  }
+
+  .needy ul li::before { color: var(--accent-red); }
+  .non-needy ul li::before { color: var(--accent-green); }
+
+  /* ─── CARDS ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-bright);
+    transform: translateY(-4px);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .card-chapter {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  /* ─── QUOTE BLOCKS ─── */
+  .quote-block {
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent-gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 24px 28px;
+    margin: 32px 0;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text-primary);
+    position: relative;
+  }
+
+  .quote-block::before {
+    content: '"';
+    position: absolute;
+    top: 10px; left: 16px;
+    font-size: 3rem;
+    color: var(--accent-gold);
+    opacity: 0.3;
+    line-height: 1;
+  }
+
+  .quote-block p { padding-left: 24px; }
+
+  .quote-source {
+    display: block;
+    font-style: normal;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+    padding-left: 24px;
+  }
+
+  /* ─── ACCORDION ─── */
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .accordion-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--transition);
+  }
+
+  .accordion-header:hover { background: var(--bg-card-hover); }
+
+  .accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .accordion-num {
+    background: rgba(201,168,76,0.15);
+    color: var(--accent-gold);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .accordion-header h3 {
+    font-size: 1.02rem;
+    color: var(--text-primary);
+  }
+
+  .accordion-header p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+
+  .accordion-arrow {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--border-color);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform var(--transition), background var(--transition);
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+  }
+
+  .accordion-arrow.open {
+    transform: rotate(180deg);
+    background: rgba(201,168,76,0.2);
+    color: var(--accent-gold);
+  }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .accordion-body.open { max-height: 1200px; }
+
+  .accordion-content {
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+  }
+
+  .accordion-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .accordion-content p:last-child { margin-bottom: 0; }
+
+  /* ─── KEY INSIGHT BOXES ─── */
+  .insight-box {
+    background: rgba(74,144,217,0.08);
+    border: 1px solid rgba(74,144,217,0.25);
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin: 16px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .insight-box.gold {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .insight-box.teal {
+    background: rgba(46,196,182,0.08);
+    border-color: rgba(46,196,182,0.25);
+  }
+
+  .insight-box.red {
+    background: rgba(231,76,60,0.08);
+    border-color: rgba(231,76,60,0.25);
+  }
+
+  .insight-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+
+  .insight-box p {
+    font-size: 0.93rem;
+    color: var(--text-secondary) !important;
+    margin: 0 !important;
+    line-height: 1.7;
+  }
+
+  .insight-box strong { color: var(--text-primary); }
+
+  /* ─── TAGS ─── */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+    border: 1px solid;
+  }
+
+  .tag-g { background: rgba(201,168,76,0.1); color: var(--accent-gold); border-color: rgba(201,168,76,0.25); }
+  .tag-b { background: rgba(74,144,217,0.1); color: var(--accent-blue); border-color: rgba(74,144,217,0.25); }
+  .tag-t { background: rgba(46,196,182,0.1); color: var(--accent-teal); border-color: rgba(46,196,182,0.25); }
+  .tag-p { background: rgba(155,89,182,0.1); color: var(--accent-purple); border-color: rgba(155,89,182,0.25); }
+  .tag-r { background: rgba(231,76,60,0.1); color: var(--accent-red); border-color: rgba(231,76,60,0.25); }
+
+  /* ─── STEP PROCESS ─── */
+  .step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .step-num {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .step.highlight .step-num {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+  }
+
+  .step-content h4 { font-size: 1rem; margin-bottom: 6px; }
+  .step-content p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; }
+
+  /* ─── FUNDAMENTALS ─── */
+  .fundamentals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 36px;
+  }
+
+  .fundamental-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: background var(--transition), transform var(--transition), border-color var(--transition);
+  }
+
+  .fundamental-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-bright);
+    transform: translateY(-6px);
+  }
+
+  .fundamental-num {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .fundamental-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+  }
+
+  .fundamental-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .fundamental-chapters {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* ─── THREE WOMEN TABLE ─── */
+  .women-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .woman-type {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    border-top: 3px solid;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .woman-type.receptive { border-color: var(--accent-green); }
+  .woman-type.neutral { border-color: var(--accent-gold); }
+  .woman-type.unreceptive { border-color: var(--accent-red); }
+
+  .woman-type h4 {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .receptive h4 { color: var(--accent-green); }
+  .neutral h4 { color: var(--accent-gold); }
+  .unreceptive h4 { color: var(--accent-red); }
+
+  .woman-type p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    line-height: 1.65;
+  }
+
+  .woman-type-action {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+  }
+
+  .receptive .woman-type-action { background: rgba(39,174,96,0.15); color: var(--accent-green); }
+  .neutral .woman-type-action { background: rgba(201,168,76,0.15); color: var(--accent-gold); }
+  .unreceptive .woman-type-action { background: rgba(231,76,60,0.15); color: var(--accent-red); }
+
+  /* ─── ACTION PLAN LEVELS ─── */
+  .levels-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .level-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: background var(--transition), border-color var(--transition);
+  }
+
+  .level-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-bright);
+  }
+
+  .level-badge {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .l1 .level-badge { background: rgba(155,89,182,0.15); color: var(--accent-purple); border: 1px solid rgba(155,89,182,0.3); }
+  .l2 .level-badge { background: rgba(74,144,217,0.15); color: var(--accent-blue); border: 1px solid rgba(74,144,217,0.3); }
+  .l3 .level-badge { background: rgba(46,196,182,0.15); color: var(--accent-teal); border: 1px solid rgba(46,196,182,0.3); }
+  .l4 .level-badge { background: rgba(39,174,96,0.15); color: var(--accent-green); border: 1px solid rgba(39,174,96,0.3); }
+  .l5 .level-badge { background: rgba(201,168,76,0.15); color: var(--accent-gold); border: 1px solid rgba(201,168,76,0.3); }
+  .l6 .level-badge { background: rgba(232,200,110,0.15); color: #e8c86e; border: 1px solid rgba(232,200,110,0.3); }
+  .l7 .level-badge { background: rgba(201,168,76,0.2); color: var(--accent-gold-light); border: 1px solid rgba(201,168,76,0.4); }
+
+  .level-info h4 { font-size: 1rem; margin-bottom: 4px; }
+  .level-info p { font-size: 0.88rem; color: var(--text-secondary); }
+
+  .level-focus {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 0;
+  }
+
+  /* ─── MINI LIST ─── */
+  .mini-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0;
+  }
+
+  .mini-list li {
+    list-style: none;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .mini-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+    font-size: 0.82rem;
+  }
+
+  /* ─── FORMULA DISPLAY ─── */
+  .formula-box {
+    background: var(--bg-card);
+    border: 1px solid var(--accent-teal);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    text-align: center;
+    margin: 32px 0;
+  }
+
+  .formula-box h3 {
+    font-size: 1.05rem;
+    color: var(--accent-teal);
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .formula {
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .formula span { color: var(--accent-teal); }
+
+  .formula-note {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 64px 0 40px;
+    text-align: center;
+  }
+
+  .footer-quote {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--text-primary);
+    max-width: 700px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .footer-meta {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-meta a {
+    color: var(--accent-gold);
+    text-decoration: none;
+  }
+
+  /* ─── HIGHLIGHT TEXT ─── */
+  .highlight-gold { color: var(--accent-gold); }
+  .highlight-blue { color: var(--accent-blue); }
+  .highlight-teal { color: var(--accent-teal); }
+  .highlight-red { color: var(--accent-red); }
+  .highlight-green { color: var(--accent-green); }
+
+  /* ─── TWO-COL ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .two-col-wide {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* ─── TABLE ─── */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 0.93rem;
+  }
+
+  .styled-table th {
+    background: var(--bg-card);
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .styled-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+
+  .styled-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .styled-table td:first-child {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ─── SPECTRUM BAR ─── */
+  .spectrum {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+
+  .spectrum h4 {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .spectrum-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, var(--accent-green), var(--accent-gold), var(--accent-red));
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .spectrum-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav .nav-links { display: none; }
+    .comparison-grid { grid-template-columns: 1fr; }
+    .fundamentals-grid { grid-template-columns: 1fr; }
+    .women-types { grid-template-columns: 1fr; }
+    .two-col, .two-col-wide { grid-template-columns: 1fr; }
+    .level-card { grid-template-columns: 1fr; }
+    .level-focus { text-align: left; }
+    section { padding: 60px 0; }
+    .hero-stats { gap: 12px; }
+    .stat-box { min-width: 100px; padding: 16px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .hero-stats .stat-box { min-width: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">Models · Mark Manson</div>
+    <ul class="nav-links">
+      <li><a href="#core-thesis">Thesis</a></li>
+      <li><a href="#part1">Reality</a></li>
+      <li><a href="#part2">Strategy</a></li>
+      <li><a href="#part3">Living</a></li>
+      <li><a href="#part4">Action</a></li>
+      <li><a href="#part5">Communication</a></li>
+      <li><a href="#action-plan">Plan</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Complete Breakdown &amp; Study Guide</div>
+      <h1 class="hero-title">
+        <span>Models</span><br>
+        Attract Women Through Honesty
+      </h1>
+      <p class="hero-subtitle">The most mature and honest guide to improving your dating life ever written.</p>
+      <p class="hero-author">by Mark Manson &nbsp;·&nbsp; A Comprehensive Educational Overview</p>
+      <div class="hero-stats">
+        <div class="stat-box">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Parts</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">15</span>
+          <span class="stat-label">Chapters</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Fundamentals</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">1</span>
+          <span class="stat-label">Core Truth</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Action Levels</span>
+        </div>
+      </div>
+      <a href="#core-thesis" class="hero-cta">Begin the Deep Dive ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ INTRODUCTION ═══════════════════════════ -->
+<section id="intro" style="background: var(--bg-secondary); padding: 60px 0;">
+  <div class="container">
+    <div class="two-col-wide">
+      <div>
+        <div class="section-tag tag-gold">Introduction</div>
+        <h2 class="section-title">What This Book Is — and Isn't</h2>
+        <p class="section-desc">Most dating advice manipulates women or manipulates men into thinking they need to manipulate women. <em>Models</em> is different. It's built on a single, radical premise: authentic self-expression is more attractive than any technique.</p>
+        <div class="quote-block">
+          <p>I'm not going to tell you how to pretend to be an amazing man. I'm going to help you actually become one.</p>
+          <span class="quote-source">— Mark Manson</span>
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">The book rejects the "pickup artist" model entirely. Instead of tricks and routines designed to game women's psychology, it argues that men who are genuinely non-needy, emotionally honest, and clear about their intentions are naturally attractive — and that this is a standard any man can meet through honest self-work.</p>
+      </div>
+      <div>
+        <div class="insight-box gold">
+          <span class="insight-icon">💡</span>
+          <p><strong>The Central Argument:</strong> Attractiveness is not a skill to be learned — it's an expression of who you are. The work, therefore, is internal: become a less needy, more authentic version of yourself.</p>
+        </div>
+        <div style="margin-top: 20px;">
+          <table class="styled-table">
+            <thead><tr><th>Conventional Advice</th><th>Models' Approach</th></tr></thead>
+            <tbody>
+              <tr><td>Scripts &amp; routines</td><td>Authentic expression</td></tr>
+              <tr><td>Trick her into attraction</td><td>Express genuine desire</td></tr>
+              <tr><td>Never show weakness</td><td>Embrace vulnerability</td></tr>
+              <tr><td>Maximize approval</td><td>Polarize indifferent women</td></tr>
+              <tr><td>Fear of rejection</td><td>Rejection as information</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CORE THESIS ═══════════════════════════ -->
+<section id="core-thesis">
+  <div class="container">
+    <div class="section-tag tag-gold">Core Thesis</div>
+    <h2 class="section-title">The Architecture of Attraction</h2>
+    <p class="section-desc">Everything in the book stems from a single psychological insight about what actually makes men attractive.</p>
+
+    <div class="thesis-statement">
+      <h3>Attractiveness Is Inversely Proportional to Neediness</h3>
+      <p>The more a man needs external validation — from women, from society, from any source — the less attractive he is. The more he is validated internally, living by his own values and expressing himself honestly regardless of outcome, the more attractive he becomes.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <div class="comparison-card needy">
+        <div class="comparison-label bad">✗ The Needy Man (Jeff)</div>
+        <h4>Driven by External Validation</h4>
+        <ul>
+          <li>Prioritizes what women think over what he thinks</li>
+          <li>Hides his true feelings to avoid rejection</li>
+          <li>Performs &amp; postures to gain approval</li>
+          <li>Changes his behavior based on her mood</li>
+          <li>Invests more in others' opinions than in his own</li>
+          <li>Feels desperate — and it shows</li>
+          <li>Uses women to fill an emotional void</li>
+          <li>Views relationships as transactions</li>
+        </ul>
+      </div>
+      <div class="comparison-card non-needy">
+        <div class="comparison-label good">✓ The Non-Needy Man (Jim)</div>
+        <h4>Driven by Internal Values</h4>
+        <ul>
+          <li>Expresses himself honestly, outcome independent</li>
+          <li>States his intentions clearly and directly</li>
+          <li>Maintains his values &amp; standards under pressure</li>
+          <li>Comfortable with — even attracted to — strong women</li>
+          <li>Trusts his own perception and judgement</li>
+          <li>Projects confidence without arrogance</li>
+          <li>Genuine desire to connect, not to fill a void</li>
+          <li>Views relationships as opportunities for mutual growth</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>Neediness is when you place a higher priority on what others think of you than what you think of yourself. The vast majority of men spend their entire lives doing this without ever realizing it.</p>
+      <span class="quote-source">— Ch. 2: The Seduction Process</span>
+    </div>
+
+    <div class="insight-box teal">
+      <span class="insight-icon">🔑</span>
+      <p><strong>Why it matters:</strong> Neediness is not just unattractive — it's contagious as a signal. Everything a needy man does — his body language, his conversation, his decisions — leaks his need for external validation. You can't "fake" non-neediness; you have to actually develop it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PART I ═══════════════════════════ -->
+<section id="part1" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-tag tag-blue">Part I · Chapters 1–4</div>
+    <h2 class="section-title">Reality</h2>
+    <p class="section-desc">How women experience attraction, why most men get it wrong, and the psychological mechanisms that actually create deep, lasting interest.</p>
+
+    <div class="accordion">
+
+      <!-- Chapter 1 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">1</div>
+            <div>
+              <h3>What Women Want</h3>
+              <p>Female attraction is emotional, not logical — and that changes everything</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>Women are not attracted in a step-by-step logical sequence. They don't meet a man, assess his resume, and decide to feel attracted. Attraction for women is an <strong>emotional experience</strong> — it happens in the moment, through how interactions feel, not what facts are presented.</p>
+            <div class="insight-box">
+              <span class="insight-icon">⚡</span>
+              <p><strong>The implication:</strong> This is why buying dinner, listing accomplishments, or performing impressive feats often backfires. These things address logic. Attraction is emotional. What creates attraction is how she <em>feels</em> in your presence — which is driven by your emotional state, your confidence, your realness.</p>
+            </div>
+            <p>Men who try to "convince" women to like them through logical arguments or impressive displays are misunderstanding the mechanism entirely. You don't argue someone into attraction. You create the conditions for it to emerge.</p>
+            <p>The chapters also establish that female attraction is strongly tied to perception of social status, physical confidence, and emotional strength — and that these qualities are genuine things that can be developed, not tricks to be performed.</p>
+            <div class="tag-list">
+              <span class="tag tag-b">Emotional Experience</span>
+              <span class="tag tag-b">Feelings vs. Facts</span>
+              <span class="tag tag-b">Social Status</span>
+              <span class="tag tag-b">In-Moment Chemistry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">2</div>
+            <div>
+              <h3>The Seduction Process</h3>
+              <p>Why attraction requires investment — and what "investment" actually means</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>Attraction is not instant — it builds through a process of investment. The more someone invests in an interaction (time, energy, emotional attention), the more they tend to value it. This is universal psychology.</p>
+            <p>The seduction process, properly understood, is the gradual escalation of mutual investment and trust. This is not manipulation — it's the natural arc of any developing relationship. Problems arise when men try to shortcut this process (coming on too strong too soon) or stretch it indefinitely (never escalating, becoming "just a friend").</p>
+            <div class="insight-box gold">
+              <span class="insight-icon">💡</span>
+              <p><strong>Key insight:</strong> Neediness violates the investment principle. A needy man invests heavily and immediately — he "falls hard" without reciprocation, sends too many texts, plans elaborate dates — which signals low status and desperation. Non-needy behavior means your investment is proportional to hers and grows naturally over time.</p>
+            </div>
+            <p>Manson also introduces the concept of <strong>"demographics"</strong> here — the idea that compatibility is a fixed variable. Not every woman is a match for every man regardless of how well he performs. The goal is not to "get" any specific woman, but to find and connect with the women who are genuinely compatible.</p>
+            <div class="tag-list">
+              <span class="tag tag-g">Mutual Investment</span>
+              <span class="tag tag-g">Escalation</span>
+              <span class="tag tag-g">Proportional Response</span>
+              <span class="tag tag-g">Compatibility</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 3 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">3</div>
+            <div>
+              <h3>The Gift of Truth</h3>
+              <p>Why vulnerability is the cornerstone of genuine connection</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>This is one of the book's most psychologically sophisticated chapters. Manson argues that <strong>vulnerability</strong> — not confidence tricks — is what creates real intimacy and deep attraction. Vulnerability is the willingness to say what you actually feel, express what you actually want, and show who you actually are, without guarantee of acceptance.</p>
+            <div class="quote-block">
+              <p>Vulnerability is not weakness. It's the willingness to express yourself with no guarantee of outcome. It's the most courageous thing a person can do.</p>
+              <span class="quote-source">— Ch. 3</span>
+            </div>
+            <p>Most men are trained, culturally and socially, to hide vulnerability. They perform toughness. They never admit uncertainty. They deflect emotional questions. This comes across not as strength but as <em>fear</em> — because that's exactly what it is. Real emotional strength is not the absence of vulnerability, but the willingness to be vulnerable from a position of security.</p>
+            <div class="insight-box teal">
+              <span class="insight-icon">🔍</span>
+              <p><strong>The paradox:</strong> Men who refuse to show vulnerability in order to appear strong actually appear weaker — because they signal they cannot handle emotional exposure. Men who are comfortable being vulnerable appear stronger — because they signal they don't need approval from the outcome.</p>
+            </div>
+            <p>This chapter also distinguishes between performative vulnerability (emotional manipulation, oversharing to elicit pity) and genuine vulnerability (honest expression of real feelings without agenda).</p>
+            <div class="tag-list">
+              <span class="tag tag-t">Vulnerability</span>
+              <span class="tag tag-t">Emotional Honesty</span>
+              <span class="tag tag-t">Genuine Connection</span>
+              <span class="tag tag-t">Courage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 4 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">4</div>
+            <div>
+              <h3>The Honest Truth</h3>
+              <p>Neediness, behavior, and why most dating advice makes things worse</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>Chapter 4 completes Part I by tying together the threads: why conventional dating advice fails, and what genuinely changes the dynamic. The core problem with most advice is that it treats the <em>behavior</em> (what to say, what to do) as the variable, when the <em>mindset</em> (how you relate to yourself and others) is what actually drives outcomes.</p>
+            <p>A man who is genuinely non-needy will naturally behave in ways women find attractive — not because he learned the "right moves," but because non-neediness expresses itself through everything: eye contact, posture, the way he speaks, how he handles disagreement, how he responds to rejection. It's holistic, not a script.</p>
+            <div class="insight-box red">
+              <span class="insight-icon">⚠️</span>
+              <p><strong>The problem with techniques:</strong> Techniques are a band-aid over the underlying need for approval. A man who learns a "line" but is still fundamentally needy will deliver that line needily — and it will fail. Worse, techniques create inauthenticity, which women detect instinctively.</p>
+            </div>
+            <p>Manson ends Part I with a clear directive: the work is internal. Change your relationship with yourself and your need for validation, and your external behavior will change as a natural consequence.</p>
+            <div class="tag-list">
+              <span class="tag tag-r">Internal Work</span>
+              <span class="tag tag-r">Mindset vs. Technique</span>
+              <span class="tag tag-r">Holistic Change</span>
+              <span class="tag tag-r">Anti-Manipulation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PART II ═══════════════════════════ -->
+<section id="part2">
+  <div class="container">
+    <div class="section-tag tag-teal">Part II · Chapters 5–7</div>
+    <h2 class="section-title">Strategy</h2>
+    <p class="section-desc">The practical framework for interacting with women authentically — including polarization, the three types of women, and the Three Fundamentals of non-neediness.</p>
+
+    <!-- Chapter 5: Polarization -->
+    <div style="margin-bottom: 56px;">
+      <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Ch. 5 — Polarization: The Only Strategy That Works</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 28px; line-height: 1.8;">Most men try to avoid rejection by being broadly likeable — neutral, inoffensive, non-threatening. This strategy backfires. Being inoffensive also means being uninteresting. Manson introduces <strong>polarization</strong>: the deliberate, honest expression of who you are, knowing it will attract some women and repel others — and that both outcomes are valuable.</p>
+
+      <div class="women-types">
+        <div class="woman-type receptive">
+          <h4>Receptive Women</h4>
+          <p>She's interested in you and open to being approached. She's generally positive, responsive, and engaged. Chemistry and circumstances align.</p>
+          <div class="tag-list"><span class="tag tag-t">Pursue directly</span></div>
+          <span class="woman-type-action">Make a move. Now.</span>
+        </div>
+        <div class="woman-type neutral">
+          <h4>Neutral / Indifferent Women</h4>
+          <p>She doesn't know you yet or hasn't formed an opinion. Not particularly interested, not dismissive. A blank canvas. The largest group.</p>
+          <div class="tag-list"><span class="tag tag-g">Polarize toward receptive</span></div>
+          <span class="woman-type-action">Express yourself boldly</span>
+        </div>
+        <div class="woman-type unreceptive">
+          <h4>Unreceptive Women</h4>
+          <p>She's not interested for any number of reasons — she's in a relationship, she's not attracted, circumstances aren't right, or you're simply not compatible.</p>
+          <div class="tag-list"><span class="tag tag-r">Respect and move on</span></div>
+          <span class="woman-type-action">Accept gracefully</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <div class="insight-box gold">
+          <span class="insight-icon">💡</span>
+          <p><strong>The key insight:</strong> You can't convert an unreceptive woman into a receptive one through persistence or technique. And trying to attract <em>everyone</em> by being bland means you attract <em>no one</em> genuinely. Polarization converts neutral women into receptive ones — and filters out the incompatible ones quickly, saving everyone's time.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 6: Rejection -->
+    <div style="margin-bottom: 56px;">
+      <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Ch. 6 — The Truth About Rejection</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 28px; line-height: 1.8;">Rejection is the central obstacle most men face — not logistically, but psychologically. The fear of rejection keeps men passive, indirect, and inauthentic. Manson reframes rejection entirely.</p>
+
+      <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <div class="card" style="opacity:1; transform:none; border-top: 2px solid var(--accent-gold);">
+          <div class="card-icon">📊</div>
+          <h3>Rejection as Information</h3>
+          <p>Rejection tells you this woman, in this moment, is not a match. That's <em>useful</em>. The alternative — not approaching and never knowing — gives you no information at all.</p>
+        </div>
+        <div class="card" style="opacity:1; transform:none; border-top: 2px solid var(--accent-teal);">
+          <div class="card-icon">🧮</div>
+          <h3>It's a Numbers Reality</h3>
+          <p>Even the most attractive, compatible men get rejected often. Rejection is not evidence of inadequacy — it's evidence of incompatibility, which is normal and universal.</p>
+        </div>
+        <div class="card" style="opacity:1; transform:none; border-top: 2px solid var(--accent-blue);">
+          <div class="card-icon">💪</div>
+          <h3>Rejection Builds Resilience</h3>
+          <p>The more you experience rejection without collapsing, the less power it holds. Each rejection desensitizes and builds genuine confidence — not performed confidence.</p>
+        </div>
+        <div class="card" style="opacity:1; transform:none; border-top: 2px solid var(--accent-purple);">
+          <div class="card-icon">🎯</div>
+          <h3>Non-Neediness Reframes It</h3>
+          <p>A non-needy man doesn't need any specific woman's approval. So her "no" doesn't threaten his self-worth. This makes him far more resilient — and paradoxically more attractive.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 7: Three Fundamentals -->
+    <div>
+      <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Ch. 7 — The Three Fundamentals</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 8px; line-height: 1.8;">Non-neediness manifests through three interconnected pillars. These are not tactics — they are the actual substance of who you are as presented to the world.</p>
+
+      <div class="fundamentals-grid">
+        <div class="fundamental-card">
+          <div class="fundamental-num">I</div>
+          <h3>Creating an Attractive Lifestyle</h3>
+          <p>Living a life that genuinely fulfills you — pursuing meaningful work, maintaining your body, cultivating interesting friendships and experiences. Not performing a lifestyle for women, but actually building one for yourself.</p>
+          <div class="fundamental-chapters">Part III · Chapters 8–9</div>
+        </div>
+        <div class="fundamental-card">
+          <div class="fundamental-num">II</div>
+          <h3>Overcoming Anxiety and Approach</h3>
+          <p>Developing the courage to consistently approach and express interest, to tolerate social anxiety and rejection, and to escalate interactions rather than hovering indefinitely in comfortable ambiguity.</p>
+          <div class="fundamental-chapters">Part IV · Chapters 10–11</div>
+        </div>
+        <div class="fundamental-card">
+          <div class="fundamental-num">III</div>
+          <h3>Mastering Communication</h3>
+          <p>Learning to express yourself authentically — with intention, humor, and directness — to flirt effectively, to connect deeply, and to navigate the dating process from first interaction through relationship.</p>
+          <div class="fundamental-chapters">Part V · Chapters 12–15</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PART III ═══════════════════════════ -->
+<section id="part3" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-tag tag-purple">Part III · Chapters 8–9</div>
+    <h2 class="section-title">Honest Living</h2>
+    <p class="section-desc">Fundamental I: Building the attractive lifestyle through demographic targeting, appearance, fitness, and body language.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 18px; color: var(--accent-purple);">Ch. 8 — Lifestyle &amp; Demographics</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">The first practical question is: <em>who</em> are you looking for? Manson argues that most men approach this backwards — they try to appeal to the widest possible pool, instead of finding the people they are genuinely most compatible with.</p>
+
+        <div class="insight-box">
+          <span class="insight-icon">🗺️</span>
+          <p><strong>Demographics first:</strong> Every man has a "type" — and every man is someone's "type." The goal is to build a life that naturally attracts women who are genuinely compatible with your values, interests, and personality. Where you live, what you do socially, what communities you join — these are demographic decisions.</p>
+        </div>
+
+        <div class="step-list" style="margin-top: 24px;">
+          <div class="step highlight" style="opacity:1; transform:none;">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Identify Your Values</h4>
+              <p>What kind of woman fits your actual life? What do you value in a partner? Be honest, not aspirational.</p>
+            </div>
+          </div>
+          <div class="step highlight" style="opacity:1; transform:none;">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Go Where She Is</h4>
+              <p>Your ideal demographic hangs out somewhere. Concerts, bookstores, gyms, meetups, certain neighborhoods. Find the overlap.</p>
+            </div>
+          </div>
+          <div class="step highlight" style="opacity:1; transform:none;">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Build a Life Worth Sharing</h4>
+              <p>The most attractive thing is a man who has an interesting, fulfilling life and is inviting a woman into it — not a man who needs a woman to give his life meaning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 18px; color: var(--accent-purple);">Ch. 9 — Image, Fitness &amp; Body Language</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">Physical presentation is the first thing anyone perceives. Manson is blunt: how you look matters — not because you need to be conventionally handsome, but because taking care of your appearance signals self-respect.</p>
+
+        <table class="styled-table">
+          <thead><tr><th>Domain</th><th>The Non-Needy Approach</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Fitness</td>
+              <td>Exercise because it makes you feel good and builds discipline, not to "get girls"</td>
+            </tr>
+            <tr>
+              <td>Grooming</td>
+              <td>Maintain consistent hygiene and grooming as basic self-respect</td>
+            </tr>
+            <tr>
+              <td>Style</td>
+              <td>Develop a personal aesthetic that reflects your identity, not whatever is trendy</td>
+            </tr>
+            <tr>
+              <td>Posture</td>
+              <td>Stand tall, move slowly, take up space — not performed, but as an expression of comfort in your body</td>
+            </tr>
+            <tr>
+              <td>Eye Contact</td>
+              <td>Hold it comfortably. Not staring — relaxed confidence</td>
+            </tr>
+            <tr>
+              <td>Voice</td>
+              <td>Speak slowly, clearly, from the chest. Don't rush to fill silence</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="insight-box gold" style="margin-top: 20px;">
+          <span class="insight-icon">✨</span>
+          <p><strong>The multiplier effect:</strong> Physical confidence multiplies everything else. A man with good posture, calm eye contact, and deliberate movement projects confidence even before saying a word. These things are learnable and improvable by anyone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PART IV ═══════════════════════════ -->
+<section id="part4">
+  <div class="container">
+    <div class="section-tag tag-red">Part IV · Chapters 10–11</div>
+    <h2 class="section-title">Honest Action</h2>
+    <p class="section-desc">Fundamental II: Overcoming approach anxiety, defeating the stories that keep men passive, and building a systematic approach to taking action.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 18px; color: var(--accent-red);">Ch. 10 — The Stories We Tell Ourselves</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">Approach anxiety is real and near-universal among men. The question is what <em>causes</em> it. Manson's answer: stories. Men don't avoid approaching because of the approach itself — they avoid because of the stories they tell themselves about what the approach means and what could go wrong.</p>
+
+        <div class="quote-block">
+          <p>Men don't fear rejection. They fear what rejection means about them. And that meaning is entirely constructed — and entirely optional.</p>
+          <span class="quote-source">— Ch. 10</span>
+        </div>
+
+        <h4 style="margin: 24px 0 12px; font-size: 1rem;">Common Defense Mechanisms</h4>
+        <ul class="mini-list">
+          <li><strong>Rationalizing:</strong> "She's probably in a relationship anyway"</li>
+          <li><strong>Spectating:</strong> Watching and analyzing without acting</li>
+          <li><strong>Distraction:</strong> "I'll approach after this drink/song/conversation"</li>
+          <li><strong>Overanalysis:</strong> Spending mental energy planning instead of acting</li>
+          <li><strong>Oneitis:</strong> Fixating on one woman to avoid the vulnerability of general approach</li>
+          <li><strong>Neediness protection:</strong> Never approaching to never feel rejected</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 18px; color: var(--accent-red);">Ch. 11 — The Anxiety Hierarchy</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">Manson borrows from behavioral psychology to present a systematic method for overcoming approach anxiety: <strong>exposure therapy via the anxiety staircase</strong>. You don't cure anxiety by forcing yourself to do the hardest thing immediately — you build up gradually, desensitizing at each step.</p>
+
+        <div class="step-list">
+          <div class="step" style="opacity:1; transform:none;">
+            <div class="step-num" style="border-color: var(--accent-red); color: var(--accent-red);">1</div>
+            <div class="step-content">
+              <h4>Baseline Comfort</h4>
+              <p>Make small talk with everyone — cashiers, neighbors, strangers in line. Normalize low-stakes social interaction.</p>
+            </div>
+          </div>
+          <div class="step" style="opacity:1; transform:none;">
+            <div class="step-num" style="border-color: var(--accent-gold); color: var(--accent-gold);">2</div>
+            <div class="step-content">
+              <h4>Eye Contact Practice</h4>
+              <p>Hold eye contact comfortably with everyone, including attractive women, without looking away first.</p>
+            </div>
+          </div>
+          <div class="step" style="opacity:1; transform:none;">
+            <div class="step-num" style="border-color: var(--accent-gold); color: var(--accent-gold);">3</div>
+            <div class="step-content">
+              <h4>Non-Outcome Approaches</h4>
+              <p>Approach and make conversation with no agenda — just to practice. Don't try to get numbers. Just talk.</p>
+            </div>
+          </div>
+          <div class="step" style="opacity:1; transform:none;">
+            <div class="step-num" style="border-color: var(--accent-teal); color: var(--accent-teal);">4</div>
+            <div class="step-content">
+              <h4>Expressing Genuine Interest</h4>
+              <p>Practice stating your interest directly and honestly. "I thought you were cute and wanted to say hello." Simple, real, direct.</p>
+            </div>
+          </div>
+          <div class="step" style="opacity:1; transform:none;">
+            <div class="step-num" style="border-color: var(--accent-green); color: var(--accent-green);">5</div>
+            <div class="step-content">
+              <h4>Asking for What You Want</h4>
+              <p>Ask for numbers, ask for dates. Accept whatever response comes without emotional collapse. Build resilience through repetition.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PART V ═══════════════════════════ -->
+<section id="part5" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-tag tag-teal">Part V · Chapters 12–15</div>
+    <h2 class="section-title">Honest Communication</h2>
+    <p class="section-desc">Fundamental III: How to express sexual interest clearly, flirt authentically, build deep connections, and navigate the entire dating process from first meeting through long-term intimacy.</p>
+
+    <div class="accordion">
+
+      <!-- Chapter 12 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">12</div>
+            <div>
+              <h3>Nonverbal Communication &amp; Sexuality</h3>
+              <p>Expressing sexual intent without words — the body speaks first</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>Most men communicate their sexual interest either by <em>hiding it entirely</em> (friendzone behavior) or <em>expressing it awkwardly</em> (over-eager, desperate). Manson argues for a third path: nonverbal communication of sexual intent that is confident, warm, and outcome-independent.</p>
+
+            <div class="insight-box teal">
+              <span class="insight-icon">👁️</span>
+              <p><strong>Eye contact is the primary channel:</strong> Sustained, relaxed eye contact communicates "I see you, I'm interested, and I'm comfortable with that." It's intimate without being aggressive. Breaking eye contact first signals nervousness and lower status.</p>
+            </div>
+
+            <p>Physical proximity, body orientation (facing her directly), deliberate touch (beginning with neutral, socially acceptable touch and escalating with her receptiveness), and voice tonality are the other primary channels. None of these require words — they communicate interest through presence and body language.</p>
+
+            <p>The key principle: sexual intent, expressed calmly and confidently, is attractive. Sexual intent, expressed anxiously or manipulatively, is repellent. The difference is not the intent — it's the emotional state behind it.</p>
+
+            <div class="tag-list">
+              <span class="tag tag-t">Eye Contact</span>
+              <span class="tag tag-t">Proximity</span>
+              <span class="tag tag-t">Touch Escalation</span>
+              <span class="tag tag-t">Confident Intent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 13 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">13</div>
+            <div>
+              <h3>The Flirting Formula</h3>
+              <p>Connecting humor, authenticity, and genuine interest into natural flirtation</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>Flirting, properly understood, is <strong>expressing genuine interest while maintaining playful confidence</strong>. It's not a performance or a script — it's the natural expression of someone who finds another person interesting and isn't afraid to show it.</p>
+
+            <div class="formula-box">
+              <h3>The Flirting Equation</h3>
+              <div class="formula">
+                <span>Genuine Interest</span> + <span>Playful Confidence</span> + <span>Honest Presence</span>
+              </div>
+              <div class="formula-note">Not a technique. A way of being.</div>
+            </div>
+
+            <p>Manson breaks down flirting into its components: <strong>teasing</strong> (light, affectionate, not mean), <strong>banter</strong> (quick back-and-forth that creates energy and intimacy), <strong>showing genuine curiosity</strong> (asking real questions, not interview questions), and <strong>sharing yourself</strong> (revealing opinions, stories, vulnerabilities).</p>
+
+            <div class="insight-box">
+              <span class="insight-icon">🎭</span>
+              <p><strong>The compliment trap:</strong> Excessive complimenting is a major neediness tell. It's approval-seeking disguised as appreciation. One genuine, specific compliment ("I love how direct you are") lands far better than a dozen generic ones. And it should be said once — not repeated or doubled down on if she doesn't respond warmly.</p>
+            </div>
+
+            <p>The chapter also addresses <strong>conversation depth</strong> — moving from surface-level small talk to genuine connection. This requires vulnerability from the man: sharing real opinions, real stories, real feelings. Conversations stay shallow when both parties only talk about facts and logistics. They become memorable when someone goes first and shares something real.</p>
+
+            <div class="tag-list">
+              <span class="tag tag-t">Playful Teasing</span>
+              <span class="tag tag-t">Banter</span>
+              <span class="tag tag-t">Genuine Curiosity</span>
+              <span class="tag tag-t">Conversation Depth</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 14 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">14</div>
+            <div>
+              <h3>The Dating Process</h3>
+              <p>From first meeting through relationship — the honest path</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>The dating process, from Manson's perspective, is simply a series of honest escalations. Each step — getting her contact info, asking for a date, the first date, physical escalation, becoming exclusive — is an act of expressing genuine desire and seeing whether she reciprocates.</p>
+
+            <h4 style="margin: 18px 0 12px; font-size: 1rem; color: var(--accent-teal);">The Date Structure</h4>
+            <ul class="mini-list">
+              <li>First dates should be simple — coffee, a walk, one drink. Low investment, low pressure</li>
+              <li>Purpose of the first date: establish whether there's genuine chemistry and compatibility</li>
+              <li>Quality of conversation matters more than the venue or activity</li>
+              <li>At the end, a non-needy man clearly communicates his interest and asks to see her again — or doesn't, if he's not interested</li>
+            </ul>
+
+            <div class="insight-box gold">
+              <span class="insight-icon">📱</span>
+              <p><strong>Texting and communication:</strong> Manson dedicates space to modern communication. The principle: text to make plans, not to fill emotional voids. Keep texting lean and purposeful. Long texting conversations before meeting are a neediness trap — they give the feeling of connection without the vulnerability of real presence.</p>
+            </div>
+
+            <p>The chapter also addresses the "exclusive relationship" conversation — which should happen naturally when both people genuinely want it, not be engineered or strategized. A non-needy man can have this conversation directly: "I'm really enjoying spending time with you. Are we exclusive?" No manipulation, no games.</p>
+
+            <div class="tag-list">
+              <span class="tag tag-g">Direct Asking</span>
+              <span class="tag tag-g">Simple First Dates</span>
+              <span class="tag tag-g">Lean Communication</span>
+              <span class="tag tag-g">Clear Escalation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chapter 15 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="accordion-title">
+            <div class="accordion-num">15</div>
+            <div>
+              <h3>Physicality and Intimacy</h3>
+              <p>The psychological and emotional dimensions of physical connection</p>
+            </div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-content">
+            <p>The final chapter addresses physical and sexual intimacy through the same lens as everything else: honest expression of desire, attunement to her responses, and non-neediness as the foundation of genuine connection.</p>
+
+            <div class="insight-box teal">
+              <span class="insight-icon">🤝</span>
+              <p><strong>Consent is attunement:</strong> Manson frames physical escalation not as a strategic maneuver but as genuine attunement — reading signals, checking in verbally when unclear, and being comfortable backing off if she's not feeling it. This is both ethical and attractive; a man comfortable enough to check in or slow down signals security, not weakness.</p>
+            </div>
+
+            <p>The deeper point of this chapter is that sex, for the non-needy man, is an expression of genuine desire and connection — not a scoreboard metric, not a conquest, and not the primary measure of an interaction's success. A man who "needs" sex to feel validated will communicate that need — and it undermines everything.</p>
+
+            <p>The chapter also addresses anxiety around physical performance and presence — recommending the same principles that apply everywhere: be present, be vulnerable enough to be honest, don't perform, trust that genuine connection is more powerful than any technique.</p>
+
+            <div class="tag-list">
+              <span class="tag tag-t">Attunement</span>
+              <span class="tag tag-t">Genuine Desire</span>
+              <span class="tag tag-t">Presence</span>
+              <span class="tag tag-t">Non-Neediness</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONCLUSION ═══════════════════════════ -->
+<section id="conclusion">
+  <div class="container">
+    <div class="section-tag tag-gold">Conclusion &amp; Epilogue</div>
+    <h2 class="section-title">The Bigger Picture</h2>
+    <p class="section-desc">What this journey is really about — and the mindset shift that changes everything.</p>
+
+    <div class="two-col-wide">
+      <div>
+        <h3 style="font-size: 1.3rem; margin-bottom: 20px; color: var(--accent-gold);">The Bigger Picture</h3>
+
+        <div class="quote-block">
+          <p>The purpose of this book was not to trick women into bed. It was to inspire men to become better, more authentic versions of themselves — and then to help them express that authenticity in their interactions with women.</p>
+          <span class="quote-source">— Conclusion</span>
+        </div>
+
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">The book's conclusion widens the frame: the internal work required to become less needy and more authentic doesn't just improve your dating life. It improves your entire life — your relationships, your career, your sense of self, your mental health.</p>
+
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">A man who develops genuine non-neediness is a man who has done the hard psychological work of building an identity based on his own values rather than on others' approval. That's not a dating skill — that's a life skill.</p>
+
+        <h3 style="font-size: 1.2rem; margin-bottom: 16px; margin-top: 32px; color: var(--accent-gold);">Epilogue: What If It Was a Gift?</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">Manson closes with a powerful reframe: what if your rejection, your awkwardness, your social anxiety — what if all of it was a gift? What if the very obstacles that make you feel inadequate are the exact things forcing you to do the internal work that will ultimately make you more genuine, more connected, and more fulfilled than someone who never had to struggle with them?</p>
+
+        <div class="insight-box gold" style="margin-top: 20px;">
+          <span class="insight-icon">🎁</span>
+          <p><strong>The gift reframe:</strong> The men who struggle with women are being forced — by their pain — to examine their relationship with approval, vulnerability, and authenticity. Men who "naturally" succeeded never had to examine these things. The struggle is the curriculum.</p>
+        </div>
+      </div>
+
+      <div>
+        <div style="background: var(--bg-card); border-radius: var(--radius); padding: 28px; border: 1px solid var(--border-color);">
+          <h4 style="font-family: 'Arial', sans-serif; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 20px;">Core Principles Summary</h4>
+
+          <div class="mini-list">
+            <li>Attractiveness comes from non-neediness, not from technique</li>
+            <li>Non-neediness means valuing your own opinion more than others' approval</li>
+            <li>Vulnerability is strength, not weakness</li>
+            <li>Polarization is better than universal approval-seeking</li>
+            <li>Rejection is information, not judgment</li>
+            <li>Your lifestyle is your first impression</li>
+            <li>Approach anxiety is conquered by gradual exposure, not willpower blasts</li>
+            <li>Flirting is genuine interest expressed playfully</li>
+            <li>Sexual intent, expressed confidently, is attractive</li>
+            <li>The goal is connection, not conquest</li>
+            <li>The work is internal, not performative</li>
+            <li>Compatible women exist; filtering efficiently is a kindness to everyone</li>
+          </div>
+        </div>
+
+        <div class="formula-box" style="margin-top: 24px;">
+          <h3>The Complete Equation</h3>
+          <div class="formula" style="font-size: 1.1rem; line-height: 1.5;">
+            <span>Non-Neediness</span><br>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">expressed through</span><br>
+            <span>Attractive Lifestyle</span> + <span>Honest Action</span> + <span>Honest Communication</span>
+          </div>
+          <div class="formula-note">= Genuine Attractiveness</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ACTION PLAN ═══════════════════════════ -->
+<section id="action-plan" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-tag tag-green">Action Plan</div>
+    <h2 class="section-title">The 7 Levels: From Foundation to Mastery</h2>
+    <p class="section-desc">Manson's practical progression — a staircase of development designed so each level builds naturally on the last.</p>
+
+    <div class="levels-container">
+      <div class="level-card l1">
+        <div class="level-badge">Level 1 — Foundation</div>
+        <div class="level-info">
+          <h4>Build the Basics of Self-Respect</h4>
+          <p>Address fitness, grooming, style, sleep, and nutrition. Get your life in basic order. These are non-negotiable prerequisites — without them, all other work is built on sand.</p>
+        </div>
+        <div class="level-focus">Weeks 1–4</div>
+      </div>
+
+      <div class="level-card l2">
+        <div class="level-badge">Level 2 — Social Comfort</div>
+        <div class="level-info">
+          <h4>Normalize Social Interaction</h4>
+          <p>Talk to everyone — cashiers, waiters, strangers, neighbors. Practice holding eye contact. Join one social group or activity. Goal: remove the friction from everyday social interaction.</p>
+        </div>
+        <div class="level-focus">Weeks 3–8</div>
+      </div>
+
+      <div class="level-card l3">
+        <div class="level-badge">Level 3 — Lifestyle Design</div>
+        <div class="level-info">
+          <h4>Create a Life Worth Living</h4>
+          <p>Identify your values, your passions, your demographic. Build a social life around activities you genuinely enjoy. Work on your career or purpose. Stop optimizing for women; optimize for your own fulfillment.</p>
+        </div>
+        <div class="level-focus">Ongoing</div>
+      </div>
+
+      <div class="level-card l4">
+        <div class="level-badge">Level 4 — First Approaches</div>
+        <div class="level-info">
+          <h4>Start Expressing Interest Directly</h4>
+          <p>Approach 3 women per week with no agenda. Practice simple, direct openers: "I thought you were interesting and wanted to say hi." Don't try to get numbers yet. Just approach, hold your ground, and have a brief conversation.</p>
+        </div>
+        <div class="level-focus">Weeks 6–12</div>
+      </div>
+
+      <div class="level-card l5">
+        <div class="level-badge">Level 5 — Asking &amp; Dates</div>
+        <div class="level-info">
+          <h4>Start Asking for What You Want</h4>
+          <p>Get comfortable asking for numbers and asking women out on dates. Keep first dates simple. Practice expressing genuine interest and flirting naturally. Accept rejection without collapse.</p>
+        </div>
+        <div class="level-focus">Months 2–4</div>
+      </div>
+
+      <div class="level-card l6">
+        <div class="level-badge">Level 6 — Consistent Dating</div>
+        <div class="level-info">
+          <h4>Build a Dating Pipeline</h4>
+          <p>Date multiple women simultaneously (transparently) to avoid the "oneitis" trap and to build genuine perspective on compatibility. Practice physical escalation with confidence. Learn to recognize and act on genuine compatibility.</p>
+        </div>
+        <div class="level-focus">Months 3–6</div>
+      </div>
+
+      <div class="level-card l7">
+        <div class="level-badge">Level 7 — Authentic Mastery</div>
+        <div class="level-info">
+          <h4>Integrated Non-Neediness</h4>
+          <p>Non-neediness is no longer practiced — it's internalized. You approach because it's fun. You date because you enjoy connection. You're comfortable in uncertainty. You've stopped optimizing for approval. The work has become who you are.</p>
+        </div>
+        <div class="level-focus">Ongoing</div>
+      </div>
+    </div>
+
+    <div class="insight-box gold" style="margin-top: 36px;">
+      <span class="insight-icon">⚡</span>
+      <p><strong>The key principle running through all 7 levels:</strong> You are not completing tasks to "get women." You are developing yourself — becoming more self-aware, more courageous, more authentic, and more comfortable in your own skin. The improvements in your dating life are a byproduct of becoming a better, more genuine version of yourself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ KEY THEMES ═══════════════════════════ -->
+<section id="themes">
+  <div class="container">
+    <div class="section-tag tag-blue">Deep Themes</div>
+    <h2 class="section-title">The Psychology Beneath the Surface</h2>
+    <p class="section-desc">Models operates on multiple levels simultaneously — practical dating advice is the surface, but beneath it are substantial ideas about psychology, authenticity, and what it means to live well.</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🪞</div>
+        <h3>The Mirror Problem</h3>
+        <p>Most men who struggle with women are actually struggling with their own self-image. They seek external validation because they don't have internal validation. Women are mirrors in which they're trying to see themselves as worthwhile.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎭</div>
+        <h3>Performance vs. Presence</h3>
+        <p>Western masculinity culture trains men to perform — to project strength, competence, fearlessness. Performance is exhausting and inauthentic. Presence — simply being fully there, honest about what you feel — is both more powerful and more sustainable.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <h3>The Validation Loop</h3>
+        <p>Needy behavior creates the very outcomes it fears. A man who needs approval behaves desperately → women sense desperation → they become less attracted → he feels worse → he seeks more validation → cycle continues. Breaking the loop requires internal work, not external adjustment.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚖️</div>
+        <h3>Investment Asymmetry</h3>
+        <p>Healthy attraction grows when investment is proportional and mutual. When a man over-invests relative to a woman's investment level, he creates an unbalanced dynamic that both parties find uncomfortable.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>The Selection Problem</h3>
+        <p>The real problem isn't "how do I attract women" — it's "how do I find and connect with women who are genuinely right for me." Filtering for compatibility from the start creates better outcomes than trying to convert anyone into a match.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <h3>Identity as Process</h3>
+        <p>Manson's implicit argument is that identity is not fixed — you are not "just a needy person." You are a person with patterns that can change through conscious practice, honest self-examination, and gradual behavioral exposure. Character is built, not discovered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SPECTRUM ═══════════════════════════ -->
+<section style="background: var(--bg-secondary); padding: 60px 0;">
+  <div class="container">
+    <div class="section-tag tag-gold">The Neediness Spectrum</div>
+    <h2 class="section-title" style="margin-bottom: 14px;">Where Do You Fall?</h2>
+    <p style="color: var(--text-secondary); max-width: 680px; margin-bottom: 40px; font-size: 1rem; line-height: 1.8;">Neediness is not binary. It's a spectrum. Most men fall somewhere in the middle — sometimes secure, sometimes approval-seeking, depending on the situation. The goal is to move the needle consistently toward the non-needy end.</p>
+
+    <div class="spectrum">
+      <h4>The Non-Neediness Spectrum</h4>
+      <div class="spectrum-bar"></div>
+      <div class="spectrum-labels">
+        <span class="highlight-green">Fully Non-Needy<br><small style="font-size:0.7rem; color: var(--text-muted);">Internal validation only</small></span>
+        <span style="color: var(--accent-gold);">Situationally Secure<br><small style="font-size:0.7rem; color: var(--text-muted);">Usually grounded</small></span>
+        <span class="highlight-red">Fully Needy<br><small style="font-size:0.7rem; color: var(--text-muted);">External validation dependent</small></span>
+      </div>
+    </div>
+
+    <div style="margin-top: 36px;">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Behavior</th>
+            <th class="highlight-red">Needy Signal</th>
+            <th class="highlight-green">Non-Needy Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eye Contact</td>
+            <td style="color: var(--text-secondary);">Looks away first, avoids gaze</td>
+            <td style="color: var(--text-secondary);">Holds comfortable, relaxed eye contact</td>
+          </tr>
+          <tr>
+            <td>Response to "no"</td>
+            <td style="color: var(--text-secondary);">Collapses, persists, apologizes excessively</td>
+            <td style="color: var(--text-secondary);">Accepts gracefully, moves on without drama</td>
+          </tr>
+          <tr>
+            <td>Texting</td>
+            <td style="color: var(--text-secondary);">Multiple texts, analyzes response time, double-texts</td>
+            <td style="color: var(--text-secondary);">Texts with purpose, comfortable with silence</td>
+          </tr>
+          <tr>
+            <td>Opinions</td>
+            <td style="color: var(--text-secondary);">Mirrors her views, avoids disagreement</td>
+            <td style="color: var(--text-secondary);">States views clearly, comfortable disagreeing</td>
+          </tr>
+          <tr>
+            <td>Compliments</td>
+            <td style="color: var(--text-secondary);">Excessive, generic, seeking reaction</td>
+            <td style="color: var(--text-secondary);">Specific, genuine, said once without expectation</td>
+          </tr>
+          <tr>
+            <td>Interest in her</td>
+            <td style="color: var(--text-secondary);">Obsessive focus, puts her on pedestal</td>
+            <td style="color: var(--text-secondary);">Genuinely curious, but maintains perspective</td>
+          </tr>
+          <tr>
+            <td>Physical space</td>
+            <td style="color: var(--text-secondary);">Hunched, small, permission-seeking</td>
+            <td style="color: var(--text-secondary);">Upright, relaxed, comfortable taking space</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FURTHER READING ═══════════════════════════ -->
+<section id="further-reading">
+  <div class="container">
+    <div class="section-tag tag-purple">Further Reading</div>
+    <h2 class="section-title">Going Deeper</h2>
+    <p class="section-desc">Manson recommends building on <em>Models</em> with works that deepen the underlying psychological and philosophical foundations.</p>
+
+    <div class="cards-grid">
+      <div class="card" style="opacity:1; transform:none;">
+        <div class="card-chapter">Recommended by Manson</div>
+        <h3>No More Mr. Nice Guy</h3>
+        <p style="color: var(--text-secondary);">Robert A. Glover's foundational work on the "Nice Guy Syndrome" — the psychological pattern where men suppress their needs and desires in exchange for approval. The direct predecessor to Manson's ideas.</p>
+        <div class="tag-list"><span class="tag tag-p">Psychology</span><span class="tag tag-p">Approval-Seeking</span></div>
+      </div>
+      <div class="card" style="opacity:1; transform:none;">
+        <div class="card-chapter">Recommended by Manson</div>
+        <h3>When I Say No, I Feel Guilty</h3>
+        <p style="color: var(--text-secondary);">Manuel J. Smith's classic on assertiveness — setting boundaries, saying no, expressing genuine preferences without guilt. Core skills for non-neediness in practice.</p>
+        <div class="tag-list"><span class="tag tag-p">Assertiveness</span><span class="tag tag-p">Boundaries</span></div>
+      </div>
+      <div class="card" style="opacity:1; transform:none;">
+        <div class="card-chapter">Thematic Connection</div>
+        <h3>The Subtle Art of Not Giving a F*ck</h3>
+        <p style="color: var(--text-secondary);">Manson's own follow-up book, which expands the non-neediness and values-based living framework beyond dating into a comprehensive life philosophy.</p>
+        <div class="tag-list"><span class="tag tag-p">Values</span><span class="tag tag-p">Life Philosophy</span></div>
+      </div>
+      <div class="card" style="opacity:1; transform:none;">
+        <div class="card-chapter">Psychological Foundation</div>
+        <h3>Feeling Good</h3>
+        <p style="color: var(--text-secondary);">David D. Burns' cognitive behavioral therapy handbook — the tools for examining and restructuring the cognitive distortions (negative self-stories) that drive needy behavior.</p>
+        <div class="tag-list"><span class="tag tag-p">CBT</span><span class="tag tag-p">Cognitive Patterns</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="quote-block" style="text-align: left; max-width: 680px; margin: 0 auto 40px;">
+      <p>What if it was a gift? What if it made you who you are? What if every awkward conversation, every rejection, every night lying awake wondering what was wrong with you — what if all of that was building something? Not in spite of the pain, but because of it.</p>
+      <span class="quote-source">— Epilogue: The Gift</span>
+    </div>
+    <p class="footer-meta">
+      Educational overview of <em>Models: Attract Women Through Honesty</em> by Mark Manson &nbsp;·&nbsp;
+      All content is educational and analytical in nature &nbsp;·&nbsp;
+      Original work © Mark Manson
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollProgress').style.width = scrolled + '%';
+  });
+
+  // Accordion toggle
+  function toggleAccordion(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.accordion-arrow');
+    const isOpen = body.classList.contains('open');
+
+    // Close all accordions in the same parent
+    const parent = header.closest('.accordion');
+    if (parent) {
+      parent.querySelectorAll('.accordion-body.open').forEach(b => b.classList.remove('open'));
+      parent.querySelectorAll('.accordion-arrow.open').forEach(a => a.classList.remove('open'));
+    }
+
+    // Toggle clicked one (unless it was already open)
+    if (!isOpen) {
+      body.classList.add('open');
+      arrow.classList.add('open');
+    }
+  }
+
+  // Intersection Observer for scroll-reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  // Apply observer to animatable elements
+  document.querySelectorAll('.card, .accordion-item, .step, .fundamental-card, .woman-type, .level-card').forEach(el => {
+    if (el.style.opacity !== '1') {
+      observer.observe(el);
+    }
+  });
+
+  // Stagger children in grids
+  document.querySelectorAll('.cards-grid, .fundamentals-grid, .women-types, .levels-container').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+</script>
+
+</body>
+</html>

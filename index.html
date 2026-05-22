@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Subtle Art of Not Giving a F*ck — Deep Study Guide</title>
+<style>
+/* ===== RESET & VARIABLES ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:         #0b0b0b;
+  --bg-card:    #141414;
+  --bg-hover:   #1c1c1c;
+  --bg-section: #101010;
+  --text:       #ddd5c4;
+  --text-dim:   #8a8070;
+  --text-faint: #4a4440;
+  --accent:     #d93020;
+  --accent-warm:#e8981a;
+  --accent-teal:#28a87a;
+  --accent-blue:#3a82d4;
+  --border:     #222018;
+  --border-med: #302c26;
+  --font-head:  'Helvetica Neue', 'Arial Black', Arial, sans-serif;
+  --font-body:  Georgia, 'Times New Roman', serif;
+  --font-mono:  'Courier New', Courier, monospace;
+  --max:        1100px;
+  --radius:     6px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ===== PROGRESS BAR ===== */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+  z-index: 1000;
+  transition: width 0.1s linear;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  background: rgba(11,11,11,0.94);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  padding: 0 20px;
+}
+
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  gap: 12px;
+}
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px 20px 60px;
+  background: radial-gradient(ellipse at center top, #1a100a 0%, var(--bg) 70%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(80px, 20vw, 260px);
+  color: rgba(217, 48, 32, 0.04);
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.hero-tag {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  border: 1px solid rgba(217, 48, 32, 0.35);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.hero-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(36px, 7vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.hero-title span { color: var(--accent); }
+
+.hero-subtitle {
+  font-family: var(--font-head);
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 400;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.hero-thesis {
+  max-width: 680px;
+  font-size: clamp(17px, 2.2vw, 22px);
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 48px;
+}
+
+.hero-thesis strong { color: var(--accent-warm); }
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 40px;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+}
+
+.hero-stat-label {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-faint);
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: bounce 2s infinite;
+}
+
+.scroll-hint svg { stroke: var(--text-faint); }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ===== BACKWARDS LAW SECTION ===== */
+#backwards-law {
+  background: var(--bg-section);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 20px;
+}
+
+.section-container {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.law-visual {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.law-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.law-box.negative { border-color: rgba(217,48,32,0.4); }
+.law-box.positive { border-color: rgba(40,168,122,0.4); }
+
+.law-box-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.law-box h3 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.law-box.negative h3 { color: var(--accent); }
+.law-box.positive h3 { color: var(--accent-teal); }
+
+.law-box p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.law-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-faint);
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.law-arrow-icon {
+  font-size: 28px;
+  color: var(--accent-warm);
+}
+
+/* ===== CHAPTERS ===== */
+.chapters-wrapper {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.chapter-section {
+  padding: 90px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.chapter-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chapter-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+.chapter-num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(64px, 10vw, 110px);
+  line-height: 0.85;
+  color: var(--accent);
+  flex-shrink: 0;
+  opacity: 0.35;
+  letter-spacing: -0.04em;
+}
+
+.chapter-title-block {}
+
+.chapter-label {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.chapter-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(26px, 4.5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.chapter-thesis {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.65;
+}
+
+/* Chapter content layout */
+.chapter-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 700px) {
+  .chapter-content { grid-template-columns: 1fr; }
+  .law-visual { grid-template-columns: 1fr; }
+  .law-arrow { transform: rotate(90deg); }
+  .chapter-header { flex-direction: column; gap: 12px; }
+  .chapter-num { font-size: 56px; }
+}
+
+.concept-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: border-color 0.25s, background 0.25s;
+  cursor: default;
+}
+
+.concept-card:hover {
+  border-color: var(--border-med);
+  background: var(--bg-hover);
+}
+
+.concept-card-icon {
+  font-size: 26px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.concept-card h4 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  color: #fff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.concept-card p {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.concept-card p strong { color: var(--text); }
+
+/* Pull quote */
+.pull-quote {
+  border-left: 4px solid var(--accent);
+  padding: 20px 28px;
+  margin: 36px 0;
+  background: rgba(217,48,32,0.04);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.pull-quote blockquote {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.pull-quote cite {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* Takeaway box */
+.takeaway {
+  background: linear-gradient(135deg, rgba(232,152,26,0.08), rgba(232,152,26,0.03));
+  border: 1px solid rgba(232,152,26,0.25);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.takeaway-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.takeaway h5 {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 8px;
+}
+
+.takeaway p {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+/* Story card */
+.story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  margin: 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-warm);
+}
+
+.story-card h4 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 12px;
+}
+
+.story-card p {
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.story-card p + p { margin-top: 10px; }
+
+/* Full-width card */
+.full-card {
+  grid-column: 1 / -1;
+}
+
+/* ===== VALUES FRAMEWORK ===== */
+#values-framework {
+  background: var(--bg-section);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 20px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 40px 0;
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.values-col-header {
+  padding: 18px 24px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.values-col-header.good {
+  background: rgba(40,168,122,0.12);
+  color: var(--accent-teal);
+  border-bottom: 1px solid rgba(40,168,122,0.2);
+}
+
+.values-col-header.bad {
+  background: rgba(217,48,32,0.08);
+  color: var(--accent);
+  border-bottom: 1px solid rgba(217,48,32,0.2);
+}
+
+.values-item {
+  padding: 16px 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  border-top: 1px solid var(--border);
+}
+
+.values-item.good {
+  background: var(--bg-card);
+  color: var(--text);
+}
+
+.values-item.bad {
+  background: rgba(217,48,32,0.03);
+  color: var(--text-dim);
+}
+
+.values-criteria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.criteria-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.criteria-item .criteria-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+
+.criteria-item h4 {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-teal);
+  margin-bottom: 8px;
+}
+
+.criteria-item p { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+
+/* ===== ONION VISUAL ===== */
+.onion-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 36px 0;
+}
+
+.onion-layer {
+  border-radius: 8px;
+  padding: 20px 28px;
+  position: relative;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.onion-layer:hover { cursor: pointer; }
+
+.onion-layer-1 {
+  background: rgba(217,48,32,0.06);
+  border-color: rgba(217,48,32,0.2);
+  margin: 0 0px;
+}
+
+.onion-layer-2 {
+  background: rgba(232,152,26,0.07);
+  border-color: rgba(232,152,26,0.25);
+  margin: 0 24px;
+}
+
+.onion-layer-3 {
+  background: rgba(40,168,122,0.08);
+  border-color: rgba(40,168,122,0.3);
+  margin: 0 48px;
+}
+
+.onion-layer h4 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.onion-layer-1 h4 { color: var(--accent); }
+.onion-layer-2 h4 { color: var(--accent-warm); }
+.onion-layer-3 h4 { color: var(--accent-teal); }
+
+.onion-layer p { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+.onion-layer .layer-num {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 40px;
+  opacity: 0.12;
+  line-height: 1;
+}
+
+/* ===== DO SOMETHING PRINCIPLE ===== */
+.do-something-flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 36px 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.flow-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  text-align: center;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.flow-step-icon { font-size: 28px; display: block; margin-bottom: 8px; }
+.flow-step h4 {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.flow-step p { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+.flow-step.old { border-color: rgba(217,48,32,0.3); }
+.flow-step.new { border-color: rgba(40,168,122,0.3); }
+
+.flow-arrow {
+  font-size: 22px;
+  color: var(--text-faint);
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.flow-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.flow-divider span {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+}
+
+.flow-divider .line {
+  width: 1px;
+  height: 30px;
+  background: var(--border-med);
+}
+
+/* ===== INTERACTIVE VALUES AUDIT ===== */
+#values-audit {
+  background: var(--bg-section);
+  border-top: 1px solid var(--border);
+  padding: 80px 20px;
+}
+
+.audit-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 36px 0;
+}
+
+.audit-q {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.audit-q:hover { border-color: var(--accent); }
+
+.audit-q .q-num {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.audit-q .q-text {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.audit-q .q-insight {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: none;
+}
+
+.audit-q.expanded .q-insight { display: block; }
+
+.audit-q .q-toggle {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== FIVE VALUES SECTION ===== */
+#five-values {
+  padding: 80px 20px;
+}
+
+.five-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin: 40px 0;
+}
+
+.value-pill {
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  text-align: center;
+  border: 1px solid var(--border-med);
+  background: var(--bg-card);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.value-pill:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+}
+
+.value-pill .v-num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.value-pill:nth-child(1) .v-num { color: var(--accent); }
+.value-pill:nth-child(2) .v-num { color: var(--accent-warm); }
+.value-pill:nth-child(3) .v-num { color: #9b7dff; }
+.value-pill:nth-child(4) .v-num { color: var(--accent-teal); }
+.value-pill:nth-child(5) .v-num { color: var(--accent-blue); }
+
+.value-pill h3 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.value-pill p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ===== DEATH SECTION ===== */
+#death-section {
+  background: #050505;
+  border-top: 1px solid var(--border);
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.death-quote {
+  max-width: 700px;
+  margin: 0 auto 60px;
+  font-size: clamp(20px, 3vw, 32px);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.death-becker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: var(--max);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.becker-point {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+
+.becker-point .bp-num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 52px;
+  color: var(--accent);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.becker-point h4 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.becker-point p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #050505;
+  border-top: 1px solid var(--border);
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.footer-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: var(--text-faint);
+  max-width: 500px;
+  margin: 0 auto 20px;
+  line-height: 1.7;
+}
+
+.footer-mantra {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 28px;
+  color: rgba(255,255,255,0.08);
+  letter-spacing: -0.02em;
+  margin-top: 32px;
+}
+
+/* ===== SECTION HEADING ===== */
+.section-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-tag {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(28px, 5vw, 52px);
+  letter-spacing: -0.025em;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+.section-desc {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ===== UTILITY ===== */
+.mt-6 { margin-top: 24px; }
+.mt-8 { margin-top: 32px; }
+.tag {
+  display: inline-block;
+  background: rgba(217,48,32,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(217,48,32,0.2);
+  border-radius: 3px;
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.tag.warm {
+  background: rgba(232,152,26,0.1);
+  color: var(--accent-warm);
+  border-color: rgba(232,152,26,0.2);
+}
+
+.tag.teal {
+  background: rgba(40,168,122,0.1);
+  color: var(--accent-teal);
+  border-color: rgba(40,168,122,0.2);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 48px 0;
+}
+
+/* Responsive nav */
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hero-stats { gap: 24px; }
+  .five-values-grid { grid-template-columns: repeat(2, 1fr); }
+  .values-grid { grid-template-columns: 1fr; }
+  .onion-layer-2 { margin: 0 12px; }
+  .onion-layer-3 { margin: 0 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">The Subtle Art</a>
+    <div class="nav-links">
+      <a href="#ch1">Ch.1</a>
+      <a href="#ch2">Ch.2</a>
+      <a href="#ch3">Ch.3</a>
+      <a href="#ch4">Ch.4</a>
+      <a href="#ch5">Ch.5</a>
+      <a href="#ch6">Ch.6</a>
+      <a href="#ch7">Ch.7</a>
+      <a href="#ch8">Ch.8</a>
+      <a href="#ch9">Ch.9</a>
+      <a href="#values-audit">Reflect</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">F*CK</div>
+  <div class="hero-tag">Mark Manson · A Deep Study</div>
+  <h1 class="hero-title">The Subtle Art of<br><span>Not Giving a F*ck</span></h1>
+  <p class="hero-subtitle">A Counterintuitive Approach to Living a Good Life</p>
+  <p class="hero-thesis">
+    Our culture sells the idea that the key to a good life is <strong>more</strong> — more happiness, more positivity, more success. But this obsession with the positive only reminds us of what we lack. The radical truth: <strong>the quality of your life is determined by what you choose to care about</strong> — not how much you care.
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">9</span>
+      <span class="hero-stat-label">Chapters</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label">Core Values</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">1</span>
+      <span class="hero-stat-label">Central Truth</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Begin</span>
+    <svg width="20" height="20" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- THE BACKWARDS LAW -->
+<section id="backwards-law">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="section-tag">The Central Paradox</span>
+      <h2 class="section-title">The Backwards Law</h2>
+      <p class="section-desc">Philosopher Alan Watts called it the backwards law: the more you pursue something, the more you reinforce that you lack it. This is the engine that drives the entire book.</p>
+    </div>
+
+    <div class="law-visual">
+      <div class="law-box negative">
+        <span class="law-box-icon">😤</span>
+        <h3>Pursuing the Positive</h3>
+        <p>Desperately chasing happiness, success, wealth, and acceptance creates constant awareness of your shortfall. The pursuit itself is the negative experience.</p>
+      </div>
+      <div class="law-arrow">
+        <span class="law-arrow-icon">⇌</span>
+        <span>Reversed</span>
+      </div>
+      <div class="law-box positive">
+        <span class="law-box-icon">🧘</span>
+        <h3>Accepting the Negative</h3>
+        <p>Accepting struggle, failure, and discomfort — without resistance — frees you from the feedback loop and paradoxically creates more genuine satisfaction.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>"The desire for more positive experience is itself a negative experience. And, paradoxically, the acceptance of one's negative experience is itself a positive experience."</blockquote>
+      <cite>— The Subtle Art of Not Giving a F*ck</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTERS WRAPPER -->
+<div class="chapters-wrapper">
+
+  <!-- CH1: DON'T TRY -->
+  <section id="ch1" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">01</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter One</span>
+        <h2 class="chapter-title">Don't Try</h2>
+        <p class="chapter-thesis">The key to a good life is not giving more fucks — it's giving fewer, more deliberately chosen fucks about things that actually matter.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <h4>The Bukowski Paradox</h4>
+      <p>Charles Bukowski spent decades as a rejected, alcoholic postal worker before finally being published at 50. His tombstone reads simply: <em>"Don't try."</em> His success didn't come from believing he was a winner. It came from radical honesty about being a loser — and writing about it unflinchingly.</p>
+      <p>Self-improvement and success often occur together, but they are not the same thing. Bukowski never tried to be anything other than what he was. That authenticity was the source of his power.</p>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">🔄</span>
+        <h4>The Feedback Loop from Hell</h4>
+        <p>You feel anxious, then you feel <strong>anxious about feeling anxious</strong>. You get angry, then angry at yourself for getting angry. Consumer culture and social media have amplified this loop to epidemic proportions. The solution: not giving a fuck that you feel bad breaks the cycle.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🎯</span>
+        <h4>Subtlety #1: Comfortable with Different</h4>
+        <p>Not giving a fuck doesn't mean indifference — that's cowardice. It means being <strong>comfortable being different</strong>. Indifferent people hide behind apathy because they care too much about everything. Real not-giving-a-fuck is about selective investment.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🔥</span>
+        <h4>Subtlety #2: Something More Important</h4>
+        <p>To not care about adversity, you must care about <strong>something more important than adversity</strong>. The elderly woman screaming about a 30-cent coupon isn't trivial — it's the only thing she has left to care about. Fill your life with worthy problems.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">⏳</span>
+        <h4>Subtlety #3: Always Choosing</h4>
+        <p>You are always choosing what to give a fuck about, whether you realize it or not. As we mature, we naturally become more selective. This isn't apathy — it's <strong>maturity</strong>. Reserve your fucks for what truly matters: people, purpose, and meaning.</p>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>You have a limited number of fucks to give in your lifetime. Spending them on trivial irritants — rude cashiers, canceled TV shows, somebody's Facebook post — leaves you bankrupt when real things need your care. The art is in the selection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH2: HAPPINESS IS A PROBLEM -->
+  <section id="ch2" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">02</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Two</span>
+        <h2 class="chapter-title">Happiness Is a Problem</h2>
+        <p class="chapter-thesis">Happiness is not a destination you arrive at — it is the activity of solving problems. The goal is not to eliminate problems but to find better ones.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <h4>The Buddha's Realization</h4>
+      <p>A sheltered prince witnesses suffering for the first time and has an existential crisis. He abandons wealth and deliberately embraces poverty and pain — only to discover that suffering without purpose is just as hollow as pleasure without meaning.</p>
+      <p>His first and most central teaching: pain and loss are inevitable. Resisting this truth is the source of most human suffering. Accepting it is the beginning of peace.</p>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">🧩</span>
+        <h4>Happiness = Solving Problems</h4>
+        <p>Problems never go away — they only <strong>improve and evolve</strong>. The solution to today's problem creates tomorrow's problem. Happiness isn't the absence of problems; it's the experience of making progress through them. To be happy, you need something to solve.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🚫</span>
+        <h4>Two Ways We Fail</h4>
+        <p><strong>Denial:</strong> pretending problems don't exist, leading to deluded numbness. <strong>Victim mentality:</strong> believing nothing can be done, leading to helplessness and anger. Both avoid the actual solving — and therefore avoid actual happiness.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">📡</span>
+        <h4>Emotions Are Feedback, Not Commands</h4>
+        <p>Emotions evolved to nudge us toward beneficial change — nothing more. Negative emotions signal an unresolved problem. Positive emotions reward action. They are <strong>signposts, not destinations</strong>. Don't chase good feelings; solve the problems that generate them.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">⚖️</span>
+        <h4>Choose Your Struggle</h4>
+        <p>Everyone wants the reward. Few are willing to sustain the required pain. "What do you want?" is the easy question. The powerful question is: <strong>"What pain are you willing to sustain?"</strong> Your answer to that second question determines far more about your life's trajectory than the first.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>"Who you are is defined by what you're willing to struggle for."</blockquote>
+      <cite>— The Subtle Art of Not Giving a F*ck</cite>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>Don't ask what you want to enjoy. Ask what pain you want to sustain. The person who loves the gym's pain gets the body. The person who loves the struggle of an artist gets the art. The result is inseparable from the process — and you must fall in love with the process.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH3: YOU ARE NOT SPECIAL -->
+  <section id="ch3" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">03</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Three</span>
+        <h2 class="chapter-title">You Are Not Special</h2>
+        <p class="chapter-thesis">The self-esteem movement promised that believing in your exceptionalism would lead to success. The data is in: it produced entitlement instead.</p>
+      </div>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">📊</span>
+        <h4>The Bell Curve Reality</h4>
+        <p>Most of us are average at most things. To become truly exceptional at something requires extraordinary investment of time and energy — meaning you'll be average at most everything else. The Internet floods us with the rare exceptions at both extremes, making <strong>average feel like failure</strong>.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🏆</span>
+        <h4>The Entitlement Trap</h4>
+        <p>Entitlement manifests in two ways: <em>"I'm amazing and everyone else sucks"</em> or <em>"I'm terrible and everyone else is amazing."</em> Both are self-absorbed. Both avoid real engagement with life. Both share the same narcissistic core: <strong>my situation is uniquely special and normal rules don't apply to me.</strong></p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🌱</span>
+        <h4>The Anti-Entitlement Path</h4>
+        <p>Truly exceptional people become exceptional not because they believe they're great — but because they're <strong>obsessed with improvement</strong>. That obsession stems from knowing they're not that great yet. Embracing mediocrity as your starting point is what allows growth.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🌿</span>
+        <h4>Ordinary as Extraordinary</h4>
+        <p>Accepting your mundane existence frees you from the constant pressure to prove yourself. The knowledge that you're ordinary allows you to genuinely appreciate what's in front of you: <strong>simple friendship, creating something, helping someone, laughing</strong>. These things matter because they're ordinary — not despite it.</p>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>The pressure to be extraordinary is not motivating — it's paralyzing. Once you accept that your problems are not uniquely special, that millions of people have faced them and survived, that first step of accepting ordinariness becomes the most important step toward solving them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH4: THE VALUE OF SUFFERING -->
+  <section id="ch4" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">04</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Four</span>
+        <h2 class="chapter-title">The Value of Suffering</h2>
+        <p class="chapter-thesis">The question isn't "How do I stop suffering?" It's "Why am I suffering — for what purpose?" The right values turn unavoidable pain into something meaningful.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <h4>Lieutenant Onoda's 30-Year War</h4>
+      <p>Japanese soldier Hiroo Onoda continued fighting in the Philippine jungle until 1974 — nearly 30 years after WWII ended — because his orders were to never surrender. He suffered enormously, yet claimed to regret nothing. His suffering had a purpose: loyalty to his empire.</p>
+      <p>When he returned to Japan and found a consumerist society that had abandoned everything he fought for, he became more depressed than he'd ever been in the jungle. Purpose stripped away, his suffering suddenly meant nothing.</p>
+    </div>
+
+    <!-- Self-Awareness Onion -->
+    <h3 style="font-family:var(--font-head);font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:0.06em;color:#fff;margin:40px 0 20px;">The Self-Awareness Onion</h3>
+
+    <div class="onion-visual">
+      <div class="onion-layer onion-layer-1">
+        <h4>Layer 1: What Do I Feel?</h4>
+        <p>The most basic level — simply identifying your own emotions. "I feel angry right now." "I feel anxious." Many people struggle here; they have emotional blind spots, especially around feelings they were taught were unacceptable.</p>
+        <span class="layer-num">1</span>
+      </div>
+      <div class="onion-layer onion-layer-2">
+        <h4>Layer 2: Why Do I Feel It?</h4>
+        <p>Digging into the root cause. "Why am I angry — what failure or threat does this represent?" "Why does this make me feel worthless?" These questions reveal what we secretly consider success and failure — and often take months to answer honestly.</p>
+        <span class="layer-num">2</span>
+      </div>
+      <div class="onion-layer onion-layer-3">
+        <h4>Layer 3: What Are My Values?</h4>
+        <p>The deepest, hardest level. "What standard am I measuring myself by? Is this a good standard?" Our values determine what problems we perceive and how we feel about them. Bad values generate chronic bad feelings. Better values generate better lives.</p>
+        <span class="layer-num">3</span>
+      </div>
+    </div>
+
+    <div class="chapter-content mt-6">
+      <div class="concept-card">
+        <span class="concept-card-icon">🎸</span>
+        <h4>Dave Mustaine vs. Pete Best</h4>
+        <p>Mustaine (Megadeth) was kicked out of Metallica and built a career of 25M albums — yet felt like a failure because his metric was "be bigger than Metallica." Best (the fired Beatle) never reached superstardom but eventually found <strong>genuine happiness</strong> by changing what he measured.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🧭</span>
+        <h4>Values Shape Problems</h4>
+        <p>The same external event creates completely different problems depending on your values. Onoda's loyalty value kept him alive in the jungle for decades. Mustaine's comparison-based value tortured him despite massive success. Your <strong>values are your life's operating system</strong>.</p>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>Self-improvement isn't about chasing achievements or highs — it's about upgrading your values. When you give better fucks (care about better things), you get better problems. And better problems generate a better life as a natural side effect.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end chapters-wrapper -->
+
+<!-- VALUES FRAMEWORK -->
+<section id="values-framework">
+  <div class="section-container">
+    <div class="section-heading">
+      <span class="section-tag">The Framework</span>
+      <h2 class="section-title">Good Values vs. Bad Values</h2>
+      <p class="section-desc">Your values are the lens through which you see every problem in your life. They determine whether your suffering is meaningful — or pointless.</p>
+    </div>
+
+    <div class="values-criteria">
+      <div class="criteria-item">
+        <span class="criteria-icon">✅</span>
+        <h4>Reality-Based</h4>
+        <p>Good values reflect how the world actually works, not wishful thinking or superstition.</p>
+      </div>
+      <div class="criteria-item">
+        <span class="criteria-icon">🤝</span>
+        <h4>Socially Constructive</h4>
+        <p>Good values create benefits for others — honesty, courage, empathy improve everyone's situation.</p>
+      </div>
+      <div class="criteria-item">
+        <span class="criteria-icon">🎛️</span>
+        <h4>Controllable</h4>
+        <p>Good values are within your power to live up to today, regardless of external circumstances.</p>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="values-col-header good">✓ Good Values</div>
+      <div class="values-col-header bad">✗ Bad Values</div>
+
+      <div class="values-item good">Honesty — controlled entirely by you, benefits others</div>
+      <div class="values-item bad">Being liked by everybody — outside your control</div>
+
+      <div class="values-item good">Creativity — expressed through your choices and actions</div>
+      <div class="values-item bad">Material success as self-worth — relies on external validation</div>
+
+      <div class="values-item good">Vulnerability — an internal state you choose</div>
+      <div class="values-item bad">Always being right — requires rewriting reality</div>
+
+      <div class="values-item good">Curiosity — available to you in this very moment</div>
+      <div class="values-item bad">Constant positivity — denies and suppresses real feelings</div>
+
+      <div class="values-item good">Humility — practiced regardless of what others do</div>
+      <div class="values-item bad">Pleasure as primary goal — shallow, fleeting, addictive</div>
+
+      <div class="values-item good">Self-respect — your own standard to meet</div>
+      <div class="values-item bad">Status and dominance — requires others to lose</div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>"If you want to change how you see your problems, you have to change what you value and how you measure failure and success."</blockquote>
+      <cite>— The Subtle Art of Not Giving a F*ck</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTERS 5-8 -->
+<div class="chapters-wrapper">
+
+  <!-- CH5: YOU ARE ALWAYS CHOOSING -->
+  <section id="ch5" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">05</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Five</span>
+        <h2 class="chapter-title">You Are Always Choosing</h2>
+        <p class="chapter-thesis">You are always responsible for your experiences — not because everything is your fault, but because you always control how you interpret and respond to what happens.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <h4>William James' Experiment</h4>
+      <p>Near suicidal at 30, James — despite a privileged birth, Harvard, and every advantage — had failed at everything. One night, reading philosophy, he resolved to spend one year believing he was 100% responsible for everything in his life. If nothing improved, he'd take his life.</p>
+      <p>He became the father of American psychology, taught at Harvard, had five children, and revolutionized his field. That one shift — radical responsibility — was the turning point. He called it his "rebirth."</p>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">⚡</span>
+        <h4>Fault vs. Responsibility</h4>
+        <p><strong>Fault</strong> is past tense — it concerns what caused something. <strong>Responsibility</strong> is present tense — it concerns what you do now. You are not at fault for being robbed, but you are responsible for how you respond. The judge didn't commit the crime but is responsible for the verdict. These are different things.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🦁</span>
+        <h4>Victimhood vs. Agency</h4>
+        <p>Many people resist taking responsibility because they conflate it with fault. But <strong>accepting responsibility for your problems is not the same as accepting blame</strong>. It's claiming the power to change them. Blaming others feels righteous but leaves you powerless.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🌍</span>
+        <h4>Malala's Choice</h4>
+        <p>Shot in the face by the Taliban at 14 for advocating girls' education. She could not control what was done to her. But she chose what it would mean — and that choice made her a Nobel laureate. The intensity of an event doesn't change the fundamental truth: <strong>we always get to choose our response.</strong></p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🃏</span>
+        <h4>The Hand We're Dealt</h4>
+        <p>Some people receive terrible cards — genetic disorders, abusive childhoods, systemic disadvantage. They didn't choose these. But the most important thing in poker, as in life, is not the cards you're dealt. <strong>It's the choices you make with those cards</strong> that determine the long-term result.</p>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>With great responsibility comes great power. The more ownership you take over the interpretation of and response to your problems — even ones clearly not your fault — the more genuine power you exercise over your own life. Blame, by contrast, transfers that power away from you permanently.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH6: YOU'RE WRONG ABOUT EVERYTHING -->
+  <section id="ch6" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">06</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Six</span>
+        <h2 class="chapter-title">You're Wrong About Everything (But So Am I)</h2>
+        <p class="chapter-thesis">Certainty is the enemy of growth. Our brains are meaning-making machines prone to systematic error. The willingness to doubt yourself is a superpower, not a weakness.</p>
+      </div>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">🧠</span>
+        <h4>We're Architects of Our Beliefs</h4>
+        <p>Psychologists have shown that humans will invent elaborate patterns in completely random data — pressing buttons in random sequences, convinced they've "solved the puzzle." Our brains create meaning from noise. <strong>Most of our beliefs are products of our biases</strong>, not of careful reasoning.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">⚠️</span>
+        <h4>The Dangers of Pure Certainty</h4>
+        <p>Evil is not born from people who know they are evil. Atrocities are committed by people <strong>absolutely certain of their righteousness</strong>. Unwavering certainty in one's own beliefs is not strength — it is the precondition for the worst human behavior. Doubt is a moral virtue.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🪞</span>
+        <h4>Manson's Law of Avoidance</h4>
+        <p><em>"The more something threatens your identity, the more you will avoid it."</em> We avoid growth opportunities — asking for the promotion, launching the business, ending the bad relationship — not because of fear of failure but because <strong>success itself would threaten who we think we are</strong>.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">☯️</span>
+        <h4>Kill Your Ego</h4>
+        <p>Buddhism argues the "self" is a constructed story — and that clinging to this story imprisons us. Paradoxically, <strong>not knowing who you are keeps you growing</strong>. Rigid self-definitions lock you into roles. Fluid identity lets you grow beyond your current limitations.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <h4>Three Questions to Breed Uncertainty</h4>
+      <p><strong>1. What if I'm wrong?</strong> — Practice asking this constantly. The simple act generates humility. It doesn't mean you are wrong — just that you might be.</p>
+      <p><strong>2. What would it mean if I were wrong?</strong> — This is the harder step. The meaning behind your potential wrongness is often painful but necessary. Aristotle: an educated mind can entertain a thought without accepting it.</p>
+      <p><strong>3. Would being wrong create a better or worse problem?</strong> — The litmus test. Often, being wrong means you were protecting yourself at someone else's expense. Recognizing this is how we grow.</p>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>Growth isn't going from wrong to right. It's going from wrong to slightly less wrong, over and over, forever. The person who believes they know everything learns nothing. Seek doubt as eagerly as you seek knowledge — because doubt creates the space where knowledge grows.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH7: FAILURE IS THE WAY FORWARD -->
+  <section id="ch7" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">07</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Seven</span>
+        <h2 class="chapter-title">Failure Is the Way Forward</h2>
+        <p class="chapter-thesis">We can only succeed at things we're willing to fail at. The fear of failure is really the fear of losing a self-concept — which is the exact obstacle blocking growth.</p>
+      </div>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">🎨</span>
+        <h4>The Picasso Principle</h4>
+        <p>Picasso scribbled a napkin sketch in a café and charged $20,000 for it. "It took me two minutes," said the customer. "No," said Picasso, "it took me over sixty years." <strong>Mastery is accumulated failure</strong>. Every improvement is built on a foundation of previous error.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🏋️</span>
+        <h4>Pain Is Part of the Process</h4>
+        <p>Polish psychologist Dabrowski studied WWII survivors who felt the trauma had made them stronger, more grateful, and better people. He called this "positive disintegration" — the idea that <strong>psychological pain can produce psychological growth</strong>, just as physical pain builds muscle.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🔢</span>
+        <h4>Process-Oriented Values</h4>
+        <p>Goal-oriented values ("buy the house," "lose 15 pounds") produce a crisis upon completion — the meaning evaporates. Process-oriented values ("express myself honestly," "become a better partner") are <strong>infinitely renewable sources of direction</strong>. Picasso never ran out of reasons to paint.</p>
+      </div>
+      <div class="concept-card full-card">
+        <h4>The Do Something Principle</h4>
+        <p>Most people wait for inspiration → motivation → action. But research shows motivation is actually a loop. Taking action — even tiny, imperfect action — <strong>generates its own inspiration and motivation</strong>. The sequence runs backwards too. You don't wait to feel like doing it. You do it, then feel like doing more.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-head);font-weight:900;font-size:16px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);margin-bottom:20px;">The Motivation Loop — Rewritten</h3>
+
+    <div class="do-something-flow">
+      <div class="flow-step old">
+        <span class="flow-step-icon">💭</span>
+        <h4>Old View</h4>
+        <p>Inspiration → Motivation → Action</p>
+      </div>
+      <div class="flow-divider">
+        <div class="line"></div>
+        <span>vs</span>
+        <div class="line"></div>
+      </div>
+      <div class="flow-step new">
+        <span class="flow-step-icon">⚡</span>
+        <h4>Action First</h4>
+        <p>Do <em>anything</em> → Reaction → Motivation → Action</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step new">
+        <span class="flow-step-icon">🔁</span>
+        <h4>Endless Loop</h4>
+        <p>Action creates inspiration which creates more action</p>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>When the standard of success becomes merely acting — when any result is progress — we are free to fail. And that freedom to fail is exactly what moves us forward. Don't wait to feel ready. Start with two hundred crappy words. Start with one push-up. Start with saying hello.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH8: THE IMPORTANCE OF SAYING NO -->
+  <section id="ch8" class="chapter-section">
+    <div class="chapter-header">
+      <span class="chapter-num">08</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label">Chapter Eight</span>
+        <h2 class="chapter-title">The Importance of Saying No</h2>
+        <p class="chapter-thesis">To stand for something, you must be willing to reject everything that isn't it. Depth of commitment — not breadth of experience — is where real meaning lives.</p>
+      </div>
+    </div>
+
+    <div class="chapter-content">
+      <div class="concept-card">
+        <span class="concept-card-icon">🚧</span>
+        <h4>Rejection Defines You</h4>
+        <p>We are defined by what we choose to reject. If you stand for nothing in particular, you stand for nothing. To value X requires rejecting non-X. Accepting everything equally makes life feel <strong>directionless and hollow</strong> — not liberated.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🤝</span>
+        <h4>Healthy Boundaries</h4>
+        <p>In a healthy relationship, each person takes responsibility for their own problems and supports their partner in solving theirs — but does not take responsibility <em>for</em> their partner's problems. When these lines blur, <strong>enabling, resentment, and codependency follow</strong>.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">🪨</span>
+        <h4>Trust Through Conflict</h4>
+        <p>Without conflict, there is no trust — only pleasant performance. Conflict reveals who is genuinely there for you and who is just there for the benefits. <strong>The ability to say and hear "no"</strong> is the foundation of every authentic relationship.</p>
+      </div>
+      <div class="concept-card">
+        <span class="concept-card-icon">⛏️</span>
+        <h4>Freedom Through Commitment</h4>
+        <p>The paradox of choice: the more options available, the less satisfied we become with any one choice. Deep commitment to one person, one craft, one city <strong>unlocks levels of experience impossible to reach through constant novelty</strong>. The gold is buried deep, not wide.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote">
+      <blockquote>"Absolute freedom, by itself, means nothing. The only way to achieve meaning is through a rejection of alternatives — a narrowing of freedom, a choice of commitment."</blockquote>
+      <cite>— The Subtle Art of Not Giving a F*ck</cite>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>Pursuing a breadth of experiences denies you the rewards of depth. Some experiences are only available after decades of investment in one relationship, one craft, one place. Stop collecting and start committing. That is where the richest life is found.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end chapters-wrapper -->
+
+<!-- CH9: AND THEN YOU DIE -->
+<section id="ch9" id="death-section">
+  <div class="section-container" style="max-width:var(--max);margin:0 auto;padding:90px 20px;border-bottom:1px solid var(--border);">
+
+    <div class="chapter-header">
+      <span class="chapter-num" style="color:var(--accent);opacity:0.35;font-family:var(--font-head);font-weight:900;font-size:clamp(64px,10vw,110px);line-height:0.85;flex-shrink:0;letter-spacing:-0.04em;">09</span>
+      <div class="chapter-title-block">
+        <span class="chapter-label" style="font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:block;">Chapter Nine</span>
+        <h2 class="chapter-title">. . . And Then You Die</h2>
+        <p class="chapter-thesis">Death is not the opposite of life — it is the compass that gives all life meaning. To live fully requires making peace with the fact that you won't always.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <h4>Josh</h4>
+      <p>At 19, the author watched his friend Josh drown in a lake after jumping from a cliff — the last thing Josh said to him was a joking, ironic: "Seek the truth for yourself, and I will meet you there."</p>
+      <p>Josh's death destroyed the author's comfortable numbness — the weed, the video games, the social anxiety, the passive drifting. The realization: <em>"If there's no reason to do anything, there's also no reason to not do anything."</em> In the face of certain death, there is no reason to give in to fear or embarrassment. It's all temporary anyway.</p>
+    </div>
+
+    <div class="death-becker" style="margin-top:40px;">
+      <div class="becker-point">
+        <span class="bp-num">01</span>
+        <h4>We Know We Will Die</h4>
+        <p>Humans are uniquely aware of their own mortality. This awareness — absent in all other animals — creates what Ernest Becker called "death terror": an underlying existential anxiety that motivates everything we do.</p>
+      </div>
+      <div class="becker-point">
+        <span class="bp-num">02</span>
+        <h4>Immortality Projects</h4>
+        <p>To cope with death terror, we build "immortality projects" — legacies, families, religions, empires, art — that allow our conceptual self to outlive our physical self. All of civilization, Becker argued, is essentially a product of humans trying not to be forgotten.</p>
+      </div>
+      <div class="becker-point">
+        <span class="bp-num">03</span>
+        <h4>Values as Immortality Projects</h4>
+        <p>Our values — the things we give a fuck about — are our immortality projects. When they fail, death terror rushes back in. This is why it matters so much to choose good values: they determine what we're willing to suffer for and what legacy we will leave.</p>
+      </div>
+      <div class="becker-point">
+        <span class="bp-num">04</span>
+        <h4>The Bitter Antidote</h4>
+        <p>Becker's uncomfortable conclusion: instead of building ever-larger immortality projects, we should become comfortable with the reality of our own death. This acceptance — not denial — is what frees us to choose values that are genuine rather than defensive.</p>
+      </div>
+    </div>
+
+    <div class="pull-quote" style="margin-top:48px;">
+      <blockquote>"Confronting the reality of our own mortality is important because it obliterates all the crappy, fragile, superficial values in life."</blockquote>
+      <cite>— The Subtle Art of Not Giving a F*ck</cite>
+    </div>
+
+    <div class="takeaway" style="margin-top:24px;">
+      <span class="takeaway-icon">💡</span>
+      <div>
+        <h5>Core Insight</h5>
+        <p>Death is the only thing you can know with absolute certainty. As such, it should be the compass orienting all other values. The Stoics, Buddhists, and thoughtful people across all traditions have reached the same conclusion: keeping death in mind is not morbid — it is clarifying. It separates what matters from what doesn't. Everything else is noise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIVE CORE VALUES -->
+<section id="five-values">
+  <div class="section-container" style="max-width:var(--max);margin:0 auto;padding:0 20px;">
+    <div class="section-heading">
+      <span class="section-tag">The Prescription</span>
+      <h2 class="section-title">Five Counterintuitive Values</h2>
+      <p class="section-desc">The book proposes five specific values — all "backwards," all uncomfortable, all transformational. Each one requires confronting rather than avoiding deeper problems.</p>
+    </div>
+
+    <div class="five-values-grid">
+      <div class="value-pill">
+        <span class="v-num">I</span>
+        <h3>Radical Responsibility</h3>
+        <p>Take ownership of everything in your experience — not because it's your fault, but because you're the only one with the power to change it.</p>
+      </div>
+      <div class="value-pill">
+        <span class="v-num">II</span>
+        <h3>Embrace Uncertainty</h3>
+        <p>Certainty breeds entitlement and closes off growth. Cultivate doubt. Assume you might be wrong — especially when you feel most certain.</p>
+      </div>
+      <div class="value-pill">
+        <span class="v-num">III</span>
+        <h3>Embrace Failure</h3>
+        <p>Willingness to fail is the prerequisite for success. Adopt process values over outcome values so that the work itself is the reward.</p>
+      </div>
+      <div class="value-pill">
+        <span class="v-num">IV</span>
+        <h3>Practice Rejection</h3>
+        <p>Learn to say no and hear no. Clear boundaries and honest rejection are the foundation of authentic relationships and a meaningful life.</p>
+      </div>
+      <div class="value-pill">
+        <span class="v-num">V</span>
+        <h3>Contemplate Death</h3>
+        <p>Regularly confronting your own mortality strips away superficial values and refocuses attention on what is genuinely important.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES AUDIT -->
+<section id="values-audit">
+  <div class="section-container" style="max-width:var(--max);margin:0 auto;">
+    <div class="section-heading">
+      <span class="section-tag">Reflect &amp; Apply</span>
+      <h2 class="section-title">Your Values Audit</h2>
+      <p class="section-desc">The self-awareness onion requires asking uncomfortable questions. Click each question to reveal the deeper insight. Sit with these slowly.</p>
+    </div>
+
+    <div class="audit-questions">
+      <div class="audit-q" onclick="toggleAudit(this)">
+        <span class="q-num">Question 01</span>
+        <p class="q-text">What recurring negative emotion keeps showing up in your life — anger, anxiety, loneliness, shame?</p>
+        <button class="q-toggle">Reveal Insight ↓</button>
+        <p class="q-insight">This emotion is a signal, not a sentence. It points to a problem you haven't solved yet. The question is: what problem? Identifying it honestly — rather than blaming external circumstances — is the first layer of the self-awareness onion.</p>
+      </div>
+
+      <div class="audit-q" onclick="toggleAudit(this)">
+        <span class="q-num">Question 02</span>
+        <p class="q-text">What pain are you currently willing to sustain — and what pain are you avoiding that is blocking your growth?</p>
+        <button class="q-toggle">Reveal Insight ↓</button>
+        <p class="q-insight">The gap between the struggle you're willing to embrace and the struggle required for the life you want — that gap is the exact size of the changes you need to make. What you won't endure is what's standing between you and the life you claim to want.</p>
+      </div>
+
+      <div class="audit-q" onclick="toggleAudit(this)">
+        <span class="q-num">Question 03</span>
+        <p class="q-text">If you're consistently unhappy, what metric are you using to measure yourself — and is it actually in your control?</p>
+        <button class="q-toggle">Reveal Insight ↓</button>
+        <p class="q-insight">Dave Mustaine sold 25 million albums and felt like a failure because his metric — "be bigger than Metallica" — was outside his control. What metric are you using? Is it based on others' behavior, public opinion, or external circumstances? If so, it's a bad metric. Find something you can own completely.</p>
+      </div>
+
+      <div class="audit-q" onclick="toggleAudit(this)">
+        <span class="q-num">Question 04</span>
+        <p class="q-text">Where in your life are you most certain you're right — and what would it mean for you if you were wrong there?</p>
+        <button class="q-toggle">Reveal Insight ↓</button>
+        <p class="q-insight">Maximum certainty is maximum risk. The stories we cling to most tenaciously are usually the ones most in need of examination. The discomfort of imagining being wrong about something core is precisely what makes it worth investigating. Certainty closes; doubt opens.</p>
+      </div>
+
+      <div class="audit-q" onclick="toggleAudit(this)">
+        <span class="q-num">Question 05</span>
+        <p class="q-text">What would you do — or attempt — if you truly accepted that failure was not just possible but inevitable and necessary?</p>
+        <button class="q-toggle">Reveal Insight ↓</button>
+        <p class="q-insight">The "do something" principle: action creates motivation, not the other way around. The project you're not starting, the conversation you're not having, the relationship you're not ending — start with the smallest possible action. Even two hundred crappy words. Even one uncomfortable sentence. The rest follows.</p>
+      </div>
+
+      <div class="audit-q" onclick="toggleAudit(this)">
+        <span class="q-num">Question 06</span>
+        <p class="q-text">When you imagine your death, what specifically would feel like a wasted life — and does how you're spending your time today reflect that?</p>
+        <button class="q-toggle">Reveal Insight ↓</button>
+        <p class="q-insight">Death clarifies. The Stoics recommended meditating on death daily not to be morbid but to prioritize correctly. What would you regret? What would feel unfinished? The answer reveals your actual values — not your stated ones. Are you living those values today?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-title">The Subtle Art of Not Giving a F*ck</p>
+    <p class="footer-text">
+      This educational guide summarizes and synthesizes the ideas of Mark Manson's 2016 book. The concepts explored here — radical responsibility, embracing uncertainty, process over outcome, the backwards law — are tools for living with more intention and less anxiety.
+    </p>
+    <p class="footer-text" style="margin-top:8px;">
+      <em>The central question the book asks, and the only one that matters:</em>
+    </p>
+    <p style="font-size:20px;font-style:italic;color:var(--text);margin-top:8px;font-family:Georgia,serif;">
+      "What pain are you willing to sustain?"
+    </p>
+    <div class="footer-mantra">DON'T TRY</div>
+  </div>
+</footer>
+
+<script>
+// Progress bar
+function updateProgress() {
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (scrolled / total) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// Intersection Observer for chapter animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.chapter-section').forEach(el => observer.observe(el));
+
+// Nav active state
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id]');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => navObserver.observe(s));
+
+// Values audit toggle
+function toggleAudit(card) {
+  card.classList.toggle('expanded');
+  const btn = card.querySelector('.q-toggle');
+  if (card.classList.contains('expanded')) {
+    btn.textContent = 'Hide Insight ↑';
+  } else {
+    btn.textContent = 'Reveal Insight ↓';
+  }
+}
+
+// Animate hero stat numbers
+function animateCount(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) {
+      start = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(start);
+  }, 16);
+}
+
+const heroObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.hero-stat-num').forEach(el => {
+      const val = parseInt(el.textContent);
+      el.textContent = '0';
+      animateCount(el, val, 800);
+    });
+    heroObserver.disconnect();
+  }
+}, { threshold: 0.5 });
+
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) heroObserver.observe(heroStats);
+</script>
+</body>
+</html>

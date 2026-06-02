@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Theory for Fashion — Complete Visual Guide</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0c0c0f;--bg2:#141418;--bg3:#1c1c22;--bg4:#242430;
+  --text:#e4e2dd;--muted:#7a7a8a;--dim:#3e3e50;
+  --accent:#c9a84c;--accent2:#e8d5a3;--border:#252530;
+  --green:#4a9a5a;--red:#c8192a;
+}
+html{scroll-behavior:smooth;}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--text);line-height:1.75;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(12,12,15,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;}
+.nav-logo{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);padding:1rem 1.2rem 1rem 0;border-right:1px solid var(--border);margin-right:.5rem;white-space:nowrap;font-family:Arial,sans-serif;}
+nav ul{display:flex;list-style:none;overflow-x:auto;scrollbar-width:none;}
+nav ul::-webkit-scrollbar{display:none;}
+nav ul li a{display:block;padding:.95rem .9rem;color:var(--muted);text-decoration:none;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;transition:color .2s;font-family:Arial,sans-serif;}
+nav ul li a:hover{color:var(--accent);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 5rem;position:relative;}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at 50% 25%,rgba(201,168,76,.07) 0%,transparent 65%);pointer-events:none;}
+.hero-eyebrow{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:1.4rem;font-family:Arial,sans-serif;}
+.hero h1{font-size:clamp(2.8rem,6vw,5.5rem);font-weight:400;letter-spacing:.02em;line-height:1.06;margin-bottom:1.4rem;}
+.hero h1 .gold{color:var(--accent);}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:560px;margin-bottom:3rem;font-style:italic;}
+.spectrum{display:flex;width:340px;max-width:88vw;height:6px;border-radius:3px;overflow:hidden;margin:0 auto 1rem;}
+.spectrum span{flex:1;}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--dim);font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;font-family:Arial,sans-serif;animation:bob 2s infinite;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
+
+/* SECTIONS */
+.section{padding:5rem 2rem;}
+.section+.section{border-top:1px solid var(--border);}
+.inner{max-width:1060px;margin:0 auto;}
+.eyebrow{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;font-family:Arial,sans-serif;}
+h2{font-size:clamp(1.9rem,3vw,2.9rem);font-weight:400;line-height:1.12;margin-bottom:1rem;}
+h3{font-size:1.12rem;font-weight:500;color:var(--accent2);margin-bottom:.5rem;}
+h4{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;font-family:Arial,sans-serif;}
+p{color:var(--muted);margin-bottom:.95rem;max-width:70ch;}
+p.wide{max-width:88ch;}
+p.full{max-width:100%;}
+strong{color:var(--accent2);font-weight:600;}
+
+/* CALLOUTS */
+.callout{background:var(--bg3);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:1.2rem 1.6rem;margin:1.8rem 0;}
+.callout p{color:var(--text);margin-bottom:0;max-width:100%;font-size:.95rem;}
+.callout h4{color:var(--accent);margin-bottom:.35rem;}
+.tip-box{background:rgba(74,154,90,.08);border:1px solid rgba(74,154,90,.25);border-radius:10px;padding:1.2rem 1.6rem;margin:1.5rem 0;}
+.tip-box p{color:var(--text);margin-bottom:0;max-width:100%;font-size:.88rem;}
+
+/* SWATCHES */
+.swatch-group{margin:1.8rem 0;}
+.sg-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:.75rem;font-family:Arial,sans-serif;}
+.swatch-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.chip{border-radius:7px;box-shadow:0 2px 10px rgba(0,0,0,.55);transition:transform .25s ease,box-shadow .25s ease;cursor:default;}
+.chip:hover{transform:translateY(-6px) scale(1.07);box-shadow:0 10px 24px rgba(0,0,0,.5);}
+.chip.sm{width:54px;height:70px;}
+.chip.md{width:70px;height:90px;}
+.chip.lg{width:86px;height:108px;}
+.chip-name{font-size:.6rem;color:var(--muted);text-align:center;max-width:72px;line-height:1.3;font-family:Arial,sans-serif;}
+.swatch-sep{width:1px;height:75px;background:var(--border);margin:0 6px;align-self:center;}
+
+/* STRIPS */
+.strip{margin:1.4rem 0;}
+.strip-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.35rem;}
+.strip-title{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;font-family:Arial,sans-serif;color:var(--text);}
+.strip-formula{font-size:.7rem;color:var(--accent);font-family:Arial,sans-serif;}
+.strip-bar{display:flex;height:50px;border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.5);}
+.strip-bar span{flex:1;}
+.strip-note{font-size:.72rem;color:var(--dim);margin-top:.3rem;font-family:Arial,sans-serif;}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin:1.8rem 0;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.8rem 0;}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.4rem;}
+.card h3{margin-bottom:.4rem;}
+.card h4{margin-bottom:.3rem;}
+.card p{font-size:.86rem;max-width:100%;margin-bottom:0;}
+.card.gold-border{border-color:rgba(201,168,76,.35);}
+.big-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:2rem;}
+
+/* COLOR WHEEL */
+#rwCanvas,#cmykCanvas{border-radius:50%;box-shadow:0 4px 22px rgba(0,0,0,.65);display:block;}
+.wheel-wrap{display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center;justify-content:center;margin:2rem 0;}
+.wheel-info h3{margin-bottom:.5rem;}
+.wheel-info p{max-width:36ch;font-size:.9rem;}
+.wheel-info ul{color:var(--muted);font-size:.86rem;padding-left:1.2rem;max-width:36ch;}
+.wheel-info ul li{margin-bottom:.3rem;}
+.wheel-info strong{color:var(--accent2);}
+
+/* GRAY COMPARE */
+.gray-demo{display:flex;gap:1.5rem;flex-wrap:wrap;margin:1.5rem 0;}
+.gray-item{flex:1;min-width:120px;}
+.gray-chip{height:60px;border-radius:8px;margin-bottom:.6rem;box-shadow:0 2px 8px rgba(0,0,0,.4);}
+.gray-label{font-size:.72rem;color:var(--text);font-family:Arial,sans-serif;margin-bottom:.2rem;}
+.gray-desc{font-size:.65rem;color:var(--muted);font-family:Arial,sans-serif;line-height:1.4;}
+.gray-pair{display:flex;gap:6px;margin-top:.5rem;}
+.gray-pair-chip{height:30px;flex:1;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.4);}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{background:none;border:none;padding:.75rem 1.3rem;color:var(--muted);font-family:Arial,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .2s;}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-btn:hover:not(.active){color:var(--text);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* SCHEME CARDS */
+.scheme-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.4rem;margin-bottom:1rem;}
+.scheme-card h3{color:var(--accent);margin-bottom:.25rem;}
+.scheme-card > p{font-size:.85rem;max-width:100%;margin-bottom:1rem;}
+.scheme-circles{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.sc{width:46px;height:46px;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.5);transition:transform .2s;flex-shrink:0;}
+.sc:hover{transform:scale(1.15);}
+.sc-plus{color:var(--dim);font-size:1rem;line-height:46px;}
+.scheme-example{margin-top:.9rem;font-size:.8rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.7rem;font-family:Arial,sans-serif;}
+
+/* VALUE */
+.value-scale-bar{display:flex;height:54px;border-radius:8px;overflow:hidden;margin:1.5rem 0;box-shadow:0 2px 12px rgba(0,0,0,.5);}
+.value-scale-bar span{flex:1;}
+.dress-row{display:flex;gap:2rem;justify-content:center;margin:2.5rem 0;flex-wrap:wrap;}
+.dress-wrap{text-align:center;}
+.dress-label{font-size:.72rem;color:var(--muted);margin-top:.7rem;max-width:110px;line-height:1.35;font-family:Arial,sans-serif;}
+
+/* OUTFIT PAIRINGS */
+.outfit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;margin:1.8rem 0;}
+.outfit-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s;}
+.outfit-card:hover{border-color:var(--accent);}
+.outfit-swatches{display:flex;height:80px;}
+.outfit-swatches span{flex:1;}
+.outfit-info{padding:.85rem 1rem;}
+.ot{font-size:.85rem;color:var(--text);margin-bottom:.2rem;font-weight:500;}
+.outfit-info p{font-size:.72rem;max-width:100%;margin-bottom:0;line-height:1.4;}
+.works{color:#5aaa6a!important;}
+.tension{color:#c4a020!important;}
+.clash{color:#c86040!important;}
+
+/* PROPORTIONS */
+.prop-demo{display:flex;gap:1.2rem;align-items:flex-end;flex-wrap:wrap;margin:1.5rem 0;}
+.prop-stack{width:68px;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.45);}
+.prop-note{font-size:.65rem;color:var(--muted);text-align:center;margin-top:.5rem;max-width:68px;line-height:1.3;font-family:Arial,sans-serif;}
+
+/* PROCESS LIST */
+.process-list{margin:2rem 0;position:relative;padding-left:0;}
+.process-item{display:flex;gap:1.4rem;padding:1rem 0;position:relative;}
+.process-item+.process-item{border-top:1px solid var(--border);}
+.p-num{width:38px;height:38px;border-radius:50%;background:var(--bg3);border:1px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.82rem;font-family:Arial,sans-serif;flex-shrink:0;margin-top:.1rem;}
+.p-content{}
+.p-content h3{font-size:1rem;color:var(--text);margin-bottom:.25rem;}
+.p-content p{font-size:.84rem;margin-bottom:0;}
+
+/* QUICK REF */
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0;}
+.qr-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;}
+.qr-card h4{color:var(--accent);letter-spacing:.06em;margin-bottom:.5rem;font-size:.78rem;}
+.qr-card p{font-size:.8rem;margin-bottom:0;max-width:100%;}
+.qr-card .formula{font-size:.78rem;color:var(--text);font-family:'Courier New',monospace;background:var(--bg4);border-radius:4px;padding:.2rem .5rem;display:inline-block;margin-bottom:.4rem;}
+
+/* BLOCKQUOTE */
+blockquote{border-left:3px solid var(--accent);padding:.9rem 1.4rem;margin:1.5rem 0;background:var(--bg2);border-radius:0 8px 8px 0;}
+blockquote p{font-style:italic;color:var(--text);font-size:.97rem;margin-bottom:0;max-width:100%;}
+blockquote cite{display:block;margin-top:.4rem;font-size:.72rem;color:var(--muted);font-style:normal;font-family:Arial,sans-serif;}
+
+/* COMPARISON */
+.compare-demo{display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0;}
+.compare-item{flex:1;min-width:130px;}
+.compare-bg{border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.4);margin-bottom:.5rem;}
+.compare-inner{padding:12px;display:flex;justify-content:center;}
+.compare-chip{width:50px;height:50px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.4);}
+.compare-note{font-size:.7rem;color:var(--muted);font-family:Arial,sans-serif;line-height:1.35;}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* FOOTER */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem;font-family:Arial,sans-serif;letter-spacing:.04em;}
+footer a{color:var(--muted);text-decoration:none;}
+footer a:hover{color:var(--accent);}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  .g2,.g3,.g4{grid-template-columns:1fr;}
+  .nav-logo{display:none;}
+  .wheel-wrap{flex-direction:column;}
+  .chip.lg{width:64px;height:82px;}
+}
+@media(max-width:500px){
+  .chip.md{width:54px;height:70px;}
+  .chip.sm{width:44px;height:58px;}
+  h2{font-size:1.75rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Color Theory</div>
+    <ul>
+      <li><a href="#vst">Properties</a></li>
+      <li><a href="#undertones">Undertones</a></li>
+      <li><a href="#desaturation">Desaturation</a></li>
+      <li><a href="#wheels">Color Wheels</a></li>
+      <li><a href="#grays">Grays</a></li>
+      <li><a href="#schemes">Schemes</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#fashion">Fashion</a></li>
+      <li><a href="#story">Color Story</a></li>
+      <li><a href="#proportions">Proportions</a></li>
+      <li><a href="#process">Process</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-eyebrow">A Complete Visual Reference</div>
+  <h1>Color Theory<br>for <span class="gold">Fashion</span></h1>
+  <p class="hero-sub">Undertones, desaturation, color schemes, value placement, and building a cohesive color story — everything a designer needs to stop guessing and start knowing.</p>
+  <div class="spectrum">
+    <span style="background:#c8192a"></span><span style="background:#d03818"></span>
+    <span style="background:#d86010"></span><span style="background:#e09000"></span>
+    <span style="background:#ccc000"></span><span style="background:#5aaa40"></span>
+    <span style="background:#18a080"></span><span style="background:#1878c8"></span>
+    <span style="background:#2848b0"></span><span style="background:#5030a0"></span>
+    <span style="background:#801888"></span><span style="background:#b01858"></span>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</div>
+
+<!-- ═══ INTRO OVERVIEW ═══ -->
+<div class="section" style="padding-top:3rem;padding-bottom:3rem;">
+  <div class="inner">
+    <div class="g4 fade-in">
+      <div class="card gold-border">
+        <h4>The Goal</h4>
+        <p>Reduce trial and error. Instead of randomly testing swatches, understand <em>why</em> colors work together before you ever pull fabric.</p>
+      </div>
+      <div class="card gold-border">
+        <h4>The Foundation</h4>
+        <p>Every color has three properties: <strong>Value</strong> (light/dark), <strong>Saturation</strong> (intensity), and <strong>Temperature</strong> (warm/cool).</p>
+      </div>
+      <div class="card gold-border">
+        <h4>The Key Insight</h4>
+        <p>Colors don't exist in isolation. Every color looks different depending on what color sits next to it. That's the whole game.</p>
+      </div>
+      <div class="card gold-border">
+        <h4>The Payoff</h4>
+        <p>When you can read undertones and understand color relationships, you can build a cohesive collection palette from any inspiration image.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 1: VST ═══ -->
+<div class="section" id="vst">
+  <div class="inner">
+    <div class="eyebrow">Foundation</div>
+    <h2 class="fade-in">The Three Properties<br>of Every Color</h2>
+    <p class="wide fade-in">Every single color can be described by three things: its <strong>Value</strong>, its <strong>Saturation</strong>, and its <strong>Temperature</strong>. These aren't just academic labels — they're the tools you use to talk precisely about color with your team, your sourcing rep, and your own eye.</p>
+
+    <div class="g3 fade-in">
+      <div class="big-card">
+        <h3>Value</h3>
+        <p class="full">How light or dark the color is. Light values are called <strong>high values</strong>; dark values are <strong>low values</strong>. Value is about lightness — not brightness.</p>
+        <div class="value-scale-bar" style="margin-top:1rem;">
+          <span style="background:#f4f4f4"></span><span style="background:#d0d0d0"></span>
+          <span style="background:#a8a8a8"></span><span style="background:#808080"></span>
+          <span style="background:#585858"></span><span style="background:#303030"></span>
+          <span style="background:#0a0a0a"></span>
+        </div>
+        <p style="font-size:.75rem;color:var(--dim);font-family:Arial,sans-serif;margin-top:.3rem;margin-bottom:0;">High value → Low value</p>
+        <div class="tip-box" style="margin-top:1.2rem;">
+          <p>To find the value of a colored swatch: squint your eyes and compare it to a gray scale. When the edge blurs, you've found its matching value.</p>
+        </div>
+      </div>
+
+      <div class="big-card">
+        <h3>Saturation</h3>
+        <p class="full">How intense or pure the color is — not its lightness. A bright banana yellow and a pale powder blue can share the same value but have very different saturations.</p>
+        <div style="margin-top:1rem;">
+          <div style="height:40px;border-radius:6px;background:linear-gradient(90deg,#c8c8c8,#c41428);box-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:.4rem;"></div>
+          <p style="font-size:.72rem;color:var(--dim);font-family:Arial,sans-serif;margin-bottom:0;">Desaturated → Fully saturated red</p>
+        </div>
+        <div style="margin-top:.8rem;">
+          <div style="height:40px;border-radius:6px;background:linear-gradient(90deg,#c0c0a0,#c8b400);box-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:.4rem;"></div>
+          <p style="font-size:.72rem;color:var(--dim);font-family:Arial,sans-serif;margin-bottom:0;">Desaturated → Fully saturated yellow</p>
+        </div>
+        <div class="tip-box" style="margin-top:1.2rem;">
+          <p>Saturation and value are independent. You can have a dark, muted color or a dark, vivid color. The combinations are endless.</p>
+        </div>
+      </div>
+
+      <div class="big-card">
+        <h3>Temperature</h3>
+        <p class="full">How warm or cool the color feels. <strong>Orange is the warmest color</strong> on the wheel; <strong>blue is the coolest</strong>. Any color can be made warmer (add yellow/red) or cooler (add blue).</p>
+        <div class="swatch-row" style="margin-top:1rem;gap:6px;flex-wrap:nowrap;justify-content:center;">
+          <div class="swatch"><div class="chip sm" style="background:#d44218;"></div><div class="chip-name">Warm Red</div></div>
+          <div class="swatch"><div class="chip sm" style="background:#c41428;"></div><div class="chip-name">True Red</div></div>
+          <div class="swatch"><div class="chip sm" style="background:#a81850;"></div><div class="chip-name">Cool Red</div></div>
+        </div>
+        <div class="tip-box" style="margin-top:1.2rem;">
+          <p>A cool-toned red shares a blue undertone with a cool-toned collection. A warm red shares orange with warm neutrals. Temperature creates family relationships between colors.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout fade-in">
+      <h4>VST in Practice</h4>
+      <p>When your boss says "let's try a pop of red," ask yourself: warm or cool red? Bright or muted? Light or dark? These three questions narrow down thousands of reds to exactly the right one for your collection.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: UNDERTONES ═══ -->
+<div class="section" id="undertones">
+  <div class="inner">
+    <div class="eyebrow">The Hidden Layer</div>
+    <h2 class="fade-in">What Is an Undertone?</h2>
+    <p class="wide fade-in">A color's undertone is its sub-family — what it's secretly made of. When you look at a swatch and say "that's brown," the undertone tells you <em>what kind</em> of brown. Is it orange-brown? Red-brown? Yellow-brown? This is the difference between a leather that harmonizes with your collection and one that fights it.</p>
+
+    <blockquote class="fade-in">
+      <p>"Undertone is what's the undercurrent of the color — what family it belongs to. This is a brown that belongs in the orange family."</p>
+    </blockquote>
+
+    <div class="fade-in">
+      <h3 style="margin-top:2rem;">Red Undertone Spectrum</h3>
+      <p>Every shade below can be called "red" — but they read completely differently in a collection. Warm reds (left) feel aggressive and autumnal. Cool reds (right) feel romantic, luxurious, sophisticated.</p>
+
+      <div class="swatch-group">
+        <div class="sg-label">Warm ← → Cool</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip lg" style="background:#d44218;"></div><div class="chip-name">Red Orange</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#c83220;"></div><div class="chip-name">Warm Red</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#c41428;"></div><div class="chip-name">True Red</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#aa1848;"></div><div class="chip-name">Cool Red</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#981462;"></div><div class="chip-name">Red Violet</div></div>
+          <div class="swatch-sep"></div>
+          <div class="swatch"><div class="chip lg" style="background:#5a0010;"></div><div class="chip-name">Burgundy (shade of red)</div></div>
+        </div>
+        <p style="font-size:.75rem;color:var(--dim);font-family:Arial,sans-serif;margin-top:.4rem;margin-bottom:0;">Hover to see each swatch. Note: the burgundy is a shade (red + black) — it belongs to the red family, but is deeply desaturated.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <h3>Brown Undertone Spectrum</h3>
+      <p>Browns are where undertone knowledge really pays off. They all read as "neutral" but they're wildly incompatible with each other — and each harmonizes with a completely different color story.</p>
+
+      <div class="swatch-group">
+        <div class="sg-label">Orange-based ← → Green-based</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip lg" style="background:#c0581a;"></div><div class="chip-name">Burnt Sienna (orange)</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#9a4022;"></div><div class="chip-name">Red Brown</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#7c3c20;"></div><div class="chip-name">True Brown</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#8c6428;"></div><div class="chip-name">Yellow Brown (camel)</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#6c6c28;"></div><div class="chip-name">Olive Brown (green)</div></div>
+        </div>
+      </div>
+
+      <div class="g2" style="margin-top:1.5rem;">
+        <div class="card">
+          <h4>Burnt Sienna &amp; Red Browns</h4>
+          <p>These belong to the orange-red family. They harmonize with warm reds, rust, brick, terracotta. They're the go-to neutral for blue suits (orange is blue's complement) and fall collections.</p>
+        </div>
+        <div class="card">
+          <h4>Yellow &amp; Green Browns</h4>
+          <p>Khaki, olive, and sage browns belong to the yellow-green family. They harmonize with yellow-based colors and cool-toned greens. Putting these next to a warm red creates friction — they share no undertone and aren't complements.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout fade-in">
+      <h4>Lighting Matters — A Lot</h4>
+      <p>Do all color work in bright, white light — early afternoon daylight or clean daylight-rated bulbs. That warm golden table lamp in your living room will shift every color you're looking at. If you're matching swatches under warm indoor light, you're guessing wrong.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: DESATURATION ═══ -->
+<div class="section" id="desaturation">
+  <div class="inner">
+    <div class="eyebrow">Four Methods</div>
+    <h2 class="fade-in">Desaturating a Color</h2>
+    <p class="wide fade-in">To "desaturate" means to make a color less punchy — to soften, darken, lighten, or neutralize it. There are exactly <strong>four methods</strong>, each with a specific name, and each produces a fundamentally different result. People use these terms interchangeably in the real world — don't. Each means something precise.</p>
+
+    <div class="fade-in">
+      <div class="strip">
+        <div class="strip-head">
+          <span class="strip-title">Tint</span>
+          <span class="strip-formula">Color + White</span>
+        </div>
+        <div class="strip-bar">
+          <span style="background:#c41428"></span><span style="background:#cf3a48"></span>
+          <span style="background:#da5866"></span><span style="background:#e57888"></span>
+          <span style="background:#ed96a0"></span><span style="background:#f4b4bc"></span>
+          <span style="background:#f8cfd4"></span><span style="background:#fce8ea"></span>
+        </div>
+        <p class="strip-note">Red → Coral → Rose → Blush → Near-white. Tints are airy, youthful, delicate. Spring collections lean heavily on tints.</p>
+      </div>
+
+      <div class="strip">
+        <div class="strip-head">
+          <span class="strip-title">Shade</span>
+          <span class="strip-formula">Color + Black</span>
+        </div>
+        <div class="strip-bar">
+          <span style="background:#c41428"></span><span style="background:#a81020"></span>
+          <span style="background:#8c0c18"></span><span style="background:#700810"></span>
+          <span style="background:#540408"></span><span style="background:#380204"></span>
+          <span style="background:#200100"></span><span style="background:#0a0000"></span>
+        </div>
+        <p class="strip-note">Red → Crimson → Burgundy → Oxblood → Near-black. Shades are rich, dramatic, sophisticated. A touch of black creates burgundy; more creates blood red. Fall and eveningwear.</p>
+      </div>
+
+      <div class="strip">
+        <div class="strip-head">
+          <span class="strip-title">Tone</span>
+          <span class="strip-formula">Color + Gray</span>
+        </div>
+        <div class="strip-bar">
+          <span style="background:#c41428"></span><span style="background:#b43848"></span>
+          <span style="background:#a04858"></span><span style="background:#906068"></span>
+          <span style="background:#7e7070"></span><span style="background:#707070"></span>
+          <span style="background:#686868"></span><span style="background:#606060"></span>
+        </div>
+        <p class="strip-note">Red → Dusty rose → Muted mauve → Warm gray. Tones are understated, complex, subtle. Loved in contemporary minimalist and quiet luxury aesthetics.</p>
+      </div>
+
+      <div class="strip">
+        <div class="strip-head">
+          <span class="strip-title">Mute</span>
+          <span class="strip-formula">Color + Its Complement</span>
+        </div>
+        <div class="strip-bar">
+          <span style="background:#c41428"></span><span style="background:#b03c30"></span>
+          <span style="background:#9a5038"></span><span style="background:#886040"></span>
+          <span style="background:#786848"></span><span style="background:#686c50"></span>
+          <span style="background:#5a7058"></span><span style="background:#4a7460"></span>
+        </div>
+        <p class="strip-note">Red + Green → Brick red → Terracotta → Earthy neutral → Near-green. Mutes create naturalistic, earthy colors. The magic: both the red and the green in your collection will harmonize with a muted version of either because they're made of the same pigments.</p>
+      </div>
+    </div>
+
+    <div class="g2 fade-in" style="margin-top:2rem;">
+      <div class="card">
+        <h3>Same Color, Four Outcomes</h3>
+        <p>Below: all four desaturation methods applied to the same red, at the same level of intensity. They produce completely different emotional registers — even though all four started from the same parent color.</p>
+        <div class="swatch-row" style="margin-top:1rem;justify-content:center;">
+          <div class="swatch"><div class="chip md" style="background:#c41428;"></div><div class="chip-name">Pure Red</div></div>
+          <div class="swatch"><div class="chip md" style="background:#f0b0b8;"></div><div class="chip-name">Tint (pink)</div></div>
+          <div class="swatch"><div class="chip md" style="background:#700810;"></div><div class="chip-name">Shade (burgundy)</div></div>
+          <div class="swatch"><div class="chip md" style="background:#906068;"></div><div class="chip-name">Tone (mauve)</div></div>
+          <div class="swatch"><div class="chip md" style="background:#886040;"></div><div class="chip-name">Mute (brick)</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Why Muting Is Special</h3>
+        <p>When you add green to red, you get a terracotta or brick — a muted red that simultaneously harmonizes with <em>both</em> red and green. This is why, when building a red-and-green color story, your neutral earth tones should be muted versions of those same colors: they're all part of the same color DNA.</p>
+        <div class="swatch-row" style="margin-top:1rem;justify-content:center;">
+          <div class="swatch"><div class="chip md" style="background:#c41428;"></div><div class="chip-name">Red</div></div>
+          <div class="swatch"><div class="chip md" style="background:#886040;"></div><div class="chip-name">Muted Red (brick)</div></div>
+          <div class="swatch"><div class="chip md" style="background:#4a9a5a;"></div><div class="chip-name">Green</div></div>
+        </div>
+        <p style="margin-top:.8rem;">These three look like they belong together. They do — they share the same two pigments.</p>
+      </div>
+    </div>
+
+    <div class="callout fade-in">
+      <h4>The Christmas Problem — Solved by Muting</h4>
+      <p>Red + green at full saturation reads as Christmas. But if you take that green and mute it with a little red (its complement), you get an earthy olive that harmonizes beautifully with red without screaming December 25th. The muting doesn't destroy the relationship — it deepens it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 4: COLOR WHEELS ═══ -->
+<div class="section" id="wheels">
+  <div class="inner">
+    <div class="eyebrow">Two Systems</div>
+    <h2 class="fade-in">The Two Color Wheels</h2>
+    <p class="wide fade-in">Fashion designers use two different color systems for two different purposes. Confusing them creates muddy mixes and wasted time. Use the right wheel for the right job.</p>
+
+    <div class="wheel-wrap fade-in">
+      <div>
+        <canvas id="rybCanvas" width="220" height="220"></canvas>
+        <p style="text-align:center;font-size:.72rem;font-family:Arial,sans-serif;color:var(--muted);margin-top:.7rem;margin-bottom:0;">Red–Yellow–Blue Wheel</p>
+      </div>
+      <div class="wheel-info">
+        <h3>RYB — For Design</h3>
+        <p>The traditional artist's wheel. Primaries: Red, Yellow, Blue. Secondaries: Orange, Green, Violet. <strong>Use this for design decisions</strong> — choosing color schemes, identifying complements, building relationships.</p>
+        <p>This is the wheel your clients, buyers, and creative directors are accustomed to seeing. When you point to a color wheel in a meeting, this is the one.</p>
+        <ul>
+          <li>Red's complement: <strong>Green</strong></li>
+          <li>Blue's complement: <strong>Orange</strong></li>
+          <li>Yellow's complement: <strong>Violet</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wheel-wrap fade-in" style="margin-top:2.5rem;">
+      <div>
+        <canvas id="cmykCanvas" width="220" height="220"></canvas>
+        <p style="text-align:center;font-size:.72rem;font-family:Arial,sans-serif;color:var(--muted);margin-top:.7rem;margin-bottom:0;">Cyan–Magenta–Yellow Wheel</p>
+      </div>
+      <div class="wheel-info">
+        <h3>CMYK — For Mixing</h3>
+        <p>The subtractive color model used by every printer on Earth and every professional colorist. Primaries: Cyan, Magenta, Yellow (plus Black as a separate tool). <strong>Use this when mixing paints or inks.</strong></p>
+        <p>This system produces far cleaner, more accurate secondaries. Mixing cyan + magenta gives a pure violet. Mixing red + blue (RYB) gives a muddy, brownish purple.</p>
+        <ul>
+          <li>Cyan + Magenta = <strong>clean Violet</strong></li>
+          <li>Cyan + Yellow = <strong>clean Green</strong></li>
+          <li>Magenta + Yellow = <strong>clean Red/Orange</strong></li>
+          <li>Paint brand: look for Phthalo Blue (cyan) + Rose Tyrion (magenta) + Primary Yellow</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="g2 fade-in" style="margin-top:2rem;">
+      <div class="card">
+        <h3>You Don't Need 100 Tubes</h3>
+        <p>Start with Cyan, Magenta, Yellow, Black, and White. You can mix every color from these five. As you identify colors you use constantly — like burnt sienna for skin tones — buy those as shortcuts. The goal is understanding <em>where colors come from</em>, not owning every possible hue.</p>
+      </div>
+      <div class="card">
+        <h3>CMYK is Also for Printing</h3>
+        <p>When setting up any document that will be physically printed — fashion illustrations, lookbooks, tech packs — always work in CMYK mode in Photoshop or Illustrator. RGB is for screens. CMYK is for everything that gets printed on paper or fabric.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 5: GRAYS ═══ -->
+<div class="section" id="grays">
+  <div class="inner">
+    <div class="eyebrow">The Most Misunderstood Tool</div>
+    <h2 class="fade-in">Choosing the Right Gray</h2>
+    <p class="wide fade-in">When you tone a color by mixing it with gray, the gray you choose dramatically changes the result. Every gray has its own undertone — and if the gray's undertone conflicts with your color's undertone, you're changing the color's identity without realizing it. <strong>There are three families of gray.</strong></p>
+
+    <div class="gray-demo fade-in">
+      <div class="gray-item">
+        <div class="gray-chip" style="background:#8090a8;"></div>
+        <div class="gray-label">Cool Gray</div>
+        <div class="gray-desc">Blue-tinted. Use with blues, purples, and violet families. Adding this to yellow immediately starts greening it — pulling it toward blue-green and away from yellow.</div>
+        <div class="gray-pair" style="margin-top:.6rem;">
+          <div class="gray-pair-chip" style="background:#3858a8;"></div>
+          <div class="gray-pair-chip" style="background:#6040a0;"></div>
+          <div class="gray-pair-chip" style="background:#8090a8;"></div>
+        </div>
+        <p style="font-size:.62rem;color:var(--dim);font-family:Arial,sans-serif;margin-top:.3rem;margin-bottom:0;">Harmonizes with blues &amp; purples</p>
+      </div>
+      <div class="gray-item">
+        <div class="gray-chip" style="background:#a09090;"></div>
+        <div class="gray-label">Warm Gray</div>
+        <div class="gray-desc">Red/pink-tinted. Use with reds, oranges, and warm earth tones. Adding this to yellow starts pinkening it — a warm gray can tip purple if there's too much pink in it.</div>
+        <div class="gray-pair" style="margin-top:.6rem;">
+          <div class="gray-pair-chip" style="background:#c83220;"></div>
+          <div class="gray-pair-chip" style="background:#d06020;"></div>
+          <div class="gray-pair-chip" style="background:#a09090;"></div>
+        </div>
+        <p style="font-size:.62rem;color:var(--dim);font-family:Arial,sans-serif;margin-top:.3rem;margin-bottom:0;">Harmonizes with reds &amp; oranges</p>
+      </div>
+      <div class="gray-item">
+        <div class="gray-chip" style="background:#9a9e84;"></div>
+        <div class="gray-label">French Gray</div>
+        <div class="gray-desc">Yellow-green tinted. Use with yellows and greens. This is the correct gray for toning yellow — it deepens the yellow without shifting its undertone. Adding it to yellow reads as "darker yellow," not "gray."</div>
+        <div class="gray-pair" style="margin-top:.6rem;">
+          <div class="gray-pair-chip" style="background:#c8b000;"></div>
+          <div class="gray-pair-chip" style="background:#5a9a40;"></div>
+          <div class="gray-pair-chip" style="background:#9a9e84;"></div>
+        </div>
+        <p style="font-size:.62rem;color:var(--dim);font-family:Arial,sans-serif;margin-top:.3rem;margin-bottom:0;">Harmonizes with yellows &amp; greens</p>
+      </div>
+    </div>
+
+    <h3 class="fade-in" style="margin-top:2rem;">The Undertone-Preserving Rule</h3>
+    <p class="fade-in">When you tone a color but want to <em>preserve its original undertone</em>, use the gray whose undertone matches the color's family. When you <em>want to shift</em> the undertone, mix a conflicting gray intentionally.</p>
+
+    <div class="g2 fade-in">
+      <div class="card">
+        <h4 style="color:var(--green);">✓ Correct: Yellow + French Gray</h4>
+        <div class="swatch-row" style="margin:.8rem 0;justify-content:center;">
+          <div class="swatch"><div class="chip sm" style="background:#c8b000;"></div><div class="chip-name">Pure Yellow</div></div>
+          <div class="swatch"><div class="chip sm" style="background:#9a9e84;"></div><div class="chip-name">French Gray</div></div>
+          <div class="swatch"><div class="chip sm" style="background:#a09a40;"></div><div class="chip-name">Toned Yellow</div></div>
+        </div>
+        <p>The result reads as "dark, sophisticated yellow" — the yellow's identity is preserved. This is khaki, olive, citrine.</p>
+      </div>
+      <div class="card">
+        <h4 style="color:#c86040;">✗ Wrong: Yellow + Cool Gray</h4>
+        <div class="swatch-row" style="margin:.8rem 0;justify-content:center;">
+          <div class="swatch"><div class="chip sm" style="background:#c8b000;"></div><div class="chip-name">Pure Yellow</div></div>
+          <div class="swatch"><div class="chip sm" style="background:#8090a8;"></div><div class="chip-name">Cool Gray</div></div>
+          <div class="swatch"><div class="chip sm" style="background:#7a9a60;"></div><div class="chip-name">Result</div></div>
+        </div>
+        <p>The cool gray's blue content pulls yellow toward green. The result is a yellow-green, not a toned yellow. You've accidentally changed the undertone.</p>
+      </div>
+    </div>
+
+    <div class="callout fade-in">
+      <h4>Don't Trust the Label</h4>
+      <p>Art supply companies label their grays inconsistently. A "warm gray" from one brand may actually tip yellow-green, which is technically a French gray by function. And a "warm gray" from another brand may tip pink-red as expected. Always assess the actual color — not the label — by placing the gray chip next to the color you intend to tone.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 6: COLOR SCHEMES ═══ -->
+<div class="section" id="schemes">
+  <div class="inner">
+    <div class="eyebrow">Color Relationships</div>
+    <h2 class="fade-in">Color Schemes</h2>
+    <p class="wide fade-in">A color scheme isn't a restriction — it's a decision framework. These relationships give you a principled starting point so you're not blindly combining swatches. Each scheme has its own emotional register.</p>
+
+    <div class="tabs fade-in">
+      <button class="tab-btn active" data-tab="mono">Monochromatic</button>
+      <button class="tab-btn" data-tab="analogous">Analogous</button>
+      <button class="tab-btn" data-tab="comp">Complementary</button>
+      <button class="tab-btn" data-tab="split">Split Complementary</button>
+      <button class="tab-btn" data-tab="triadic">Triadic</button>
+    </div>
+
+    <!-- Monochromatic -->
+    <div class="tab-panel active" id="tab-mono">
+      <div class="scheme-card">
+        <h3>Monochromatic</h3>
+        <p>One hue. All the tints, shades, and tones of that single color. Not boring — incredibly controlled. The hardest scheme to mess up; the easiest to make look intentional.</p>
+        <div class="scheme-circles">
+          <div class="sc" style="background:#f8d0d8;" title="Tint (light pink)"></div>
+          <div class="sc" style="background:#e88090;" title="Tint (pink)"></div>
+          <div class="sc" style="background:#c41428;" title="True red"></div>
+          <div class="sc" style="background:#8c1020;" title="Shade (burgundy)"></div>
+          <div class="sc" style="background:#3a0008;" title="Deep shade (oxblood)"></div>
+        </div>
+        <div class="scheme-example">
+          <strong>Fashion example:</strong> A red floral dress where the flowers are deep crimson, the stems dusty rose, and the background a soft blush. Every garment in the collection reads as "red" but with enormous range and depth. Spring/feminine association.
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <h4>When to Use</h4>
+          <p>When you want a strong, singular, immersive color story. Monochromatic collections photograph beautifully. Great for a brand whose color is their identity (think an all-red or all-blue capsule collection).</p>
+        </div>
+        <div class="card">
+          <h4>The Trap</h4>
+          <p>Varying value and texture is essential. A flat collection of identical-value items in the same hue reads as a uniform. Use the full range: tints, mid-tones, shades, and mix matte with shine to create visual interest.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analogous -->
+    <div class="tab-panel" id="tab-analogous">
+      <div class="scheme-card">
+        <h3>Analogous</h3>
+        <p>A group of 2–4 neighboring colors on the wheel. Shares the warmth or coolness of a section of the spectrum. Natural harmony — found constantly in nature (sunsets, forest floors, ocean gradients).</p>
+        <div class="scheme-circles">
+          <div class="sc" style="background:#e07018;" title="Orange"></div>
+          <div class="sc" style="background:#d44218;" title="Red-Orange"></div>
+          <div class="sc" style="background:#c41428;" title="Red"></div>
+          <div class="sc" style="background:#aa1848;" title="Cool Red"></div>
+          <div class="sc" style="background:#901060;" title="Red-Violet"></div>
+        </div>
+        <div class="scheme-example">
+          <strong>Fashion example:</strong> A fall collection built from terracotta, brick red, deep burgundy, and a touch of plum. All warm-to-slightly-cool Reds and Red-Oranges. Cohesive earthy warmth.
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <h4>Cool-Side Analogous</h4>
+          <div class="scheme-circles" style="margin:.6rem 0;">
+            <div class="sc" style="background:#1848c4;"></div>
+            <div class="sc" style="background:#3838a0;"></div>
+            <div class="sc" style="background:#601890;"></div>
+            <div class="sc" style="background:#981462;"></div>
+          </div>
+          <p>Blue → Blue-Violet → Violet → Red-Violet. Luxurious, moody, nocturnal. Evening collections, gothic, high fashion.</p>
+        </div>
+        <div class="card">
+          <h4>Warm-Side Analogous</h4>
+          <div class="scheme-circles" style="margin:.6rem 0;">
+            <div class="sc" style="background:#e8b000;"></div>
+            <div class="sc" style="background:#e07818;"></div>
+            <div class="sc" style="background:#d44218;"></div>
+            <div class="sc" style="background:#c41428;"></div>
+          </div>
+          <p>Yellow-Orange → Orange → Red-Orange → Red. Energetic, warm, autumnal. Markets, festivals, harvest — retro or earthy aesthetics.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complementary -->
+    <div class="tab-panel" id="tab-comp">
+      <div class="scheme-card">
+        <h3>Complementary</h3>
+        <p>Two colors directly opposite on the color wheel. Maximum contrast. Each makes the other pop — the red looks redder next to green; the green looks greener next to red. But when mixed, they neutralize each other into earthy mutes.</p>
+        <div class="scheme-circles">
+          <div class="sc" style="background:#c41428;"></div>
+          <div class="sc-plus">↔</div>
+          <div class="sc" style="background:#18a040;"></div>
+        </div>
+        <div class="scheme-example">
+          <strong>Key insight:</strong> Complements have a dual superpower. Side by side, they create visual vibration. Mixed together, they create harmonious neutrals. A muted green (mixed with a little red) will always harmonize with the red it's paired with, because they share pigment DNA.
+        </div>
+      </div>
+      <div class="g3">
+        <div class="card">
+          <div class="scheme-circles" style="margin-bottom:.8rem;justify-content:center;">
+            <div class="sc" style="background:#c41428;"></div>
+            <div class="sc-plus">↔</div>
+            <div class="sc" style="background:#1a9040;"></div>
+          </div>
+          <h4>Red — Green</h4>
+          <p>The Christmas problem (solved with muting). Also: redheads in green. Saturated = holiday; muted = earthy chic.</p>
+        </div>
+        <div class="card">
+          <div class="scheme-circles" style="margin-bottom:.8rem;justify-content:center;">
+            <div class="sc" style="background:#1848c4;"></div>
+            <div class="sc-plus">↔</div>
+            <div class="sc" style="background:#c06018;"></div>
+          </div>
+          <h4>Blue — Orange</h4>
+          <p>The menswear standard. Navy suit + burnt sienna leather. Ocean + sand. Safe, classic, impeccably sophisticated.</p>
+        </div>
+        <div class="card">
+          <div class="scheme-circles" style="margin-bottom:.8rem;justify-content:center;">
+            <div class="sc" style="background:#c8b000;"></div>
+            <div class="sc-plus">↔</div>
+            <div class="sc" style="background:#6020a0;"></div>
+          </div>
+          <h4>Yellow — Violet</h4>
+          <p>Rarely used at full saturation (harsh). But muted down, they create creamy yellows and warm purples that feel painterly and artistic.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split Complementary -->
+    <div class="tab-panel" id="tab-split">
+      <div class="scheme-card">
+        <h3>Split Complementary</h3>
+        <p>Instead of one complement, take the <em>two neighbors</em> of the complement. This gives you the contrast of a complementary scheme but with more flexibility and less visual tension. Highly versatile for fashion collections.</p>
+        <div class="scheme-circles">
+          <div class="sc" style="background:#c41428;" title="Red (base)"></div>
+          <span style="color:var(--dim);font-size:.9rem;">+ split of green →</span>
+          <div class="sc" style="background:#18a880;" title="Blue-Green"></div>
+          <div class="sc-plus">+</div>
+          <div class="sc" style="background:#60a018;" title="Yellow-Green"></div>
+        </div>
+        <div class="scheme-example">
+          <strong>Egypt / Rococo example:</strong> The mood board analysis revealed cobalt blue (base) split to red-orange (warm gold, bronze, terra cotta) + yellow-orange (gold, amber, aged wood). The resulting split complementary scheme felt both warm and dramatic — ancient and opulent.
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <h4>Blue Split: Blue + Red-Orange + Yellow-Orange</h4>
+          <div class="scheme-circles" style="margin:.7rem 0;">
+            <div class="sc" style="background:#1848c4;"></div>
+            <div class="sc-plus">+</div>
+            <div class="sc" style="background:#d44218;"></div>
+            <div class="sc-plus">+</div>
+            <div class="sc" style="background:#d48018;"></div>
+          </div>
+          <p>Blue suits with gold and terra cotta accents. Ancient Egyptian color palettes. Rich, bold, timeless.</p>
+        </div>
+        <div class="card">
+          <h4>Red Split: Red + Blue-Green + Yellow-Green</h4>
+          <div class="scheme-circles" style="margin:.7rem 0;">
+            <div class="sc" style="background:#c41428;"></div>
+            <div class="sc-plus">+</div>
+            <div class="sc" style="background:#18a880;"></div>
+            <div class="sc-plus">+</div>
+            <div class="sc" style="background:#60a818;"></div>
+          </div>
+          <p>More exotic. Red with teal and chartreuse accents. Maximalist, tropical, or art deco energy depending on desaturation level.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Triadic -->
+    <div class="tab-panel" id="tab-triadic">
+      <div class="scheme-card">
+        <h3>Triadic</h3>
+        <p>Three colors equidistant on the color wheel. Vibrant, bold, and full of energy at full saturation. At muted levels, one of the three is typically used as a dominant neutral.</p>
+        <div class="scheme-circles">
+          <div class="sc" style="background:#c41428;"></div>
+          <div class="sc-plus">+</div>
+          <div class="sc" style="background:#c8b000;"></div>
+          <div class="sc-plus">+</div>
+          <div class="sc" style="background:#1848c4;"></div>
+        </div>
+        <div class="scheme-example">
+          <strong>Fashion example:</strong> At full saturation: primary-colored collections (Lego/childrenswear energy). Muted heavily: one becomes a dark navy, one becomes a warm khaki, one becomes a dusty rose — suddenly very sophisticated.
+        </div>
+      </div>
+      <div class="callout">
+        <h4>The Secret: Muting Changes Everything</h4>
+        <p>Red + Yellow + Blue at full saturation reads as children's toys. Take those same three hues and mute them down — burgundy, warm amber, slate blue — and suddenly you have a grown-up, editorial palette. The relationships are identical; only the saturation changed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 7: VALUE ═══ -->
+<div class="section" id="value">
+  <div class="inner">
+    <div class="eyebrow">Light, Dark &amp; Everything Between</div>
+    <h2 class="fade-in">Value &amp; Value Placement</h2>
+    <p class="wide fade-in">Value — the lightness or darkness of a color — is one of the most powerful compositional tools in fashion design. Where you place your light and dark values directly changes the <em>perceived proportions</em> of the body. This isn't a minor detail. It can make the same dress look three completely different ways.</p>
+
+    <div class="fade-in">
+      <h4>Full Value Scale</h4>
+      <div class="value-scale-bar">
+        <span style="background:#f6f6f6"></span><span style="background:#e0e0e0"></span>
+        <span style="background:#c0c0c0"></span><span style="background:#989898"></span>
+        <span style="background:#707070"></span><span style="background:#484848"></span>
+        <span style="background:#282828"></span><span style="background:#0a0a0a"></span>
+      </div>
+      <p style="font-size:.72rem;color:var(--dim);font-family:Arial,sans-serif;">High key (light) → Low key (dark). Every color sits at a natural value point on this scale.</p>
+    </div>
+
+    <div class="fade-in">
+      <h3 style="margin-top:2rem;">Value Key</h3>
+      <div class="g3">
+        <div class="card">
+          <h4>High Key (Narrow, Light Range)</h4>
+          <p>Light to mid values only. Soft, airy, romantic. Very little contrast. Everything feels weightless and delicate. Spring/bridal/feminine energy.</p>
+          <div class="value-scale-bar" style="height:28px;margin-top:.8rem;">
+            <span style="background:#f4c8d0"></span><span style="background:#e8a0ac"></span>
+            <span style="background:#dc7888"></span><span style="background:#d05068"></span>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Full Range (High Contrast)</h4>
+          <p>Lightest lights and darkest darks. Maximum visual impact. The eye is forced to travel across the composition. Dramatic, editorial, graphic.</p>
+          <div class="value-scale-bar" style="height:28px;margin-top:.8rem;">
+            <span style="background:#f4c8d0"></span><span style="background:#c41428"></span>
+            <span style="background:#7a0818"></span><span style="background:#200004"></span>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Low Key (Narrow, Dark Range)</h4>
+          <p>Mid to dark values only. Moody, sophisticated, mysterious. Quiet luxury. Fall/winter/evening. Think luxe neutrals with deep jewel tone accents.</p>
+          <div class="value-scale-bar" style="height:28px;margin-top:.8rem;">
+            <span style="background:#8c1020"></span><span style="background:#680c18"></span>
+            <span style="background:#440808"></span><span style="background:#200004"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <h3 style="margin-top:2rem;">Value Placement on the Body</h3>
+      <p>The most concrete fashion application of value theory. Where you place dark colors and where you place light colors changes what the eye sees first — and therefore how the body reads proportionally.</p>
+
+      <div class="dress-row">
+        <div class="dress-wrap">
+          <svg width="110" height="185" viewBox="0 0 110 185">
+            <!-- Dress with gradient top-to-bottom light to medium -->
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,185 L35,185 L35,55 Q10,55 15,45 Z" fill="#d05068"/>
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,110 Q55,110 55,110 Q55,110 35,110 L35,55 Q10,55 15,45 Z" fill="#e090a0"/>
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,75 Q55,70 35,75 L35,55 Q10,55 15,45 Z" fill="#f4c8d0"/>
+          </svg>
+          <div class="dress-label">Gradient: Light top → Dark hem. Creates visual flow downward. Natural, elongating.</div>
+        </div>
+        <div class="dress-wrap">
+          <svg width="110" height="185" viewBox="0 0 110 185">
+            <!-- Uniform mid value -->
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,185 L35,185 L35,55 Q10,55 15,45 Z" fill="#c41428"/>
+          </svg>
+          <div class="dress-label">Uniform: Same value top to bottom. Simple, clean. Color as the focus — no value hierarchy.</div>
+        </div>
+        <div class="dress-wrap">
+          <svg width="110" height="185" viewBox="0 0 110 185">
+            <!-- Dark on top, light on bottom -->
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,185 L35,185 L35,55 Q10,55 15,45 Z" fill="#f4c8d0"/>
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,90 Q55,85 35,90 L35,55 Q10,55 15,45 Z" fill="#8c1020"/>
+          </svg>
+          <div class="dress-label">Dark top, light skirt. Dark draws the eye UP. Lighter skirt reads LARGER below. Shifts perceived proportions.</div>
+        </div>
+        <div class="dress-wrap">
+          <svg width="110" height="185" viewBox="0 0 110 185">
+            <!-- Dark hem, light top -->
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,185 L35,185 L35,55 Q10,55 15,45 Z" fill="#8c1020"/>
+            <path d="M30,8 Q55,0 80,8 L95,45 Q100,55 75,55 L75,95 Q55,90 35,95 L35,55 Q10,55 15,45 Z" fill="#f4c8d0"/>
+          </svg>
+          <div class="dress-label">Light top, dark hem. Dark hem visually anchors and grounds. Creates a lengthening effect on the bottom.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>The Rule</h4>
+        <p><strong>Dark colors make areas look smaller.</strong> <strong>Light colors make areas look larger.</strong> Place your dark values where you want to minimize; place light values where you want to expand. This is one of the most practical tools in fashion design — more powerful than silhouette in many cases because it operates subconsciously.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 8: FASHION APPLICATION ═══ -->
+<div class="section" id="fashion">
+  <div class="inner">
+    <div class="eyebrow">Practical Application</div>
+    <h2 class="fade-in">Undertones in Your Wardrobe</h2>
+    <p class="wide fade-in">Colors don't exist alone. Every color changes based on what's next to it. The same burgundy will look cooler and darker next to a warm color — because the contrast between the two is doing the work. Understanding undertone relationships is how you stop making mistakes at the fabric store and start building outfits that feel inevitable.</p>
+
+    <div class="fade-in">
+      <blockquote>
+        <p>"You might walk right past a jacket you've never even tried on because the color was so awful. You don't even know if it fits you like a dream."</p>
+        <cite>Color is your first impression. Not cut. Not fabric. Color.</cite>
+      </blockquote>
+    </div>
+
+    <h3 class="fade-in" style="margin-top:2rem;">The Same Burgundy — Two Different Stories</h3>
+    <p class="fade-in">Below: one color, placed on two different backgrounds. The undertone of the background dramatically changes how the burgundy reads. This happens to every color in your collection — the neutrals you pair with your hero colors will change how those hero colors look.</p>
+
+    <div class="compare-demo fade-in">
+      <div class="compare-item">
+        <div class="compare-bg" style="background:#f0d080;">
+          <div class="compare-inner"><div class="compare-chip" style="background:#8c1020;"></div></div>
+        </div>
+        <div class="compare-note">Burgundy on warm golden background. The burgundy reads as <strong>cooler</strong> and <strong>darker</strong> by contrast with the warm yellow.</div>
+      </div>
+      <div class="compare-item">
+        <div class="compare-bg" style="background:#304880;">
+          <div class="compare-inner"><div class="compare-chip" style="background:#8c1020;"></div></div>
+        </div>
+        <div class="compare-note">Same burgundy on cool blue. Now it reads as <strong>warmer</strong> and <strong>lighter</strong> in comparison. Completely different read.</div>
+      </div>
+      <div class="compare-item">
+        <div class="compare-bg" style="background:#604830;">
+          <div class="compare-inner"><div class="compare-chip" style="background:#8c1020;"></div></div>
+        </div>
+        <div class="compare-note">Same burgundy on warm brown. Nearly harmonious — they share undertone. The burgundy doesn't pop much. Good for tonal looks; bad for making it a focal point.</div>
+      </div>
+    </div>
+
+    <h3 class="fade-in" style="margin-top:2.5rem;">Outfit Pairings by Undertone Logic</h3>
+
+    <div class="outfit-grid fade-in">
+      <div class="outfit-card">
+        <div class="outfit-swatches">
+          <span style="background:#c41428;flex:2;"></span>
+          <span style="background:#c0581a;"></span>
+        </div>
+        <div class="outfit-info">
+          <div class="ot">Red + Burnt Sienna</div>
+          <p class="works">✓ Harmonizes</p>
+          <p>Both share orange-red base. Burnt sienna is a muted, desaturated red-orange. A leather blazer in this color over a red sweater reads as intentional and rich.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-swatches">
+          <span style="background:#c41428;flex:2;"></span>
+          <span style="background:#4a5e1a;"></span>
+        </div>
+        <div class="outfit-info">
+          <div class="ot">Red + Deep Olive</div>
+          <p class="works">✓ Complement</p>
+          <p>Green is red's complement. Olive is a muted green, so the pairing is sophisticated rather than jarring. Shares no undertone — but complements are meant to contrast.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-swatches">
+          <span style="background:#c41428;flex:2;"></span>
+          <span style="background:#c4a018;"></span>
+        </div>
+        <div class="outfit-info">
+          <div class="ot">Red + Golden Yellow</div>
+          <p class="tension">~ Context-dependent</p>
+          <p>Retro 70s energy. Golden yellow and warm red are both warm but not complements or undertone-related. Works in the right context; reads vintage otherwise.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-swatches">
+          <span style="background:#c41428;flex:2;"></span>
+          <span style="background:#8aa428;"></span>
+        </div>
+        <div class="outfit-info">
+          <div class="ot">Red + Yellow-Green</div>
+          <p class="clash">✗ Clashes</p>
+          <p>Yellow-green shares no undertone with red. It's not red's complement (that would be blue-green). It's in an awkward middle zone that neither harmonizes nor creates useful tension.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-swatches">
+          <span style="background:#1a2868;flex:2;"></span>
+          <span style="background:#c0581a;"></span>
+        </div>
+        <div class="outfit-info">
+          <div class="ot">Navy Suit + Sienna Belt</div>
+          <p class="works">✓ Classic Complement</p>
+          <p>The menswear gold standard. Blue + orange are complements. Burnt sienna is orange-based, so brown leather accessories pop beautifully against navy.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-swatches">
+          <span style="background:#2a1878;flex:2;"></span>
+          <span style="background:#c8a018;"></span>
+        </div>
+        <div class="outfit-info">
+          <div class="ot">Blue-Violet + Gold</div>
+          <p class="works">✓ Complement Shift</p>
+          <p>As blue tips toward violet, the complement shifts from pure orange toward yellow-orange. Gold accessories (yellow-orange base) are the correct complement pair for blue-violet garments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 9: COLOR STORY ═══ -->
+<div class="section" id="story">
+  <div class="inner">
+    <div class="eyebrow">From Inspiration to Palette</div>
+    <h2 class="fade-in">Building a Color Story</h2>
+    <p class="wide fade-in">A color story isn't chosen arbitrarily. It's discovered — pulled from your visual research by identifying the mother colors hidden inside all the muted, desaturated, and neutralized versions of those colors in your inspiration images.</p>
+
+    <div class="process-list fade-in">
+      <div class="process-item">
+        <div class="p-num">1</div>
+        <div class="p-content">
+          <h3>Gather Inspiration Without Clothing</h3>
+          <p>Pull images based on mood, texture, and historical reference — not garments. Garments are already designed. You want raw visual material: interiors, landscapes, artworks, geological specimens, graffiti, architecture. The clothing comes later.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">2</div>
+        <div class="p-content">
+          <h3>Identify Dominant Color Families</h3>
+          <p>What do you see most in the images? Look beyond the obvious — often the <em>neutrals</em> carry the real color information. An aged gold, a weathered wood, a rust-stained stone: what color family do these belong to? Are they orange-based? Red-based? Yellow-based?</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">3</div>
+        <div class="p-content">
+          <h3>Find the Mother Colors</h3>
+          <p>Trace every neutral and desaturated color back to its source hue. An amber is a desaturated yellow-orange. Burnt wood is a shaded red-orange. Old gold is a toned yellow-orange. When multiple colors point to the same mother hue, that hue is central to your story.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">4</div>
+        <div class="p-content">
+          <h3>Map to a Color Scheme</h3>
+          <p>Once you know your 2–3 mother colors, identify their relationship on the color wheel. Complementary? Analogous? Split complementary? That relationship becomes the structural logic of your palette. You can now make principled decisions about every color you add or remove.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">5</div>
+        <div class="p-content">
+          <h3>Build Levels of Saturation</h3>
+          <p>Collect tints, shades, tones, and mutes of each mother color. Your collection needs light, mid, and dark values; saturated accents and grounded neutrals. The neutrals should be muted versions of your pop colors — so everything shares the same DNA.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="big-card fade-in" style="margin-top:1.5rem;">
+      <h3>Case Study: Egypt + Rococo</h3>
+      <p class="full" style="margin-bottom:1rem;">Mood board: French Baroque ornament, ancient Egyptian gold artifacts, cobalt blue faience, warm wood, copper tones. Analysis of the dominant colors:</p>
+      <div class="swatch-group" style="margin-bottom:1.5rem;">
+        <div class="sg-label">Colors found in the mood board</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip md" style="background:#c0581a;"></div><div class="chip-name">Burnt Bronze</div></div>
+          <div class="swatch"><div class="chip md" style="background:#c8a018;"></div><div class="chip-name">Antique Gold</div></div>
+          <div class="swatch"><div class="chip md" style="background:#8c5820;"></div><div class="chip-name">Warm Wood</div></div>
+          <div class="swatch"><div class="chip md" style="background:#1848c4;"></div><div class="chip-name">Cobalt Blue</div></div>
+          <div class="swatch"><div class="chip md" style="background:#8ab8d8;"></div><div class="chip-name">Pastel Blue</div></div>
+          <div class="swatch"><div class="chip md" style="background:#e8d8b0;"></div><div class="chip-name">Cream Gold</div></div>
+        </div>
+      </div>
+      <div class="swatch-group">
+        <div class="sg-label">Identified mother colors → Split Complementary Scheme</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip lg" style="background:#1848c4;"></div><div class="chip-name">Cobalt Blue (base)</div></div>
+          <div class="swatch-sep"></div>
+          <div class="swatch"><div class="chip lg" style="background:#d44218;"></div><div class="chip-name">Red-Orange (all the bronze &amp; wood)</div></div>
+          <div class="swatch"><div class="chip lg" style="background:#d48018;"></div><div class="chip-name">Yellow-Orange (all the gold)</div></div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1.2rem;margin-bottom:0;">
+        <p>The warm neutrals in the images weren't just "brown" — they were <strong>orange-family</strong>. Once that was clear, the split complementary structure was obvious: blue splits to red-orange and yellow-orange. Every neutral in the collection would be a desaturated version of those two warm mother hues, naturally harmonizing with the cobalt blue pops.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 10: PROPORTIONS ═══ -->
+<div class="section" id="proportions">
+  <div class="inner">
+    <div class="eyebrow">The Variable That Changes Everything</div>
+    <h2 class="fade-in">Color Proportions</h2>
+    <p class="wide fade-in">The same three colors can produce wildly different moods depending on <em>how much</em> of each you use. Proportion is the final dial you turn after choosing your palette. It's the difference between a spring collection and a fall collection built from the exact same swatches.</p>
+
+    <div class="fade-in">
+      <h3>Three Colors, Four Moods</h3>
+      <p>Below: a palette of dusty red, warm brown, and olive green — applied in different proportions.</p>
+
+      <div class="prop-demo">
+        <div>
+          <div class="prop-stack" style="height:160px;">
+            <div style="background:#c41428;height:100px;"></div>
+            <div style="background:#7c3c20;height:38px;"></div>
+            <div style="background:#5a6a20;height:22px;"></div>
+          </div>
+          <div class="prop-note">Red-dominant. Bold, aggressive, graphic. Fashion-forward statement.</div>
+        </div>
+        <div>
+          <div class="prop-stack" style="height:160px;">
+            <div style="background:#7c3c20;height:90px;"></div>
+            <div style="background:#c41428;height:45px;"></div>
+            <div style="background:#5a6a20;height:25px;"></div>
+          </div>
+          <div class="prop-note">Brown-dominant. Earthy, grounded, autumnal. Safari/workwear energy.</div>
+        </div>
+        <div>
+          <div class="prop-stack" style="height:160px;">
+            <div style="background:#7c3c20;height:70px;"></div>
+            <div style="background:#5a6a20;height:60px;"></div>
+            <div style="background:#c41428;height:30px;"></div>
+          </div>
+          <div class="prop-note">Neutral-heavy, red as accent. Military, utilitarian, with a punch. Very wearable.</div>
+        </div>
+        <div>
+          <div class="prop-stack" style="height:160px;">
+            <div style="background:#c41428;height:55px;"></div>
+            <div style="background:#7c3c20;height:55px;"></div>
+            <div style="background:#5a6a20;height:50px;"></div>
+          </div>
+          <div class="prop-note">Equal parts. Eye jumps everywhere. Harder to resolve — can feel restless without strong value contrast.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2 fade-in">
+      <div class="card">
+        <h3>The Black Spectrum</h3>
+        <p>Almost every designer uses black. But look at how proportion changes everything:</p>
+        <ul style="color:var(--muted);font-size:.84rem;padding-left:1.2rem;margin-top:.6rem;">
+          <li style="margin-bottom:.4rem;"><strong>90%+ black:</strong> Yamamoto — sculptural, funerary, severe</li>
+          <li style="margin-bottom:.4rem;"><strong>60% black + pink/purple accents:</strong> Anna Sui — gothic Lolita, flirty-dark</li>
+          <li style="margin-bottom:.4rem;"><strong>10% black as accent:</strong> Carolina Herrera — black as punctuation in a color world</li>
+          <li><strong>0% black:</strong> Rick Owens doing mint green — shocking precisely because it's so unusual</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Seasonal Color Proportions</h3>
+        <p>Proportion creates season. The same burnt sienna works in spring <em>and</em> fall — but how you proportion it changes the read:</p>
+        <ul style="color:var(--muted);font-size:.84rem;padding-left:1.2rem;margin-top:.6rem;">
+          <li style="margin-bottom:.4rem;"><strong>Spring:</strong> Sienna as a minor accent on white/cream — warm touch in an airy palette</li>
+          <li style="margin-bottom:.4rem;"><strong>Fall:</strong> Sienna as dominant, paired with deep burgundy and forest green — maximum richness</li>
+          <li><strong>Winter:</strong> Sienna heavily shaded (near brown-black) with clean white contrasts — stark and graphic</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout fade-in">
+      <h4>Play With Color Chips</h4>
+      <p>Cut your color swatches or paint chips into different sizes. Then physically move them around and stack them — more area = more visual weight. This is faster than rendering and more honest. Try 10 different proportion arrangements before you commit. The right one will feel obvious once you see it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 11: DESIGN PROCESS ═══ -->
+<div class="section" id="process">
+  <div class="inner">
+    <div class="eyebrow">The Full Picture</div>
+    <h2 class="fade-in">Color in the Design Process</h2>
+    <p class="wide fade-in">Color theory doesn't stand alone. It's one layer of a structured creative process. Here's where color work actually fits — and why rushing to sketching before establishing your color and fabric story is the most common (and costly) design mistake.</p>
+
+    <div class="process-list fade-in">
+      <div class="process-item">
+        <div class="p-num">1</div>
+        <div class="p-content">
+          <h3>Visual Research &amp; Mood</h3>
+          <p>Pull images from books, magazines, museums, nature — not clothing catalogs. Collect for mood, texture, and color energy. Avoid fashion references at this stage; they're already designed.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">2</div>
+        <div class="p-content">
+          <h3>Color Story</h3>
+          <p>Analyze your mood board. Find the mother colors. Map the color scheme. Build your palette: pop colors + neutrals (muted from those pops) + accent + grounding darks.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">3</div>
+        <div class="p-content">
+          <h3>Fabric Story</h3>
+          <p>Fabric is your medium — not an afterthought. Pull headers from your fabric reps. Build a story with varied weights (bottom weight, top weight, dress weight). The texture of a color changes its entire emotional register: shiny red PVC vs. nubbly red bouclé are completely different garments.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">4</div>
+        <div class="p-content">
+          <h3>Texture Development</h3>
+          <p>Explore how to translate visual textures from your research into fabric manipulation: quilting, beading, pleating, smocking, embroidery, hand-painting. Think about surface before silhouette.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">5</div>
+        <div class="p-content">
+          <h3>Sketching (Finally)</h3>
+          <p>Now sketch — with your palette and fabric story established. Sketches without this foundation are just regurgitated old ideas. With this foundation, every design decision has context and purpose.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">6</div>
+        <div class="p-content">
+          <h3>Flats &amp; Technical Development</h3>
+          <p>Lock down every proportion, seam, pocket, and topstitch detail. Fabricate in muslin first. Apply value knowledge here — where are the darks? Where are the lights? Does value placement serve the design?</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="p-num">7</div>
+        <div class="p-content">
+          <h3>Figures &amp; Presentation</h3>
+          <p>The rendered figures are where you seduce — but they're almost an afterthought in terms of design decisions. The real work was steps 1–6. The figure just shows everything working together.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-in">
+      <p><strong>Fabric before sketching.</strong> This sounds backwards. It isn't. In the industry, you develop your concept, color story, and fabric story simultaneously — then start designing garments around those constraints. Designers who sketch first and source fabric later waste time, waste money, and produce incoherent collections.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUICK REFERENCE ═══ -->
+<div class="section" style="background:var(--bg2);">
+  <div class="inner">
+    <div class="eyebrow">Glossary</div>
+    <h2 class="fade-in">Quick Reference</h2>
+    <div class="qr-grid fade-in">
+      <div class="qr-card">
+        <h4>Value</h4>
+        <p>The lightness or darkness of a color. Light = high value. Dark = low value. Independent of saturation.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Saturation</h4>
+        <p>How intense or pure a color is. Fully saturated = maximum chroma. Not the same as lightness.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Temperature</h4>
+        <p>Warmth or coolness of a color. Orange = warmest. Blue = coolest. Every color can be made warmer or cooler.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Undertone</h4>
+        <p>The sub-family a color belongs to. "What kind of brown?" A color's undertone determines which other colors it harmonizes with.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Tint</h4>
+        <div class="formula">Color + White</div>
+        <p>Makes a color lighter and more pastel. Pink is a tint of red.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Shade</h4>
+        <div class="formula">Color + Black</div>
+        <p>Makes a color darker and deeper. Burgundy is a shade of red.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Tone</h4>
+        <div class="formula">Color + Gray</div>
+        <p>Desaturates a color while preserving its undertone (if the gray family matches).</p>
+      </div>
+      <div class="qr-card">
+        <h4>Mute</h4>
+        <div class="formula">Color + Complement</div>
+        <p>Creates earthy, naturalistic neutrals. Both the color and its complement harmonize with the muted result.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Complement</h4>
+        <p>The color directly opposite on the wheel. Complements make each other pop when adjacent; create neutrals when mixed.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Monochromatic</h4>
+        <p>One hue across its full range of tints, shades, and tones. Cohesive and easy to control.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Analogous</h4>
+        <p>2–4 neighboring colors on the wheel. Natural harmony. Keep to one side of the wheel to maintain a clear warm or cool identity.</p>
+      </div>
+      <div class="qr-card">
+        <h4>Split Complementary</h4>
+        <p>One color + the two neighbors of its complement. High contrast with more flexibility than straight complementary.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p style="margin-bottom:.4rem;color:var(--muted);">Color Theory for Fashion — A Visual Guide</p>
+  <p>Based on color theory lectures by Zoe Hong. Practice makes magic happen. Not magic — practice.</p>
+</footer>
+
+<script>
+// ── Tab system ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.tab;
+    const parent = btn.closest('.inner') || btn.parentElement.parentElement;
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('tab-' + id);
+    if (panel) panel.classList.add('active');
+  });
+});
+
+// ── Intersection observer for fade-in ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── Color wheel drawing ──
+function drawWheel(canvasId, mode) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = canvas.width / 2, cy = canvas.height / 2, r = cx - 8;
+  const img = ctx.createImageData(canvas.width, canvas.height);
+
+  for (let y = 0; y < canvas.height; y++) {
+    for (let x = 0; x < canvas.width; x++) {
+      const dx = x - cx, dy = y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist <= r) {
+        let angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        if (angle < 0) angle += 360;
+        const sat = dist / r;
+        const [rv, gv, bv] = hslToRgb(angle / 360, sat, 0.5);
+        const idx = (y * canvas.width + x) * 4;
+        img.data[idx] = rv; img.data[idx+1] = gv; img.data[idx+2] = bv; img.data[idx+3] = 255;
+      }
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Labels for RYB
+  if (mode === 'ryb') {
+    const labels = [
+      {angle:-90, text:'Y'}, {angle:-30, text:'Y-O'},
+      {angle:30, text:'O'},  {angle:90, text:'R-O'},
+      {angle:120, text:'R'}, {angle:150, text:'R-V'},
+      {angle:180, text:'V'}, {angle:210, text:'B-V'},
+      {angle:240, text:'B'}, {angle:280, text:'B-G'},
+      {angle:320, text:'G'}, {angle:0, text:'Y-G'},
+    ];
+    ctx.font = 'bold 9px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    labels.forEach(l => {
+      const rad = l.angle * Math.PI / 180;
+      const lx = cx + (r + 0) * Math.sin(rad);
+      const ly = cy - (r + 0) * Math.cos(rad);
+      // tiny dot
+    });
+  }
+}
+
+function hslToRgb(h, s, l) {
+  let r, g, b;
+  if (s === 0) { r = g = b = l; }
+  else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1/3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1/3);
+  }
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+function hue2rgb(p, q, t) {
+  if (t < 0) t += 1;
+  if (t > 1) t -= 1;
+  if (t < 1/6) return p + (q - p) * 6 * t;
+  if (t < 1/2) return q;
+  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+  return p;
+}
+
+drawWheel('rybCanvas', 'ryb');
+drawWheel('cmykCanvas', 'cmyk');
+
+// ── Active nav highlighting ──
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === '#' + current
+      ? 'var(--accent)' : '';
+  });
+}, { passive: true });
+</script>
+</body>
+</html>

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A deep, practical guide to dissolving social anxiety permanently — the psychology of the cage, fear's bluff, and reclaiming who you always were.">
+<title>The Cage Is Open — Dissolving Social Anxiety Permanently</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08080f;
+  --bg2: #0d0d1a;
+  --bg3: #111122;
+  --bg4: #161630;
+  --gold: #d4a853;
+  --gold-l: #e8c97a;
+  --amber: #c07830;
+  --red: #c94040;
+  --green: #4a9870;
+  --text: #f0ece4;
+  --text2: #9890a0;
+  --text3: #5a5568;
+  --border: #1a1a2e;
+  --border2: #262640;
+  --glow: rgba(212,168,83,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.15}
+h1{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900}
+h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:700}
+h3{font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700}
+p{font-size:clamp(.9rem,1.4vw,1.05rem);color:var(--text2);max-width:62ch;line-height:1.75}
+strong{color:var(--text);font-weight:600}
+a{color:var(--gold);text-decoration:none}
+.gold{color:var(--gold)}
+.dim{color:var(--text3)}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--gold),var(--gold-l));width:0%;z-index:999;transition:width .1s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 2rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(8,8,15,.96),transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav-brand{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);letter-spacing:.04em}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{color:var(--text3);font-size:.82rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+@media(max-width:700px){.nav-links{display:none}}
+
+/* CONTAINER */
+.c{max-width:1080px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0;position:relative}
+
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.reveal.on{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.4s}.reveal-d5{transition-delay:.5s}
+
+/* LABELS */
+.label{font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block}
+.sep{width:44px;height:3px;background:linear-gradient(90deg,var(--amber),var(--gold));border-radius:2px;margin:1.4rem 0}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(30,15,60,.7),transparent 65%),radial-gradient(ellipse at 20% 80%,rgba(193,120,48,.06),transparent 50%)}
+.hero-inner{position:relative;z-index:1;max-width:820px}
+.cage-wrap{width:110px;height:130px;margin:0 auto 2.5rem}
+.cage-wrap svg{width:100%;height:100%}
+.cage-door-group{transform-origin:10px 70px;animation:swingOpen 2.2s cubic-bezier(.4,0,.2,1) 1.2s forwards}
+@keyframes swingOpen{0%{transform:perspective(500px) rotateY(0deg)}100%{transform:perspective(500px) rotateY(-82deg)}}
+.hero-eye{font-size:.75rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;opacity:0;animation:fadeUp .8s ease .2s forwards}
+.hero-title{background:linear-gradient(145deg,#f0ece4 0%,var(--gold) 55%,var(--amber) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.4rem;opacity:0;animation:fadeUp 1s ease .5s forwards}
+.hero-sub{font-size:clamp(1rem,1.9vw,1.25rem);color:var(--text2);max-width:52ch;margin:0 auto 2rem;line-height:1.8;opacity:0;animation:fadeUp 1s ease .8s forwards}
+.hero-q{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,1.8vw,1.15rem);color:var(--gold);opacity:0;animation:fadeIn 1.2s ease 2s forwards}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;opacity:0;animation:fadeIn 1s ease 2.5s forwards}
+.scroll-hint span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)}
+.arrow-down{width:18px;height:18px;border-right:2px solid var(--text3);border-bottom:2px solid var(--text3);transform:rotate(45deg);animation:bob 2s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bob{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+
+/* ── ON FIRE ── */
+#fire{background:var(--bg2)}
+.fire-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:700px){.fire-layout{grid-template-columns:1fr}}
+.fire-circle-wrap{display:flex;justify-content:center}
+.fire-ring{width:200px;height:200px;border-radius:50%;border:2px solid var(--red);background:radial-gradient(circle,rgba(201,64,64,.18),rgba(193,120,48,.08),transparent);display:flex;align-items:center;justify-content:center;animation:pulse 3s ease-in-out infinite;position:relative}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,64,64,.2)}50%{box-shadow:0 0 40px 12px rgba(201,64,64,.15)}}
+.fire-inner{text-align:center;padding:1rem}
+.fire-text{font-family:'Playfair Display',serif;font-size:1rem;color:var(--red);line-height:1.5}
+.bq{border-left:3px solid var(--gold);padding:1.2rem 1.6rem;margin:1.5rem 0;background:rgba(212,168,83,.05);border-radius:0 10px 10px 0}
+.bq p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.95rem,1.7vw,1.15rem);color:var(--text);max-width:none}
+
+/* ── CAGE METAPHOR ── */
+#cage{}
+.cage-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:2.5rem}
+.cage-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:border-color .3s,transform .3s}
+.cage-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+.cage-card-num{font-size:2.8rem;font-weight:900;font-family:'Playfair Display',serif;color:var(--text3);line-height:1;margin-bottom:.75rem}
+.cage-card h4{font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:var(--text)}
+.cage-card p{font-size:.88rem;max-width:none;color:var(--text2)}
+
+/* ── CONDITIONING ── */
+#conditioning{background:var(--bg2)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+.timeline{padding-left:2.5rem;border-left:2px solid;border-image:linear-gradient(to bottom,var(--gold),var(--amber),transparent) 1;margin-top:1rem}
+.t-item{position:relative;margin-bottom:2.2rem;padding-left:.8rem}
+.t-dot{position:absolute;left:-2.85rem;top:.3rem;width:13px;height:13px;border-radius:50%;background:var(--gold);border:2px solid var(--bg2)}
+.t-age{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.t-title{font-size:1rem;font-weight:600;margin-bottom:.4rem}
+.t-desc{font-size:.86rem;color:var(--text2);max-width:42ch}
+.three-lives{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+@media(max-width:700px){.three-lives{grid-template-columns:1fr}}
+.life{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.4rem;text-align:center}
+.life:last-child{border-color:rgba(201,64,64,.35);background:rgba(201,64,64,.04)}
+.life-icon{font-size:1.8rem;display:block;margin-bottom:.8rem}
+.life-name{font-weight:700;font-size:.95rem;margin-bottom:.4rem}
+.life-desc{font-size:.8rem;color:var(--text2);max-width:none}
+.life-bar{height:3px;border-radius:2px;margin-top:.9rem}
+
+/* ── INSIGHTS ── */
+#insights{}
+.insights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.4rem;margin-top:2.5rem}
+.insight{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:1.75rem;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.insight::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--gold));opacity:0;transition:opacity .3s}
+.insight:hover::before,.insight.open::before{opacity:1}
+.insight:hover,.insight.open{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.ins-icon{width:46px;height:46px;border-radius:12px;background:rgba(212,168,83,.09);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.1rem}
+.ins-hook{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.ins-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:.7rem}
+.ins-body{font-size:.88rem;color:var(--text2);line-height:1.75;max-width:none}
+.ins-expand{display:none;margin-top:1.1rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+.insight.open .ins-expand{display:block;animation:fadeIn .3s ease}
+.ins-quote{padding:.75rem 1rem;background:rgba(212,168,83,.07);border-left:2px solid var(--gold);font-style:italic;font-size:.85rem;color:var(--text);border-radius:0 6px 6px 0;margin-top:.9rem;font-family:'Playfair Display',serif}
+.ins-toggle{font-size:.75rem;color:var(--gold);margin-top:.9rem;display:inline-flex;align-items:center;gap:.4rem;font-weight:600}
+.ins-toggle svg{transition:transform .3s}
+.insight.open .ins-toggle svg{transform:rotate(180deg)}
+
+/* ── FORMULA ── */
+#formula{background:var(--bg2);text-align:center}
+.formula-flow{display:flex;align-items:center;justify-content:center;gap:.9rem;flex-wrap:wrap;margin:3rem 0}
+.f-step{background:var(--bg3);border:1px solid var(--border2);border-radius:16px;padding:1.5rem 1.75rem;min-width:145px;text-align:center;transition:all .3s;cursor:default}
+.f-step:hover{border-color:var(--gold);transform:scale(1.04);box-shadow:0 0 30px var(--glow)}
+.f-num{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.f-word{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.35rem}
+.f-desc{font-size:.78rem;color:var(--text3);max-width:110px;margin:0 auto;line-height:1.5}
+.f-arrow{color:var(--gold);font-size:1.3rem;opacity:.45}
+@media(max-width:700px){.formula-flow{flex-direction:column}.f-arrow{transform:rotate(90deg)}}
+.formula-explainer{max-width:680px;margin:0 auto;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left}
+.formula-explainer p{max-width:none}
+
+/* ── SHADOW QUESTIONS ── */
+#shadow{}
+.shadow-intro{margin-bottom:2.5rem}
+.q-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.1rem}
+.q-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.4rem;cursor:pointer;transition:all .3s}
+.q-card:hover{border-color:var(--border2);background:var(--bg4)}
+.q-tag{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.q-text{font-family:'Playfair Display',serif;font-style:italic;font-size:.98rem;color:var(--text);margin-bottom:.5rem;line-height:1.5}
+.q-hint{font-size:.75rem;color:var(--text3)}
+.q-why{display:none;margin-top:.9rem;padding:.8rem 1rem;background:rgba(212,168,83,.07);border-radius:8px;font-size:.82rem;color:var(--text2);line-height:1.65;animation:fadeIn .3s ease}
+.q-card.open .q-why{display:block}
+.q-card.open .q-hint{display:none}
+
+/* ── EXERCISES ── */
+#exercises{background:var(--bg2)}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:2.5rem}
+.ex-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:1.75rem;position:relative}
+.ex-badge{position:absolute;top:1rem;right:1rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .75rem;border-radius:20px}
+.b-easy{background:rgba(74,152,112,.15);color:var(--green);border:1px solid rgba(74,152,112,.25)}
+.b-med{background:rgba(193,120,48,.15);color:var(--amber);border:1px solid rgba(193,120,48,.25)}
+.b-hard{background:rgba(201,64,64,.15);color:var(--red);border:1px solid rgba(201,64,64,.25)}
+.ex-num{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.ex-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.9rem}
+.ex-desc{font-size:.88rem;color:var(--text2);max-width:none;line-height:1.7;margin-bottom:1.1rem}
+.ex-steps{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+.ex-steps li{font-size:.83rem;color:var(--text2);padding-left:1.3rem;position:relative}
+.ex-steps li::before{content:'→';position:absolute;left:0;color:var(--gold)}
+.ex-why{padding:.75rem 1rem;background:rgba(212,168,83,.07);border:1px solid rgba(212,168,83,.14);border-radius:8px;font-size:.8rem;color:var(--text2)}
+.ex-why strong{color:var(--gold)}
+
+/* ── AFFIRMATIONS LAB ── */
+#mirror{text-align:center}
+.mirror-intro{max-width:58ch;margin:0 auto 2.5rem;font-size:.95rem;line-height:1.75;color:var(--text2)}
+.aff-list{max-width:660px;margin:0 auto 2.5rem;display:flex;flex-direction:column;gap:.8rem}
+.aff{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.6rem;cursor:pointer;text-align:left;transition:all .3s;position:relative}
+.aff:hover{border-color:var(--border2)}
+.aff-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.aff-text{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text)}
+.aff-dot{width:10px;height:10px;border-radius:50%;background:var(--border2);flex-shrink:0;transition:background .3s}
+.aff.cringe .aff-dot{background:var(--red)}
+.aff.smooth .aff-dot{background:var(--green)}
+.aff-btns{display:none;gap:.6rem;margin-top:.9rem;flex-wrap:wrap}
+.aff.open .aff-btns{display:flex;animation:fadeIn .25s ease}
+.btn-c,.btn-s{font-size:.75rem;font-weight:600;letter-spacing:.05em;padding:.35rem .9rem;border-radius:20px;border:1px solid;cursor:pointer;background:none;transition:all .2s;font-family:'Inter',sans-serif}
+.btn-c{color:var(--red);border-color:var(--red)}.btn-c:hover{background:rgba(201,64,64,.12)}
+.btn-s{color:var(--green);border-color:var(--green)}.btn-s:hover{background:rgba(74,152,112,.12)}
+.aff-insight{display:none;margin-top:.9rem;font-size:.82rem;color:var(--text2);line-height:1.65;text-align:left}
+.aff.cringe .aff-insight,.aff.smooth .aff-insight{display:block;animation:fadeIn .3s ease}
+.mirror-note{max-width:620px;margin:0 auto;background:var(--bg3);border:1px solid var(--border2);border-radius:14px;padding:1.75rem;text-align:left}
+.mirror-note h4{font-size:1rem;color:var(--gold);margin-bottom:.7rem;font-family:'Playfair Display',serif}
+.mirror-note p{font-size:.9rem;max-width:none;line-height:1.75}
+
+/* ── BEING/DOING/HAVING ── */
+#being{background:var(--bg2)}
+.paradigm-row{display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:2.5rem}
+.para{flex:1;min-width:190px;background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:1.75rem;text-align:center}
+.para:last-child{border-color:rgba(212,168,83,.4);background:rgba(212,168,83,.04)}
+.para-icon{font-size:2rem;display:block;margin-bottom:.9rem}
+.para-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
+.para-desc{font-size:.85rem;color:var(--text2);max-width:none;margin-bottom:.9rem}
+.para-eg{font-size:.78rem;color:var(--text3);font-style:italic;max-width:none;margin-bottom:.9rem}
+.para-risk{display:inline-block;font-size:.72rem;font-weight:700;padding:.25rem .8rem;border-radius:20px}
+.risk-f{background:rgba(201,64,64,.15);color:var(--red);border:1px solid rgba(201,64,64,.25)}
+.risk-s{background:rgba(74,152,112,.15);color:var(--green);border:1px solid rgba(74,152,112,.25)}
+
+/* ── CLOSING ── */
+#closing{min-height:85vh;display:flex;align-items:center;text-align:center;background:radial-gradient(ellipse at 50% 40%,rgba(212,168,83,.07),transparent 65%)}
+.closing-inner{max-width:700px;margin:0 auto;padding:0 2rem}
+.closing-lion{font-size:4.5rem;margin-bottom:2rem;display:block;animation:floatY 4s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.closing-q{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:700;line-height:1.45;margin-bottom:1.5rem;color:var(--text)}
+.closing-body{font-size:1rem;color:var(--text2);line-height:1.85;max-width:54ch;margin:0 auto 2rem}
+.closing-final{font-family:'Playfair Display',serif;font-style:italic;font-size:1.6rem;color:var(--gold);margin-bottom:2.5rem}
+.okay-box{display:inline-block;padding:1.2rem 2.5rem;background:rgba(212,168,83,.08);border:1px solid rgba(212,168,83,.25);border-radius:50px;font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:var(--gold);cursor:pointer;transition:all .3s}
+.okay-box:hover{background:rgba(212,168,83,.15);transform:scale(1.03)}
+.okay-response{margin-top:1.5rem;font-size:.95rem;color:var(--text2);opacity:0;transition:opacity .5s;line-height:1.75;max-width:50ch;margin-left:auto;margin-right:auto}
+.okay-response.show{opacity:1}
+
+/* DIVIDER */
+.hdiv{width:40px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:2rem auto}
+
+/* FOOTER */
+footer{padding:2rem;text-align:center;border-top:1px solid var(--border)}
+footer p{font-size:.78rem;color:var(--text3);max-width:none;margin:0 auto}
+
+/* HIGHLIGHT */
+.hl{background:rgba(212,168,83,.07);border:1px solid rgba(212,168,83,.18);border-radius:12px;padding:1.4rem 1.75rem;margin:1.75rem 0}
+.hl p{color:var(--text);max-width:none}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav>
+  <a class="nav-brand" href="#hero">The Cage Is Open</a>
+  <ul class="nav-links">
+    <li><a href="#cage">The Psychology</a></li>
+    <li><a href="#insights">Core Truths</a></li>
+    <li><a href="#formula">The Formula</a></li>
+    <li><a href="#exercises">Exercises</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="cage-wrap">
+      <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top arc / roof -->
+        <path d="M10 40 Q50 8 90 40" stroke="#d4a853" stroke-width="2" fill="none"/>
+        <!-- Base -->
+        <rect x="8" y="108" width="84" height="4" rx="2" fill="#d4a853" opacity=".6"/>
+        <!-- Left wall bars -->
+        <line x1="10" y1="40" x2="10" y2="110" stroke="#d4a853" stroke-width="1.8"/>
+        <line x1="24" y1="26" x2="24" y2="110" stroke="#d4a853" stroke-width="1.4" opacity=".7"/>
+        <line x1="38" y1="18" x2="38" y2="110" stroke="#d4a853" stroke-width="1.4" opacity=".7"/>
+        <!-- Right wall bars -->
+        <line x1="90" y1="40" x2="90" y2="110" stroke="#d4a853" stroke-width="1.8"/>
+        <line x1="76" y1="26" x2="76" y2="110" stroke="#d4a853" stroke-width="1.4" opacity=".7"/>
+        <line x1="62" y1="18" x2="62" y2="110" stroke="#d4a853" stroke-width="1.4" opacity=".7"/>
+        <!-- Horizontal rings -->
+        <line x1="10" y1="65" x2="90" y2="65" stroke="#d4a853" stroke-width="1.3" opacity=".5"/>
+        <line x1="10" y1="88" x2="90" y2="88" stroke="#d4a853" stroke-width="1.3" opacity=".5"/>
+        <!-- DOOR (swings open) -->
+        <g class="cage-door-group">
+          <rect x="10" y="68" width="36" height="40" rx="2" fill="rgba(212,168,83,.06)" stroke="#d4a853" stroke-width="1.8"/>
+          <circle cx="42" cy="90" r="3.5" fill="#d4a853"/>
+          <!-- door bars -->
+          <line x1="21" y1="68" x2="21" y2="108" stroke="#d4a853" stroke-width="1.1" opacity=".6"/>
+          <line x1="33" y1="68" x2="33" y2="108" stroke="#d4a853" stroke-width="1.1" opacity=".6"/>
+        </g>
+        <!-- Person silhouette inside (simple) -->
+        <circle cx="62" cy="76" r="5" fill="#d4a853" opacity=".4"/>
+        <line x1="62" y1="81" x2="62" y2="100" stroke="#d4a853" stroke-width="1.5" opacity=".4"/>
+        <line x1="56" y1="88" x2="68" y2="88" stroke="#d4a853" stroke-width="1.5" opacity=".4"/>
+        <line x1="62" y1="100" x2="56" y2="110" stroke="#d4a853" stroke-width="1.5" opacity=".4"/>
+        <line x1="62" y1="100" x2="68" y2="110" stroke="#d4a853" stroke-width="1.5" opacity=".4"/>
+      </svg>
+    </div>
+    <p class="hero-eye">A Guide to Permanent Freedom</p>
+    <h1 class="hero-title">The Cage<br>Is Open</h1>
+    <p class="hero-sub">Everything that keeps you small — the anxiety, the hiding, the constant performing — is a cage whose door you can walk through right now. This is a map of what's really happening, and how to permanently dissolve it.</p>
+    <p class="hero-q">"What do you have to lose? Just your pain."</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll to begin</span>
+    <div class="arrow-down"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ON FIRE -->
+<section id="fire">
+  <div class="c">
+    <div class="fire-layout">
+      <div class="reveal">
+        <span class="label">The Honest Question</span>
+        <h2>Are you on fire<br>right now?</h2>
+        <div class="sep"></div>
+        <p>If you are standing in a burning circle and someone says "jump out" — and you say "but what if where I jump to isn't perfect?" — what would anyone tell you?</p>
+        <div class="bq" style="margin-top:1.5rem">
+          <p>Jump. What do you have to lose? You're on fire. Jump.</p>
+        </div>
+        <p style="margin-top:1rem">The same logic applies to the pain you're in right now. If your current strategy — the hiding, the performing, the shrinking — led you here, then <strong>anything different is better than this.</strong> You don't need a perfect plan. You need to move.</p>
+        <div class="hl" style="margin-top:1.5rem">
+          <p><strong>The key insight:</strong> Your mind will tell you to stay. "Stay here, stay here. It's known. It's safe." But if listening to your mind put you in this much pain, maybe don't always listen to your mind.</p>
+        </div>
+      </div>
+      <div class="fire-circle-wrap reveal reveal-d2">
+        <div class="fire-ring">
+          <div class="fire-inner">
+            <p class="fire-text">You're in here.<br><br>The fire is real.<br><br>The door is open.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CAGE PSYCHOLOGY -->
+<section id="cage">
+  <div class="c">
+    <span class="label reveal">The Psychology of Staying</span>
+    <h2 class="reveal">Why we stay<br>in the cage</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal">The cage isn't just pain. It's <em>familiar</em> pain. It kept you alive. Understanding this isn't an excuse to stay — it's a map to leave.</p>
+    <div class="cage-cards" style="margin-top:2.5rem">
+      <div class="cage-card reveal reveal-d1">
+        <div class="cage-card-num">01</div>
+        <h4>The Cage Kept You Alive</h4>
+        <p>Every anxiety, every wall, every shrinking habit started as a survival strategy. A young part of you decided that being loud, being seen, being vulnerable, or expressing emotion was dangerous. So you hid those parts. The cage isn't random — it was built to protect you.</p>
+      </div>
+      <div class="cage-card reveal reveal-d2">
+        <div class="cage-card-num">02</div>
+        <h4>The Unknown Feels Worse</h4>
+        <p>Even when the cage is on fire — even when staying hurts — it still feels safer than the unknown outside. You've been fantasizing about being free your whole life, but when the door actually opens? Terror. Because you've never known what's outside. You've only known the cage.</p>
+      </div>
+      <div class="cage-card reveal reveal-d3">
+        <div class="cage-card-num">03</div>
+        <h4>You Step Out and Run Back In</h4>
+        <p>Social anxiety rarely looks like total paralysis. It looks like: you take one brave step, something triggers you, and you retreat back to what's familiar. This is normal. The cage is known. Your nervous system treats it as safe even when it clearly isn't. Expect the pull-back. Do it anyway.</p>
+      </div>
+      <div class="cage-card reveal reveal-d4">
+        <div class="cage-card-num">04</div>
+        <h4>Your Mind Gaslights You to Stay</h4>
+        <p>The same mental voice that created the cage will tell you the cage is necessary. "You can't handle it out there." "That approach would never work for you." "You're different from other people." These aren't truths. They're the lock on the door that was never actually locked.</p>
+      </div>
+    </div>
+    <div class="hl reveal" style="margin-top:2rem">
+      <p><strong>The paradigm shift:</strong> Leaving the cage isn't about becoming someone new. It's about coming home to who you always were before the cage was built. The goal is not to add confidence — it's to remove the conditioning that covered it up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ HOW WE GOT HERE -->
+<section id="conditioning">
+  <div class="c">
+    <span class="label reveal">The Origin</span>
+    <h2 class="reveal">How you became<br>a performer</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal">You weren't born this way. You were born expressing freely, crying when hungry, laughing when joyful — no filter, no performance. Something changed. Understanding what changed is the beginning of changing back.</p>
+    <div class="two-col" style="margin-top:3rem">
+      <div>
+        <h3 class="reveal">The Timeline</h3>
+        <div class="timeline reveal reveal-d1">
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-age">Born</div>
+            <div class="t-title">Pure Expression</div>
+            <p class="t-desc">No performance. No filter. You cried when hurt, laughed when happy, screamed when hungry. You were fully yourself because survival didn't depend on approval yet.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-age">Age 2–4</div>
+            <div class="t-title">First Self-Consciousness</div>
+            <p class="t-desc">You begin noticing others' reactions. You feel embarrassment for the first time. The world becomes bigger than you. You start learning: some expressions get approval, others get rejection.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-age">Age 5–12</div>
+            <div class="t-title">The Split Begins</div>
+            <p class="t-desc">Something happens — a teacher shushes you, kids mock you, a parent misreads your emotion. Your young mind concludes: being this part of me is dangerous. You start disowning it. The split self forms.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-age">Teens–Adulthood</div>
+            <div class="t-title">The Performance Hardens</div>
+            <p class="t-desc">The mask becomes automatic. You forget you're wearing one. What was once a survival strategy now feels like your personality. The disowned parts feel like strangers — or monsters in a closet.</p>
+          </div>
+          <div class="t-item">
+            <div class="t-dot" style="background:var(--gold)"></div>
+            <div class="t-age">Now</div>
+            <div class="t-title">The Door Is Open</div>
+            <p class="t-desc">What you learned, you can unlearn. The disowned parts of you haven't gone anywhere — they're waiting. The work is not to become something new; it's to remember what you always were.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="reveal">The Three Lives</h3>
+        <p class="reveal" style="margin-top:.6rem;margin-bottom:1.5rem">Everyone lives three lives simultaneously. The bigger the gap between them, the heavier the weight.</p>
+        <div class="three-lives reveal reveal-d1">
+          <div class="life">
+            <span class="life-icon">😊</span>
+            <div class="life-name">Public Life</div>
+            <p class="life-desc">What you show strangers and acquaintances. Polished, managed, curated.</p>
+            <div class="life-bar" style="background:linear-gradient(90deg,var(--green),#6bc894);width:88%"></div>
+          </div>
+          <div class="life">
+            <span class="life-icon">🤫</span>
+            <div class="life-name">Private Life</div>
+            <p class="life-desc">What close friends and family see. Still selective, but more real.</p>
+            <div class="life-bar" style="background:linear-gradient(90deg,var(--amber),var(--gold));width:55%"></div>
+          </div>
+          <div class="life" style="border-color:rgba(201,64,64,.35);background:rgba(201,64,64,.04)">
+            <span class="life-icon">🔒</span>
+            <div class="life-name">Secret Life</div>
+            <p class="life-desc">The thoughts, feelings, and struggles nobody sees. The bigger this is, the more painful your existence becomes.</p>
+            <div class="life-bar" style="background:linear-gradient(90deg,var(--red),#e05a5a);width:78%"></div>
+          </div>
+        </div>
+        <div class="hl reveal reveal-d2" style="margin-top:1.5rem">
+          <p><strong>The key:</strong> Authenticity doesn't mean telling everyone everything. It means shrinking the gap — especially in the relationships that matter.</p>
+        </div>
+        <div class="bq reveal reveal-d3" style="margin-top:1.5rem">
+          <p>"If what you see is what you get, there's nothing to defend. Nothing to maintain. You can relax."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CORE INSIGHTS -->
+<section id="insights">
+  <div class="c">
+    <span class="label reveal">Core Truths</span>
+    <h2 class="reveal">8 insights that<br>dissolve the cage</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal">Each of these reframes something your mind currently uses to keep you stuck. Click any card to go deeper.</p>
+    <div class="insights-grid" style="margin-top:2.5rem">
+
+      <div class="insight reveal reveal-d1" onclick="toggleInsight(this)">
+        <div class="ins-icon">🎭</div>
+        <div class="ins-hook">Truth #1</div>
+        <h3 class="ins-title">Fear Is a Bluff</h3>
+        <p class="ins-body">Your mind predicts catastrophic social outcomes. It has been doing this since you were five years old, when catastrophe was genuinely possible. The predictions are almost never accurate for an adult.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">When you were a child, being rejected from your social group could have meant abandonment — which felt like death. Your nervous system learned to treat social rejection as a mortal threat. <strong>That threat no longer exists, but the alarm system never got updated.</strong></p>
+          <p style="max-width:none;margin-top:.8rem">Fear's bluff: you open the closet expecting a monster. There's nothing there. You face the crowd expecting to be humiliated. You aren't. You reveal your sadness expecting rejection. People connect deeper. The fear was a bluff.</p>
+          <div class="ins-quote">"I can't show people I'm sad." — And then she did. And then she didn't die. That's what we call facing fear's bluff. It's a bluff.</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d2" onclick="toggleInsight(this)">
+        <div class="ins-icon">⚖️</div>
+        <div class="ins-hook">Truth #2</div>
+        <h3 class="ins-title">Ego Equals Effort</h3>
+        <p class="ins-body">Being yourself requires zero energy. Being the version your ego demands — cool, successful, not-too-much, acceptable — requires constant monitoring, maintenance, and anxiety.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">When you're performing a version of yourself, there's always the terror that someone will see through it. "What if they see the real me?" This is the root of most social anxiety — not fear of who you are, but fear of being caught pretending to be someone else.</p>
+          <p style="max-width:none;margin-top:.8rem"><strong>The relief of authenticity:</strong> When you drop the act, that specific fear dissolves. "What you see is what you get" has nothing to defend. The anxiety lifts — not because you became more impressive, but because you stopped trying to be.</p>
+          <div class="ins-quote">"Being who your ego wants you to be is hard. Being you is easy. If you feel tension and pressure — that's your ego."</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d3" onclick="toggleInsight(this)">
+        <div class="ins-icon">🎯</div>
+        <div class="ins-hook">Truth #3</div>
+        <h3 class="ins-title">Lean Into the Cringe</h3>
+        <p class="ins-body">Whatever your mind dismisses as "too weird," "too woo-woo," "too much," or "embarrassing" is very likely the exact thing that would free you. That resistance is not discernment — it's the cage talking.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">If a force wanted to keep you stuck, the most effective strategy would be to convince you that the one thing that would change your life is too ridiculous to try. Your mind does exactly this.</p>
+          <p style="max-width:none;margin-top:.8rem">The person who dismisses meditation as "woo-woo nonsense" often needs it most. The person who cringes at vulnerability exercises usually has the most to release. <strong>The resistance is the signal, not the warning.</strong></p>
+          <div class="ins-quote">"What if the one thing your mind convinced you would never work is actually the solution? Go into the cringe. That's usually where the gold is."</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d4" onclick="toggleInsight(this)">
+        <div class="ins-icon">🌐</div>
+        <div class="ins-hook">Truth #4</div>
+        <h3 class="ins-title">Personal Is Universal</h3>
+        <p class="ins-body">The things you're most ashamed of — your loneliness, your sadness, your sense that something is broken in you — are the most universal human experiences. You are not uniquely broken. You are profoundly human.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">In a room of a hundred people, when one person reveals vulnerability, a hundred hands go up in recognition. Everyone was hiding it. Everyone thought they were the only one. The shame lives in the hiding, not in the feeling itself.</p>
+          <p style="max-width:none;margin-top:.8rem"><strong>The paradox of connection:</strong> The things you believe would push people away are exactly what create the deepest connection. Your carefully crafted "cool" front creates distance. Your real, unfiltered self draws people in.</p>
+          <div class="ins-quote">"Whatever you think is most personal is most universal. Stop being ashamed of your struggles. It's not just you. It's insane."</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d1" onclick="toggleInsight(this)">
+        <div class="ins-icon">💫</div>
+        <div class="ins-hook">Truth #5</div>
+        <h3 class="ins-title">Power vs. Force</h3>
+        <p class="ins-body">Trying to force yourself to be more expressive, more confident, more "on" creates visible tension and blocks the very thing you're reaching for. True expressiveness requires relaxation, not strain.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">When you watch someone try to be confident versus someone who simply is, the difference is unmistakable. Force looks like effort. Power looks like ease. The person who radiates presence isn't trying harder — they've stopped blocking.</p>
+          <p style="max-width:none;margin-top:.8rem">This is why tips and tricks for social anxiety don't work long-term. Better vocal tonality while carrying deep emotional suppression is still suppression. The energy leaks out anyway. <strong>The only lasting path is removing the blockage, not fighting through it.</strong></p>
+          <div class="ins-quote">"To be truly loud, you have to be truly loose. The scream has to come from beyond yourself — beyond the image you're trying to protect."</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d2" onclick="toggleInsight(this)">
+        <div class="ins-icon">👶</div>
+        <div class="ins-hook">Truth #6</div>
+        <h3 class="ins-title">The Babysitter Problem</h3>
+        <p class="ins-body">You're hoping a coach, partner, therapist, or friend will finally give you the love and validation you've needed since childhood. They can't. The hurt part of you doesn't want the babysitter's approval — it wants yours.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">Inside you is a child who was hurt. Maybe they were told not to show emotion. Maybe they felt invisible. Maybe they never heard "I love you and I'm proud of you exactly as you are." That child needs a parent to show up.</p>
+          <p style="max-width:none;margin-top:.8rem"><strong>You are that parent.</strong> No external person can substitute for you showing up for yourself. The validation you desperately seek from the outside world is available to you right now — but it has to come from within first.</p>
+          <div class="ins-quote">"The child doesn't want the babysitter to say 'I love you.' He wants the parent to say it. You need to start saying it to you."</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d3" onclick="toggleInsight(this)">
+        <div class="ins-icon">🎤</div>
+        <div class="ins-hook">Truth #7</div>
+        <h3 class="ins-title">The 8-Mile Strategy</h3>
+        <p class="ins-body">Eminem's character wins the rap battle by exposing all his own vulnerabilities first. When you reveal your own insecurities before anyone else can weaponize them, you become invincible.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">Social anxiety is fundamentally about protecting a secret — the secret that you're not as together as you're pretending to be. The energy of maintaining that secret is enormous, and it shows up as tension, awkwardness, and avoidance.</p>
+          <p style="max-width:none;margin-top:.8rem">What happens when you just say it? "I'm nervous right now." "I don't always know what to say." "I'm working through some insecurities." Suddenly there's nothing to defend. The anxiety loses its fuel. <strong>Vulnerability isn't weakness — it's the most disarming strategy available.</strong></p>
+          <div class="ins-quote">"Once you've put your weaknesses out there yourself, they have no power. You become invincible. Now what are they gonna say?"</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="insight reveal reveal-d4" onclick="toggleInsight(this)">
+        <div class="ins-icon">✨</div>
+        <div class="ins-hook">Truth #8</div>
+        <h3 class="ins-title">It's Okay</h3>
+        <p class="ins-body">Almost every form of anxiety is resistance to what is. "It's not okay that I feel this way. It's not okay that I look like this. It's not okay that I don't know what to say." The deepest practice is two words: it's okay.</p>
+        <div class="ins-expand">
+          <p style="max-width:none">Most social anxiety is not primary anxiety — it's anxiety about the anxiety. You feel nervous, then you feel bad about feeling nervous, then you feel bad about feeling bad, and it spirals. The cycle breaks the moment you allow the original feeling to simply be there.</p>
+          <p style="max-width:none;margin-top:.8rem">What a child actually needs when they're sad is not "why are you sad? cheer up." It's: <em>"You're feeling sad. That's okay. I'm here with you."</em> You can give this to yourself. Right now. Whatever you're feeling — <strong>it's okay.</strong></p>
+          <div class="ins-quote">"If I had five seconds to give you a life-changing app, it would just be a hologram of me popping up and saying: 'It's okay.' That's it. It's okay."</div>
+        </div>
+        <div class="ins-toggle">
+          <span>Expand</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FORMULA -->
+<section id="formula">
+  <div class="c">
+    <span class="label reveal">The Method</span>
+    <h2 class="reveal">The Only Formula<br>That Creates Permanent Change</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal" style="margin:0 auto">Tips and tricks treat symptoms. This formula goes to the root — re-owning the parts of yourself you were taught to hide.</p>
+    <div class="formula-flow reveal">
+      <div class="f-step">
+        <div class="f-num">Step 1</div>
+        <div class="f-word">Action</div>
+        <p class="f-desc">Do the thing that activates the disowned part</p>
+      </div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">
+        <div class="f-num">Step 2</div>
+        <div class="f-word">Trigger</div>
+        <p class="f-desc">Feel the resistance surface — this is the buried material coming up</p>
+      </div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">
+        <div class="f-num">Step 3</div>
+        <div class="f-word">Release</div>
+        <p class="f-desc">Let go of the charge — breathe into it, don't suppress it</p>
+      </div>
+      <div class="f-arrow">→</div>
+      <div class="f-step">
+        <div class="f-num">Step 4</div>
+        <div class="f-word">Repeat</div>
+        <p class="f-desc">Each cycle reduces the resistance permanently</p>
+      </div>
+    </div>
+    <div class="formula-explainer reveal">
+      <h3 style="margin-bottom:1rem;font-size:1.1rem">Why this works — and why tips don't</h3>
+      <p style="max-width:none">When social anxiety holds you back, the mainstream advice is: better eye contact, stronger vocal tone, confident posture, more conversational techniques. These are surface-level. They treat the symptom while leaving the cause completely intact.</p>
+      <p style="max-width:none;margin-top:1rem">The actual cause is a disowned part of yourself — say, the expressive, loud, vulnerable part — that got locked away when expressing it felt dangerous as a child. That part is still in there, blocked by a protective mechanism your younger self installed.</p>
+      <p style="max-width:none;margin-top:1rem"><strong>The formula works because it makes the blockage visible.</strong> When you take an action (be louder, be more vulnerable, take up space), the old resistance surfaces. In that moment, it's no longer buried in your subconscious — it's right there, available to release. Each cycle frees a little more of the real you.</p>
+      <div class="ins-quote" style="margin-top:1.2rem">Triggered doesn't mean you're failing. Triggered means the buried material just came to the surface. That's the best time to release it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SHADOW QUESTIONS -->
+<section id="shadow">
+  <div class="c">
+    <span class="label reveal">Shadow Work</span>
+    <h2 class="reveal">Questions to ask<br>the hidden parts</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal shadow-intro">These are "shadow questions" — not questions to answer with your logical mind, but questions to sit with. Close your eyes, ask the question slowly, and notice what surfaces. Click each card to see why it matters.</p>
+    <div class="q-grid">
+
+      <div class="q-card reveal reveal-d1" onclick="toggleQ(this)">
+        <div class="q-tag">Self-Worth</div>
+        <p class="q-text">"Why do I think I'm not worthy of being seen?"</p>
+        <p class="q-hint">Click to explore why this question matters →</p>
+        <div class="q-why">Most people can answer this instantly — and the answer is always a story from childhood, not a fact. Someone made you believe your presence was a burden. It wasn't true then. It certainly isn't now. Finding the origin of the story is the first step to releasing it.</div>
+      </div>
+
+      <div class="q-card reveal reveal-d2" onclick="toggleQ(this)">
+        <div class="q-tag">Origin</div>
+        <p class="q-text">"When did I start hiding this part of myself, and what happened?"</p>
+        <p class="q-hint">Click to explore why this question matters →</p>
+        <div class="q-why">There's always a specific period or event — often much smaller than it felt at the time. A teacher who shushed you. Friends who laughed. A parent who showed disapproval. Your child mind built a permanent rule from one moment. That rule can be rewritten when you can see it clearly.</div>
+      </div>
+
+      <div class="q-card reveal reveal-d3" onclick="toggleQ(this)">
+        <div class="q-tag">The Front</div>
+        <p class="q-text">"What am I afraid people will discover if I stop performing?"</p>
+        <p class="q-hint">Click to explore why this question matters →</p>
+        <div class="q-why">The answer almost always reveals a false belief masquerading as a fact. "They'll see I'm not as smart/confident/successful as I seem." These are not discoveries people make — they're projections from your own self-judgement. Others are typically far less concerned with your performance than you assume.</div>
+      </div>
+
+      <div class="q-card reveal reveal-d4" onclick="toggleQ(this)">
+        <div class="q-tag">Freedom</div>
+        <p class="q-text">"Who would I be if I knew — truly knew — that no one was judging me?"</p>
+        <p class="q-hint">Click to explore why this question matters →</p>
+        <div class="q-why">This thought experiment reveals the gap between who you are and who you perform as. Most people, when they sit with this question, feel a sudden lightness — a glimpse of freedom. That lightness is available to you not just in imagination but in reality. You just have to take the risk of testing the assumption.</div>
+      </div>
+
+      <div class="q-card reveal reveal-d1" onclick="toggleQ(this)">
+        <div class="q-tag">The Wound</div>
+        <p class="q-text">"What did I need to hear as a child that I never heard?"</p>
+        <p class="q-hint">Click to explore why this question matters →</p>
+        <div class="q-why">For most people with social anxiety, the answer is some version of: "You're enough exactly as you are. Your emotions are valid. You're not a burden. I love you unconditionally." Knowing what you needed is the map to what you now need to give yourself — because no one else can give it at this point. Only you can go back and fill that gap.</div>
+      </div>
+
+      <div class="q-card reveal reveal-d2" onclick="toggleQ(this)">
+        <div class="q-tag">The Cage</div>
+        <p class="q-text">"Is there a part of me that doesn't want to get better?"</p>
+        <p class="q-hint">Click to explore why this question matters →</p>
+        <div class="q-why">Almost always: yes. The cage is known. The pain is familiar. Getting better means losing your story, losing a convenient explanation, facing the unknown. There's a part of every person that protects the cage because the cage is all it knows. Naming this part disarms it. It's not a failure — it's a very human, very understandable reflex.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ EXERCISES -->
+<section id="exercises">
+  <div class="c">
+    <span class="label reveal">Practice</span>
+    <h2 class="reveal">5 Concrete Exercises</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal">These are not "try to feel confident" exercises. Each one directly activates the Action → Trigger → Release cycle by confronting specific disowned parts of yourself.</p>
+    <div class="ex-grid">
+
+      <div class="ex-card reveal reveal-d1">
+        <div class="ex-badge b-easy">Easy</div>
+        <div class="ex-num">Exercise 01</div>
+        <h3 class="ex-title">The Honest Mirror</h3>
+        <p class="ex-desc">Most people can't look themselves in the eye and say "I love you" without flinching. That flinch is exactly what needs to be worked with — not hidden from.</p>
+        <ul class="ex-steps">
+          <li>Stand in front of a mirror. Don't fix your hair or suck in your stomach.</li>
+          <li>Look yourself in the eyes for thirty full seconds. Just look.</li>
+          <li>Then say out loud: "I love you. You're enough."</li>
+          <li>Notice every sensation of resistance, cringe, or disbelief that comes up.</li>
+          <li>Don't force past it. Just notice it, breathe into it, and repeat.</li>
+          <li>Do this every morning for two weeks.</li>
+        </ul>
+        <div class="ex-why"><strong>Why it works:</strong> The resistance is the material. You're not failing if it feels cringe — you're succeeding. Each day the resistance decreases a little. That's permanent change.</div>
+      </div>
+
+      <div class="ex-card reveal reveal-d2">
+        <div class="ex-badge b-easy">Easy</div>
+        <div class="ex-num">Exercise 02</div>
+        <h3 class="ex-title">The Inner Child Letter</h3>
+        <p class="ex-desc">The hurt you carry belongs to a younger version of you who needed something they didn't get. You can give it to them now.</p>
+        <ul class="ex-steps">
+          <li>Find a photo of yourself between ages 6 and 12.</li>
+          <li>Look at it. Really look. This child didn't choose any of what happened.</li>
+          <li>Write a letter to that child. Speak to them the way a loving parent would.</li>
+          <li>Tell them what they needed to hear. Tell them they're loved. Tell them they're enough. Tell them it's okay to feel what they feel.</li>
+          <li>Read it out loud. Slowly. Let it land.</li>
+        </ul>
+        <div class="ex-why"><strong>Why it works:</strong> Much of social anxiety lives in unresolved childhood emotion. This exercise creates a direct channel to process it at the source, without needing to re-experience the original events.</div>
+      </div>
+
+      <div class="ex-card reveal reveal-d3">
+        <div class="ex-badge b-med">Medium</div>
+        <div class="ex-num">Exercise 03</div>
+        <h3 class="ex-title">The Cringe Challenge</h3>
+        <p class="ex-desc">Your mind is protecting something by labeling certain actions as "too cringe." This exercise is designed to crack that protection open.</p>
+        <ul class="ex-steps">
+          <li>Identify one thing your mind says "is too embarrassing, too weird, or would never work for me." Examples: dancing alone, posting something vulnerable, asking a stranger for directions, saying "I love you" to a friend.</li>
+          <li>Write down your predicted outcome.</li>
+          <li>Do the thing. This week.</li>
+          <li>Write down what actually happened versus what you predicted.</li>
+          <li>Repeat with something slightly more challenging each week.</li>
+        </ul>
+        <div class="ex-why"><strong>Why it works:</strong> You're building a database of evidence against your fear predictions. Each entry weakens the cage's grip on you.</div>
+      </div>
+
+      <div class="ex-card reveal reveal-d4">
+        <div class="ex-badge b-med">Medium</div>
+        <div class="ex-num">Exercise 04</div>
+        <h3 class="ex-title">The Reveal</h3>
+        <p class="ex-desc">Social anxiety lives in the gap between what's happening inside and what you show outside. This exercise deliberately closes that gap.</p>
+        <ul class="ex-steps">
+          <li>In your next meaningful conversation, share one thing you would normally hide.</li>
+          <li>It doesn't need to be dramatic. "I've been feeling really anxious lately." "I'm not sure what I'm doing with my life." "I miss having close friends."</li>
+          <li>Say it simply, without over-explaining or apologizing.</li>
+          <li>Then notice: what actually happened? Did they reject you, or did they connect with you?</li>
+        </ul>
+        <div class="ex-why"><strong>Why it works:</strong> Vulnerability creates connection, not rejection. This exercise gives you direct, real-world evidence of the Personal = Universal truth.</div>
+      </div>
+
+      <div class="ex-card reveal reveal-d1">
+        <div class="ex-badge b-hard">Hard</div>
+        <div class="ex-num">Exercise 05</div>
+        <h3 class="ex-title">The Unfiltered Week</h3>
+        <p class="ex-desc">For one full week, systematically remove the things you use to perform confidence — and discover that you are still you without them.</p>
+        <ul class="ex-steps">
+          <li>No makeup (or minimum makeup if you wear it heavily). No "going out" outfit — wear everyday clothes.</li>
+          <li>When someone asks how you are, give an honest answer instead of "good thanks."</li>
+          <li>If you have a thought in a group, say it. Don't filter it first.</li>
+          <li>When you feel nervous, say so: "I'm a bit nervous about this."</li>
+          <li>At the end of each day, note what happened. What did you expect vs. what occurred?</li>
+        </ul>
+        <div class="ex-why"><strong>Why it works:</strong> This is a full-week experiment in testing the fundamental question: Am I acceptable as I actually am? The answer is almost always more affirming than you believed possible.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ AFFIRMATIONS LAB -->
+<section id="mirror">
+  <div class="c">
+    <span class="label reveal">Affirmation Lab</span>
+    <h2 class="reveal">Test These Statements</h2>
+    <div class="sep reveal"></div>
+    <div class="reveal">
+      <p class="mirror-intro">Don't say these to convince yourself. Say them to discover which parts of you resist them — because the resistance shows you exactly where the work is. For each statement: say it out loud, then mark whether it feels cringe or smooth.</p>
+    </div>
+    <div class="aff-list reveal">
+      <div class="aff" onclick="openAff(this)">
+        <div class="aff-row"><span class="aff-text">"I deserve to be seen."</span><div class="aff-dot"></div></div>
+        <div class="aff-btns">
+          <button class="btn-c" onclick="markAff(event,'cringe',this)">Felt cringe / resistance</button>
+          <button class="btn-s" onclick="markAff(event,'smooth',this)">Felt true / smooth</button>
+        </div>
+        <div class="aff-insight">
+          <span class="cringe-msg" style="display:none">The resistance here usually points to an early decision that your presence is a burden to others. That decision was made by a child trying to stay safe — not by the truth. Keep saying this one daily until the resistance fades.</span>
+          <span class="smooth-msg" style="display:none">Wonderful. This one is landing. The work here is to let it expand into situations that challenge it — when you're nervous, when you're a stranger in a room, when you've made a mistake.</span>
+        </div>
+      </div>
+
+      <div class="aff" onclick="openAff(this)">
+        <div class="aff-row"><span class="aff-text">"I am a leader."</span><div class="aff-dot"></div></div>
+        <div class="aff-btns">
+          <button class="btn-c" onclick="markAff(event,'cringe',this)">Felt cringe / resistance</button>
+          <button class="btn-s" onclick="markAff(event,'smooth',this)">Felt true / smooth</button>
+        </div>
+        <div class="aff-insight">
+          <span class="cringe-msg" style="display:none">Leadership feels arrogant or presumptuous — which suggests you've been taught that owning your presence and influence is inappropriate. You don't need a title to be a leader. You just need to be someone willing to step forward honestly.</span>
+          <span class="smooth-msg" style="display:none">You're recognizing your capacity to influence — not from a place of ego, but from authenticity. Real leadership is just being so fully yourself that others feel permission to do the same.</span>
+        </div>
+      </div>
+
+      <div class="aff" onclick="openAff(this)">
+        <div class="aff-row"><span class="aff-text">"I deserve love exactly as I am."</span><div class="aff-dot"></div></div>
+        <div class="aff-btns">
+          <button class="btn-c" onclick="markAff(event,'cringe',this)">Felt cringe / resistance</button>
+          <button class="btn-s" onclick="markAff(event,'smooth',this)">Felt true / smooth</button>
+        </div>
+        <div class="aff-insight">
+          <span class="cringe-msg" style="display:none">This is the most common resistance point. Love feels like it must be earned — not given freely. This belief was installed early. The child who wasn't loved unconditionally grew up believing love is conditional. It isn't. You deserve it not because of what you do or look like, but because you exist.</span>
+          <span class="smooth-msg" style="display:none">This is the foundation. Love as a baseline, not as a reward. When this lands fully, everything else in your life starts to reorganize around it.</span>
+        </div>
+      </div>
+
+      <div class="aff" onclick="openAff(this)">
+        <div class="aff-row"><span class="aff-text">"I love myself."</span><div class="aff-dot"></div></div>
+        <div class="aff-btns">
+          <button class="btn-c" onclick="markAff(event,'cringe',this)">Felt cringe / resistance</button>
+          <button class="btn-s" onclick="markAff(event,'smooth',this)">Felt true / smooth</button>
+        </div>
+        <div class="aff-insight">
+          <span class="cringe-msg" style="display:none">If this felt hollow or fake, you're being honest — which is more valuable than performing the affirmation. The resistance here is the work. What specifically makes this feel untrue? That specific answer is where to go next.</span>
+          <span class="smooth-msg" style="display:none">This is everything. When this is genuinely true — not performatively true, genuinely — the hunger for external validation dissolves. Not because you stop caring about people, but because your worth isn't sourced there anymore.</span>
+        </div>
+      </div>
+
+      <div class="aff" onclick="openAff(this)">
+        <div class="aff-row"><span class="aff-text">"I am proud of who I am."</span><div class="aff-dot"></div></div>
+        <div class="aff-btns">
+          <button class="btn-c" onclick="markAff(event,'cringe',this)">Felt cringe / resistance</button>
+          <button class="btn-s" onclick="markAff(event,'smooth',this)">Felt true / smooth</button>
+        </div>
+        <div class="aff-insight">
+          <span class="cringe-msg" style="display:none">Pride without achievement feels arrogant to most people — which reveals that self-worth has been tied to doing, not being. You are allowed to be proud of your existence and your character independent of accomplishments. That's the real foundation.</span>
+          <span class="smooth-msg" style="display:none">This one is powerful because it's not about specific achievements — it's about your character, your resilience, the fact that you keep trying. Let it be as broad as that.</span>
+        </div>
+      </div>
+
+      <div class="aff" onclick="openAff(this)">
+        <div class="aff-row"><span class="aff-text">"My presence is a gift."</span><div class="aff-dot"></div></div>
+        <div class="aff-btns">
+          <button class="btn-c" onclick="markAff(event,'cringe',this)">Felt cringe / resistance</button>
+          <button class="btn-s" onclick="markAff(event,'smooth',this)">Felt true / smooth</button>
+        </div>
+        <div class="aff-insight">
+          <span class="cringe-msg" style="display:none">This one often provokes the strongest resistance in people with social anxiety — because the core belief is exactly the opposite: "my presence is a burden." That belief is learned, not innate. Every person who ever touched your life and mattered to you was, in some way, a gift to you. You are this to others, even when you can't feel it.</span>
+          <span class="smooth-msg" style="display:none">This is the ultimate reframe of social anxiety. Instead of "will they like me?" — "I have something to offer here." The focus shifts outward, the anxiety dissolves, and genuine connection becomes possible.</span>
+        </div>
+      </div>
+    </div>
+    <div class="mirror-note reveal">
+      <h4>How to use these daily</h4>
+      <p>Each morning, stand at a mirror. Say each statement out loud. Don't rush. For the ones that feel cringe or hollow, stay with them an extra breath. You're not trying to brainwash yourself — you're trying to identify the specific resistance so you can work with it. Over weeks, watch which ones shift. The shift is the evidence of real change.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ BEING/DOING/HAVING -->
+<section id="being">
+  <div class="c">
+    <span class="label reveal">Foundation</span>
+    <h2 class="reveal">Where you source<br>your self-worth</h2>
+    <div class="sep reveal"></div>
+    <p class="reveal">Most people anchor their self-worth to something external. When that thing wobbles, so does everything else. Permanent freedom requires moving to a different foundation entirely.</p>
+    <div class="paradigm-row">
+      <div class="para reveal reveal-d1">
+        <span class="para-icon">🏠</span>
+        <div class="para-name">Having</div>
+        <p class="para-desc">I am what I own and accumulate. My worth comes from my money, my looks, my followers, my achievements.</p>
+        <p class="para-eg">"I'll feel good about myself when I have more / look better / achieve X."</p>
+        <span class="para-risk risk-f">Most Fragile</span>
+      </div>
+      <div class="para reveal reveal-d2">
+        <span class="para-icon">⚡</span>
+        <div class="para-name">Doing</div>
+        <p class="para-desc">I am what I do and how hard I try. My worth comes from effort, progress, and right action.</p>
+        <p class="para-eg">"I love myself because I'm doing my best and working on myself."</p>
+        <span class="para-risk risk-f">Still Fragile</span>
+      </div>
+      <div class="para reveal reveal-d3">
+        <span class="para-icon">✨</span>
+        <div class="para-name">Being</div>
+        <p class="para-desc">I am worthy simply because I exist. No condition. No achievement required. The foundation beneath everything else.</p>
+        <p class="para-eg">"I am enough. Right now. Even if I change nothing. Even if I accomplish nothing. I am enough."</p>
+        <span class="para-risk risk-s">Unshakeable</span>
+      </div>
+    </div>
+    <div class="hl reveal" style="margin-top:2rem">
+      <p><strong>The trap:</strong> Even "I love myself because I'm working on myself" ties worth to doing. What happens when you stop? What happens on a bad day? The only foundation that doesn't crack is the one with no conditions. You don't have a reason to be good enough. You simply are.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CLOSING -->
+<section id="closing">
+  <div class="closing-inner">
+    <span class="closing-lion">🦁</span>
+    <div class="hdiv"></div>
+    <p class="closing-q reveal">"Remember who you are.<br>This isn't you."</p>
+    <p class="closing-body reveal">You were born the hero. Not a background character. Not someone who deserves to be invisible. You were born expressing freely, laughing without permission, crying without shame. Everything that happened after was conditioning. Conditioning can be undone.</p>
+    <p class="closing-body reveal">The cage was built to keep you safe. It worked. Now the door is open. What you're feeling as you consider walking out is not danger — it's the unfamiliar. It feels the same, but it isn't.</p>
+    <div class="hdiv reveal"></div>
+    <p class="closing-final reveal">"If I can do it once, I can do it again."</p>
+    <button class="okay-box reveal" onclick="showOkay(this)">
+      Click here. Right now. Whatever you're feeling —
+    </button>
+    <p class="okay-response" id="okay-resp">
+      <strong style="color:var(--gold);font-family:'Playfair Display',serif;font-size:1.4rem">It's okay.</strong><br><br>
+      Whatever you're feeling right now — the anxiety, the doubt, the hope, the fear of hope — it's okay. You don't have to be further along. You don't have to be different. You are allowed to be exactly where you are, feeling exactly what you feel, right now. That's the whole message. That's the whole practice. <em>It's okay.</em>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>Built on the raw insight that whatever is most personal is most universal. You are not alone in this.</p>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Insight cards
+function toggleInsight(el) {
+  const isOpen = el.classList.contains('open');
+  // close all
+  document.querySelectorAll('.insight.open').forEach(i => {
+    i.classList.remove('open');
+    const t = i.querySelector('.ins-toggle span');
+    if (t) t.textContent = 'Expand';
+  });
+  if (!isOpen) {
+    el.classList.add('open');
+    const t = el.querySelector('.ins-toggle span');
+    if (t) t.textContent = 'Collapse';
+  }
+}
+
+// Shadow questions
+function toggleQ(el) { el.classList.toggle('open'); }
+
+// Affirmations
+function openAff(el) {
+  if (!el.classList.contains('cringe') && !el.classList.contains('smooth')) {
+    el.classList.add('open');
+  }
+}
+
+function markAff(e, type, btn) {
+  e.stopPropagation();
+  const card = btn.closest('.aff');
+  card.classList.remove('open', 'cringe', 'smooth');
+  card.classList.add(type);
+  const cringe = card.querySelector('.cringe-msg');
+  const smooth = card.querySelector('.smooth-msg');
+  if (cringe) cringe.style.display = type === 'cringe' ? 'inline' : 'none';
+  if (smooth) smooth.style.display = type === 'smooth' ? 'inline' : 'none';
+}
+
+// Okay button
+function showOkay(btn) {
+  btn.style.display = 'none';
+  const resp = document.getElementById('okay-resp');
+  resp.classList.add('show');
+}
+
+// Smooth highlight on nav click
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

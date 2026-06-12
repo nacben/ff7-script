@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break Free — The Psychology of Authentic Liberation</title>
+<style>
+:root {
+  --dark: #0d0d1a;
+  --darker: #07070f;
+  --gold: #e9a11a;
+  --gold-light: #fbbf24;
+  --gold-dim: rgba(233,161,26,0.12);
+  --purple: #7c3aed;
+  --purple-light: #a78bfa;
+  --blue: #3b82f6;
+  --teal: #0d9488;
+  --red: #dc2626;
+  --orange: #ea580c;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --soft: #94a3b8;
+  --card: rgba(255,255,255,0.03);
+  --card-h: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.07);
+  --border-b: rgba(255,255,255,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--darker);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.75;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Georgia,serif;font-weight:normal;letter-spacing:-0.02em}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(7,7,15,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.9rem 2rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:1rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{color:var(--soft);text-decoration:none;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+@media(max-width:700px){.nav-links{display:none}}
+
+/* PROGRESS */
+#pb{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold));z-index:2000;transition:width .1s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:8rem 2rem 5rem}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(124,58,237,.14) 0%,transparent 65%),radial-gradient(ellipse at 20% 85%,rgba(233,161,26,.07) 0%,transparent 55%)}
+.cage-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.05;pointer-events:none}
+.hero-c{position:relative;z-index:10;text-align:center;max-width:920px}
+.eyebrow{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s ease forwards .3s}
+.hero-title{font-size:clamp(3rem,8vw,7rem);line-height:1.05;color:#fff;margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s ease forwards .5s}
+.hero-title span{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.2rem;color:var(--soft);max-width:580px;margin:0 auto 2.5rem;font-style:italic;opacity:0;animation:fadeUp 1s ease forwards .7s}
+.hero-btn{display:inline-block;background:linear-gradient(135deg,var(--gold),#b7791f);color:#000;text-decoration:none;padding:.9rem 2.4rem;border-radius:2rem;font-size:.95rem;letter-spacing:.04em;font-family:Georgia,serif;font-weight:bold;opacity:0;animation:fadeUp 1s ease forwards .9s;transition:transform .3s,box-shadow .3s}
+.hero-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(233,161,26,.35)}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;opacity:0;animation:fadeIn 2s ease forwards 2s}
+.scroll-ind span{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sline 2s ease infinite}
+@keyframes sline{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* TICKER */
+.ticker{overflow:hidden;background:rgba(233,161,26,.04);border-top:1px solid rgba(233,161,26,.1);border-bottom:1px solid rgba(233,161,26,.1);padding:.85rem 0}
+.ticker-track{display:flex;gap:3rem;animation:tick 35s linear infinite;white-space:nowrap}
+.ticker-track span{color:var(--gold);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.sec-label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block}
+.sec-title{font-size:clamp(2rem,4vw,3.2rem);color:#fff;margin-bottom:1.4rem;line-height:1.1}
+.sec-intro{font-size:1.1rem;color:var(--soft);max-width:660px;margin-bottom:3.5rem;font-style:italic}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-b),transparent)}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.r.v{opacity:1;transform:translateY(0)}
+.r.d1{transition-delay:.1s}.r.d2{transition-delay:.2s}.r.d3{transition-delay:.3s}.r.d4{transition-delay:.4s}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:2rem;transition:background .3s,border-color .3s,transform .3s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
+.card:hover{background:var(--card-h);border-color:var(--border-b);transform:translateY(-3px)}
+.card:hover::before{opacity:1}
+.card-icon{font-size:2.2rem;margin-bottom:.9rem;display:block}
+.card-title{font-size:1.15rem;color:#fff;margin-bottom:.65rem}
+.card-text{font-size:.9rem;color:var(--soft);line-height:1.7}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+
+/* BIG QUOTE */
+.bq{background:var(--card);border-left:3px solid var(--gold);padding:2.2rem 2.8rem;margin:3.5rem 0;border-radius:0 1rem 1rem 0;position:relative}
+.bq::before{content:'"';position:absolute;top:-.5rem;left:1.3rem;font-size:5.5rem;color:var(--gold);opacity:.18;font-family:Georgia,serif;line-height:1}
+.bq p{font-size:1.3rem;color:#fff;font-style:italic;line-height:1.6}
+.bq cite{display:block;margin-top:.9rem;font-size:.78rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-style:normal}
+
+/* PULL QUOTE */
+.pq{text-align:center;padding:4rem 2rem}
+.pq p{font-size:clamp(1.4rem,3vw,2.3rem);color:#fff;font-style:italic;max-width:800px;margin:0 auto;line-height:1.45}
+.pq p em{color:var(--gold);font-style:normal}
+
+/* HIGHLIGHT BOX */
+.hb{background:linear-gradient(135deg,rgba(233,161,26,.09),rgba(233,161,26,.04));border:1px solid rgba(233,161,26,.28);border-radius:1rem;padding:2.3rem;margin:3rem 0}
+.hb h3{color:var(--gold);font-size:1.2rem;margin-bottom:.9rem}
+.hb p{color:var(--text);font-size:.95rem}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2.8rem;margin-top:2.5rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--purple),var(--gold))}
+.titem{position:relative;margin-bottom:2.8rem}
+.tdot{position:absolute;left:-3.2rem;top:.3rem;width:13px;height:13px;border-radius:50%;background:var(--gold);border:2px solid var(--darker);box-shadow:0 0 0 4px rgba(233,161,26,.18)}
+.tlabel{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.ttitle{font-size:1.15rem;color:#fff;margin-bottom:.45rem}
+.ttext{color:var(--soft);font-size:.9rem}
+
+/* FORMULA */
+.formula{display:flex;flex-wrap:wrap;gap:0;position:relative;margin-top:2.8rem}
+.fstep{flex:1;min-width:180px;padding:2.2rem 1.8rem;background:var(--card);border:1px solid var(--border);position:relative}
+.fstep:first-child{border-radius:1rem 0 0 1rem}
+.fstep:last-child{border-radius:0 1rem 1rem 0}
+.fstep:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:1.4rem;z-index:1;background:var(--darker);padding:0 3px}
+.fnum{font-size:2.8rem;color:var(--gold);opacity:.3;line-height:1;margin-bottom:.4rem}
+.ftitle{font-size:1.2rem;color:#fff;margin-bottom:.6rem}
+.fdesc{font-size:.87rem;color:var(--soft)}
+@media(max-width:640px){
+  .formula{flex-direction:column}
+  .fstep:first-child{border-radius:1rem 1rem 0 0}
+  .fstep:last-child{border-radius:0 0 1rem 1rem}
+  .fstep:not(:last-child)::after{content:'↓';right:auto;left:50%;bottom:-13px;top:auto;transform:translateX(-50%)}
+}
+
+/* SPLIT DIAGRAM */
+.split{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;margin:3rem 0}
+.ss{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.8rem}
+.ss.l{border-color:rgba(13,148,136,.3)}
+.ss.r{border-color:rgba(220,38,38,.3);opacity:.75}
+.ss h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.9rem}
+.ss.l h4{color:var(--teal)}.ss.r h4{color:var(--red)}
+.ss ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.ss li{font-size:.87rem;color:var(--soft);padding-left:1.2rem;position:relative}
+.ss.l li::before{content:'✓';position:absolute;left:0;color:var(--teal)}
+.ss.r li::before{content:'✗';position:absolute;left:0;color:var(--red)}
+.sarr{font-size:1.8rem;color:var(--gold);text-align:center}
+@media(max-width:560px){.split{grid-template-columns:1fr}.sarr{transform:rotate(90deg)}}
+
+/* FUEL */
+.fuels{display:flex;flex-direction:column;gap:.8rem;margin:2rem 0}
+.fuel{display:flex;align-items:center;gap:1rem}
+.fbar-wrap{flex:1;height:9px;background:rgba(255,255,255,.05);border-radius:5px;overflow:hidden}
+.fbar{height:100%;border-radius:5px;width:0;transition:width 1.6s ease}
+.flabel{font-size:.82rem;color:var(--soft);min-width:90px;text-align:right}
+.ficon{font-size:1.1rem;min-width:26px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:3rem 0}
+.sbox{text-align:center;padding:1.8rem;background:var(--card);border:1px solid var(--border);border-radius:1rem}
+.snum{font-size:2.8rem;color:var(--gold);display:block;margin-bottom:.4rem;line-height:1}
+.slabel{font-size:.8rem;color:var(--soft);line-height:1.45}
+
+/* PRINCIPLES */
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.9rem;margin-top:2.5rem}
+.principle{background:var(--card);border:1px solid var(--border);border-radius:.75rem;padding:1.4rem;display:flex;gap:.9rem;align-items:flex-start;transition:all .3s}
+.principle:hover{background:var(--card-h);border-color:rgba(233,161,26,.25)}
+.pnum{color:var(--gold);font-size:1.4rem;opacity:.45;min-width:1.8rem;line-height:1;margin-top:.15rem}
+.principle h4{color:#fff;font-size:.95rem;margin-bottom:.35rem}
+.principle p{color:var(--soft);font-size:.82rem}
+
+/* GAME VISUAL */
+.gv{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:3rem 0}
+.glevel{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center}
+.glevel-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.glevel-title{font-size:1.4rem;color:#fff;margin-bottom:.9rem}
+.glevel-icon{font-size:3.2rem;display:block;margin:.8rem 0}
+.glevel-desc{color:var(--soft);font-size:.87rem}
+@media(max-width:520px){.gv{grid-template-columns:1fr}}
+
+/* MOMENT CARDS */
+.moment{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(233,161,26,.04));border:1px solid rgba(124,58,237,.2);border-radius:1.4rem;padding:2.3rem;margin-bottom:2rem}
+.moment-icon{font-size:1.8rem;margin-bottom:.9rem;display:block}
+.moment-title{font-size:1.15rem;color:var(--purple-light);margin-bottom:.9rem}
+.moment-text{color:var(--soft);font-size:.93rem;font-style:italic}
+.moment-insight{margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid var(--border);color:var(--text);font-size:.9rem}
+.moment-insight strong{color:var(--gold)}
+
+/* CHILD VISUAL */
+.child-visual{display:flex;align-items:center;gap:3.5rem;margin:3rem 0}
+.child-fig{flex-shrink:0;width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(233,161,26,.2));border:2px solid rgba(233,161,26,.28);display:flex;align-items:center;justify-content:center;font-size:4.5rem;animation:pulse 4s ease infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(max-width:580px){.child-visual{flex-direction:column;text-align:center}}
+
+/* REFLECTION */
+.qcard{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;margin-bottom:1.3rem;cursor:pointer;transition:all .3s}
+.qcard:hover{background:rgba(255,255,255,.06);border-color:var(--gold)}
+.qcard h4{font-size:1.05rem;color:var(--gold-light);margin-bottom:.6rem}
+.qcard>p{color:var(--soft);font-size:.9rem}
+.ans{display:none;margin-top:1.4rem}
+.qcard.open .ans{display:block}
+.ans textarea{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:.5rem;color:var(--text);padding:.9rem;font-family:Georgia,serif;font-size:.9rem;resize:vertical;min-height:80px;outline:none;transition:border-color .3s}
+.ans textarea:focus{border-color:var(--gold)}
+.q-toggle{font-size:.75rem;color:var(--muted);margin-top:.5rem;text-align:right}
+
+/* CTA */
+.cta-sec{background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(233,161,26,.08));text-align:center;padding:8rem 2rem}
+
+/* FOOTER */
+footer{background:var(--darker);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
+footer p{color:var(--muted);font-size:.82rem;line-height:1.8}
+
+/* DARK SECTIONS */
+.dark-bg{background:var(--dark)}
+
+/* It's Okay Banner */
+.okay-banner{background:linear-gradient(135deg,rgba(13,148,136,.1),rgba(124,58,237,.08));border:1px solid rgba(13,148,136,.2);border-radius:1.2rem;padding:3rem;text-align:center;margin:3rem 0}
+.okay-banner h2{font-size:clamp(2rem,5vw,4rem);color:#fff;margin-bottom:1rem}
+.okay-banner p{color:var(--soft);max-width:600px;margin:0 auto;font-size:.95rem}
+
+/* Mobile padding */
+@media(max-width:480px){
+  section{padding:4rem 1.2rem}
+  .bq{padding:1.5rem}
+  .bq p{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+
+<div id="pb"></div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Break Free</span>
+    <ul class="nav-links">
+      <li><a href="#cage">The Cage</a></li>
+      <li><a href="#conditioning">Conditioning</a></li>
+      <li><a href="#formula">The Formula</a></li>
+      <li><a href="#selfworth">Self-Worth</a></li>
+      <li><a href="#reflect">Reflect</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="cage-bg" aria-hidden="true">
+    <svg width="480" height="480" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="90" y="40" width="300" height="400" rx="8" stroke="#e9a11a" stroke-width="2.5" fill="none"/>
+      <line x1="150" y1="40" x2="150" y2="440" stroke="#e9a11a" stroke-width="1.2"/>
+      <line x1="210" y1="40" x2="210" y2="440" stroke="#e9a11a" stroke-width="1.2"/>
+      <line x1="270" y1="40" x2="270" y2="440" stroke="#e9a11a" stroke-width="1.2"/>
+      <line x1="330" y1="40" x2="330" y2="440" stroke="#e9a11a" stroke-width="1.2"/>
+      <line x1="90" y1="180" x2="390" y2="180" stroke="#e9a11a" stroke-width="1.5"/>
+      <line x1="90" y1="300" x2="390" y2="300" stroke="#e9a11a" stroke-width="1.5"/>
+      <!-- open door -->
+      <line x1="390" y1="180" x2="445" y2="155" stroke="#e9a11a" stroke-width="1.5" stroke-dasharray="6,4" opacity=".6"/>
+      <line x1="390" y1="300" x2="445" y2="325" stroke="#e9a11a" stroke-width="1.5" stroke-dasharray="6,4" opacity=".6"/>
+    </svg>
+  </div>
+  <div class="hero-c">
+    <p class="eyebrow">The Psychology of Authentic Liberation</p>
+    <h1 class="hero-title">The Door Is<br><span>Already Open</span></h1>
+    <p class="hero-sub">You have been standing in an open cage, mistaking familiar pain for safety. This is what it means to finally walk out.</p>
+    <a href="#cage" class="hero-btn">Begin the Journey ↓</a>
+  </div>
+  <div class="scroll-ind">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>You are worthy</span><span>•</span>
+    <span>The cage door is open</span><span>•</span>
+    <span>Face fear's bluff</span><span>•</span>
+    <span>Drop the front</span><span>•</span>
+    <span>You were born the hero</span><span>•</span>
+    <span>It's a bluff</span><span>•</span>
+    <span>Ego equals effort</span><span>•</span>
+    <span>What you have to lose is just your pain</span><span>•</span>
+    <span>Authenticity equals relief</span><span>•</span>
+    <span>Remember who you are</span><span>•</span>
+    <span>You are worthy</span><span>•</span>
+    <span>The cage door is open</span><span>•</span>
+    <span>Face fear's bluff</span><span>•</span>
+    <span>Drop the front</span><span>•</span>
+    <span>You were born the hero</span><span>•</span>
+    <span>It's a bluff</span><span>•</span>
+    <span>Ego equals effort</span><span>•</span>
+    <span>What you have to lose is just your pain</span><span>•</span>
+    <span>Authenticity equals relief</span><span>•</span>
+    <span>Remember who you are</span><span>•</span>
+  </div>
+</div>
+
+<!-- CHAPTER 1: THE CAGE -->
+<section id="cage" style="background:linear-gradient(135deg,rgba(124,58,237,.05) 0%,rgba(233,161,26,.03) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <span class="sec-label r">Chapter One</span>
+    <h2 class="sec-title r">The Comfortable Cage</h2>
+    <p class="sec-intro r">Why we stay in pain we know rather than risk the freedom we have always wanted.</p>
+
+    <div class="bq r">
+      <p>Imagine you saw someone locked in a cage. You. And you're crying and you're screaming — "Help, I'm in a cage!" And you think the cage is locked. And I come up to you and I open this door. And so much of the coaching is: you'll take one step out, two — and then you run back in the cage.</p>
+      <cite>The Cage Metaphor</cite>
+    </div>
+
+    <div class="g2 r">
+      <div class="card">
+        <span class="card-icon">🔥</span>
+        <h3 class="card-title">The Fire You Know</h3>
+        <p class="card-text">Your cage may have spikes on the walls and flames beneath you — it's terrible. But it kept you alive. The question isn't whether the cage is good. The question is: if you're already on fire, isn't anything better than staying in the flames? What do you have to lose? Jump.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🧠</span>
+        <h3 class="card-title">The Mind That Lies</h3>
+        <p class="card-text">Your mind is not always on your side. It will gaslight you into staying put. "Stay here, stay here." If listening to your mind put you in such a state of pain — maybe don't always listen. Facts and stories are different things. Your mind specializes in stories.</p>
+      </div>
+    </div>
+
+    <div class="hb r">
+      <h3>Why We Return to the Cage</h3>
+      <p>The cage is <em>known</em>. If you have been raised inside it, leaving isn't exciting and hopeful — it's terrifying. You have all your dreams locked in there with you, fantasizing that one day when you're free, it'll be awesome. But say it's like: okay, go. And suddenly you freeze. Because the cage, however terrible, is the only world you have ever known. That familiarity feels like safety, even when it is killing you.</p>
+    </div>
+
+    <div class="pq">
+      <p>"What do you have to lose? <em>Just your pain.</em> Isn't this worth losing?"</p>
+    </div>
+
+    <div class="g3 r">
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <h3 class="card-title">Facts vs. Stories</h3>
+        <p class="card-text">A fact: you are in a difficult situation. A story: this will always be this way, there is no exit, I don't deserve better. Your mind conflates the two constantly. Separating them — just seeing "this is a story I'm telling myself" — is the beginning of freedom.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">😬</span>
+        <h3 class="card-title">Lean Into the Cringe</h3>
+        <p class="card-text">The one thing your mind has convinced you would never work is often the exact solution. If your goal were to keep you stuck, you'd be told that the life-changing thing is too dumb, too woo-woo, too extreme. That's resistance talking. Go into the cringe.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🚪</span>
+        <h3 class="card-title">Out or In?</h3>
+        <p class="card-text">The door is open. Not a metaphor — a real choice available right now. The cage doesn't hold you. You hold yourself inside it. The only question remaining is: will you step through? And if not now — when?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 2: CONDITIONING -->
+<section id="conditioning">
+  <div class="container">
+    <span class="sec-label r">Chapter Two</span>
+    <h2 class="sec-title r">The Cult of Not Enough</h2>
+    <p class="sec-intro r">How we learned to perform instead of live — and where the split in ourselves began.</p>
+
+    <div class="timeline r">
+      <div class="titem">
+        <div class="tdot"></div>
+        <div class="tlabel">Birth</div>
+        <h3 class="ttitle">Pure Expression</h3>
+        <p class="ttext">Before conditioning, you had no concept of approval or social currency. You expressed exactly what was happening inside. Hungry? Cry. Tired? Cry. Happy? Laugh. No filter, no performance, no mask. This is your original nature.</p>
+      </div>
+      <div class="titem">
+        <div class="tdot" style="background:var(--purple-light)"></div>
+        <div class="tlabel">Ages 2–5</div>
+        <h3 class="ttitle">The First Self-Consciousness</h3>
+        <p class="ttext">You become aware of others watching. You trip and fall, and instead of just feeling pain you feel the devastating weight of being observed. For the first time, you wonder: "Does this make them stop loving me?" The performance begins.</p>
+      </div>
+      <div class="titem">
+        <div class="tdot" style="background:var(--red)"></div>
+        <div class="tlabel">Ages 6–12</div>
+        <h3 class="ttitle">The Classroom Is the World</h3>
+        <p class="ttext">Your entire reality is the classroom. Being laughed at there feels like exile from the world — because for a child, it is. Getting mocked hits with the same force that losing everything would hit an adult. Survival instincts activate.</p>
+      </div>
+      <div class="titem">
+        <div class="tdot" style="background:var(--orange)"></div>
+        <div class="tlabel">The Splitting</div>
+        <h3 class="ttitle">The Two Selves</h3>
+        <p class="ttext">You learn to disown the parts of yourself that "threatened your survival." Being loud got you mocked? Lock away the loud part. Showing sadness got you hurt? Seal off the sadness. Being smart made you a target? Hide the intelligence. The real self goes underground.</p>
+      </div>
+      <div class="titem">
+        <div class="tdot" style="background:var(--gold)"></div>
+        <div class="tlabel">Now</div>
+        <h3 class="ttitle">The Hidden Self Still Waits</h3>
+        <p class="ttext">That locked-away part didn't die. It's still there, waiting. And every time you feel "triggered" by a situation that mirrors the original wound, that's the buried part trying to surface. That is not failure. That is the door creaking open.</p>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>At a general level, it's the cult of not feeling good enough. You're not enough, you're not enough, you're not enough. Welcome to the cult. Chase more, chase the money, chase the clothes, chase the approval. We are deprogramming from the cult. It was a bluff.</p>
+      <cite>On Social Conditioning</cite>
+    </div>
+
+    <div class="split r">
+      <div class="ss l">
+        <h4>The Acceptable Self</h4>
+        <ul>
+          <li>Gets external approval</li>
+          <li>Fits social expectations</li>
+          <li>Performs correctly</li>
+          <li>Does not cause problems</li>
+          <li>Is rewarded by society</li>
+        </ul>
+      </div>
+      <div class="sarr">→</div>
+      <div class="ss r">
+        <h4>The Disowned Shadow</h4>
+        <ul>
+          <li>Too loud, too expressive</li>
+          <li>Too sad, too vulnerable</li>
+          <li>Too much, too real</li>
+          <li>Threatens "survival"</li>
+          <li>Locked in the closet</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hb r">
+      <h3>The Monster in the Closet</h3>
+      <p>Imagine a child told there is a monster in the closet. Years pass. The closet stays shut. Every creak confirms the terror. But when you finally open it — nothing. That is Fear's Bluff. The horror of being truly seen, of showing vulnerability, of being fully yourself? When you actually face it, it is not there. The terror was always the closet, not what was inside.</p>
+    </div>
+
+    <div class="child-visual r">
+      <div class="child-fig">👶</div>
+      <div>
+        <h3 style="font-size:1.35rem;color:#fff;margin-bottom:1rem">The Inner Child Still Waits</h3>
+        <p style="color:var(--soft);margin-bottom:1.2rem">There is a younger version of you who needed to hear "I love you, I see you, you're enough" — and didn't get it consistently. That child didn't disappear when you grew up. They are still there, still hoping the adult (now you) will finally show up.</p>
+        <p style="color:var(--soft)">The deepest healing is not from someone outside telling you that you are loved. It is from you going back to that younger self and becoming the parent you needed. <em style="color:var(--gold)">You have yourself. You are not alone.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 3: REAL MOMENTS -->
+<section class="dark-bg">
+  <div class="container">
+    <span class="sec-label r">Chapter Three</span>
+    <h2 class="sec-title r">Moments of Breakthrough</h2>
+    <p class="sec-intro r">What transformation actually looks like — not polished, not perfect, but real.</p>
+
+    <div class="moment r">
+      <span class="moment-icon">🦁</span>
+      <h3 class="moment-title">The Simba Moment</h3>
+      <p class="moment-text">"Trois, deux, un. Do a full Lion King. This is my child!" — A woman who spent her life hiding her sadness raised it for the world to see. She did not die. The crowd did not laugh at her. She discovered that what she was most ashamed of was exactly what connected everyone in the room.</p>
+      <div class="moment-insight"><strong>The Insight:</strong> Whatever you think is most personal is most universal. The things you are most insecure about are what everyone is insecure about. Everyone just hides it the same way you hide it. When you reveal it, you give everyone else permission to breathe.</div>
+    </div>
+
+    <div class="moment r">
+      <span class="moment-icon">🎭</span>
+      <h3 class="moment-title">The Mask That Set You Free</h3>
+      <p class="moment-text">A musician started posting online wearing a mask, telling no one who he was. Without the fear of judgment from people who knew him, he danced in ways he never had, expressed himself fully. Because no one knew it was him, he was free. Then the mask came off. The challenge: can you be that free as yourself?</p>
+      <div class="moment-insight"><strong>The Insight:</strong> You have a reference now. If you did it once — even behind a mask, even for one moment — you can do it again. That is not luck. That is proof. Use it as ammo when the voice says "you can't."</div>
+    </div>
+
+    <div class="moment r">
+      <span class="moment-icon">💡</span>
+      <h3 class="moment-title">When Success Became Dangerous</h3>
+      <p class="moment-text">A man got his first A on an exam. He was promised a great surprise. The surprise was learning his brother had cancer. From the highest high to the lowest low in thirty minutes. A child's mind makes a devastating equation: "When I do well, terrible things happen."</p>
+      <div class="moment-insight"><strong>The Insight:</strong> This is how subtle self-sabotage is born — not from laziness, not from lack of ambition, but from a deeply buried belief that winning invites catastrophe. Identifying this pattern is the beginning of releasing it. You are allowed to succeed.</div>
+    </div>
+
+    <div class="moment r">
+      <span class="moment-icon">👁️</span>
+      <h3 class="moment-title">The Fear of Being Seen</h3>
+      <p class="moment-text">"I always prefer to be invisible." — A woman stood in front of a crowd, revealing the sadness she had spent her life protecting. The voice had told her: "This will destroy you." It didn't. The applause that followed was not for a performance. It was for the first moment she had simply been herself.</p>
+      <div class="moment-insight"><strong>The Insight:</strong> Being seen isn't dangerous. Being seen while hiding is what's exhausting. When you finally show the real thing, you discover the audience was waiting for exactly that — not your cool front, but your real self.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 4: THE FORMULA -->
+<section id="formula">
+  <div class="container">
+    <span class="sec-label r">Chapter Four</span>
+    <h2 class="sec-title r">Action → Trigger → Release → Repeat</h2>
+    <p class="sec-intro r">The four-step cycle that dismantles the cage from the inside.</p>
+
+    <div class="formula r">
+      <div class="fstep">
+        <div class="fnum">1</div>
+        <h3 class="ftitle">Action</h3>
+        <p class="fdesc">Take an external action that links to owning a part of yourself you have disowned. Scream. Show up. Share. Step into the spotlight you have been avoiding. Do the cringe thing.</p>
+      </div>
+      <div class="fstep">
+        <div class="fnum">2</div>
+        <h3 class="ftitle">Trigger</h3>
+        <p class="fdesc">By taking the action, you trigger buried resistance. What was deep in your subconscious rises to the surface — closer to your awareness than it has ever been before.</p>
+      </div>
+      <div class="fstep">
+        <div class="fnum">3</div>
+        <h3 class="ftitle">Release</h3>
+        <p class="fdesc">With the resistance now present and conscious, you can breathe through it and release it. Stuffing it back down propels it deeper. Moving through it frees you.</p>
+      </div>
+      <div class="fstep">
+        <div class="fnum">4</div>
+        <h3 class="ftitle">Repeat</h3>
+        <p class="fdesc">Each cycle loosens the grip. What felt like a 9/10 fear becomes a 7, then a 4, then background noise. You are literally rewiring what your nervous system treats as dangerous.</p>
+      </div>
+    </div>
+
+    <div class="g2 r" style="margin-top:3rem">
+      <div class="card">
+        <span class="card-icon">⚡</span>
+        <h3 class="card-title">Power vs. Force</h3>
+        <p class="card-text">Most people try to force expression out — fighting the internal wall of suppression. The result is strained, tense, effortful. Real power comes from releasing the tension first, then expressing from spaciousness. You do not push harder. You dissolve what's blocking the flow.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎭</span>
+        <h3 class="card-title">Shattering the Cool Image</h3>
+        <p class="card-text">Your ego wants you to appear a certain way at all times. The fastest shortcut to authentic expression is to deliberately shatter the cool image — do something "uncool," destroy the possibility of maintaining the front. Once you can't be cool, you can just be.</p>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>It's not something you must learn. It's about unlearning, remembering. You can't think your way into it — you have to stop thinking and get back in touch with feeling.</p>
+      <cite>On the Nature of Authenticity</cite>
+    </div>
+
+    <div class="hb r">
+      <h3>The 8 Mile Mindset</h3>
+      <p>How does Eminem win the rap battle at the end of 8 Mile? He puts all his own weaknesses out there first. He says everything the opponent could say about him — before the opponent can. And now they have nothing. That is invincibility. Not through perfection or armor, but through radical transparency. When you own your story fully, no one can use it against you.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 5: MOTIVATIONAL FUEL -->
+<section class="dark-bg">
+  <div class="container">
+    <span class="sec-label r">Chapter Five</span>
+    <h2 class="sec-title r">The Hierarchy of Motivation</h2>
+    <p class="sec-intro r">Not all fuel burns the same. Learn to choose your engine.</p>
+
+    <div class="fuels r" id="fuels">
+      <div class="fuel">
+        <span class="ficon">⚡</span>
+        <span class="flabel" style="color:var(--red)">Fear</span>
+        <div class="fbar-wrap"><div class="fbar" style="background:var(--red)" data-w="22"></div></div>
+        <span style="font-size:.78rem;color:var(--muted);min-width:200px">Short-term, corrosive. Like a daily Red Bull.</span>
+      </div>
+      <div class="fuel">
+        <span class="ficon">☕</span>
+        <span class="flabel" style="color:var(--orange)">Anger</span>
+        <div class="fbar-wrap"><div class="fbar" style="background:var(--orange)" data-w="42"></div></div>
+        <span style="font-size:.78rem;color:var(--muted);min-width:200px">Powerful but draining. Like a double espresso.</span>
+      </div>
+      <div class="fuel">
+        <span class="ficon">🍵</span>
+        <span class="flabel" style="color:var(--gold)">Desire</span>
+        <div class="fbar-wrap"><div class="fbar" style="background:var(--gold)" data-w="65"></div></div>
+        <span style="font-size:.78rem;color:var(--muted);min-width:200px">Sustainable and directional. Like green tea.</span>
+      </div>
+      <div class="fuel">
+        <span class="ficon">🌙</span>
+        <span class="flabel" style="color:var(--teal)">Purpose &amp; Love</span>
+        <div class="fbar-wrap"><div class="fbar" style="background:linear-gradient(90deg,var(--teal),var(--purple-light))" data-w="92"></div></div>
+        <span style="font-size:.78rem;color:var(--muted);min-width:200px">The foundation. A full night's sleep.</span>
+      </div>
+    </div>
+
+    <div class="hb r" style="margin-top:2.5rem">
+      <h3>The Procrastination Trap</h3>
+      <p>Some people procrastinate deliberately — the longer they wait, the scarier it gets, until fear builds enough to force action. That is using the lowest quality fuel available, and the crash afterward is real. The goal is not to wait until fear drives you. The goal is to act from purpose and love so you never need fear to start the engine.</p>
+    </div>
+
+    <div class="pq">
+      <p>When work doesn't feel like work, <em>that is your unfair advantage.</em> Think of a child playing — fully focused, losing track of time, no discipline required. Transfer that to real life and you are unstoppable.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 6: SELF-WORTH -->
+<section id="selfworth">
+  <div class="container">
+    <span class="sec-label r">Chapter Six</span>
+    <h2 class="sec-title r">The Foundation of Self-Worth</h2>
+    <p class="sec-intro r">Not what you have, not what you do — but simply who you are.</p>
+
+    <div class="stats r" id="stats">
+      <div class="sbox">
+        <span class="snum" data-target="0">0</span>
+        <span class="slabel">Conditions required<br>for you to be worthy</span>
+      </div>
+      <div class="sbox">
+        <span class="snum">∞</span>
+        <span class="slabel">Worth you already<br>unconditionally have</span>
+      </div>
+      <div class="sbox">
+        <span class="snum" data-target="1">1</span>
+        <span class="slabel">Person whose approval<br>actually matters: you</span>
+      </div>
+      <div class="sbox">
+        <span class="snum" data-target="100" data-suffix="%">0%</span>
+        <span class="slabel">People who will dislike<br>you no matter what</span>
+      </div>
+    </div>
+
+    <div class="g3 r" style="margin-top:1rem">
+      <div class="card" style="border-color:rgba(220,38,38,.2)">
+        <span class="card-icon">💰</span>
+        <h3 class="card-title" style="color:#fca5a5">Having</h3>
+        <p class="card-text">"I love myself because I have the looks, the money, the success, the relationship." The most fragile foundation. Markets crash. Bodies age. When you lose what you have, you lose yourself.</p>
+      </div>
+      <div class="card" style="border-color:rgba(234,179,8,.2)">
+        <span class="card-icon">⚙️</span>
+        <h3 class="card-title" style="color:#fde047">Doing</h3>
+        <p class="card-text">"I love myself because I'm taking right action, on top of my health, improving every day." Better — but still conditional. What if you rest? Get sick? Your worth cannot be contingent on your output.</p>
+      </div>
+      <div class="card" style="border-color:rgba(13,148,136,.25)">
+        <span class="card-icon">✨</span>
+        <h3 class="card-title" style="color:#5eead4">Being</h3>
+        <p class="card-text">"I am worthy by virtue of existing." This is the foundation. From here, you can have things and do things — but they become expressions of who you are, not conditions for your value.</p>
+      </div>
+    </div>
+
+    <div class="principles r" style="margin-top:2.5rem">
+      <div class="principle">
+        <span class="pnum">01</span>
+        <div>
+          <h4>You are not what you have.</h4>
+          <p>Possessions, status, looks, and money fluctuate. What remains when all of it is gone is still completely you.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum">02</span>
+        <div>
+          <h4>You are not what others think.</h4>
+          <p>If someone says you have blue hair and you don't — you feel nothing. The insults that land are the ones you already believe.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum">03</span>
+        <div>
+          <h4>Your looks are the avatar, not you.</h4>
+          <p>In a video game your character's appearance doesn't change the player. You are both. The avatar changes. The player doesn't.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum">04</span>
+        <div>
+          <h4>Universal approval is a trap.</h4>
+          <p>Not one person in history has had 100% approval. Chasing it is an endless treadmill with no finish line.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum">05</span>
+        <div>
+          <h4>Love first, then change.</h4>
+          <p>As long as you don't love yourself now, nothing will be enough later. The foundation must come first.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="pnum">06</span>
+        <div>
+          <h4>Ego equals effort.</h4>
+          <p>Maintaining a version of yourself that isn't true requires enormous, exhausting energy. Being you is easy. That relief is confidence.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>You are good enough and you have always been good enough. The problem is, things have convinced you you aren't. Experiences, people, life — and you started forming the shell. It's not about adding more. It's about removing. Remove the conditioning. Let what was always there shine.</p>
+      <cite>On the Nature of Self-Worth</cite>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 7: THE GAME -->
+<section class="dark-bg">
+  <div class="container">
+    <span class="sec-label r">Chapter Seven</span>
+    <h2 class="sec-title r">The Game of Life</h2>
+    <p class="sec-intro r">You are both the character and the player. The mistake is forgetting which one you actually are.</p>
+
+    <div class="gv r">
+      <div class="glevel">
+        <div class="glevel-label">First Person View</div>
+        <h3 class="glevel-title">The Character</h3>
+        <span class="glevel-icon">🧍</span>
+        <p class="glevel-desc">Weight, looks, money, status, relationships — the avatar navigating the world. Always changing. Subject to circumstance. This is what you are wearing, not who you are.</p>
+      </div>
+      <div class="glevel" style="border-color:rgba(233,161,26,.3);background:rgba(233,161,26,.04)">
+        <div class="glevel-label" style="color:var(--gold)">Zoomed Out</div>
+        <h3 class="glevel-title" style="color:var(--gold)">The Player</h3>
+        <span class="glevel-icon">⭐</span>
+        <p class="glevel-desc">The observer. The experiencer. The unchanging presence behind the eyes. This is actually you — and this part is always, unconditionally enough. The game changes. The player remains.</p>
+      </div>
+    </div>
+
+    <div class="hb r">
+      <h3>The Gamer's Detachment</h3>
+      <p>In Red Dead Redemption, you can eat too much at the saloon and your character gains weight. Does that ruin the game? Does it make you a worse person? No — it is a feature. That is life. Your body, your bank account, your social standing — these are features of the character, not judgments on the player. The character changes costumes. Zoom out. The player is always whole.</p>
+    </div>
+
+    <div class="pq">
+      <p>Every single person thinks they are Peter Parker in Spider-Man, <em>waiting for a radioactive spider to give them permission</em> to be their own version of the hero. Stop waiting for the spider. Give yourself a gentle nibble. You are Spider-Man now. Go live.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 8: LONELINESS -->
+<section>
+  <div class="container">
+    <span class="sec-label r">Chapter Eight</span>
+    <h2 class="sec-title r">The Invisible Glass Wall</h2>
+    <p class="sec-intro r">Why people feel lonely even when surrounded — and how the performance creates the prison.</p>
+
+    <div class="g2 r">
+      <div class="card">
+        <span class="card-icon">🪟</span>
+        <h3 class="card-title">The Glass Between Us</h3>
+        <p class="card-text">You can be surrounded by people — friends, family, a partner — and feel utterly alone. Because what you are connecting with is not you. It is the front. The real you watches from behind the glass, unseen and unheard. The loneliness is not from being alone. It is from being unseen while you are present.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎭</span>
+        <h3 class="card-title">Three Lives Everyone Lives</h3>
+        <p class="card-text">Your public life (the front everyone sees), your private life (what close friends glimpse), and your secret life (what no one sees). The bigger your secret life, the heavier the performance — and the deeper the loneliness. Authenticity collapses all three into one.</p>
+      </div>
+    </div>
+
+    <div class="bq r">
+      <p>Most of us aren't actually truly living. You're not expressing yourself — you're performing. And you are taught to perform from a very young age. When did you start being you, and when did you start being the performance?</p>
+      <cite>On the Performance We Call Life</cite>
+    </div>
+
+    <div class="hb r">
+      <h3>The Paradox of Authentic Connection</h3>
+      <p>What you were most afraid to show — your sadness, your fear, your imperfection, your struggle — is precisely what connects you to other people. Not your highlight reel. Not your polished front. The moment someone showed real, raw, unfiltered emotion, every hand in the room went up: "That's me too." Your shame is not your separation. It is your bridge. When you hide it, you hide the bridge.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IT'S OKAY -->
+<section class="dark-bg">
+  <div class="container">
+    <div class="okay-banner r">
+      <h2 style="color:var(--teal);font-size:clamp(1.8rem,5vw,4rem)">It's okay.</h2>
+      <p style="margin-top:1.5rem;font-size:1rem;color:var(--soft);max-width:600px;margin-left:auto;margin-right:auto">It is okay to feel what you are feeling. It is okay to be who you are. It is okay to move at your pace. It is okay to be sad, to be afraid, to be uncertain. It is okay to not have it all together. What is not okay is telling yourself it is not okay — and then feeling bad about feeling bad, and then feeling bad about that. Just: it's okay.</p>
+      <p style="margin-top:1.5rem;font-size:.9rem;color:var(--muted);font-style:italic">The best app in the world would be a hologram that pops up throughout your day and simply says "It's okay."</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHAPTER 9: REFLECTION -->
+<section id="reflect" style="background:linear-gradient(135deg,rgba(124,58,237,.07),rgba(13,148,136,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <span class="sec-label r">Chapter Nine</span>
+    <h2 class="sec-title r">Shadow Questions</h2>
+    <p class="sec-intro r">Don't analyze whether the question is valid. Just notice what surfaces. That is the data.</p>
+
+    <p class="r" style="color:var(--muted);font-size:.85rem;margin-bottom:1.8rem;font-style:italic">Click any question to open a private space for reflection.</p>
+
+    <div class="qcard r" onclick="toggle(this)">
+      <h4>🔑 What cage am I living in right now?</h4>
+      <p>What familiar pain have I mistaken for safety? What am I staying in because it's known, even though it hurts?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+
+    <div class="qcard r d1" onclick="toggle(this)">
+      <h4>👁️ What am I afraid people will see?</h4>
+      <p>If your front were completely transparent, what would people find? Why is it so terrifying to show that part?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+
+    <div class="qcard r d2" onclick="toggle(this)">
+      <h4>🔒 What part of myself have I locked away?</h4>
+      <p>What aspect of you got disowned because expressing it once felt dangerous? What is in the closet that you're afraid to open?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+
+    <div class="qcard r d3" onclick="toggle(this)">
+      <h4>👶 What does my inner child most need to hear?</h4>
+      <p>If you could go back to the moment the split happened — the first time you decided you needed to hide — what would you say to that younger version of you?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+
+    <div class="qcard r d4" onclick="toggle(this)">
+      <h4>🌱 What condition am I placing on my self-worth?</h4>
+      <p>"I will love myself when ___." What is filling that blank — and what would happen if you crossed it out right now?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+
+    <div class="qcard r" onclick="toggle(this)">
+      <h4>😬 What is the one thing I keep avoiding?</h4>
+      <p>The thing your mind insists "could never work" or is "too cringe" or "not for someone like me" — what is it? What if that is the exact thing?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+
+    <div class="qcard r" onclick="toggle(this)">
+      <h4>🏆 When did I last celebrate a win without immediately dismissing it?</h4>
+      <p>The win — however small — counts. Do you let it land? Or does it vanish before it can reach you?</p>
+      <div class="q-toggle">Click to open ↓</div>
+      <div class="ans"><textarea placeholder="Write whatever surfaces. No filter needed..."></textarea></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE 10 TRUTHS -->
+<section>
+  <div class="container">
+    <span class="sec-label r">The Summary</span>
+    <h2 class="sec-title r">10 Core Truths</h2>
+    <p class="sec-intro r">The distilled essence. Read these when you find yourself walking back into the cage.</p>
+
+    <div class="principles r">
+      <div class="principle">
+        <span class="pnum">1</span>
+        <div><h4>The cage door is open.</h4><p>You are not locked in. The wall keeping you there is a belief, not a fact.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">2</span>
+        <div><h4>Fear is a bluff.</h4><p>The monster in the closet disappears the moment you open the door. Every single time.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">3</span>
+        <div><h4>Ego equals effort. Authenticity equals relief.</h4><p>Being who your ego wants you to be is exhausting. Being you is easy.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">4</span>
+        <div><h4>You were not born this way.</h4><p>If you learned to play small, you can unlearn it. It was never who you actually were.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">5</span>
+        <div><h4>What you most hide is what connects you most.</h4><p>Your vulnerability is not your weakness. It is the bridge between you and every other human.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">6</span>
+        <div><h4>The love you seek is your own.</h4><p>You cannot outsource this to a coach, a partner, or applause. Only your own approval fills this void.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">7</span>
+        <div><h4>You are the player, not just the character.</h4><p>Your body, status, and looks are the avatar. Zoom out. The player is always whole.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">8</span>
+        <div><h4>Lean into the cringe.</h4><p>The thing your mind insists would never work is usually the exact thing that does.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">9</span>
+        <div><h4>It's okay.</h4><p>It's okay to feel what you're feeling. To be who you are. To move at your pace. It's okay.</p></div>
+      </div>
+      <div class="principle">
+        <span class="pnum">10</span>
+        <div><h4>If not now, when?</h4><p>There is no magical moment. The only magical moment is this one.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="container">
+    <span class="sec-label r" style="justify-content:center;display:block;text-align:center">Begin</span>
+    <h2 class="sec-title r" style="text-align:center;max-width:700px;margin:0 auto 1.4rem">Remember Who You Are</h2>
+    <p class="r" style="color:var(--soft);font-size:1.1rem;max-width:560px;margin:0 auto 3rem;font-style:italic;text-align:center">You were born the hero. The cage was never locked. The door is open. What do you have to lose?</p>
+    <div class="r" style="display:flex;flex-direction:column;align-items:center;gap:.9rem">
+      <a href="#reflect" style="display:inline-block;background:linear-gradient(135deg,var(--gold),#b7791f);color:#000;text-decoration:none;padding:1rem 2.8rem;border-radius:2rem;font-size:.95rem;font-family:Georgia,serif;font-weight:bold;transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 14px 45px rgba(233,161,26,.35)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Begin Your Reflection</a>
+      <a href="#top" style="color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase">↑ Back to Top</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="max-width:560px;margin:0 auto">
+    <p style="color:var(--gold);font-size:1.05rem;margin-bottom:1rem;font-style:italic">"Just your pain. Isn't this worth losing?"</p>
+    <p>Based on the live coaching work of Julien Blanc.</p>
+    <p style="margin-top:.8rem;font-size:.78rem">These teachings have existed for thousands of years. What changes is how they are explained — in a way that finally clicks.</p>
+  </div>
+</footer>
+
+<script>
+// Progress bar
+const pb = document.getElementById('pb');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  pb.style.width = pct + '%';
+});
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+// Fuel bars
+const fuelObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.fbar').forEach(b => {
+        const w = b.getAttribute('data-w');
+        setTimeout(() => { b.style.width = w + '%'; }, 200);
+      });
+      fuelObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+const fuels = document.getElementById('fuels');
+if (fuels) fuelObs.observe(fuels);
+
+// Stat number animation
+function animNum(el, target, suffix) {
+  let cur = 0;
+  const inc = target / 50;
+  const t = setInterval(() => {
+    cur = Math.min(cur + inc, target);
+    el.textContent = Math.floor(cur) + (suffix || '');
+    if (cur >= target) clearInterval(t);
+  }, 25);
+}
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.snum[data-target]').forEach(el => {
+        const t = parseInt(el.getAttribute('data-target'));
+        const s = el.getAttribute('data-suffix') || '';
+        animNum(el, t, s);
+      });
+      statObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+const stats = document.getElementById('stats');
+if (stats) statObs.observe(stats);
+
+// Question card toggle
+function toggle(card) {
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.qcard').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) card.classList.add('open');
+}
+
+// Prevent textarea click from closing card
+document.querySelectorAll('.ans').forEach(a => {
+  a.addEventListener('click', e => e.stopPropagation());
+});
+
+// Active nav
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>

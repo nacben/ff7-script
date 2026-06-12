@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art Spirit — Robert Henri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-dark: #1c1510;
+  --bg-mid: #241a12;
+  --bg-warm: #f5edd8;
+  --gold: #c8961e;
+  --gold-light: #e8b84b;
+  --gold-pale: #f0d080;
+  --cream: #f0e8d0;
+  --cream-dim: #c8b89a;
+  --text-dark: #2a1f14;
+  --red-accent: #8b2a1a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--bg-dark);
+  color: var(--cream);
+  overflow-x: hidden;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* PROGRESS BAR */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(20, 13, 8, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200, 150, 30, 0.2);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+}
+
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--cream-dim);
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--gold-light);
+  transition: all 0.3s;
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 61px; left: 0; right: 0;
+    flex-direction: column;
+    background: rgba(20, 13, 8, 0.97);
+    padding: 1rem 2rem 2rem;
+    gap: 0;
+    transform: translateY(-120%);
+    transition: transform 0.35s ease;
+    border-bottom: 1px solid rgba(200,150,30,0.2);
+  }
+  .nav-links.open { transform: translateY(0); }
+  .nav-links a { padding: 0.8rem 0; font-size: 0.9rem; display: block; }
+}
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 30% 60%, #2d1e0e 0%, var(--bg-dark) 65%),
+              radial-gradient(ellipse at 80% 20%, #1e130a 0%, transparent 60%);
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+}
+
+.hero-brushstroke {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.hero-brushstroke-1 {
+  width: 700px; height: 200px;
+  background: linear-gradient(135deg, var(--gold), transparent);
+  top: 15%; left: -10%;
+  transform: rotate(-20deg);
+  animation: brushFloat 12s ease-in-out infinite;
+}
+.hero-brushstroke-2 {
+  width: 500px; height: 150px;
+  background: linear-gradient(45deg, var(--red-accent), transparent);
+  bottom: 20%; right: -8%;
+  transform: rotate(15deg);
+  animation: brushFloat 16s ease-in-out infinite reverse;
+}
+.hero-brushstroke-3 {
+  width: 800px; height: 100px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  animation: brushFloat 20s ease-in-out infinite;
+}
+
+@keyframes brushFloat {
+  0%, 100% { transform: translateY(0) rotate(-20deg); }
+  50% { transform: translateY(-20px) rotate(-18deg); }
+}
+
+.hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.95;
+  color: var(--cream);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title span {
+  display: block;
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.hero-author {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 0.3rem;
+}
+
+.hero-dates {
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 3rem;
+}
+
+.hero-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 2.5rem;
+}
+
+.hero-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-weight: 300;
+  color: var(--cream-dim);
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.hero-quote-attr {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--gold);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  animation: bounce 2.5s ease-in-out infinite;
+  cursor: pointer;
+}
+.scroll-indicator::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* SECTION COMMONS */
+section { position: relative; }
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+.section-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(200, 150, 30, 0.08);
+  position: absolute;
+  top: 2rem; right: 2rem;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.section-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.section-title em {
+  color: var(--gold-light);
+  font-style: italic;
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.ornament::before, .ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.ornament-center {
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+
+/* DARK SECTIONS */
+.section-dark {
+  background: var(--bg-dark);
+  color: var(--cream);
+}
+.section-dark .section-title { color: var(--cream); }
+.section-dark p { color: var(--cream-dim); }
+
+/* WARM SECTIONS */
+.section-warm {
+  background: var(--bg-warm);
+  color: var(--text-dark);
+}
+.section-warm .section-tag { color: #8b5e1a; }
+.section-warm .section-title { color: var(--text-dark); }
+.section-warm .section-title em { color: #8b5e1a; }
+.section-warm .section-number { color: rgba(139, 94, 26, 0.08); }
+.section-warm p { color: #3a2a1a; line-height: 1.8; }
+.section-warm .ornament::before,
+.section-warm .ornament::after { background: linear-gradient(90deg, transparent, #8b5e1a, transparent); }
+.section-warm .ornament-center { color: #8b5e1a; }
+
+/* PULL QUOTES */
+.pull-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.35;
+  border-left: 3px solid var(--gold);
+  padding: 1rem 0 1rem 2rem;
+  margin: 2.5rem 0;
+  color: var(--gold-pale);
+}
+
+.section-warm .pull-quote {
+  color: #6b3e12;
+  border-left-color: #8b5e1a;
+}
+
+/* GRID LAYOUTS */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; gap: 2rem; } }
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+@media (max-width: 900px) { .three-col { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .three-col { grid-template-columns: 1fr; } }
+
+/* INFO CARDS */
+.info-card {
+  background: rgba(200, 150, 30, 0.05);
+  border: 1px solid rgba(200, 150, 30, 0.15);
+  border-radius: 2px;
+  padding: 1.8rem;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  border-color: rgba(200, 150, 30, 0.4);
+}
+.info-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+}
+.info-card p { font-size: 0.95rem; color: var(--cream-dim); }
+
+.section-warm .info-card {
+  background: rgba(139, 94, 26, 0.06);
+  border-color: rgba(139, 94, 26, 0.2);
+}
+.section-warm .info-card h3 { color: #7a3f10; }
+.section-warm .info-card p { color: #3a2a1a; }
+.section-warm .info-card:hover { border-color: rgba(139, 94, 26, 0.5); }
+
+/* QUOTE EXPLORER */
+#wisdom { background: var(--bg-dark); }
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.filter-btn {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid rgba(200, 150, 30, 0.3);
+  background: transparent;
+  color: var(--cream-dim);
+  cursor: pointer;
+  transition: all 0.25s;
+  border-radius: 1px;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+.quotes-grid {
+  columns: 3;
+  column-gap: 1.5rem;
+}
+@media (max-width: 900px) { .quotes-grid { columns: 2; } }
+@media (max-width: 560px) { .quotes-grid { columns: 1; } }
+
+.quote-card {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+  background: rgba(200, 150, 30, 0.04);
+  border: 1px solid rgba(200, 150, 30, 0.12);
+  padding: 1.5rem;
+  transition: all 0.35s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+.quote-card.hidden {
+  display: none;
+}
+.quote-card:hover {
+  border-color: rgba(200, 150, 30, 0.35);
+  background: rgba(200, 150, 30, 0.08);
+}
+.quote-card blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--cream);
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+.quote-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-block;
+  border: 1px solid rgba(200, 150, 30, 0.3);
+  padding: 0.15rem 0.5rem;
+}
+
+/* MASTERS GRID */
+.masters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.8rem;
+  margin-top: 2rem;
+}
+
+.master-card {
+  background: rgba(200, 150, 30, 0.04);
+  border: 1px solid rgba(200, 150, 30, 0.15);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s;
+  cursor: default;
+}
+.master-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.master-card:hover::before { transform: scaleX(1); }
+.master-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+  border-color: rgba(200,150,30,0.35);
+}
+
+.master-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+.master-dates {
+  font-size: 0.78rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+.master-quote {
+  font-style: italic;
+  font-size: 0.97rem;
+  color: var(--cream-dim);
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+.master-context {
+  font-size: 0.88rem;
+  color: rgba(200, 184, 152, 0.65);
+  line-height: 1.6;
+}
+
+/* COLOR THEORY SECTION */
+.spectrum-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 2rem 0;
+  box-shadow: 0 0 20px rgba(200,150,30,0.2);
+}
+.spectrum-bar span {
+  flex: 1;
+  transition: flex 0.4s;
+}
+
+.color-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media (max-width: 600px) { .color-cards { grid-template-columns: 1fr; } }
+
+.color-card {
+  padding: 1.8rem;
+  border: 1px solid rgba(200, 150, 30, 0.15);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.color-card:hover { border-color: rgba(200,150,30,0.4); }
+.color-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  margin-bottom: 0.8rem;
+}
+.color-card p { font-size: 0.92rem; color: var(--cream-dim); }
+.color-card.warm { background: rgba(180, 80, 20, 0.08); }
+.color-card.warm h4 { color: #e8844b; }
+.color-card.cool { background: rgba(20, 60, 120, 0.12); }
+.color-card.cool h4 { color: #6ab4d8; }
+.color-card.neutral { background: rgba(100, 100, 100, 0.08); }
+.color-card.neutral h4 { color: #b0a898; }
+.color-card.special { background: rgba(200, 150, 30, 0.06); }
+.color-card.special h4 { color: var(--gold-light); }
+
+/* EXPANDABLE SECTIONS */
+.expand-group { margin: 1.5rem 0; }
+.expand-toggle {
+  width: 100%;
+  text-align: left;
+  background: rgba(200,150,30,0.05);
+  border: 1px solid rgba(200,150,30,0.18);
+  color: var(--cream);
+  padding: 1.1rem 1.4rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+}
+.expand-toggle:hover { background: rgba(200,150,30,0.1); border-color: rgba(200,150,30,0.35); }
+.expand-toggle.open { border-bottom-color: transparent; }
+.expand-toggle .arrow {
+  transition: transform 0.35s;
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+.expand-toggle.open .arrow { transform: rotate(180deg); }
+.expand-body {
+  background: rgba(200,150,30,0.03);
+  border: 1px solid rgba(200,150,30,0.18);
+  border-top: none;
+  padding: 0 1.4rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s;
+}
+.expand-body.open {
+  max-height: 800px;
+  padding: 1.4rem;
+}
+.expand-body p { color: var(--cream-dim); font-size: 0.97rem; margin-bottom: 0.8rem; }
+.expand-body p:last-child { margin-bottom: 0; }
+
+/* SCROLL ANIMATIONS */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-up:nth-child(3) { transition-delay: 0.2s; }
+.fade-up:nth-child(4) { transition-delay: 0.3s; }
+.fade-up:nth-child(5) { transition-delay: 0.4s; }
+
+/* HIGHLIGHT TEXT */
+.highlight { color: var(--gold-light); }
+.warm-highlight { color: #7a3f10; font-weight: 600; }
+
+/* STAT ROW */
+.stat-row {
+  display: flex;
+  gap: 3rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+.stat-item { flex: 1; min-width: 140px; }
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--gold-light);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* FOOTER */
+footer {
+  background: #0f0a06;
+  padding: 5rem 2rem 3rem;
+  text-align: center;
+  border-top: 1px solid rgba(200,150,30,0.15);
+}
+.footer-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--gold-light);
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  line-height: 1.35;
+}
+.footer-attr {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3rem;
+}
+.footer-info {
+  font-size: 0.85rem;
+  color: rgba(200,184,152,0.4);
+  line-height: 1.9;
+}
+
+/* LIST STYLES */
+.styled-list {
+  list-style: none;
+  margin: 1.2rem 0;
+}
+.styled-list li {
+  padding: 0.4rem 0 0.4rem 1.5rem;
+  position: relative;
+  font-size: 0.97rem;
+  color: var(--cream-dim);
+  line-height: 1.65;
+}
+.styled-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+.section-warm .styled-list li { color: #3a2a1a; }
+.section-warm .styled-list li::before { color: #8b5e1a; }
+
+/* INTRO BOX */
+.intro-box {
+  background: linear-gradient(135deg, rgba(200,150,30,0.07), rgba(200,150,30,0.02));
+  border: 1px solid rgba(200,150,30,0.2);
+  border-radius: 2px;
+  padding: 2rem 2.5rem;
+  margin: 2rem 0;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: var(--cream-dim);
+}
+.section-warm .intro-box {
+  background: linear-gradient(135deg, rgba(139,94,26,0.07), rgba(139,94,26,0.02));
+  border-color: rgba(139,94,26,0.2);
+  color: #3a2a1a;
+}
+
+/* PORTRAIT / FORM SUBSECTION */
+.subsection-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  margin: 2.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(200,150,30,0.2);
+}
+.section-warm .subsection-head {
+  color: #7a3f10;
+  border-bottom-color: rgba(139,94,26,0.2);
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav id="main-nav">
+  <a href="#hero" class="nav-brand">The Art Spirit</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">Henri</a></li>
+    <li><a href="#philosophy">Spirit</a></li>
+    <li><a href="#seeing">Seeing</a></li>
+    <li><a href="#technique">Technique</a></li>
+    <li><a href="#color">Color</a></li>
+    <li><a href="#masters">Masters</a></li>
+    <li><a href="#wisdom">Wisdom</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-brushstroke hero-brushstroke-1"></div>
+  <div class="hero-brushstroke hero-brushstroke-2"></div>
+  <div class="hero-brushstroke hero-brushstroke-3"></div>
+
+  <p class="hero-eyebrow">A Complete Guide to</p>
+  <h1 class="hero-title">The Art<br><span>Spirit</span></h1>
+  <p class="hero-author">Robert Henri</p>
+  <p class="hero-dates">1865 — 1929</p>
+  <div class="hero-divider"></div>
+  <p class="hero-quote">"No other American painter drew unto himself such a large, ardently personal group of followers. He fought to open the way for young artists who were being stifled by the stranglehold of official exhibitions."</p>
+  <p class="hero-quote-attr">— Forbes Watson, Introduction</p>
+
+  <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Explore</div>
+</section>
+
+<!-- ABOUT HENRI -->
+<section id="about" class="section-dark">
+  <div class="section-number">I</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">The Man &amp; His Mission</span>
+    <h2 class="section-title fade-up">Robert Henri — <em>Painter, Teacher, Prophet</em></h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="two-col">
+      <div>
+        <div class="intro-box fade-up">
+          <p>Robert Henri (born Robert Henry Cozad, June 24, 1865 — died July 12, 1929) was the central figure of American realism and the spiritual leader of the Ashcan School. More than a painter, he was a philosopher of seeing — a teacher whose influence shaped the course of American art.</p>
+        </div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">Forbes Watson, writing in the introduction to <em>The Art Spirit</em> (1923), captured Henri's rare gift: <span class="highlight">"An inspired teacher with an extraordinary gift for verbal communication, with the personality and prophetic fire that transformed pupils into idolators."</span> Henri did not merely teach art — he awakened people to the possibility of living fully.</p>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">He was born into a peculiar American West, the son of a land speculator who fled scandal and renamed the family. Henri studied at the Pennsylvania Academy of Fine Arts and the École des Beaux-Arts in Paris, absorbing the masters before forging his own path. He would spend his life in rebellion against the institutional forces that throttled artistic vitality.</p>
+
+        <p class="fade-up">Henri's great battle was against the National Academy of Design and the entrenched jury system that controlled American exhibitions. He helped organize the landmark show of The Eight in 1908 and championed the first American Independent Exhibition — free of juries, free of prizes, free of the gatekeepers who had long decided what Americans were permitted to see and admire.</p>
+      </div>
+      <div>
+        <div class="pull-quote fade-up">"No other American painter drew unto himself such a large, ardently personal group of followers."</div>
+
+        <div class="stat-row">
+          <div class="stat-item fade-up">
+            <span class="stat-number">1865</span>
+            <span class="stat-label">Year of Birth</span>
+          </div>
+          <div class="stat-item fade-up">
+            <span class="stat-number">1923</span>
+            <span class="stat-label">Book Published</span>
+          </div>
+          <div class="stat-item fade-up">
+            <span class="stat-number">1929</span>
+            <span class="stat-label">Year of Death</span>
+          </div>
+        </div>
+
+        <h3 class="subsection-head fade-up">Students Who Became Masters</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">Henri's teaching at the New York School of Art and later the Henri School produced some of the most significant American artists of the twentieth century:</p>
+        <ul class="styled-list fade-up">
+          <li><strong>John Sloan</strong> — Chronicler of New York street life, co-organizer of The Eight</li>
+          <li><strong>George Bellows</strong> — Painter of raw urban energy and the boxing ring</li>
+          <li><strong>Edward Hopper</strong> — Master of American solitude and light</li>
+          <li><strong>Rockwell Kent</strong> — Adventurer-painter of arctic landscapes</li>
+          <li><strong>Stuart Davis</strong> — Pioneer of American modernism</li>
+        </ul>
+
+        <h3 class="subsection-head fade-up">His Artistic Ancestors</h3>
+        <ul class="styled-list fade-up">
+          <li>Velasquez — for dignity and psychological truth</li>
+          <li>Manet — for boldness and refusal of the expected</li>
+          <li>Frans Hals — for vitality and the speaking brush</li>
+          <li>Rembrandt — for depth of human feeling</li>
+          <li>El Greco — for compositional drama and spiritual fire</li>
+          <li>Goya — for savage honesty</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="three-col">
+      <div class="info-card fade-up">
+        <h3>The Independent Exhibition</h3>
+        <p>Henri helped organize the first American Independent Exhibition, modeled on the French Salon des Indépendants — no jury, no prizes, no gatekeeping. Every artist could show. This was a revolutionary act in American art history.</p>
+      </div>
+      <div class="info-card fade-up">
+        <h3>The Art Spirit (1923)</h3>
+        <p>Compiled by Margery Ryerson from Henri's letters, notes, and classroom talks, <em>The Art Spirit</em> is not a systematic treatise but a living document — aphoristic, passionate, contradictory, and deeply wise. It remains in print a century after publication.</p>
+      </div>
+      <div class="info-card fade-up">
+        <h3>Forbes Watson's Verdict</h3>
+        <p>"He fought to open the way for young artists who were being stifled by the stranglehold of official exhibitions that were controlled by academicians who prevented the showing of any work that differed from their own conventional standards."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE PHILOSOPHY -->
+<section id="philosophy" class="section-warm">
+  <div class="section-number">II</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">Core Philosophy</span>
+    <h2 class="section-title fade-up">The <em>Art Spirit</em> — What It Means</h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="intro-box fade-up">
+      <p>Henri's central claim is radical: art is not the possession of artists. It belongs to everyone. The "art spirit" is not a talent granted to a chosen few, but a quality of full, attentive, self-expressive living that any human being can cultivate. The artist is simply the person who has not lost this capacity — or who has fought to recover it.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="pull-quote fade-up">"Art when really understood is the province of every human being. It is simply a question of doing things, anything, well."</div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">For Henri, art was not decorative, not professional, not institutional. It was the natural outcome of full living. <span class="warm-highlight">"When the artist is alive in any person, whatever his kind of work may be, he becomes an inventive, searching, daring, self-expressing creature."</span> This was as true of a carpenter as a painter, of a cook as a sculptor.</p>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">The world, Henri insisted, would stagnate without the art spirit, and would be beautiful with it. This was not mere sentiment — it was a philosophy of civilization. The art spirit keeps human beings from becoming mechanical, from submitting to convention, from losing the capacity for genuine perception.</p>
+
+        <p class="fade-up">He was deeply critical of the institutional art world — museums, academies, prize systems — not because they were unimportant, but because they had usurped the place of living experience: <span class="warm-highlight">"Museums of art will not make a country an art country. But where there is the art spirit there will be precious works to fill museums."</span></p>
+      </div>
+      <div>
+        <h3 class="subsection-head fade-up">The Seven Pillars of Henri's Art Spirit</h3>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            Art is Natural, Not Extra <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>Henri insisted that art is not "an outside, extra thing" added to life — it is the living itself. The art spirit is present when any person engages fully with what they are doing, bringing their whole being to the work. Painting is simply one medium in which this spirit can manifest; so is farming, carpentry, conversation, or thought.</p>
+          </div>
+        </div>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            The State of Being <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>"The object, which is back of every true work of art, is the attainment of a state of being, a state of high functioning, a more than ordinary moment of existence." The artwork is secondary — it is the trace left behind by a heightened state of consciousness. The living is primary; the canvas is the record.</p>
+          </div>
+        </div>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            Individuality Above All <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>Henri's most persistent theme is the sacredness of the individual. "Don't worry about your originality. You could not get rid of it even if you wanted to." True art can only emerge from a genuine self — not from adherence to schools, traditions, or fashions. Walt Whitman was Henri's ideal: a man who lived and sang his own truth without apology.</p>
+          </div>
+        </div>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            Seeing as the Highest Skill <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>"It is harder to see than it is to express." Henri placed the capacity for genuine perception above technical facility. Technique without real seeing produces dead work. The artist's primary training is learning to see — not to copy what is there, but to perceive its essence, its significance, its moment of life.</p>
+          </div>
+        </div>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            The Brotherhood of Artists <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>Art creates invisible bonds across time. Through genuine work, an artist enters into a brotherhood with all others who have lived deeply and expressed truly — Rembrandt, El Greco, Shakespeare, Plato. These bonds are not metaphorical: they are the actual experience of recognition that occurs when encountering genuine art across centuries.</p>
+          </div>
+        </div>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            Rebellion as Necessity <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>"Every man who has shown the world the way to beauty, to true culture, has been a rebel." For Henri, rebellion was not adolescent defiance but a moral necessity. Official taste, institutional validation, prize systems, juries — all of these were forces of entropy, grinding down the individuality that art requires. History proved that juries were almost always wrong.</p>
+          </div>
+        </div>
+
+        <div class="expand-group fade-up">
+          <button class="expand-toggle" onclick="toggleExpand(this)">
+            Living Fully as the Goal <span class="arrow">▾</span>
+          </button>
+          <div class="expand-body">
+            <p>"After all, the goal is not making art. It is living a life." The deepest purpose of the art spirit is not the production of objects but the quality of experience. Artists who have lived to great age — Titian, Rembrandt — were young because they lived living, whereas most people live dying. Art was Henri's prescription for remaining alive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="pull-quote fade-up" style="text-align:center; border-left:none; border-top: 2px solid #8b5e1a; border-bottom: 2px solid #8b5e1a; padding: 1.5rem 2rem;">
+      "The reason so many artists have lived to great age and have been so young at great age is that to such extent they have lived living, whereas most people live dying."
+    </div>
+  </div>
+</section>
+
+<!-- SEEING -->
+<section id="seeing" class="section-dark">
+  <div class="section-number">III</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">The Art of Perception</span>
+    <h2 class="section-title fade-up">The Art of <em>Seeing</em></h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="intro-box fade-up">
+      "It is harder to see than it is to express." This single line contains Henri's most important pedagogical insight. The failure of most artistic training, he believed, was its preoccupation with execution while neglecting the far more difficult discipline of genuine perception. Seeing — real seeing — is an act of will, attention, and transformation.
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p class="fade-up" style="margin-bottom:1.2rem;">Henri drew a sharp distinction between copying and seeing. "A genius is one who can see. The others can often 'draw' remarkably well." Technical facility without genuine seeing produces nothing of value. Many students can render surfaces accurately — they cannot perceive the essential quality beneath.</p>
+
+        <div class="pull-quote fade-up">"The whole value of art rests in the artist's ability to see well into what is before him."</div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">He warned against the temptation to acquire technique first, expecting vision to arrive later: <span class="highlight">"Those who get their technique first, expecting sight to come to them later, get a technique of a very ready-made order."</span> Technique built without seeing is a prison, not a tool. It imposes conventions on experience rather than arising from it.</p>
+
+        <p class="fade-up">His concept of the <strong>Sketch Hunter</strong> captures this beautifully: "He moves through life as he finds it, not passing negligently the things he loves, but stopping to know them, and trying to get into himself the veritable existence of them." The sketch hunter is perpetually alert, perpetually studying, without the burden of needing to produce.</p>
+      </div>
+      <div>
+        <h3 class="subsection-head fade-up">Memory and the Vital Moment</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">"The most vital things in the look of a face or of a landscape endure only for a moment." Henri was deeply interested in memory as a tool for capturing what is essential rather than incidental. Working from memory forces the artist to retain only what truly mattered — the rest dissolves.</p>
+
+        <p class="fade-up" style="margin-bottom:1rem;"><span class="highlight">"All good work is done from memory whether the model is still present or not."</span> Even when painting from life, the artist's task is to see the vital impression and work from that — not to transcribe mechanically. The model's presence is a stimulus, not a source of information to be copied.</p>
+
+        <div class="info-card fade-up">
+          <h3>The Concept-and-Carry Method</h3>
+          <p>Henri proposed art schools teach through the concept-and-carry method: students would observe a pose for a set time, then carry the image in memory to another room to draw it. This forces genuine seeing — you cannot carry what you have not truly perceived. The method strips away the mechanical copying reflex.</p>
+        </div>
+
+        <div class="info-card fade-up" style="margin-top:1.2rem;">
+          <h3>Rembrandt as Supreme Seer</h3>
+          <p>Henri held Rembrandt as the supreme example of an artist who saw deeply. "The deeper you penetrate below the surface, the better you will see the surface." Rembrandt's people seem alive because he saw not their surfaces but their essential humanity — and the surfaces followed naturally from that deeper seeing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="three-col">
+      <div class="info-card fade-up">
+        <h3>Seeing vs. Looking</h3>
+        <p>"Seeing is not such an easy thing as it is supposed to be." Most people look at the world through a filter of preconceptions, naming things before they perceive them. True seeing requires emptying oneself, setting aside categories, and actually encountering what is there.</p>
+      </div>
+      <div class="info-card fade-up">
+        <h3>Nature's Secrets</h3>
+        <p>"Nature does not reveal herself to the negligent." Attention is the key to the world's generosity. The careless eye sees surfaces; the attentive eye discovers the inner life of things — the quality of light on a particular surface, the feeling of a particular moment, the personality of a particular face.</p>
+      </div>
+      <div class="info-card fade-up">
+        <h3>The Signpost</h3>
+        <p>"There are moments in our lives, there are moments in a day, when we seem to see beyond the usual. Such are the moments of our greatest happiness. Such are the moments of our greatest wisdom." These moments are the artist's material — and the purpose of training is to make oneself capable of receiving them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDIVIDUALITY AND FREEDOM -->
+<section id="individuality" class="section-warm">
+  <div class="section-number">IV</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">On Freedom &amp; Selfhood</span>
+    <h2 class="section-title fade-up">Individuality &amp; <em>Freedom</em></h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="two-col">
+      <div>
+        <div class="intro-box fade-up">
+          Henri's most passionate theme — running through every page of <em>The Art Spirit</em> — is the sacredness of individual selfhood. Against the pressure of schools, fashions, juries, and institutional taste, he insisted on the irreplaceable uniqueness of each person's way of seeing and being.
+        </div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">"You can do anything you want to do. What is rare is this actual wanting to do a specific thing: wanting it so much that you are practically blind to all other things, that nothing else will satisfy you. This wanting is not a wish, a daydream, a vague ambition. It is a specific, almost physical need."</p>
+
+        <div class="pull-quote fade-up">"Don't worry about your originality. You could not get rid of it even if you wanted to."</div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">The fear of being unoriginal, Henri argued, was based on a misunderstanding. Originality is not something to be achieved — it is something to be revealed. The problem is never that a person lacks originality; the problem is that they suppress it through imitation, conformity, and anxiety about opinion.</p>
+
+        <p class="fade-up"><span class="warm-highlight">"Find out what you really like if you can. Find out what is really important to you. Then sing your song."</span> This deceptively simple injunction requires deep self-knowledge and enormous courage. Most people never discover what they actually like — they inherit the likes of others and wear them like borrowed clothes.</p>
+      </div>
+      <div>
+        <h3 class="subsection-head fade-up">Walt Whitman: The Ideal</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">Henri returned repeatedly to Walt Whitman as the supreme example of a human being who lived and expressed his own truth. "His work is an autobiography — not of haps and mishaps, but of his deepest thought, his life indeed." Whitman did not write about life from a distance; he was alive in his work, fully and unashamedly himself.</p>
+
+        <p class="fade-up" style="margin-bottom:1rem;">This was Henri's standard for art: not technical excellence, not beauty, not even originality — but the quality of presence. Is the person genuinely there in the work? Is the work an act of self-expression or self-concealment?</p>
+
+        <h3 class="subsection-head fade-up">The Rebel's Necessity</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">"Every man who has shown the world the way to beauty, to true culture, has been a rebel, a 'universal' without patriotism, without home, who has found his people everywhere." Henri's rebels were not contrarians — they were people who refused to subordinate their vision to institutional comfort.</p>
+
+        <ul class="styled-list fade-up">
+          <li>Don't belong to any school</li>
+          <li>Don't tie yourself to any technique</li>
+          <li>Don't seek validation from juries or prizes</li>
+          <li>Know what the masters did — but do not become their prisoners</li>
+          <li>An artist has got to get acquainted with himself just as much as he can</li>
+        </ul>
+
+        <div class="info-card fade-up" style="margin-top:1.5rem;">
+          <h3>The Brotherhood</h3>
+          <p>"Through art mysterious bonds of understanding and of knowledge are established among men. They are the bonds of a great Brotherhood." The Brotherhood is powerful. It has many members. They are of all places and of all times. The members do not die. "If the artist is alive in you, you may meet Greco nearer than many people, also Plato, Shakespeare, the Greeks."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE -->
+<section id="technique" class="section-dark">
+  <div class="section-number">V</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">The Tools of Expression</span>
+    <h2 class="section-title fade-up">Technique as <em>Language</em></h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="intro-box fade-up">
+      "Technique is to me merely a language." Henri's view of technique was deeply anti-academic. Technique was not a set of rules to be mastered and applied — it was a living means of expression that had to be reinvented for each new purpose. Technique divorced from motive was dead. Motive demanded its own specific technique.
+    </div>
+
+    <div class="two-col">
+      <div>
+        <p class="fade-up" style="margin-bottom:1.2rem;"><span class="highlight">"The technique learned without a purpose is a formula which when used, knocks the life out of any ideas to which it is applied."</span> This is Henri's most damning critique of conventional art training. Students learned approved techniques and then applied them to ideas — and the result was always stilted, lifeless, mechanical. The technique preceded and shaped the seeing, instead of arising from it.</p>
+
+        <div class="pull-quote fade-up">"To study technique means to make it, to invent it. To take the raw material each time anew and twist it into shape."</div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">Every painting is a new problem. What worked in the last painting may be entirely wrong for this one. The experienced artist does not reach into a bag of approved methods — they face the specific problem of this canvas, this subject, this moment, and discover what is needed.</p>
+
+        <h3 class="subsection-head fade-up">The Brush Stroke</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">"Whatever you feel or think, your exact state at the exact moment of your brush touching the canvas is in some way registered in that stroke." This is perhaps Henri's most startling claim about technique — that the brush stroke is a form of truth-telling that cannot be faked.</p>
+
+        <p class="fade-up" style="margin-bottom:1rem;"><span class="highlight">"The brush stroke at the moment of contact carries inevitably the exact state of being of the artist at that exact moment into the work."</span> Direction, pressure, speed — all of these register the artist's inner state. A timid stroke records timidity. A bold stroke records boldness. The painting is not merely a representation; it is a psychological record.</p>
+
+        <ul class="styled-list fade-up">
+          <li>Direction of the stroke — follows or opposes form</li>
+          <li>Pressure — from feather-light to impasto</li>
+          <li>Speed — slow deliberation vs. swift decisiveness</li>
+          <li>Loading of the brush — lean or rich with paint</li>
+          <li>Get the full swing of your body into the stroke</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="subsection-head fade-up">Composition &amp; Organization</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">"A good painting is a remarkable feat of organization." Henri taught that painting was primarily an act of organization — deciding what to include, what to suppress, how to weight each element against every other. This was not mechanical arrangement but expressive decision-making.</p>
+
+        <div class="info-card fade-up">
+          <h3>Big Masses First</h3>
+          <p>"Get the greatest possibility of expression in the larger masses first." Begin with the four or five large masses that constitute the painting's fundamental structure. Everything else — detail, refinement, specific passages — must serve and support these larger relationships. A painting that succeeds in its large masses can survive weaknesses in detail; the reverse is not true.</p>
+        </div>
+
+        <div class="info-card fade-up" style="margin-top:1.2rem;">
+          <h3>Background as Structure</h3>
+          <p>Henri rejected the common practice of treating backgrounds as spaces to be filled after the figure was complete. "The background is structural, not decorative." It is an active participant in the painting's organization. "The background must travel along and keep pace with every advance of the picture." It breathes with the figure, not behind it.</p>
+        </div>
+
+        <div class="info-card fade-up" style="margin-top:1.2rem;">
+          <h3>Portrait Painting</h3>
+          <p>"Start with a deep impression, the best, the most interesting, the deepest you can have of the model." The face mass is principal. Eyebrows are "living things" — primary constructors of the forehead. "All the features are concerned in one expression which manifests the state of mind of the sitter." Velasquez was Henri's supreme model: his kings became human beings for whom one felt sympathy, pity, and respect.</p>
+        </div>
+
+        <div class="pull-quote fade-up">"Without motive, painting is only some sort of difficult jugglery."</div>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <h3 class="subsection-head fade-up" style="color:var(--gold-light);">The Human Form</h3>
+    <div class="two-col">
+      <div>
+        <p class="fade-up" style="margin-bottom:1.2rem;">"There is nothing in all the world more beautiful or significant of the laws of the universe than the nude human body." Henri approached the figure not as a technical problem — anatomy, proportion, foreshortening — but as a subject of profound human significance. The model was not a prop but a person.</p>
+        <p class="fade-up">"Demand of the model all your greatest ideas. See the dignity of the model, see the man in him." This ethical dimension of figure study was central to Henri. <span class="highlight">"No man has ever over-appreciated a human being."</span> And of children: "Feel the dignity of a child. Do not feel superior to him, for you are not."</p>
+      </div>
+      <div>
+        <p class="fade-up" style="margin-bottom:1.2rem;">Anatomy, for Henri, was a tool and not an end. The student who could draw a textbook skeleton but not feel the life moving beneath skin and cloth had missed the point entirely. "Drawing through clothes" — perceiving the body within its coverings — was evidence of genuine understanding.</p>
+        <p class="fade-up">The dignity of the subject was always paramount. Henri's figure paintings — like those of his student Bellows — show people who have interior lives, who matter, whose existence is not merely pictorial occasion but human fact.</p>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="three-col">
+      <div class="info-card fade-up">
+        <h3>Rhythm &amp; Cumulation</h3>
+        <p>Composition in Henri's teaching was organized through rhythm (the repetition and variation of visual elements), cumulation (the building of emphasis toward climactic passages), opposition (the tension between contrasting forces), and balance (the resolution of those tensions into a stable whole).</p>
+      </div>
+      <div class="info-card fade-up">
+        <h3>El Greco's Method</h3>
+        <p>"Puts together forces and makes of these forces a great unit." El Greco's rising, flame-like compositions were for Henri the supreme example of compositional drama — every element pulling upward, every form contributing to a single overwhelming movement. The spirit of composition, not its rules.</p>
+      </div>
+      <div class="info-card fade-up">
+        <h3>Titian the Organizer</h3>
+        <p>Titian demonstrated for Henri the capacity to organize vast, complex compositions without losing any of their parts. Every figure, every passage of color, every area of the canvas was in conscious relationship with everything else. This was not planning but mastery — the intuitive grasp of the whole.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR THEORY -->
+<section id="color" class="section-warm">
+  <div class="section-number">VI</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">Color Theory &amp; Practice</span>
+    <h2 class="section-title fade-up">The Possibilities of <em>Color</em></h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="intro-box fade-up">
+      "The possibilities of color are wonderful. A study entrancingly interesting and unlimited." Henri engaged with color theory seriously, influenced by H.G. Maratta's studies of pigment relationships. But his approach was always experiential and expressive first — theory served practice, never the reverse.
+    </div>
+
+    <!-- Spectrum Bar -->
+    <div class="fade-up">
+      <p style="font-size:0.78rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b5e1a; margin-bottom:0.8rem;">Henri's Spectrum Palette — RO · O · OY · Y · YG · G · GB · B · BP · P · PR</p>
+      <div class="spectrum-bar">
+        <span style="background:#c0392b;"></span>
+        <span style="background:#e8562a;"></span>
+        <span style="background:#e67e22;"></span>
+        <span style="background:#f39c12;"></span>
+        <span style="background:#d4ac0d;"></span>
+        <span style="background:#a9c934;"></span>
+        <span style="background:#27ae60;"></span>
+        <span style="background:#1abc9c;"></span>
+        <span style="background:#2980b9;"></span>
+        <span style="background:#2c3e8c;"></span>
+        <span style="background:#6c3483;"></span>
+        <span style="background:#a93226;"></span>
+      </div>
+      <p style="font-size:0.82rem; color:#6b4a1a; margin-top:0.5rem;">The spectrum read: Red-Orange, Orange, Orange-Yellow, Yellow, Yellow-Green, Green, Green-Blue, Blue, Blue-Purple, Purple, Purple-Red</p>
+    </div>
+
+    <div class="color-cards fade-up">
+      <div class="color-card warm">
+        <h4>Warm Colors</h4>
+        <p>The warm family — reds, oranges, yellows — advance in a painting, create sensation of closeness and heat. Henri taught that brilliancy in painting depends on the interplay of warm and cool: "The effect of brilliancy is to be obtained principally from the oppositions of cool colors with warm colors." Warm colors alone become oppressive; paired with cool they sing.</p>
+      </div>
+      <div class="color-card cool">
+        <h4>Cool Colors</h4>
+        <p>The cool family — blues, blue-greens, cool purples — recede, suggest distance, air, and shadow. Henri's key insight: "Keep as deep down in color as you can. It is color that makes the sensation of light. Play from warm to cold, not from white to black." The conventional use of white to represent light was, for Henri, a fatal error that produced chalky, dead painting.</p>
+      </div>
+      <div class="color-card neutral">
+        <h4>Neutral &amp; Grave Colors</h4>
+        <p>Henri distinguished between pure colors (from the spectrum) and grave or neutral colors (mixtures). Neither was superior — the grave colors provided the context against which pure colors sang. "Employ such colors as produce immensity in a small space." Black could be a neutralizer, but also a color of great depth and richness when used knowingly.</p>
+      </div>
+      <div class="color-card special">
+        <h4>The Unifying Color</h4>
+        <p>"There is a color over all colors which unites them and which is more important than the individual colors." Every painting has — or should have — an overarching color atmosphere: the quality of light particular to this moment, this scene, this feeling. Finding this unifying note and maintaining it throughout was for Henri a primary compositional discipline.</p>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="two-col">
+      <div>
+        <h3 class="subsection-head fade-up">H.G. Maratta's Color Studies</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">Henri was influenced by H.G. Maratta's systematic study of pigment relationships, which attempted to apply principles of musical harmony to color. The palette Henri recommended was organized according to the full spectrum, enabling the artist to move through the whole range of color relationships with conscious intention rather than accidental harmony.</p>
+        <p class="fade-up">But he was careful to keep theory in its place. The system existed to serve the painter, not to constrain them. Knowing why certain color relationships work gave the artist power over them — it did not prescribe what to do.</p>
+      </div>
+      <div>
+        <h3 class="subsection-head fade-up">Practical Discipline</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">"Dirty brushes and a sloppy palette have dictated the color-tone and key of many a painting." Henri's emphasis on practical studio discipline was not fussiness but respect for the medium. The condition of one's palette and brushes directly determined the quality of color available.</p>
+        <ul class="styled-list fade-up">
+          <li>Keep the palette organized and clean between sessions</li>
+          <li>Never let colors muddy inadvertently — only deliberately</li>
+          <li>Understand which pigments are opaque and which transparent</li>
+          <li>Reserve white for opaque passages; allow transparent color to breathe</li>
+          <li>Study the old masters' grounds and glazing techniques</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pull-quote fade-up">"Keep as deep down in color as you can. It is color that makes the sensation of light. Play from warm to cold, not from white to black."</div>
+  </div>
+</section>
+
+<!-- MASTERS -->
+<section id="masters" class="section-dark">
+  <div class="section-number">VII</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">Henri on the Great Painters</span>
+    <h2 class="section-title fade-up">The <em>Masters</em> — Henri's Views</h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="intro-box fade-up">
+      Throughout <em>The Art Spirit</em>, Henri returned again and again to the great painters of history — not as objects of reverent distance, but as living companions in the exploration of visual truth. His commentary on each master reveals his own deepest values: humanity, vitality, psychological depth, compositional power.
+    </div>
+
+    <div class="masters-grid">
+      <div class="master-card fade-up">
+        <div class="master-name">Velasquez</div>
+        <div class="master-dates">1599 — 1660</div>
+        <div class="master-quote">"A man in love with humanity. He had the utmost respect for the king, the beggar and the dwarf. His king becomes a man for whom you have sympathy, pity and respect."</div>
+        <div class="master-context">Henri saw Velasquez as the supreme portraitist — not because of technical dazzle but because of his profound democratic sympathy. "Everybody he painted had dignity, from a clown to a king." His silver light and violet note were for Henri a complete lesson in tonal painting.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Rembrandt</div>
+        <div class="master-dates">1606 — 1669</div>
+        <div class="master-quote">"His greatness lies in his intense feeling for his subjects. His lines are filled with a great man's sense of life. The deeper you penetrate below the surface, the better you will see the surface."</div>
+        <div class="master-context">Rembrandt was Henri's supreme example of an artist who saw deeply. People in Rembrandt seem alive not because he captured their surfaces accurately but because he perceived their essential humanity. Henri placed him at the pinnacle of all painting.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Manet</div>
+        <div class="master-dates">1832 — 1883</div>
+        <div class="master-quote">"Manet did not do the expected. He was a pioneer. His 'Olympia' has a supreme elegance. His stroke was ample, full, and flowed with a gracious continuity."</div>
+        <div class="master-context">Henri's admiration for Manet was primarily for his courage — his refusal to produce the conventionally beautiful, his willingness to paint people as they actually were, and his mastery of the decisive, unhesitating brush stroke.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">El Greco</div>
+        <div class="master-dates">c. 1541 — 1614</div>
+        <div class="master-quote">"Puts together forces and makes of these forces a great unit." A rising movement like a flame. The supreme spirit of composition.</div>
+        <div class="master-context">El Greco demonstrated for Henri the possibility of subordinating every element of a painting — color, form, space, light — to a single overwhelming expressive idea. The flame-like upward movement of his compositions was for Henri a lesson in what composition could achieve at its most powerful.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Whistler</div>
+        <div class="master-dates">1834 — 1903</div>
+        <div class="master-quote">"The White Girl looks like the finest nature of Whistler. It shows the heart and vision of Whistler."</div>
+        <div class="master-context">Henri admired Whistler for his refinement and his capacity for restraint — his ability to achieve great effect through minimal means. The Portrait of the Artist's Mother demonstrated for Henri that beauty could be found in age, in stillness, in the ordinary arrangements of a quiet life.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Cézanne</div>
+        <div class="master-dates">1839 — 1906</div>
+        <div class="master-quote">"He had a great vision and it was beyond him. In his effort to give his idea, he correlated things never before correlated. Therefore he was a great artist."</div>
+        <div class="master-context">Henri's assessment of Cézanne is perhaps the most nuanced in the book — he recognized Cézanne's greatness precisely in the gap between his vision and his execution. The struggle itself was evidence of the genuineness of the vision. An artist who always succeeds has probably set the bar too low.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Renoir</div>
+        <div class="master-dates">1841 — 1919</div>
+        <div class="master-quote">"In painting those little children he painted...it will be apparent that Renoir had not only a great interest in human character."</div>
+        <div class="master-context">Henri admired Renoir for a quality often overlooked in celebrations of his sensuous color — his genuine interest in the people he painted. Despite critical focus on technique and surface, Renoir's children and bathers have inner lives that speak across the paint.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Frans Hals</div>
+        <div class="master-dates">c. 1582 — 1666</div>
+        <div class="master-quote">"Don't think that Frans Hals was drunk when he painted his vital pictures. There was wonderful judgment in the conception and execution of these works."</div>
+        <div class="master-context">The apparent spontaneity of Hals was, for Henri, the result of perfect preparation and profound understanding — not accident or intoxication. Everything in those swift, seemingly loose paintings was in right condition and place. This was Henri's model for the kind of technical mastery that looked like freedom.</div>
+      </div>
+
+      <div class="master-card fade-up">
+        <div class="master-name">Thomas Eakins</div>
+        <div class="master-dates">1844 — 1916</div>
+        <div class="master-quote">"Personally, I consider him the greatest portrait painter America has produced. His quality was honesty. 'Integrity' is the word which seems best to fit him."</div>
+        <div class="master-context">Henri's championing of Eakins was a declaration of values. Eakins was not fashionable; he had been persecuted by the institutions. But his unswerving commitment to visual truth — his refusal to flatter, to idealize, to falsify — made him for Henri the most significant American artist of his generation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING PHILOSOPHY -->
+<section id="teaching" class="section-warm">
+  <div class="section-number">VIII</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">The Classroom &amp; Self-Education</span>
+    <h2 class="section-title fade-up">Henri's <em>Teaching Philosophy</em></h2>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="two-col">
+      <div>
+        <div class="intro-box fade-up">
+          Henri's approach to teaching was as radical as his approach to making art. He did not want to produce students who painted like Henri — he wanted to produce students who could not help but paint like themselves. His classroom was not a place for transmission of approved methods but for the liberation of individual capacities.
+        </div>
+
+        <div class="pull-quote fade-up">"I have little interest in teaching you what I know. I wish to stimulate you to tell me what you know."</div>
+
+        <p class="fade-up" style="margin-bottom:1.2rem;">"Let a student enter the school with this advice: No matter how good the school is, his education is in his own hands. All education must be self-education." This was Henri's foundational conviction as a teacher — that the student was the active agent, not the passive recipient. The school could provide stimulus, environment, and technical resources; it could not provide the essential thing, which only the student could find in themselves.</p>
+
+        <p class="fade-up"><span class="warm-highlight">"The best advice I have ever given to students...has been: 'Educate yourself, do not let me educate you — use me, do not be used by me.'"</span> This inversion — the student using the teacher, rather than being formed by the teacher — captures Henri's essential pedagogical stance.</p>
+      </div>
+      <div>
+        <h3 class="subsection-head fade-up">On Prizes and Juries</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">"History proves that juries in art have been generally wrong." This was not a cynical observation but a historical one — the Impressionists were rejected, Cézanne was rejected, El Greco was forgotten for centuries, Eakins was persecuted. The jury system rewarded the already-approved and excluded the genuinely new.</p>
+
+        <p class="fade-up" style="margin-bottom:1rem;">"Prizes generally go amiss. The award of prizes has the effect of setting up a false discrimination." The prize system taught students that art was a competition — that there was a hierarchy of quality determinable by committee. This was precisely backwards. Art was not competitive; it was individual. There was no ranking to be assigned.</p>
+
+        <h3 class="subsection-head fade-up">What Art School Should Be</h3>
+        <p class="fade-up" style="margin-bottom:1rem;">Henri imagined the ideal art school as "a boiling, seething place" — alive with argument, disagreement, passionate exploration, and fierce individual purpose. Its function was to stimulate profound study of life and to develop individuality. A school where everyone agreed and worked in the same direction had already failed.</p>
+
+        <div class="info-card fade-up">
+          <h3>The New Man Problem</h3>
+          <p>"No one can lead him. Many can give advices, but the greatest artist in the world cannot point his course for he is a new man." The genuinely original student was beyond the teacher's knowledge. The teacher's job was not to lead but to prepare — to give the student the technical resources and the freedom to discover a direction that the teacher could not have predicted.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ornament fade-up"><span class="ornament-center">✦</span></div>
+
+    <div class="pull-quote fade-up" style="text-align:center; border-left:none; border-top: 2px solid #8b5e1a; border-bottom: 2px solid #8b5e1a; padding: 1.5rem 2rem;">
+      "After all, the goal is not making art. It is living a life. Those who live their lives will leave the stuff that is really art."
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE EXPLORER -->
+<section id="wisdom" class="section-dark">
+  <div class="section-number">IX</div>
+  <div class="section-inner">
+    <span class="section-tag fade-up">The Words of Robert Henri</span>
+    <h2 class="section-title fade-up">A Treasury of <em>Wisdom</em></h2>
+    <p class="fade-up" style="color:var(--cream-dim); margin-bottom:2rem; font-size:1rem;">Filter Henri's quotes by theme to explore his thought across different dimensions of art and life.</p>
+
+    <div class="filter-bar fade-up">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="seeing">Seeing</button>
+      <button class="filter-btn" data-filter="spirit">Spirit</button>
+      <button class="filter-btn" data-filter="freedom">Freedom</button>
+      <button class="filter-btn" data-filter="technique">Technique</button>
+      <button class="filter-btn" data-filter="teaching">Teaching</button>
+      <button class="filter-btn" data-filter="brotherhood">Brotherhood</button>
+      <button class="filter-btn" data-filter="color">Color</button>
+      <button class="filter-btn" data-filter="life">Life</button>
+    </div>
+
+    <div class="quotes-grid" id="quotes-grid">
+
+      <!-- SEEING -->
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"It is harder to see than it is to express."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"The whole value of art rests in the artist's ability to see well into what is before him."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"If you want to know how to do a thing you must first have a complete desire to do that thing."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"We are not cameras. We select."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"Seeing is not such an easy thing as it is supposed to be."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"Nature does not reveal herself to the negligent."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+      <div class="quote-card" data-theme="seeing">
+        <blockquote>"What you see is not what is over there, but what you are capable of seeing. It is a creation of your own mind."</blockquote>
+        <span class="quote-tag">Seeing</span>
+      </div>
+
+      <!-- SPIRIT -->
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"There are moments in our lives, there are moments in a day, when we seem to see beyond the usual. Such are the moments of our greatest happiness."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"The object, which is back of every true work of art, is the attainment of a state of being, a state of high functioning."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"The traces are inevitable. The living is the thing."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"Art is not an outside, extra thing."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"Art is the inevitable consequence of growth."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"All manifestations of art are but landmarks in the progress of the human spirit toward a thing but as yet sensed."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+      <div class="quote-card" data-theme="spirit">
+        <blockquote>"Museums of art will not make a country an art country. But where there is the art spirit there will be precious works to fill museums."</blockquote>
+        <span class="quote-tag">Spirit</span>
+      </div>
+
+      <!-- FREEDOM -->
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"You can do anything you want to do. What is rare is this actual wanting to do a specific thing."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"Don't worry about your originality. You could not get rid of it even if you wanted to."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"Don't belong to any school. Don't tie up to any technique."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"Find out what you really like if you can. Find out what is really important to you. Then sing your song."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"Every man who has shown the world the way to beauty, to true culture, has been a rebel."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"After all, the goal is not making art. It is living a life."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+      <div class="quote-card" data-theme="freedom">
+        <blockquote>"Originality cannot be preconceived, and any effort to coddle it is to preconceive it."</blockquote>
+        <span class="quote-tag">Freedom</span>
+      </div>
+
+      <!-- TECHNIQUE -->
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"Technique is to me merely a language."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"Without motive, painting is only some sort of difficult jugglery."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"The technique learned without a purpose is a formula which when used, knocks the life out of any ideas to which it is applied."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"To study technique means to make it, to invent it."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"The brush stroke at the moment of contact carries inevitably the exact state of being of the artist at that exact moment into the work."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"Know what the old masters did. Know how they composed their pictures, but do not fall into the conventions they established."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"Get the full swing of your body into the stroke."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+      <div class="quote-card" data-theme="technique">
+        <blockquote>"A good painting is a remarkable feat of organization."</blockquote>
+        <span class="quote-tag">Technique</span>
+      </div>
+
+      <!-- TEACHING -->
+      <div class="quote-card" data-theme="teaching">
+        <blockquote>"I have little interest in teaching you what I know. I wish to stimulate you to tell me what you know."</blockquote>
+        <span class="quote-tag">Teaching</span>
+      </div>
+      <div class="quote-card" data-theme="teaching">
+        <blockquote>"All education must be self-education."</blockquote>
+        <span class="quote-tag">Teaching</span>
+      </div>
+      <div class="quote-card" data-theme="teaching">
+        <blockquote>"Educate yourself, do not let me educate you — use me, do not be used by me."</blockquote>
+        <span class="quote-tag">Teaching</span>
+      </div>
+      <div class="quote-card" data-theme="teaching">
+        <blockquote>"History proves that juries in art have been generally wrong."</blockquote>
+        <span class="quote-tag">Teaching</span>
+      </div>
+      <div class="quote-card" data-theme="teaching">
+        <blockquote>"No one can lead him. Many can give advices, but the greatest artist in the world cannot point his course for he is a new man."</blockquote>
+        <span class="quote-tag">Teaching</span>
+      </div>
+      <div class="quote-card" data-theme="teaching">
+        <blockquote>"Let a student enter the school with this advice: No matter how good the school is, his education is in his own hands."</blockquote>
+        <span class="quote-tag">Teaching</span>
+      </div>
+
+      <!-- BROTHERHOOD -->
+      <div class="quote-card" data-theme="brotherhood">
+        <blockquote>"Through art mysterious bonds of understanding and of knowledge are established among men."</blockquote>
+        <span class="quote-tag">Brotherhood</span>
+      </div>
+      <div class="quote-card" data-theme="brotherhood">
+        <blockquote>"The Brotherhood is powerful. It has many members. They are of all places and of all times. The members do not die."</blockquote>
+        <span class="quote-tag">Brotherhood</span>
+      </div>
+      <div class="quote-card" data-theme="brotherhood">
+        <blockquote>"In certain books — some way in the first few paragraphs you know that you have met a brother."</blockquote>
+        <span class="quote-tag">Brotherhood</span>
+      </div>
+      <div class="quote-card" data-theme="brotherhood">
+        <blockquote>"If the artist is alive in you, you may meet Greco nearer than many people, also Plato, Shakespeare, the Greeks."</blockquote>
+        <span class="quote-tag">Brotherhood</span>
+      </div>
+
+      <!-- COLOR -->
+      <div class="quote-card" data-theme="color">
+        <blockquote>"Keep as deep down in color as you can. It is color that makes the sensation of light."</blockquote>
+        <span class="quote-tag">Color</span>
+      </div>
+      <div class="quote-card" data-theme="color">
+        <blockquote>"The effect of brilliancy is to be obtained principally from the oppositions of cool colors with warm colors."</blockquote>
+        <span class="quote-tag">Color</span>
+      </div>
+      <div class="quote-card" data-theme="color">
+        <blockquote>"There is a color over all colors which unites them and which is more important than the individual colors."</blockquote>
+        <span class="quote-tag">Color</span>
+      </div>
+      <div class="quote-card" data-theme="color">
+        <blockquote>"Dirty brushes and a sloppy palette have dictated the color-tone and key of many a painting."</blockquote>
+        <span class="quote-tag">Color</span>
+      </div>
+      <div class="quote-card" data-theme="color">
+        <blockquote>"Employ such colors as produce immensity in a small space."</blockquote>
+        <span class="quote-tag">Color</span>
+      </div>
+      <div class="quote-card" data-theme="color">
+        <blockquote>"Play from warm to cold, not from white to black."</blockquote>
+        <span class="quote-tag">Color</span>
+      </div>
+
+      <!-- LIFE -->
+      <div class="quote-card" data-theme="life">
+        <blockquote>"Cherish your own emotions and never undervalue them."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"We are not here to do what has already been done."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"It takes wit, and interest and energy to be happy. The pursuit of happiness is a great activity."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"The best art the world has ever had is but the impress left by men who have thought less of making great art than of living full and completely with all their faculties."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"Genius is not a possession of the limited few, but exists in some degree in everyone."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"There is nothing so important as art in the world, nothing so constructive, so life-sustaining."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"A man must become interesting to himself and must become actually expressive before he can be happy."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+      <div class="quote-card" data-theme="life">
+        <blockquote>"Art when really understood is the province of every human being. It is simply a question of doing things, anything, well."</blockquote>
+        <span class="quote-tag">Life</span>
+      </div>
+
+    </div><!-- end quotes-grid -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ornament" style="max-width:500px; margin: 0 auto 3rem;"><span class="ornament-center" style="color:var(--gold);">✦</span></div>
+  <p class="footer-quote">"The traces are inevitable. The living is the thing."</p>
+  <p class="footer-attr">— Robert Henri, The Art Spirit</p>
+  <div style="width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin: 2rem auto;"></div>
+  <p class="footer-info">
+    <em>The Art Spirit</em> by Robert Henri<br>
+    Compiled by Margery Ryerson · First published 1923<br>
+    J.B. Lippincott Company, Philadelphia<br><br>
+    Robert Henri · Born June 24, 1865 · Died July 12, 1929<br><br>
+    <span style="opacity:0.5; font-size:0.78rem;">This educational site is a non-commercial appreciation of Henri's public-domain work.</span>
+  </p>
+</footer>
+
+<script>
+// PROGRESS BAR
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+});
+
+// HAMBURGER MENU
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// SCROLL ANIMATIONS (Intersection Observer)
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+fadeEls.forEach(el => observer.observe(el));
+
+// NAV ACTIVE STATE ON SCROLL
+const sections = document.querySelectorAll('section[id], footer');
+const navAnchors = document.querySelectorAll('.nav-links a');
+const activateNav = () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 120) {
+      current = section.getAttribute('id') || '';
+    }
+  });
+  navAnchors.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) {
+      a.classList.add('active');
+    }
+  });
+};
+window.addEventListener('scroll', activateNav);
+
+// QUOTE FILTER
+const filterBtns = document.querySelectorAll('.filter-btn');
+const quoteCards = document.querySelectorAll('.quote-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    quoteCards.forEach((card, i) => {
+      const theme = card.dataset.theme;
+      if (filter === 'all' || theme === filter) {
+        card.classList.remove('hidden');
+        card.style.animationDelay = (i * 0.03) + 's';
+        card.style.animation = 'none';
+        card.offsetHeight; // reflow
+        card.style.animation = '';
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// EXPANDABLE SECTIONS
+function toggleExpand(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // Close all in same group (optional: single open at a time)
+  // Uncomment below for accordion behavior:
+  // document.querySelectorAll('.expand-toggle.open').forEach(b => {
+  //   b.classList.remove('open');
+  //   b.nextElementSibling.classList.remove('open');
+  // });
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// HERO PARALLAX (subtle)
+const hero = document.getElementById('hero');
+window.addEventListener('scroll', () => {
+  if (window.scrollY < window.innerHeight) {
+    hero.style.backgroundPositionY = (window.scrollY * 0.3) + 'px';
+  }
+}, { passive: true });
+
+// Stagger quote cards on load
+quoteCards.forEach((card, i) => {
+  card.style.transitionDelay = Math.min(i * 0.04, 0.8) + 's';
+});
+</script>
+
+</body>
+</html>
